@@ -1,0 +1,14 @@
+project: researcher-skill
+domain: software
+phase: ARCHIVED
+phase_before_archive: DONE
+last_gate: IMPLEMENT-to-DONE
+created: 2026-02-21
+updated: 2026-03-06
+next_action: "Project complete. 15 tasks, 2 e2e dispatches validated, skill deployed. M6 (MCP tools) deferred as future work. See design/specification-summary.md for architecture."
+active_task: null
+blocked_by: null
+last_committed: null
+prior_art:
+  - design/perplexity-deep-research.md
+  - _system/reviews/2026-02-21-perplexity-deep-research.md

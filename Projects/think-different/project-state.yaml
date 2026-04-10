@@ -1,0 +1,11 @@
+# Machine-readable project state — updated at every phase transition.
+# Validated by vault-check.sh against run-log.md for consistency.
+project_class: knowledge
+phase: ARCHIVED
+workflow: three-phase
+last_gate: act-complete
+active_task: null
+next_action: "Archived — all deliverables complete"
+archived: 2026-02-18
+updated: 2026-02-18
+last_committed: 2026-02-17 19:05

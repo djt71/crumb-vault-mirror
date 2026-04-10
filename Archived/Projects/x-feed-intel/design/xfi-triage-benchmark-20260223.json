@@ -1,0 +1,351 @@
+{
+  "metadata": {
+    "created": "2026-02-23T15:59:19.223Z",
+    "created_by": "claude-ai-peer-review",
+    "purpose": "Gold-label benchmark set for XFI-017 triage prompt validation and Phase 2 drift detection",
+    "source_files": [
+      "bookmarks-2026-02-23.json",
+      "twitterapi-benchmark-2026-02-23.json"
+    ],
+    "total_labeled": 20,
+    "distribution": {
+      "high_priority": 6,
+      "medium_priority": 5,
+      "low_priority_or_ignore": 9
+    },
+    "tag_coverage": [
+      "crumb-architecture",
+      "tool-discovery",
+      "pattern-insight",
+      "architecture-inspiration",
+      "tess-operations",
+      "community-signal",
+      "general-interest"
+    ],
+    "notes": "Deliberately includes off-topic bookmarks (health, politics, spiritual) to stress-test triage ignore/low-priority classification. Search results include both high-signal and noise examples."
+  },
+  "labeled_posts": [
+    {
+      "id": "2025371800587436344",
+      "source": "bookmark",
+      "author": "code_rams",
+      "text": "Day 5 of debugging Chiti's memory.\n\nToday wasn't about retrieval or indexing. \nIt was about bloat.\n\nI ran /context detail(telegram) and realized \nmy agent was loading 11,887 tokens of system prompt on every new session.\n\n51 skills. 20 of them I never used. \n200 lines of https://t.co/A9TjsQMAfy https://t.co/zTOvVYHDZh",
+      "expected": {
+        "priority": "high",
+        "tags": [
+          "crumb-architecture",
+          "pattern-insight"
+        ],
+        "recommended_action": "capture",
+        "confidence": "high"
+      },
+      "rationale": "Direct parallel to Crumb context management — debugging agent memory bloat, /context detail usage"
+    },
+    {
+      "id": "2025638214405697748",
+      "source": "bookmark",
+      "author": "intellectronica",
+      "text": "A few notes on agentic @obsdmd (about a week in):\n\n- This is amazing. So fast, so flexible.\n- Bases for everything. All my notes have a `type` and matching template and structure. Bases organise them, the agent knows how to create, query, and update them.\n- All notes are https://t.co/PvpBjXWFP3",
+      "expected": {
+        "priority": "high",
+        "tags": [
+          "crumb-architecture",
+          "tool-discovery"
+        ],
+        "recommended_action": "add-to-spec",
+        "confidence": "high"
+      },
+      "rationale": "Agentic Obsidian with typed notes and bases — directly relevant to vault architecture and file conventions"
+    },
+    {
+      "id": "2025212540288971199",
+      "source": "bookmark",
+      "author": "GanimCorey",
+      "text": "The secret file he didn't mention:\n\n`. learnings/LEARNINGS. md`\n\nEvery time my agent makes a mistake, it logs the correction and updates its own rules.\n\n43 skills. 661 lines of learnings. An agent that gets smarter every day.\n\nYour setup isn't just a moat. It's a flywheel. https://t.co/pcbjUKrsa3",
+      "expected": {
+        "priority": "high",
+        "tags": [
+          "crumb-architecture",
+          "pattern-insight"
+        ],
+        "recommended_action": "capture",
+        "confidence": "high"
+      },
+      "rationale": "Agent mistake logging with LEARNINGS.md — direct compound engineering parallel"
+    },
+    {
+      "id": "2020992712825241801",
+      "source": "bookmark",
+      "author": "zarazhangrui",
+      "text": "Created a custom slash command \"/handover\" in Claude Code: When I'm ending a Claude session (e.g. context window filling up), I get Claude to generate a \"https://t.co/Q0oKA5x360\" document which summarizes everything we did in this session, including decisions, pitfalls, lessons https://t.co/5ZyOAWNwBx",
+      "expected": {
+        "priority": "high",
+        "tags": [
+          "crumb-architecture",
+          "pattern-insight"
+        ],
+        "recommended_action": "add-to-spec",
+        "confidence": "high"
+      },
+      "rationale": "Context handover slash command — directly relevant to checkpoint/compact/session-end workflow"
+    },
+    {
+      "id": "2025504364153246103",
+      "source": "bookmark",
+      "author": "jasonzhou1993",
+      "text": "Anthropic’s new advanced tool calling is gold and I’m surprised not many people talk about it\n\n- Programmatic tool calling\n- Dynamic filtering\n- Tool use examples\n- Tool search\n…\n\nHere is a quick 3 min break down 🧵👇 https://t.co/fpET9e0muC",
+      "expected": {
+        "priority": "high",
+        "tags": [
+          "tool-discovery",
+          "crumb-architecture"
+        ],
+        "recommended_action": "test",
+        "confidence": "high"
+      },
+      "rationale": "Anthropic advanced tool calling features — direct capability enhancement for Crumb/Tess"
+    },
+    {
+      "id": "2020161412593774922",
+      "source": "bookmark",
+      "author": "JundeMorsenWu",
+      "text": "Introducing OneContext. I built it for myself but now I can’t work without it, so it felt wrong not to share.\n\nOneContext is an Agent Self-Managed Context Layer across different sessions, devices, and coding agents (Codex / Claude Code).\n\nHow it works:\n1. Open Claude Code/Codex https://t.co/h0D4KAFNC5",
+      "expected": {
+        "priority": "high",
+        "tags": [
+          "tool-discovery",
+          "crumb-architecture"
+        ],
+        "recommended_action": "test",
+        "confidence": "medium"
+      },
+      "rationale": "Agent self-managed context system — evaluate against Crumb memory/context architecture"
+    },
+    {
+      "id": "2024869914021175330",
+      "source": "bookmark",
+      "author": "SystematicPeter",
+      "text": "1/ Building an agentic research workflow for systematic trading.\n\nI've been experimenting with Claude Code as an autonomous research assistant for futures strategy development. Not a \"let AI trade for you\" pitch - just a structured workflow that runs overnight while I sleep. https://t.co/rrteqUOMCJ",
+      "expected": {
+        "priority": "medium",
+        "tags": [
+          "pattern-insight",
+          "architecture-inspiration"
+        ],
+        "recommended_action": "read",
+        "confidence": "medium"
+      },
+      "rationale": "Agentic research workflow in different domain (trading) — transferable patterns but not directly actionable"
+    },
+    {
+      "id": "2022028819532853740",
+      "source": "bookmark",
+      "author": "kathyyliao",
+      "text": "~80% reduction in token usage for agents just by adding this header\n-H \"Accept: text/markdown\"\n\nAnd for accessing websites not on Cloudflare, you can always use the Browser Rendering /markdown REST API to render a dynamic page or application in a real browser before converting https://t.co/rpIY3ValSt",
+      "expected": {
+        "priority": "medium",
+        "tags": [
+          "tool-discovery",
+          "tess-operations"
+        ],
+        "recommended_action": "test",
+        "confidence": "high"
+      },
+      "rationale": "80% token reduction via Accept header — practical operational improvement for agent web access"
+    },
+    {
+      "id": "2017742741636321619",
+      "source": "bookmark",
+      "author": "bcherny",
+      "text": "I'm Boris and I created Claude Code. I wanted to quickly share a few tips for using Claude Code, sourced directly from the Claude Code team. The way the team uses Claude is different than how I use it. Remember: there is no one right way to use Claude Code -- everyones' setup is",
+      "expected": {
+        "priority": "medium",
+        "tags": [
+          "community-signal",
+          "pattern-insight"
+        ],
+        "recommended_action": "read",
+        "confidence": "high"
+      },
+      "rationale": "Claude Code creator sharing tips — authoritative source, likely overlaps with known patterns but worth scanning"
+    },
+    {
+      "id": "2016564307765424285",
+      "source": "bookmark",
+      "author": "balintorosz",
+      "text": "Diagrams are becoming my primary way of reasoning  about code with Agents. And I didn't find anything there that I'm happy to look at all day long.\nMermaid as a format is amazing - so we built something beautiful on top of it. It's called Beautiful Mermaid\nhttps://t.co/zXOgaMl7f3",
+      "expected": {
+        "priority": "medium",
+        "tags": [
+          "pattern-insight"
+        ],
+        "recommended_action": "read",
+        "confidence": "medium"
+      },
+      "rationale": "Diagramming as primary reasoning tool with agents — relates to Danny developing diagramming skills"
+    },
+    {
+      "id": "2021633574089416993",
+      "source": "bookmark",
+      "author": "karpathy",
+      "text": "On DeepWiki and increasing malleability of software.\n\nThis starts as partially a post on appreciation to DeepWiki, which I routinely find very useful and I think more people would find useful to know about. I went through a few iterations of use:\n\nTheir first feature was that it",
+      "expected": {
+        "priority": "low",
+        "tags": [
+          "community-signal",
+          "architecture-inspiration"
+        ],
+        "recommended_action": "read",
+        "confidence": "medium"
+      },
+      "rationale": "Karpathy on software malleability — interesting thought leadership but not directly actionable for current work"
+    },
+    {
+      "id": "2020715562880651426",
+      "source": "bookmark",
+      "author": "readswithravi",
+      "text": "Writing is thinking. https://t.co/z0pj1BKdq0",
+      "expected": {
+        "priority": "low",
+        "tags": [
+          "general-interest"
+        ],
+        "recommended_action": "ignore",
+        "confidence": "high"
+      },
+      "rationale": "Inspirational writing quote — not actionable for any configured topic or current project"
+    },
+    {
+      "id": "2019290953509413053",
+      "source": "bookmark",
+      "author": "PowerBruteHQ",
+      "text": "HIIT ABS WORKOUT AT HOME https://t.co/zBmbol9c65",
+      "expected": {
+        "priority": "low",
+        "tags": [
+          "general-interest"
+        ],
+        "recommended_action": "ignore",
+        "confidence": "high"
+      },
+      "rationale": "Fitness content — valid personal interest but entirely outside pipeline topic scope"
+    },
+    {
+      "id": "2011109352909017277",
+      "source": "bookmark",
+      "author": "andysignore",
+      "text": "Jon Stewart just hit it out of the park with the Trump’s administration’s blatant hypocrisy… makes you wonder why they want us so heated and fighting… 🤔 https://t.co/QoCgv2g05o",
+      "expected": {
+        "priority": "low",
+        "tags": [
+          "general-interest"
+        ],
+        "recommended_action": "ignore",
+        "confidence": "high"
+      },
+      "rationale": "Political commentary — not relevant to any configured topic domain"
+    },
+    {
+      "id": "1970122097361027186",
+      "source": "bookmark",
+      "author": "durdfarm",
+      "text": "From the Buddhist point of view “who is experiencing the illusion” is an inappropriate question (for ending suffering). The appropriate question is “what is experiencing the illusion.” 1 https://t.co/nsIkVkN6eR",
+      "expected": {
+        "priority": "low",
+        "tags": [
+          "general-interest"
+        ],
+        "recommended_action": "ignore",
+        "confidence": "high"
+      },
+      "rationale": "Buddhist philosophy — personal spiritual interest, outside pipeline scope"
+    },
+    {
+      "id": "2016621362480382213",
+      "source": "search",
+      "topic": "agent-architecture",
+      "query": "agent architecture LLM",
+      "author": "GoogleResearch",
+      "text": "A common heuristic in LLM agent design—\"more agents is better\"—might be wrong.\n\nAcross 180 configurations, we find multi-agent coordination is task-contingent: +81% on parallelizable tasks (finance), but -70% on sequential ones (planning). Architecture-task alignment matters more than agent count.",
+      "expected": {
+        "priority": "high",
+        "tags": [
+          "crumb-architecture",
+          "community-signal"
+        ],
+        "recommended_action": "read",
+        "confidence": "high"
+      },
+      "rationale": "Google Research: multi-agent coordination is task-contingent, not universally better — directly informs Crumb architecture decisions"
+    },
+    {
+      "id": "2022091734457491921",
+      "source": "search",
+      "topic": "obsidian-pkm",
+      "query": "personal knowledge management AI",
+      "author": "tom_doerr",
+      "text": "Personal knowledge management system with AI agents and Git backups\n\nhttps://t.co/G4xAqAkXkV https://t.co/dTVrEtBYs5",
+      "expected": {
+        "priority": "medium",
+        "tags": [
+          "tool-discovery",
+          "architecture-inspiration"
+        ],
+        "recommended_action": "test",
+        "confidence": "medium"
+      },
+      "rationale": "PKM system with AI agents and Git backups — worth evaluating against Crumb approach"
+    },
+    {
+      "id": "2025868420009599487",
+      "source": "search",
+      "topic": "claude-code",
+      "query": "claude MCP",
+      "author": "TechAI_X",
+      "text": "You don't need to burn $100s in token usage every month.\n\nInstead, you can already connect Claude MCP to your apps and talk to them directly.\n\nHere's how I turned a Linear issue list into a live presentation and shared it with my team in under 5 minutes:\n\nFirst, make sure you have these connectors set up in Claude.\n\nLinear for project management. Gamma for presentations. Slack for team communication.\n\nTakes 30 seconds each.\n\nStep 1: Pull your project data from Linear.\n\nI asked Claude to get all subissues from our Migration to Multi-Agent Architecture project.\n\nIt exported 23 of them with their statuses. 9 done, 14 to do.\n\nStep 2: Turn that data into a presentation.\n\nI told Claude to create a project overview deck using Gamma.\n\nIt organized everything into 8 slides. Project summary, progress stats, and all 7 phases from foundation to production rollout.\n\nStep 3: Share it with your team instantly.\n\nI asked Claude to push the live presentation link to our shipped-today channel in Slack.\n\nOne prompt and the whole team had access.\n\nNo exporting CSVs. No copying links between apps.\n\nLinear to Gamma to Slack. All from one conversation.\n\nThis is what AI agents actually look like for developers.\n\nNot complex frameworks that need debugging. Just tools that connect and execute.\n\nWant to try this yourself?\n\nConnect Linear, Gamma, and Slack to Claude. Start automating your project updates today.\n\nStart here: https://t.co/HHqQ2rt53M",
+      "expected": {
+        "priority": "low",
+        "tags": [
+          "general-interest"
+        ],
+        "recommended_action": "ignore",
+        "confidence": "high"
+      },
+      "rationale": "Engagement-bait tweet about MCP — generic advice, no substantive content or novel pattern"
+    },
+    {
+      "id": "2025601573284364387",
+      "source": "search",
+      "topic": "ai-workflows",
+      "query": "AI automation workflow",
+      "author": "AlexEngineerAI",
+      "text": "AI automation creates a dangerous productivity flywheel.\n\nI've been shipping 5x faster with AI over the last few months. The speed boost is incredible and I'm finally getting a handle on the workflow.\n\nBut the mental fatigue is real.\n\nWhen you're self-employed, it's impossible to draw the line at the end of the day. Every feature is just a few prompts away from completion.\n\nDon't get me wrong, I already worked too much before AI, but now it's so easy to say \"just one more prompt\" and boom it's 2AM.\n\nThe real competitive advantage doesn't go to whoever ships fastest. It goes to builders who master execution velocity without burning out.\n\nDiscipline is the new technical skill.",
+      "expected": {
+        "priority": "low",
+        "tags": [
+          "community-signal"
+        ],
+        "recommended_action": "ignore",
+        "confidence": "medium"
+      },
+      "rationale": "Generic AI productivity take — no specific pattern, tool, or architectural insight to extract"
+    },
+    {
+      "id": "2025918350921261133",
+      "source": "search",
+      "topic": "claude-code",
+      "query": "claude MCP",
+      "author": "HeyAbhishek",
+      "text": "OpenClaw is powerful.\n\nBut if you can’t control token usage then it becomes a money pit fast.\n\nMeanwhile, you can use Claude MCP connectors to close clients with @gammaapp while others are still troubleshooting.\n\nHere’s how: https://t.co/e2CfXBUR9c",
+      "expected": {
+        "priority": "low",
+        "tags": [
+          "general-interest"
+        ],
+        "recommended_action": "ignore",
+        "confidence": "high"
+      },
+      "rationale": "Token usage comparison tweet — surface-level cost advice without actionable technique"
+    }
+  ]
+}

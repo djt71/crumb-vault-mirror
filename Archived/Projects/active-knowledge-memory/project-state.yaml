@@ -1,0 +1,15 @@
+project: active-knowledge-memory
+domain: software
+type: system
+phase: ARCHIVED
+phase_before_archive: DONE
+last_gate: TASK-to-DONE
+created: 2026-03-01
+updated: 2026-03-02
+last_committed: 2026-03-02
+active_task: null
+next_action: "Project complete. Deferred: AKM-010/011 (Tess KB advisory) — new project if needed."
+related_projects:
+  - knowledge-navigation
+  - feed-intel-framework
+  - crumb-tess-bridge

@@ -1,0 +1,38 @@
+# Feed Pipeline Brief Schema
+# Shared contract for feed-intel processing capabilities.
+# Consumers: feed-pipeline skill (feed.triage.standard, feed.promotion.signal)
+#
+# Project: agent-to-agent-communication (A2A-006, A2A-007)
+
+brief:
+  operation:
+    type: string
+    required: true
+    enum: [triage, promote]
+    description: >
+      triage: process inbox items, classify by tier, extract actions.
+      promote: evaluate permanence and promote to signal-notes.
+
+  inbox_path:
+    type: string
+    required: false
+    default: "_openclaw/inbox/"
+    description: "Path to inbox directory containing feed-intel items."
+
+  scope:
+    type: object
+    required: false
+    description: "Optional filtering."
+    properties:
+      source:
+        type: string
+        description: "Filter to specific source (e.g., 'x-feed-intel', 'rss')."
+      date:
+        type: string
+        format: date
+        description: "Filter to specific date's items."
+
+  context:
+    type: string
+    required: false
+    description: "Project/domain context for relevance assessment."

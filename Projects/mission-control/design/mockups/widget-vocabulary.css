@@ -1,0 +1,748 @@
+/* Mission Control — Widget Vocabulary
+   New widget archetypes beyond ops-mockup.css.
+   Imports ops-mockup.css for design tokens + existing widgets. */
+
+/* ===== ATTENTION CARD ===== */
+/* Three kinds: system, relational, personal.
+   Urgency drives left border color: now=error, soon=warn, ongoing=accent, awareness=stale. */
+
+.attention-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-panel);
+  border-radius: 8px;
+  padding: 16px 16px 16px 19px;
+  box-shadow: var(--shadow-panel);
+  border-left: 3px solid var(--accent);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  cursor: pointer;
+  transition: box-shadow 0.15s ease-out;
+}
+
+.attention-card:hover {
+  box-shadow: var(--shadow-panel-hover);
+}
+
+.attention-card:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.attention-card.urgency-now { border-left-color: var(--status-error); }
+.attention-card.urgency-soon { border-left-color: var(--status-warn); }
+.attention-card.urgency-ongoing { border-left-color: var(--accent); }
+.attention-card.urgency-awareness { border-left-color: var(--status-stale); }
+
+.attention-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.attention-card-title {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  flex: 1;
+  min-width: 0;
+}
+
+.attention-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.attention-card-age {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+}
+
+.attention-card-source {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+}
+
+/* ===== BADGES ===== */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 4px;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+/* Urgency badges */
+.badge-now {
+  background: var(--status-error-bg);
+  color: var(--status-error);
+}
+
+.badge-soon {
+  background: var(--status-warn-bg);
+  color: var(--status-warn);
+}
+
+.badge-ongoing {
+  background: var(--accent-muted);
+  color: var(--accent);
+}
+
+.badge-awareness {
+  background: var(--status-stale-bg);
+  color: var(--status-stale);
+}
+
+/* Kind badges */
+.badge-system {
+  background: var(--accent-muted);
+  color: var(--accent);
+}
+
+.badge-relational {
+  background: var(--status-warn-bg);
+  color: var(--status-warn);
+}
+
+.badge-personal {
+  background: var(--badge-personal-bg);
+  color: var(--text-secondary);
+}
+
+/* Domain badges */
+.badge-domain {
+  background: var(--accent-muted);
+  color: var(--accent);
+  text-transform: lowercase;
+}
+
+/* Tier badges (signal classification) */
+.badge-t1 {
+  background: var(--status-ok-bg);
+  color: var(--status-ok);
+  font-weight: 600;
+}
+
+.badge-t2 {
+  background: var(--status-warn-bg);
+  color: var(--status-warn);
+}
+
+.badge-t3 {
+  background: var(--status-stale-bg);
+  color: var(--status-stale);
+}
+
+/* Source badges */
+.badge-source {
+  background: rgba(160, 152, 136, 0.12);
+  color: var(--text-secondary);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* ===== SIGNAL CARD ===== */
+/* Feed intelligence signal — headline, source, tier, timestamp. */
+
+.signal-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-panel);
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: var(--shadow-panel);
+  cursor: pointer;
+  transition: box-shadow 0.15s ease-out;
+}
+
+.signal-card:hover {
+  box-shadow: var(--shadow-panel-hover);
+}
+
+.signal-card:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.signal-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.signal-card-headline {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+
+.signal-card-snippet {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.signal-card-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+}
+
+/* ===== AGENT STATUS CARD ===== */
+
+.agent-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-panel);
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: var(--shadow-panel);
+}
+
+.agent-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.agent-card-name {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.agent-card-model {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+}
+
+.agent-card-stats {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.agent-card-stat-value {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.agent-card-context {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* ===== SEARCH RESULT CARD ===== */
+
+.search-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-panel);
+  border-radius: 8px;
+  padding: 14px 16px;
+  box-shadow: var(--shadow-panel);
+  cursor: pointer;
+  transition: box-shadow 0.15s ease-out;
+}
+
+.search-card:hover {
+  box-shadow: var(--shadow-panel-hover);
+}
+
+.search-card:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.search-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.search-card-title {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.search-card-score {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+  margin-left: auto;
+}
+
+.search-card-snippet {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 6px;
+}
+
+.search-card-snippet mark {
+  background: rgba(92, 184, 164, 0.22);
+  color: var(--accent);
+  border-radius: 2px;
+  padding: 0 2px;
+}
+
+.search-card-path {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+}
+
+/* ===== APPROVAL CARD ===== */
+
+.approval-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-panel);
+  border-radius: 8px;
+  padding: 16px 16px 16px 19px;
+  box-shadow: var(--shadow-panel);
+  border-left: 3px solid var(--status-warn);
+}
+
+.approval-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.approval-card-title {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.approval-card-context {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.approval-card-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+  margin-bottom: 12px;
+}
+
+.approval-card-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 6px 16px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.15s ease-out, border-color 0.15s ease-out, box-shadow 0.15s ease-out;
+}
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.btn-approve {
+  background: var(--accent);
+  color: var(--text-inverse);
+  border-color: var(--accent);
+}
+
+.btn-approve:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.btn-reject {
+  background: transparent;
+  color: var(--status-error);
+  border-color: var(--border-panel);
+}
+
+.btn-reject:hover {
+  background: var(--status-error-bg);
+  border-color: var(--status-error);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-secondary);
+  border-color: var(--border-panel);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ===== PROGRESS BAR ===== */
+
+.progress-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.progress-bar-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  min-width: 100px;
+}
+
+.progress-bar-track {
+  flex: 1;
+  height: 8px;
+  background: var(--gauge-track);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: var(--accent);
+  transition: width 0.4s ease;
+}
+
+.progress-bar-fill.ok { background: var(--status-ok); }
+.progress-bar-fill.warn { background: var(--status-warn); }
+.progress-bar-fill.error { background: var(--status-error); }
+
+.progress-bar-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  min-width: 40px;
+  text-align: right;
+}
+
+/* ===== DATA TABLE ===== */
+
+.data-table-container {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-panel);
+  border-radius: 8px;
+  box-shadow: var(--shadow-panel);
+  overflow: hidden;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table thead th {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+  text-align: left;
+  padding: 10px 16px;
+  background: var(--bg-panel-header);
+  border-bottom: 1px solid var(--border-panel);
+  white-space: nowrap;
+}
+
+.data-table thead th.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.data-table thead th.sortable:hover {
+  color: var(--accent);
+}
+
+.data-table thead th.sortable:focus-visible {
+  outline: none;
+  box-shadow: inset var(--focus-ring);
+}
+
+.sort-indicator {
+  display: inline-block;
+  margin-left: 4px;
+  font-size: 0.8125rem;
+  color: var(--accent);
+}
+
+.data-table tbody td {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.data-table tbody tr:nth-child(even) {
+  background: var(--table-row-alt);
+}
+
+.data-table tbody tr:hover {
+  background: var(--accent-muted);
+}
+
+.data-table td.text-cell {
+  font-family: 'Source Serif 4', Georgia, serif;
+}
+
+.data-table td.chrome-cell {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+}
+
+/* ===== STATE PATTERNS ===== */
+/* Adapter {data, error, stale} contract produces four visual states.
+   Each works at three levels: full panel, KPI card, card-within-list.
+   Blocked/placeholder is the fourth (upstream dependency not yet available). */
+
+/* --- Blocked / Placeholder --- */
+/* Upstream dependency not yet available. Dashed border, muted. */
+
+.blocked-panel {
+  background: var(--bg-panel);
+  border: 1px dashed var(--border-panel);
+  border-radius: 8px;
+  padding: 20px;
+  opacity: 0.5;
+}
+
+.blocked-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.blocked-panel-title {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.blocked-panel-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+  font-style: italic;
+}
+
+/* --- Empty State --- */
+/* Adapter succeeded, zero items. Calm, not broken. */
+
+.state-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 32px 20px;
+}
+
+.state-empty-icon {
+  width: 32px;
+  height: 32px;
+  color: var(--text-disabled);
+  margin-bottom: 12px;
+  opacity: 0.6;
+}
+
+.state-empty-text {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 0.875rem;
+  color: var(--text-disabled);
+  line-height: 1.5;
+}
+
+.kpi-card.state-empty .kpi-value {
+  color: var(--text-disabled);
+}
+
+.kpi-card.state-empty .kpi-sub {
+  color: var(--text-disabled);
+}
+
+/* --- Error State --- */
+/* Adapter failed. Clearly wrong without being alarming. */
+
+.state-error-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--status-error-bg);
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.state-error-icon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: var(--status-error);
+  margin-top: 1px;
+}
+
+.state-error-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.state-error-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  color: var(--status-error);
+  line-height: 1.4;
+}
+
+.state-error-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+  margin-top: 4px;
+}
+
+.kpi-card.state-error {
+  border-color: var(--status-error);
+}
+
+.kpi-card.state-error .kpi-value {
+  color: var(--status-error);
+}
+
+/* Card-within-list: error on individual cards */
+.signal-card.state-error,
+.attention-card.state-error {
+  border-color: var(--status-error);
+  background: var(--status-error-bg);
+}
+
+/* --- Stale State --- */
+/* Data exists but past freshness threshold. Show data + warning banner. */
+
+.state-stale-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--status-warn-bg);
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.state-stale-banner-icon {
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  color: var(--status-warn);
+}
+
+.state-stale-banner-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8125rem;
+  color: var(--status-warn);
+  line-height: 1.4;
+}
+
+.kpi-card.state-stale {
+  border-color: var(--status-warn);
+  border-width: 1px 1px 1px 3px;
+}
+
+/* Card-within-list: stale indicator stripe at top */
+.signal-card.state-stale,
+.attention-card.state-stale {
+  position: relative;
+}
+
+.signal-card.state-stale::before,
+.attention-card.state-stale::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--status-warn);
+  border-radius: 8px 8px 0 0;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 480px) {
+  .attention-card-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .agent-card-stats {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .approval-card-actions {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .data-table-container {
+    overflow-x: auto;
+  }
+}

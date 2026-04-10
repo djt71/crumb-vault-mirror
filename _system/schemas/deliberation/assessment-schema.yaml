@@ -1,0 +1,54 @@
+---
+type: schema
+domain: software
+status: active
+created: 2026-03-22
+updated: 2026-03-22
+spec_ref: "Projects/multi-agent-deliberation/design/specification.md#6"
+---
+
+# Assessment Schema
+#
+# Every evaluator produces this structure. Standardized interface,
+# variable evaluative content. Used as Layer 3 structured output
+# enforcement in the dispatch agent prompt.
+#
+# Verdict scales are artifact-type-dependent — see deliberation-config.md
+# artifact_type_verdicts section. Default: opportunity-candidate scale.
+
+assessment:
+  # Identity
+  deliberation_id: string        # UUID linking to deliberation
+  evaluator_id: string           # Registry ID (e.g., 'business-advisor')
+  model_used: string             # Actual model ID used (from API response)
+  artifact_ref: string           # Reference to artifact being evaluated
+  pass_number: integer           # 1 = independent, 2 = dissent
+
+  # Timestamp
+  timestamp: string              # ISO 8601 format
+
+  # Evaluation
+  verdict: string                # From artifact-type verdict scale (see deliberation-config.md)
+                                 # Default (opportunity-candidate): strong | promising | neutral | cautionary | reject
+                                 # signal-note: high-signal | useful | neutral | low-signal | noise
+                                 # architectural-decision: strongly-support | support | neutral | concern | oppose
+  confidence: number             # 0.0 - 1.0
+  key_finding: string            # 1-2 sentence summary of the most important insight
+  reasoning: string              # 150-400 words, must reference artifact specifics
+  findings:                      # Structured atomic findings — enables automated extraction
+    - claim: string              # One discrete observation, risk, or recommendation
+      domain: string             # One of: market, execution, cost, timing, risk, personal-fit, architecture, values, career
+  flags:                         # Actionable concerns or opportunities
+    - string
+
+  # Dissent (Pass 2 only — null for Pass 1)
+  dissent_targets: array         # evaluator_id(s) being responded to (supports many-to-many)
+                                 # null for Pass 1 assessments
+  dissent_type: string           # disagree | augment | condition
+                                 # null for Pass 1 assessments
+
+  # Cost tracking (populated by dispatch agent, not by evaluator)
+  cost:
+    prompt_tokens: integer
+    completion_tokens: integer
+    estimated_cost_usd: number

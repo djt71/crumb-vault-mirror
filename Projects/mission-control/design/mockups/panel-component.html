@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Control — Panel Component Reference</title>
+  <link rel="stylesheet" href="ops-mockup.css">
+  <style>
+    /* Panel component reference — standalone page styles */
+    .reference-page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 48px 32px;
+    }
+
+    .reference-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .reference-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      margin-bottom: 48px;
+    }
+
+    .specimen-group {
+      margin-bottom: 48px;
+    }
+
+    .specimen-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .specimen-note {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8125rem;
+      color: var(--text-tertiary);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .specimen-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .color-swatch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .color-swatch {
+      border: 1px solid var(--border-panel);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .swatch-color {
+      height: 48px;
+    }
+
+    .swatch-info {
+      padding: 10px 12px;
+      background: var(--bg-panel);
+    }
+
+    .swatch-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .swatch-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8125rem;
+      color: var(--text-tertiary);
+      margin-top: 2px;
+    }
+
+    .type-specimen {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-panel);
+      border-radius: 8px;
+      padding: 24px;
+    }
+
+    .type-sample {
+      margin-bottom: 16px;
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+    }
+
+    .type-sample:last-child {
+      margin-bottom: 0;
+    }
+
+    .type-meta {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8125rem;
+      color: var(--text-tertiary);
+      min-width: 140px;
+      flex-shrink: 0;
+    }
+
+    .type-text-serif {
+      font-family: 'Source Serif 4', Georgia, serif;
+    }
+
+    .type-text-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .type-text-sans {
+      font-family: 'Inter', sans-serif;
+    }
+
+    hr.divider {
+      border: none;
+      border-top: 1px solid var(--border-subtle);
+      margin: 48px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="reference-page">
+    <h1 class="reference-title">Panel Component Reference</h1>
+    <p class="reference-subtitle">Dark Observatory design system — all panel variants, color swatches, and type specimens.</p>
+
+    <!-- ===== COLOR SWATCHES ===== -->
+    <div class="specimen-group">
+      <div class="specimen-label">Background Tones</div>
+      <div class="color-swatch-grid">
+        <div class="color-swatch">
+          <div class="swatch-color" style="background: #151820;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Nav Rail</div>
+            <div class="swatch-value">#151820</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background: #1c1f26;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Page Background</div>
+            <div class="swatch-value">#1c1f26</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background: #242830;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Panel / Card</div>
+            <div class="swatch-value">#242830</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background: #2a2e38;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Panel Header</div>
+            <div class="swatch-value">#2a2e38</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background: #363b48;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Border</div>
+            <div class="swatch-value">#363b48</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="specimen-group">
+      <div class="specimen-label">Status Palette</div>
+      <div class="color-swatch-grid">
+        <div class="color-swatch">
+          <div class="swatch-color" style="background: #4aba7a;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">OK / Healthy</div>
+            <div class="swatch-value">#4aba7a</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background: #e0a830;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Warning / Degraded</div>
+            <div class="swatch-value">#e0a830</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background: #e05545;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Error / Critical</div>
+            <div class="swatch-value">#e05545</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background: #706860;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Stale / Idle</div>
+            <div class="swatch-value">#706860</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background: #5cb8a4;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Accent (Teal)</div>
+            <div class="swatch-value">#5cb8a4</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ===== TYPOGRAPHY SPECIMENS ===== -->
+    <div class="specimen-group">
+      <div class="specimen-label">Typography Scale</div>
+      <div class="type-specimen">
+        <div class="type-sample">
+          <span class="type-meta">24px / Serif 700</span>
+          <span class="type-text-serif" style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary);">Operations</span>
+        </div>
+        <div class="type-sample">
+          <span class="type-meta">22px / Mono 500</span>
+          <span class="type-text-mono" style="font-size: 1.35rem; font-weight: 500; color: var(--status-ok);">99.7%</span>
+        </div>
+        <div class="type-sample">
+          <span class="type-meta">24px / Mono 500</span>
+          <span class="type-text-mono" style="font-size: 1.5rem; font-weight: 500; color: var(--text-primary);">42%</span>
+        </div>
+        <div class="type-sample">
+          <span class="type-meta">18px / Mono 500</span>
+          <span class="type-text-mono" style="font-size: 1.1rem; font-weight: 500; color: var(--text-primary);">$4.82 today</span>
+        </div>
+        <div class="type-sample">
+          <span class="type-meta">15px / Serif 600</span>
+          <span class="type-text-serif" style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary);">OpenClaw Gateway</span>
+        </div>
+        <div class="type-sample">
+          <span class="type-meta">14px / Mono 400</span>
+          <span class="type-text-mono" style="font-size: 0.875rem; color: var(--text-secondary);">last run: 14:32 UTC</span>
+        </div>
+        <div class="type-sample">
+          <span class="type-meta">13px / Sans 600 UC</span>
+          <span class="type-text-sans" style="font-size: 0.8125rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-secondary);">System Status</span>
+        </div>
+        <div class="type-sample">
+          <span class="type-meta">13px / Sans 500 UC</span>
+          <span class="type-text-sans" style="font-size: 0.8125rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-tertiary);">Tess Status</span>
+        </div>
+        <div class="type-sample">
+          <span class="type-meta">13px / Mono 400</span>
+          <span class="type-text-mono" style="font-size: 0.8125rem; color: var(--text-tertiary);">Updated 14:32:08 UTC</span>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ===== PANEL VARIANTS ===== -->
+    <div class="specimen-group">
+      <div class="specimen-label">Panel Variant: KPI Card</div>
+      <div class="specimen-note">Compact metric display. 14px 16px padding. Status-colored values.</div>
+      <div class="kpi-strip" style="max-width: 800px;">
+        <div class="kpi-card">
+          <div class="kpi-label">Tess Status</div>
+          <div class="kpi-value ok"><span class="status-dot ok"></span>Normal</div>
+          <div class="kpi-sub">Since 06:00</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Gateway</div>
+          <div class="kpi-value ok"><span class="status-dot ok"></span>Up</div>
+          <div class="kpi-sub">Uptime: 14d 7h</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">CPU Load</div>
+          <div class="kpi-value warn">68%</div>
+          <div class="kpi-sub">4-core avg</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Disk</div>
+          <div class="kpi-value">42%</div>
+          <div class="kpi-sub">394 GB free</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="specimen-group">
+      <div class="specimen-label">Panel Variant: Service Card (Interactive)</div>
+      <div class="specimen-note">Clickable card with hover shadow transition. Status dot + metadata rows.</div>
+      <div class="specimen-row">
+        <div class="service-card">
+          <div class="service-card-header">
+            <span class="status-dot ok"></span>
+            <span class="service-name">OpenClaw Gateway</span>
+          </div>
+          <div class="service-meta">
+            <div class="service-meta-row">
+              <span class="service-meta-label">Last Run</span>
+              <span>14:32 UTC</span>
+            </div>
+            <div class="service-meta-row">
+              <span class="service-meta-label">Result</span>
+              <span style="color: var(--status-ok);">OK</span>
+            </div>
+          </div>
+        </div>
+        <div class="service-card">
+          <div class="service-card-header">
+            <span class="status-dot warn"></span>
+            <span class="service-name">FIF Capture</span>
+          </div>
+          <div class="service-meta">
+            <div class="service-meta-row">
+              <span class="service-meta-label">Last Run</span>
+              <span>14:15 UTC</span>
+            </div>
+            <div class="service-meta-row">
+              <span class="service-meta-label">Result</span>
+              <span style="color: var(--status-warn);">Slow (8.2s)</span>
+            </div>
+          </div>
+        </div>
+        <div class="service-card">
+          <div class="service-card-header">
+            <span class="status-dot error"></span>
+            <span class="service-name">Awareness Check</span>
+          </div>
+          <div class="service-meta">
+            <div class="service-meta-row">
+              <span class="service-meta-label">Last Run</span>
+              <span>12:00 UTC</span>
+            </div>
+            <div class="service-meta-row">
+              <span class="service-meta-label">Result</span>
+              <span style="color: var(--status-error);">Failed</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="specimen-group">
+      <div class="specimen-label">Panel Variant: Standard Panel (with header)</div>
+      <div class="specimen-note">Full-width panel for structured content. Header row with title + secondary element.</div>
+      <div class="cost-panel" style="max-width: 700px;">
+        <div class="cost-header">
+          <span class="cost-title">Cost Burn — Today</span>
+          <span class="cost-total" style="color: var(--text-primary);">$4.82</span>
+        </div>
+        <div class="cost-bar-group">
+          <div class="cost-bar-row">
+            <span class="cost-bar-label">Crumb (Opus)</span>
+            <div class="cost-bar-track"><div class="cost-bar-fill" style="width: 62%;"></div></div>
+            <span class="cost-bar-value">$2.98</span>
+          </div>
+          <div class="cost-bar-row">
+            <span class="cost-bar-label">Tess (Haiku)</span>
+            <div class="cost-bar-track"><div class="cost-bar-fill" style="width: 20%;"></div></div>
+            <span class="cost-bar-value">$0.96</span>
+          </div>
+          <div class="cost-bar-row">
+            <span class="cost-bar-label">FIF Pipeline</span>
+            <div class="cost-bar-track"><div class="cost-bar-fill" style="width: 12%;"></div></div>
+            <span class="cost-bar-value">$0.58</span>
+          </div>
+          <div class="cost-bar-row">
+            <span class="cost-bar-label">Research</span>
+            <div class="cost-bar-track"><div class="cost-bar-fill warn" style="width: 6%;"></div></div>
+            <span class="cost-bar-value">$0.30</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="specimen-group">
+      <div class="specimen-label">Panel Variant: Gauge Container (Analog Readout)</div>
+      <div class="specimen-note">Centered SVG arc gauge. Max 4 custom SVG gauges across the dashboard.</div>
+      <div class="gauge-row" style="max-width: 800px;">
+        <div class="gauge-container">
+          <svg class="gauge-svg" viewBox="0 0 120 80">
+            <path class="gauge-track-path" d="M 15 70 A 50 50 0 0 1 105 70" />
+            <path class="gauge-fill-path ok" d="M 15 70 A 50 50 0 0 1 75 22" />
+          </svg>
+          <div class="gauge-value-text" style="color: var(--status-ok);">42%</div>
+          <div class="gauge-label-text">CPU Load</div>
+        </div>
+        <div class="gauge-container">
+          <svg class="gauge-svg" viewBox="0 0 120 80">
+            <path class="gauge-track-path" d="M 15 70 A 50 50 0 0 1 105 70" />
+            <path class="gauge-fill-path warn" d="M 15 70 A 50 50 0 0 1 95 48" />
+          </svg>
+          <div class="gauge-value-text" style="color: var(--status-warn);">68%</div>
+          <div class="gauge-label-text">Memory</div>
+        </div>
+        <div class="gauge-container">
+          <svg class="gauge-svg" viewBox="0 0 120 80">
+            <path class="gauge-track-path" d="M 15 70 A 50 50 0 0 1 105 70" />
+            <path class="gauge-fill-path ok" d="M 15 70 A 50 50 0 0 1 55 18" />
+          </svg>
+          <div class="gauge-value-text">34%</div>
+          <div class="gauge-label-text">Disk</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="specimen-group">
+      <div class="specimen-label">Panel Variant: LLM Status Card</div>
+      <div class="specimen-note">Extends service card pattern with stats row and optional degradation note.</div>
+      <div class="specimen-row">
+        <div class="service-card">
+          <div class="service-card-header">
+            <span class="status-dot ok"></span>
+            <span class="service-name">Anthropic — Opus 4.6</span>
+          </div>
+          <div class="llm-card-stats">
+            <span class="llm-stat">success <span class="llm-stat-value ok">99.7%</span></span>
+            <span class="llm-stat">p95 <span class="llm-stat-value">2.1s</span></span>
+            <span class="llm-stat">calls <span class="llm-stat-value">47</span></span>
+          </div>
+        </div>
+        <div class="service-card">
+          <div class="service-card-header">
+            <span class="status-dot warn"></span>
+            <span class="service-name">Anthropic — Haiku 4.5</span>
+          </div>
+          <div class="llm-card-stats">
+            <span class="llm-stat">success <span class="llm-stat-value warn">94.2%</span></span>
+            <span class="llm-stat">p95 <span class="llm-stat-value warn">4.8s</span></span>
+            <span class="llm-stat">calls <span class="llm-stat-value">312</span></span>
+          </div>
+          <div class="llm-degradation-note">Elevated latency since 11:40 UTC</div>
+        </div>
+        <div class="service-card">
+          <div class="service-card-header">
+            <span class="status-dot stale"></span>
+            <span class="service-name">Local — qwen3-coder</span>
+          </div>
+          <div class="llm-idle-note">No calls in 24h</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ===== STATUS INDICATORS ===== -->
+    <div class="specimen-group">
+      <div class="specimen-label">Status Indicators</div>
+      <div class="type-specimen">
+        <div class="type-sample">
+          <span class="type-meta">Inline dot (8px)</span>
+          <span><span class="status-dot ok"></span><span style="font-size: 0.875rem;">Healthy</span></span>
+          <span style="margin-left: 24px;"><span class="status-dot warn"></span><span style="font-size: 0.875rem;">Degraded</span></span>
+          <span style="margin-left: 24px;"><span class="status-dot error"></span><span style="font-size: 0.875rem;">Critical</span></span>
+          <span style="margin-left: 24px;"><span class="status-dot stale"></span><span style="font-size: 0.875rem;">Stale</span></span>
+        </div>
+        <div class="type-sample">
+          <span class="type-meta">Nav badge</span>
+          <span class="nav-badge" style="position: static; display: inline-flex;">3</span>
+          <span style="margin-left: 16px; font-family: Inter, sans-serif; font-size: 0.8125rem; color: var(--text-tertiary);">Urgency count on nav item</span>
+        </div>
+        <div class="type-sample">
+          <span class="type-meta">Status-colored value</span>
+          <span class="type-text-mono" style="font-size: 1.35rem; font-weight: 500; color: var(--status-ok);">99.7%</span>
+          <span class="type-text-mono" style="font-size: 1.35rem; font-weight: 500; color: var(--status-warn); margin-left: 24px;">68%</span>
+          <span class="type-text-mono" style="font-size: 1.35rem; font-weight: 500; color: var(--status-error); margin-left: 24px;">12%</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

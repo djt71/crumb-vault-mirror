@@ -1,0 +1,10 @@
+project: notebooklm-pipeline
+domain: learning
+project_class: knowledge
+phase: ARCHIVED
+phase_before_archive: ACT
+status: active
+created: 2026-02-18
+updated: 2026-02-24
+last_committed: 2026-02-24
+next_action: "Archived. All v2 deferrals resolved (3 struck, 1 moot, 1 parked indefinitely). No outstanding work items."

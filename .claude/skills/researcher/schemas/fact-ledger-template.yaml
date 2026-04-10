@@ -1,0 +1,81 @@
+# Fact Ledger Template
+# Created by Scoping stage (Step 3, Stage 1) with dispatch metadata populated.
+# Populated by Research Loop stages (Step 3, Stage 3) — append-only during research.
+# Corrected by Citation Verification stage (Step 3, Stage 5) — supersede model.
+# Consumed by Writing stage (Step 3, Stage 6) — only status: active entries are citable.
+#
+# I/O Operations:
+#   CREATE  — Scoping stage writes this template with metadata filled in, empty sources/entries
+#   APPEND  — Research Loop appends to sources[] and entries[] (never overwrites existing)
+#   READ    — All stages read; Synthesis and Writing consume entries for claim mapping
+#   SUPERSEDE — Citation Verification creates new entry with supersedes field,
+#               marks original status: deprecated. Invariant: every deprecated entry
+#               has exactly one active entry that supersedes it.
+#
+# File location: research/fact-ledger-[dispatch-id-short].yaml
+---
+type: fact-ledger
+project: "DISPATCH_PROJECT"
+dispatch_id: "DISPATCH_ID_FULL"
+created: "DISPATCH_DATE"
+updated: "DISPATCH_DATE"
+---
+
+sources:
+  # Each source encountered during research. Appended by Research Loop stages.
+  #
+  # - source_id: "string — kebab-case slug (author-short-title or domain-slug)"
+  #   url: "string — canonical URL"
+  #   title: "string — page/article title"
+  #   author: "string | null"
+  #   publication_date: "string | null — YYYY-MM-DD or YYYY"
+  #   venue: "string — where published"
+  #   tier: "A | B | C"
+  #   ingestion: "FullText | AbstractOnly | SecondaryCitation | ToolLimited"
+  #   authority_signals:
+  #     - "string — e.g., 'peer-reviewed', '.edu domain', 'cited by 3 other sources'"
+  #   retrieved_at: "string — ISO 8601"
+  #   content_path: "string | null — vault-relative path to stored content (FullText only)"
+  #   content_hash: "string | null — deferred to Phase 4 MCP tooling; V1 writes 'DEFERRED'"
+  #   content_extracted_at: "string | null — ISO 8601"
+
+entries:
+  # Each factual claim extracted from sources. Appended by Research Loop stages.
+  # Corrected by Citation Verification via supersede model.
+  #
+  # - entry_id: "FL-NNN — sequential, zero-padded 3 digits"
+  #   statement: "string — the factual claim"
+  #   source_id: "string — references sources[].source_id"
+  #   quote_snippet: "string — verbatim text from source supporting the claim (<=500 chars)"
+  #   confidence: "verified | supported | plausible | contested | unverifiable"
+  #   claim_key: "string — stable normalized identifier for 'same claim' across entries (kebab-case)"
+  #   stance: "supports | refutes | mixed"
+  #   contradicts: []  # FL-NNN entry IDs of contradictory claims
+  #   notes: "string | null — analyst notes on interpretation or context"
+  #   sub_question: "sq-N — which sub-question this entry addresses"
+  #   added_at_stage: 0  # stage number when entry was created
+  #   supersedes: null  # "FL-NNN | null — if this entry corrects a previous entry"
+  #   status: "active"  # "active | deprecated — deprecated entries are superseded"
+  #
+  # Confidence constraints (checked at entry creation):
+  #   verified    — requires source ingestion == FullText
+  #   supported   — requires source ingestion == FullText or AbstractOnly
+  #   plausible   — any ingestion class
+  #   contested   — any; must have >=2 entries with same claim_key
+  #   unverifiable — any; flagged for operator review
+
+verification:
+  # Written by Citation Verification stage. Empty until then.
+  total_entries: 0
+  by_confidence:
+    verified: 0
+    supported: 0
+    plausible: 0
+    contested: 0
+    unverifiable: 0
+  flags: []
+  # flags entries:
+  #   - entry_id: "FL-NNN"
+  #     flag_type: "over-confidence | match-failure | near-miss | orphan-deprecated"
+  #     detail: "string — explanation"
+  #     resolution: "string | null — what was done (supersede, downgrade, etc.)"

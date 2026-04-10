@@ -1,0 +1,34 @@
+---
+type: tasks
+project: vault-restructure
+domain: software
+status: active
+created: 2026-02-20
+updated: 2026-02-20
+skill_origin: action-architect
+tags:
+  - tasks
+---
+
+# Tasks — vault-restructure
+
+| id | description | state | depends_on | risk_level | domain | acceptance_criteria |
+|----|-------------|-------|------------|------------|--------|---------------------|
+| VRS-001 | Delete stale root files (print-mode-results.txt, print-mode-test7-results.txt) + verify .zprofile with user + fix frontmatter misclassifications in skill-authoring-conventions.md and inline-attachment-protocol.md (Phase 0A+0D) | pending | — | low | software | Files deleted; `project: crumb` changed to `project: null` in both docs; vault-check passes |
+| VRS-002 | Add `project_class: system\|knowledge` to all project-state.yaml files: system for crumb-tess-bridge, inbox-processor, openclaw-colocation, vault-restructure; knowledge for think-different, customer-intelligence, notebooklm-pipeline (Phase 0B) | pending | — | low | software | All 7 project-state.yaml files contain `project_class` field with correct value |
+| VRS-003 | Create Projects/index.md — curated project listing by class (Phase 0C) | pending | — | low | software | File exists with all 7 projects listed, grouped by system/knowledge class |
+| VRS-004 | Create 3 reference notes (wikilinks, not symlinks) in Projects/openclaw-colocation/design/ for specification, specification-summary, and integration-reference (Phase 0E) | pending | — | low | software | 3 reference notes exist with wikilinks to source docs; Obsidian graph shows connections |
+| VRS-005 | Search external tooling for vault path references: ~/.zshrc, ~/.zprofile, ~/.bashrc, ~/Library/LaunchAgents/*.plist, Alfred/Raycast workflows. Document findings. (Phase 0F) | pending | — | low | software | Inventory documented; each finding has a decision: update-with-phase or defer |
+| VRS-006 | Convert 5 breakable Obsidian links in docs/crumb-studio-migration.md (lines 353, 670, 674) and docs/openclaw-crumb-reference.md (lines 151, 153) to wiki links (Phase 0G) | pending | — | medium | software | All 5 hardcoded relative paths replaced with `[[wikilink]]` format; no broken links in Obsidian |
+| VRS-007 | Phase 0 verification: vault-check passes. Commit all Phase 0 changes. | pending | VRS-001, VRS-002, VRS-003, VRS-004, VRS-005, VRS-006 | low | software | vault-check exit code 0; git commit exists with all Phase 0 changes |
+| VRS-008 | Update critical system files for docs/ → _system/docs/: CLAUDE.md (18 refs), AGENTS.md (2 refs), scripts/session-startup.sh (2 refs), scripts/vault-check.sh (3 refs), .claude/settings.json + .claude/settings.local.json (audit both for docs/ permission patterns) (Phase 1) | pending | VRS-007 | medium | software | All `docs/` path refs in these 5-6 files point to `_system/docs/`; vault-check.sh scans `_system/docs/` |
+| VRS-009 | Update 7 skill files for docs/ → _system/docs/: audit (13), writing-coach (10), peer-review (6), action-architect (6), inbox-processor (5), systems-analyst (4), startup (1) (Phase 1) | pending | VRS-007 | low | software | All `docs/` refs in skill SKILL.md files point to `_system/docs/` |
+| VRS-010 | Update remaining external files: setup-vault-structure.sh (7 refs), _openclaw/README.md (1 ref), forward-looking refs in project run-logs/specs — skip historical entries (Phase 1) | pending | VRS-007 | low | software | All non-historical `docs/` refs in these files point to `_system/docs/` |
+| VRS-011 | Two-pass update of design spec (162+ refs): (1) bulk find-replace docs/ → _system/docs/, (2) 30-min manual line-by-line review using decision rule: current-structure/how-to-run → update; explicitly-historical → keep + label. Smoke test 5+ links in Obsidian. (Phase 1) | pending | VRS-007 | high | software | All live path refs updated; historical sections preserved with `(historical, pre-_system/)` labels where ambiguous; 5+ spec links resolve correctly in Obsidian |
+| VRS-012 | Update vault-root-absolute refs inside docs/ files: separate-version-history.md (67 refs), other docs/ files with `docs/` self-references (Phase 1) | pending | VRS-007 | medium | software | No vault-root-absolute `docs/` refs remain in files under `_system/docs/` (excluding historical prose) |
+| VRS-013 | Close Obsidian → execute `mkdir -p _system && git mv docs/ _system/docs/` → run secondary verification (test -d, test -f, bash -n) → run vault-check → run scoped + unrestricted grep → reopen Obsidian → spot-check links → commit (Phase 1) | pending | VRS-008, VRS-009, VRS-010, VRS-011, VRS-012 | high | software | `_system/docs/` exists; no `docs/` at vault root; vault-check passes; secondary verification passes; unrestricted grep shows only historical false positives; Obsidian shows no broken links; atomic commit exists |
+| VRS-014 | Bump spec to v1.8: update version header, redraw §2.1 directory diagram, add version history entry, `git mv crumb-design-spec-v1-7-1.md crumb-design-spec-v1-8.md`, grep for old filename + update all refs, commit (Phase 1B) | pending | VRS-013 | medium | software | Spec version reads v1.8; §2.1 shows _system/ structure; old filename returns 0 grep hits; atomic commit exists |
+| VRS-015 | Edit session-startup.sh line 12: change `..` to `../..` for VAULT_ROOT depth at _system/scripts/. Update all scripts/ refs: CLAUDE.md (1), AGENTS.md (1), design spec, crumb-studio-migration.md (6), other docs, project run-logs (skip historical). (Phase 2) | pending | VRS-014 | high | software | session-startup.sh VAULT_ROOT uses `../..`; all non-historical `scripts/` refs point to `_system/scripts/` |
+| VRS-016 | Close Obsidian → `git mv scripts/ _system/scripts/` → update .claude/settings.json hook path → update permission patterns in both settings files → verify hook from terminal (`bash _system/scripts/session-startup.sh`) → reopen Obsidian → grep verification → commit (Phase 2) | pending | VRS-015 | high | software | No `scripts/` at vault root; hook fires from `_system/scripts/`; new session starts; vault-check passes from new location; permissions allow new paths; atomic commit exists |
+| VRS-017 | Update all reviews/ refs: peer-review skill (8 refs), .claude/settings.json + .claude/settings.local.json (audit both), peer-review-skill-spec.md (11 refs), AGENTS.md (1 ref). Skip historical log entries. (Phase 3) | pending | VRS-016 | low | software | All non-historical `reviews/` refs point to `_system/reviews/`; both settings files audited |
+| VRS-018 | Close Obsidian → `git mv reviews/ _system/reviews/` → reopen Obsidian → verify peer-review skill can write to _system/reviews/ and _system/reviews/raw/ → vault-check → grep verification → commit (Phase 3) | pending | VRS-017 | medium | software | No `reviews/` at vault root; vault-check passes; peer-review skill output paths correct; Obsidian shows reviews under _system/reviews/; atomic commit exists |

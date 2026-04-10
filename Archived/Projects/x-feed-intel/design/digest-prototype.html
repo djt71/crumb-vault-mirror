@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>X Feed Intel — Feb 25, 2026</title>
+
+<!-- ET Book from Tufte CSS project -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.8.0/tufte.min.css">
+
+<style>
+  /* =========================================
+     FOUNDATION — Warm Enlightenment palette
+     ========================================= */
+  :root {
+    --bg:           #FFFCF5;
+    --bg-panel:     #FBF7EE;
+    --bg-high:      #FFF8F0;
+    --bg-medium:    #FFFCF5;
+    --bg-low:       #F8F6F1;
+
+    --text:         #1A1A1A;
+    --text-secondary: #5C5C5C;
+    --text-tertiary:  #8A8A8A;
+
+    --accent:       #8B3A3A;   /* Deep burgundy — primary interactive */
+    --accent-hover: #A04545;
+    --link:         #2B5F7C;   /* Deep teal for links */
+    --link-visited: #5C4A6E;
+
+    --high:         #8B3A3A;   /* Burgundy for high priority */
+    --high-bg:      rgba(139, 58, 58, 0.06);
+    --medium:       #8B7332;   /* Warm amber for medium */
+    --medium-bg:    rgba(139, 115, 50, 0.05);
+    --low:          #6B7B6B;   /* Muted sage for low */
+    --low-bg:       rgba(107, 123, 107, 0.04);
+
+    --border:       #E8E2D6;
+    --border-light: #F0EBE0;
+    --divider:      #D4CCBA;
+
+    --tag-bg:       #F0EBE0;
+    --tag-text:     #5C5040;
+
+    --conf-high:    #2B6B3A;
+    --conf-medium:  #8B7332;
+    --conf-low:     #8B5A3A;
+
+    --bookmark:     #8B6914;
+    --search:       #3A6B8B;
+  }
+
+  /* =========================================
+     TYPOGRAPHY
+     ========================================= */
+  /* ET Book is loaded by tufte.css */
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "et-book", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-size: 17px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  code, .mono {
+    font-family: "JetBrains Mono", "Fira Code", "Source Code Pro", Consolas, monospace;
+    font-size: 0.85em;
+  }
+
+  /* Override tufte.css max-width to use more screen */
+  article {
+    max-width: 1100px;
+    padding: 0 2rem;
+  }
+
+  /* =========================================
+     HEADER
+     ========================================= */
+  .digest-header {
+    border-bottom: 2px solid var(--divider);
+    padding: 2.5rem 0 1.5rem;
+    margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 1rem;
+  }
+
+  .digest-header h1 {
+    font-size: 1.8rem;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    margin: 0;
+    color: var(--text);
+  }
+
+  .digest-header .date {
+    font-style: italic;
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    margin-top: 0.3rem;
+  }
+
+  .digest-stats {
+    text-align: right;
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  .digest-stats .stat-value {
+    font-family: "JetBrains Mono", "Fira Code", monospace;
+    font-size: 0.82rem;
+    color: var(--text);
+  }
+
+  /* =========================================
+     COST TELEMETRY BAR
+     ========================================= */
+  .telemetry {
+    display: flex;
+    gap: 2rem;
+    padding: 0.7rem 1rem;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-light);
+    border-radius: 3px;
+    margin-bottom: 2.5rem;
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    align-items: center;
+  }
+
+  .telemetry .label {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.7rem;
+    color: var(--text-tertiary);
+    margin-right: 0.4rem;
+  }
+
+  .telemetry .amount {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.82rem;
+    color: var(--text);
+  }
+
+  .telemetry .projected {
+    color: var(--conf-high);
+  }
+
+  /* =========================================
+     PRIORITY SECTIONS
+     ========================================= */
+  .priority-section {
+    margin-bottom: 2.5rem;
+  }
+
+  .priority-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1.2rem;
+  }
+
+  .priority-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .priority-indicator.high { background: var(--high); }
+  .priority-indicator.medium { background: var(--medium); }
+  .priority-indicator.low { background: var(--low); }
+
+  .priority-label {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-secondary);
+    font-weight: 400;
+  }
+
+  .priority-count {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+  }
+
+  /* =========================================
+     POST CARDS — HIGH PRIORITY (full detail)
+     ========================================= */
+  .post-card {
+    margin-bottom: 1.5rem;
+    padding: 1.2rem 1.4rem;
+    border-left: 3px solid transparent;
+    border-radius: 2px;
+    position: relative;
+  }
+
+  .post-card.high {
+    background: var(--high-bg);
+    border-left-color: var(--high);
+  }
+
+  .post-card.medium {
+    background: var(--medium-bg);
+    border-left-color: var(--medium);
+  }
+
+  .post-card.low {
+    background: var(--low-bg);
+    border-left-color: var(--low);
+  }
+
+  .post-card-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.7rem;
+    margin-bottom: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  .item-id {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.78rem;
+    color: var(--text-tertiary);
+    background: var(--tag-bg);
+    padding: 0.15rem 0.4rem;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .author {
+    font-size: 0.92rem;
+    color: var(--link);
+  }
+
+  .author:hover {
+    color: var(--accent-hover);
+  }
+
+  .source-badge {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.12rem 0.45rem;
+    border-radius: 2px;
+    font-family: "JetBrains Mono", monospace;
+  }
+
+  .source-badge.bookmark {
+    color: var(--bookmark);
+    background: rgba(139, 105, 20, 0.1);
+  }
+
+  .source-badge.search {
+    color: var(--search);
+    background: rgba(58, 107, 139, 0.1);
+  }
+
+  .source-badge.both {
+    color: var(--accent);
+    background: rgba(139, 58, 58, 0.08);
+  }
+
+  .post-excerpt {
+    font-size: 0.98rem;
+    line-height: 1.55;
+    color: var(--text);
+    margin-bottom: 0.7rem;
+    font-style: italic;
+  }
+
+  .post-excerpt::before { content: '"'; }
+  .post-excerpt::after { content: '"'; }
+
+  /* Tufte-style margin note for triage metadata */
+  .triage-meta {
+    float: right;
+    clear: right;
+    width: 220px;
+    margin-right: -260px;
+    margin-top: 0;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    padding-left: 1rem;
+    border-left: 1px solid var(--border-light);
+  }
+
+  .triage-meta .meta-label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-tertiary);
+    display: block;
+    margin-top: 0.5rem;
+  }
+
+  .triage-meta .meta-label:first-child {
+    margin-top: 0;
+  }
+
+  /* =========================================
+     WHY NOW — the key triage insight
+     ========================================= */
+  .why-now {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    padding-left: 0.8rem;
+    border-left: 2px solid var(--border-light);
+  }
+
+  .why-now::before {
+    content: "Why now — ";
+    font-variant: small-caps;
+    letter-spacing: 0.04em;
+    color: var(--text-tertiary);
+    font-size: 0.85em;
+  }
+
+  /* =========================================
+     TAGS
+     ========================================= */
+  .tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+  }
+
+  .tag {
+    font-size: 0.72rem;
+    padding: 0.15rem 0.5rem;
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    border-radius: 2px;
+    font-family: "JetBrains Mono", monospace;
+    letter-spacing: 0.02em;
+  }
+
+  .tag.crumb-architecture {
+    background: rgba(139, 58, 58, 0.1);
+    color: var(--high);
+  }
+
+  .tag.tool-discovery {
+    background: rgba(58, 107, 139, 0.1);
+    color: var(--search);
+  }
+
+  .tag.tess-operations {
+    background: rgba(107, 90, 139, 0.1);
+    color: #5C4A6E;
+  }
+
+  .tag.pattern-insight {
+    background: rgba(139, 115, 50, 0.1);
+    color: var(--medium);
+  }
+
+  .tag.community-signal {
+    background: rgba(107, 123, 107, 0.1);
+    color: var(--low);
+  }
+
+  .tag.architecture-inspiration {
+    background: rgba(107, 90, 80, 0.08);
+    color: #6B5A50;
+  }
+
+  /* =========================================
+     POST FOOTER — link, action, confidence
+     ========================================= */
+  .post-footer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.6rem;
+    font-size: 0.82rem;
+  }
+
+  .post-link {
+    color: var(--link);
+    text-decoration: none;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.76rem;
+  }
+
+  .post-link:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
+  }
+
+  .action-badge {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    font-family: "JetBrains Mono", monospace;
+  }
+
+  .action-badge.add-to-spec {
+    background: rgba(139, 58, 58, 0.12);
+    color: var(--high);
+  }
+
+  .action-badge.test {
+    background: rgba(58, 107, 139, 0.12);
+    color: var(--search);
+  }
+
+  .action-badge.capture {
+    background: rgba(139, 115, 50, 0.12);
+    color: var(--medium);
+  }
+
+  .action-badge.read {
+    background: rgba(107, 123, 107, 0.1);
+    color: var(--low);
+  }
+
+  .confidence {
+    font-size: 0.72rem;
+    font-family: "JetBrains Mono", monospace;
+  }
+
+  .confidence.high { color: var(--conf-high); }
+  .confidence.medium { color: var(--conf-medium); }
+  .confidence.low { color: var(--conf-low); }
+
+  .thread-flag {
+    font-size: 0.78rem;
+    color: var(--conf-low);
+    font-style: italic;
+  }
+
+  .review-flag {
+    font-size: 0.72rem;
+    color: var(--conf-low);
+    font-style: italic;
+    border: 1px solid rgba(139, 90, 58, 0.25);
+    padding: 0.1rem 0.4rem;
+    border-radius: 2px;
+  }
+
+  /* =========================================
+     MEDIUM ITEMS — condensed format
+     ========================================= */
+  .post-card.medium .post-excerpt {
+    font-size: 0.92rem;
+  }
+
+  /* =========================================
+     LOW ITEMS — minimal format
+     ========================================= */
+  .post-card.low .post-excerpt {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+  }
+
+  /* =========================================
+     ROUTED ITEMS SIDEBAR
+     ========================================= */
+  .routed-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--divider);
+  }
+
+  .routed-header {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-secondary);
+    margin-bottom: 0.8rem;
+  }
+
+  .routed-item {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    padding: 0.3rem 0;
+    display: flex;
+    gap: 0.5rem;
+    align-items: baseline;
+  }
+
+  .routed-item .vault-path {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.76rem;
+    color: var(--text-tertiary);
+  }
+
+  /* =========================================
+     FOOTER
+     ========================================= */
+  .digest-footer {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--divider);
+    font-size: 0.82rem;
+    color: var(--text-tertiary);
+    padding-bottom: 3rem;
+  }
+
+  .digest-footer .help-text {
+    font-style: italic;
+    margin-bottom: 0.5rem;
+  }
+
+  .command-ref {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.76rem;
+    color: var(--text-secondary);
+    background: var(--bg-panel);
+    padding: 0.6rem 0.8rem;
+    border-radius: 2px;
+    display: inline-block;
+    margin-top: 0.3rem;
+    line-height: 1.8;
+  }
+
+  /* =========================================
+     ORNAMENTAL DIVIDER
+     ========================================= */
+  .ornament {
+    text-align: center;
+    color: var(--divider);
+    font-size: 1.2rem;
+    letter-spacing: 0.5em;
+    margin: 1.5rem 0;
+  }
+
+  /* =========================================
+     RESPONSIVE — collapse margin notes inline
+     ========================================= */
+  @media (max-width: 1400px) {
+    .triage-meta {
+      float: none;
+      width: auto;
+      margin-right: 0;
+      margin-top: 0.5rem;
+      padding-left: 0;
+      border-left: none;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .triage-meta .meta-label {
+      margin-top: 0;
+    }
+
+    .triage-meta > span {
+      display: inline;
+    }
+  }
+
+  @media (max-width: 768px) {
+    article {
+      padding: 0 1rem;
+    }
+
+    .digest-header {
+      grid-template-columns: 1fr;
+    }
+
+    .digest-stats {
+      text-align: left;
+    }
+
+    .telemetry {
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .post-card {
+      padding: 1rem;
+    }
+
+    .post-footer {
+      flex-wrap: wrap;
+    }
+  }
+</style>
+</head>
+
+<body>
+<article>
+
+  <!-- ============================
+       HEADER
+       ============================ -->
+  <section class="digest-header">
+    <div>
+      <h1>X Feed Intelligence</h1>
+      <div class="date">Tuesday, February 25, 2026</div>
+    </div>
+    <div class="digest-stats">
+      <span class="stat-value">13</span> new items &middot;
+      <span class="stat-value">5</span> bookmarks &middot;
+      <span class="stat-value">11</span> search &middot;
+      <span class="stat-value">3</span> overlap<br>
+      <span class="stat-value">2</span> routed to inbox
+    </div>
+  </section>
+
+  <!-- ============================
+       COST TELEMETRY
+       ============================ -->
+  <div class="telemetry">
+    <span><span class="label">Today</span> <span class="amount">$0.09</span></span>
+    <span><span class="label">MTD</span> <span class="amount">$2.14</span></span>
+    <span><span class="label">Projected</span> <span class="amount projected">$3.21</span></span>
+    <span><span class="label">Budget</span> <span class="amount">$6.00</span></span>
+  </div>
+
+  <!-- ============================
+       HIGH PRIORITY
+       ============================ -->
+  <section class="priority-section">
+    <div class="priority-header">
+      <span class="priority-indicator high"></span>
+      <span class="priority-label">High Priority</span>
+      <span class="priority-count">3</span>
+    </div>
+
+    <!-- A01 -->
+    <div class="post-card high">
+      <div class="triage-meta">
+        <span class="meta-label">Action</span>
+        <span class="action-badge add-to-spec">add-to-spec</span>
+        <span class="meta-label">Confidence</span>
+        <span class="confidence high">high</span>
+        <span class="meta-label">Source</span>
+        <span class="source-badge bookmark">bookmark</span>
+        <span class="meta-label">Owner</span>
+        Crumb
+      </div>
+      <div class="post-card-header">
+        <span class="item-id">A01</span>
+        <a class="author" href="#">@swyx</a>
+      </div>
+      <div class="tags">
+        <span class="tag crumb-architecture">crumb-architecture</span>
+        <span class="tag pattern-insight">pattern-insight</span>
+      </div>
+      <p class="post-excerpt">We shipped a 'skill graph' — skills that reference other skills via wikilinks. Single-file skills hit a ceiling fast. The graph lets you compose capabilities: a therapy skill that pulls from attachment theory, CBT patterns, active listening, all as separate composable nodes. One file can't hold real depth.</p>
+      <p class="why-now">Directly applicable to Crumb Phase 2 skill composition. The wikilink-as-edge pattern mirrors the MOC architecture — skills as a knowledge graph rather than flat files. Worth evaluating against current skill spec.</p>
+      <div class="post-footer">
+        <a class="post-link" href="https://x.com/swyx/status/189384726152">x.com/swyx/…726152</a>
+      </div>
+    </div>
+
+    <!-- A02 -->
+    <div class="post-card high">
+      <div class="triage-meta">
+        <span class="meta-label">Action</span>
+        <span class="action-badge test">test</span>
+        <span class="meta-label">Confidence</span>
+        <span class="confidence high">high</span>
+        <span class="meta-label">Source</span>
+        <span class="source-badge both">bookmark + search</span>
+        <span class="meta-label">Owner</span>
+        Tess
+      </div>
+      <div class="post-card-header">
+        <span class="item-id">A02</span>
+        <a class="author" href="#">@simonw</a>
+      </div>
+      <div class="tags">
+        <span class="tag tool-discovery">tool-discovery</span>
+      </div>
+      <p class="post-excerpt">New release: sqlite-utils 4.1 adds a 'insert --detect-types' flag that auto-schemas JSON. Been using it for pipeline state and it eliminates the schema-definition step entirely. Just point it at your JSONL and it figures out the types. Pairs well with datasette for instant queryable dashboards.</p>
+      <p class="why-now">The x-feed-intel pipeline uses SQLite for state (§7.2). Auto-schema from JSON could simplify Phase 1 setup and reduce boilerplate. Also relevant to the datasette integration path for trend analysis in Phase 2.</p>
+      <div class="post-footer">
+        <a class="post-link" href="https://x.com/simonw/status/189372615243">x.com/simonw/…615243</a>
+      </div>
+    </div>
+
+    <!-- A03 -->
+    <div class="post-card high">
+      <div class="triage-meta">
+        <span class="meta-label">Action</span>
+        <span class="action-badge capture">capture</span>
+        <span class="meta-label">Confidence</span>
+        <span class="confidence low">low — review</span>
+        <span class="meta-label">Source</span>
+        <span class="source-badge search">search</span>
+      </div>
+      <div class="post-card-header">
+        <span class="item-id">A03</span>
+        <a class="author" href="#">@karpathy</a>
+        <span class="review-flag">manual review</span>
+      </div>
+      <div class="tags">
+        <span class="tag crumb-architecture">crumb-architecture</span>
+      </div>
+      <p class="post-excerpt">Hot take: the 'context window is memory' framing is wrong. Memory is what survives context death. If your agent can't resume after a cold start with zero context, you don't have memory, you have a long conversation. The test is: pull the plug, restart, and see what's preserved.</p>
+      <span class="thread-flag">🧵 Thread likely — expand before final decision</span>
+      <p class="why-now">Session continuity and context-death recovery are core Crumb design concerns (§7 session protocol). But this is a thread — the excerpt alone may not capture the full argument. Worth expanding before deciding whether to incorporate.</p>
+      <div class="post-footer">
+        <a class="post-link" href="https://x.com/karpathy/status/189365271534">x.com/karpathy/…271534</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="ornament">· · ·</div>
+
+  <!-- ============================
+       MEDIUM PRIORITY
+       ============================ -->
+  <section class="priority-section">
+    <div class="priority-header">
+      <span class="priority-indicator medium"></span>
+      <span class="priority-label">Medium</span>
+      <span class="priority-count">6</span>
+    </div>
+
+    <div class="post-card medium">
+      <div class="post-card-header">
+        <span class="item-id">B01</span>
+        <a class="author" href="#">@mckaywrigley</a>
+        <span class="source-badge bookmark">bookmark</span>
+      </div>
+      <div class="tags">
+        <span class="tag pattern-insight">pattern-insight</span>
+      </div>
+      <p class="post-excerpt">Finally figured out a clean pattern for agent handoffs using structured outbox files. The receiving agent reads a manifest, not a conversation. Eliminates the 'lost context' problem entirely because the manifest IS the context. No summarization needed.</p>
+      <p class="why-now">Mirrors the _openclaw/ bridge pattern between Tess and Crumb. Validates the manifest-over-conversation design decision.</p>
+      <div class="post-footer">
+        <a class="post-link" href="#">x.com/mckaywrigley/…</a>
+        <span class="action-badge read">read</span>
+        <span class="confidence medium">med conf</span>
+      </div>
+    </div>
+
+    <div class="post-card medium">
+      <div class="post-card-header">
+        <span class="item-id">B02</span>
+        <a class="author" href="#">@natfriedman</a>
+        <span class="source-badge search">search</span>
+      </div>
+      <div class="tags">
+        <span class="tag tess-operations">tess-operations</span>
+      </div>
+      <p class="post-excerpt">Telegram bots are so underrated for personal automation. I run 4 bots that handle everything from expense tracking to daily journaling. The reply-based UX is the key — it's faster than any app because you're already in your messaging flow.</p>
+      <p class="why-now">Validates Tess's Telegram-based interaction model. The reply-based UX insight aligns with the x-feed-intel feedback protocol.</p>
+      <div class="post-footer">
+        <a class="post-link" href="#">x.com/natfriedman/…</a>
+        <span class="action-badge read">read</span>
+        <span class="confidence high">high conf</span>
+      </div>
+    </div>
+
+    <div class="post-card medium">
+      <div class="post-card-header">
+        <span class="item-id">B03</span>
+        <a class="author" href="#">@alexalbert__</a>
+        <span class="source-badge search">search</span>
+      </div>
+      <div class="tags">
+        <span class="tag community-signal">community-signal</span>
+      </div>
+      <p class="post-excerpt">Claude Code just crossed 500k weekly active users. The MCP ecosystem is growing faster than we expected — over 2,000 community-built servers now. The patterns people are building are wild: vault management, CI/CD orchestration, personal CRMs.</p>
+      <p class="why-now">Community validation that the agent-native architecture approach is gaining mainstream traction. MCP server count relevant to future Crumb integration paths.</p>
+      <div class="post-footer">
+        <a class="post-link" href="#">x.com/alexalbert__/…</a>
+        <span class="action-badge read">read</span>
+        <span class="confidence high">high conf</span>
+      </div>
+    </div>
+
+    <div class="post-card medium">
+      <div class="post-card-header">
+        <span class="item-id">B04</span>
+        <a class="author" href="#">@dustinmoskovitz</a>
+        <span class="source-badge search">search</span>
+      </div>
+      <div class="tags">
+        <span class="tag pattern-insight">pattern-insight</span>
+      </div>
+      <p class="post-excerpt">We added a 'confidence' field to every AI-generated output in Asana. Turns out when you make the model's uncertainty visible, users make dramatically better decisions about when to trust it and when to verify. Simple field, huge behavioral shift.</p>
+      <p class="why-now">Validates the confidence field in the x-feed-intel triage schema. Enterprise-scale evidence that explicit uncertainty changes user behavior.</p>
+      <div class="post-footer">
+        <a class="post-link" href="#">x.com/dustinmoskovitz/…</a>
+        <span class="action-badge capture">capture</span>
+        <span class="confidence medium">med conf</span>
+      </div>
+    </div>
+
+    <div class="post-card medium">
+      <div class="post-card-header">
+        <span class="item-id">B05</span>
+        <a class="author" href="#">@emollick</a>
+        <span class="source-badge search">search</span>
+      </div>
+      <div class="tags">
+        <span class="tag architecture-inspiration">architecture-inspiration</span>
+      </div>
+      <p class="post-excerpt">New paper: agents that maintain explicit 'working memory' files outperform those relying solely on context windows by 34% on multi-step tasks. The key finding — the file acts as a commitment device, not just storage. Agents re-read it and self-correct.</p>
+      <p class="why-now">Academic validation of the session-state file pattern used in Crumb's session protocol. The 'commitment device' framing is a useful mental model.</p>
+      <div class="post-footer">
+        <a class="post-link" href="#">x.com/emollick/…</a>
+        <span class="action-badge read">read</span>
+        <span class="confidence high">high conf</span>
+      </div>
+    </div>
+
+    <div class="post-card medium">
+      <div class="post-card-header">
+        <span class="item-id">B06</span>
+        <a class="author" href="#">@kepano</a>
+        <span class="source-badge bookmark">bookmark</span>
+      </div>
+      <div class="tags">
+        <span class="tag tool-discovery">tool-discovery</span>
+      </div>
+      <p class="post-excerpt">Obsidian 1.9 ships with native YAML validation in frontmatter. This is a big deal for anyone building structured workflows on top of Obsidian — you'll get inline errors when your frontmatter doesn't match a schema you define. Community plugins can register schemas.</p>
+      <p class="why-now">Directly relevant to Crumb's vault-check.sh and frontmatter governance. Native validation could replace or supplement the custom lint pass.</p>
+      <div class="post-footer">
+        <a class="post-link" href="#">x.com/kepano/…</a>
+        <span class="action-badge test">test</span>
+        <span class="confidence high">high conf</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="ornament">· · ·</div>
+
+  <!-- ============================
+       LOW PRIORITY
+       ============================ -->
+  <section class="priority-section">
+    <div class="priority-header">
+      <span class="priority-indicator low"></span>
+      <span class="priority-label">Low</span>
+      <span class="priority-count">4</span>
+    </div>
+
+    <div class="post-card low">
+      <div class="post-card-header">
+        <span class="item-id">C01</span>
+        <a class="author" href="#">@random_dev</a>
+        <span class="source-badge search">search</span>
+      </div>
+      <p class="post-excerpt">Tried building a cron-based RSS reader with Claude. It works but the token costs add up if you don't batch aggressively. Switched to Haiku for classification and cut costs 70%.</p>
+      <div class="post-footer">
+        <a class="post-link" href="#">x.com/random_dev/…</a>
+        <span class="confidence medium">med conf</span>
+      </div>
+    </div>
+
+    <div class="post-card low">
+      <div class="post-card-header">
+        <span class="item-id">C02</span>
+        <a class="author" href="#">@pkm_enthusiast</a>
+        <span class="source-badge search">search</span>
+      </div>
+      <p class="post-excerpt">My Obsidian vault just hit 2000 notes. Time to rethink my folder structure. Anyone use MOCs successfully at this scale? I keep losing things in nested folders.</p>
+      <div class="post-footer">
+        <a class="post-link" href="#">x.com/pkm_enthusiast/…</a>
+        <span class="confidence medium">med conf</span>
+      </div>
+    </div>
+
+    <div class="post-card low">
+      <div class="post-card-header">
+        <span class="item-id">C03</span>
+        <a class="author" href="#">@ai_builder</a>
+        <span class="source-badge search">search</span>
+      </div>
+      <p class="post-excerpt">Comparison of 5 tweet API providers. TwitterAPI.io came out cheapest for search-only workloads, Tweetbase had the best thread expansion, official X API was most reliable but 3x the price.</p>
+      <div class="post-footer">
+        <a class="post-link" href="#">x.com/ai_builder/…</a>
+        <span class="confidence high">high conf</span>
+      </div>
+    </div>
+
+    <div class="post-card low">
+      <div class="post-card-header">
+        <span class="item-id">C04</span>
+        <a class="author" href="#">@llm_tinkerer</a>
+        <span class="source-badge search">search</span>
+      </div>
+      <p class="post-excerpt">Haiku 4.5 is surprisingly good at classification tasks. We switched from Sonnet and saved 70% with no measurable accuracy drop on our eval suite. The gap is in creative/complex reasoning, not structured output.</p>
+      <div class="post-footer">
+        <a class="post-link" href="#">x.com/llm_tinkerer/…</a>
+        <span class="confidence high">high conf</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       ROUTED ITEMS
+       ============================ -->
+  <section class="routed-section">
+    <div class="routed-header">Auto-routed to Crumb inbox</div>
+    <div class="routed-item">
+      <span class="item-id">A01</span>
+      <span>@swyx — skill graph / wikilink composition</span>
+      <span class="vault-path">→ _openclaw/inbox/feed-intel-189384726152.md</span>
+    </div>
+    <div class="routed-item">
+      <span class="item-id">A02</span>
+      <span>@simonw — sqlite-utils auto-schema</span>
+      <span class="vault-path">→ _openclaw/inbox/feed-intel-189372615243.md</span>
+    </div>
+  </section>
+
+  <!-- ============================
+       FOOTER
+       ============================ -->
+  <section class="digest-footer">
+    <p class="help-text">Reply in Telegram to act on any item:</p>
+    <div class="command-ref">
+      [ID] promote &nbsp;·&nbsp; [ID] ignore &nbsp;·&nbsp; [ID] add-topic [name] &nbsp;·&nbsp; [ID] expand
+    </div>
+    <p style="margin-top: 1rem; font-size: 0.76rem;">
+      Generated by Tess · x-feed-intel v0.3 · Vault snapshot from 07:55 UTC
+    </p>
+  </section>
+
+</article>
+</body>
+</html>

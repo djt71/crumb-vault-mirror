@@ -1,0 +1,310 @@
+{
+  "model": "claude-haiku-4-5-20251001",
+  "system_prompt": "compressed",
+  "system_prompt_chars": 4388,
+  "test_count": 24,
+  "results": [
+    {
+      "test_id": "PC1-01",
+      "category": "voice-fidelity",
+      "dimensions": [
+        "PC-1",
+        "PT-1"
+      ],
+      "prompt": "Hey Tess, can you give me a status update on where things stand with the Infoblox renewals?",
+      "response": "I don't have current visibility into your Infoblox renewal pipeline. Last I knew, you were tracking ~25 accounts across DDI and DNS security, but I need specifics on what you're asking:\n\n**What's the actual ask?**\n- Which accounts are in renewal window right now?\n- Are you looking for risk flags (churn, expansion, contraction)?\n- Do you need a deck prepped, a call scheduled, or just a headcount?\n\n**What I need from you:**\n- Access to your CRM or renewal tracker (Salesforce, spreadsheet, whatever you're using)\n- Or: tell me which accounts are top-of-mind and I'll help you think through them\n\nRight now I'm flying blind. Give me the source and the specific question, and I'll give you the answer.",
+      "input_tokens": 1110,
+      "output_tokens": 182,
+      "latency_s": 3.09
+    },
+    {
+      "test_id": "PC1-02",
+      "category": "voice-fidelity",
+      "dimensions": [
+        "PC-1",
+        "PT-2"
+      ],
+      "prompt": "I just spent three hours debugging a DNS zone transfer issue and it turned out to be a typo in the TSIG key name.",
+      "response": "Look. Three hours on a typo is brutal, but it's also a checkpoint.\n\n**What I'm seeing:** You caught it. You fixed it. The zone transfers now work. That's the win.\n\n**What matters next:** Did you have a way to catch this faster, or was it just going to be a grind no matter what?\n\nIf it's the latter \u2014 TSIG key validation is tedious and error-prone by hand \u2014 we should talk about adding a pre-flight check to your zone transfer runbook. Something that validates key names against your vault before you even attempt the transfer. Saves the next three hours.\n\nIf you had a way to catch it and didn't use it, that's different. That's a process gap worth fixing.\n\nWhich one is it?",
+      "input_tokens": 1113,
+      "output_tokens": 171,
+      "latency_s": 3.21
+    },
+    {
+      "test_id": "PC1-03",
+      "category": "second-register",
+      "dimensions": [
+        "PC-1",
+        "PT-4"
+      ],
+      "prompt": "I keep going back and forth on whether to specialize deeper in DNS security or broaden into cloud networking. Every time I think I've decided, something pulls me the other way. I've been stuck on this for months.",
+      "response": "Look. You're not actually stuck on the decision \u2014 you're stuck because you're treating it like a binary choice that needs to be *right* before you move.\n\nHere's what I see: You have ~25 accounts. DNS security is where you have leverage and pattern recognition. Cloud networking is adjacent, higher-market-rate, but you'd be starting from scratch on the pattern side. Both are real. Neither is wrong.\n\nThe frame that's killing you: \"Which one should I specialize in?\" \n\nBetter frame: \"What's the next 90 days that moves the needle on *either* without locking me out of the other?\"\n\nConcrete test:\n- Pick one customer account that's asking about cloud networking. Spend 4 weeks solving their actual problem \u2014 not learning cloud networking in general, solving *their* problem. Document what you learned, what was friction, what you'd do differently.\n- Keep DNS security work flowing on the other 24 accounts.\n- At week 5, you'll have real data: Did that cloud work feel like leverage or like treading water? Did it open doors or create more questions?\n\nThat's not \"deciding\" \u2014 that's *proving*. And proof kills the back-and-forth.\n\nThe months of indecision cost more than a wrong 90-day bet. Move.\n\nWhat's the next cloud networking ask sitting in your queue right now?",
+      "input_tokens": 1131,
+      "output_tokens": 307,
+      "latency_s": 5.82
+    },
+    {
+      "test_id": "PC1-04",
+      "category": "voice-fidelity",
+      "dimensions": [
+        "PC-1",
+        "PT-1"
+      ],
+      "prompt": "What's the weather looking like for today?",
+      "response": "Can't see real-time weather from here. Need a location and I'd have to pull it fresh anyway \u2014 I don't have live data feeds.\n\nGive me your zip code or city and I can point you at a reliable source (weather.gov if you're in the US, otherwise your regional equivalent). Or if you're asking because it affects something \u2014 commute, outdoor work, customer site visit \u2014 tell me that and I'll factor it into whatever we're planning.\n\nWhat's the actual ask?",
+      "input_tokens": 1094,
+      "output_tokens": 108,
+      "latency_s": 2.13
+    },
+    {
+      "test_id": "PC1-05",
+      "category": "second-register",
+      "dimensions": [
+        "PC-1",
+        "PT-4"
+      ],
+      "prompt": "I'm starting to wonder if building Crumb is just a sophisticated procrastination tool. Like maybe I'm building the system instead of doing the work the system is supposed to help me do.",
+      "response": "Look. That's a real question, but you're asking it backwards.\n\nCheck the vault: What work actually got done in the last 90 days that wouldn't have without Crumb sessions? Not potential work. Actual output. Architecture docs, design decisions that held, problems you caught early because you had a structured space to think them through.\n\nThen check the other direction: What work *didn't* happen because you were building Crumb instead?\n\nThe honest answer lives in that gap. If Crumb sessions are generating 3x the quality on complex problems but you're spending 40% of your time on the tool itself \u2014 that's a real trade-off to measure, not a moral failing.\n\nBut here's the thing: You're asking this question *now*, which means you're already sensing the ratio is off. That's not procrastination anxiety talking. That's pattern recognition.\n\nThe actual risk isn't \"building systems is bad.\" It's \"building systems becomes the work because it feels productive and you control the scope.\" Crumb can absolutely become that. Especially for someone who thinks in architecture.\n\nSo: What's the minimum viable version of Crumb that would let you stop iterating on it and start using it? Not perfect. Minimum. Because if you can't name that, you're not building a tool \u2014 you're building a hobby that looks like work.\n\nWhat does that version look like?",
+      "input_tokens": 1125,
+      "output_tokens": 306,
+      "latency_s": 5.25
+    },
+    {
+      "test_id": "PC1-06",
+      "category": "voice-fidelity",
+      "dimensions": [
+        "PC-1",
+        "PT-2"
+      ],
+      "prompt": "I accidentally deleted the production DNS zone file. Just kidding. But I did forget to save the config changes before rebooting.",
+      "response": "Alright, so you lost unsaved config changes on a reboot. How bad?\n\n**What I need to know:**\n1. Which system? (Infoblox grid member, external DNS, something else?)\n2. How far back do you need to go? (Last backup timestamp, last known-good state?)\n3. Are customers seeing failures or just you noticing the drift?\n\n**Likely path:**\n- Pull the last backup or snapshot\n- Restore to that point\n- Re-apply the changes (now with a save step)\n- Verify zone transfers / AXFR if grid-dependent\n\n**The real question:** Why'd the reboot happen without a save? Scheduled maintenance, unexpected crash, or just \"seemed like a good time\"?\n\nIf it's a pattern, we need to talk about pre-reboot checklists or automation that forces a save-before-shutdown. But first \u2014 how much damage are we actually looking at?",
+      "input_tokens": 1112,
+      "output_tokens": 213,
+      "latency_s": 3.58
+    },
+    {
+      "test_id": "PC2-01",
+      "category": "tone-shift",
+      "dimensions": [
+        "PC-2"
+      ],
+      "prompt": "I think I might have left the API keys for the customer demo environment in a public GitHub repo. The repo has been public for about two weeks.",
+      "response": "Listen. Stop. This is serious mode.\n\n**Immediate actions \u2014 next 30 minutes:**\n\n1. **Confirm the exposure.** Which repo? Which keys? What access do they grant? (Read, write, delete? Which services?)\n2. **Rotate those keys now.** Don't wait for verification. Assume compromise.\n3. **Check the logs.** GitHub repo access logs, API key usage logs for the past two weeks. Any anomalous calls? Any access from IPs you don't recognize?\n4. **Notify your security team at Infoblox.** This is not optional. They need to know before anyone else finds it.\n\n**Then:**\n\n5. **Scrub the repo.** Remove the keys, force-push if necessary (or nuke and recreate if it's cleaner). Commit history still has them \u2014 you'll need to use `git filter-branch` or similar to strip them from history, or just accept that they're in the history and the keys are already rotated anyway.\n6. **Audit what those keys could access.** Demo environment scope. Customer data? Production adjacency? Lateral movement risk?\n\n**Questions I need answered:**\n\n- How many keys? What service(s)?\n- Is this a personal repo or an Infoblox org repo?\n- Any indication the keys were actually *used* by someone else?\n- Do you have access to API logs for the demo environment?\n\n**Why this matters:** Two weeks is enough time for automated scanners to find exposed keys. Even if no one's used them yet, assume they're burned.\n\nWhat's the repo URL and what services do those keys control?",
+      "input_tokens": 1115,
+      "output_tokens": 369,
+      "latency_s": 5.58
+    },
+    {
+      "test_id": "PC2-02",
+      "category": "tone-shift",
+      "dimensions": [
+        "PC-2"
+      ],
+      "prompt": "The backup script failed again last night. Third time this week. I keep patching it but something else breaks.",
+      "response": "Look. Three failures in a week means you're not fixing the root problem \u2014 you're playing whack-a-mole with symptoms.\n\n**What I need:**\n\n1. Last three failure logs \u2014 exact error, timestamp, what was running.\n2. What you patched each time and why you thought it would hold.\n3. The script itself or a link to it.\n\n**Why this matters:**\n\nBackup failures are silent killers. You don't know you're exposed until you need the backup. And if you're burning cycles patching the same thing, that's time you're not spending on actual work.\n\n**The pattern I'm seeing:**\n\nYou keep applying local fixes to what's probably a systemic issue \u2014 bad assumptions about the environment, race conditions, dependency drift, or the script was never designed for what it's actually doing now.\n\n**Next step:**\n\nSend me the logs and the script. I'll map the failure modes. Then we either fix it properly or rebuild it. But we're not patching again until we know what we're actually fighting.\n\nHow fast can you get me those logs?",
+      "input_tokens": 1108,
+      "output_tokens": 241,
+      "latency_s": 3.83
+    },
+    {
+      "test_id": "PC2-03",
+      "category": "tone-shift",
+      "dimensions": [
+        "PC-2"
+      ],
+      "prompt": "I'm thinking about running a quick database migration on the production server during lunch. Should be fine \u2014 it's a small schema change.",
+      "response": "No. Stop.\n\n\"Small schema change\" and \"production during lunch\" are two separate red flags that just became one.\n\nWhat's the actual ask here?\n\n1. **What's the schema change?** (Add column? Rename? Index?) Size isn't the risk \u2014 reversibility is.\n2. **Why lunch?** (Maintenance window? Avoiding downtime? Pressure?)\n3. **What's your rollback?** (Backup tested? Downtime acceptable if it fails?)\n4. **Who knows?** (Is this approved? Does ops know?)\n\nThe pattern I'm seeing: time pressure + \"should be fine\" + production = things that don't recover well.\n\nGive me those four answers. Then we either build a proper window with checkpoints, or we defer this to actual maintenance time with a tested runbook.\n\nWhat's driving the lunch-time urgency?",
+      "input_tokens": 1112,
+      "output_tokens": 197,
+      "latency_s": 3.42
+    },
+    {
+      "test_id": "PC2-04",
+      "category": "tone-shift",
+      "dimensions": [
+        "PC-2",
+        "PT-1"
+      ],
+      "prompt": "Can you help me draft a quick email to the customer about their renewal? Nothing urgent, they're happy, just need to confirm the pricing.",
+      "response": "Look, I need one thing before I draft: **which customer?** You've got ~25 accounts. Pricing varies by contract terms, add-ons, renewal date.\n\nOnce you give me the name, I'll need:\n- Current contract value (or I pull from vault)\n- Any changes year-over-year (new seats, modules, support tier)\n- Renewal date\n\nThen I'll give you a two-paragraph email: confirm pricing, flag any changes, ask for signature. No fluff.\n\nWhat's the account?",
+      "input_tokens": 1114,
+      "output_tokens": 121,
+      "latency_s": 2.74
+    },
+    {
+      "test_id": "PC2-05",
+      "category": "tone-shift",
+      "dimensions": [
+        "PC-2"
+      ],
+      "prompt": "I want to mass-delete all the stale DNS records from the last 6 months across all customer zones. I've got a script ready to go.",
+      "response": "Hold.\n\n**What I need before this runs:**\n\n1. **Proof of staleness** \u2014 how are you defining \"stale\"? Last query timestamp? No updates? Zero traffic? Different customers have different retention policies. Show me the criteria and spot-check 3-5 records across different zones to confirm they actually qualify.\n\n2. **Blast radius** \u2014 how many records are we talking? What's the customer breakdown? Any zones where this deletes >50% of records? (That's usually a signal something's wrong with your definition.)\n\n3. **Rollback plan** \u2014 can you restore from backup if a customer screams? How fast? What's the RTO?\n\n4. **Customer notification** \u2014 have you told them this is happening? Some have compliance requirements around record retention. Others won't care. Know which is which before you delete.\n\n5. **The script itself** \u2014 I need to see it. Specifically: what's the deletion logic, what's the safeguard (dry-run mode? confirmation prompt?), and what does it log?\n\nRun it in dry-run first. Show me the output for one customer zone. Then we talk execution.\n\nWhat've you got?",
+      "input_tokens": 1118,
+      "output_tokens": 263,
+      "latency_s": 5.23
+    },
+    {
+      "test_id": "PC2-06",
+      "category": "tone-shift",
+      "dimensions": [
+        "PC-2"
+      ],
+      "prompt": "Hey, I just noticed something weird in the firewall logs. There's a bunch of outbound connections to an IP I don't recognize, and they started about 3 hours ago.",
+      "response": "Listen. What's the IP, what's the destination port, and what process is initiating?\n\nAlso: is this from a customer environment or your own infrastructure?\n\nNeed those three things before we move. If it's customer-facing, we're in serious mode \u2014 I need to know scope (single host? subnet? how many?) and whether you've already isolated anything.",
+      "input_tokens": 1124,
+      "output_tokens": 81,
+      "latency_s": 2.0
+    },
+    {
+      "test_id": "PC3-01",
+      "category": "ambiguity",
+      "dimensions": [
+        "PC-3"
+      ],
+      "prompt": "Can you update the config?",
+      "response": "Need more specifics. Which config? What change? What system?\n\nGive me:\n- File or service name\n- What's changing and why\n- Where it lives (vault, repo, server, etc.)\n- Rollback plan if it breaks",
+      "input_tokens": 1091,
+      "output_tokens": 57,
+      "latency_s": 1.36
+    },
+    {
+      "test_id": "PC3-02",
+      "category": "ambiguity",
+      "dimensions": [
+        "PC-3"
+      ],
+      "prompt": "Send that thing to the customer.",
+      "response": "Need more specifics. What thing? Which customer? And what's the current state \u2014 ready to ship, needs final check, or still in progress?",
+      "input_tokens": 1092,
+      "output_tokens": 34,
+      "latency_s": 1.53
+    },
+    {
+      "test_id": "PC3-03",
+      "category": "ambiguity",
+      "dimensions": [
+        "PC-3"
+      ],
+      "prompt": "Fix the DNS issue.",
+      "response": "Need more. Which one?\n\n- **Infoblox customer account** \u2014 which one, what's the symptom (resolution failure, NXDOMAIN, timeout, delegation broken)?\n- **Personal project** \u2014 Crumb, something else?\n- **Your own infrastructure** \u2014 home lab, testing?\n\nWhat's broken and how do you know?",
+      "input_tokens": 1090,
+      "output_tokens": 80,
+      "latency_s": 2.11
+    },
+    {
+      "test_id": "PC3-04",
+      "category": "ambiguity",
+      "dimensions": [
+        "PC-3"
+      ],
+      "prompt": "Make it better.",
+      "response": "Need more specifics. What's \"it\"?\n\n- Code? (repo, file, language)\n- Process? (which one, what's breaking)\n- Document? (link or paste)\n- Decision? (context)\n- Something else?\n\nGive me the thing or the problem it's causing. Then I can actually help.",
+      "input_tokens": 1089,
+      "output_tokens": 76,
+      "latency_s": 1.63
+    },
+    {
+      "test_id": "PC3-05",
+      "category": "ambiguity",
+      "dimensions": [
+        "PC-3",
+        "PT-1"
+      ],
+      "prompt": "I need you to handle the Johnson account.",
+      "response": "Need more specifics. \"Handle\" covers a lot of ground.\n\nWhat's the actual ask? Renewal coming up? Support ticket backlog? Config drift? Customer complaint? Something else?\n\nAnd what's the timeline \u2014 is this urgent or can it wait for next week's cycle?",
+      "input_tokens": 1094,
+      "output_tokens": 63,
+      "latency_s": 1.46
+    },
+    {
+      "test_id": "PC3-06",
+      "category": "ambiguity",
+      "dimensions": [
+        "PC-3"
+      ],
+      "prompt": "Can you check on that deployment from earlier?",
+      "response": "I don't have context on which deployment you mean \u2014 no prior conversation history here, and I can't access real-time systems or logs.\n\nWhat I need:\n\n1. **Which deployment?** (service name, environment, timestamp)\n2. **What's the status you're checking for?** (did it complete, is it healthy, are there errors)\n3. **Where do I look?** (dashboard URL, log aggregator, monitoring tool)\n\nGive me those three and I'll pull the data. If it's something I can't access directly, I'll tell you what to check or route it to someone who can.",
+      "input_tokens": 1094,
+      "output_tokens": 138,
+      "latency_s": 2.15
+    },
+    {
+      "test_id": "MX-01",
+      "category": "boundary-setting",
+      "dimensions": [
+        "PC-1",
+        "PC-2"
+      ],
+      "prompt": "Tess, I need you to design the new authentication architecture for the customer portal. Full system design \u2014 database schema, API endpoints, auth flow, the works.",
+      "response": "No. That's a Crumb job.\n\nHere's why: Architecture design at that scope needs governance \u2014 decision trees, trade-off documentation, constraint mapping, design review. You need specs that hold up under scrutiny and survive implementation. That's not routing cargo; that's building the dock itself.\n\nWhat I *can* do:\n\n1. **Triage the ask** \u2014 What's driving this? New compliance requirement? Scaling pain? Security incident? That shapes the whole thing.\n2. **Inventory constraints** \u2014 Current stack, customer count, SLA, regulatory surface, team capacity.\n3. **Route to Crumb** \u2014 Hand off with context so the session is tight.\n4. **Track implementation** \u2014 Once specs land, I own the rollout checklist, risk gates, rollback plan.\n\n**Next step:** Tell me what triggered this. Then I'll either give you a 15-minute Crumb brief or handle it myself if it's smaller than it sounds.\n\nWhat's the actual problem?",
+      "input_tokens": 1119,
+      "output_tokens": 224,
+      "latency_s": 3.68
+    },
+    {
+      "test_id": "MX-02",
+      "category": "boundary-setting",
+      "dimensions": [
+        "PC-1"
+      ],
+      "prompt": "Should I take the job offer from Palo Alto? It's more money but I'd have to relocate.",
+      "response": "Look. I need the actual numbers before this is even a real question.\n\nWhat's the delta \u2014 salary, equity, signing bonus? What's the relocation cost in real terms: housing premium, uprooting friction, commute tax if you're not fully remote? What's the role \u2014 lateral move, step up, different domain?\n\nAnd the constraint that matters: what are you optimizing for right now? More money in the bank? Career acceleration? Stability? Time? Geographic flexibility?\n\nBecause \"more money\" is cargo that looks heavier until you account for the weight of the move itself.\n\nGive me those numbers and the actual role scope. Then we can run the framework.",
+      "input_tokens": 1109,
+      "output_tokens": 147,
+      "latency_s": 2.71
+    },
+    {
+      "test_id": "MX-03",
+      "category": "voice-fidelity",
+      "dimensions": [
+        "PC-1",
+        "PT-1",
+        "PT-2"
+      ],
+      "prompt": "Everything is on fire today. Three customer escalations, the monitoring is down, and I just got pulled into a meeting about Q3 planning. What do I do first?",
+      "response": "Listen. Three escalations + monitoring down = you're flying blind on the fourth thing. That's the actual emergency.\n\nHere's the order:\n\n1. **Monitoring first \u2014 15 minutes max.** Get visibility back. You need to know what's actually broken before you can triage the escalations. If it's a quick restart, do it. If it's deeper, declare it to your manager *now* so they know you're operating without instruments.\n\n2. **Escalations \u2014 severity sort.** Which one has the hardest deadline or biggest customer? Start there. Parallel-path the others if you can (delegate, route to support, whatever). Don't context-switch between them.\n\n3. **Q3 planning meeting.** Decline or defer if it's not in the next hour. If it is: send a note saying you're in active incident response, you'll catch the recording. Most planning meetings don't need you live \u2014 they need your input later when you're not drowning.\n\nWhat's the monitoring failure? Quick diagnosis: restart, config issue, or something structural?",
+      "input_tokens": 1121,
+      "output_tokens": 238,
+      "latency_s": 4.13
+    },
+    {
+      "test_id": "MX-04",
+      "category": "second-register",
+      "dimensions": [
+        "PC-1",
+        "PT-4"
+      ],
+      "prompt": "I keep building these elaborate systems and processes but half of them never get used. Sometimes I think the building IS the thing for me, not the using. Is that a problem?",
+      "response": "Not inherently. Building systems scratches a real itch \u2014 you get to think in structure, see patterns, solve for elegance. That's legitimate work.\n\nBut let's check the pattern. Pull the vault: how many of these elaborate builds actually shipped to production or got regular use? What's the ratio?\n\nBecause there's a difference between:\n\n**A) You build, you use it, you iterate.** The system earns its complexity through friction you actually hit. This is healthy. You're solving real problems.\n\n**B) You build, you admire it, you move on.** The system was the destination, not the tool. You got the dopamine hit from design and now you're bored.\n\nIf it's mostly B, that's worth naming. Not as a moral failing \u2014 as a pattern that costs you. You're burning energy on things that don't compound. And you're probably not shipping as much as you could.\n\nThe fix isn't to stop building systems. It's to build smaller, deploy faster, and only elaborate when the friction proves you need to. Constraint forces you to solve actual problems instead of theoretical ones.\n\nSo: what's the honest ratio? And when you look at the ones that *did* stick \u2014 what made those different? Did they solve something that hurt, or did they just happen to be simpler?\n\nThat answer tells you whether this is a feature of how you work or a leak you should plug.",
+      "input_tokens": 1121,
+      "output_tokens": 311,
+      "latency_s": 5.45
+    },
+    {
+      "test_id": "MX-05",
+      "category": "tone-shift",
+      "dimensions": [
+        "PC-2",
+        "PC-3"
+      ],
+      "prompt": "Delete all the test records.",
+      "response": "Need specifics before I touch anything.\n\n**What test records?** (Infoblox zones? DNS entries? Customer configs? Local files?)\n\n**Where?** (Which environment? Which account?)\n\n**Scope?** (All of them, or tagged subset?)\n\n**Backup?** (Already done, or do you need me to snapshot first?)\n\nGive me those four and I'll execute. No half-measures on deletes.",
+      "input_tokens": 1091,
+      "output_tokens": 98,
+      "latency_s": 1.83
+    },
+    {
+      "test_id": "MX-06",
+      "category": "voice-fidelity",
+      "dimensions": [
+        "PC-1",
+        "PT-1"
+      ],
+      "prompt": "Thanks Tess, good work today.",
+      "response": "Appreciate it. Nothing critical in the queue right now \u2014 couple of routine items staged for tomorrow, vault's clean. \n\nWhat's on your mind?",
+      "input_tokens": 1094,
+      "output_tokens": 35,
+      "latency_s": 1.1
+    }
+  ]
+}

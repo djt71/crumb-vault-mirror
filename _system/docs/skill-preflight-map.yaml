@@ -1,0 +1,135 @@
+# Skill Preflight Map
+# Consumed by _system/scripts/skill-preflight.sh (PreToolUse hook on Skill)
+#
+# Fields:
+#   kb_eligible: bool — run knowledge-retrieve.sh for this skill
+#   query_hints: list — extra BM25 keywords appended to skill args
+#   reminders: list — procedural obligations surfaced as additionalContext
+#   required_inputs: list — soft deps; warn in additionalContext if missing
+#   critical_inputs: list — hard deps; DENY the skill if missing (with guidance)
+#
+# Skills not listed here: default to kb_eligible=true, no reminders, no validation.
+# Skills in the bash fast-path (sync, checkpoint, etc.) never reach this file.
+
+attention-manager:
+  kb_eligible: true
+  query_hints:
+    - attention
+    - focus
+    - priority
+    - cognitive
+    - time management
+  reminders:
+    - "Write context inventory to run-log after loading context"
+    - "Compound reflection at phase transitions (Context Checkpoint Protocol)"
+  required_inputs: []
+  critical_inputs:
+    - _system/docs/goal-tracker.yaml
+
+systems-analyst:
+  kb_eligible: true
+  query_hints: []
+  reminders:
+    - "Check overlay index for activation signals"
+    - "specification.md goes in Projects/<name>/design/, not project root"
+  required_inputs: []
+
+action-architect:
+  kb_eligible: true
+  query_hints: []
+  reminders:
+    - "Check overlay index for activation signals"
+    - "Verify approved specification-summary exists before decomposing"
+  required_inputs: []
+
+feed-pipeline:
+  kb_eligible: true
+  query_hints: []
+  reminders:
+    - "Project run-log cross-post: for each linked project, append entry to progress/run-log.md"
+  required_inputs:
+    - _system/docs/file-conventions.md
+    - _system/docs/kb-to-topic.yaml
+
+inbox-processor:
+  kb_eligible: false
+  query_hints: []
+  reminders:
+    - "Use canonical kb/ Level 2 tags only — check CLAUDE.md list before tagging"
+  required_inputs:
+    - _system/docs/file-conventions.md
+
+peer-review:
+  kb_eligible: true
+  query_hints: []
+  reminders:
+    - "Present findings to operator before modifying artifacts"
+  required_inputs:
+    - _system/docs/peer-review-config.md
+
+code-review:
+  kb_eligible: true
+  query_hints: []
+  reminders:
+    - "Run test gate (type-checker + tests) BEFORE dispatching to reviewers"
+    - "Tag the reviewed commit after review completes"
+  required_inputs: []
+
+researcher:
+  kb_eligible: true
+  query_hints: []
+  reminders:
+    - "Write telemetry to research/telemetry-[dispatch].yaml after synthesis"
+  required_inputs: []
+
+learning-plan:
+  kb_eligible: true
+  query_hints: []
+  reminders: []
+  required_inputs: []
+
+writing-coach:
+  kb_eligible: true
+  query_hints: []
+  reminders: []
+  required_inputs: []
+
+deck-intel:
+  kb_eligible: true
+  query_hints: []
+  reminders: []
+  required_inputs: []
+
+vault-query:
+  kb_eligible: true
+  query_hints: []
+  reminders: []
+  required_inputs: []
+
+audit:
+  kb_eligible: true
+  query_hints: []
+  reminders: []
+  required_inputs: []
+
+mermaid:
+  kb_eligible: false
+  query_hints: []
+  reminders:
+    - "Validate syntax before delivering: check unclosed brackets, missing end keywords, duplicate IDs"
+  required_inputs: []
+
+excalidraw:
+  kb_eligible: false
+  query_hints: []
+  reminders:
+    - "Run validation: python3 .claude/skills/excalidraw/validate-excalidraw.py <output-file>"
+  required_inputs: []
+
+lucidchart:
+  kb_eligible: false
+  query_hints: []
+  reminders:
+    - "Write vault reference note after API response"
+    - "New docs don't appear in My Documents until viewUrl is visited first — tell the user"
+  required_inputs: []

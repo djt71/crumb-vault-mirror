@@ -1,0 +1,117 @@
+# Compound Insight Frontmatter Schema
+# Vault notes produced by Workflow 1 (Feed Intel → Compound Insight).
+# Written by Crumb via dispatch, triggered by Tess cross-referencing.
+#
+# Project: agent-to-agent-communication (A2A-004.1)
+# Spec reference: §10.1
+# Location: Sources/insights/ (vault routing)
+
+frontmatter:
+  type:
+    value: compound-insight
+    required: true
+
+  domain:
+    type: string
+    required: true
+    description: "Primary domain for the insight (e.g., software, career, learning)."
+
+  status:
+    type: string
+    value: active
+    required: true
+
+  created:
+    type: string
+    format: date
+    required: true
+
+  updated:
+    type: string
+    format: date
+    required: true
+
+  tags:
+    type: array
+    items:
+      type: string
+    required: true
+    description: "At least one #kb/ tag. Inherited from source item or assigned by Crumb."
+
+  topics:
+    type: array
+    items:
+      type: string
+    required: true
+    description: "Must resolve to existing MOC files in Domains/*/."
+
+  source_item:
+    type: string
+    required: true
+    description: >
+      Identifier for the feed-intel item that triggered this insight.
+      Format: canonical URL or inbox_canonical_id from the signal-note/digest.
+
+  cross_references:
+    type: array
+    items:
+      type: string
+      format: wikilink
+    required: true
+    description: >
+      Wikilinks to the vault notes this insight cross-references.
+      Must resolve to existing vault files. At least one required.
+
+  confidence:
+    type: string
+    enum: [high, medium, low]
+    required: true
+    description: >
+      Crumb's assessment of cross-reference strength.
+      high: direct evidence of connection.
+      medium: plausible inference with supporting context.
+      low: speculative but worth tracking.
+
+  provenance:
+    type: object
+    required: true
+    properties:
+      workflow:
+        type: string
+        value: compound-insight
+      dispatch_id:
+        type: string
+        format: uuidv7
+        description: "CTB-016 dispatch_id, if dispatched via bridge."
+      correlation_id:
+        type: string
+        format: uuidv7
+        description: "From Tess's orchestration decision."
+      model:
+        type: string
+        description: "Model that produced the insight (e.g., claude-opus-4-6)."
+      critic_reviewed:
+        type: boolean
+        value: false
+        description: "Set to true if a critic skill reviewed this insight. Phase 1b."
+
+# Required sections in the note body:
+#
+# ## Signal
+# What the feed-intel item says (1-2 sentences, factual).
+#
+# ## Cross-Reference
+# How this connects to vault knowledge (wikilinks, specific claims).
+#
+# ## Implication
+# What this means for active work (actionable, scoped to projects/domains).
+#
+# ## Source Trail
+# - Feed item: [link/id]
+# - Cross-referenced: [[note1]], [[note2]]
+# - Confidence rationale: [why this confidence level]
+
+# Dedup rules:
+# - Exact match: same source_item → reject (duplicate)
+# - Temporal: same cross_reference pair within 7 days → append delta to existing note
+# - Semantic dedup: deferred (not Phase 1)

@@ -1,0 +1,12 @@
+project: attention-manager
+domain: software
+project_class: system
+phase: ARCHIVED
+phase_before_archive: DONE
+workflow: four-phase
+last_gate: TASK-to-DONE
+active_task: null
+next_action: "Project complete. All 6 tasks done. G1 30-day use target (through Apr 8) is operational monitoring, not project work."
+related_projects: [tess-operations, customer-intelligence, mission-control]
+updated: 2026-03-20
+last_committed: null

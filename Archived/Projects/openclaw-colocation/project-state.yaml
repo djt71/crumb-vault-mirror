@@ -1,0 +1,12 @@
+# Machine-readable project state — updated at every phase transition.
+# Validated by vault-check.sh against run-log.md for consistency.
+project_class: system
+phase: ARCHIVED
+phase_before_archive: DONE
+workflow: four-phase
+last_gate: "IMPLEMENT complete 2026-02-19"
+active_task: null
+next_action: "Project complete. All 12 tasks done (OC-001–OC-012). Maintenance artifacts (upgrade runbooks) may be added with run-log notes."
+related_projects: [crumb-tess-bridge, tess-model-architecture]
+updated: 2026-02-22 18:00
+last_committed: 2026-02-22 18:00

@@ -1,0 +1,71 @@
+# Review Brief Schema
+# Shared contract for any capability accepting review/critique requests.
+# Consumers: critic skill (review.adversarial.standard), peer-review (future)
+#
+# Project: agent-to-agent-communication (A2A-014)
+# Spec reference: §11.2
+#
+# Required fields only. Optional fields are genuinely optional.
+
+brief:
+  artifact_path:
+    type: string
+    required: true
+    description: >
+      Vault-relative path to the artifact being reviewed.
+      Example: "Sources/research/cloud-agent-infra-landscape.md"
+
+  artifact_type:
+    type: string
+    required: true
+    enum: [spec, skill, architecture, research, signal, compound-insight, design, other]
+    description: >
+      What kind of artifact this is. Drives which review dimensions
+      the critic emphasizes.
+
+  review_focus:
+    type: array
+    items:
+      type: string
+    required: false
+    description: >
+      Specific aspects to examine. If omitted, the critic applies its
+      full default checklist. Examples: ["citation-integrity",
+      "logical-consistency", "missing-perspectives", "factual-claims"]
+
+  rigor:
+    type: string
+    required: false
+    default: standard
+    enum: [light, standard, deep]
+    description: >
+      Review depth. Drives thoroughness of citation verification
+      and depth of adversarial analysis.
+      light: structural check, flag obvious issues only.
+      standard: full adversarial pass, citation spot-check (3-5 claims).
+      deep: exhaustive citation verification, multi-perspective analysis.
+
+  context:
+    type: string
+    required: false
+    description: >
+      Why this review matters. What decisions depend on this artifact's
+      quality. Helps the critic calibrate severity ratings.
+
+  downstream_impact:
+    type: string
+    required: false
+    enum: [low, medium, high, critical]
+    description: >
+      What breaks if this artifact is wrong. Drives the critic's
+      threshold for flagging issues. high/critical → flag anything
+      uncertain. low → only flag clear problems.
+
+  citation_check:
+    type: boolean
+    required: false
+    default: true
+    description: >
+      Whether to independently verify cited sources. When true, the
+      critic checks URLs, paper titles, version numbers, and attributed
+      claims against available evidence.

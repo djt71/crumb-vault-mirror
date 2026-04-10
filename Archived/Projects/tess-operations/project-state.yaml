@@ -1,0 +1,22 @@
+name: tess-operations
+domain: software
+type: system
+phase: ARCHIVED
+phase_before_archive: DONE
+last_gate: TASK-to-DONE
+created: 2026-02-26
+updated: 2026-04-09
+related_projects:
+  - openclaw-colocation
+  - tess-model-architecture
+  - feed-intel-framework
+  - crumb-tess-bridge
+  - tess-v2
+active_task: null
+last_committed: 2026-03-26
+next_action: "Archived 2026-04-09. Succeeded by tess-v2."
+pending_signals: []
+services:
+  - ai.openclaw.overnight-research
+  - ai.openclaw.daily-attention
+  - ai.openclaw.email-triage

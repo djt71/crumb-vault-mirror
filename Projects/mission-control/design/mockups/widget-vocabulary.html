@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Control — Widget Vocabulary</title>
+  <link rel="stylesheet" href="ops-mockup.css">
+  <link rel="stylesheet" href="widget-vocabulary.css">
+  <style>
+    .vocab-page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 48px 32px;
+    }
+    .vocab-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+    .vocab-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      margin-bottom: 48px;
+    }
+    .widget-group {
+      margin-bottom: 48px;
+    }
+    .widget-group-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .widget-group-note {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8125rem;
+      color: var(--text-tertiary);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+    .widget-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 16px;
+    }
+    .widget-row-narrow {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .widget-single {
+      max-width: 700px;
+    }
+    hr.divider {
+      border: none;
+      border-top: 1px solid var(--border-subtle);
+      margin: 48px 0;
+    }
+    .badge-showcase {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      padding: 16px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border-panel);
+      border-radius: 8px;
+    }
+    .badge-showcase-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8125rem;
+      color: var(--text-tertiary);
+      width: 100%;
+      margin-bottom: 4px;
+    }
+    @media (max-width: 480px) {
+      .vocab-page { padding: 24px 16px; }
+      .widget-row { grid-template-columns: 1fr; }
+      .widget-row-narrow { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="vocab-page">
+    <h1 class="vocab-title">Widget Vocabulary</h1>
+    <p class="vocab-subtitle">Every widget archetype in the Dark Observatory design system. Real data patterns, not lorem ipsum.</p>
+
+    <!-- ===== EXISTING ARCHETYPES (from ops-mockup) ===== -->
+
+    <div class="widget-group">
+      <div class="widget-group-label">Status Indicator</div>
+      <div class="widget-group-note">8px inline dot with four semantic states. Used in card headers, KPI values, and nav items.</div>
+      <div class="badge-showcase">
+        <span><span class="status-dot ok"></span><span style="font-size: 0.875rem;">Healthy</span></span>
+        <span style="margin-left: 16px;"><span class="status-dot warn"></span><span style="font-size: 0.875rem;">Degraded</span></span>
+        <span style="margin-left: 16px;"><span class="status-dot error"></span><span style="font-size: 0.875rem;">Critical</span></span>
+        <span style="margin-left: 16px;"><span class="status-dot stale"></span><span style="font-size: 0.875rem;">Stale</span></span>
+      </div>
+    </div>
+
+    <div class="widget-group">
+      <div class="widget-group-label">Sparkline</div>
+      <div class="widget-group-note">Inline SVG trend indicator. 80×24px default. Accent stroke with subtle area fill.</div>
+      <div class="badge-showcase">
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; color: var(--text-primary);">47 signals</span>
+        <span class="sparkline-container">
+          <svg viewBox="0 0 80 24" preserveAspectRatio="none">
+            <path class="sparkline-area" d="M0 20 L8 16 L16 18 L24 12 L32 14 L40 8 L48 10 L56 6 L64 9 L72 4 L80 7 L80 24 L0 24 Z"/>
+            <path class="sparkline-path" d="M0 20 L8 16 L16 18 L24 12 L32 14 L40 8 L48 10 L56 6 L64 9 L72 4 L80 7"/>
+          </svg>
+        </span>
+      </div>
+    </div>
+
+    <div class="widget-group">
+      <div class="widget-group-label">Gauge / Meter</div>
+      <div class="widget-group-note">SVG arc gauge with needle-style fill. Max 4 custom SVG gauges across the dashboard.</div>
+      <div class="gauge-row" style="max-width: 800px;">
+        <div class="gauge-container">
+          <svg class="gauge-svg" viewBox="0 0 120 80">
+            <path class="gauge-track-path" d="M 15 70 A 50 50 0 0 1 105 70" />
+            <path class="gauge-fill-path ok" d="M 15 70 A 50 50 0 0 1 75 22" />
+          </svg>
+          <div class="gauge-value-text" style="color: var(--status-ok);">42%</div>
+          <div class="gauge-label-text">CPU Load</div>
+        </div>
+        <div class="gauge-container">
+          <svg class="gauge-svg" viewBox="0 0 120 80">
+            <path class="gauge-track-path" d="M 15 70 A 50 50 0 0 1 105 70" />
+            <path class="gauge-fill-path warn" d="M 15 70 A 50 50 0 0 1 95 48" />
+          </svg>
+          <div class="gauge-value-text" style="color: var(--status-warn);">68%</div>
+          <div class="gauge-label-text">Memory</div>
+        </div>
+        <div class="gauge-container">
+          <svg class="gauge-svg" viewBox="0 0 120 80">
+            <path class="gauge-track-path" d="M 15 70 A 50 50 0 0 1 105 70" />
+            <path class="gauge-fill-path error" d="M 15 70 A 50 50 0 0 1 102 62" />
+          </svg>
+          <div class="gauge-value-text" style="color: var(--status-error);">88%</div>
+          <div class="gauge-label-text">Disk</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="widget-group">
+      <div class="widget-group-label">Timeline</div>
+      <div class="widget-group-note">24h event strip with color-coded dots. Four event types: heartbeat, alert, mode transition, maintenance.</div>
+      <div class="widget-single">
+        <div class="timeline-panel">
+          <div class="timeline-header">
+            <span class="timeline-title">24-Hour Activity</span>
+            <div class="timeline-legend">
+              <span class="legend-item"><span class="legend-dot heartbeat"></span> Heartbeat</span>
+              <span class="legend-item"><span class="legend-dot alert"></span> Alert</span>
+              <span class="legend-item"><span class="legend-dot mode"></span> Mode</span>
+              <span class="legend-item"><span class="legend-dot maintenance"></span> Maint</span>
+            </div>
+          </div>
+          <div class="timeline-track">
+            <div class="timeline-grid-line" style="left: 25%;"></div>
+            <div class="timeline-grid-line" style="left: 50%;"></div>
+            <div class="timeline-grid-line" style="left: 75%;"></div>
+            <div class="timeline-dot heartbeat" style="left: 5%;"></div>
+            <div class="timeline-dot heartbeat" style="left: 12%;"></div>
+            <div class="timeline-dot mode" style="left: 25%;"></div>
+            <div class="timeline-dot heartbeat" style="left: 35%;"></div>
+            <div class="timeline-dot alert" style="left: 48%;"></div>
+            <div class="timeline-dot heartbeat" style="left: 55%;"></div>
+            <div class="timeline-dot maintenance" style="left: 62%;"></div>
+            <div class="timeline-dot heartbeat" style="left: 72%;"></div>
+            <div class="timeline-dot heartbeat" style="left: 80%;"></div>
+            <div class="timeline-dot mode" style="left: 88%;"></div>
+            <div class="timeline-dot heartbeat" style="left: 95%;"></div>
+          </div>
+          <div class="timeline-labels">
+            <span class="timeline-hour-label" style="position: static;">00:00</span>
+            <span class="timeline-hour-label" style="position: static;">06:00</span>
+            <span class="timeline-hour-label" style="position: static;">12:00</span>
+            <span class="timeline-hour-label" style="position: static;">18:00</span>
+            <span class="timeline-hour-label" style="position: static;">Now</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ===== ATTENTION CARDS (×3 KINDS) ===== -->
+
+    <div class="widget-group">
+      <div class="widget-group-label">Attention Card — System</div>
+      <div class="widget-group-note">Automated system-generated items. Urgency-colored left border. Source identifies the originating system.</div>
+      <div class="widget-row">
+        <div class="attention-card urgency-now" tabindex="0">
+          <div class="attention-card-header">
+            <span class="attention-card-title">FIF capture circuit breaker open — X source</span>
+            <span class="badge badge-now">Now</span>
+          </div>
+          <div class="attention-card-meta">
+            <span class="badge badge-system">system</span>
+            <span class="badge badge-domain">software</span>
+            <span class="attention-card-age">12m ago</span>
+            <span class="attention-card-source">fif-health</span>
+          </div>
+        </div>
+        <div class="attention-card urgency-soon" tabindex="0">
+          <div class="attention-card-header">
+            <span class="attention-card-title">Vault-check: 3 warnings on frontmatter validation</span>
+            <span class="badge badge-soon">Soon</span>
+          </div>
+          <div class="attention-card-meta">
+            <span class="badge badge-system">system</span>
+            <span class="badge badge-domain">software</span>
+            <span class="attention-card-age">2h ago</span>
+            <span class="attention-card-source">vault-check</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="widget-group">
+      <div class="widget-group-label">Attention Card — Relational</div>
+      <div class="widget-group-note">People and account-oriented items. Often from customer-intelligence or career overlays.</div>
+      <div class="widget-row">
+        <div class="attention-card urgency-soon" tabindex="0">
+          <div class="attention-card-header">
+            <span class="attention-card-title">Follow up with Sarah Chen re: Q2 expansion timeline</span>
+            <span class="badge badge-soon">Soon</span>
+          </div>
+          <div class="attention-card-meta">
+            <span class="badge badge-relational">relational</span>
+            <span class="badge badge-domain">career</span>
+            <span class="attention-card-age">1d ago</span>
+            <span class="attention-card-source">customer-intel</span>
+          </div>
+        </div>
+        <div class="attention-card urgency-ongoing" tabindex="0">
+          <div class="attention-card-header">
+            <span class="attention-card-title">Weekly connections brainstorm — 3 new cross-domain patterns</span>
+            <span class="badge badge-ongoing">Ongoing</span>
+          </div>
+          <div class="attention-card-meta">
+            <span class="badge badge-relational">relational</span>
+            <span class="badge badge-domain">career</span>
+            <span class="attention-card-age">3d ago</span>
+            <span class="attention-card-source">tess-research</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="widget-group">
+      <div class="widget-group-label">Attention Card — Personal</div>
+      <div class="widget-group-note">Self-directed items — goals, health, learning, creative. Often manually created via quick-add.</div>
+      <div class="widget-row">
+        <div class="attention-card urgency-ongoing" tabindex="0">
+          <div class="attention-card-header">
+            <span class="attention-card-title">Review Life Coach weekly goals — 2 of 5 complete</span>
+            <span class="badge badge-ongoing">Ongoing</span>
+          </div>
+          <div class="attention-card-meta">
+            <span class="badge badge-personal">personal</span>
+            <span class="badge badge-domain">health</span>
+            <span class="attention-card-age">5d ago</span>
+            <span class="attention-card-source">manual</span>
+          </div>
+        </div>
+        <div class="attention-card urgency-awareness" tabindex="0">
+          <div class="attention-card-header">
+            <span class="attention-card-title">Batch book pipeline: 4 sources queued for processing</span>
+            <span class="badge badge-awareness">Awareness</span>
+          </div>
+          <div class="attention-card-meta">
+            <span class="badge badge-personal">personal</span>
+            <span class="badge badge-domain">learning</span>
+            <span class="attention-card-age">6d ago</span>
+            <span class="attention-card-source">akm</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ===== SIGNAL CARD ===== -->
+
+    <div class="widget-group">
+      <div class="widget-group-label">Signal Card</div>
+      <div class="widget-group-note">Feed intelligence signal. Source and tier badges, headline, snippet, timestamp. Click to expand detail.</div>
+      <div class="widget-row">
+        <div class="signal-card" tabindex="0">
+          <div class="signal-card-header">
+            <span class="badge badge-source">X</span>
+            <span class="badge badge-t1">T1</span>
+          </div>
+          <div class="signal-card-headline">Anthropic announces Claude 4.6 model family with extended tool use</div>
+          <div class="signal-card-snippet">Major capability upgrade across the model line. Opus 4.6 shows significant improvements in multi-step reasoning and tool orchestration. Haiku 4.5 gets speed boost...</div>
+          <div class="signal-card-footer">
+            <span>@AnthropicAI</span>
+            <span>&middot;</span>
+            <span>2h ago</span>
+          </div>
+        </div>
+        <div class="signal-card" tabindex="0">
+          <div class="signal-card-header">
+            <span class="badge badge-source">RSS</span>
+            <span class="badge badge-t2">T2</span>
+          </div>
+          <div class="signal-card-headline">Cloudflare Workers adds WebSocket hibernation for persistent connections</div>
+          <div class="signal-card-snippet">New API allows Workers to maintain WebSocket connections without consuming CPU during idle periods. Relevant to dashboard SSE upgrade path...</div>
+          <div class="signal-card-footer">
+            <span>blog.cloudflare.com</span>
+            <span>&middot;</span>
+            <span>6h ago</span>
+          </div>
+        </div>
+        <div class="signal-card" tabindex="0">
+          <div class="signal-card-header">
+            <span class="badge badge-source">YT</span>
+            <span class="badge badge-t3">T3</span>
+          </div>
+          <div class="signal-card-headline">ThePrimeagen reviews new JavaScript runtime benchmarks</div>
+          <div class="signal-card-snippet">Comparison of Bun, Deno, and Node.js 22 on real-world workloads. Node still wins on Express throughput...</div>
+          <div class="signal-card-footer">
+            <span>ThePrimeagen</span>
+            <span>&middot;</span>
+            <span>14h ago</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ===== AGENT STATUS CARD ===== -->
+
+    <div class="widget-group">
+      <div class="widget-group-label">Agent Status Card</div>
+      <div class="widget-group-note">One card per agent. Model badge, status dot, stats row, current context summary.</div>
+      <div class="widget-row">
+        <div class="agent-card">
+          <div class="agent-card-header">
+            <span class="status-dot ok"></span>
+            <span class="agent-card-name">Tess — Voice</span>
+            <span class="agent-card-model">Haiku 4.5</span>
+          </div>
+          <div class="agent-card-stats">
+            <span>last <span class="agent-card-stat-value">08:42 UTC</span></span>
+            <span>today <span class="agent-card-stat-value">23 msgs</span></span>
+            <span>cost <span class="agent-card-stat-value">$0.34</span></span>
+          </div>
+          <div class="agent-card-context">Current priorities: morning briefing delivered, pipeline monitoring active, next scheduled dispatch at 14:00 UTC.</div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-card-header">
+            <span class="status-dot ok"></span>
+            <span class="agent-card-name">Tess — Mechanic</span>
+            <span class="agent-card-model">qwen3-coder:30b</span>
+          </div>
+          <div class="agent-card-stats">
+            <span>last <span class="agent-card-stat-value">14:00 UTC</span></span>
+            <span>today <span class="agent-card-stat-value">6 runs</span></span>
+            <span>cost <span class="agent-card-stat-value">$0.00</span></span>
+          </div>
+          <div class="agent-card-context">Hourly health checks passing. FIF pipeline healthy. Gateway uptime 14d 7h.</div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-card-header">
+            <span class="status-dot ok"></span>
+            <span class="agent-card-name">Crumb</span>
+            <span class="agent-card-model">Opus 4.6</span>
+          </div>
+          <div class="agent-card-stats">
+            <span>last <span class="agent-card-stat-value">14:32 UTC</span></span>
+            <span>session <span class="agent-card-stat-value">47m</span></span>
+            <span>cost <span class="agent-card-stat-value">$2.98</span></span>
+          </div>
+          <div class="agent-card-context">Active project: mission-control (TASK phase, M0b). Current task: MC-005 widget vocabulary.</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ===== SEARCH RESULT CARD ===== -->
+
+    <div class="widget-group">
+      <div class="widget-group-label">Search Result Card</div>
+      <div class="widget-group-note">Unified search results from QMD. Collection badge, relevance score, snippet with highlighted match, file path.</div>
+      <div style="display: flex; flex-direction: column; gap: 12px; max-width: 700px;">
+        <div class="search-card" tabindex="0">
+          <div class="search-card-header">
+            <span class="badge badge-source">Sources</span>
+            <span class="search-card-title">Wu — The Attention Merchants (Chapter Digest)</span>
+            <span class="search-card-score">0.94</span>
+          </div>
+          <div class="search-card-snippet">...the rise of a massive, pervasive industry that harvests <mark>human attention</mark> and resells it as a commodity. From patent medicine ads to Facebook's news feed...</div>
+          <div class="search-card-path">Sources/books/wu-attention-merchants-chapter-digest.md</div>
+        </div>
+        <div class="search-card" tabindex="0">
+          <div class="search-card-header">
+            <span class="badge badge-source">Projects</span>
+            <span class="search-card-title">Attention Manager — Specification</span>
+            <span class="search-card-score">0.87</span>
+          </div>
+          <div class="search-card-snippet">...unified <mark>attention</mark> surface aggregating system alerts, personal goals, relational commitments, and operational items into a single prioritized view...</div>
+          <div class="search-card-path">Projects/attention-manager/design/specification.md</div>
+        </div>
+        <div class="search-card" tabindex="0">
+          <div class="search-card-header">
+            <span class="badge badge-source">Domains</span>
+            <span class="search-card-title">MOC — Business</span>
+            <span class="search-card-score">0.72</span>
+          </div>
+          <div class="search-card-snippet">...the <mark>attention</mark> economy thesis connects advertising history to modern platform dynamics. Key sources: Wu, Zuboff, Lanier...</div>
+          <div class="search-card-path">Domains/career/moc-business.md</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ===== APPROVAL CARD ===== -->
+
+    <div class="widget-group">
+      <div class="widget-group-label">Approval Card</div>
+      <div class="widget-group-note">Dispatch requiring operator approval. Warning-colored left border. Context summary + approve/reject actions.</div>
+      <div class="widget-row">
+        <div class="approval-card" tabindex="0">
+          <div class="approval-card-header">
+            <span class="badge badge-soon">Approval</span>
+            <span class="approval-card-title">Research dispatch: competitive analysis — Acme Corp Q2 strategy</span>
+          </div>
+          <div class="approval-card-context">Tess proposes a deep research dispatch on Acme Corp's Q2 product announcements. Estimated cost: $0.85. Sources: 3 RSS feeds, 2 X accounts, 1 YouTube channel.</div>
+          <div class="approval-card-meta">Requested by Tess Voice &middot; 08:42 UTC &middot; correlation: disp-2026-0307-a</div>
+          <div class="approval-card-actions">
+            <button class="btn btn-approve">Approve</button>
+            <button class="btn btn-reject">Reject</button>
+            <button class="btn btn-secondary">Defer</button>
+          </div>
+        </div>
+        <div class="approval-card" tabindex="0">
+          <div class="approval-card-header">
+            <span class="badge badge-soon">Approval</span>
+            <span class="approval-card-title">Tuning recommendation: suppress source "crypto-daily-rss"</span>
+          </div>
+          <div class="approval-card-context">FIF feedback analysis suggests this source has a 92% ignore rate over 30 days. Suppressing would reduce daily signal volume by ~8 items.</div>
+          <div class="approval-card-meta">Requested by FIF pipeline &middot; 06:00 UTC &middot; correlation: fif-tune-0042</div>
+          <div class="approval-card-actions">
+            <button class="btn btn-approve">Approve</button>
+            <button class="btn btn-reject">Reject</button>
+            <button class="btn btn-secondary">Defer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ===== PROGRESS BAR ===== -->
+
+    <div class="widget-group">
+      <div class="widget-group-label">Progress Bar</div>
+      <div class="widget-group-note">Horizontal bar with label and monospace percentage. Status-colored fill for threshold awareness.</div>
+      <div style="display: flex; flex-direction: column; gap: 12px; max-width: 600px; background: var(--bg-panel); border: 1px solid var(--border-panel); border-radius: 8px; padding: 20px;">
+        <div class="progress-bar">
+          <span class="progress-bar-label">Acme Corp</span>
+          <div class="progress-bar-track"><div class="progress-bar-fill ok" style="width: 85%;"></div></div>
+          <span class="progress-bar-value">85%</span>
+        </div>
+        <div class="progress-bar">
+          <span class="progress-bar-label">Globex Inc</span>
+          <div class="progress-bar-track"><div class="progress-bar-fill warn" style="width: 52%;"></div></div>
+          <span class="progress-bar-value">52%</span>
+        </div>
+        <div class="progress-bar">
+          <span class="progress-bar-label">Initech</span>
+          <div class="progress-bar-track"><div class="progress-bar-fill" style="width: 28%;"></div></div>
+          <span class="progress-bar-value">28%</span>
+        </div>
+        <div class="progress-bar">
+          <span class="progress-bar-label">Umbrella Corp</span>
+          <div class="progress-bar-track"><div class="progress-bar-fill error" style="width: 12%;"></div></div>
+          <span class="progress-bar-value">12%</span>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ===== BADGES ===== -->
+
+    <div class="widget-group">
+      <div class="widget-group-label">Badge Variants</div>
+      <div class="widget-group-note">Compact labels for categorization. All use Inter sans-serif at 13px.</div>
+
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div class="badge-showcase">
+          <div class="badge-showcase-label">Urgency</div>
+          <span class="badge badge-now">Now</span>
+          <span class="badge badge-soon">Soon</span>
+          <span class="badge badge-ongoing">Ongoing</span>
+          <span class="badge badge-awareness">Awareness</span>
+        </div>
+
+        <div class="badge-showcase">
+          <div class="badge-showcase-label">Kind</div>
+          <span class="badge badge-system">system</span>
+          <span class="badge badge-relational">relational</span>
+          <span class="badge badge-personal">personal</span>
+        </div>
+
+        <div class="badge-showcase">
+          <div class="badge-showcase-label">Tier (signal classification)</div>
+          <span class="badge badge-t1">T1</span>
+          <span class="badge badge-t2">T2</span>
+          <span class="badge badge-t3">T3</span>
+        </div>
+
+        <div class="badge-showcase">
+          <div class="badge-showcase-label">Source</div>
+          <span class="badge badge-source">X</span>
+          <span class="badge badge-source">RSS</span>
+          <span class="badge badge-source">YT</span>
+          <span class="badge badge-source">dispatch</span>
+          <span class="badge badge-source">manual</span>
+        </div>
+
+        <div class="badge-showcase">
+          <div class="badge-showcase-label">Domain</div>
+          <span class="badge badge-domain">software</span>
+          <span class="badge badge-domain">career</span>
+          <span class="badge badge-domain">learning</span>
+          <span class="badge badge-domain">health</span>
+          <span class="badge badge-domain">financial</span>
+          <span class="badge badge-domain">creative</span>
+        </div>
+
+        <div class="badge-showcase">
+          <div class="badge-showcase-label">Collection (search)</div>
+          <span class="badge badge-source">Sources</span>
+          <span class="badge badge-source">Projects</span>
+          <span class="badge badge-source">Domains</span>
+        </div>
+
+        <div class="badge-showcase">
+          <div class="badge-showcase-label">Nav badge</div>
+          <span class="nav-badge" style="position: static; display: inline-flex;">3</span>
+          <span class="nav-badge" style="position: static; display: inline-flex;">12</span>
+          <span class="nav-badge" style="position: static; display: inline-flex;">99+</span>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ===== DATA TABLE ===== -->
+
+    <div class="widget-group">
+      <div class="widget-group-label">Data Table</div>
+      <div class="widget-group-note">Compact table for structured data. Header row with sort indicators, alternating row tint, monospace values.</div>
+      <div class="widget-single">
+        <div class="data-table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th class="sortable">Service <span class="sort-indicator">&#9662;</span></th>
+                <th class="sortable">Status</th>
+                <th class="sortable">Last Run</th>
+                <th class="sortable">Duration</th>
+                <th>Result</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-cell">OpenClaw Gateway</td>
+                <td><span class="status-dot ok"></span>Up</td>
+                <td>14:32 UTC</td>
+                <td>—</td>
+                <td style="color: var(--status-ok);">OK</td>
+              </tr>
+              <tr>
+                <td class="text-cell">FIF Capture</td>
+                <td><span class="status-dot ok"></span>Up</td>
+                <td>14:15 UTC</td>
+                <td>3.2s</td>
+                <td style="color: var(--status-ok);">OK</td>
+              </tr>
+              <tr>
+                <td class="text-cell">FIF Attention</td>
+                <td><span class="status-dot ok"></span>Up</td>
+                <td>14:00 UTC</td>
+                <td>1.8s</td>
+                <td style="color: var(--status-ok);">OK</td>
+              </tr>
+              <tr>
+                <td class="text-cell">Health Check</td>
+                <td><span class="status-dot warn"></span>Slow</td>
+                <td>14:30 UTC</td>
+                <td>8.2s</td>
+                <td style="color: var(--status-warn);">Slow</td>
+              </tr>
+              <tr>
+                <td class="text-cell">Awareness Check</td>
+                <td><span class="status-dot error"></span>Down</td>
+                <td>12:00 UTC</td>
+                <td>—</td>
+                <td style="color: var(--status-error);">Failed</td>
+              </tr>
+              <tr>
+                <td class="text-cell">Vault Mirror</td>
+                <td><span class="status-dot stale"></span>Stale</td>
+                <td>06:00 UTC</td>
+                <td>12.4s</td>
+                <td class="chrome-cell">No recent run</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ===== STATE PATTERNS ===== -->
+
+    <div class="widget-group">
+      <div class="widget-group-label">State Patterns — Overview</div>
+      <div class="widget-group-note">
+        The adapter {data, error, stale} contract produces four visual states. Each has a distinct treatment
+        that works at three levels: full panel, KPI card, and card-within-list. Blocked/placeholder is the
+        fourth state for upstream dependencies not yet available.
+      </div>
+    </div>
+
+    <!-- BLOCKED / PLACEHOLDER -->
+    <div class="widget-group">
+      <div class="widget-group-label">Blocked / Placeholder</div>
+      <div class="widget-group-note">Upstream dependency not yet available. Dashed border, 50% opacity, stale dot, italic description.</div>
+      <div class="widget-row">
+        <!-- Full panel -->
+        <div class="blocked-panel">
+          <div class="blocked-panel-header">
+            <span class="status-dot stale"></span>
+            <span class="blocked-panel-title">Relationship Heat Map</span>
+          </div>
+          <div class="blocked-panel-desc">Contact frequency visualization across accounts. Coming soon — requires CRM integration.</div>
+        </div>
+        <!-- KPI card level -->
+        <div class="kpi-card" style="border: 1px dashed var(--border-panel); opacity: 0.5;">
+          <div class="kpi-label">Pre-Brief Score</div>
+          <div class="kpi-value" style="color: var(--text-disabled);">&mdash;</div>
+          <div class="kpi-sub" style="color: var(--text-disabled); font-style: italic;">Requires dossier engine</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EMPTY STATE -->
+    <div class="widget-group">
+      <div class="widget-group-label">Empty State</div>
+      <div class="widget-group-note">Adapter succeeded, zero items returned. Calm and intentional — not broken. Centered text with muted icon.</div>
+      <div class="widget-row">
+        <!-- Full panel -->
+        <div style="background: var(--bg-panel); border: 1px solid var(--border-panel); border-radius: 8px; box-shadow: var(--shadow-panel);">
+          <div class="state-empty">
+            <svg class="state-empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10"/><path d="M8 12h8"/>
+            </svg>
+            <div class="state-empty-text">No attention items right now</div>
+          </div>
+        </div>
+        <!-- KPI card level -->
+        <div class="kpi-card state-empty">
+          <div class="kpi-label">Signals Today</div>
+          <div class="kpi-value">0</div>
+          <div class="kpi-sub">No signals captured yet</div>
+        </div>
+        <!-- Card-within-list: empty digest -->
+        <div style="background: var(--bg-panel); border: 1px solid var(--border-panel); border-radius: 8px; box-shadow: var(--shadow-panel); overflow: hidden;">
+          <div style="padding: 14px 16px; background: var(--bg-panel-header); border-bottom: 1px solid var(--border-panel); font-weight: 600; font-size: 0.95rem;">Today's Signals</div>
+          <div class="state-empty">
+            <svg class="state-empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10"/><path d="M8 12h8"/>
+            </svg>
+            <div class="state-empty-text">No signals today</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ERROR STATE -->
+    <div class="widget-group">
+      <div class="widget-group-label">Error State</div>
+      <div class="widget-group-note">Adapter failed. Clearly wrong without being alarming. Error-colored banner with message and retry context.</div>
+      <div class="widget-row">
+        <!-- Full panel -->
+        <div style="background: var(--bg-panel); border: 1px solid var(--border-panel); border-radius: 8px; padding: 20px; box-shadow: var(--shadow-panel);">
+          <div class="state-error-banner">
+            <svg class="state-error-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/>
+            </svg>
+            <div class="state-error-content">
+              <div class="state-error-text">Unable to reach FIF database</div>
+              <div class="state-error-meta">Last successful read 4h ago &middot; next retry in 60s</div>
+            </div>
+          </div>
+        </div>
+        <!-- KPI card level -->
+        <div class="kpi-card state-error">
+          <div class="kpi-label">FIF Capture</div>
+          <div class="kpi-value"><span class="status-dot error"></span>Error</div>
+          <div class="kpi-sub" style="color: var(--status-error);">Connection refused</div>
+        </div>
+        <!-- Card-within-list: error signal card -->
+        <div class="signal-card state-error">
+          <div class="signal-card-header">
+            <span class="badge badge-source">X</span>
+            <span class="badge" style="background: var(--status-error-bg); color: var(--status-error);">Error</span>
+          </div>
+          <div class="signal-card-headline" style="color: var(--status-error);">Failed to load signal — X API rate limit exceeded</div>
+          <div class="signal-card-footer">
+            <span>Last attempt 12m ago</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STALE STATE -->
+    <div class="widget-group">
+      <div class="widget-group-label">Stale State</div>
+      <div class="widget-group-note">Data exists but past freshness threshold. Data renders normally with an amber warning banner indicating age and threshold.</div>
+      <div class="widget-row">
+        <!-- Full panel with stale banner -->
+        <div style="background: var(--bg-panel); border: 1px solid var(--border-panel); border-radius: 8px; padding: 20px; box-shadow: var(--shadow-panel);">
+          <div class="state-stale-banner">
+            <svg class="state-stale-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+            </svg>
+            <span class="state-stale-banner-text">Data is 45 minutes old (threshold: 3 minutes)</span>
+          </div>
+          <div class="service-meta">
+            <div class="service-meta-row">
+              <span class="service-meta-label">CPU</span>
+              <span>23%</span>
+            </div>
+            <div class="service-meta-row">
+              <span class="service-meta-label">Memory</span>
+              <span>14.2 / 24 GB</span>
+            </div>
+            <div class="service-meta-row">
+              <span class="service-meta-label">Disk</span>
+              <span>412 / 500 GB</span>
+            </div>
+          </div>
+        </div>
+        <!-- KPI card level -->
+        <div class="kpi-card state-stale">
+          <div class="kpi-label">Gateway</div>
+          <div class="kpi-value warn"><span class="status-dot warn"></span>Stale</div>
+          <div class="kpi-sub" style="color: var(--status-warn);">Last seen 47m ago</div>
+        </div>
+        <!-- Card-within-list: stale signal card with top stripe -->
+        <div class="signal-card state-stale" tabindex="0">
+          <div class="signal-card-header">
+            <span class="badge badge-source">RSS</span>
+            <span class="badge badge-t2">T2</span>
+            <span style="margin-left: auto; font-family: 'Inter', sans-serif; font-size: 0.8125rem; color: var(--status-warn);">Stale</span>
+          </div>
+          <div class="signal-card-headline">Express 5.0 stable release — async middleware, ESM-first</div>
+          <div class="signal-card-snippet">Breaking changes from Express 4.x. Migration path documented...</div>
+          <div class="signal-card-footer">
+            <span>expressjs.com</span>
+            <span>&middot;</span>
+            <span style="color: var(--status-warn);">12h ago (stale &gt;6h)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,168 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.2.17",
+    "lastTouchedAt": "2026-02-23T05:35:00.000Z"
+  },
+  "wizard": {
+    "lastRunAt": "2026-02-19T02:32:32.272Z",
+    "lastRunVersion": "2026.2.17",
+    "lastRunCommand": "configure",
+    "lastRunMode": "local"
+  },
+  "auth": {
+    "profiles": {
+      "anthropic:default": {
+        "provider": "anthropic",
+        "mode": "api_key"
+      }
+    }
+  },
+  "models": {
+    "providers": {
+      "ollama": {
+        "baseUrl": "http://127.0.0.1:11434",
+        "api": "ollama",
+        "apiKey": "not-needed",
+        "authHeader": false,
+        "models": [
+          {
+            "id": "tess-mechanic:30b",
+            "name": "Tess Mechanic (Qwen3 Coder 30B, Q4_K_M, 65K ctx)",
+            "reasoning": false,
+            "input": ["text"],
+            "contextWindow": 65536,
+            "maxTokens": 32768
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "models": {
+        "anthropic/claude-opus-4-6": {},
+        "anthropic/claude-sonnet-4-20250514": {},
+        "anthropic/claude-haiku-4-5": {
+          "params": { "cacheRetention": "long" }
+        }
+      },
+      "workspace": "/Users/openclaw/.openclaw/workspace",
+      "compaction": {
+        "mode": "safeguard"
+      },
+      "maxConcurrent": 4,
+      "subagents": {
+        "maxConcurrent": 8
+      }
+    },
+    "list": [
+      {
+        "id": "voice",
+        "default": true,
+        "model": {
+          "primary": "anthropic/claude-haiku-4-5",
+          "fallbacks": ["ollama/tess-mechanic:30b"]
+        },
+        "identity": {
+          "name": "Tess"
+        },
+        "tools": {
+          "byProvider": {
+            "ollama": {
+              "profile": "minimal"
+            }
+          }
+        }
+      },
+      {
+        "id": "mechanic",
+        "model": {
+          "primary": "ollama/tess-mechanic:30b",
+          "fallbacks": ["anthropic/claude-haiku-4-5"]
+        },
+        "heartbeat": {
+          "every": "30m"
+        },
+        "identity": {
+          "name": "Mechanic"
+        }
+      }
+    ]
+  },
+  "bindings": [
+    {
+      "agentId": "voice",
+      "match": {
+        "channel": "telegram"
+      }
+    }
+  ],
+  "tools": {
+    "exec": {
+      "applyPatch": {
+        "workspaceOnly": true
+      }
+    },
+    "fs": {
+      "workspaceOnly": true
+    }
+  },
+  "messages": {
+    "ackReactionScope": "group-mentions"
+  },
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto"
+  },
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "dmPolicy": "pairing",
+      "botToken": "REDACTED",
+      "groupPolicy": "allowlist",
+      "streamMode": "partial"
+    }
+  },
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "loopback",
+    "auth": {
+      "mode": "password",
+      "password": "REDACTED"
+    },
+    "tailscale": {
+      "mode": "off",
+      "resetOnExit": false
+    },
+    "nodes": {
+      "denyCommands": [
+        "camera.snap",
+        "camera.clip",
+        "screen.record",
+        "calendar.add",
+        "contacts.add",
+        "reminders.add"
+      ]
+    }
+  },
+  "plugins": {
+    "entries": {
+      "telegram": {
+        "enabled": true
+      }
+    }
+  },
+  "skills": {
+    "load": {
+      "extraDirs": [
+        "/Users/tess/crumb-vault/_openclaw/skills"
+      ]
+    },
+    "entries": {
+      "crumb-bridge": {
+        "enabled": true
+      }
+    }
+  }
+}

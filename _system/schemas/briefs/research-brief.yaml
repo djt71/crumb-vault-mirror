@@ -1,0 +1,75 @@
+# Research Brief Schema
+# Shared contract for any capability accepting research requests.
+# First consumer: researcher-skill (research.external.standard)
+#
+# Project: agent-to-agent-communication (A2A-006)
+# Spec reference: §8.7
+# Extracted from: .claude/skills/researcher/SKILL.md Step 1
+#
+# Required fields only. Optional fields are genuinely optional —
+# established skills handle more, lightweight alternatives ignore them.
+
+brief:
+  question:
+    type: string
+    required: true
+    description: >
+      The research question. Should be specific enough to scope the
+      research but broad enough to allow discovery.
+
+  deliverable_format:
+    type: string
+    required: true
+    enum: [report, brief, summary, analysis]
+    description: >
+      What shape the output should take.
+      report: comprehensive with sections and citations.
+      brief: concise, 1-2 pages, key findings only.
+      summary: single-page overview.
+      analysis: structured evaluation with pros/cons/recommendations.
+
+  rigor:
+    type: string
+    required: false
+    default: standard
+    enum: [light, standard, deep]
+    description: >
+      Research depth. Drives convergence thresholds, minimum source
+      counts, and iteration limits.
+      light: quick scan, 3-5 sources, 1 iteration max.
+      standard: thorough, 5-10 sources, 2-3 iterations.
+      deep: exhaustive, 10+ sources, convergence required on all sub-questions.
+
+  scope_constraints:
+    type: object
+    required: false
+    description: "Optional boundaries on the research."
+    properties:
+      include:
+        type: array
+        items:
+          type: string
+        description: "Topics/domains to include."
+      exclude:
+        type: array
+        items:
+          type: string
+        description: "Topics/domains to exclude."
+      time_range:
+        type: string
+        description: "Temporal scope (e.g., 'last 2 years', 'post-2024')."
+
+  context:
+    type: string
+    required: false
+    description: >
+      Why this research matters. Helps the researcher prioritize
+      and frame findings. Populated from tess-context.md when
+      dispatched by Tess.
+
+  convergence_overrides:
+    type: object
+    required: false
+    description: >
+      Override default convergence thresholds for specific sub-questions.
+      Advanced — rarely used. See researcher-skill schemas/handoff-schema.json.

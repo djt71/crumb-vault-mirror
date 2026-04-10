@@ -1,0 +1,13 @@
+# Machine-readable project state — updated at every phase transition.
+# Validated by vault-check.sh against run-log.md for consistency.
+project_class: system
+phase: ARCHIVED
+phase_before_archive: DONE
+workflow: four-phase
+last_gate: "IMPLEMENT→DONE 2026-03-08 — decommissioned in favor of feed-intel-framework"
+active_task: null
+next_action: "Decommissioned. All X feed processing handled by FIF. Repo preserved at /Users/tess/openclaw/x-feed-intel/ for reference."
+related_projects: [feed-intel-framework]
+repo_path: /Users/tess/openclaw/x-feed-intel
+updated: 2026-03-08
+last_committed: 30ce944

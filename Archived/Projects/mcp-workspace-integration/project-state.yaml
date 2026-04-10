@@ -1,0 +1,20 @@
+name: mcp-workspace-integration
+domain: software
+type: system
+phase: ARCHIVED
+phase_before_archive: DONE
+status: complete
+created: 2026-03-16
+updated: 2026-03-20
+owner: danny
+related_projects:
+  - pydantic-ai-adoption
+  - tess-operations
+  - tess-model-architecture
+summary: >
+  Unified Google Workspace access for both Crumb and Tess via MCP server,
+  replacing bespoke gws CLI and direct API integrations. Community server
+  (taylorwilsdon/google_workspace_mcp) provides 94 tools across 12 services.
+  Crumb gets extended tier (Gmail, Calendar, Drive, Contacts, Docs, Sheets),
+  Tess gets core tier (Gmail, Calendar, Drive, Contacts).
+next_action: "Project complete. 13/13 tasks done. MCP + REST hybrid architecture operational. Auth self-monitoring added."

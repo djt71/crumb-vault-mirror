@@ -1,0 +1,18 @@
+# Machine-readable project state — updated at every phase transition.
+# Validated by vault-check.sh against run-log.md for consistency.
+project_class: system
+domain: software
+phase: DONE
+workflow: four-phase
+last_gate: "TASK → DONE 2026-03-26"
+active_task: null
+next_action: "Phase 1 complete (M1–M5). M6/M7 deferred as Phase 2. Reddit adapter code done, API credentials pending Reddit approval."
+related_projects: [x-feed-intel]
+repo_path: /Users/tess/openclaw/feed-intel-framework
+build_command: "npm run build"
+services:
+  - ai.openclaw.fif.capture
+  - ai.openclaw.fif.attention
+  - ai.openclaw.fif.feedback
+updated: 2026-03-26
+last_committed: 2026-03-10

@@ -1,0 +1,14 @@
+project: batch-book-pipeline
+domain: learning
+project_class: knowledge
+phase: ARCHIVED
+phase_before_archive: DONE
+status: complete
+created: 2026-02-28
+updated: 2026-03-20
+last_committed: null
+last_gate: ACT-to-DONE
+active_task: null
+related_projects:
+  - notebooklm-pipeline
+next_action: "Project complete. All tasks done, pipeline operational."

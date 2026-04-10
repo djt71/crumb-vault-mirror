@@ -1,0 +1,123 @@
+# Capability Manifest Schema
+# Declared in SKILL.md frontmatter under `capabilities:` by any skill
+# that is a valid dispatch target for Tess orchestration.
+#
+# Project: agent-to-agent-communication (A2A-006)
+# Spec reference: §8.7
+#
+# Skills invoked only by the operator (startup, checkpoint, sync, audit,
+# inbox-processor, etc.) are exempt — they don't need manifests.
+
+# ---
+# ID Namespace Convention: domain.purpose.variant
+#
+# Examples:
+#   research.external.standard    — external web research, standard rigor
+#   research.external.deep        — external web research, deep rigor
+#   feed.triage.standard          — feed-intel triage processing
+#   feed.promotion.signal         — promote feed items to signal-notes
+#   vault.query.facts             — query vault for structured facts
+#   review.adversarial.standard   — adversarial critic review
+#
+# Rules:
+#   - Lowercase, dot-separated, 3 segments exactly
+#   - No synonyms: one canonical ID per capability. If two IDs
+#     would mean the same thing, pick one and document the choice.
+#   - Substitution test: a capability is correctly scoped when you
+#     can name a plausible second skill that would offer it.
+#     Can't name one → too narrow. Every skill qualifies → too broad.
+# ---
+
+capability:
+  id:
+    type: string
+    format: "domain.purpose.variant"
+    required: true
+    description: "Unique capability identifier. See namespace convention above."
+
+  brief_schema:
+    type: string
+    required: true
+    description: >
+      Name of the brief schema this capability accepts.
+      Must correspond to a file in _system/schemas/briefs/{name}.yaml.
+      Example: "research-brief"
+
+  produced_artifacts:
+    type: array
+    items:
+      type: string
+    required: true
+    description: >
+      What this capability produces. Vault-relative path patterns.
+      Example: ["Sources/research/*.md", "research/fact-ledger.yaml"]
+
+  cost_profile:
+    type: object
+    required: true
+    description: >
+      Cold-start cost estimate. Superseded by dispatch learning log
+      after >=3 data points (A2A-011).
+    properties:
+      model:
+        type: string
+        description: "Primary model used (e.g., claude-opus-4-6, claude-sonnet-4-6)"
+      estimated_tokens:
+        type: integer
+        description: "Approximate total tokens per invocation"
+      estimated_cost_usd:
+        type: number
+        description: "Approximate cost in USD per invocation"
+      typical_wall_time_seconds:
+        type: integer
+        description: "Approximate wall-clock time per invocation"
+
+  supported_rigor:
+    type: array
+    items:
+      type: string
+      enum: [light, standard, deep]
+    required: true
+    description: >
+      Which rigor levels this capability supports.
+      Tess filters candidates by rigor compatibility before selection.
+      A brief with rigor: deep won't dispatch to a skill that only
+      supports [light, standard].
+
+  required_tools:
+    type: array
+    items:
+      type: string
+    required: false
+    description: >
+      Tools this capability needs at runtime. Used for tool scoping
+      in dispatch. Example: ["WebSearch", "WebFetch", "Read", "Write"]
+
+  quality_signals:
+    type: array
+    items:
+      type: string
+    required: true
+    description: >
+      Which quality dimensions this capability's output can be checked on.
+      The adaptive quality gate (A2A-009) only runs checks the skill
+      declares here. Example: ["convergence", "citation", "writing", "format"]
+
+# ---
+# Example manifest (researcher-skill):
+#
+# capabilities:
+#   - id: research.external.standard
+#     brief_schema: research-brief
+#     produced_artifacts:
+#       - "Sources/research/*.md"
+#       - "research/fact-ledger.yaml"
+#     cost_profile:
+#       model: claude-opus-4-6
+#       estimated_tokens: 150000
+#       estimated_cost_usd: 2.25
+#       typical_wall_time_seconds: 1200
+#     supported_rigor: [light, standard, deep]
+#     required_tools: [WebSearch, WebFetch, Read, Write, Glob, Grep]
+#     quality_signals: [convergence, citation, writing, format]
+# ---

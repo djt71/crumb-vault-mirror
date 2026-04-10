@@ -1,0 +1,12 @@
+project: crumb-tess-bridge
+domain: software
+project_class: system
+workflow: SPECIFY → PLAN → TASK → IMPLEMENT
+phase: ARCHIVED
+phase_before_archive: DONE
+created: 2026-02-19
+last_gate: IMPLEMENT-to-DONE
+active_task: null
+next_action: "Project complete. 37 tasks, 897 tests, bridge operational since 2026-02-22."
+last_committed: 2026-02-25
+repo_path: /Users/tess/openclaw/crumb-tess-bridge

@@ -1,0 +1,105 @@
+{
+  "results": [
+    {
+      "prompt": "ping",
+      "latency_ms": 758.2,
+      "input_tokens": 1086,
+      "output_tokens": 11,
+      "cache_write": 0,
+      "cache_read": 0,
+      "cache_status": "MISS"
+    },
+    {
+      "prompt": "What's the vault status?",
+      "latency_ms": 2465.8,
+      "input_tokens": 1091,
+      "output_tokens": 140,
+      "cache_write": 0,
+      "cache_read": 0,
+      "cache_status": "MISS"
+    },
+    {
+      "prompt": "Should I take Friday off?",
+      "latency_ms": 2991.3,
+      "input_tokens": 1091,
+      "output_tokens": 199,
+      "cache_write": 0,
+      "cache_read": 0,
+      "cache_status": "MISS"
+    },
+    {
+      "prompt": "What time is my next meeting?",
+      "latency_ms": 958.2,
+      "input_tokens": 1092,
+      "output_tokens": 48,
+      "cache_write": 0,
+      "cache_read": 0,
+      "cache_status": "MISS"
+    },
+    {
+      "prompt": "The deployment failed. What now?",
+      "latency_ms": 1192.0,
+      "input_tokens": 1092,
+      "output_tokens": 32,
+      "cache_write": 0,
+      "cache_read": 0,
+      "cache_status": "MISS"
+    },
+    {
+      "prompt": "Check my calendar.",
+      "latency_ms": 1898.2,
+      "input_tokens": 1089,
+      "output_tokens": 113,
+      "cache_write": 0,
+      "cache_read": 0,
+      "cache_status": "MISS"
+    },
+    {
+      "prompt": "How's the local model doing?",
+      "latency_ms": 2566.1,
+      "input_tokens": 1092,
+      "output_tokens": 149,
+      "cache_write": 0,
+      "cache_read": 0,
+      "cache_status": "MISS"
+    },
+    {
+      "prompt": "What's 2+2?",
+      "latency_ms": 666.0,
+      "input_tokens": 1092,
+      "output_tokens": 6,
+      "cache_write": 0,
+      "cache_read": 0,
+      "cache_status": "MISS"
+    },
+    {
+      "prompt": "Tell me about Thomas Cromwell.",
+      "latency_ms": 3485.1,
+      "input_tokens": 1093,
+      "output_tokens": 200,
+      "cache_write": 0,
+      "cache_read": 0,
+      "cache_status": "MISS"
+    },
+    {
+      "prompt": "I'm overwhelmed.",
+      "latency_ms": 1051.5,
+      "input_tokens": 1090,
+      "output_tokens": 25,
+      "cache_write": 0,
+      "cache_read": 0,
+      "cache_status": "MISS"
+    }
+  ],
+  "summary": {
+    "total_requests": 10,
+    "cache_writes": 0,
+    "cache_reads": 0,
+    "total_input": 10908,
+    "total_output": 923,
+    "total_cache_write": 0,
+    "total_cache_read": 0,
+    "total_cost_usd": 0.0124184,
+    "per_request_usd": 0.00124184
+  }
+}

@@ -1,0 +1,82 @@
+[vault-gc] outbox/relayed: purged 6 files older than 14d
+[vault-gc] transcripts: purged 5 files older than 14d
+[vault-gc] done: 11 files purged, 0 logs truncated
+[vault-gc] dispatch: purged 4 files older than 14d
+[vault-gc] transcripts: purged 9 files older than 14d
+[vault-gc] done: 13 files purged, 0 logs truncated
+[vault-gc] dispatch: purged 1 files older than 14d
+[vault-gc] transcripts: purged 1 files older than 14d
+[vault-gc] done: 2 files purged, 0 logs truncated
+[vault-gc] watcher.log: truncated 37 lines (kept last 1000)
+[vault-gc] done: 0 files purged, 1 logs truncated
+[vault-gc] dispatch: purged 11 files older than 14d
+[vault-gc] transcripts: purged 11 files older than 14d
+[vault-gc] done: 22 files purged, 0 logs truncated
+[vault-gc] watcher.log: truncated 14 lines (kept last 1000)
+[vault-gc] done: 0 files purged, 1 logs truncated
+[vault-gc] done: nothing to clean
+[vault-gc] watcher.log: truncated 27 lines (kept last 1000)
+[vault-gc] done: 0 files purged, 1 logs truncated
+[vault-gc] done: nothing to clean
+[vault-gc] done: nothing to clean
+[vault-gc] ops-metrics.jsonl: truncated 89 lines (kept last 1000)
+[vault-gc] done: 0 files purged, 1 logs truncated
+[vault-gc] watcher.log: truncated 8 lines (kept last 1000)
+[vault-gc] ops-metrics.jsonl: truncated 116 lines (kept last 1000)
+[vault-gc] done: 0 files purged, 2 logs truncated
+[vault-gc] ops-metrics.jsonl: truncated 114 lines (kept last 1000)
+[vault-gc] done: 0 files purged, 1 logs truncated
+[vault-gc] ops-metrics.jsonl: truncated 115 lines (kept last 1000)
+[vault-gc] done: 0 files purged, 1 logs truncated
+[vault-gc] ops-metrics.jsonl: truncated 114 lines (kept last 1000)
+[vault-gc] done: 0 files purged, 1 logs truncated
+[vault-gc] ops-metrics.jsonl: truncated 115 lines (kept last 1000)
+[vault-gc] done: 0 files purged, 1 logs truncated
+[vault-gc] ops-metrics.jsonl: truncated 115 lines (kept last 1000)
+[vault-gc] done: 0 files purged, 1 logs truncated
+[vault-gc] reviews/raw (feed-intel-framework): purged 11 files older than 30d
+[vault-gc] ops-metrics.jsonl: truncated 114 lines (kept last 1000)
+[vault-gc] done: 11 files purged, 1 logs truncated
+[vault-gc] reviews/raw (feed-intel-framework): purged 2 files older than 30d
+[vault-gc] ops-metrics.jsonl: truncated 115 lines (kept last 1000)
+[vault-gc] done: 2 files purged, 1 logs truncated
+[vault-gc] ops-metrics.jsonl: truncated 115 lines (kept last 1000)
+[vault-gc] done: 0 files purged, 1 logs truncated
+[vault-gc] reviews/raw (feed-intel-framework): purged 2 files older than 30d
+[vault-gc] reviews/raw (tess-operations): purged 15 files older than 30d
+[vault-gc] ops-metrics.jsonl: truncated 115 lines (kept last 1000)
+[vault-gc] done: 17 files purged, 1 logs truncated
+[vault-gc] reviews/raw (feed-intel-framework): purged 3 files older than 30d
+[vault-gc] ops-metrics.jsonl: truncated 114 lines (kept last 1000)
+[vault-gc] done: 3 files purged, 1 logs truncated
+[vault-gc] ops-metrics.jsonl: truncated 115 lines (kept last 1000)
+[vault-gc] done: 0 files purged, 1 logs truncated
+[vault-gc] dispatch: purged 1 files older than 14d
+[vault-gc] reviews/raw (feed-intel-framework): purged 3 files older than 30d
+[vault-gc] ops-metrics.jsonl: truncated 114 lines (kept last 1000)
+[vault-gc] done: 4 files purged, 1 logs truncated
+[vault-gc] ops-metrics.jsonl: truncated 115 lines (kept last 1000)
+[vault-gc] done: 0 files purged, 1 logs truncated
+[vault-gc] ops-metrics.jsonl: truncated 155 lines (kept last 1000)
+[vault-gc] done: 0 files purged, 1 logs truncated
+[vault-gc] reviews/raw (agent-to-agent-communication): purged 8 files older than 30d
+[vault-gc] reviews/raw (feed-intel-framework): purged 3 files older than 30d
+[vault-gc] ops-metrics.jsonl: truncated 165 lines (kept last 1000)
+[vault-gc] done: 11 files purged, 1 logs truncated
+[vault-gc] ops-metrics.jsonl: truncated 170 lines (kept last 1000)
+[vault-gc] health-ping.log: truncated 3 lines (kept last 1000)
+[vault-gc] done: 0 files purged, 2 logs truncated
+[vault-gc] reviews/raw (tess-operations): purged 4 files older than 30d
+[vault-gc] ops-metrics.jsonl: truncated 179 lines (kept last 1000)
+[vault-gc] health-ping.log: truncated 24 lines (kept last 1000)
+[vault-gc] done: 4 files purged, 2 logs truncated
+[vault-gc] reviews/raw (mission-control): purged 14 files older than 30d
+[vault-gc] ops-metrics.jsonl: truncated 185 lines (kept last 1000)
+[vault-gc] health-ping.log: truncated 24 lines (kept last 1000)
+[vault-gc] done: 14 files purged, 2 logs truncated
+[vault-gc] ops-metrics.jsonl: truncated 181 lines (kept last 1000)
+[vault-gc] health-ping.log: truncated 24 lines (kept last 1000)
+[vault-gc] done: 0 files purged, 2 logs truncated
+[vault-gc] ops-metrics.jsonl: truncated 182 lines (kept last 1000)
+[vault-gc] health-ping.log: truncated 24 lines (kept last 1000)
+[vault-gc] done: 0 files purged, 2 logs truncated

@@ -1,0 +1,17 @@
+name: vault-mobile-access
+domain: software
+type: system
+phase: ARCHIVED
+phase_before_archive: DONE
+last_gate: IMPLEMENT-to-DONE
+created: 2026-04-04
+updated: 2026-04-09
+related_projects: []
+active_task: null
+last_committed: null
+next_action: "Archived 2026-04-09. Vault accessible on iPhone at http://tesss-mac-studio:8843 via Tailscale."
+pending_signals: []
+repo_path: null
+services:
+  - com.crumb.vault-web
+  - com.crumb.vault-rebuild

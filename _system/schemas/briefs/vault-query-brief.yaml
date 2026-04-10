@@ -1,0 +1,52 @@
+# Vault Query Brief Schema
+# Shared contract for vault knowledge retrieval capabilities.
+# First consumer: vault-query skill (vault.query.facts)
+#
+# Project: agent-to-agent-communication (A2A-007.5)
+
+brief:
+  query:
+    type: string
+    required: true
+    description: >
+      What to look up. Can be an account name, topic, project,
+      person, or specific question about vault contents.
+
+  output_format:
+    type: string
+    required: false
+    default: structured
+    enum: [structured, narrative, list]
+    description: >
+      structured: sections with headings and key-value pairs.
+      narrative: prose summary.
+      list: bullet points.
+
+  scope:
+    type: object
+    required: false
+    description: "Constrain where in the vault to search."
+    properties:
+      domains:
+        type: array
+        items:
+          type: string
+        description: "Limit to specific domains (e.g., ['Software', 'Career'])."
+      projects:
+        type: array
+        items:
+          type: string
+        description: "Limit to specific projects."
+      tags:
+        type: array
+        items:
+          type: string
+        description: "Filter by #kb/ tags."
+      recency:
+        type: string
+        description: "Time filter (e.g., 'last 30 days', '2026')."
+
+  context:
+    type: string
+    required: false
+    description: "Why this query matters — helps prioritize results."

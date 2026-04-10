@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.crumb.bridge-watcher</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/opt/homebrew/bin/python3</string>
+        <string>/Users/tess/crumb-vault/_system/scripts/bridge-watcher.py</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/tess/crumb-vault</string>
+
+    <key>KeepAlive</key>
+    <true/>
+
+    <key>ThrottleInterval</key>
+    <integer>5</integer>
+
+    <key>Umask</key>
+    <integer>2</integer>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>HOME</key>
+        <string>/Users/tess</string>
+        <key>PATH</key>
+        <string>/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/tess/.local/bin</string>
+        <key>CRUMB_VAULT_ROOT</key>
+        <string>/Users/tess/crumb-vault</string>
+    </dict>
+
+    <key>StandardOutPath</key>
+    <string>/Users/tess/crumb-vault/_openclaw/logs/watcher.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/Users/tess/crumb-vault/_openclaw/logs/watcher.err</string>
+
+    <!-- Note: No ANTHROPIC_API_KEY in plist. Phase 1 ops use direct node
+         invocation (no API key needed). Phase 2 claude --print path sources
+         the key from a secure file at runtime. -->
+</dict>
+</plist>

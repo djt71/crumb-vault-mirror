@@ -1,0 +1,26 @@
+{
+  "timestamp": "2026-04-10T19:40:21Z",
+  "cpu": {
+    "load_1m": 1.52,
+    "load_5m": 1.62,
+    "load_15m": 1.65,
+    "cores": 28
+  },
+  "memory": {
+    "total_gb": 96.0,
+    "used_gb": 52.5,
+    "available_gb": 46.9,
+    "percent_used": 54.7
+  },
+  "disk": {
+    "total_gb": 926.3,
+    "used_gb": 11.6,
+    "available_gb": 613.2,
+    "percent_used": 2
+  },
+  "gpu": {
+    "model": "Apple M3 Ultra",
+    "cores": 60,
+    "utilization_percent": null
+  }
+}

@@ -1,0 +1,26 @@
+project: mission-control
+domain: software
+class: system
+workflow: four-phase
+phase: TASK
+status: active
+created: 2026-03-07
+updated: 2026-03-30
+last_committed: 2026-03-17
+last_gate: PLAN-to-TASK
+active_task: null
+next_action: "Phase 2 complete. Phase 3 available. M3.1 (Intel Feed Density Redesign) added — Surface-inspired dense list, multi-axis filters, raw scores, shared tier config. M3.1 blocks M8. Spec §6.3 amended (Amendment S). Build order: M3.1 → M8; M9/M10 independent. Start with MC-080 (tier config) + MC-082 (dense list layout)."
+tags:
+  - dashboard
+  - dataviz
+related_projects:
+  - feed-intel-framework
+  - agent-to-agent-communication
+  - tess-operations
+  - active-knowledge-memory
+  - customer-intelligence
+  - crumb-tess-bridge
+repo_path: /Users/tess/openclaw/crumb-dashboard
+build_command: "npm run build"
+services:
+  - com.crumb.dashboard

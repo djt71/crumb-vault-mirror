@@ -1,0 +1,75 @@
+{
+  "$comment": [
+    "Researcher handoff schema — structured state passed between stages via dispatch protocol.",
+    "Serialized as JSON in the dispatch stage output handoff field.",
+    "Hard limit: 8KB serialized. Soft warning: 7KB triggers overflow to vault file.",
+    "",
+    "I/O Operations:",
+    "  SERIALIZE — Orchestrator serializes handoff to JSON after each stage output.",
+    "              If serialized size > 7KB, write coverage_assessment to vault file",
+    "              and replace with {\"ref\": \"path/to/coverage-file.yaml\"}.",
+    "  DESERIALIZE — Orchestrator reads previous stage handoff, injects into next stage prompt.",
+    "  SNAPSHOT — After each stage, orchestrator writes handoff copy to",
+    "             research/handoff-snapshots/[dispatch]/stage-[N]-[name].yaml.",
+    "             Snapshots are diagnostic only — not consumed by the pipeline."
+  ],
+  "research_plan": {
+    "sub_questions": [
+      {
+        "id": "sq-1",
+        "text": "string — the sub-question (truncate to 80 chars + sq-N ref after first write)",
+        "status": "open | covered | blocked",
+        "coverage_score": 0.0,
+        "source_count": 0,
+        "ledger_entry_count": 0,
+        "hypotheses": ["string — testable prediction about what evidence will show (1-2 per sq, set by Planning)"]
+      }
+    ],
+    "source_tier_targets": {
+      "tier_a": 0,
+      "tier_b": 0,
+      "tier_c": 0
+    }
+  },
+  "coverage_assessment": {
+    "overall_score": 0.0,
+    "gaps": [],
+    "contradictions": [],
+    "quality_ceiling_reason": null,
+    "tier_a_attempts": null
+  },
+  "rigor": "standard",
+  "convergence_overrides": null,
+  "max_research_iterations": 5,
+  "decisions": [],
+  "files_created": [],
+  "files_modified": [],
+  "key_facts": [],
+  "open_questions": [],
+
+  "$overflow_protocol": {
+    "soft_threshold_bytes": 7168,
+    "hard_limit_bytes": 8192,
+    "overflow_field": "coverage_assessment",
+    "overflow_action": "Write coverage_assessment to research/coverage-[dispatch].yaml, replace value with {\"ref\": \"research/coverage-[dispatch].yaml\"}. Next stage reads the file via context_files.",
+    "sub_question_text_truncation": "After first write, truncate text to first 80 chars. Full text preserved in Planning stage vault output."
+  },
+
+  "$convergence_thresholds": {
+    "$comment": "Populated by Planning stage from rigor profile. Used by Research Loop for convergence evaluation.",
+    "light":    { "coverage_score": 0.5, "min_entries": 1, "min_sources": 1, "tier_ab_required": false },
+    "standard": { "coverage_score": 0.7, "min_entries": 2, "min_sources": 2, "tier_ab_required": true },
+    "deep":     { "coverage_score": 0.85, "min_entries": 3, "min_sources": 3, "tier_ab_required": true },
+    "tier_a_fallback_ceiling": 0.8,
+    "tier_a_fallback_after_attempts": 2,
+    "diminishing_returns": { "min_new_entries": 2, "min_score_improvement": 0.05 }
+  },
+
+  "$weighted_formula": {
+    "$comment": "coverage_score = min(1.0, weighted_evidence / target_evidence)",
+    "tier_weights":       { "A": 1.0, "B": 0.7, "C": 0.4 },
+    "confidence_weights": { "verified": 1.0, "supported": 0.7, "plausible": 0.4, "contested": 0.2, "unverifiable": 0 },
+    "target_formula": "tier_a_target * 1.0 + tier_b_target * 0.7 + tier_c_target * 0.4",
+    "status": "provisional — calibrate after 5+ dispatches via telemetry"
+  }
+}

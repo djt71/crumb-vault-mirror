@@ -1,0 +1,14 @@
+# Machine-readable project state — updated at every phase transition.
+# Validated by vault-check.sh against run-log.md for consistency.
+name: firekeeper-books
+domain: creative
+phase: ACT
+workflow: CLARIFY → ACT
+last_gate: CLARIFY-to-ACT
+created: 2026-03-17
+updated: 2026-04-07
+active_task: null
+next_action: "Phase 1 (Apr 2-8) trackable items now in [[ai-art-inventory]] — surfaced via attention-manager. Phase 1 ends 2026-04-08; Phase 2 (Style Development) starts then. ComfyUI setup deferred to Phase 5 unless Midjourney constraints force re-evaluation."
+last_committed: null
+related_projects:
+  - opportunity-scout

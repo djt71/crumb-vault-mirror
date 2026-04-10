@@ -1,0 +1,17 @@
+{
+  "timestamp": "2026-04-05T19:30:00Z",
+  "lastFullAudit": "2026-04-05",
+  "daysSinceAudit": 0,
+  "staleSummaries": 0,
+  "orphanedSolutions": 0,
+  "brokenLinks": 0,
+  "docDriftIssues": 1,
+  "failureLogEntries30d": 0,
+  "archivedKbCount": 0,
+  "findings": {
+    "high": 0,
+    "medium": 0,
+    "low": 3
+  },
+  "status": "healthy"
+}

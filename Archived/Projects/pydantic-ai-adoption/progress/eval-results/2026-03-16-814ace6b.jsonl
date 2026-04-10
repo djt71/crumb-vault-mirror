@@ -1,0 +1,9 @@
+{"run_id": "814ace6b", "timestamp": "2026-03-16T20:57:09.107413+00:00", "mode": "deterministic", "pydantic_evals_version": "1.68.0"}
+{"case_id": "tp-git-acted-on", "dataset": "ao_correlation_classify", "passed": true, "duration_ms": 0}
+{"case_id": "tp-mtime-acted-on", "dataset": "ao_correlation_classify", "passed": true, "duration_ms": 0}
+{"case_id": "tn-not-acted-on", "dataset": "ao_correlation_classify", "passed": true, "duration_ms": 0}
+{"case_id": "pathless-uncorrelated", "dataset": "ao_correlation_classify", "passed": true, "duration_ms": 0}
+{"case_id": "git-priority-over-mtime", "dataset": "ao_correlation_classify", "passed": true, "duration_ms": 0}
+{"case_id": "no-action-appears", "dataset": "ao_idempotency_predicate", "passed": true, "duration_ms": 4}
+{"case_id": "action-recorded-excluded", "dataset": "ao_idempotency_predicate", "passed": true, "duration_ms": 5}
+{"summary": {"total": 7, "passed": 7, "failed": 0}}

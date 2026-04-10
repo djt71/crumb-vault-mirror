@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Control — Intelligence</title>
+  <link rel="stylesheet" href="ops-mockup.css">
+  <link rel="stylesheet" href="widget-vocabulary.css">
+  <link rel="stylesheet" href="intelligence-mockup.css">
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- ===== NAV RAIL (full nav shell with badges + status dots) ===== -->
+  <nav class="nav-rail">
+    <div class="nav-logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M12 6v6l4 2"/>
+      </svg>
+    </div>
+
+    <div class="nav-items">
+      <a class="nav-item" href="attention-mockup.html">
+        <span class="nav-badge">13</span>
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"/><path d="M12 1v4m0 14v4m-9-9h4m14 0h4m-3.3-6.7-2.8 2.8m-9.8 9.8-2.8 2.8m0-15.6 2.8 2.8m9.8 9.8 2.8 2.8"/>
+        </svg>
+        <span class="nav-label">Attn</span>
+      </a>
+
+      <a class="nav-item" href="ops-mockup.html">
+        <span class="nav-status-dot ok"></span>
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+        </svg>
+        <span class="nav-label">Ops</span>
+      </a>
+
+      <a class="nav-item active" href="#">
+        <span class="nav-status-dot ok"></span>
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+        </svg>
+        <span class="nav-label">Intel</span>
+      </a>
+
+      <a class="nav-item" href="#">
+        <span class="nav-status-dot warn"></span>
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        <span class="nav-label">Cust</span>
+      </a>
+
+      <a class="nav-item" href="#">
+        <span class="nav-status-dot ok"></span>
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/>
+        </svg>
+        <span class="nav-label">Agents</span>
+      </a>
+
+      <a class="nav-item" href="#">
+        <span class="nav-status-dot warn"></span>
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+        </svg>
+        <span class="nav-label">Know</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="main-content">
+
+    <!-- ===== PAGE HEADER WITH SEARCH BAR (Nav Shell) ===== -->
+    <header class="page-header">
+      <h1 class="page-title">Intelligence</h1>
+      <div class="header-search">
+        <input type="text" class="search-input" placeholder="Search vault..." value="attention merchant">
+      </div>
+      <span class="refresh-ts">Updated 22s ago &middot; manual pull</span>
+    </header>
+
+    <!-- ===== SEARCH OVERLAY (shown when search active) ===== -->
+    <div class="search-overlay">
+      <div class="search-results-panel">
+        <div class="search-results-header">
+          <span class="search-results-count">3 results for "attention merchant"</span>
+          <button class="search-results-close">&times; Close</button>
+        </div>
+        <div class="search-results-body">
+          <div class="search-card" tabindex="0">
+            <div class="search-card-header">
+              <span class="badge badge-source">Sources</span>
+              <span class="search-card-title">Wu — The Attention Merchants (Chapter Digest)</span>
+              <span class="search-card-score">0.94</span>
+            </div>
+            <div class="search-card-snippet">...the rise of a massive, pervasive industry that harvests <mark>human attention</mark> and resells it as a commodity. From patent medicine ads to Facebook's news feed...</div>
+            <div class="search-card-path">Sources/books/wu-attention-merchants-chapter-digest.md</div>
+          </div>
+          <div class="search-card" tabindex="0">
+            <div class="search-card-header">
+              <span class="badge badge-source">Projects</span>
+              <span class="search-card-title">Attention Manager — Specification</span>
+              <span class="search-card-score">0.87</span>
+            </div>
+            <div class="search-card-snippet">...unified <mark>attention</mark> surface aggregating system alerts, personal goals, relational commitments...</div>
+            <div class="search-card-path">Projects/attention-manager/design/specification.md</div>
+          </div>
+          <div class="search-card" tabindex="0">
+            <div class="search-card-header">
+              <span class="badge badge-source">Domains</span>
+              <span class="search-card-title">MOC — Business</span>
+              <span class="search-card-score">0.72</span>
+            </div>
+            <div class="search-card-snippet">...the <mark>attention</mark> economy thesis connects advertising history to modern platform dynamics...</div>
+            <div class="search-card-path">Domains/career/moc-business.md</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-body">
+
+      <!-- ================================================ -->
+      <!-- PIPELINE SECTION                                  -->
+      <!-- ================================================ -->
+      <div class="page-section-header">
+        <span class="page-section-label">Pipeline</span>
+        Feed Intelligence
+      </div>
+
+      <!-- Pipeline KPIs -->
+      <section class="section">
+        <h2 class="section-title">Pipeline KPIs</h2>
+        <div class="kpi-strip">
+
+          <div class="kpi-card">
+            <div class="kpi-label">Signals Today</div>
+            <div class="kpi-value">
+              47
+              <svg class="sparkline-container" viewBox="0 0 80 24">
+                <path class="sparkline-area" d="M0 20 L8 16 L16 18 L24 12 L32 14 L40 8 L48 10 L56 6 L64 9 L72 4 L80 7 L80 24 L0 24 Z"/>
+                <path class="sparkline-path" d="M0 20 L8 16 L16 18 L24 12 L32 14 L40 8 L48 10 L56 6 L64 9 L72 4 L80 7"/>
+              </svg>
+            </div>
+            <div class="kpi-sub">+12 vs yesterday</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-label">This Week</div>
+            <div class="kpi-value">312</div>
+            <div class="kpi-sub">avg 45/day</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-label">Sources</div>
+            <div class="kpi-value">
+              <span style="font-size: 0.875rem;">X: 28 &middot; RSS: 14 &middot; YT: 5</span>
+            </div>
+            <div class="kpi-sub">3 sources active</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-label">Triage</div>
+            <div class="kpi-value">
+              <span style="font-size: 0.875rem; color: var(--status-ok);">T1: 3</span>
+              <span style="font-size: 0.875rem; color: var(--status-warn);"> &middot; T2: 18</span>
+              <span style="font-size: 0.875rem; color: var(--text-tertiary);"> &middot; T3: 26</span>
+            </div>
+            <div class="kpi-sub">6.4% promotion rate</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-label">Cost Today</div>
+            <div class="kpi-value">$1.24</div>
+            <div class="kpi-sub">/ $3.00 ceiling</div>
+            <div class="kpi-progress">
+              <div class="kpi-progress-track">
+                <div class="kpi-progress-fill" style="width: 41%;"></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Signal Digest -->
+      <!-- Signal Digest — Dense List Layout [MC-082/083/084, S-3] -->
+      <section class="section">
+        <h2 class="section-title">Signal Digest</h2>
+        <div class="digest-panel">
+          <!-- Multi-axis filter bar [MC-083] -->
+          <div style="padding: 10px 12px 6px; border-bottom: 1px solid var(--border-panel); display: flex; flex-direction: column; gap: 4px;">
+            <div style="display: flex; align-items: center; gap: 4px;">
+              <span style="font-family: Inter, sans-serif; font-size: 0.6875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary); width: 48px;">Tier</span>
+              <button class="filter-badge" style="font-size: 0.6875rem; padding: 2px 8px; background: rgba(74, 222, 128, 0.2); color: var(--status-ok); border-color: transparent;">T1 <span style="opacity: 0.7; font-size: 0.625rem;">3</span></button>
+              <button class="filter-badge" style="font-size: 0.6875rem; padding: 2px 8px;">T2 <span style="opacity: 0.7; font-size: 0.625rem;">18</span></button>
+              <button class="filter-badge" style="font-size: 0.6875rem; padding: 2px 8px;">T3 <span style="opacity: 0.7; font-size: 0.625rem;">26</span></button>
+            </div>
+            <div style="display: flex; align-items: center; gap: 4px;">
+              <span style="font-family: Inter, sans-serif; font-size: 0.6875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary); width: 48px;">Source</span>
+              <button class="filter-badge" style="font-size: 0.6875rem; padding: 2px 8px;">X <span style="opacity: 0.7; font-size: 0.625rem;">28</span></button>
+              <button class="filter-badge" style="font-size: 0.6875rem; padding: 2px 8px;">RSS <span style="opacity: 0.7; font-size: 0.625rem;">14</span></button>
+              <button class="filter-badge" style="font-size: 0.6875rem; padding: 2px 8px;">HN <span style="opacity: 0.7; font-size: 0.625rem;">3</span></button>
+              <button class="filter-badge" style="font-size: 0.6875rem; padding: 2px 8px;">YT <span style="opacity: 0.7; font-size: 0.625rem;">2</span></button>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; padding-top: 2px;">
+              <span style="font-family: JetBrains Mono, monospace; font-size: 0.75rem; color: var(--text-tertiary);">47 signals</span>
+            </div>
+          </div>
+          <!-- Dense signal list — one row per item, zero card chrome -->
+          <div class="digest-body">
+            <div style="display: flex; align-items: center; gap: 8px; padding: 6px 12px; border-bottom: 1px solid var(--border-subtle); cursor: pointer;" tabindex="0">
+              <span style="font-family: JetBrains Mono, monospace; font-size: 0.6875rem; font-weight: 600; padding: 2px 6px; border-radius: 4px; background: rgba(74, 222, 128, 0.15); color: var(--status-ok); min-width: 28px; text-align: center;">T1</span>
+              <span style="flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><span style="font-weight: 600; font-size: 0.8125rem; color: var(--text-primary);">Anthropic announces Claude 4.6 model family with extended tool use</span><span style="font-size: 0.8125rem; color: var(--text-tertiary);"> — Major capability upgrade across the model line with multi-step reasoning</span></span>
+              <span style="display: flex; gap: 6px; flex-shrink: 0; white-space: nowrap;"><span style="font-family: JetBrains Mono, monospace; font-size: 0.6875rem; color: var(--text-tertiary);">X</span><span style="font-family: JetBrains Mono, monospace; font-size: 0.6875rem; color: var(--text-tertiary); opacity: 0.7;">2h</span></span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; padding: 6px 12px; border-bottom: 1px solid var(--border-subtle); cursor: pointer;" tabindex="0">
+              <span style="font-family: JetBrains Mono, monospace; font-size: 0.6875rem; font-weight: 600; padding: 2px 6px; border-radius: 4px; background: rgba(74, 222, 128, 0.15); color: var(--status-ok); min-width: 28px; text-align: center;">T1</span>
+              <span style="flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><span style="font-weight: 600; font-size: 0.8125rem; color: var(--text-primary);">OpenAI releases GPT-5.2 with native structured outputs</span><span style="font-size: 0.8125rem; color: var(--text-tertiary);"> — Structured output mode guarantees valid JSON against provided schema</span></span>
+              <span style="display: flex; gap: 6px; flex-shrink: 0; white-space: nowrap;"><span style="font-family: JetBrains Mono, monospace; font-size: 0.6875rem; color: var(--text-tertiary);">X</span><span style="font-family: JetBrains Mono, monospace; font-size: 0.6875rem; color: var(--text-tertiary); opacity: 0.7;">8h</span></span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; padding: 6px 12px; border-bottom: 1px solid var(--border-subtle); cursor: pointer;" tabindex="0">
+              <span style="font-family: JetBrains Mono, monospace; font-size: 0.6875rem; font-weight: 600; padding: 2px 6px; border-radius: 4px; background: rgba(251, 191, 36, 0.15); color: var(--status-warn); min-width: 28px; text-align: center;">T2</span>
+              <span style="flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><span style="font-weight: 600; font-size: 0.8125rem; color: var(--text-primary);">Cloudflare Workers adds WebSocket hibernation for persistent connections</span><span style="font-size: 0.8125rem; color: var(--text-tertiary);"> — Maintain WebSocket connections without consuming CPU during idle</span></span>
+              <span style="display: flex; gap: 6px; flex-shrink: 0; white-space: nowrap;"><span style="font-family: JetBrains Mono, monospace; font-size: 0.6875rem; color: var(--text-tertiary);">RSS</span><span style="font-family: JetBrains Mono, monospace; font-size: 0.6875rem; color: var(--text-tertiary); opacity: 0.7;">6h</span></span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; padding: 6px 12px; border-bottom: 1px solid var(--border-subtle); cursor: pointer;" tabindex="0">
+              <span style="font-family: JetBrains Mono, monospace; font-size: 0.6875rem; font-weight: 600; padding: 2px 6px; border-radius: 4px; background: rgba(251, 191, 36, 0.15); color: var(--status-warn); min-width: 28px; text-align: center;">T2</span>
+              <span style="flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><span style="font-weight: 600; font-size: 0.8125rem; color: var(--text-primary);">Express 5.0 stable release</span><span style="font-size: 0.8125rem; color: var(--text-tertiary);"> — Async middleware, ESM-first, Node 20+ required. Migration path documented</span></span>
+              <span style="display: flex; gap: 6px; flex-shrink: 0; white-space: nowrap;"><span style="font-family: JetBrains Mono, monospace; font-size: 0.6875rem; color: var(--text-tertiary);">RSS</span><span style="font-family: JetBrains Mono, monospace; font-size: 0.6875rem; color: var(--text-tertiary); opacity: 0.7;">12h</span></span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; padding: 6px 12px; border-bottom: 1px solid var(--border-subtle); cursor: pointer;" tabindex="0">
+              <span style="font-family: JetBrains Mono, monospace; font-size: 0.6875rem; font-weight: 600; padding: 2px 6px; border-radius: 4px; background: rgba(251, 191, 36, 0.15); color: var(--status-warn); min-width: 28px; text-align: center;">T2</span>
+              <span style="flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><span style="font-weight: 600; font-size: 0.8125rem; color: var(--text-primary);">Safeguarding VS Code against prompt injections</span><span style="font-size: 0.8125rem; color: var(--text-tertiary);"> — Tool outputs can override user intent, enabling stealth attacks</span></span>
+              <span style="display: flex; gap: 6px; flex-shrink: 0; white-space: nowrap;"><span style="font-family: JetBrains Mono, monospace; font-size: 0.6875rem; color: var(--text-tertiary);">HN</span><span style="font-family: JetBrains Mono, monospace; font-size: 0.6875rem; color: var(--text-tertiary); opacity: 0.7;">14h</span></span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; padding: 6px 12px; border-bottom: 1px solid var(--border-subtle); cursor: pointer;" tabindex="0">
+              <span style="font-family: JetBrains Mono, monospace; font-size: 0.6875rem; font-weight: 600; padding: 2px 6px; border-radius: 4px; background: rgba(74, 222, 128, 0.15); color: var(--status-ok); min-width: 28px; text-align: center;">T1</span>
+              <span style="flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><span style="font-weight: 600; font-size: 0.8125rem; color: var(--text-primary);">How Deep Research Agents Can Leak Your Data</span><span style="font-size: 0.8125rem; color: var(--text-tertiary);"> — Prompt injection can cross-tool leak data between research sessions</span></span>
+              <span style="display: flex; gap: 6px; flex-shrink: 0; white-space: nowrap;"><span style="font-family: JetBrains Mono, monospace; font-size: 0.6875rem; color: var(--text-tertiary);">RSS</span><span style="font-family: JetBrains Mono, monospace; font-size: 0.6875rem; color: var(--text-tertiary); opacity: 0.7;">1d</span></span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; padding: 6px 12px; border-bottom: 1px solid var(--border-subtle); cursor: pointer;" tabindex="0">
+              <span style="font-family: JetBrains Mono, monospace; font-size: 0.6875rem; font-weight: 600; padding: 2px 6px; border-radius: 4px; background: rgba(251, 191, 36, 0.15); color: var(--status-warn); min-width: 28px; text-align: center;">T2</span>
+              <span style="flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><span style="font-weight: 600; font-size: 0.8125rem; color: var(--text-primary);">Using LLMs to solve security problems</span><span style="font-size: 0.8125rem; color: var(--text-tertiary);"> — Rank security targets with LLMs cheaply. Practical automation patterns</span></span>
+              <span style="display: flex; gap: 6px; flex-shrink: 0; white-space: nowrap;"><span style="font-family: JetBrains Mono, monospace; font-size: 0.6875rem; color: var(--text-tertiary);">X</span><span style="font-family: JetBrains Mono, monospace; font-size: 0.6875rem; color: var(--text-tertiary); opacity: 0.7;">1d</span></span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; padding: 6px 12px; cursor: pointer;" tabindex="0">
+              <span style="font-family: JetBrains Mono, monospace; font-size: 0.6875rem; font-weight: 600; padding: 2px 6px; border-radius: 4px; background: rgba(251, 191, 36, 0.15); color: var(--status-warn); min-width: 28px; text-align: center;">T2</span>
+              <span style="flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><span style="font-weight: 600; font-size: 0.8125rem; color: var(--text-primary);">How decentralized is Bluesky really?</span><span style="font-size: 0.8125rem; color: var(--text-tertiary);"> — Scales via centralized relays, not federation. Architecture analysis</span></span>
+              <span style="display: flex; gap: 6px; flex-shrink: 0; white-space: nowrap;"><span style="font-family: JetBrains Mono, monospace; font-size: 0.6875rem; color: var(--text-tertiary);">HN</span><span style="font-family: JetBrains Mono, monospace; font-size: 0.6875rem; color: var(--text-tertiary); opacity: 0.7;">2d</span></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pipeline Health -->
+      <section class="section">
+        <h2 class="section-title">Pipeline Health</h2>
+        <div style="background: var(--bg-panel); border: 1px solid var(--border-panel); border-radius: 8px; padding: 20px; box-shadow: var(--shadow-panel);">
+          <div class="circuit-breaker-strip">
+            <div class="circuit-breaker">
+              <span class="status-dot ok"></span>
+              <span class="circuit-breaker-label">Capture</span>
+              <span class="circuit-breaker-status ok">Closed</span>
+            </div>
+            <div class="circuit-breaker">
+              <span class="status-dot ok"></span>
+              <span class="circuit-breaker-label">Attention</span>
+              <span class="circuit-breaker-status ok">Closed</span>
+            </div>
+            <div class="circuit-breaker">
+              <span class="status-dot ok"></span>
+              <span class="circuit-breaker-label">Feedback</span>
+              <span class="circuit-breaker-status ok">Closed</span>
+            </div>
+          </div>
+
+          <table class="data-table" style="margin: 0 -20px -20px; width: calc(100% + 40px);">
+            <thead>
+              <tr>
+                <th>Service</th>
+                <th>Last Run</th>
+                <th>Duration</th>
+                <th>Error Rate (24h)</th>
+                <th>Backlog</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-cell">FIF Capture</td>
+                <td>12m ago</td>
+                <td>3.2s</td>
+                <td style="color: var(--status-ok);">0%</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td class="text-cell">FIF Attention</td>
+                <td>18m ago</td>
+                <td>1.8s</td>
+                <td style="color: var(--status-ok);">2.1%</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td class="text-cell">FIF Feedback</td>
+                <td>8m ago</td>
+                <td>0.9s</td>
+                <td style="color: var(--status-ok);">0%</td>
+                <td>0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Tuning (blocked) -->
+      <section class="section">
+        <div class="blocked-panel">
+          <div class="blocked-panel-header">
+            <span class="status-dot stale"></span>
+            <span class="blocked-panel-title">Tuning</span>
+          </div>
+          <div class="blocked-panel-desc">Feedback analysis, topic weight trends, tuning recommendations. Coming soon — requires FIF feedback analysis.</div>
+        </div>
+      </section>
+
+      <!-- ================================================ -->
+      <!-- PRODUCTION SECTION                                -->
+      <!-- ================================================ -->
+      <div class="page-section-header" style="margin-top: 16px;">
+        <span class="page-section-label">Production</span>
+        Analytical Output
+      </div>
+
+      <!-- Research Briefs + Weekly Brief -->
+      <section class="section">
+        <div class="production-grid">
+
+          <!-- Research Briefs -->
+          <div class="production-panel">
+            <div class="production-panel-title">Research Briefs</div>
+            <div class="brief-list">
+              <div class="brief-item">
+                <span class="badge badge-soon" style="margin-top: 2px;">Pending</span>
+                <div class="brief-item-content">
+                  <div class="brief-item-title">Competitive analysis: Acme Corp Q2 positioning</div>
+                  <div class="brief-item-meta">Requested 2h ago &middot; est. $0.85</div>
+                </div>
+              </div>
+              <div class="brief-item">
+                <span class="badge badge-ongoing" style="margin-top: 2px;">Done</span>
+                <div class="brief-item-content">
+                  <div class="brief-item-title">Infrastructure cost optimization — cloud vs local inference</div>
+                  <div class="brief-item-meta">Delivered yesterday &middot; $0.62</div>
+                </div>
+              </div>
+              <div class="brief-item">
+                <span class="badge badge-ongoing" style="margin-top: 2px;">Done</span>
+                <div class="brief-item-content">
+                  <div class="brief-item-title">Developer productivity tooling landscape 2026</div>
+                  <div class="brief-item-meta">Delivered 3d ago &middot; $1.04</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Weekly Intelligence Brief -->
+          <div class="production-panel">
+            <div class="production-panel-title">Weekly Intelligence Brief</div>
+            <div class="weekly-brief-content">
+              <strong>March 3-7, 2026</strong>
+              <ul>
+                <li>Claude 4.6 launch — Opus reasoning upgrade, Haiku speed boost. Crumb already on Opus 4.6.</li>
+                <li>Express 5.0 stable — migration path for MC-012 scaffold. Async middleware simplifies adapter pattern.</li>
+                <li>YT API quota changes effective April 1 — FIF YouTube adapter may need rate adjustment.</li>
+              </ul>
+              <strong>Promoted:</strong> 3 T1 signals &middot; 18 T2 triaged &middot; 2 tuning recs pending
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Brainstorm + Ecosystem Radar -->
+      <section class="section">
+        <div class="production-grid">
+
+          <!-- Connections Brainstorm -->
+          <div class="production-panel" style="padding: 0; border: none; background: none; box-shadow: none;">
+            <div class="brainstorm-card" tabindex="0">
+              <div class="brainstorm-card-label">New &middot; Connections Brainstorm</div>
+              <div class="brainstorm-card-title">Cross-domain: surveillance capitalism thesis meets customer intelligence ethics</div>
+              <div class="brainstorm-card-snippet">Zuboff's behavioral surplus extraction model parallels the data-rich dossier approach in customer-intelligence. The difference: transparency and consent. Three patterns identified connecting privacy-first CI to the anti-surveillance framework...</div>
+            </div>
+          </div>
+
+          <!-- Ecosystem Radar -->
+          <div class="production-panel">
+            <div class="production-panel-title">Ecosystem Radar</div>
+            <div class="brief-list">
+              <div class="brief-item">
+                <span class="badge badge-source" style="margin-top: 2px;">Tool</span>
+                <div class="brief-item-content">
+                  <div class="brief-item-title">Cursor Rules — AI IDE config sharing community</div>
+                  <div class="brief-item-meta">Trending &middot; 2d ago</div>
+                </div>
+              </div>
+              <div class="brief-item">
+                <span class="badge badge-source" style="margin-top: 2px;">Framework</span>
+                <div class="brief-item-content">
+                  <div class="brief-item-title">Hono v5 — ultralight web framework, Cloudflare Workers native</div>
+                  <div class="brief-item-meta">Release &middot; 4d ago</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div><!-- /page-body -->
+  </main>
+</div><!-- /app-shell -->
+
+</body>
+</html>

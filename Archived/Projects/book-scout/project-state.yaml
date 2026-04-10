@@ -1,0 +1,17 @@
+project: book-scout
+domain: software
+project_class: system
+phase: ARCHIVED
+phase_before_archive: DONE
+status: active
+created: 2026-02-28
+updated: 2026-03-04
+last_committed: 2026-03-04
+last_gate: IMPLEMENT-to-DONE
+active_task: null
+related_projects:
+  - batch-book-pipeline
+  - crumb-tess-bridge
+  - feed-intel-framework
+repo_path: /Users/tess/openclaw/book-scout
+next_action: "Project complete. 10 tasks, 199 tests, plugin deployed. See design/catalog-handoff-guide.md for operations."

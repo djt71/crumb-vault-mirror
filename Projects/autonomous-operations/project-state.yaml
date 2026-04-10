@@ -1,0 +1,15 @@
+name: autonomous-operations
+domain: software
+type: system
+phase: DONE
+last_gate: TASK-to-DONE
+created: 2026-03-12
+updated: 2026-03-26
+related_projects:
+  - attention-manager
+  - tess-operations
+  - crumb-tess-bridge
+  - tess-v2
+active_task: null
+last_committed: 2026-03-26
+next_action: "Phase 1 complete. Phase 2 scope (labeling, advanced scoring) absorbed into tess-v2 dispatch infrastructure. No further work planned."

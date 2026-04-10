@@ -1,0 +1,41 @@
+# Tag-to-MOC mapping — single source of truth for all ingestion paths
+# Both batch-book-pipeline (pipeline.py) and inbox-processor read this file.
+#
+# SCOPE: This file governs knowledge-note (type: knowledge-note) routing only.
+# Signal-notes (type: signal-note) route to moc-signals unconditionally via the
+# feed-pipeline skill, regardless of their kb/ tag. Do not use this mapping for
+# signal-note topic derivation.
+#
+# Format: kb/<tag> → MOC filename slug (without .md, without path)
+# Every value must resolve to an existing file in Domains/*/
+#
+# Tags that map to the same MOC (consolidation):
+#   kb/networking, kb/networking/dns → moc-networking
+#   kb/security → moc-security (dedicated security MOC; remapped 2026-03-06 from moc-business)
+#   kb/customer-engagement, kb/training-delivery → moc-business
+#
+# Tags with no MOC mapping:
+#   kb/inspiration → needs-placement (no dedicated MOC; flag for manual review)
+#
+# Updated: 2026-03-06
+
+mappings:
+  kb/business: moc-business
+  kb/history: moc-history
+  kb/philosophy: moc-philosophy
+  kb/writing: moc-writing
+  kb/religion: moc-religion
+  kb/fiction: moc-fiction
+  kb/biography: moc-biography
+  kb/politics: moc-politics
+  kb/psychology: moc-psychology
+  kb/poetry: moc-poetry
+  kb/gardening: moc-gardening
+  kb/networking: moc-networking
+  kb/networking/dns: moc-networking
+  kb/security: moc-security
+  kb/software-dev: moc-crumb-architecture
+  kb/customer-engagement: moc-business
+  kb/training-delivery: moc-business
+  kb/lifestyle: moc-lifestyle
+  kb/inspiration: needs-placement

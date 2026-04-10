@@ -1,0 +1,79 @@
+# Goal Tracker — updated by operator, read by attention-manager skill.
+# Review cadence: monthly (first of month).
+# Keep this short. 3-5 active goals max. If you have more, you don't have priorities.
+
+updated: 2026-04-06
+
+goals:
+  # ============================================================
+  # Q2 2026 — Season shift: equal parts build and use
+  # Spring-oriented goals. Post attention-manager soak.
+  # ============================================================
+
+  - id: G1
+    domain: health
+    description: "Daily spring rhythm — one outdoor walk + one zazen sit per day"
+    horizon: quarter
+    target_date: 2026-06-30
+    status: active
+    progress: "New baseline rhythm. Replaces twice-daily zazen. Walk + sit as the two daily contemplative anchors. Reassess at end of Q2."
+
+  - id: G2
+    domain: lifestyle
+    description: "Plant and tend the 2026 garden; maintain yard and property"
+    horizon: season
+    target_date: 2026-10-31
+    status: active
+    progress: "Scope: perennial bed + herb bed at New Hudson, MI (zone 6a). Also: tree pruning/planting, bird feeders, water element install. Build gardening KB anchored to MSU Extension. Build seasonal schedule. Execute."
+
+  - id: G3
+    domain: lifestyle
+    description: "Establish sustained household maintenance cadence"
+    horizon: quarter
+    target_date: 2026-06-30
+    status: active
+    progress: "Schedule drafted by end of April, sustained execution through Q2. Informed by Home Comforts (Mendelson) digests and general home-care KB. Light structure — a schedule that prompts, not a system that grades."
+
+  - id: G4
+    domain: career
+    description: "Build sustained social media presence (with Tess's planning support)"
+    horizon: quarter
+    target_date: 2026-06-30
+    status: active
+    progress: "Tess plans the strategy: audience, platforms, cadence, content direction. Build-in-public as the foundational approach. First wave of content shipped by June 30. Liberation directive alignment."
+
+  # ============================================================
+  # Q1 2026 — Completed and carried over for history
+  # ============================================================
+
+  - id: G1-Q1
+    domain: software
+    description: "Ship attention-manager and use it daily for 30 days"
+    horizon: none
+    target_date: 2026-04-08
+    status: completed
+    progress: "Soak complete 2026-04-06 (day 30 of 30). 29/30 artifacts, one self-reported gap. Carry-forward escalation, domain balance correction, quality evolution all validated. Skill moved from mechanical planner to reflective coaching instrument over the arc."
+
+  - id: G2-Q1
+    domain: career
+    description: "Complete Q1 customer engagement plans for top 10 accounts"
+    horizon: none
+    target_date: 2026-03-31
+    status: completed
+    progress: "Completed 2026-04-01. All 10 plans drafted and closed."
+
+  - id: G3-Q1
+    domain: learning
+    description: "Finish Attention Merchants and apply key insights to daily practice"
+    horizon: none
+    target_date: 2026-03-31
+    status: completed
+    progress: "Completed 2026-03-17. Format problem correctly diagnosed mid-soak; insights applied."
+
+  - id: G5-Q1
+    domain: relationships
+    description: "wish kristine a happy birthday"
+    horizon: none
+    target_date: 2026-03-15
+    status: completed
+    progress: ""

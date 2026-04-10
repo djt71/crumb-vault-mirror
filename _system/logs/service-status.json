@@ -1,0 +1,83 @@
+{
+  "timestamp": "2026-04-10T19:41:15Z",
+  "services": [
+    {
+      "label": "ai.openclaw.gateway",
+      "pid": 25199,
+      "last_exit_status": 0,
+      "state": "running"
+    },
+    {
+      "label": "ai.openclaw.bridge.watcher",
+      "pid": 714,
+      "last_exit_status": 0,
+      "state": "running"
+    },
+    {
+      "label": "ai.openclaw.fif.attention",
+      "pid": null,
+      "last_exit_status": 0,
+      "state": "idle_ok"
+    },
+    {
+      "label": "ai.openclaw.fif.capture",
+      "pid": null,
+      "last_exit_status": 0,
+      "state": "idle_ok"
+    },
+    {
+      "label": "ai.openclaw.fif.feedback",
+      "pid": 49466,
+      "last_exit_status": -9,
+      "state": "running"
+    },
+    {
+      "label": "ai.openclaw.awareness-check",
+      "pid": null,
+      "last_exit_status": 0,
+      "state": "idle_ok"
+    },
+    {
+      "label": "ai.openclaw.health-ping",
+      "pid": null,
+      "last_exit_status": 0,
+      "state": "idle_ok"
+    },
+    {
+      "label": "ai.openclaw.vault-health",
+      "pid": null,
+      "last_exit_status": 0,
+      "state": "idle_ok"
+    },
+    {
+      "label": "com.crumb.dashboard",
+      "pid": 33873,
+      "last_exit_status": -15,
+      "state": "running"
+    },
+    {
+      "label": "com.crumb.cloudflared",
+      "pid": 719,
+      "last_exit_status": 0,
+      "state": "running"
+    },
+    {
+      "label": "com.tess.health-check",
+      "pid": null,
+      "last_exit_status": 0,
+      "state": "idle_ok"
+    },
+    {
+      "label": "com.tess.vault-backup",
+      "pid": null,
+      "last_exit_status": 0,
+      "state": "idle_ok"
+    },
+    {
+      "label": "com.tess.backup-status",
+      "pid": 2201,
+      "last_exit_status": 0,
+      "state": "running"
+    }
+  ]
+}

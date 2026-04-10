@@ -1,0 +1,309 @@
+/* Mission Control — Attention / Inbox Page
+   Page-specific styles. Imports ops-mockup.css (tokens, nav, KPI)
+   and widget-vocabulary.css (attention cards, badges, approval cards). */
+
+/* ===== QUICK-ADD FORM ===== */
+
+.quick-add {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-panel);
+  border-radius: 8px;
+  padding: 14px 16px;
+  box-shadow: var(--shadow-panel);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.quick-add-input {
+  flex: 1;
+  min-width: 200px;
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  background: var(--bg-page);
+  border: 1px solid var(--border-panel);
+  border-radius: 5px;
+  padding: 8px 12px;
+  outline: none;
+  transition: border-color 0.15s ease-out, box-shadow 0.15s ease-out;
+}
+
+.quick-add-input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.quick-add-input:focus-visible {
+  border-color: var(--accent);
+  box-shadow: var(--focus-ring);
+}
+
+.quick-add-select {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--bg-page);
+  border: 1px solid var(--border-panel);
+  border-radius: 5px;
+  padding: 8px 10px;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23706860'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  padding-right: 24px;
+  transition: border-color 0.15s ease-out, box-shadow 0.15s ease-out;
+}
+
+.quick-add-select:focus-visible {
+  border-color: var(--accent);
+  box-shadow: var(--focus-ring);
+}
+
+.quick-add-btn {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-inverse);
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 5px;
+  padding: 8px 18px;
+  cursor: pointer;
+  transition: background-color 0.15s ease-out, box-shadow 0.15s ease-out;
+  white-space: nowrap;
+}
+
+.quick-add-btn:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.quick-add-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+/* ===== FILTER BAR ===== */
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.filter-group-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-right: 2px;
+}
+
+.filter-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--border-panel);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background-color 0.15s ease-out, border-color 0.15s ease-out, color 0.15s ease-out, box-shadow 0.15s ease-out;
+  white-space: nowrap;
+}
+
+.filter-badge:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.filter-badge:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.filter-badge.active {
+  background: var(--accent-selected);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ===== VIEW SWITCHER ===== */
+
+.view-switcher {
+  display: flex;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-panel);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.view-tab {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 6px 16px;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--border-panel);
+  cursor: pointer;
+  transition: background-color 0.15s ease-out, color 0.15s ease-out, box-shadow 0.15s ease-out;
+}
+
+.view-tab:last-child {
+  border-right: none;
+}
+
+.view-tab:hover {
+  color: var(--accent);
+}
+
+.view-tab:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.view-tab.active {
+  background: var(--accent-selected);
+  color: var(--accent);
+}
+
+/* ===== ATTENTION LIST ===== */
+
+.attention-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ===== COMPLETED / DISMISSED FEED ===== */
+
+.completed-section {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 16px;
+}
+
+.completed-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px 0;
+  transition: color 0.15s ease-out;
+}
+
+.completed-toggle:hover {
+  color: var(--text-secondary);
+}
+
+.completed-toggle:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: 4px;
+}
+
+.completed-toggle-arrow {
+  display: inline-block;
+  transition: transform 0.15s ease-out;
+  font-size: 0.75rem;
+}
+
+.completed-toggle-arrow.open {
+  transform: rotate(180deg);
+}
+
+.completed-list {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.attention-card.completed {
+  opacity: 0.55;
+  border-left-color: var(--border-panel);
+}
+
+.attention-card.completed .attention-card-title {
+  text-decoration: line-through;
+  text-decoration-color: var(--text-tertiary);
+}
+
+.attention-card.dismissed {
+  opacity: 0.45;
+  border-left-color: var(--border-panel);
+}
+
+.attention-card.dismissed .attention-card-title {
+  color: var(--text-tertiary);
+}
+
+/* ===== URGENCY KPI HIGHLIGHTING ===== */
+
+.kpi-card.urgency-now {
+  border-color: var(--status-error);
+  border-width: 1px 1px 1px 3px;
+}
+
+.kpi-card.urgency-soon {
+  border-color: var(--status-warn);
+  border-width: 1px 1px 1px 3px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 480px) {
+  .quick-add {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .quick-add-input {
+    min-width: 0;
+  }
+
+  .quick-add-select {
+    width: 100%;
+  }
+
+  .filter-bar {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .view-switcher {
+    width: 100%;
+  }
+
+  .view-tab {
+    flex: 1;
+    text-align: center;
+  }
+}

@@ -1,0 +1,19 @@
+project: opportunity-scout
+domain: software
+project_class: system
+phase: TASK
+workflow: four-phase
+last_gate: "PLAN → TASK 2026-03-14"
+active_task: null
+next_action: "M2 behavioral validation in progress (started 2026-03-16, gate 2026-04-15). Triage upgraded to Sonnet + 4-gate scoring (actionability gate added) + enrichment fields (2026-03-18). Observe tomorrow's digest for v2.0 triage quality."
+created: 2026-03-14
+updated: 2026-03-18
+last_committed: 2026-03-16
+services:
+  - com.scout.daily-pipeline
+  - com.scout.weekly-heartbeat
+  - com.scout.feedback-poller
+repo_path: ~/openclaw/opportunity-scout
+related_projects:
+  - book-scout
+  - feed-intel-framework

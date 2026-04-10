@@ -1,0 +1,50 @@
+# Research Dispatch Telemetry Template
+# Written after Writing stage completes (or dispatch terminates early).
+# Calibration mechanism for provisional convergence weights.
+# File location: research/telemetry-[dispatch-id-short].yaml
+---
+type: research-telemetry
+dispatch_id: "DISPATCH_ID_FULL"
+completed_at: "ISO_8601"
+rigor: "light | standard | deep"
+---
+
+timing:
+  total_stages: 0
+  research_loop_iterations: 0
+  wall_time_seconds: 0
+
+sources:
+  total: 0
+  by_tier: { A: 0, B: 0, C: 0 }
+  by_ingestion: { FullText: 0, AbstractOnly: 0, SecondaryCitation: 0, ToolLimited: 0 }
+
+evidence:
+  total_entries: 0
+  active_entries: 0
+  deprecated_entries: 0
+  by_confidence: { verified: 0, supported: 0, plausible: 0, contested: 0, unverifiable: 0 }
+
+convergence:
+  sub_questions: 0
+  covered: 0
+  blocked: 0
+  quality_ceilings_applied: 0
+  diminishing_returns_triggered: false
+  iterations_to_converge: {}
+  # per sub-question: sq-N: integer (or null if blocked)
+
+escalations:
+  total: 0
+  by_type: {}
+  # scope: N, access: N, conflict: N, risk: N
+
+verification:
+  entries_checked: 0
+  supersede_corrections: 0
+  near_miss_flags: 0
+
+writing:
+  citation_count: 0
+  orphan_entries: 0
+  validation_passes: 0  # attempts before Writing Validation passed

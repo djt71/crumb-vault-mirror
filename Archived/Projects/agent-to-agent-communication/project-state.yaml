@@ -1,0 +1,25 @@
+name: agent-to-agent-communication
+domain: software
+type: system
+phase: ARCHIVED
+phase_before_archive: IMPLEMENT
+last_gate: TASK-to-IMPLEMENT
+created: 2026-03-01
+updated: 2026-04-09
+related_projects:
+  - crumb-tess-bridge
+  - tess-operations
+  - researcher-skill
+  - feed-intel-framework
+  - customer-intelligence
+  - tess-v2
+active_task: null
+last_committed: 2026-03-26
+next_action: "Archived 2026-04-09. Superseded by tess-v2 Amendment Z dispatch model (contracts, Ralph loops, session reports). M6 complete; M7+ not needed."
+pending_signals:
+  - signal: sycophancy-are-you-sure-problem
+    added: 2026-03-19
+    summary: "Agents defer ~60% of the time under challenge — embed decision frameworks in agent constitutions for Phase 3 composition"
+  - signal: lore-git-commit-decision-context
+    added: 2026-03-19
+    summary: "Git trailer protocol for inter-session decision context — evaluate for Crumb-Tess audit trails"

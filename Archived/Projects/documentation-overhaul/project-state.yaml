@@ -1,0 +1,12 @@
+project: documentation-overhaul
+domain: software
+type: knowledge-work
+workflow: SPECIFY → PLAN → ACT
+phase: ARCHIVED
+phase_before_archive: DONE
+last_gate: ACT-complete
+created: 2026-03-14
+updated: 2026-03-14
+active_task: null
+next_action: All 35 tasks complete across 4 milestones. Project deliverables ready for operator review.
+last_committed: 2026-03-14

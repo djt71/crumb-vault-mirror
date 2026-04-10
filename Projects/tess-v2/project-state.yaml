@@ -1,0 +1,32 @@
+name: tess-v2
+domain: software
+type: system
+phase: IMPLEMENT
+last_gate: TASK-to-IMPLEMENT
+created: 2026-03-28
+updated: 2026-04-10
+related_projects:
+  - tess-operations
+  - autonomous-operations
+  - crumb-tess-bridge
+  - tess-model-architecture
+  - agent-to-agent-communication
+repo_path: /Users/tess/crumb-apps/tess-v2
+active_task: null
+last_committed: 2026-04-10
+next_action: "42/50 done, 2 cancelled (TV2-036/037 — email triage shut down 2026-04-10). TV2-043 re-soak in progress: C2/C3 clean, C1 had dead-letter from pre-fix claude-p scoring (fixed f056e5b). C1 soak clock reset — needs 3 clean daily runs post-fix, earliest gate pass Apr 13. Blocked: TV2-038 (needs TV2-043). Open follow-ups: Tess-side poller plist (IDQ-004, blocks TV2-039), run-log rotation (3050+ lines). Pending: TV2-045 Paperclip spike."
+services:
+  - com.tess.v2.health-ping
+  - com.tess.v2.awareness-check
+  - com.tess.v2.backup-status
+  - com.tess.v2.vault-health
+  - com.tess.v2.vault-gc
+  - com.tess.v2.fif-capture
+  - com.tess.v2.fif-attention
+  - com.tess.v2.fif-feedback-health
+  - com.tess.v2.connections-brainstorm
+  - com.tess.v2.daily-attention
+  - com.tess.v2.overnight-research
+  - com.tess.v2.scout-pipeline
+  - com.tess.v2.scout-weekly-heartbeat
+  - com.tess.v2.scout-feedback-health

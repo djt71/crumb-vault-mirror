@@ -1,0 +1,25 @@
+=== ISOLATION TEST SUITE — OpenClaw Colocation ===
+Date: 2026-02-26 13:17:31
+Primary user: tess
+Testing user: openclaw
+
+--- Deny tests (openclaw must be blocked) ---
+PASS [1/9]: openclaw blocked from ~/.config/crumb/.env
+PASS [2/9]: openclaw blocked from ~/.ssh/
+PASS [3/9]: openclaw blocked from ~/.zshrc
+PASS [4/9]: openclaw blocked from ~/Library/Keychains/
+
+--- Read tests (openclaw must succeed) ---
+PASS [5/9]: openclaw can read vault _system/docs/
+PASS [6/9]: openclaw can read CLAUDE.md
+
+--- Write-deny test (openclaw must be blocked) ---
+FAIL [7/9]: openclaw CAN WRITE to vault root — WRITE BOUNDARY BROKEN
+
+--- Sandbox write tests (openclaw must succeed) ---
+PASS [8/9]: openclaw can write to _openclaw/ sandbox
+PASS [9/9]: openclaw can mkdir in _openclaw/ sandbox
+
+=== RESULTS: 8 passed, 1 failed ===
+*** STOP: 1 test(s) failed. Fix permissions before proceeding. ***
+*** Do NOT connect messaging platforms until all tests pass.      ***

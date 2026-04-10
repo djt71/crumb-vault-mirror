@@ -1,0 +1,92 @@
+[
+  {
+    "name": "Augustine \u2014 Confessions",
+    "genre": "nonfiction",
+    "templates": [
+      "book-digest"
+    ],
+    "pages": 208,
+    "total_tokens": 116481,
+    "tokens_per_page": 560.0048076923077,
+    "result_book-digest": {
+      "elapsed_s": 187.7,
+      "word_count": 1629,
+      "complete": true,
+      "required_missing": [],
+      "optional_found": [
+        "## Notable Quotes",
+        "## Checklists",
+        "## Tables",
+        "## Takeaways",
+        "## Uncertain",
+        "## Connections"
+      ],
+      "sample_file": "augustine-confessions-book-digest.md",
+      "input_tokens": 108472,
+      "output_tokens": 2148
+    },
+    "result_chapter-digest": {
+      "elapsed_s": 119.7,
+      "word_count": 5364,
+      "complete": false,
+      "input_tokens": 108412,
+      "output_tokens": 7290,
+      "sample_file": "augustine-confessions-chapter-digest.md"
+    },
+    "path": "/Users/tess/crumb-vault/_inbox/bbp-pdfs/nonfiction/The Confessions of St Augustine.pdf"
+  },
+  {
+    "name": "Wu \u2014 Attention Merchants",
+    "genre": "nonfiction",
+    "templates": [
+      "book-digest"
+    ],
+    "pages": 464,
+    "total_tokens": 259841,
+    "tokens_per_page": 560.0021551724138,
+    "result_book-digest": {
+      "elapsed_s": 112.4,
+      "word_count": 1888,
+      "complete": true,
+      "required_missing": [],
+      "optional_found": [
+        "## Notable Quotes",
+        "## Checklists",
+        "## Tables",
+        "## Takeaways",
+        "## Uncertain",
+        "## Connections"
+      ],
+      "sample_file": "wu-attention-merchants-book-digest.md",
+      "input_tokens": 241592,
+      "output_tokens": 2628
+    },
+    "path": "/Users/tess/crumb-vault/_inbox/bbp-pdfs/nonfiction/The Attention Merchants The Epic Struggle to Get Inside Our Heads.pdf"
+  },
+  {
+    "name": "Dostoyevsky \u2014 Brothers Karamazov",
+    "genre": "fiction",
+    "templates": [
+      "fiction-digest"
+    ],
+    "pages": 707,
+    "total_tokens": 395921,
+    "tokens_per_page": 560.001414427157,
+    "result_fiction-digest": {
+      "elapsed_s": 118.3,
+      "word_count": 1619,
+      "complete": true,
+      "required_missing": [],
+      "optional_found": [
+        "## Craft & Style",
+        "## Notable Quotes",
+        "## Resonance",
+        "## Context"
+      ],
+      "sample_file": "dostoyevsky-brothers-karamazov-fiction-digest.md",
+      "input_tokens": 368000,
+      "output_tokens": 2202
+    },
+    "path": "/Users/tess/crumb-vault/_inbox/bbp-pdfs/fiction/The Brothers Karamazov - Fyodor Dostoyevsky.pdf"
+  }
+]

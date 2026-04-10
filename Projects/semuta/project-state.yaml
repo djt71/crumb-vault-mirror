@@ -1,0 +1,10 @@
+name: semuta
+domain: software
+phase: PLAN
+created: 2026-03-17
+updated: 2026-03-18
+repo_path: ~/openclaw/semuta
+last_committed: 2026-03-18
+last_gate: SPECIFY-to-PLAN
+active_task: null
+next_action: "PLAN complete. Ready for TASK/IMPLEMENT phase transition — start with SEM-001 scaffolding."

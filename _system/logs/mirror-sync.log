@@ -1,0 +1,685 @@
+2026-02-20 12:31:04 SYNC feat(vault-mirror): scaffold project and implement mirror sync
+2026-02-20 12:33:08 SKIP mirror repo not found at /Users/tess/crumb-vault-mirror
+2026-02-20 12:34:47 SKIP mirror repo not found at /Users/tess/crumb-vault-mirror
+2026-02-20 12:35:32 SKIP mirror repo not found at /Users/tess/crumb-vault-mirror
+2026-02-20 12:37:05 SKIP mirror repo not found at /Users/tess/crumb-vault-mirror
+2026-02-20 12:40:21 NOOP no effective changes after rsync
+2026-02-20 12:41:18 SYNC chore(vault-mirror): update project-state — implementation complete
+2026-02-20 12:45:28 SYNC chore(vault-mirror): update context doc and sync log — PAT clone verified
+2026-02-20 12:47:37 SYNC docs(vault-mirror): simplify workflow — one paste, no upload needed
+2026-02-20 12:52:59 SYNC chore(vault-mirror): session-end — add session prompt, update logs
+2026-02-20 12:54:05 SYNC chore: session-end — vault-mirror complete, rating 3
+2026-02-20 12:55:41 SYNC docs(vault-mirror): switch session prompt from git clone to raw API fetch
+2026-02-20 13:05:02 SYNC docs(vault-mirror): revert to git clone, add context budget guidance
+2026-02-20 13:05:11 SYNC docs(vault-mirror): revert to git clone, add context budget guidance
+2026-02-20 13:11:49 SYNC chore: session-end — vault-mirror domain restriction fix, rating 3
+2026-02-20 13:23:48 SYNC feat(peer-review): add placeholder slot for fourth reviewer
+2026-02-20 14:19:36 SYNC chore: session-end — Grok reviewer added, diagramming skills staged, rating 3
+2026-02-20 15:05:27 SYNC fix(diagramming): implement peer review findings A1–A13
+2026-02-20 15:14:04 SYNC chore: session-end — power-blip recovery, inbox processing, rating 3
+2026-02-20 15:29:27 SYNC chore: session-end — recovery, inbox, permission audit, rating 3
+2026-02-20 16:02:43 SYNC feat(diagramming): R2 peer review, implement fixes, promote Excalidraw + Mermaid
+2026-02-20 16:24:14 SYNC chore: session-end — diagramming skill test suite, all pass
+2026-02-20 17:18:08 SYNC chore: session-end — Lucidchart skill spec deep research, peer review, smoke test prep
+2026-02-20 17:37:24 SYNC feat(lucidchart): smoke tests pass — update spec and fixtures with verified API behavior
+2026-02-20 17:41:10 SYNC feat(mirror): add _inbox/ to vault mirror allowlist
+2026-02-20 18:13:35 SYNC feat(lucidchart): implement skill — SKILL.md, shape-reference, routing integration
+2026-02-20 18:16:19 SYNC chore: session-end — Lucidchart skill implementation, e2e test, visual-explainer eval
+2026-02-20 18:19:16 SYNC chore: clean up diagramming staging, note deferred validator fixes
+2026-02-20 18:21:18 SYNC feat(overlay): add Financial Advisor overlay for personal finance decisions
+2026-02-20 18:26:41 SYNC chore: archive inbox-processor and vault-restructure projects
+2026-02-20 18:29:52 SYNC docs: codify knowledge-base exception for project archival
+2026-02-20 18:56:14 SYNC feat(notebooklm-pipeline): PLAN phase — spec updates, implementation plan, 2 peer reviews
+2026-02-20 18:59:55 SYNC feat(notebooklm-pipeline): Batch 1 — schema, Sources/, templates, sentinel contract
+2026-02-20 19:26:12 SYNC feat(notebooklm-pipeline): NLM-004 — extend inbox-processor with NLM detection + processing
+2026-02-20 19:44:25 SYNC feat(notebooklm-pipeline): NLM-005/006/007 — e2e test, docs, template promotion
+2026-02-20 19:46:51 SYNC chore(notebooklm-pipeline): project complete — phase DONE, deferrals documented
+2026-02-20 19:57:32 SYNC chore: archive notebooklm-pipeline project
+2026-02-20 20:02:28 SYNC docs: add workflow guide link to NLM template README
+2026-02-20 20:26:17 SYNC docs: comprehensive Crumb deployment runbook for fresh Mac setup
+2026-02-20 20:27:50 SYNC chore: session-end log — deployment runbook rewrite (rating 3)
+2026-02-20 20:35:08 SYNC docs: bump design spec v1.8 → v1.9 (retroactive NLM pipeline changes)
+2026-02-20 21:01:48 SYNC docs(v1.9): add Financial Advisor overlay and peer-review model update
+2026-02-20 21:04:48 SYNC docs: spec v1.9.1 — completeness sync for built skills and overlays
+2026-02-20 21:06:11 SYNC chore: session-end log — spec v1.9/v1.9.1 bump (rating 3)
+2026-02-21 12:45:39 SYNC feat: researcher-skill project + 4-model peer review of deep research artifact
+2026-02-21 12:46:09 SYNC fix: add missing domain and last_committed fields (vault-check warnings)
+2026-02-21 13:44:10 SYNC feat(crumb-tess-bridge): dispatch protocol design (CTB-016) with 2-round 4-model peer review
+2026-02-21 13:46:54 SYNC fix: CTB-016 description — peer reviewed independently, not as part of CTB-014
+2026-02-21 13:52:31 SYNC chore: session-end log — CTB-016 dispatch protocol (rating 3)
+2026-02-21 13:53:52 SYNC docs: update claude-ai-context with dispatch protocol, researcher-skill, .gitignore
+2026-02-21 14:27:02 SYNC feat(crumb-tess-bridge): CTB-004 bridge skill protocol mechanics (50/50 tests pass)
+2026-02-21 14:30:11 SYNC chore: session-end log — CTB-004 implementation (rating 3)
+2026-02-21 14:39:18 SYNC chore: session-end log — CTB-004 implementation (rating 3)
+2026-02-21 14:42:00 SYNC chore: CTB-006 transcript infra done, add src/ to mirror allowlist
+2026-02-21 15:01:41 SYNC feat(crumb-tess-bridge): CTB-005 Crumb bridge-processing procedure (58/58 tests pass)
+2026-02-21 15:04:57 SYNC chore: session-end log — CTB-005 implementation (rating 3)
+2026-02-21 15:16:42 SYNC feat(crumb-tess-bridge): CTB-015 Telegram UX layer (39/39 tests, 147 total)
+2026-02-21 15:24:56 SYNC review(crumb-tess-bridge): M3 code peer review — 4 models, 2 must-fix
+2026-02-21 15:36:06 SYNC fix(crumb-tess-bridge): apply M3 peer review findings (152/152 tests pass)
+2026-02-21 15:41:04 SYNC chore: session-end log — M3 peer review + fixes applied (rating 3)
+2026-02-21 16:16:32 SYNC feat(crumb-tess-bridge): CTB-013 update colocation spec threat model for bridge
+2026-02-21 16:19:05 SYNC chore: session-end log — CTB-013 complete (rating 3)
+2026-02-21 17:08:52 SYNC feat(crumb-tess-bridge): CTB-008 maxLength fix, e2e tests, measurement infra
+2026-02-21 17:12:31 SYNC feat(crumb-tess-bridge): CTB-010 token cost model — FULL GO
+2026-02-21 17:17:46 SYNC chore: session-end log — CTB-010 complete (rating 2)
+2026-02-21 18:03:41 SYNC feat(crumb-tess-bridge): CTB-011 file-watch + bridge runner
+2026-02-21 18:20:34 SYNC feat(crumb-tess-bridge): CTB-012 governance verification test suite
+2026-02-21 18:52:36 SYNC feat(crumb-tess-bridge): CTB-014 peer review — all findings applied (325 tests)
+2026-02-21 18:54:27 SYNC chore: session-end log — CTB-014 complete (rating 3)
+2026-02-21 19:02:41 SYNC chore(crumb-tess-bridge): phase transition TASK → IMPLEMENT
+2026-02-21 19:36:31 SYNC feat(crumb-tess-bridge): IMPLEMENT phase complete — Phase 1 bridge operational
+2026-02-21 19:39:56 SYNC chore: session-end log — IMPLEMENT complete (rating 3)
+2026-02-21 20:54:23 SYNC feat(crumb-tess-bridge): Telegram loop closed, spec v2.0
+2026-02-21 21:11:23 SYNC feat(crumb-tess-bridge): markdown rendering fix — spec v2.0.1
+2026-02-21 21:16:34 SYNC chore: session-end log — markdown rendering fix (rating 3)
+2026-02-22 06:06:47 SYNC feat(openclaw-colocation): v2026.2.21 upgrade runbook + 4-model peer review
+2026-02-22 06:07:22 SYNC chore: fix frontmatter warnings — add project/domain fields
+2026-02-22 06:44:50 SYNC feat(crumb-tess-bridge): Phase 2 action plan + 4-model peer review
+2026-02-22 07:21:26 SYNC feat(crumb-tess-bridge): M7 Foundation — CTB-017 through CTB-020, 583 tests
+2026-02-22 07:30:36 SYNC chore: move session-log.md to _system/logs/, remove setup-vault-structure.sh
+2026-02-22 07:32:28 SYNC chore: session-end log — vault housekeeping (rating 3)
+2026-02-22 07:41:31 SYNC chore(crumb-tess-bridge): spec v2.0.2 — fix stale session-log.md paths + conditional commit protocol
+2026-02-22 07:46:22 SYNC chore: session-end log — spec v2.0.2 + CTB-021 design review (rating 3)
+2026-02-22 08:10:18 SYNC feat(crumb-tess-bridge): CTB-021 dispatch engine + watcher routing — M8 walking skeleton complete
+2026-02-22 08:29:44 SYNC feat(crumb-tess-bridge): CTB-022 multi-stage lifecycle + budget enforcement — M9 complete
+2026-02-22 08:59:20 SYNC feat(crumb-tess-bridge): CTB-024 structured escalation flow — Option A start/resume split
+2026-02-22 09:26:18 SYNC fixup(crumb-tess-bridge): CTB-024a peer review remediation — 8 fixes, 16 new tests
+2026-02-22 09:29:48 SYNC chore: session-end log — CTB-024a peer review remediation (rating 3)
+2026-02-22 09:46:16 SYNC feat(crumb-tess-bridge): CTB-025 cancel-dispatch + inter-stage kill-switch
+2026-02-22 10:11:52 SYNC fix(crumb-tess-bridge): code review remediation — 4 findings, 739 tests
+2026-02-22 10:38:25 SYNC feat(crumb-tess-bridge): CTB-023 + CTB-026 + CTB-027 — status updates, Tess CLI, audit trail
+2026-02-22 12:16:32 SYNC feat(crumb-tess-bridge): CTB-028 E2E dispatch test suite + peer review remediation
+2026-02-22 13:40:44 SYNC feat(crumb-tess-bridge): Phase 2 live deployment + compound patterns
+2026-02-22 13:42:31 SYNC chore: session-end log — Phase 2 live deployment + compound patterns (rating 3)
+2026-02-22 14:04:14 SYNC chore: compound scan + Tess persona deployment + write-read path pattern
+2026-02-22 14:49:41 SYNC docs: spec v2.0.3 bump + version history split + architecture companion note
+2026-02-22 14:50:13 SYNC fix: add missing domain field to architecture companion note
+2026-02-22 14:51:46 SYNC chore: session-end log — spec v2.0.3 + version history split (rating 3)
+2026-02-22 15:01:13 SYNC fix: add unverifiable claims flagging to peer-review prompt + route citation findings
+2026-02-22 15:03:09 SYNC fix: add missing project field to citation findings frontmatter
+2026-02-22 15:06:40 SYNC chore: route processed-ids enhancement as resolved — already implemented
+2026-02-22 15:08:45 SYNC chore: route local LLM research thread to openclaw-colocation
+2026-02-22 15:09:25 SYNC docs: flag unverified citations in local LLM research thread
+2026-02-22 15:13:39 SYNC chore: session-end log — inbox triage + citation gap fix (rating 3)
+2026-02-22 15:28:08 SYNC feat: DONE phase, completed-project guard, tess-model-architecture project
+2026-02-22 15:30:15 SYNC chore: session-end log — DONE phase + project guard implementation (rating 3)
+2026-02-22 16:14:15 SYNC feat: tess-model-architecture specification — SPECIFY phase deliverables
+2026-02-22 16:42:50 SYNC feat: tess-model-architecture SPECIFY→PLAN — peer review + must-fix edits
+2026-02-22 16:45:25 SYNC chore: session-end log — peer review + F19 modelByChannel update (rating 3)
+2026-02-22 17:11:47 SYNC feat: tess-model-architecture PLAN→TASK — action plan + peer review (14 findings applied)
+2026-02-22 17:13:37 SYNC chore: session-end log — PLAN→TASK phase transition complete (rating 3)
+2026-02-22 17:28:31 SYNC feat: tess-model-architecture TASK phase — 4 writing tasks complete (rating 3)
+2026-02-22 18:40:13 SYNC feat: TMA-002 routing PoC complete — two-agent split confirmed, fallback chain failure discovered
+2026-02-22 18:42:45 SYNC fix: strengthen 4a verdict — config-swapped prompt, not model self-identification
+2026-02-22 18:44:13 SYNC chore: session-end log — TMA-002 routing PoC complete (rating 3)
+2026-02-22 19:40:40 SYNC feat: TMA-005/006/010a complete — voice model switched Sonnet→Haiku on evidence
+2026-02-22 22:31:14 SYNC feat: TMA-007a/b, 008, 009, 010b, 011 complete — 14/14 tasks done, cost model confirmed
+2026-02-23 06:56:49 SYNC feat: tess-model-architecture project closed — health-check cron, compressed prompt deployed
+2026-02-23 07:54:01 SYNC feat: web design preference overlay + x-feed-intel & feed-intel-framework projects
+2026-02-23 07:57:40 SYNC fix: resolve 8 vault-check warnings in tess-model-architecture
+2026-02-23 08:13:35 SYNC feat: x-feed-intel governance review + save command amendment (SPECIFY→PLAN)
+2026-02-23 08:14:40 SYNC chore: x-feed-intel phase state → PLAN
+2026-02-23 09:07:31 SYNC feat: x-feed-intel action plan + 5-model peer review (PLAN→TASK)
+2026-02-23 09:08:42 SYNC chore: x-feed-intel phase state → TASK
+2026-02-23 09:11:08 SYNC chore: session-end log — x-feed-intel PLAN→TASK peer review session (rating 3)
+2026-02-23 09:28:49 SYNC fix: mirror sync now includes top-level project markdown files
+2026-02-23 09:59:30 SYNC feat: x-feed-intel M0 implementation — 7/12 tasks done (rating 3)
+2026-02-23 11:08:27 SYNC feat: x-feed-intel spec v0.4.3 — benchmark review + topic management
+2026-02-23 11:09:18 SYNC fix: add missing frontmatter fields to xfi-009-spec-amendments.md
+2026-02-23 11:17:43 SYNC feat: x-feed-intel M1 implementation — 4/5 tasks done
+2026-02-23 11:27:02 SYNC chore: session-end log — x-feed-intel M0/M1 sprint (rating 3)
+2026-02-23 11:29:20 SYNC chore: session-end log — x-feed-intel recovery session (rating 3)
+2026-02-23 12:15:29 SYNC feat: x-feed-intel M1 peer review + must-fix hardening, web UI proposal
+2026-02-23 13:38:21 SYNC feat: x-feed-intel pre-M2 punch list + M1 peer review integration
+2026-02-23 14:04:56 SYNC feat: x-feed-intel M3 complete — all 32 tasks done, 617 tests
+2026-02-23 14:21:57 SYNC refactor: extract peer-review dispatch into subagent
+2026-02-23 14:24:22 SYNC chore: session-end log — peer-review agentic extraction (rating 3)
+2026-02-23 14:54:55 SYNC chore: session-end log — peer-review M2/M3 5-model review + Perplexity calibration (rating 3)
+2026-02-23 15:10:51 SYNC chore: x-feed-intel TASK→IMPLEMENT phase transition
+2026-02-23 15:12:06 SYNC chore: x-feed-intel progress-log update for TASK→IMPLEMENT
+2026-02-23 15:15:03 SYNC chore: session-end log — peer-review fixes + TASK→IMPLEMENT transition (rating 3)
+2026-02-23 15:42:57 SYNC chore: session-end log — x-feed-intel IMPLEMENT deployment (rating 3)
+2026-02-23 17:20:30 SYNC chore: session-end log — research dispatch integration IMPLEMENT (rating pending)
+2026-02-23 17:23:52 SYNC chore: session-end log — research dispatch integration IMPLEMENT (rating 3)
+2026-02-23 17:46:13 SYNC docs: add research promotion path design note for feed-intel-framework
+2026-02-23 17:47:06 SYNC fix: add missing project/domain frontmatter to research-promotion-path
+2026-02-23 17:48:06 SYNC fix: add missing frontmatter fields to web-ui-proposal
+2026-02-23 17:51:20 SYNC chore: session-end log — digest amendment + research promotion design note (rating 3)
+2026-02-23 18:07:21 SYNC feat: XFI-022b refresh command — amendment applied, task complete
+2026-02-23 18:17:29 SYNC chore: rotate x-feed-intel run-log (1024 lines → archive) + frontmatter fix
+2026-02-23 18:28:10 SYNC chore: session-end log — XFI-022b refresh command implemented + live tested (rating 3)
+2026-02-23 18:45:58 SYNC feat: add test-runner subagent for isolated test execution
+2026-02-23 18:51:26 SYNC fix: correct attention clock schedule references from 8 AM to 7 AM
+2026-02-23 19:02:02 SYNC feat: feed-intel-framework governance review — spec v0.3 → v0.3.1
+2026-02-23 20:20:03 SYNC feat: feed-intel-framework peer review synthesis — spec v0.3.1 → v0.3.2
+2026-02-23 20:38:53 SYNC feat: feed-intel-framework peer review + scoped migration review — spec v0.3.1 → v0.3.3
+2026-02-23 20:42:58 SYNC docs: add feed-intel-framework specification-summary.md
+2026-02-23 20:45:43 SYNC chore: feed-intel-framework SPECIFY → PLAN phase transition
+2026-02-23 20:47:52 SYNC fix: migration lockfile guard is a prerequisite, not aspirational
+2026-02-23 21:38:13 SYNC feat: feed-intel-framework action plan + 5-model peer review (43 tasks)
+2026-02-23 21:41:50 SYNC chore: session-end log — feed-intel-framework action plan + peer review (rating 3)
+2026-02-23 21:47:19 SYNC fix: run-log-phase1 session block format — vault-check structural compliance
+2026-02-23 22:17:26 SYNC refactor: relocate project reviews to project directories
+2026-02-24 07:40:40 SYNC feat: vault gardening — archive/purge practice for stale KB notes
+2026-02-24 07:57:04 SYNC refactor: optimize CLAUDE.md — extract procedures to protocol docs (268→182 lines)
+2026-02-24 08:03:43 SYNC chore: session-end log — CLAUDE.md optimization session (rating 3)
+2026-02-24 08:06:39 SYNC fix: make protocol doc pointers explicit — "load and follow" for reliable execution
+2026-02-24 09:11:57 SYNC chore: session-end log — gateway crash recovery + dual-supervisor fix (rating 3)
+2026-02-24 09:16:48 SYNC chore: PLAN → TASK gate — feed-intel-framework action plan v2 approved
+2026-02-24 10:01:06 SYNC feat: FIF-001–004 implementation + web UI spec amendment (v0.3.4)
+2026-02-24 11:03:49 SYNC feat: notebooklm-pipeline enhancement pass E1-E7 — v2 templates, fiction, parser fix
+2026-02-24 11:04:59 SYNC fix: add missing status field to promoted NLM templates
+2026-02-24 13:15:34 SYNC feat: notebooklm-pipeline enhancement complete — validated + re-archived
+2026-02-24 13:26:16 SYNC fix: promote batch to primary workflow for chapter-digest-v1
+2026-02-24 13:30:06 SYNC chore: session-end log — notebooklm-pipeline enhancement pass (rating 1)
+2026-02-24 13:31:37 SYNC fix: correct session rating 1→3 (misclick)
+2026-02-24 13:35:12 SYNC fix: correct session rating 1→3 (misclick)
+2026-02-24 13:38:35 SYNC fix(mirror): add Archived/ directory to mirror sync allowlist
+2026-02-24 14:21:07 SYNC feat(knowledge-navigation): implement MOC system and topics backfill (Phases 1-3)
+2026-02-24 14:25:38 SYNC chore: session-end log — knowledge-navigation Phases 1-3 implementation (rating 3)
+2026-02-24 15:19:12 SYNC chore: session-end log — knowledge-navigation Phases 1-3 implementation (rating 3)
+2026-02-24 15:42:01 SYNC feat: mirror sync expansion, NLM closure, required_context linkage mechanism
+2026-02-24 16:55:58 SYNC feat(feed-intel): FIF-006/007/008 — capture clock, lifecycle, triage engine
+2026-02-24 17:16:56 SYNC standardize NLM digest templates
+2026-02-24 17:30:04 SYNC chore: session-end log — FIF-011/012 implementation (rating 3)
+2026-02-24 18:08:52 SYNC chore: session-end log — FIF-015/016/017/018 M1 complete (rating 3)
+2026-02-24 18:40:43 SYNC chore: session-end log — FIF-019/020/021 M2 WP-7 complete (rating 3)
+2026-02-24 19:45:22 SYNC feat: deploy code-review skill — two-tier review system
+2026-02-24 19:49:46 SYNC chore: session-end log — code-review skill deployment (rating 3)
+2026-02-24 19:55:50 SYNC fix: address 7 code-review skill issues before first test run
+2026-02-24 20:14:40 SYNC feat: external repo gate — git init for system projects
+2026-02-24 20:22:43 SYNC fix: code-review SKILL — test runner discovery order and scope confirmation gate
+2026-02-24 20:28:33 SYNC chore: session-end log — code-review skill hardening + repo gate (rating 3)
+2026-02-24 21:19:51 SYNC feat: code-review skill validation — 3 Tier 1 + first Tier 2 review
+2026-02-25 07:36:02 SYNC feat: inbox processing — 11 NLM exports, 3 new MOCs, moc-history migration
+2026-02-25 07:54:06 SYNC feat: skill-level model routing — model_tier field + Task tool delegation
+2026-02-25 08:25:17 SYNC fix: xfeed digest delivery, credential consolidation, cost overrun
+2026-02-25 09:32:07 SYNC chore: session-end log — context enrichment + human-readable filenames (rating 3)
+2026-02-25 10:31:31 SYNC feat: backlog research amendment — research by URL spec
+2026-02-25 10:59:59 SYNC feat: x-feed-intel session — backlog research, article fetch, compound routing (rating 3)
+2026-02-25 12:50:31 SYNC feat: CTB-037 persistent bridge watcher, perishable insight promotion, x-feed-intel updates (rating 3)
+2026-02-25 13:14:46 SYNC feat: CTB-029/030/031/035 deferred hardening — duplicate detection, alert relay, sender allowlist (rating 3)
+2026-02-25 13:34:30 SYNC feat: CTB-032/033/034/036 quick-capture — skill, taxonomy, startup detection, processing (rating 3)
+2026-02-25 13:38:53 SYNC docs: add Crumb-side capture processing procedure (review finding #7)
+2026-02-25 14:28:14 SYNC feat: crumb-tess-bridge DONE — Tier 1 code review, test fix, phase transition (rating 3)
+2026-02-25 14:56:57 SYNC feat: apply spec amendment v0.3.5 — React SPA + Paper design workflow for M-Web
+2026-02-25 15:00:13 SYNC chore: session-end log — spec amendment v0.3.5 applied (rating 3)
+2026-02-25 16:06:55 SYNC chore: session-end log — x-feed-intel deploy, bot separation, compound insight E2E (rating 2)
+2026-02-25 16:51:17 SYNC feat: compound routing (5 insights) + FIF-023 session log (rating 3)
+2026-02-25 16:57:17 SYNC fix: deploy quick-capture skill to Tess active skills directory
+2026-02-25 17:24:28 SYNC chore: session-end log — quick-capture diagnostic, FIF-023 continuation (rating 3)
+2026-02-25 17:26:05 SYNC docs: abandon quick-capture skill, bridge capture operation decision logged
+2026-02-25 17:53:36 SYNC chore: session-end log — FIF-024/025/026 complete, WP-8 done (rating 3)
+2026-02-25 18:12:13 SYNC chore: session-end log — FIF-027 integration test complete, M1 tracking updated (rating 3)
+2026-02-25 18:29:58 SYNC docs: resolve research promotion path design, first article promoted to Sources/
+2026-02-25 20:11:14 SYNC feat: replace Tier 1 code review — Devstral → Sonnet inline
+2026-02-25 20:22:20 SYNC Pre-migration backup snapshot (FIF-025)
+2026-02-25 20:25:24 SYNC Pre-migration backup snapshot (FIF-025)
+2026-02-25 20:28:37 SYNC Pre-migration backup snapshot (FIF-025)
+2026-02-25 20:35:34 SYNC feat: FIF-028 live migration complete — x-feed-intel DB migrated to framework schema
+2026-02-25 20:45:24 SYNC chore: fix all 14 vault-check warnings — clean pass
+2026-02-25 20:48:32 SYNC chore: session-end log — FIF-028 live migration complete, M2 tracking updated (rating 3)
+2026-02-25 22:03:58 SYNC feat: OpenClaw v2026.2.24 upgrade runbook + 4-model peer review (rating 3)
+2026-02-25 22:45:23 SYNC chore: session-end log — FIF-029 CLI runner implemented, Tier 1 review complete (rating 3)
+2026-02-26 08:41:57 SYNC chore: session-end log — FIF-030 RSS Phase 0 complete, feed list documented (rating 3)
+2026-02-26 09:06:22 SYNC feat: overhaul code review — two-reviewer panel (Opus + Codex CLI)
+2026-02-26 10:14:01 SYNC chore: session-end log — code review overhaul deployed, FIF-029 reviewed + fixed (rating 3)
+2026-02-26 10:43:30 SYNC chore: session-end log — FIF-031 RSS adapter implemented, 71 tests passing (rating 3)
+2026-02-26 10:44:57 SYNC chore: session-end log — FIF-031 RSS adapter implemented, 71 tests passing (rating 3)
+2026-02-26 10:46:40 SYNC chore: bump design spec v2.0 → v2.1, update version history
+2026-02-26 11:41:04 SYNC feat: retarget OpenClaw upgrade runbook to v2026.2.25, harden health-check
+2026-02-26 12:28:17 SYNC feat: integrate supervisor migration into upgrade runbook, complete deferred review items
+2026-02-26 12:38:26 SYNC feat: add pre-reboot checklist to TMA maintenance runbook, handoff pointer in upgrade runbook
+2026-02-26 14:33:46 SYNC feat: execute OpenClaw upgrade v2026.2.17→v2026.2.25, fix health-check + runbook
+2026-02-26 15:01:13 SYNC chore: apply U1-U11 spec updates, fix runbook, update context protocol
+2026-02-26 15:11:15 SYNC fix: add sudo to §9.4 post-reboot gateway lsof check
+2026-02-26 15:33:37 SYNC chore: full vault audit — fix findings, update project states
+2026-02-26 15:35:06 SYNC fix: add missing topics field to kb-tagged solution docs
+2026-02-26 15:37:19 SYNC chore: session-end log — post-reboot verification + full audit (rating 3)
+2026-02-26 15:53:26 SYNC feat: process inbox — tess-operations project + Domains/Software/
+2026-02-26 16:13:27 SYNC feat: review + amend chief-of-staff spec — resolve 7 findings
+2026-02-26 16:24:08 SYNC feat: review + file Google services spec — resolve blocking credential issue
+2026-02-26 16:27:13 SYNC chore: session-end log — tess-operations spec reviews (rating 3)
+2026-02-26 18:05:45 SYNC feat: peer review + amend Google services & comms channel specs
+2026-02-26 18:31:44 SYNC feat: SPECIFY→PLAN phase transition — tess-operations
+2026-02-26 18:44:42 SYNC feat: integrate frontier ideas peer review + verify unverified claims
+2026-02-26 18:56:46 SYNC feat: integrate feed-intel ownership peer review + amend Google & comms specs
+2026-02-26 19:03:44 SYNC feat: propagate peer review amendments to chief-of-staff master spec
+2026-02-26 19:09:00 SYNC chore: session-end log — tess-operations cross-spec consistency (rating 3)
+2026-02-26 19:55:27 SYNC feat: tess-operations PLAN phase — action plan, 52 tasks, two-round peer review (rating 3)
+2026-02-26 19:56:51 SYNC chore: fix missing updated field in Tess synthesis review note
+2026-02-26 20:02:54 SYNC feat: tess-operations PLAN → TASK phase transition
+2026-02-26 20:17:53 SYNC feat: tess-operations M0 infrastructure — cron guardrails, kill-switch, metrics, state
+2026-02-26 20:30:34 SYNC feat: tess-operations M1 chief-of-staff MVP — heartbeats, cron jobs, deployment
+2026-02-26 20:34:27 SYNC chore: normalize tasks.md table formatting
+2026-02-26 20:57:19 SYNC feat: code review M0+M1 — fix vault-check path + alert count bug
+2026-02-26 21:06:22 SYNC chore: session-end log — tess-operations M0+M1 implementation + code review (rating 3)
+2026-02-26 21:21:22 SYNC feat: heartbeat cost optimization — eliminate voice heartbeat, migrate to local model
+2026-02-26 21:22:58 SYNC fix: add missing updated field to heartbeat recommendation frontmatter
+2026-02-26 21:44:31 SYNC feat: deploy M1 chief-of-staff MVP — 4 cron jobs, heartbeats, health-ping
+2026-02-26 21:49:31 SYNC chore: reduce gate evaluation durations from 5 days to 3 days
+2026-02-26 21:56:53 SYNC chore: session-end log — M1 deployment + gate duration reduction (rating 3)
+2026-02-26 23:01:24 SYNC fix: awareness-check delivery routing + log post-deploy validation findings
+2026-02-26 23:03:53 SYNC chore: session-end log — M1 deployment + post-deploy validation (rating 3)
+2026-02-27 08:28:31 SYNC feat: awareness-check bash script + FIF-031 code review artifacts
+2026-02-27 09:03:37 SYNC fix: awareness-check octal bug + vault-health bash migration
+2026-02-27 09:29:25 SYNC chore: session-end log — awareness-check bugfixes + vault-health migration (rating 3)
+2026-02-27 10:38:36 SYNC feat: add tess memory search enablement spec + update summary
+2026-02-27 11:30:04 SYNC feat: deploy memory search — resolve Open Question #1, add config script
+2026-02-27 11:38:45 SYNC chore: session-end log — memory search spec review + deployment (rating 3)
+2026-02-27 12:10:29 SYNC feat: rotate FIF run-log + add vault-check §24 run-log size monitor
+2026-02-27 12:14:02 SYNC chore: session-end log — run-log rotation + vault-check §24 (rating 3)
+2026-02-27 13:28:34 SYNC feat: mermaid skill styling restructure + vault doc routing + excalidraw test
+2026-02-27 13:51:35 SYNC chore: session-end log — Tess vault access + tess_scratch (rating 3)
+2026-02-27 14:22:07 SYNC feat: add ops-level system architecture diagram (Operator / Crumb / Tess)
+2026-02-27 14:31:35 SYNC fix: remove defunct Tess quick-capture from vault intake map
+2026-02-27 15:45:11 SYNC feat: fix Tess memory write path + harden Crumb ops access
+2026-02-27 15:50:17 SYNC chore: archive vault-mirror project
+2026-02-27 17:12:58 SYNC feat: researcher-skill specification complete (SPECIFY phase)
+2026-02-27 17:18:16 SYNC gate: researcher-skill SPECIFY → PLAN phase transition
+2026-02-27 18:15:38 SYNC feat: researcher-skill PLAN phase complete — action plan + peer review
+2026-02-27 18:19:06 SYNC gate: researcher-skill PLAN → TASK phase transition
+2026-02-27 18:25:04 SYNC gate: researcher-skill TASK → IMPLEMENT phase transition
+2026-02-27 18:31:18 SYNC feat: researcher-skill M1 complete — SKILL.md + data schemas
+2026-02-27 18:37:06 SYNC feat: researcher-skill M2 complete — Scoping + Planning stage templates
+2026-02-27 18:44:12 SYNC chore: session-end log — researcher-skill M1+M2 complete
+2026-02-27 19:19:13 SYNC feat: researcher-skill M3 complete — Research Loop + escalation gates
+2026-02-27 19:53:23 SYNC feat: researcher-skill M4 complete — Citation Verification + Writing Validation
+2026-02-28 08:33:08 SYNC feat: TOP-054 browser access + SOUL.md Written Deliverables standards
+2026-02-28 09:21:24 SYNC feat: batch-book-pipeline SPECIFY complete — dual-template PDF pipeline spec
+2026-02-28 09:47:48 SYNC feat: batch-book-pipeline PLAN complete — execution plan + spec refinements
+2026-02-28 10:03:14 SYNC feat: batch-book-pipeline PLAN → ACT transition
+2026-02-28 10:24:29 SYNC feat: add fiction-digest-v1 as third template to batch-book-pipeline
+2026-02-28 10:32:18 SYNC chore: session-end log — batch-book-pipeline session 3
+2026-02-28 11:26:24 SYNC feat: BBP-001 + BBP-002 complete — API validation and template adaptation
+2026-02-28 12:40:48 SYNC feat: BBP-003 complete — pipeline script with standard + batch modes, code-reviewed
+2026-02-28 12:50:24 SYNC chore: session-end log — batch-book-pipeline session 6
+2026-03-01 18:32:45 NOOP no effective changes after rsync
+2026-03-01 19:35:24 NOOP no effective changes after rsync
+2026-03-01 19:40:43 NOOP no effective changes after rsync
+2026-03-01 21:22:59 NOOP no effective changes after rsync
+2026-03-02 10:41:50 SYNC feat(akm): AKM-004 complete — QMD retrieval engine + mirror sync fix
+2026-03-02 11:32:07 SYNC fix(akm): apply 8 code review findings on AKM-004 retrieval engine
+2026-03-02 11:33:28 SYNC chore: update awareness-check state + mirror-sync log
+2026-03-02 11:38:27 SYNC chore: session-end log — AKM-004 code review + fixes
+2026-03-02 11:47:43 SYNC feat(akm): AKM-005 session start integration + AKM-008 collection config
+2026-03-02 11:47:54 SYNC fix: add missing domain field to qmd-collections.md
+2026-03-02 12:28:58 SYNC feat(akm): complete AKM v1 — skill integration, mode evaluation, tuning, validation
+2026-03-02 12:35:27 SYNC chore: session-end — update claude-ai-context for AKM completion
+2026-03-02 23:36:07 SYNC feat(bbp): 41 source-index notes from Book Scout catalog + pipeline retry queued
+2026-03-03 06:59:02 SYNC chore: session-end — run-log rotation, AKM audit review + F3 feedback loop fix
+2026-03-03 22:03:56 SYNC feat: 3 new overlays (Life Coach, Career Coach, Network Skills) + poetry pipeline + system updates
+2026-03-03 22:41:46 SYNC feat: Design Advisor dataviz expansion + deck-intel project (SPECIFY complete)
+2026-03-03 22:41:54 SYNC chore: add last_committed to deck-intel project-state
+2026-03-04 07:15:29 SYNC chore: session-end — book-scout close-out, x-feed-intel log rotation, BBP telemetry
+2026-03-04 09:11:16 SYNC chore: full vault audit — 7 of 8 flagged items resolved
+2026-03-04 09:11:28 SYNC fix: add missing domain field to qmd-v1-reference.md
+2026-03-04 09:12:34 SYNC chore: session-end — full vault audit log + AKM feedback
+2026-03-04 09:40:57 SYNC feat: feed-pipeline T1 backlog — 53 signal-notes promoted (batches 1-3)
+2026-03-04 10:24:34 SYNC feat: create moc-signals, migrate 53 signal-notes from moc-crumb-architecture
+2026-03-04 11:34:17 SYNC feat: feed-pipeline T1 backlog cleared — batch 8 (+22 signal-notes, 144 total)
+2026-03-04 12:39:19 SYNC feat: feed-pipeline inbox cleared — +40 signal-notes, triage quality fix
+2026-03-04 13:07:34 SYNC chore: session-end — FIF queue triage (64 skipped) + Tess vault access fix
+2026-03-04 13:33:59 SYNC feat: FIF-033 done — M3 complete, cross-source collision + weekly summary
+2026-03-04 14:38:52 SYNC feat: M4 YouTube adapter — run-log, code review note, project-state update
+2026-03-04 15:43:57 SYNC feat: researcher-skill M5 complete — Synthesis, Writing, vault output + code review
+2026-03-04 16:37:16 SYNC feat: agent-to-agent-communication SPECIFY complete — 25 tasks, 4 phases
+2026-03-04 17:19:49 SYNC feat: agent-to-agent-communication peer review complete — 6 reviewers, 34 action items
+2026-03-04 17:38:23 SYNC feat: agent-to-agent-communication review applied, SPECIFY → PLAN
+2026-03-04 17:42:34 SYNC chore: move specification files to design/ per crumb standard
+2026-03-04 17:46:50 SYNC fix: address operator review — vault.query.facts gap, gate ceiling, OQ7
+2026-03-04 17:53:18 SYNC feat: agent-to-agent-communication PLAN complete — 9 milestones, 28 tasks
+2026-03-04 17:56:33 SYNC chore: session-end log + claude-ai-context update
+2026-03-04 21:35:11 SYNC feat: A2A action plan peer review applied — 25 items from 6 reviewers
+2026-03-04 21:35:29 SYNC fix: add missing domain field to review notes
+2026-03-04 22:04:09 SYNC feat: researcher e2e test complete + Agent tool dispatch + BBP pipeline outputs
+2026-03-04 22:25:12 SYNC chore: FIF production go-live — DRY_RUN off, 5-day soak started
+2026-03-04 22:35:26 SYNC chore: session-end log + BBP telemetry from retry runs
+2026-03-05 07:33:55 SYNC fix: startup script false positives for rotation and audit detection
+2026-03-05 08:15:49 SYNC chore: session-end log — FIF soak day 1 fixes + BBP retry telemetry
+2026-03-05 08:43:45 SYNC feat: apply overlay sanity check — revise 3 new overlays, split dataviz companion, relax line budget
+2026-03-05 08:44:56 SYNC chore: session-end log — overlay sanity check applied
+2026-03-05 09:41:28 SYNC feat: researcher skill — review fixes, niche-topic e2e #2, promote write-only-from-ledger
+2026-03-05 16:38:38 SYNC feat: feed pipeline overhaul — inbox clear, noise reduction, tighter thresholds
+2026-03-06 07:29:24 SYNC feat: design spec v2.4 — AKM, researcher, overlays, restructure (294KB → 261KB)
+2026-03-06 07:30:46 SYNC chore: session-end log — spec v2.4 bump and restructure session
+2026-03-06 11:02:35 SYNC refactor: extract crumb-tess-bridge source to standalone repo
+2026-03-06 11:02:46 SYNC chore: add 52 book digests, cloudflare reference, routine state updates
+2026-03-06 11:08:35 SYNC chore: session-end log — YT fix, repo extraction, inbox clear, brainworm signal
+2026-03-06 12:12:08 SYNC feat: swap gogcli → gws in Google services spec, spike-verify + peer review
+2026-03-06 12:42:04 SYNC feat: process Tess inbox — 2 signal-notes, book digest, feed-pipeline resurfacing fix
+2026-03-06 12:54:18 SYNC feat: implement agentic design patterns — T1 conventions + T2 hypothesis-directed research
+2026-03-06 12:59:34 SYNC chore: session-end log — agentic patterns implementation + AKM learning exploration
+2026-03-06 13:15:33 SYNC feat(akm): tune retrieval from feedback analysis — chronic-miss suppression + mapping diversification
+2026-03-06 13:41:30 SYNC feat: process 9 NLM book digests (18 files) + AKM feedback tuning
+2026-03-06 14:43:35 SYNC feat: network KB build — 14 knowledge notes, moc-networking, learning-plan skill
+2026-03-06 16:11:01 SYNC feat: complete network KB + kb/dns→kb/networking/dns taxonomy restructure
+2026-03-06 16:23:46 SYNC docs: add runtime flow example to network KB plan
+2026-03-06 16:25:31 SYNC chore: session-end log — update with runtime flow and WebFetch verification
+2026-03-06 17:07:10 SYNC feat: security KB build — sources catalog, ingestion plan, Batch 1 (4 framework notes)
+2026-03-06 17:14:35 SYNC chore: session-end — Kill Chain accuracy fix, deck-intel skill install, session log
+2026-03-06 17:30:53 SYNC feat: security KB Batch 2 — Government & Protective DNS (4 notes)
+2026-03-06 17:33:38 SYNC chore: session-end — Batch 2 security KB session log
+2026-03-06 17:57:21 SYNC feat: security KB Batches 3-5 — STIX/TAXII, competitive architectures, integration stories (11 notes)
+2026-03-06 18:31:18 SYNC feat: security KB — deck-intel enrichment, MOC synthesis, AWS/EfficientIP competitor notes
+2026-03-06 19:27:16 SYNC feat: diagram-capture skill + security KB competitor digests
+2026-03-06 19:36:25 SYNC feat: diagram-capture Mode B validation, visual content routing, session log
+2026-03-06 20:06:46 SYNC feat: researcher-skill DONE, A2A TASK→IMPLEMENT, A2A-001 delivery layer
+2026-03-06 20:14:14 SYNC feat: A2A M1 complete — context model (A2A-002) + feedback infra (A2A-003)
+2026-03-06 20:28:03 SYNC feat: A2A M2 build + M3 schema tasks (A2A-004.1/2, 006-007.5)
+2026-03-06 20:28:40 SYNC chore: session-end — A2A run-log, project state update
+2026-03-06 20:56:39 SYNC chore: session-end — A2A live deployment, mirror-sync schema fix
+2026-03-06 21:26:54 SYNC chore: session-end — FIF soak day 2 health check, keychain credential fix
+2026-03-06 22:37:25 SYNC feat: attention-manager SPECIFY — spec + 6-reviewer peer review
+2026-03-07 08:20:57 SYNC chore: session-end — FIF noise reduction (routing bar overhaul, circuit breaker)
+2026-03-07 08:35:23 SYNC feat: add 99 book digest notes, clear pipeline retry backlog
+2026-03-07 09:01:45 SYNC chore: session-end — permissions fix, 99 book notes, DNS tunneling research
+2026-03-07 09:21:09 SYNC feat: create mission-control project — SPECIFY complete, R2 amendments applied
+2026-03-07 09:21:21 SYNC fix: vault-check warnings — missing updated field, repo_path comment
+2026-03-07 10:16:37 SYNC feat: mission-control PLAN phase — 59 tasks, 10 milestones, 3 review rounds
+2026-03-07 10:53:54 SYNC feat: mission-control M0a complete — Dark Observatory aesthetic, Ops page mockup
+2026-03-07 10:59:20 SYNC docs: add operator amendments AP-19/20/21 to action plan review synthesis
+2026-03-07 11:25:51 SYNC feat: mission-control M0b — design system, widget vocabulary, AP-19/20/21 applied
+2026-03-07 11:27:05 SYNC chore: session-end — update claude-ai-context for mission-control M0b progress
+2026-03-07 11:30:30 SYNC fix: MC-005 review — focus-ring token, badge tokens, table-row-alt, data fixes
+2026-03-07 11:43:56 SYNC feat: MC-006 widget inventory + W1-W3 workbench deferred
+2026-03-07 11:50:15 SYNC fix: MC-006 review — count mismatch, GPU gap note, BBP fold, structural count note
+2026-03-07 12:50:11 SYNC feat: MC-055 state patterns + mobile viewport, MC-007/008/009 mockups
+2026-03-07 12:55:10 SYNC chore: session-end — compound + claude-ai-context update for MC-055 completion
+2026-03-07 13:12:27 SYNC chore: session-end — MC-010 design gate passed, Phase 0 complete
+2026-03-07 13:23:21 SYNC feat: cross-project dependency tracking convention + vault-check §26
+2026-03-07 15:28:21 SYNC chore: session-end — MC-012/013/015/017/018/019/020/023 done, AKM investigation updated
+2026-03-07 15:28:39 SYNC fix: add missing domain fields to design-rationale + AKM investigation
+2026-03-07 16:01:15 SYNC chore: session-end — MC-021/MC-022 done, M2 complete, code review logged
+2026-03-07 17:20:43 SYNC chore: session-end — MC-014/024/025/026 done, M3 at 3/5
+2026-03-07 17:43:12 SYNC chore: session-end — MC-027 done, FIF cost wiring, ops fixes, M3 at 4/5
+2026-03-07 18:23:11 SYNC chore: session-end — MC-060 done, M4 backend 4/6, telemetry rollups deployed
+2026-03-07 18:23:25 SYNC fix: add missing domain field to MC-060 investigation note
+2026-03-07 18:51:14 SYNC chore: session-end — MC-032/033/053/054 done, M4 complete, cross-project amendments
+2026-03-07 19:11:13 SYNC fix(akm): close knowledge utilization gap — tag enrichment, task-pickup trigger, overlay source surfacing
+2026-03-07 19:12:48 SYNC chore: session-end log — AKM knowledge utilization gap fixes (#1-#4)
+2026-03-07 19:21:27 SYNC chore: archive knowledge-navigation — Phases 1-3 complete, Phase 4 declined
+2026-03-07 19:26:54 SYNC chore: session-end log — knowledge-navigation archived, BBP-006/007 closed
+2026-03-08 08:02:25 SYNC fix(akm): unblock skill-activation trigger — dedup exemption + chronic-miss reset
+2026-03-08 08:24:35 SYNC chore: session-end log — AKM fixes verified, triage model upgraded to Sonnet, BBP batch-3 confirmed
+2026-03-08 09:11:14 SYNC chore: session-end log — feed pipeline backlog cleanup, P2 thread collapsing
+2026-03-08 09:29:21 SYNC feat(fif): decommission x-feed-intel — FIF-044 complete
+2026-03-08 09:31:12 SYNC chore: session-end log — x-feed-intel decommissioned, FIF dedup hardened
+2026-03-08 10:18:13 SYNC feat: inbox processing, vault-gc, 7-book NLM batch
+2026-03-08 11:29:55 SYNC feat: book KB backfill, dedup, and library reconciliation
+2026-03-08 11:30:11 SYNC chore: session-end log — book KB backfill/dedup, 426-title library reconciled
+2026-03-08 11:50:32 SYNC feat(attention-manager): SPECIFY → PLAN phase transition
+2026-03-08 12:18:47 SYNC feat(attention-manager): M1 complete — prerequisites, types, vault-check rules
+2026-03-08 12:21:09 SYNC feat(attention-manager): M2 complete — attention-manager skill built (AM-003)
+2026-03-08 12:21:24 SYNC chore: register attention-manager skill in vault-check primitive registry
+2026-03-08 12:27:20 SYNC feat(attention-manager): first daily artifact + AM-004 soak day 1
+2026-03-08 12:35:30 SYNC feat: compound insight — behavioral vs. automated triggers pattern
+2026-03-08 12:38:20 SYNC feat: compound insight — validation is convention source of truth
+2026-03-08 12:44:01 SYNC fix: enforce tasks.md at project root — revert permissive convention drift
+2026-03-08 12:46:07 SYNC chore: session-end log — attention-manager M1+M2, two compound insights, convention fix
+2026-03-08 14:27:34 SYNC feat: skill preflight hook + AKM weight tuning + vault-check enforcement rules
+2026-03-08 14:27:43 SYNC chore: session-end log — skill preflight hook, AKM weights, vault-check rules 29+30
+2026-03-08 18:41:10 SYNC feat: autoresearch applicability research + Symphony/autoresearch signal notes
+2026-03-08 19:45:30 SYNC feat: dispatch-tier classification, post-call pipeline spec, gate evaluation pattern
+2026-03-08 21:28:12 SYNC feat: rewrite personal philosophy doc from interview-driven belief inventory
+2026-03-08 21:28:18 SYNC chore: session-end log — background log drift + SE inventory update
+2026-03-09 07:36:46 SYNC fix: vault-health Telegram overflow + non-canonical kb tag
+2026-03-09 08:10:43 SYNC chore: feed pipeline run — 3 signal-notes promoted, FIF digest fixes logged
+2026-03-09 09:13:28 SYNC feat: feed triage actions spec + M3b tasks (MC-061–065)
+2026-03-09 09:15:05 SYNC chore: session-end — MC-061/062/063 done, MC-064 next
+2026-03-09 09:20:26 SYNC fix: spec §8.6 — UNIQUE(canonical_id), conflict semantics, best-effort delete, undo docs
+2026-03-09 09:28:44 SYNC chore: session-end — peer review fixes logged (S1-S6), code review entry added
+2026-03-09 09:42:05 SYNC chore: MC-064 done, advance active_task to MC-065
+2026-03-09 09:43:35 SYNC chore: session-end — MC-064 done, TS/test fixes logged
+2026-03-09 09:45:40 SYNC chore: session-end — MC-064 peer review fixes logged (S1, S6)
+2026-03-09 10:19:02 SYNC chore: session-end — MC-065 done, MC-028 tests done, MC-066 captured
+2026-03-09 10:35:55 SYNC chore: session-end — MC-056/057/058 cross-project tasks done
+2026-03-09 11:21:34 SYNC feat: attention-manager delivery + overnight research design
+2026-03-09 11:30:39 SYNC feat: overnight research design — execution model + last30days integration
+2026-03-09 11:39:22 SYNC feat: TOP-047 session prep design note + TOP-046 review fixes
+2026-03-09 11:44:01 SYNC fix: TOP-047 design note — peer review fixes
+2026-03-09 11:47:45 SYNC chore: session-end — TOP-046/047 design, AM-004 soak day 2, MC-067/068
+2026-03-09 12:05:30 SYNC feat: TOP-014 M1 gate pass + TOP-047 session prep (SOUL.md)
+2026-03-09 12:18:36 SYNC feat: TOP-047 session prep — wrapper script + thin SOUL.md trigger
+2026-03-09 12:24:41 SYNC chore: session-end — TOP-014 gate, TOP-047 fn1 done, Haiku pattern
+2026-03-09 13:32:49 SYNC feat: last30days validated for B2B — install + validation gate PASS
+2026-03-09 13:55:25 SYNC feat: TOP-047 fn2 — meeting-prep.sh wrapper + openclaw agent validation
+2026-03-09 14:23:16 SYNC chore: session-end — vault-health carry-forward resolved, meeting-prep --include-web validated
+2026-03-09 14:47:45 SYNC chore: session-end — meeting-prep delivery fix, Keychain token, fn3 deferred
+2026-03-09 16:37:29 SYNC feat(customer-intelligence): Glean prompt pipeline + ACG dossier refresh
+2026-03-09 20:51:19 SYNC chore: session-end — FIF triage backlog clear, dashboard query fix
+2026-03-10 11:53:19 SYNC fix: morning briefing output contract + FIF digest build deploy
+2026-03-10 16:25:15 SYNC feat(customer-intelligence): curation layer + DNS recon + account directory migration
+2026-03-10 16:26:46 SYNC chore: session-end — customer-intelligence context update
+2026-03-10 17:23:03 SYNC fix(akm): 6 retrieval fixes — chronic-miss death spiral, cross-session dedup, signal quality
+2026-03-10 17:34:15 SYNC chore(akm): validation pass (7/8 pass) + trigger role architecture decision
+2026-03-10 18:02:49 SYNC feat(customer-intelligence): full pipeline E2E validation — ACG extract→curate→generate
+2026-03-10 19:27:20 SYNC chore: session-end — customer-intelligence pipeline E2E validated
+2026-03-10 21:57:15 SYNC chore: session-end — FIF digest volume, RSS rename, X reauth, dashboard fixes
+2026-03-11 09:57:54 SYNC fix(fif): RSS stale build + X OAuth hardcoded refresh token — both pipelines restored
+2026-03-11 12:15:41 SYNC feat(a2a): compound insight smoke test — Crumb-side validated, queue-based dispatch
+2026-03-11 13:32:06 SYNC feat(a2a): A2A-004.3 complete — full compound insight pipeline validated E2E
+2026-03-11 14:20:18 SYNC feat(tess-ops): TOP-044 FIF health monitoring + TOP-046 overnight research cron
+2026-03-11 14:43:01 SYNC chore: bump code-review grandfather date to 2026-03-12, fix MC repo_path
+2026-03-11 16:14:24 SYNC feat(tess-ops): TOP-015/016/017/019/020 Google OAuth + labels + Apple sudoers/wrapper
+2026-03-11 18:26:14 SYNC feat(tess-ops): TOP-018/021-026 M2 Phase 0 complete — Google calendars, Apple wrapper, Discord server
+2026-03-11 18:31:27 SYNC chore: pre-reboot snapshot — macOS Tahoe 26.3.1 update
+2026-03-11 19:26:52 SYNC chore: session-end log — post-reboot systems check, 3 service fixes
+2026-03-11 20:21:51 SYNC feat(tess-ops): TOP-027/028 — email, calendar, reminders in morning briefing
+2026-03-11 20:36:25 SYNC feat(tess-ops): TOP-029 — dual delivery Telegram + Discord for briefings and alerts
+2026-03-11 21:38:44 SYNC feat(a2a): A2A-005 observation gate started — day 1 compound insights + feedback
+2026-03-11 22:44:51 SYNC feat(inbox): process 32 NLM book/chapter digests — Gandhi (12) + Weil (4)
+2026-03-12 11:25:08 SYNC feat(tess-ops): TOP-056 — daily attention cron job (Opus, 6:30 AM pre-briefing)
+2026-03-12 12:00:29 SYNC feat(attention-manager): AM-004 soak passed, AM-005/006 complete — all tasks done
+2026-03-12 14:43:35 SYNC feat(tess-ops): TOP-030 Phase 1 gate passed + TOP-031 email triage deployed
+2026-03-12 15:15:04 SYNC feat(tess-ops): TOP-033 Notes read via snapshot + TOP-056 state fix
+2026-03-12 15:50:40 SYNC feat(autonomous-operations): project creation + SPECIFY + PLAN complete
+2026-03-12 16:04:28 SYNC feat(autonomous-operations): peer review + action plan hardening (A1-A10)
+2026-03-12 16:11:05 SYNC chore: add _openclaw/scripts/ to mirror sync allowlist
+2026-03-12 18:00:17 SYNC feat(autonomous-operations): R2 peer review — action plan hardening (B1-B10)
+2026-03-12 18:05:31 SYNC feat(autonomous-operations): PLAN → TASK phase transition
+2026-03-12 18:26:24 SYNC feat(autonomous-operations): implement AO-001 schema + AO-002 structured extraction
+2026-03-12 18:30:48 SYNC feat(autonomous-operations): implement AO-004 vault-change correlation engine
+2026-03-12 18:33:20 SYNC feat(autonomous-operations): implement AO-005 proxy scoring + exit metrics
+2026-03-12 18:34:17 SYNC chore: session-end log — AO-001/002/004/005 implementation session
+2026-03-12 19:09:42 SYNC feat(feed-intel-framework): close M4 YT soak, implement HN + arXiv adapters
+2026-03-12 19:50:56 SYNC feat(mission-control): MC-028 parity gate pass, MC-068 done, overnight research amendments
+2026-03-12 21:27:03 SYNC feat(mission-control): Phase 1 retro, Ops page overhaul, LLM provider status
+2026-03-12 21:27:15 SYNC fix: add missing domain field to phase-1-retro.md frontmatter
+2026-03-12 21:47:24 SYNC docs: add skill workflow and operator reference docs for all 24 skills
+2026-03-12 21:48:23 SYNC fix: add missing domain field to skill-workflow docs
+2026-03-12 21:49:11 SYNC chore: session-end log — skill workflow documentation batch
+2026-03-12 22:18:41 SYNC feat: feed pipeline batch — 20 signal-notes, personal philosophy update, inbox cleared
+2026-03-12 22:19:54 SYNC chore: session-end log — feed pipeline batch, personal philosophy update
+2026-03-13 11:02:30 SYNC feat: MC-066/MC-067 vault updates — feed-pipeline sync-back, daily-attention permission fix
+2026-03-13 11:19:11 SYNC chore: session-end log — MC-066/MC-067 shipped, daily-attention permission fix
+2026-03-13 12:21:30 SYNC feat: MC-070 Goals panel — task definitions, goal-tracker updates, run-log
+2026-03-13 13:05:18 SYNC feat: MC-069 done, MC-070 done, MC-071 created — run-log, task updates
+2026-03-13 15:08:41 SYNC feat: M6 Knowledge page complete — run-log, project-state, task updates
+2026-03-13 15:23:54 SYNC chore: session-end log — vault health relocation, MC-072 captured
+2026-03-13 15:38:11 SYNC feat: MC-072 AKM consumption tracking — instrumentation + task updates
+2026-03-13 16:16:19 SYNC chore: session-end log — MC-072, Ops polish, LLM labels, git fix
+2026-03-13 16:59:48 SYNC feat: A2A M3 build — gate passed, capability resolution + quality + escalation + learning log + research dispatch
+2026-03-13 17:36:44 SYNC feat: A2A-012.2 complete — first research dispatch e2e integration
+2026-03-13 23:36:31 SYNC feat: A2A-013 gate active + S1 dispatch complete — recovery from power outage
+2026-03-14 00:16:29 SYNC feat: MOC link queue backfill (185 entries) + vault-wide broken link repair (118 fixes)
+2026-03-14 10:23:23 SYNC feat: overnight research — route reactive output to Sources/research/ + process all queued items
+2026-03-14 11:16:47 SYNC feat: dispatch triage protocol, briefing polish, 1M context insight
+2026-03-14 11:40:04 SYNC feat: A6 reassessment — context ceilings become soft targets under 1M windows
+2026-03-14 13:07:40 SYNC feat: deck-intel SPECIFY→PLAN→TASK (DI-001 through DI-006 done) + side hustle research (all 7 vectors)
+2026-03-14 13:21:41 SYNC fix: remove unbound $FEED_TIER3 variable from startup hook
+2026-03-14 13:28:02 SYNC feat: TOP-031 email triage soak PASSED — task closed
+2026-03-14 13:47:16 SYNC chore: TOP-052 on hold (pending OpenClaw upgrade) + state refresh
+2026-03-14 13:49:05 SYNC chore: session-end — TOP-031 passed, TOP-033 E2E in progress, TOP-052 on hold
+2026-03-14 14:16:40 SYNC chore: session-end — TOP-033 E2E partial (capture ok, consumption blocked)
+2026-03-14 15:05:04 SYNC feat: documentation-overhaul project — spec, peer review, action plan
+2026-03-14 15:06:19 SYNC fix: update Gemini model in peer-review config (deprecated endpoint)
+2026-03-14 15:32:42 SYNC chore: PLAN → ACT — action plan peer reviewed, 8 fixes applied
+2026-03-14 15:37:38 SYNC feat: DOH-001 + DOH-002 — M1 prerequisites complete
+2026-03-14 16:07:08 SYNC feat: DOH-003 through DOH-012 — M2 Architecture Foundation complete
+2026-03-14 18:01:22 SYNC feat: documentation-overhaul complete — M3 operator docs, M4 orientation map, Drive sync
+2026-03-14 18:07:10 SYNC fix: drive-sync stages .md as .txt for NotebookLM compatibility
+2026-03-14 18:11:52 SYNC chore: session-end log — documentation-overhaul complete + Drive sync
+2026-03-14 20:58:39 SYNC feat: opportunity-scout — SPECIFY + PLAN complete, entering TASK phase
+2026-03-14 22:38:09 SYNC feat: opportunity-scout — M0 milestone complete (OSC-001–009)
+2026-03-15 17:18:58 SYNC feat: research staging gate, feed pipeline run, cloud-agent research batch
+2026-03-15 17:20:20 SYNC fix: add missing domain field + MOC synthesis for signal density
+2026-03-15 17:52:36 SYNC feat: A2A-014 critic skill + Tess orchestration wiring
+2026-03-15 17:57:29 SYNC chore: session-end log — ops fixes, research batch, feed pipeline, A2A-014 critic
+2026-03-15 21:16:37 SYNC feat: AKM decay model — add reference tier, retune tag assignments
+2026-03-15 21:43:18 SYNC chore: session-end log — OpenClaw v2026.2.25 → v2026.3.13 upgrade executed
+2026-03-15 23:20:41 SYNC feat: pydantic-ai-adoption project — ADR, analysis, specification, reviews
+2026-03-16 10:18:48 SYNC feat: source-index consistency — research pipeline, backfill, rename
+2026-03-16 10:59:41 SYNC fix: post-outage recovery — vault-health, backup-status, daily attention, index renames
+2026-03-16 11:49:37 SYNC chore: vault audit fixes — critic registration, kb tags, orphan cleanup
+2026-03-16 12:06:58 SYNC feat: audit skill writes dashboard status JSON
+2026-03-16 13:37:07 SYNC feat: vault-check §31 — broken wikilink detection
+2026-03-16 13:41:49 SYNC chore: session-end log — research, source-index consistency, FIF fix, audit, dashboard, wikilink detection
+2026-03-16 15:28:02 SYNC fix: AO-002 source_path extraction — inject vault paths into attention prompt
+2026-03-16 15:50:03 SYNC chore: session-end log — AO-002/AO-004 validation, path fix, cron diagnosis
+2026-03-16 15:52:32 SYNC feat: mcp-workspace-integration project — spec, plan, MWI-001 complete
+2026-03-16 19:32:04 SYNC feat: MWI-002/003/004 — tool validation, architecture decision, token reader
+2026-03-16 19:35:19 SYNC feat: pydantic-ai-adoption DONE — spike, NO-GO on pydantic-evals, pytest adopted
+2026-03-16 20:17:56 SYNC feat: opportunity-scout M1 complete (OSC-010–016), Discord webhook migration
+2026-03-16 20:19:03 SYNC fix: add missing domain field to claude-print-cwd-sensitivity solution
+2026-03-16 20:24:56 SYNC feat: TOP-033 done, TOP-047 done (session prep/debrief), TOP-056 cron fix
+2026-03-16 20:27:24 SYNC chore: session-end log — synthesis header addition noted in run-log
+2026-03-16 20:34:05 SYNC feat: MWI-005/006 — GWS workspace skill for Tess, Telegram validation
+2026-03-16 20:42:22 SYNC chore: log Scout bot token migration in run-log
+2026-03-16 20:46:21 SYNC chore: session-end log — MWI-005/006, Telegram 409 diagnosis, skill deployment
+2026-03-16 21:16:46 SYNC feat: TOP-049/032/034 — Approval Contract, Reminders write, Discord mirroring
+2026-03-16 21:19:06 SYNC feat: MWI-006/007/009 — email triage REST API migration, calendar awareness
+2026-03-16 21:27:18 SYNC chore: session-end log — M5 complete (MC-036/037/038/039), task states updated
+2026-03-17 11:11:02 SYNC chore: session-end log — opportunity scout pipeline fix + broadening
+2026-03-17 11:51:53 SYNC feat: add signal scan step to SPECIFY and PLAN phases
+2026-03-17 12:04:42 SYNC feat: process dispatch queue — 2 compound insights, 1 signal note, 1 skip
+2026-03-17 12:09:06 SYNC docs: update spec and operator docs for signal scan step
+2026-03-17 12:55:18 SYNC feat: research brief review — signal notes, ECL insight, Tess fixes
+2026-03-17 12:57:56 SYNC feat: promote 2 research briefs to signal notes, clear output queue
+2026-03-17 13:02:47 SYNC chore: session-end log — signal scan feature, dispatch triage, research review
+2026-03-17 13:47:34 SYNC chore: session-end log — monitoring sweep, A2A-013 gate PASS
+2026-03-17 14:49:05 SYNC feat: MC M7 complete (status updates), M6 closed, 51 sources linked to MOCs
+2026-03-18 09:33:36 SYNC feat: create wisdom-library project — CLARIFY complete, ACT phase with action plan
+2026-03-18 10:30:17 SYNC feat: wisdom-library — Firekeeper Books naming, v0.2 merge, spec refinements
+2026-03-18 17:33:51 SYNC chore: session-end log — Firekeeper Books naming, trademark clear, domain registered
+2026-03-18 17:36:10 SYNC feat(semuta): peer-reviewed spec — 11 action items applied
+2026-03-18 17:37:55 SYNC feat: opportunity-scout triage upgrade — actionability gate, Sonnet, enrichment fields
+2026-03-18 17:44:58 SYNC gate: semuta SPECIFY → PLAN — spec peer-reviewed and approved
+2026-03-18 19:05:04 SYNC feat(semuta): PLAN phase — action plan, tasks, peer-reviewed + operator feedback applied
+2026-03-18 20:24:44 SYNC feat(semuta): external review synthesis — 5 MF + 14 SF + 12 NH + 5 DN applied
+2026-03-18 21:07:13 SYNC feat(multi-agent-deliberation): project creation through PLAN — spec, action plan, tasks
+2026-03-19 12:33:06 SYNC feat: research brief review protocol + compound insight triage + 5 signal notes
+2026-03-19 14:42:14 SYNC feat: Liberation Directive v1.1 + Perplexity Computer integration
+2026-03-19 15:32:20 SYNC chore: session-end — Liberation Directive session, Perplexity Computer setup
+2026-03-19 22:20:51 SYNC feat(wisdom-library): Title #1 production plan — Meditations illustrated edition
+2026-03-20 15:20:43 SYNC refactor(akm): remove consumption tracking + session-start brief
+2026-03-20 15:41:19 SYNC chore: session-end — AKM simplification + QMD 2.0.1 upgrade
+2026-03-20 16:39:38 SYNC chore: project closeout sprint — 4 projects DONE, inbox processed, OAuth fix
+2026-03-20 17:20:53 SYNC chore: FIF session log — Reddit adapter (FIF-040 + FIF-041)
+2026-03-20 17:26:53 SYNC feat(autonomous-ops): AO-003 dedup + AO-002/AO-004 validated — all Phase 1 tasks DONE
+2026-03-20 17:33:20 SYNC feat(a2a): Phase 2 planning + M6 implementation (A2A-016, A2A-017)
+2026-03-20 17:42:48 SYNC chore: archive 13 DONE projects
+2026-03-20 17:54:20 SYNC chore: session-end log — bulk project archival
+2026-03-20 18:55:11 SYNC chore: FIF-043 soak started, openclaw scripts + state catchup
+2026-03-20 20:13:27 SYNC feat(a2a): A2A-018 gate — Crumb-side W3 pipeline validated (2 dispatches)
+2026-03-22 12:53:23 SYNC fix: vault-check — resolve 37 warnings + 1 error across 5 categories
+2026-03-22 13:28:33 SYNC feat(mad): M0+M1 complete — deliberation pipeline built, baselines rated
+2026-03-22 14:24:01 SYNC fix: vault-check — resolve 110 of 127 pre-existing warnings
+2026-03-22 14:33:09 SYNC chore: session-end log — vault-check hygiene pass (127→17 warnings)
+2026-03-22 17:30:09 SYNC feat(mad): MAD-005 + MAD-006 complete — H1/H2 live API dispatches
+2026-03-22 19:49:55 SYNC feat(mad): MAD-007 gate PROCEED + MAD-008/009 + H3 dispatches complete
+2026-03-22 21:14:43 SYNC feat(mad): MAD-010/011 H3 gate PROCEED + MAD-012/012a Phase 3 ready
+2026-03-23 15:11:55 SYNC chore: dispatch triage — skip 3 fabricated compound insights, log finding
+2026-03-23 15:21:59 SYNC chore: session-end log — dispatch triage + scout signal-to-noise fix
+2026-03-23 17:45:32 SYNC feat(mad): Phase 3+4 complete — H4 batch (8 cold artifacts), synthesis, meta-eval, INTEGRATE recommendation
+2026-03-26 12:40:22 SYNC chore: vault audit + retire compound insight pipeline
+2026-03-26 13:41:02 SYNC feat: gate evaluations — FIF DONE, AO DONE, A2A-018 PASS
+2026-03-26 14:06:34 SYNC chore: tess-ops diagnosis + disable broken scheduled streams
+2026-03-26 20:35:34 SYNC chore: ceremony reduction audit — retire 6 components, consolidate 4 skills
+2026-03-28 12:36:40 SYNC feat(tess-v2): project creation + SPECIFY phase complete (r2)
+2026-03-28 12:40:47 SYNC feat(tess-v2): SPECIFY → PLAN phase transition
+2026-03-28 13:18:25 SYNC feat(tess-v2): PLAN phase — action plan + peer review r1 applied
+2026-03-28 13:40:47 SYNC feat(tess-v2): action plan r2 — external peer review (5 reviewers) applied
+2026-03-28 13:43:07 SYNC chore: session-end — tess-v2 PLAN complete, context checkpoint updated
+2026-03-28 14:55:27 SYNC feat(tess-v2): Phase 0 complete + TV2-005 Hermes install
+2026-03-28 22:25:57 SYNC feat(tess-v2): Phase 1+2 evaluation complete — Nemotron selected, conditional GO
+2026-03-29 20:39:10 SYNC chore(tess-v2): session-end — soak check + backup model benchmarks
+2026-03-29 20:41:35 SYNC feat(tess-v2): persona spec v1.2 — tone down roleplay, deploy to Hermes
+2026-03-29 21:05:18 SYNC feat(tess-operations): DONE — all 59 tasks resolved, 9 milestones complete
+2026-03-29 21:47:31 SYNC fix(connections-brainstorm): broken idempotency + prompt quality overhaul
+2026-03-30 14:08:13 SYNC feat(tess-v2): design input — response validation harness from AutoBE analysis
+2026-03-30 14:37:04 SYNC feat(mission-control): M3.1 Intelligence Feed Density Redesign — spec, plan, design, mockup
+2026-03-30 15:31:22 SYNC feat(tess-v2): cloud model eval complete — Kimi K2.5 primary, Qwen 3.5 failover
+2026-03-30 15:42:00 SYNC chore: session-end — cloud eval compound reflection + state sync
+2026-03-30 16:13:46 SYNC feat(tess-v2): soak extension, bridge PoC, service interfaces, spec amendments
+2026-03-31 19:04:16 SYNC feat(tess-v2): Nemotron GO, Hermes v0.6.0 upgrade, Kimi soak restart
+2026-03-31 19:05:37 SYNC fix: add missing domain field to tv2-cloud-eval-spec.md frontmatter
+2026-04-01 12:31:34 SYNC feat(tess-v2): TV2-008 Hermes GO — Phase 3 fully unblocked
+2026-04-01 12:32:58 SYNC fix: add missing frontmatter fields to hermes-patch-tracking.md
+2026-04-01 14:07:30 SYNC feat(tess-v2): Phase 3 architecture — state machine, escalation, prompt, failover, integration test
+2026-04-01 14:13:03 SYNC chore(tess-v2): session-end log — Phase 3 architecture sprint
+2026-04-01 16:06:02 SYNC feat(tess-v2): Phase 3 complete — 11 design artifacts, peer review, must-fix applied
+2026-04-01 16:26:18 SYNC feat(tess-v2): Phase transition TASK → IMPLEMENT — Phase 3 architecture complete
+2026-04-01 17:36:36 SYNC feat(tess-v2): Phase 4 scaffold — TV2-031a-d done, code review complete
+2026-04-01 17:37:54 SYNC chore: vault state sync — system logs, openclaw state, wisdom-library updates
+2026-04-01 18:03:03 SYNC feat(firekeeper-books): fiction-first pivot + project rename from wisdom-library
+2026-04-01 19:10:42 SYNC chore(tess-v2): session-end log — scaffold + live tests + code review
+2026-04-01 20:50:25 SYNC chore(tess-v2): session-end log — 48h parallel run started, 5/5 contracts STAGED
+2026-04-02 14:24:42 SYNC feat(firekeeper-books): AI art & book design learning plan
+2026-04-03 09:25:59 SYNC chore(firekeeper-books): session-end log — AI art learning plan created
+2026-04-03 09:46:59 SYNC feat(tess-v2): run history, backup-status fix, TV2-046, readiness engine spec
+2026-04-03 09:48:28 SYNC fix: add missing domain field to readiness-engine-spec frontmatter
+2026-04-03 09:57:24 SYNC chore(tess-v2): session-end log — TV2-032/033 gate passed, 5/5 services running
+2026-04-03 10:48:12 SYNC feat(tess-v2): TV2-034 feed-intel pipeline — 72h parallel run started
+2026-04-03 10:54:08 SYNC feat(tess-v2): TV2-044 connections brainstorm — 48h parallel run started
+2026-04-03 11:08:25 SYNC feat(tess-v2): TV2-035 daily-attention + overnight-research — 72h parallel run
+2026-04-03 11:51:51 SYNC feat(tess-v2): TV2-046 Gemma 4 benchmark — no switch, Nemotron confirmed
+2026-04-03 13:39:23 SYNC feat(tess-v2): cloud orchestrator re-eval — Kimi confirmed, Qwen 3.6 failover
+2026-04-03 13:45:21 SYNC feat(tess-v2): spec amendment Y — orchestrator plan-before-request directive
+2026-04-03 13:49:48 SYNC chore(tess-v2): session-end log — 4 tasks shipped, 11/11 services, model stacks confirmed
+2026-04-04 11:28:21 SYNC feat(crumb): compound engineering enhancements — track schema, conditional review routing, cluster analysis
+2026-04-04 11:29:52 SYNC fix: add missing topics field to two solution docs
+2026-04-04 11:54:57 SYNC feat(tess-v2): Amendment Z — interactive dispatch & orchestrator authority
+2026-04-04 11:58:16 SYNC chore: session-end log — compound enhancements shipped, markitdown upgraded, hermes fork cleaned
+2026-04-04 12:30:57 SYNC chore(tess-v2): session-end log — Amendment Z filed, soak runs clean, external eval processed
+2026-04-04 12:37:26 SYNC feat(tess-v2): Pedro autopilot pattern extraction — 6 patterns mapped to Z
+2026-04-04 12:47:46 SYNC chore(tess-v2): cross-link design inputs — Z, Paperclip, Pedro, external eval
+2026-04-04 13:57:58 SYNC feat(tess-v2): Amendment AA — vault semantic search integration
+2026-04-04 20:08:51 SYNC feat(vault-mobile-access): Quartz v4 static site for iPhone vault access
+2026-04-04 21:26:15 SYNC feat(tess-v2): Phase 4a complete — vault semantic search (TV2-047–055)
+2026-04-05 14:02:24 SYNC feat(tess-v2): TV2-034/035/044 gates passed, TV2-036/043 migrations started
+2026-04-05 14:28:55 SYNC feat(templates): add 4 NLM digest templates for Greek classics
+2026-04-05 14:35:21 SYNC feat(tess-v2): MiniMax M2.7 cloud eval — 80/95, latency-blocked
+2026-04-06 10:42:24 SYNC chore(audit): fix 3 medium findings — summaries, skills-ref, orphaned solutions
+2026-04-06 11:58:35 SYNC chore: session-end — update claude-ai-context with eval + audit status
+2026-04-06 12:10:21 SYNC chore: session-end log — kb/literature tag resolution
+2026-04-06 15:21:52 SYNC feat(tess-v2): Amendment Z peer-reviewed (2 rounds), TV2-043-C3 heartbeat fixed
+2026-04-06 19:23:38 SYNC feat(tess-v2): Amendment Z Phase A — interactive dispatch core loop
+2026-04-06 19:43:08 SYNC feat(tess-v2): Amendment Z Phase A first end-to-end loop exercise
+2026-04-06 20:10:19 SYNC chore(tess-v2): close Phase A gaps — tess CLI on PATH + queue reframe
+2026-04-06 20:26:38 SYNC chore: session-end log — Phase A gap closure
+2026-04-06 22:58:39 SYNC feat: Q2 2026 goals + lifestyle canonical domain + philosophy shift
+2026-04-06 23:02:17 SYNC chore: session-end log — Q2 goal setting + lifestyle canonical domain
+2026-04-07 12:01:30 SYNC feat(attention-manager): wire plans into daily attention via inventory pattern
+2026-04-07 18:46:36 SYNC feat(lifestyle): gardening KB + seasonal schedule for New Hudson zone 6a
+2026-04-07 19:08:21 SYNC feat(lifestyle): housework schedule + home services directory
+2026-04-07 19:12:05 SYNC chore: session-end log — gardening + housework + home services KB stand-up
+2026-04-07 21:00:01 SYNC feat(solutions): add atomic-rebuild + foreign-tool patterns, smoke-test plan-wiring
+2026-04-07 21:06:26 SYNC chore: session-end log — plan-tracking system + compound patterns from vault-mobile-access
+2026-04-07 21:38:08 SYNC chore: session-end log — SE weekly prioritization + project survey
+2026-04-08 13:10:00 SYNC feat(tess-v2): TV2-Cloud frontier survey — Kimi K2.5 reaffirmed at 89/95
+2026-04-09 09:19:08 SYNC chore(tess-v2): session-end log — frontier re-eval + Gemini diagnostic
+2026-04-09 11:40:49 SYNC fix(tess-v2): TV2-043 gate failure analysis + rollback runbook + re-soak
+2026-04-09 14:05:10 SYNC chore(tess-v2): session-end log — TV2-043 gate eval failure + remediation
+2026-04-09 15:54:25 SYNC feat(tess-v2): IDQ-004 pre-staged + Tess training session record
+2026-04-09 17:27:41 SYNC feat(tess-v2): harness plan v1 + execution infrastructure
+2026-04-09 19:55:57 SYNC docs(tess-v2): harness plan — Hermes-native alignment additions
+2026-04-09 20:01:20 SYNC chore: session-end log — Tess harness plan + training session (full)
+2026-04-09 21:52:51 SYNC chore: IDQ-005/006 harness edits + archive 3 superseded projects
+2026-04-10 12:33:50 SYNC feat: migrate email triage from Haiku API to local Nemotron
+2026-04-10 12:42:58 SYNC docs(spiritual): integrate 7 quotations into personal philosophy
+2026-04-10 12:53:13 SYNC chore: session-end log — TV2-043 C1 diagnosis + local LLM migration
+2026-04-10 13:49:03 SYNC chore: shut down email triage — cancel TV2-036, TV2-037, unload services
+2026-04-10 14:44:35 SYNC chore: session-end log — email triage shutdown + TV2-043 soak review
+2026-04-10 14:47:51 SYNC chore: rotate tess-v2 run-log (3026 lines → archive)

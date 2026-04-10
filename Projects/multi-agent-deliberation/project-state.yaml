@@ -1,0 +1,15 @@
+project: multi-agent-deliberation
+domain: software
+phase: DONE
+status: active
+created: 2026-03-18
+updated: 2026-03-23
+last_committed: 2026-03-22
+last_gate: M3-to-M4
+active_task: null
+next_action: "All tasks complete. Recommendation: INTEGRATE (scoped to opportunity-candidates). Integration work is a new project scope — use related_projects to link."
+related_projects:
+  - opportunity-scout
+  - agent-to-agent-communication
+  - feed-intel-framework
+  - customer-intelligence

@@ -1,0 +1,8 @@
+project: deck-intel
+domain: software
+phase: ARCHIVED
+phase_before_archive: DONE
+created: 2026-03-03
+updated: 2026-03-20
+next_action: "Project complete. 8/8 tasks done. Skill validated with single files and batch processing. Ready for routine use."
+last_committed: 2026-03-14

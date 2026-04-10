@@ -1,0 +1,58 @@
+# rclone filter rules for Perplexity Computer vault sync
+# Order matters — first match wins
+# See: https://rclone.org/filtering/#filter-from-read-filtering-patterns-from-a-file
+
+# === EXCLUDE operational/sensitive content ===
+- _openclaw/**
+- _system/logs/**
+- _system/scripts/**
+- _system/reviews/raw/**
+- _system/daily/**
+- _inbox/**
+- _attachments/**
+- Archived/**
+- .git/**
+- .obsidian/**
+- .claude/**
+- .gitignore
+- .gitattributes
+
+# Exclude project operational files (run logs, progress logs)
+- Projects/*/progress/**
+
+# Exclude virtual environments and symlink-heavy directories
+- **/.venv/**
+- **/node_modules/**
+
+# Exclude binary files
+- *.png
+- *.jpg
+- *.jpeg
+- *.gif
+- *.pdf
+- *.pptx
+- *.xlsx
+- *.docx
+- *.zip
+- *.lucid
+
+# === INCLUDE everything else ===
+# Sources (knowledge notes, research, signals, insights)
++ Sources/**
+
+# Domains (MOCs, overviews, personal philosophy)
++ Domains/**
+
+# Projects (specs, designs, project state — not progress/run-logs)
++ Projects/**
+
+# System docs (reference, overlays, protocols, solutions, directives)
++ _system/docs/**
++ _system/directives/**
++ _system/reviews/*.md
+
+# Root-level docs
++ CLAUDE.md
+
+# Exclude anything not explicitly included
+- *

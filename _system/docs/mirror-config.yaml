@@ -1,0 +1,4 @@
+mirror_repo_path: ~/crumb-vault-mirror
+mirror_remote: origin
+mirror_branch: main
+log_file: _system/logs/mirror-sync.log

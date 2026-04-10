@@ -1,0 +1,1 @@
+../../../docs/openclaw-colocation-spec-summary.md

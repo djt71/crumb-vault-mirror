@@ -1,0 +1,908 @@
+---
+project: crumb
+domain: software
+type: log
+skill_origin: null
+status: active
+created: 2026-02-12
+updated: 2026-02-20
+tags:
+  - design-spec
+  - crumb
+  - version-history
+description: >
+  Pre-v2.0 version history for the Crumb design spec. Covers v0.1 through v1.9.1.
+  Current version history (v2.0+) lives in separate-version-history.md.
+---
+
+## Version History (Archive: v0.1–v1.9.1)
+
+> Current versions (v2.0+): [[separate-version-history]]
+
+**v1.9.1** (2026-02-20)
+- **Spec completeness sync** — all built skills and overlays now explicitly listed in the spec
+- **§2.1 directory tree updated**
+  - Added 6 skill directories: `peer-review/`, `excalidraw/`, `mermaid/`, `lucidchart/`, `meme-creator/`, `startup/`
+- **§3.3 backlog table updated**
+  - 5 new built entries (struck through): Excalidraw, Mermaid, Lucidchart, Meme Creator, Startup
+  - Peer-review and Inbox Processor were already listed
+- **§3.4.2 active overlay table updated**
+  - Design Advisor: visual design, UI/UX, typography, brand identity lens
+  - Glean Prompt Engineer: enterprise knowledge search, Glean-to-Crumb data pipeline lens
+  - Both were already in `overlay-index.md` but missing from the spec's §3.4.2 table
+- Source: same-day spec audit against on-disk state
+
+**v1.9** (2026-02-20)
+- **Retroactive spec bump for notebooklm-pipeline project deliverables** — these changes landed during the NLM pipeline project (2026-02-19 to 2026-02-20) and were documented in `_system/docs/file-conventions.md` but not reflected in the design spec until this version.
+- **Knowledge-note document type — new §2.2.4**
+  - New first-class document type (`type: knowledge-note`) for synthesized knowledge from external sources processed through the NotebookLM pipeline
+  - Full frontmatter schema: `source` block (source_id, title, author, source_type, canonical_url, notebooklm_notebook, date_ingested, queried_at, query_template), `note_type` (digest | extract), `scope` enum, `schema_version` field
+  - source_id algorithm (v1): `kebab(author-surname + short-title)`, collision detection + disambiguation
+  - Scope enum: whole, chapter, section, timestamp, topic
+  - Quality gate: low-citation source types (podcast, video) auto-tagged `needs_review`
+- **Sources/ top-level directory — updated §2.1**
+  - New vault structure with 7 subdirectories: `books/`, `articles/`, `podcasts/`, `videos/`, `courses/`, `papers/`, `other/`
+  - Routing by source type, not domain — knowledge notes live here, cross-linked via mandatory `#kb/` tags
+  - Source type → directory mapping table added
+- **`#kb/philosophy` canonical tag — updated §5.5**
+  - New Level 2 tag: `#kb/philosophy` — ethics, metaphysics, epistemology, philosophical traditions, thinkers
+  - Canonical list now 14 tags (was 13)
+- **Sentinel contract — referenced in §2.2.4**
+  - Formal spec for NLM export detection at `_system/docs/templates/notebooklm/sentinel-contract.md`
+  - Dual sentinel format: HTML comment (preferred) + plain-text fallback
+  - Placement rule: first 5 lines of exported file
+  - Parser contract with detection regex
+  - Versioning: `v` field, inbox-processor maintains backward compatibility
+- **`_system/docs/templates/notebooklm/` added to §2.1 directory tree**
+- **Type comment in §2.2 frontmatter examples updated** to include `knowledge-note`
+- **Financial Advisor overlay — added to §3.4.2 active roster**
+  - Personal/household finance lens: budgeting, investing, debt, tax planning, insurance, major purchases
+  - Activation signals and anti-signals with boundary definition against Business Advisor
+  - Seven lens questions covering time horizon, tax implications, opportunity cost, assumptions, reversibility, household impact, and budget impact
+- **Peer-review skill model update — §3.3, v1.7.1 description**
+  - Third provider changed from Perplexity Sonar Reasoning Pro to DeepSeek Reasoner
+  - Parallel API dispatch (was sequential)
+  - Fourth reviewer slot added for ad-hoc additions (e.g., Grok)
+- Source: retroactive from notebooklm-pipeline project (archived 2026-02-20) and same-day spec audit. All changes were implemented and validated before spec incorporation.
+
+**v1.7.1** (2026-02-18)
+- **Peer-review utility skill — new in §3.3**
+  - Cross-LLM review automation via OpenAI, Google, and Perplexity APIs
+  - Three-provider default: GPT-5.2 Thinking, Gemini 2.5 Pro, Sonar Reasoning Pro
+  - `docs/peer-review-config.md` for model config, retry policy, reviewer addenda
+  - `reviews/` directory for consolidated review notes + raw JSON forensic trail
+  - Safety gate with hard denylist + soft heuristics
+  - Diff mode for iterative reviews
+  - Decision-oriented synthesis with finding IDs and action items
+  - Cost guidance: ~$0.17 per 3-model review, ~$5/month at moderate usage
+  - Design spec: `docs/peer-review-skill-spec.md`
+- Source: two-round peer review provenance (GPT-5.2 Thinking, Gemini 2.5 Pro, Perplexity Sonar Reasoning Pro)
+
+**v1.7** (2026-02-18)
+- **Maps of Content (MOC) system — new §5.6**
+  - Topic-level navigational layer between domain summaries and atomic kb-tagged notes
+  - Two MOC types: `moc-orientation` (conceptual map + synthesis) and `moc-operational` (execution playbook)
+  - MOC skeleton with HTML comment anchors (`<!-- CORE:START -->` etc.) for deterministic edits
+  - Section requirements type-aware: Paths optional for orientation, required for operational; Synthesis required for orientation (when Core > 3), optional for operational
+- **`topics` frontmatter field (§2.2, §5.6.5)**
+  - MOC membership declaration required for all `#kb/`-tagged notes (frontmatter `tags[]` detection only)
+  - Simplified exemption rule: requires `topics` iff `tags[]` contains `kb/` AND `type` is not `moc-orientation`/`moc-operational` (prevents circularity — MOCs are targets, not members)
+  - Vault-check Check 19 enforces the requirement mechanically
+- **Placement pass (§5.6.6)**
+  - Deterministic (no LLM) — mechanical insertion of structured one-liner into MOC Core section
+  - Integrates with compound step, inbox processor, and manual note creation workflows
+  - Soft quality lint: informational warning for one-liners <10 chars after link
+- **Synthesis pass (§5.6.7)**
+  - LLM-required, gated by debt score threshold (30 points)
+  - Invariant: `last_reviewed` and `notes_at_review` must update in the same write
+  - Three review basis levels: delta-only, full, restructure
+- **MOC debt score (§5.6.8)**
+  - Formula: `(delta_count × 3 + (staleness if delta_count > 0 else 0) + (5 if core > 15 else 0)) × review_basis_multiplier`
+  - Staleness gated on delta activity: dormant topics (no new notes) have zero debt
+  - Session startup reports top 3 MOCs by debt
+  - Known limitation: bulk-update delta inflation acknowledged with future escape hatch
+- **Bridge-candidate lint (§5.6.9)**
+  - Notes in 3+ MOCs should have Scope/Boundary section — audit diagnostic only (not vault-check)
+- **Vault-check additions (§5.6.10, §7.8)**
+  - Check 17: MOC schema validation + global filename uniqueness
+  - Check 18: Topics resolution — two-step (glob resolve + assert MOC type)
+  - Check 19: Topics requirement for kb-tagged notes (MOC files exempt)
+  - Check 20: Reserved (bridge-candidate moved to audit)
+  - Check 21: Synthesis density — type-aware (orientation only)
+  - Validation count updated from sixteen to twenty
+- **Delta computation (§5.6.11)**
+  - Source of truth: frontmatter `updated` field (not filesystem mtime)
+  - Operator rule: only semantic edits bump `updated`; mechanical rewrites preserve it
+  - New/Updated classification using `created` vs `last_reviewed`
+- **Initial MOC set (§5.6.12)**
+  - 9 starter MOCs across Career and Learning domains
+  - Includes `moc-crumb-operations` (operational MOC for session workflows and vault maintenance)
+- **MOC health as system metric (§5.6.13)**
+  - Healthy/unhealthy signal definitions
+  - Audit skill weekly review includes MOC debt scores, synthesis density, bridge-candidate scope
+- **Spec modifications**
+  - §2.1: MOC files added to Domains/ directory listing
+  - §2.2: `topics` field added to both frontmatter templates
+  - §5.5: Promotion mechanism extended with Step 4 (Place in MOC)
+  - §7.8: Checks 17-21 added; future extension note updated
+  - §8 Phase 2: Items 25e (build MOC system) and 25f (add MOC lint) added
+  - §9: Five deferred items added (synthesis skill, delta automation, split/merge, graph metrics, bulk-update suppression)
+- **Design decisions documented inline**
+  - MOCs are topic-based, not project-based (orthogonal to project lifecycle)
+  - MOCs participate in `#kb/` queries by design (separate namespace rejected)
+- Source: arscontexta analysis, four-review provenance (Claude Opus, ChatGPT, Perplexity, post-review hardening); 21-item change log in amendment document
+
+**v1.6.3** (2026-02-17)
+- Spec-reality sync after inbox-processor implementation
+- Stale OCR references removed from §2.5 Path B and §3.3
+- Path A language made mandatory ("MUST follow this protocol")
+- Re-routing section aligned with implementation: added status field removal step and post-condition check
+- Idempotency note added to §2.5
+- CLAUDE.md template corrected (CLI, not MCP)
+- Implementation items 25b, 25c, 25d marked complete
+
+**v1.6.2** (2026-02-17)
+- **Archive location consistency check (§7.8 Check 16)**
+  - Phase/location mismatch detection: `project-state.yaml phase: archived` must match `Archived/Projects/` location (and vice versa)
+  - Duplicate project directory detection: same project name cannot exist in both `Projects/` and `Archived/Projects/`
+  - Both violations are errors (not warnings) — catches interrupted archive/reactivate operations
+  - Remediation guidance prefers directory location as authoritative
+- **Archive closure semantics (§4.6)**
+  - `archived_reason` field added to project-state.yaml: `completed | paused | abandoned`
+  - Distinguishes done projects (knowledge-base mining candidates) from paused (likely to return) and abandoned (audit pattern signal)
+  - Claude asks user for reason during confirmation step; cleared to null on reactivation
+- **Defensive default for missing `phase_before_archive` (§4.6)**
+  - If `phase_before_archive` is missing or null during reactivation, default to `PLAN` with run-log notation
+  - Handles pre-v1.6.1 archivals, manual archives, and corrupted state
+- Source: ChatGPT architectural peer review; actionable feedback incorporated, link-rot sweep and macro checklist noted for observation/future
+- **§7.9 MarkItDown corrections from empirical validation (v0.1.4, 2026-02-17)**
+  - Image capabilities: EasyOCR was never integrated into released versions (through v0.1.4) despite early documentation suggesting it. `ImageConverter` only supports EXIF metadata extraction (via `exiftool`) and LLM-based captioning (via Python API `llm_client`, not accessible through CLI). All EasyOCR references removed.
+  - Integration path: changed from MCP-preferred/CLI-fallback to CLI-primary (`markitdown <filepath>` via bash) — simpler for single-operator serial execution, validated in implementation session
+  - Known limitations: replaced speculative list with per-format empirical quality findings — DOCX/PPTX/XLSX excellent, PDF adequate but tables lose structure, images return EXIF metadata only
+  - Installation: updated from `pip install` to `pipx install 'markitdown[all]'` + `brew install exiftool`; noted EasyOCR is neither included in `[all]` extra nor used by any converter
+  - §9 Vision enrichment deferred item: corrected "EXIF metadata extraction and OCR for text-bearing images" to "EXIF metadata extraction via MarkItDown + exiftool"
+  - §9 Docling deferred item: updated with empirical PDF finding (table cells render as flat text, not markdown tables)
+
+**v1.6.1** (2026-02-17)
+- **Project archive & reactivate protocol (§4.6)**
+  - User-initiated archive and reactivate procedures with explicit steps, preconditions, and failure handling
+  - Directory location (`Projects/` vs `Archived/Projects/`) is single source of truth for project active/archived state
+  - `phase_before_archive` field in project-state.yaml preserves pre-archival phase for mechanical restoration on reactivation
+  - Final compound step on archival — last opportunity to extract patterns before project leaves active rotation
+  - Precondition: clean working tree required before archival (commit or run interruption recovery first)
+  - Companion note path updates with vault-check verification after both operations
+  - Phase selection on reactivation: default to pre-archive phase, user may override for scope changes
+- **Project lifecycle overview (§4.1.6)**
+  - New paragraph documenting creation → active work → archival → reactivation lifecycle
+  - Cross-references to Project Creation Protocol (§4.1.5) and Archive/Reactivate Protocol (§4.6)
+- **Removed `status` from project doc frontmatter (§2.2, §2.2.1, §7.8)**
+  - Project docs inherit active/archived state from directory location — `status` field is redundant
+  - Non-project docs (domain notes, system docs, global attachment companions) retain `status`
+  - vault-check Check 1 updated to path-conditional required fields
+  - Backward compatible: existing `status` fields on project docs are ignored, not errored
+- **Section renumbering (§4.6–§4.9)**
+  - Behavioral Boundaries: §4.6 → §4.7
+  - Hallucination Detection Protocol: §4.7 → §4.8 (all subsection references updated)
+  - Signal Capture Protocol: §4.8 → §4.9
+  - All cross-references throughout spec updated to match
+- **CLAUDE.md updates (§6)**
+  - New `## Project Archival` section with archive/reactivate procedures and autonomy boundary
+- **Implementation plan additions (§8)**
+  - 17c: Document archive/reactivate protocol in CLAUDE.md
+  - 17d: Remove `status` from existing project doc frontmatter (cleanup, not urgent)
+- Source: design session with Perplexity peer review; all actionable feedback incorporated
+
+**v1.6** (2026-02-17)
+- **Binary attachment support — complete design for images, PDFs, and office documents in the vault**
+  - Designed, drafted, and peer-reviewed across Perplexity and ChatGPT before integration. All feedback addressed.
+- **Companion note architecture (§2.2.1)**
+  - Every binary file MUST have a colocated markdown companion note — the agent-facing interface for queries, task references, knowledge base discovery, and audit
+  - Companion note schema: `type: attachment-companion` with `attachment` block (source_file, filetype, source, size_bytes, description_source), `related` block (task_ids, docs), `description`, and `summary`
+  - `description` vs `summary` semantics: `description` is the short synopsis for queries/references; `summary` is the longer extraction dump for deep search. Full extraction lives in `## Extracted Content` body section, not frontmatter (prevents YAML bloat)
+  - `description_source` enum: `null | filename-derived | user-provided | markitdown | ocr | vision-api`
+  - `needs-description` tag for images without meaningful descriptions; `needs-extraction` tag for documents where extraction fails — both are quality signals, not structural errors
+  - PDF companion note example added alongside the existing image example
+  - Companion notes are promotable to `#kb/` like any other markdown artifact
+- **Two-tier storage model (§2.1)**
+  - `_attachments/[domain]/` for unaffiliated binaries; `Projects/[project-name]/attachments/` for project-scoped binaries
+  - Routing rule: project-affiliated binaries MUST live in project tree; archived projects carry their attachments
+  - Supported types: documents (PDF, DOCX, PPTX, XLSX) and images (PNG, JPG, JPEG, GIF, WEBP, SVG); audio/video intentionally excluded
+  - Binary location constraint enforced by vault-check (§7.8 check 14)
+- **Binary filename conventions (§2.2.2)**
+  - Templates for screenshots, diagrams, inbound docs, exports, personal media
+  - SHOULD-level guidance (not MUST) with minimal fallback patterns when full context unavailable
+  - Inbox processor proposes fully-qualified rename when project/task context becomes clear
+- **File size guidance (§2.2.3)**
+  - 10MB soft threshold per file — ingestion paths flag, vault-check warns, but neither blocks
+  - Audit skill weekly review includes aggregate attachment storage visibility
+- **Four ingestion paths (§2.5)**
+  - Path A: created during governed session (highest signal, bypasses inbox)
+  - Path B: dropped in `_inbox/` with no context (inbox processor handles classification and routing)
+  - Path C: external file, project-affiliated (user specifies project)
+  - Path D: manually placed in project attachments (orphan detection on session start)
+  - Re-routing protocol for when project affiliation is discovered after initial processing
+  - Project detection precedence ladder for Path B: user override → filename match → active project context → global `_attachments/`
+- **Inbox processor expanded (§3.3)**
+  - Table row updated with two processing tiers: text-extractable documents (MarkItDown extraction → summary + `## Extracted Content`) and non-extractable images (EXIF + opportunistic OCR)
+  - Supports project override, filename renames, orphan sweep mode
+- **Vault-check extended from 11 to 15 validations (§7.8)**
+  - Check 12: Binary → companion orphan check (missing companion → error)
+  - Check 13: Companion → binary orphan check (missing binary → error)
+  - Check 14: Binary location constraint (binaries outside permitted directories → error)
+  - Check 15: Description and extraction completeness (missing description → error; missing extraction → warning + `needs-extraction` tag)
+- **MarkItDown external tool dependency (§7.9)**
+  - Microsoft, MIT licensed, unified extraction for documents + images via single interface
+  - CLI-primary integration path (`markitdown <filepath>` via bash); MCP server available if needed later
+  - Known limitations documented with empirical quality findings: DOCX/PPTX/XLSX excellent, PDF adequate (tables lose structure), images return EXIF metadata only (no OCR in released versions)
+  - Backend flexibility: inbox processor MAY swap extraction backends per file type without spec changes — schema is tool-agnostic
+- **Git binary handling (§7.10)**
+  - `.gitignore` by extension (not directory) — companion notes tracked, binaries excluded
+  - Binary durability requirement: vault owner MUST configure separate sync/backup for binaries (day-one operational requirement)
+  - `.gitattributes` LFS stub included for future migration path
+  - Location constraint works in concert with gitignore — vault-check catches misplaced binaries regardless of git tracking
+- **Deferred items added (§9)**
+  - Vision enrichment for image attachments: MarkItDown `llm_client` parameter for LLM-based descriptions; schema already supports it via `description_source` and `needs-description` tag
+  - Docling as PDF extraction backend: higher-fidelity PDF conversion when compound engineering surfaces quality friction
+- **CLAUDE.md updates (§6)**
+  - Session startup: orphan binary check added as step 9
+  - New `## External Tools` section for MarkItDown MCP registration
+- **Implementation plan amendments (§8)**
+  - Phase 1b: item 17b — add binary attachment validations to vault-check.sh (inert until binaries exist)
+  - Phase 2: items 25b-25d — build inbox processor with MarkItDown, configure integration, configure git binary handling
+- Source: design session with multi-model peer review (Perplexity, ChatGPT) — all actionable feedback incorporated
+- **Documentation audit fixes**
+  - Fixed vault-check count references: §7.4 step 5 and §7.8 future extension note updated from "10"/"ten" to "11"/"eleven" (Check 11 added in v1.5.4 but prose references not updated)
+  - Fixed vault-check Check 4 section marker format: changed `### Actions Taken` (H3 headings) to `**Actions Taken:**` (bold-text markers) to match actual run-log format defined in §2.3.1
+  - Updated spec preamble to include skill authoring conventions alongside crash resilience in v1.5.4 description
+  - Added obsidian-cli, checkpoint, and sync skill directories to vault structure (§2.1) — these have full SKILL.md files since v1.5.4 but were missing from the tree listing; inbox-processor annotated as Phase 2
+  - Aligned §0.3 session startup description with §6 and §7.1 — removed `session-startup.sh` hook reference (file was not in vault structure or scripts listing; §6 and §7.1 already describe startup as individual steps Claude runs sequentially)
+  - Added spec-section fallback references to CLAUDE.md template (§6) for three reference docs without build triggers: compound-protocol.md (→ §4.4), convergence-protocol.md (→ §4.2), routing-heuristics.md (→ §1.2/§4.1)
+  - Added Phase 1b items 12a-12c: creation triggers for compound-protocol.md, convergence-protocol.md, and routing-heuristics.md
+  - Source: documentation audit covering structural consistency, cross-reference integrity, and completeness
+
+**v1.5.4** (2026-02-17)
+- **Crash resilience hardening from real usage (think-different project)**
+  - A connectivity crash mid-session left 20+ files on disk but uncommitted. The session-end sequence commits, but long ACT sessions can accumulate many files before reaching session-end. Three changes to harden crash resilience:
+- **Git commit at checkpoint boundaries (§4.1.4)**
+  - Added explicit `git commit` step to Context Checkpoint Protocol — after run-log phase transition entry and project-state.yaml update, before loading next phase context
+  - Moves the durability boundary from "end of session" to "end of meaningful work unit"
+  - Added batch commit discipline note for long ACT phases — commit at each batch boundary during multi-batch work, not just at session end
+  - Updated CLAUDE.md Phase Transition Gate template (now 8 steps, was 7)
+  - Updated `docs/context-checkpoint-protocol.md` procedure (now 8 steps, was 7)
+- **Formalized crash recovery (§0.3, §7.4)**
+  - Added "Session crashed mid-work" scenario to §0.3 Operator Quick-Start with pointer to full procedure
+  - Added Session Interruption Recovery procedure to §7.4: 7-step reconciliation (check git status → read project-state → compare filesystem vs run-log → update logs → vault-check → commit → continue)
+  - Authority rules during reconciliation: filesystem is ground truth for what was produced; logs get updated to match it
+- **Added `last_committed` field to project-state.yaml (§4.1.4, §4.1.5, §7.1, §7.8)**
+  - Timestamp showing when project was last git-committed, updated alongside `updated` at every commit
+  - Enables crash detection on resume: if `last_committed` is significantly older than `updated`, uncommitted work may exist on disk
+  - Added to project creation schema (§4.1.5), phase transition template (§4.1.4), task completion template, and resume procedure (§7.1)
+  - vault-check.sh Check 11: verify `last_committed` exists (warning level, backward compatible)
+  - Extended vault integrity script from 10 to 11 mechanical validations (§7.8)
+- **Phase transition heading fix (pre-v1.5.4, committed separately)**
+  - Demoted phase transitions from `## Phase Transition:` to `### Phase Transition:` — they are events within session blocks, not top-level entries
+  - Fixed vault-check Check 4 false positives where `##` headings prematurely terminated session blocks before required fields were reached
+  - Updated vault-check Check 5 to detect `### Phase Transition:` blocks
+- **Standardized skill file structure via skill authoring conventions (§3.1, `docs/skill-authoring-conventions.md`)**
+  - New reference doc `docs/skill-authoring-conventions.md` adapts Fabric's battle-tested pattern structure (251 patterns, 200+ contributors, 3,500+ commits) to Crumb's stateful skill model
+  - Prescribed section order for all SKILL.md files: YAML frontmatter → Identity and Purpose → When to Use This Skill → Procedure → Context Contract → Output Constraints (when applicable) → Output Quality Checklist → Compound Behavior → Convergence Dimensions
+  - Created standalone SKILL.md files for 5 skills previously defined only in spec: `systems-analyst`, `action-architect`, `obsidian-cli`, `checkpoint`, `sync`
+  - Reformatted 2 existing SKILL.md files (`writing-coach`, `audit`) to match conventions: added Identity and Purpose, Compound Behavior, and Convergence Dimensions sections
+  - Identity and Purpose section uses three-part formula: what you are, what you produce, what you protect against — primes Claude's behavior before reading the procedure
+  - Output Quality Checklist items standardized to state-not-action, binary testable format (from PAI's ISC pattern)
+  - Promoted `checkpoint` and `sync` from Phase 2+ backlog stubs to full §3.1.6 and §3.1.7 skill definitions
+  - Updated spec §3.1 to reference SKILL.md files as authoritative source, with concise summaries capturing phase context, inputs/outputs, and cross-references — eliminates content duplication between spec and skill files
+  - Removed Command-Like Skills subsection from §3.3 (content now lives in standalone SKILL.md files)
+
+**v1.5.3** (2026-02-17)
+- **Peer review synthesis: targeted hardening from multi-model analysis (Gemini, ChatGPT, Perplexity)**
+  - Three batches: structural/mechanical (high priority), state/lifecycle (medium-high), operational/ergonomic (medium). All informed by independent reviews from three external models with cross-review synthesis.
+- **Extended vault integrity script from 6 to 9 mechanical validations (§7.8)**
+  - Check 3 (new): Summary schema completeness — verifies every `*-summary.md` has a `source_updated` field in frontmatter. A summary without this field is structurally invisible to all staleness detection. Reports missing fields as errors.
+  - Check 7 (new): Project scaffold completeness — verifies every `Projects/` directory contains `progress/run-log.md` and `progress/progress-log.md`. Catches interrupted Project Creation Protocol or manual directory creation that bypassed the protocol. Reports missing files as errors.
+  - Check 8 (new): Task completion evidence — verifies every `state: complete` task in `tasks.md` has at least one `## Session` block in the project's `run-log.md` referencing that task ID. Reports mismatches as warnings (not errors — crash recovery may legitimately produce this state temporarily).
+  - Renumbered existing checks 3-6 → 4-6, 9. Updated Phase 1a implementation list (§8) to reference new validations. Updated future extension note to reference nine validations.
+  - Addresses: Perplexity P1 (over-reliance on behavioral compliance), Gemini P5 (metadata enforcement), ChatGPT meta-observation (mechanical checks not covering true control plane)
+- **Added Context Pressure Degradation Guide (§4.1.4)**
+  - Five capacity bands (<50%, 50-65%, 65-75%, 75-85%, >85%) with explicit operational adjustments at each level
+  - Key trade-offs: skip optional overlays at 65%+, skip MAY-request docs at 75%+, flag reduced mode to user at 75%+, refuse substantive work at 85%+
+  - Operational guidelines, not mechanical enforcement — Claude applies judgment within bands
+  - Core insight: graceful degradation is better than full capability followed by sudden failure
+  - Added reference in CLAUDE.md Context Rules section (§6)
+  - Addresses: Perplexity P9 (no degradation model under context pressure) — novel observation not raised by other reviewers
+- **Added targeted partial reads to Action Architect context contract (§3.1.2)**
+  - For software projects at PLAN → TASK transition: Action Architect now MUST load Constraints, Requirements, and Interfaces/Dependencies sections from full design docs alongside summaries
+  - Targeted partial reads (specific sections, not full documents) catch constraint omissions that summaries may introduce — provenance checks catch additions but are structurally weak at catching omissions
+  - Partial reads count as one doc each for budget purposes, not as loading the full document
+  - Fallback: if design docs lack these headings, load first and last sections as proxy
+  - Addresses: Perplexity P8 (summary-as-interface creates lossy information channel) — best-framed version of concern raised by all three reviewers
+- **Added human sign-off gate for medium-confidence compound patterns (§4.4, §4.6)**
+  - Medium-confidence patterns now require user review before writing to `docs/solutions/`. Claude presents: pattern title, trigger context, proposed decision rule, source task(s), and falsifiability check result. User approves, requests changes, or rejects.
+  - Low-confidence path unchanged: observations held in `run-log.md` until second instance
+  - High-confidence path updated: write directly if 3+ instances, but tag as `tentative-pattern` if all instances are from the same project (within-project repetition is weaker evidence than cross-project)
+  - Added to §4.6 Ask First boundaries list
+  - Addresses: Perplexity P4 (circular quality assurance — LLM evaluates own outputs), ChatGPT meta-observation (mechanical checks not covering knowledge-modifying actions)
+- **Enhanced overlay activation schema (§3.4.1, §3.4.2, §3.4.3, §3.1.4)**
+  - Standard overlay structure (§3.4.1): Activation Criteria section now has three subsections — Signals (match any → consider loading), Anti-signals (match any → do NOT load even if signals match), Canonical examples (2-3 concrete ✓/✗ scenarios)
+  - Overlay index (§3.4.2): table gains Anti-Signals column — anti-signals must be visible at routing time, not just in the overlay file
+  - Business Advisor example (§3.4.3): updated with concrete anti-signals (purely technical decisions, implementation-level tasks, personal goals without financial dimensions, post-hoc justification) and canonical examples (vendor evaluation ✓, pricing strategy ✓, database choice ✗ unless budget/vendor lock-in is stated)
+  - Audit skill monthly checks (§3.1.4): new item 11 — overlay activation precision review. Reviews match/skip logs, qualitatively assesses false positives and false negatives per overlay, proposes signal/anti-signal tightening when patterns recur. This is the feedback loop that prevents overlay routing from drifting over time.
+  - Fixed duplicate numbering in audit monthly checks (two item 9s → items 9, 10, 11)
+  - Added "Modify overlay activation signals or anti-signals" to human review actions list
+  - Addresses: ChatGPT P4 (overlay activation is a rules-drift hotspot) — strongest point from that review, not raised by other reviewers
+- **Added `project-state.yaml` for machine-readable project state tracking (§2.1, §4.1.4, §4.1.5, §4.5, §7.1, §7.8)**
+  - New file in project scaffold: `Projects/[project-name]/project-state.yaml` with fields: `phase`, `workflow`, `last_gate`, `active_task`, `updated`
+  - Created at project creation (§4.1.5) alongside run-log.md and progress-log.md
+  - Updated at every phase transition as part of Context Checkpoint Protocol (§4.1.4, step 4) and on task completion (§4.5)
+  - Resume Procedure (§7.1) now reads project-state.yaml first for quick state orientation before parsing run-log prose
+  - vault-check.sh check 7 updated to verify project-state.yaml exists (warning, not error — pre-v1.5.3 projects won't have it)
+  - Vault structure (§2.1) and scaffold note updated
+  - CLAUDE.md Project Creation section updated
+  - Addresses: Perplexity P2 (no formal state machine enforcement), ChatGPT P1 (orchestration logic underspecified)
+- **Formalized task lifecycle state machine (§4.5)**
+  - Explicit allowed transitions: pending→ready, ready→claimed, claimed→in_progress, in_progress→complete, in_progress→ready, claimed→ready. All others invalid.
+  - Four transition invariants: dependencies must be complete before ready; all acceptance criteria must be checked before complete; no dependency cycles; one active task per session
+  - Definition of done: all acceptance criteria [x], run-log entry references task ID, convergence check passes (code: binary; non-code: rubric or user acceptance), project-state.yaml updated
+  - Task completion triggers project-state.yaml update (active_task cleared or set to next task)
+  - Addresses: ChatGPT P5 (task lifecycle under-defined), Perplexity P2 (no formal state machine enforcement)
+- **Added operator quick-start section (§0.3)**
+  - One-screenful session on-ramp: 5 concrete steps (start session, identify project, read last entry, choose depth, go)
+  - Minimum viable Crumb checklist: 7 artifacts needed before the system is usable
+  - Addresses: Perplexity usability recommendation — lowers cognitive load on session start
+- **Added worked examples and governance boundary (§4.1)**
+  - Three golden path examples: new software project (end-to-end four-phase), ad-hoc research that becomes a project (mid-conversation escalation), personal domain goal (two-phase lightweight)
+  - "When NOT to use Crumb" section: defines the boundary between Crumb-governed work and ad-hoc Claude Code usage
+  - Addresses: Perplexity usability recommendations — golden paths lower friction, governance boundary prevents the system from becoming an obligation for every interaction
+- **Added compound artifact output template (§4.4)**
+  - Pattern document minimum fields: Pattern Title, Trigger Context, Decision Rule, Evidence (with project/task references), Counterexample (from falsifiability check)
+  - Reduces variance in pattern doc quality; makes patterns more reusable and searchable
+  - Addresses: ChatGPT initial analysis — compound artifacts need an explicit output contract
+- **Added phase transition exception rules (§4.1)**
+  - Five explicit rules for when reality doesn't fit linear flow: scope change (return to SPECIFY), spec invalidation (return to SPECIFY), user requests phase skip (decline with explanation, log as ADR if overridden), subagent output rejection (stay in phase, revision protocol), context clear mid-phase (reconstruct and continue)
+  - Bounds Claude's judgment with explicit exception handling — doesn't remove flexibility but makes deviation auditable
+  - Addresses: ChatGPT P1 (orchestration logic underspecified) — complements existing "never skip phases" rule with concrete exception paths
+- **Added observability-to-action escalation responses (§3.1.4 audit weekly)**
+  - Three concrete if-then responses: >25% rating-1 → extra convergence check; 3+ extended-tier context invocations → flag for summary tightening; 3+ routing failures in 30 days → review CLAUDE.md heuristics
+  - Closes the loop between data collection (signals, context inventories, failure log) and behavior change
+  - Addresses: ChatGPT P9 (observability not tied to control actions)
+- **Extended ADR mechanism to cover spec evolution decisions (§2.3.3)**
+  - ADR format now covers any decision that modifies specs, adds constraints, or changes architectural direction — not just subagent design choices
+  - Spec evolution ADRs reference the spec section(s) changed and capture before/after reasoning
+  - Fills gap where specs accumulate implicit decisions that lose their reasoning history
+  - Addresses: Claude's analysis of Gemini P1 — the real drift risk is in parent documents, not summaries
+- **Added solution doc tagging consistency check to audit (§3.1.4 weekly item 9)**
+  - Weekly KB health check now verifies all `docs/solutions/` files have at least one `#kb/` tag
+  - Untagged solution docs are invisible to knowledge base queries and risk creating duplicate patterns
+  - Addresses: Claude's analysis of Gemini P4 — semantic discovery gap mitigated by consistent tagging
+- **Added retention policies for append-only stores (§4.8)**
+  - `docs/signals.jsonl`: archive entries older than 6 months to dated archive file
+  - `docs/solutions/`: consolidation when category exceeds 15 docs (finer-grained than existing 50-doc trigger)
+  - `docs/failure-log.md`: archive entries older than 6 months to dated archive file
+  - Session-log: already handled by monthly rotation — no additional action needed
+  - Audit skill applies during monthly checks; archiving moves data to dated files, never deletes
+  - Addresses: Perplexity P5 (append-only data structures with deferred pruning)
+- **Added project-state active task consistency check to vault-check.sh (§7.8)**
+  - Check 10: if `project-state.yaml` specifies a non-null `active_task`, verify (a) `tasks.md` exists, (b) the task ID exists in `tasks.md`, (c) the task is not `state: complete`
+  - Reports violations as errors — a dangling or stale active_task is a true invariant break, not a timing issue
+  - Updated future extension note and §8 implementation plan to reference ten validations
+  - Addresses: Perplexity post-v1.5.3 review §2 — project-state.yaml existence verified but correctness not checked
+- **Added source of truth authority rules (§7.1)**
+  - Explicit table: `project-state.yaml` authoritative for "where am I", `run-log.md` for "what happened", `tasks.md` for "what remains"
+  - Disagreement during resume: flag to user, don't silently pick one
+  - Addresses: ChatGPT post-v1.5.3 review §6 (dual control planes, truth divergence risk)
+- **Added `next_action` field to `project-state.yaml` (§4.1.4, §4.1.5, §4.5, §7.1)**
+  - One-sentence instruction written at every phase transition and task completion: "when you resume, do X first"
+  - Single most valuable resume field — reduces reconstruction overhead dramatically
+  - Updated initialization schema, phase transition update, task completion update, and resume procedure
+  - Addresses: ChatGPT post-v1.5.3 review §6 (state file too thin for complex resume)
+- **Added Minimum Safe Checkpoint at ≥75% context (§4.1.4 degradation guide)**
+  - 75-85% band now requires: write/refresh `project-state.yaml` (including `next_action`), append partial run-log entry, git commit — before any new substantive work
+  - Ensures state is durable before degradation risks increase
+  - Addresses: ChatGPT post-v1.5.3 review §2 (no task-safe checkpoint definition under pressure)
+- **Added cost-of-wrong to medium-confidence compound pattern presentation (§4.4)**
+  - User now sees "what breaks if this is wrong?" alongside existing fields (title, trigger, decision rule, evidence, falsifiability)
+  - Helps calibrate review effort — high cost-of-wrong patterns get more scrutiny
+  - Addresses: ChatGPT post-v1.5.3 review §4 (pattern review is taste-based without rubric)
+- **Added incident recovery guidance to operator quick-start (§0.3)**
+  - Three concrete scenarios: stale/inconsistent state, high context with incomplete work, unclear phase
+  - Each has an immediate action — no diagnosis required, just follow the steps
+  - Addresses: ChatGPT post-v1.5.3 review §8 (quick-start lacks "what to do when broken")
+- **Added deferred items to §9**
+  - vault-check.sh auto-repair ("doctor" mode): build when recurring fixable issues surface
+  - Constraint Harvest micro-protocol: build when failure-log shows constraint omission despite targeted partial reads
+  - Overlay composition and precedence rules: build when 3+ active overlays exist
+
+**v1.5.2** (2026-02-15)
+- **Added Check 6 to vault integrity script description (§7.8)**
+  - §7.8 now documents six mechanical validations, up from five
+  - Check 6: Knowledge base tag validation — scans `Projects/` and `Domains/` for `#kb/` tags, enforces canonical Level 2 list from §5.5, enforces three-level depth cap, blocks commits on violations
+  - Scope deliberately excludes `docs/` — system infrastructure files should not carry `#kb/` tags
+  - Updated future extension note to reflect six validations
+
+**v1.5.1** (2026-02-15)
+- **Formalized knowledge base tag hierarchy (§5.5)**
+  - Three-level structure with hard cap: `#kb/` → `#kb/[topic]` → `#kb/[topic]/[subtopic]`
+  - Defined 13 canonical Level 2 topics: religion, gardening, history, inspiration, poetry, writing, business, dns, networking, security, software-dev, customer-engagement, training-delivery
+  - Level 3 subtopics are NOT predefined — they emerge through compound engineering when a Level 2 topic accumulates enough notes that finer filtering becomes useful
+  - Added audit guidance for Level 3 tag health: flag single-note tags (premature fragmentation), 15+ note topics with no subtopics (may benefit from splitting), and duplicate subtopics (consolidate)
+  - Tag depth enforcement: `#kb/topic/subtopic` is the maximum; content and title provide specificity beyond that, CLI full-text search handles the rest
+  - Updated discovery pattern examples to use new hierarchy
+  - Updated `docs/file-conventions.md` Knowledge Base Tags section to match
+
+**v1.5** (2026-02-15)
+- **Added inbox processing pattern and inbox-processor skill (§2.1, §3.3)**
+  - New `_inbox/` directory: drop zone for manually added files of any supported type. Processed by the inbox-processor skill into vault-native artifacts with proper frontmatter, tags, and placement.
+  - New `_attachments/[domain]/` directory: permanent storage for binary files (PDF, DOCX, PPTX, XLSX) after inbox processing. Binary files get a markdown companion note at the destination with summary, key points, embed link, and `source_file`/`source_type` frontmatter fields.
+  - Markdown files processed directly: frontmatter added, renamed to kebab-case, moved to appropriate location.
+  - New `inbox-processor` skill (`.claude/skills/inbox-processor/SKILL.md`): repeatable procedure for scanning inbox, classifying files by type, asking user for domain/destination/tags, processing markdown directly, creating companion notes for binaries, and verifying completion. Supports batch processing with user-provided context to minimize per-file prompting.
+  - Binary extraction left to Claude Code's judgment (native PDF reading, `pandoc`, Python libraries) — skill specifies intent, not mechanics. Tighten if extraction quality proves inconsistent.
+  - Added to §3.3 skill table as built Phase 2 skill.
+  - Updated vault structure (§2.1) with `_inbox/`, `_attachments/`, `inbox-processor/SKILL.md`, and `setup-crumb.sh`.
+
+**v1.4.2** (2026-02-15)
+- **Added future extension note to vault integrity script (§7.8)**
+  - Documents that Phase 1b reference docs (convergence rubrics, failure log, context checkpoint protocol, file conventions, etc.) have structural invariants that could be mechanically validated — heading presence, taxonomy preservation, capacity threshold values
+  - Explicitly deferred: build when audit data shows structural drift in Phase 1b docs is a real problem, not speculatively
+  - Informed by Perplexity-generated validation review of Phase 1b files against spec, which proposed heading-level checks but used incorrect regex patterns — the concept is sound, implementation deferred
+
+**v1.4.1** (2026-02-15)
+- **Added acceptance criteria format rules (§4.5)**
+  - Three rules tightening the free-form acceptance criteria convention: (1) state not action — describe end state, not activity, (2) binary testable — YES/NO answerable with no judgment call, (3) one short sentence — under ~15 words, split if longer
+  - Convention change only — no new files, protocols, or infrastructure
+  - Updated §4.5 task YAML example to demonstrate compliant criteria
+  - Updated §4.6 behavioral boundaries "Always" list to reference format rules
+  - Informed by PAI's ISC-format acceptance criteria — adapted without the strict 8-word limit, which is arbitrary precision at Crumb's scale
+- **Added prompt triage for within-project response depth (§4.1, §6)**
+  - Three modes: FULL (new phase/task/scope change — full skill/overlay/context loading), ITERATION (refining current work — load only what the change needs), MINIMAL (quick fix/lookup/clarification — just do it, no skill invocation)
+  - Classification is Claude's judgment call, not a mechanical check or separate processing step — routing guidance, not a protocol
+  - Added to §4.1 as new subsection after workflow entry threshold with mode table and examples
+  - Added to CLAUDE.md template (§6) Workflow Routing section as three-line summary
+  - Addresses friction where Crumb's discipline-heavy approach applies full overhead to trivial within-project interactions
+  - Informed by PAI's FormatReminder hook — adapted without the skill/agent suggestion component (Crumb's existing routing already handles that) and without making it a separate pre-processing step (Principle 8)
+- **Declined: Versioned, component-assembled CLAUDE.md**
+  - Evaluated and rejected: PAI's approach (numbered component files + build script + LATEST pointer) solves a problem that exists when the file is large and changes frequently across many dimensions. Crumb's CLAUDE.md is under 200 lines, changes infrequently, and git already provides full version history. Build machinery adds a dependency, a sync failure mode, and cognitive overhead without paying for itself at current scale. Revisit if CLAUDE.md exceeds 250-line ceiling or compound engineering modifies routing rules frequently enough to cause edit conflicts.
+
+**v1.4** (2026-02-15)
+- **Added Signal Capture Protocol (§4.8 — new section)**
+  - New `docs/signals.jsonl` file: append-only JSONL with one entry per session capturing quantitative quality data
+  - Schema: date (ISO 8601), rating (1-3: miss/fine/hit), comment (optional), project (or null), domain (or null), skill (or null)
+  - 1-3 scale chosen over 1-10 to reduce noise at low signal volume — impactful meta, not granularity theater
+  - Capture mechanism: one-line append added to session-end sequence after compound evaluation. No hooks, no new infrastructure
+  - No rotation: ~220KB/year at high usage; filter by date at analysis time
+  - Rating-1 sessions should have a corresponding diagnosis entry in `docs/failure-log.md`
+  - Audit skill (§3.1.4) updated with new weekly step: analyze signals for underperforming skills/domains, 30-day trends, and any skill/domain where >25% of sessions rate 1
+  - Principle 7 compatible: ratings are external human input, not LLM self-evaluation
+  - Informed by PAI's signal capture system (3,540+ signals) — adapted to Crumb's lower volume and qualitative-first philosophy
+- **Broadened `docs/hallucination-log.md` to `docs/failure-log.md` (§2.1, §2.3, §3.1.4, §4.7, §5.3, §5.5, §6, §7.5, §8)**
+  - Renamed across all references (~8 locations): filesystem layout, key document table, audit skill, hallucination detection protocol, summary quality rules, CLAUDE.md template, vault maintenance, implementation plan
+  - Failure type taxonomy expanded from 4 (Convergence Failure, False Pattern, Bad Summary, Irrelevant Context) to 8: added Routing Failure, Scope Miss, Quality Miss, Wrong Skill
+  - Same log entry format retained: what happened / why it passed validation / actual failure mode / system update
+  - Tied to signal capture: rating-1 sessions should have a corresponding failure-log entry with the diagnosis
+  - Hallucination-specific failure types remain as categories within the broader taxonomy — no fidelity lost, coverage gained
+  - The Hallucination Detection Protocol (§4.7) retains its name — it's still about hallucination detection; the *log file* now captures all failure types
+- **Added Personal Context Document (§2.4 — new section)**
+  - New `docs/personal-context.md` with three functional sections: strategic priorities (6-12 month focus), professional context (role, responsibilities, relationships), working style (communication preferences, valued pushback, anti-patterns)
+  - Target under 50 lines — every line should change how a skill behaves
+  - Does not count against source document budget tiers (§5.4) — instructional context like overlays
+  - Added as MAY-load to context contracts for systems-analyst (§3.1.1), action-architect (§3.1.2), and writing-coach (§3.1.3) — load when task involves strategic trade-offs, recommendations, or communication style decisions
+  - Audit skill (§3.1.4) monthly checks updated: new step to verify strategic priorities are still current
+  - CLAUDE.md template (§6) Context Rules updated: personal-context.md and overlays explicitly noted as budget-exempt
+  - Maintenance: monthly audit includes currency check; update immediately if significant priority shift occurs mid-cycle
+  - Informed by PAI's TELOS identity files — scoped down significantly: no beliefs, personality traits, or life philosophy; only content that changes how skills route and evaluate
+- **Updated session-end sequence (§4.6, §6, §7.1)**
+  - Behavioral boundaries (§4.6) session logging: now includes signal append and rating-1 failure-log entry as part of session-end flow
+  - CLAUDE.md template (§6) Session Management: session-end sequence explicitly stated as log → compound → signal → failure-log (if rating 1)
+  - Operational concerns (§7.1) session-end automatic behavior: expanded from 2 steps to 4
+- **Updated Implementation Plan (§8)**
+  - Phase 1b: added items 16 (create personal-context.md) and 17 (initialize signal capture) — both have no trigger gate; start as early as practical
+  - Phase 2 and Phase 3 items renumbered (18-31) to accommodate new Phase 1b items
+  - Triggers-not-sequence note updated to reference items 8-17 and note that personal context and signal capture have no trigger
+
+**v1.3.1** (2026-02-14)
+- **Added OpenClaw integration to §9 (Deferred Items)**
+  - OpenClaw provides always-on availability, mobile vault access, messaging interfaces, cron scheduling, research delegation, and proactive monitoring — capabilities Crumb intentionally lacks
+  - Integration architecture uses shared vault with strict directory ownership: OpenClaw writes only to `_openclaw/` sandbox; Crumb manages all governed directories
+  - Phased adoption: (1) shared filesystem + read-only vault skill + cron, (2) bidirectional inbox + research delegation + webhooks, (3) CLI escalation + browser validation
+  - Standalone reference document (`docs/openclaw-crumb-reference.md`) contains full integration architecture, exchange formats, use case allocation, and phasing
+- **Added semantic search via qmd to §9 (Deferred Items)**
+  - qmd (by Tobi Lütke) provides hybrid BM25 + vector embedding + neural reranker search — meaning-based retrieval that complements Crumb's keyword/tag-based Obsidian CLI search
+  - Already available as opt-in OpenClaw memory backend; can index arbitrary markdown directories including the Crumb vault
+  - Two adoption paths: (1) via OpenClaw for phone-based semantic queries (near-automatic), (2) directly in Crumb via `qmd query` shell calls (requires spec change)
+  - Local-first, no API calls, credible provenance — separate from ClawVault
+- **Added ClawVault structured memory to §9 (Deferred Items)**
+  - Typed categories, observational memory, wiki-link knowledge graph, session lifecycle (`wake`/`sleep`/`handoff`) — built on top of qmd by Versatly (unproven org, 20 GitHub stars)
+  - Would automate intake funnel and provide cross-system session continuity, but category structure overlaps with Crumb's vault — risk of parallel state
+  - Deferred until empirical friction data from running the basic OpenClaw integration justifies the dependency
+- **Updated Researcher skill entry (§3.3)** — added alternative path note: if OpenClaw integration is active, delegated research via `_openclaw/inbox/` may satisfy the need without building a native Crumb skill
+- **Updated §5 tool layer** — Phase 2+ evaluation now includes qmd semantic search alongside MCP as potential capability extensions if primary tools prove insufficient
+
+**v1.3** (2026-02-14)
+- **Added Primitive Creation Protocol (§3.5)**
+  - Unified protocol for creating skills, subagents, and overlays — two paths: user-initiated (bypasses escalation) and system-proposed (via compound step's Primitive Proposal Flow)
+  - Five-step creation flow: select primitive type → Claude proposes definition using structural template → user reviews and approves → create and register (including overlay index update) → verify routing
+  - "When NOT to create" checklist: update existing primitive, adjust routing, add step to overlay, or use one-time instruction before reaching for a new primitive
+  - Naming conventions standardized across all primitive types
+  - All primitive creation logged to run-log or session-log with type, name, and rationale
+- **Generalized Skill Proposal Flow into Primitive Proposal Flow (§4.4)**
+  - Same three-stage escalation cadence (first occurrence → second occurrence → third/high-impact) now applies to skills, subagents, and overlays — not just skills
+  - Each occurrence logged with which primitive type seems appropriate and why, per the Primitive Selection Guide (§3.0)
+  - Proposals for subagents go to §3.3 backlog; proposals for overlays go to §3.4.4 backlog
+  - All references to "Skill Proposal Flow" updated to "Primitive Proposal Flow" throughout spec
+- **Expanded compound step routing table (§4.4)**
+  - "System gap (existing skill)" generalized to "System gap (existing primitive)"
+  - Added "System gap (new subagent needed)" and "System gap (new overlay needed)" routes — compound step can now propose any primitive type, not just skills
+  - Removed "style guide" from convention/rule destination (file was removed in v1.2)
+- **Updated §4.6 Behavioral Boundaries**
+  - Ask First list: added "Creating new primitives (skills, subagents, overlays)" with §3.5 reference; "Modifying CLAUDE.md or skill definitions" expanded to include overlay index
+- **Updated CLAUDE.md design (§6)** — Skills & Agents section now references user-initiated primitive creation and the Primitive Proposal Flow
+
+**v1.2.2** (2026-02-14)
+- **Added Researcher skill to Phase 2+ backlog (§3.3)**
+  - Trigger: external research done manually 3+ times with findings brought into the vault
+  - Requires web search tool integration (§9) as a prerequisite — first skill in the system that depends on external tooling beyond Claude Code and Obsidian CLI
+  - Skill would cover: query formulation, source evaluation, synthesis with provenance, confidence tagging, vault integration with `#kb/` tagging
+  - Placed at top of backlog table to reflect the dependency note, not priority
+- **Added web search tool integration to §9 (Deferred Items)**
+  - External dependency (Tavily, Brave Search API, web search MCP, etc.) deferred until manual research friction surfaces empirically through the compound step
+  - Prerequisite for the Researcher skill; also enables external grounding for non-code work
+- **Added hallucination detection web grounding to §9 (Deferred Items)**
+  - Web search could enable fact-checking summaries against live sources, validating vault knowledge currency during audits, and grounding compound insights against community consensus
+  - Depends on stable Researcher skill — two-level dependency chain (web tooling → researcher skill → hallucination grounding)
+
+**v1.2.1** (2026-02-14)
+- **Added session-log compound enforcement to vault integrity script (§7.8, §2.3.4, §4.4)**
+  - Fifth validation: for every `session-log.md` entry with a non-empty `**Summary:**` field, verify a `**Compound:**` field exists. Entries without a summary (trivial interactions) are skipped.
+  - Closes the enforcement gap for non-project sessions: compound evaluation at session end is behavioral, but this mechanical check catches entries where the evaluation was skipped entirely — same pattern as run-log compound continuity check.
+  - Updated §2.3.4 compound integration to reference vault-check safety net instead of audit-only review.
+  - Updated §4.4 non-project session-end trigger: reframed from "behavioral" to "behavioral with mechanical safety net."
+- **Explicit no-resume policy for session-log (§2.3.4)**
+  - Session-log does not support formal resume (`--resume` reads project `run-log.md`). Non-project interactions are lightweight by definition — below the workflow entry threshold. If an interaction needs resume capability, that's a signal it should be a project.
+- **Specified mid-conversation escalation context transfer mechanism (§4.1.5)**
+  - In-memory context carries directly into the SPECIFY phase — no round-trip through the vault needed.
+  - Crash resilience ordering: write session-log entry *before* creating project scaffold, so the worst case is a recoverable session-log entry with no project directory yet.
+  - Context checkpoint interaction: if context usage is high when project creation triggers, checkpoint runs *after* session-log write and scaffold creation but *before* entering SPECIFY phase.
+- **Tightened session startup rotation check wording (§6)** — step 3 now explicitly states both `session-log.md` (vault root) and active project's `run-log.md` are checked for monthly rotation.
+
+**v1.2** (2026-02-14)
+- **Added session-log for non-project interaction capture (§2.1, §2.3, §2.3.4, §4.1, §4.4, §4.6, §6, §7.5, §8)**
+  - New vault-root file `session-log.md` captures non-project interactions — brainstorms, research, ad-hoc deliverables, quick tasks — ensuring ad-hoc work leaves a vault trace and feeds the compounding system (Principle 4: "Every unit of work compounds")
+  - Lightweight format: date, domain, summary, compound evaluation, promote flag
+  - Compound integration: before ending any non-project session that produced meaningful work, Claude evaluates compound trigger criteria and records the result in the `Compound` field. This is behavioral (no phase transitions to hook into) but the format makes skipped evaluations visible to the audit skill
+  - Rotates monthly using the same mechanism as project run-logs (§2.3.1)
+  - Added to §4.4 as third compound trigger level: "Non-project session-end (required — behavioral)" alongside phase-level (structural) and task-level (discretionary)
+  - Updated §4.6 system behaviors: session logging now distinguishes project sessions (run-log) from non-project sessions (session-log)
+  - Updated audit skill weekly check (§3.1.4): "Review daily notes for patterns" → "Review session-log.md for patterns worth promoting to solution docs or interactions worth escalating to projects"
+  - Updated §7.5 Vault Maintenance weekly scope to reference session-log instead of daily notes
+  - Updated §5.5 Knowledge Base Protocol: "daily notes" → "session-log entries" in what-does-not-qualify list
+  - Updated CLAUDE.md design (§6): workflow routing, compound engineering, session management, and session startup all reference session-log
+  - Added to Phase 1a implementation (§8) as item 5 — initialized from day one because non-project interactions happen immediately
+- **Added Project Creation Protocol (§4.1.5)**
+  - Three paths to project creation: user-initiated (bypasses threshold), threshold-triggered (prompts user), and session-log promotion (formalizes previous ad-hoc work)
+  - User is always prompted for project name and domain confirmation — Claude proposes, user decides
+  - User can decline threshold-triggered project creation; decision is recorded in session-log (`Promote: declined — [reason]`) and not re-prompted in the same session
+  - Minimum scaffold: project directory, `run-log.md` with creation entry, `progress-log.md` with creation entry, `design/` subdirectory for software-domain only. All other files created on-demand by the skills that produce them
+  - If created from a session-log entry, relevant context transfers to the project and the session-log entry gets a promote note with link
+  - Naming conventions: kebab-case, descriptive, concise; avoid generic names
+  - Updated workflow entry threshold (§4.1) with mid-conversation escalation clause and non-project session handling
+- **Removed Daily/ and Weekly/ directories from vault structure (§2.1)**
+  - These directories were present in the layout but never defined — no format, no creation trigger, no skill or protocol wrote to them
+  - The session-log covers the capture need that daily notes were implicitly serving
+  - Audit skill references to "review daily notes" updated to reference session-log
+  - Meditation example (§4.1) updated to reference domain file instead of daily notes
+- **Removed `ideas.md` from project directory structure (§2.1)**
+  - Never referenced by any skill or protocol; dead weight in the layout
+- **Removed orphaned files from vault and project structure (§2.1)**
+  - `docs/style-guide.md` — present in vault layout but never referenced by any skill or protocol. The writing-coach skill builds its style guide in `docs/solutions/writing-patterns/`, making this a duplicate concept at a different path.
+  - `docs/block-patterns.md` — present in vault layout but only relevant to the deferred Momentum Coach skill. No current skill or protocol reads or writes to it.
+  - `lessons-learned.md` — present in project layout but never created or referenced by any skill or protocol.
+  - `decision-log.md` — present in project `decisions/` layout but never written to or read by any skill. The system uses `subagent-decisions.md` and ADR files for decision tracking.
+- **Added project scaffold note to §2.1** — clarifies which files are created at project initialization vs. on-demand
+
+**v1.1** (2026-02-14)
+- **Structural enforcement of compound engineering at phase transitions (§4.1.4, §4.4, §4.6, §6, §7.3, §7.8, §8)**
+  - Compound reflection is now a required step in the Context Checkpoint Protocol (§4.1.4) — runs as step 1 at every phase transition, before context management, while the completing phase's working context is still loaded
+  - Compound step trigger criteria unchanged (non-obvious decisions, rework/failure, reusable artifacts, system gaps), but the evaluation is now structurally guaranteed at phase boundaries rather than depending on behavioral discipline
+  - Every phase transition run-log entry must contain a `Compound:` field with either routed insights or an explicit skip note — creates an auditable trace
+  - Added compound step continuity as fourth vault integrity script validation (§7.8): mechanically verifies every `### Phase Transition` block in `run-log.md` has a `Compound:` entry, preventing silent skips outside Claude's context window
+  - Compound step operates at two levels: phase-level (required, enforced) and task-level (discretionary, behavioral) — individual tasks that surface notable insights mid-phase don't have to wait for the phase boundary
+  - Removed "After compound engineering step" from Context Checkpoint proactive triggers — compound reflection is now embedded in the checkpoint itself, not a separate event that triggers one
+  - Updated §4.4 "When to Run" to document both trigger levels
+  - Updated §4.6 behavioral boundaries: "Run compound step after significant work" replaced with explicit phase-level enforcement reference
+  - Updated §6 CLAUDE.md Compound Engineering section to reflect structural enforcement
+  - Updated §7.3 Hooks: post-task hook reframed as Phase 2 supplement for mid-phase prompting; note that phase-level enforcement is handled by Context Checkpoint Protocol from Phase 1a
+  - Updated §8 Phase 2 item 20: compound engineering is active from Phase 1a via phase transitions, Phase 2 focuses on reviewing and consolidating outputs
+  - Rationale: Compound engineering is the system's primary self-improvement mechanism and a key differentiator. Behavioral-only enforcement fails under the same conditions (context pressure, momentum, rushing) that produce the most valuable insights. Phase-level structural enforcement provides reliable triggering with minimal overhead (3-4 transitions per project) while avoiding the run-log bloat that task-level enforcement would create (15-30 entries per project).
+- **Fixed §7.4 Failure Recovery table formatting** — removed extra pipe in header separator
+
+**v1.0** (2026-02-13)
+- **Added vault integrity script as external mechanical enforcement (§7.8, §7.3, §7.1, §6, §2.1, §8)**
+  - Deterministic bash script (`scripts/vault-check.sh`) validates frontmatter schema, summary freshness, and run-log structural integrity — the system's only enforcement mechanism that runs outside Claude's context window
+  - Three validations: YAML parse + required fields on all substantive docs, `source_updated` vs parent `updated` comparison on all summaries (exhaustive, not spot-check), and structural integrity of run-log session blocks
+  - Integrated as git pre-commit hook (§7.3) — commits blocked on validation errors
+  - Added as step 0 in session startup (§6, §7.1) — runs before staleness scan, surfaces errors to user
+  - Added `scripts/` directory to vault structure (§2.1)
+  - Added to Phase 1a implementation plan (§8) as item 7
+- **Added subagent revision protocol (§3.2.3)**
+  - When main session validation finds specific, actionable issues with subagent output, spawn one revision pass before escalating to human gate
+  - Revision subagent gets: original output files + structured feedback file + original spec summary (no conversation history)
+  - One pass only — if revision still fails, escalate directly. Same aggressive stop-condition philosophy as convergence protocol
+  - Scoping rule: revise when issues are specific and fixable; escalate when issues are structural
+- **Added workflow entry threshold heuristic (§4.1)**
+  - Replaces implicit LLM judgment call with two-signal test: enter formal workflow when file footprint ≥ 3 files OR task involves downstream dependencies
+  - Skip formal workflow for single-file edits, lookups, conversational Q&A, routine log updates, or explicit user override
+  - Default to lighter workflow variant when uncertain (CLARIFY → ACT for personal, three-phase for knowledge work)
+- **Added routing decision log to run-log format (§2.3.1)**
+  - Every formal workflow entry writes a routing block before invoking any skill: domain, workflow variant, rationale, skill invoked, overlays matched/skipped
+  - Enables audit skill to compare routing decisions against outcomes during monthly CLAUDE.md drift check
+- **Added personal domain worked example and convergence rubric (§4.1, §4.2.1)**
+  - Complete worked example of CLARIFY → ACT for spiritual domain (meditation practice) validating the architecture for non-software domains
+  - Added Personal Goal Quality rubric to convergence rubrics bootstrap: specificity, sustainability, feedback loop
+- **Moved token cost instrumentation from Phase 3 to Phase 1b (§8)**
+  - After first 5 sessions, begin recording per-session token usage in `docs/estimation-calibration.md`
+  - Enables every downstream cost decision the spec references: subagent model selection, Opus Plan Mode adoption, context budget calibration
+- **Added human-grounded hallucination validation (§4.7.7, §3.1.4)**
+  - Monthly audit selects 2 items for human review: one high-confidence pattern (with evidence chain) and one high-stakes summary (with extracted claims)
+  - If either fails: log to hallucination log, trigger deep provenance analysis of all items in that category, demote failed patterns to medium confidence
+  - Added human-grounded tier to §4.7 activation tiers table — the only tier introducing external verification
+  - Added to audit skill monthly checks (§3.1.4)
+
+**v0.6** (2026-02-13)
+- **Adopted Obsidian CLI (1.12+) as primary indexed query tool — CLI-first with file tool fallback (§5.2, §3.1.5, §6, §7.1, §7.4, §8)**
+  - Obsidian CLI provides indexed search, backlink/link graph queries, native property and tag queries, orphan detection, and task management — all at dramatically lower token cost than MCP Filesystem and with capabilities (backlinks, tag hierarchy, orphan detection) that MCP doesn't provide at all
+  - Requires Obsidian to be running; falls back to native file tools when unavailable
+  - Added Obsidian CLI skill (§3.1.5) as Phase 1 cross-cutting skill: encodes safe command patterns (avoiding 22.8% silent failure rate in early access), Crumb-specific query conventions, output parsing, fallback routing, and risk-tier alignment
+  - Rewrote §5.2 File Access Strategy: two-layer model (native file tools + Obsidian CLI) replaces three-phase model (Phase 1 file tools → Phase 2 MCP)
+  - MCP moved from planned Phase 2 milestone to deferred contingency in §9 — evaluate only if CLI + file tools prove insufficient
+  - Updated CLAUDE.md design (§6) with File Access section, CLI routing rules, and CLI availability check in session startup
+  - Updated session startup (§6, §7.1) to include `obsidian vault` availability check as first step
+  - Updated failure recovery (§7.4) to reference CLI fallback instead of MCP disconnection
+  - Updated implementation plan (§8): CLI skill added to Phase 1a as third core skill; MCP installation removed from Phase 2 milestones
+  - Updated Systems Analyst Gather Context step (§3.1.1) to use CLI commands instead of MCP function calls
+  - Replaced all MCP query examples in §5.4 with CLI and file tool equivalents
+  - Renamed §2.2 from "MCP-Ready File Conventions" to "File Conventions"
+- **Added Knowledge Base Protocol for vault as "second brain" (§5.5, §4.4, §3.1.4, §2.2)**
+  - The vault serves dual roles: operational infrastructure (project files, logs, system docs) and personal knowledge base
+  - Knowledge base is a view over the vault, not a separate location — artifacts stay where created, become discoverable via `#kb/*` tags and backlinks from domain summaries
+  - `#kb/[topic]` tag hierarchy provides orthogonal classification: a note can be both `#domain/career` (where it belongs) and `#kb/career-strategy` (what knowledge it contains)
+  - Promotion via compound step (§4.4): added "Durable knowledge" route to insight routing table — tag with `#kb/[topic]` and link from relevant domain summary
+  - Discovery via Obsidian CLI: `obsidian tag name=kb/<topic>`, `obsidian backlinks path=Domains/<domain>/<domain>-summary.md`, `obsidian tags all counts | grep "kb/"`
+  - Added knowledge base health checks to audit skill (§3.1.4): weekly check for orphaned `#kb/*` notes and untagged candidates in completed projects; monthly check for tag hygiene
+  - Added `#kb/` tag example to frontmatter template (§2.2)
+  - Knowledge base tagging added to Phase 2 implementation steps (§8)
+
+**v0.5** (2026-02-13)
+- **Replaced behavioral `summary_stale` flag with mechanical `source_updated` timestamp comparison**
+  - Removed `summary_stale` field from parent document frontmatter (§2.2)
+  - Added `source_updated` field to summary frontmatter (§5.3) — records parent's `updated` value at summary generation time
+  - Staleness detection is now a data comparison by the consumer (summary's `source_updated` vs parent's `updated`), not a flag set by the producer
+  - Eliminates correlated failure mode: the conditions that cause Claude to skip summary regeneration (context pressure, mid-task focus) are the same conditions that cause it to skip setting a staleness flag — both are behavioral. Timestamp comparison is mechanical and fires every time a summary is loaded.
+  - Updated Summary Freshness Protocol (§5.3), System Behaviors (§4.6), Provenance Check (§4.7.2), Audit skill staleness scan (§3.1.4), CLAUDE.md Session Startup (§6), Session Management (§7.1), and Vault Maintenance (§7.5)
+  - Weekly audit spot-check (§3.1.4) refocused on content drift detection (cases where summary was regenerated but regeneration quality was poor) — complementary to the mechanical timestamp check which catches missed regenerations
+- **Reframed context budget as operating targets with mechanical visibility (§5.4)**
+  - Claude Code has no native mechanism for tracking document load counts — real-time enforcement is not mechanically possible
+  - Budget tiers reframed from enforcement ("never exceed") to operating targets — the design ceiling (10 docs) remains as a task-design signal, not a runtime limit
+  - Added context inventory: skills write a snapshot of loaded documents (file list, count, tier, justification) to the run-log after gathering context and before beginning core work
+  - Context inventory provides auditable record without requiring Claude to maintain a running counter — it's a single discrete write, not ongoing tracking
+  - Added context inventory review to audit skill weekly checks (§3.1.4 item 7): flags skills consistently operating in extended tier or above design ceiling
+  - Updated CLAUDE.md Context Rules (§6), behavioral boundaries (§4.6), and skill context contracts (§3.1.1, §3.1.2) to reflect operating targets and reference context inventory
+- **Documented shared file write assumptions as known constraint (§7.6, §9)**
+  - Shared mutable files (`run-log.md`, `tasks.md`, `progress-log.md`, `subagent-decisions.md`) assume single-writer access — one agent or session writing at a time, in serial order
+  - Holds under current design (sequential subagents, single operator); breaks under parallel execution, concurrent multi-project sessions, or external edits during active sessions
+  - Added §7.6 documenting the assumption, current mitigations, and forward pointer to §9
+  - Added concurrent file write safety to §9 deferred items — deferred because single-writer assumption holds and solving prematurely adds complexity with no benefit
+- **Added Plan Mode strategy as runtime enforcement mechanism (§7.7, §4.1, §6)**
+  - Plan Mode provides mechanical read-only enforcement during analysis phases — Claude literally cannot write files until the plan is approved, unlike behavioral instructions which Claude may skip under pressure
+  - Recommended for SPECIFY phase (systems analyst work is almost entirely read-and-think) and PLAN validation (reviewing subagent output should be read-only until human gate fires)
+  - Not recommended for IMPLEMENT or compound step (require active file writes)
+  - Documented Opus Plan Mode as cost optimization: Opus for planning/reasoning, Sonnet for execution — aligns with Crumb's separation of high-judgment work from execution work
+  - Added phase-by-phase plan mode table (§7.7) with rationale for each recommendation
+  - Added plan mode annotations to Full Workflow phases (§4.1)
+  - Added Plan Mode section to CLAUDE.md design (§6)
+
+**v0.4.5** (2026-02-12)
+- **Restructured hallucination detection protocol into activation tiers (§4.7)**
+  - Always-on (lightweight): confidence tagging, context relevance justification, falsifiability checks (compound step only), interpretation flagging
+  - Risk-proportional: provenance check fires based on gap between summary and source — agent gap (subagent output), time/context gap (previous session), no gap (current session → skip)
+  - Audit-time: deep provenance analysis (full citation tracking), calibration log review, summary spot-checks
+  - Added activation tier table to §4.7 header for quick reference
+  - Added tier labels to each check section (§4.7.1 through §4.7.6)
+- **Rewrote provenance check as risk-proportional (§4.7.2)**
+  - Agent gap: verify key constraints/decisions match subagent full output — part of existing subagent validation step
+  - Time/context gap: verify staleness marker, spot-check one critical claim against parent doc
+  - No gap (same session): skip provenance check entirely — drift risk near-zero
+  - Deep provenance analysis (full source-level citation tracking) moved to audit-time only
+- **Simplified summary generation rules for always-on use (§4.7.5)**
+  - Preserve critical content verbatim and flag interpretations: always-on (lightweight)
+  - Source-level section citations: high-stakes documents only (specs, ADRs, API contracts), not routine summaries
+  - Weekly drift detection unchanged — audit skill spot-checks with deep provenance
+- **Updated §5.3 Summary Quality Rules** to align with tiered approach — references §4.7.2 for audit-time deep provenance
+- **Updated subagent validation (§3.2.1, §3.2.2)** to explicitly reference §4.7.2 provenance check (agent gap) as part of validation step
+- **Updated CLAUDE.md Hallucination Detection (§6)** to reflect tiered check structure
+
+**v0.4.4** (2026-02-12)
+- **Added overlay index file for reliable overlay routing (§3.4.2)**
+  - New file: `docs/overlays/overlay-index.md` — compact routing table mapping overlay names, file paths, and activation signals
+  - Replaces ambiguous "Claude uses judgment" routing with deterministic index-driven activation
+  - Index loaded at session start as part of session startup procedure
+  - Maintenance rule: adding/retiring overlays requires updating the index as part of the same operation
+  - Modifying the overlay index is a medium-risk action (proceed + flag)
+  - Includes complete index file structure with active/retired sections
+- **Added explicit overlay check steps to skill procedures (§3.1.1, §3.1.2)**
+  - Systems Analyst: new step 2 "Check Overlay Index" between Gather Context and Clarify Through Questions; subsequent steps renumbered 3-6
+  - Action Architect: overlay check added as first behavior bullet
+  - Embeds the trigger in the workflow rather than relying on Claude's initiative
+- **Updated overlay activation documentation (§3.4.2)**
+  - Automatic path now "index-driven" rather than "CLAUDE.md routing"
+  - Skills with overlay check steps match tasks against index activation signals
+  - Explicit path unchanged — user can still request any overlay directly
+- **Updated session-start staleness scan (§3.1.4)** to include overlay index loading as step 2
+- **Updated CLAUDE.md design (§6)**
+  - Session Startup: overlay index loading added as step 2
+  - Overlay Routing: rewritten to reference index file and skill-level check steps
+- **Updated vault structure (§2.1)** to include `docs/overlays/overlay-index.md`
+- **Updated key document functions table (§2.3)** with overlay-index entry
+- **Updated Phase 1b implementation (§8)** — overlay index created alongside first overlay; noted as routing dependency
+- **Updated §3.4.3** — building any overlay requires adding its entry to the index
+
+**v0.4.3** (2026-02-12)
+- **Replaced flat context budget with tiered system (§5.4)**
+  - Standard tier: ≤5 source documents per skill invocation (default, no logging required)
+  - Extended tier: 6-8 source documents for iteration passes and multi-input skills (requires justification logged in run-log)
+  - Hard ceiling: 10 source documents — exceeding this means decompose the task or compress summaries
+  - Budget calibration signal: skills regularly operating in extended tier flagged for investigation during compound step or weekly audit
+- **Clarified what counts as a source document (§5.4)**
+  - Counts: any file read from the vault (summaries, specs, patterns, design docs, calibration data, tasks)
+  - Does not count: user's current prompt, always-loaded system context (CLAUDE.md, AGENTS.md), overlays
+- **Updated skill context contracts with typical budget guidance (§3.1.1, §3.1.2)**
+  - Systems Analyst: standard tier (2-4 docs) for new projects, extended tier (6-7 docs) for iteration passes
+  - Action Architect: standard tier (3-5 docs) for simple projects, extended tier (5-7 docs) for software projects with multiple design summaries
+  - Added design summaries as explicit MAY request for Systems Analyst when iterating after design feedback
+- **Added MCP query examples for extended tier scenarios (§5.4)**
+  - New example: Systems Analyst iteration pass showing 6-7 doc load with justification comment
+  - Existing Action Architect example updated to show 4-doc load spanning standard/extended boundary
+- **Updated overlay context budget reference (§3.4.2)** to reference tiered system instead of flat 5-doc limit
+- **Updated behavioral boundaries (§4.6)** — "Never" list now references 10-doc hard ceiling instead of 5-doc flat cap
+- **Updated CLAUDE.md design (§6)** — Context Rules section references tiered budget system
+- **Replaced assumed automatic audit cadence with hybrid trigger model (§3.1.4, §4.6, §6, §7.1, §7.5)**
+  - Session-start staleness scan: lightweight automatic check at every session start (read frontmatter flags, check last audit date)
+  - Staleness scan triggers full audit recommendation when 7+ days since last audit or 3+ stale summaries detected
+  - Full audit (weekly/monthly scope) runs on user request or staleness scan recommendation — no pretense of cron-like automation
+  - Audit skill logs completion date to run-log for cadence tracking
+  - Added Session Startup section to CLAUDE.md design (§6)
+  - Updated §7.1 Session Management with session-start behavior
+  - Updated §7.5 Vault Maintenance to reflect hybrid model
+- **Added run-log monthly rotation policy (§2.3.1)**
+  - Current month is always `run-log.md`; at month boundary, renamed to `run-log-YYYY-MM.md`
+  - Fresh `run-log.md` created with rotation header linking to previous log and summarizing key milestones
+  - Archived logs stay in `progress/` directory for reference
+  - Rotation triggered automatically during session-start staleness scan when month has changed
+  - Reading convention: only load current `run-log.md` for resume/audit; archived logs loaded only for specific investigations
+- **Updated vault structure (§2.1)** to show archived run-log files in `progress/` directory
+- **Updated session-start staleness scan (§3.1.4)** to include run-log rotation check as first step
+- **Updated CLAUDE.md Session Startup (§6)** to include rotation check
+- **Updated resume procedure (§7.1)** to handle month-boundary edge case (freshly rotated log with no entries)
+
+**v0.4.2** (2026-02-12)
+- **Comprehensive redesign of Overlays (§3.4)**
+  - Replaced generic "intellectual breadth" overlay list with purpose-built expert lenses aligned to actual workflow needs
+  - Defined standard overlay structure: activation criteria, lens questions, key frameworks, anti-patterns (target: under 50 lines each)
+  - Two activation paths: automatic via CLAUDE.md routing when domain signals match, or explicit user request
+  - Overlays exempt from 5-document context limit (instructional context, not source material)
+- **Complete Business Advisor overlay as template (§3.4.3)**
+  - Full example with activation criteria, 5 lens questions, Porter's Five Forces + Jobs-to-be-Done frameworks, and anti-patterns
+  - Serves as the structural template for all future overlays
+  - Built in Phase 1b as first overlay
+- **New overlay roster (8 total: 1 Phase 1b + 7 Phase 2+)**
+  - Phase 1b: Business Advisor
+  - Phase 2+ backlog: Persuasion Analysis, Infrastructure Architect (consolidated from systems engineer + cloud/network/security architect), Systems Administrator (consolidated from network/linux/windows sys admin), Commercial Analyst (consolidated from quote analyst + business value analyst), Technical Educator, Customer Empathy, Systems Thinking
+- **Two new customer engagement skills added to §3.3 Phase 2+ backlog**
+  - Customer Contact Strategist: smart, relevant connection points with customers (has clear procedure: inputs → analysis → touchpoint recommendations)
+  - Meeting Topic Planner: customer-centric meeting agendas (has clear procedure: inputs → topic identification → agenda output)
+- **Added Overlays to §1.1 Components table** — overlays are now a first-class architectural component
+- **Updated §3.0 Primitive Selection Guide** — overlay description now reflects dual activation (automatic + explicit)
+- **Updated §5.4 Context Budget** — explicit exemption for overlays from 5-document limit
+- **Updated CLAUDE.md design (§6)** — added Overlay Routing section
+- **Updated §8 Implementation Plan** — Phase 1b includes business advisor overlay, Phase 2 references overlay backlog
+- **Updated vault structure (§2.1)** — `docs/overlays/` with business-advisor.md as Phase 1b template
+
+**v0.4.1** (2026-02-12)
+- **Restructured §4.4 Compound Step Protocol for sustainability**
+  - Added concrete significance threshold: compound step only fires when task involved a non-obvious decision, rework/failure, reusable artifact, or system gap
+  - Added insight routing: conventions update existing docs, system gaps update skills/config, genuine patterns go to `docs/solutions/`, one-time fixes stay in run-log
+  - Low-confidence insights held in run-log until second occurrence (prevents speculative pattern accumulation)
+  - Only the "genuine reusable pattern" route creates new documents in `docs/solutions/`
+- **Added Skill Proposal Flow (§4.4)**
+  - Novel skill needs discovered through compound step follow a confidence-gated proposal process
+  - First occurrence: logged in run-log (low confidence, single data point)
+  - Second occurrence: skill proposal written in §3.3 backlog, user notified for review (medium confidence)
+  - Third occurrence or high-impact: build if approved (high confidence)
+  - User notification at medium confidence ensures human judgment on structural changes
+- **Updated §3.3** to reference Skill Proposal Flow and include placeholder for novel skill proposals
+- **Restructured §8 Phase 1 into Phase 1a/1b sub-phases**
+  - Phase 1a (Day 1): Minimum viable system — vault, CLAUDE.md, AGENTS.md, 2 core skills (systems-analyst, action-architect), project logs, then immediately run a real project
+  - Phase 1b (Days 2-5): Remaining artifacts built as the first project reveals specific needs — writing-coach, file conventions, convergence rubrics, hallucination log, context checkpoint protocol, audit skill
+  - Same total scope as before, resequenced so scaffolding is driven by experience rather than front-loaded speculatively
+  - Aligns with Principle 8: "Start simple, add complexity when empirically needed"
+- **Added inline convergence rubric dimensions to skill definitions (§3.1.1, §3.1.2, §3.1.3)**
+  - Bootstrap rubric dimensions embedded directly in systems-analyst, action-architect, and writing-coach SKILL.md files
+  - Enables convergence from Day 1 without requiring the standalone rubrics doc
+  - When `docs/convergence-rubrics.md` is created in Phase 1b, inline versions remain as fallbacks
+- **Separated system behaviors from workflow discipline in §4.6**
+  - Context management, session logging, document conventions, summary freshness, and vault maintenance are now classified as autonomous system behaviors Claude handles proactively
+  - "Always" list reduced from 13 items to 5 workflow discipline rules
+  - Eliminates redundancy between behavioral boundaries and the Context Checkpoint Protocol
+- **Added Summary Freshness Protocol (§5.3)**
+  - Preventive mechanism: regenerate summaries as part of the same operation that modifies parent docs
+  - Safety net: `summary_stale` frontmatter flag on parent docs, checked at summary load time
+  - Both mechanisms work together — regenerate-on-modify prevents most drift, staleness marker catches edge cases
+- **Added `summary_stale` field to frontmatter spec (§2.2)**
+- **Updated subagent definitions (§3.2.1, §3.2.2)** to require summary generation alongside parent docs per Summary Freshness Protocol
+- **Promoted audit skill to Phase 1 (§3.1.4)**
+  - Expanded from sketch to full skill definition with automated weekly/monthly procedures
+  - Includes staleness marker scanning as first weekly check
+  - Distinguishes low-risk actions (auto-execute) from medium/high-risk actions (flag for human review)
+  - Serves as the mechanism for automated vault maintenance
+  - Built in Phase 1b when vault has enough content to audit
+- **Reframed §7.5 Vault Maintenance as automated + human review**
+  - Weekly and monthly checks are now automated via the audit skill
+  - Human review section limited to items requiring judgment (archiving, rubric updates, CLAUDE.md changes)
+- **Updated §7.1 Session Management** to frame context management as autonomous
+- **Updated CLAUDE.md design (§6)** to reflect autonomous session management
+- **Updated vault structure (§2.1)** to include `audit/SKILL.md` in Phase 1 skills
+
+**v0.4** (2026-02-12)
+- **Added cross-agent context preservation (§2.3.3)**
+  - New document: `decisions/subagent-decisions.md` for subagent reasoning logs
+  - Captures WHY decisions were made, not just WHAT
+  - Documents options considered, analysis, rationale, and trade-offs
+  - Enables future agents/sessions to understand decision context
+- **Enhanced run-log format (§2.3.1)** with Validation subsection
+  - Tracks what was validated, what dimensions were checked
+  - Records validation results and accepted issues
+  - Provides cross-agent accountability
+- **Updated subagent definitions (§3.2.1, §3.2.2)** to require decision logging
+  - Frontend Designer and Backend Designer now output decision logs
+  - Main session adds validation notes during review
+- **Enhanced slash command usage (§4.1.4, §4.6, §7.1)**
+  - Explicit proactive triggers for `/context` checks
+  - Context checkpoint protocol with reactive triggers
+  - Resume procedure for large context scenarios
+  - Command-like session management skills (checkpoint, audit, sync)
+- **Complete resume support (§7.1)**
+  - Structured run-log and progress-log formats
+  - Resume procedure with vault reconstruction
+  - Large context handling strategy
+
+**v0.3** (2026-02-12)
+- **Added comprehensive hallucination detection framework (§4.7)**
+  - Falsifiability checks for patterns and insights
+  - Provenance checks for summaries and context retrieval
+  - Calibration tracking via `docs/hallucination-log.md`
+  - Confidence tagging system (high/medium/low) for all patterns
+  - Summary generation rules to prevent drift from source documents
+  - Context relevance justification requirements
+- **Enhanced Compound Step Protocol (§4.4)** with falsifiability checks and confidence levels
+- **Enhanced Summary Document Structure (§5.3)** with hallucination prevention rules
+- **Enhanced Context Budget Management (§5.4)** with relevance validation requirements
+- **Updated CLAUDE.md design (§6)** to include hallucination detection reference
+- **Updated Vault Maintenance (§7.5)** to include hallucination log review and tentative pattern validation
+- **Updated Implementation Plan (§8)** to include hallucination log creation in Phase 1
+- Added `docs/hallucination-log.md` to vault structure (§2.1)
+
+**v0.2** (2026-02-12)
+- Added Context Checkpoint Protocol (§4.1.4) with detailed procedure
+- Added Convergence Rubrics Bootstrap (§4.2.1) with starter rubrics file
+- Added subagent model selection strategy (§3.2.1, §6 CLAUDE.md)
+- Added MCP readiness signals to Phase 2 guidance (§5.2)
+- Clarified consolidation trigger language: "review trigger" not "hard cap" (§4.4)
+- Improved subagent validation details: specific convergence dimensions (§3.2.1)
+
+**v0.1** (2026-02-12)
+- Added `docs/convergence-rubrics.md` with pre-built dimension sets for non-code convergence
+- Changed MCP integration strategy: file conventions from day one, MCP server added in Phase 2
+- Added context checkpoint protocol between workflow phases
+- Added complete Systems Analyst skill file as template/example
+- Clarified subagent output validation process
+- Changed consolidation trigger for `docs/solutions/` from hard cap to review trigger
+- Removed hardcoded model versions from subagent definitions
+- Added version history section
