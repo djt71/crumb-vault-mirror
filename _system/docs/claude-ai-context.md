@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: active
 created: 2026-02-21
-updated: 2026-04-09
+updated: 2026-04-11
 tags:
   - system
 ---
@@ -13,7 +13,9 @@ tags:
 Orientation artifact for new claude.ai chat sessions. This file lives
 inside the mirror repo — after cloning, read this first for context.
 
-Last updated: 2026-04-09 (TV2-043 gate eval failed and fully remediated same session — 3 stacked defects in Scout migration exposed: dispatch.sh PATH excluded ~/.local/bin so claude was unreachable; shell executor's `_capture_stdout_to_staging` only writes once so C1/C2 contract checks had been reading 4-day-old fossilized staging files; no Tess-side feedback-poller plist exists. Fixes: PATH, 3 wrapper rewrites (direct `tee $STAGING_PATH` + run-log parsing + heartbeat dry-run mode), 3 contract strengthenings, rollback runbook tested end-to-end. Re-soak window 2026-04-09 → 2026-04-12. Key compound finding: soak validation by contract pass/fail alone is insufficient — every contract was rubber-stamping 5/5 while underlying pipeline was 100% failing. Needs explicit external-truth comparison. Yesterday: TV2-Cloud frontier re-evaluation — Kimi K2.5 reaffirmed at 89/95, no swap.)
+Last updated: 2026-04-11 (documentation-refresh-2026-04 project DONE in single session — content refresh of all three doc tracks from the archived documentation-overhaul template. Architecture, operator, and LLM orientation map updated to 2026-04-11 state. Primary drift corrected: skills 22→20 (−excalidraw/lucidchart/meme-creator/obsidian-cli; +critic/deliberation), subagents 3→4 (+deliberation-dispatch), Tess Voice Haiku→Kimi K2.5 via OpenRouter (Qwen 3.6 failover), Tess Mechanic qwen3-coder→Nemotron via com.tess.llama-server, email-triage shut down 2026-04-10 (TV2-036/037 cancelled), two-namespace service architecture (`ai.openclaw.*` legacy + `com.tess.v2.*` new) documented, `lifestyle` added as 9th canonical domain. Cross-reference consistency verified: skill count 20 and subagent count 4 agree across architecture 02, skills-reference, orientation map, and filesystem. Design-spec drift at `crumb-design-spec-v2-4.md` lines 243 and 1504 (dead skill references) flagged as follow-on.)
+
+Previous session (2026-04-09 → 2026-04-10): TV2-043 gate eval failed and remediated with 3 stacked defects (PATH, stdout-capture, no feedback-poller plist). Re-soak window 2026-04-09 → 2026-04-12. Compound finding: soak validation by contract pass/fail alone is insufficient — needs explicit external-truth comparison. Email triage migrated from Haiku→local Nemotron then shut down entirely 2026-04-10.
 
 ## Context Budget — READ THIS FIRST
 
@@ -53,8 +55,8 @@ vault as external memory and single source of truth. The canonical spec is
 Mission: build enough independent revenue that corporate work becomes a choice, not a dependency. Six parallel prompts (execution/discovery/maintenance), four agent surfaces. Revenue-generating prompts get priority claim on sessions; all other work continues in parallel. Referenced in CLAUDE.md Workflow Routing.
 
 **Four-surface model:**
-- **Crumb** (Claude Code, Opus) — deep work, specs, strategy
-- **Tess** (OpenClaw, Haiku) — always-on execution, monitoring
+- **Crumb** (Claude Code, Opus 4.6) — deep work, specs, strategy
+- **Tess** (OpenClaw; Voice: Kimi K2.5 via OpenRouter with Qwen 3.6 failover; Mechanic: local Nemotron via `com.tess.llama-server`) — always-on execution, monitoring
 - **Perplexity Computer** — research, daily operational awareness, interactive synthesis
 - **Chrome** (Claude browser extension) — authenticated website actions
 
@@ -129,8 +131,8 @@ Mission: build enough independent revenue that corporate work becomes a choice, 
 ### tess-v2
 - **Domain:** software | **Class:** system | **Workflow:** four-phase
 - **Phase:** IMPLEMENT (transitioned 2026-04-01)
-- **Status:** 15 services running on LaunchAgents alongside OpenClaw. TV2-034/035/044 gates passed. **TV2-043 gate eval 2026-04-09 FAILED and remediated same session** — initial Apr 5-8 soak was invalidated by 3 stacked defects (dispatch.sh PATH bug, shell-executor stdout-capture write-once bug freezing C1/C2 staging files, no Tess feedback-poller plist). Full remediation: PATH fix + 3 wrapper rewrites + 3 contract YAML strengthenings (4→8/4→7/4→6 tests) + rollback runbook written and tested end-to-end (~5s cycle). New 72h re-soak 2026-04-09 15:35 UTC → 2026-04-12. TV2-036 soak continues (gate ~Apr 12). Cloud eval: Kimi K2.5 primary (89/95) reaffirmed via 2026-04-08 frontier survey — no swap. 40/50 tasks done.
-- **Next:** TV2-043 gate re-eval ~Apr 12 (after 3 daily C1 runs under strengthened contracts). TV2-036 mid-soak checkpoint. Open follow-ups from 2026-04-09 remediation: Tess-side feedback-poller plist design (blocks TV2-039 cutover), transient claude flake RCA, shell executor `_capture_stdout_to_staging` write-once bug fix at source.
+- **Status:** 14 services running on LaunchAgents (`com.tess.v2.*` namespace) managed via `tess-v2/project-state.yaml` `services:` field. 42/50 tasks done, 2 cancelled (TV2-036/037 email triage shut down 2026-04-10 after brief local-Nemotron migration). TV2-034/035/044 gates passed. **TV2-043 re-soak in progress** — C2/C3 clean, C1 had dead-letter from pre-fix claude-p scoring (fixed f056e5b). C1 soak clock reset — needs 3 clean daily runs post-fix, earliest gate pass Apr 13. Cloud stack: Kimi K2.5 primary (89/95) reaffirmed via 2026-04-08 frontier survey, Qwen 3.6 failover. Amendment Z interactive dispatch peer-reviewed (two rounds) and Phase A end-to-end loop completed 2026-04-06. Amendment AA vault semantic search landed (Phase 4a).
+- **Next:** TV2-043 C1 gate re-eval earliest Apr 13. Blocked: TV2-038 (needs TV2-043). Open follow-ups: Tess-side feedback-poller plist (IDQ-004, blocks TV2-039 cutover), run-log rotation. Pending: TV2-045 Paperclip spike.
 - **Key files:** `Projects/tess-v2/design/`, `Projects/tess-v2/progress/run-log.md`, repo at `/Users/tess/crumb-apps/tess-v2/`
 
 ### agent-to-agent-communication
@@ -152,6 +154,7 @@ All in `Archived/Projects/` unless noted. Think-different stays in `Projects/` (
 | crumb-tess-bridge | Telegram bridge + dispatch protocol. 897 tests. |
 | deck-intel | PPTX/PDF extraction skill. |
 | documentation-overhaul | Arc42 + Diátaxis + LLM orientation. |
+| documentation-refresh-2026-04 | 2026-04-11 content refresh of overhaul output: skill inventories, Tess model routing, two-namespace service architecture. 12 tasks, one session. |
 | inbox-processor | File intake + routing skill. |
 | knowledge-navigation | QMD collections + MOC system. |
 | mcp-workspace-integration | Google Workspace MCP access (94 tools). |
