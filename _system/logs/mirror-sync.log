@@ -683,3 +683,4 @@
 2026-04-10 13:49:03 SYNC chore: shut down email triage — cancel TV2-036, TV2-037, unload services
 2026-04-10 14:44:35 SYNC chore: session-end log — email triage shutdown + TV2-043 soak review
 2026-04-10 14:47:51 SYNC chore: rotate tess-v2 run-log (3026 lines → archive)
+2026-04-10 15:50:11 SYNC chore: public mirror prep — redact OAuth secret, narrow allowlist, session log

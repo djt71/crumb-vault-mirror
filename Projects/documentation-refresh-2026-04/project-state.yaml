@@ -1,0 +1,13 @@
+project: documentation-refresh-2026-04
+domain: software
+type: knowledge-work
+workflow: SPECIFY → PLAN → ACT
+phase: PLAN
+last_gate: SPECIFY-to-PLAN
+created: 2026-04-11
+updated: 2026-04-11
+active_task: null
+next_action: action-architect decomposes spec into action-plan.md and tasks.md
+last_committed: null
+related_projects:
+  - documentation-overhaul

@@ -1,1 +1,13 @@
-{"timestamp":"2026-04-10T19:37:08Z","vaultBackup":{"latestFile":null,"ageHours":null,"status":"timeout"},"timeMachine":{"latestBackup":null,"ageHours":null,"status":"unknown"}}
+{
+  "timestamp": "2026-04-11T16:45:29Z",
+  "vaultBackup": {
+    "latestFile": "crumb-vault-2026-04-11_0300.tar.gz",
+    "ageHours": 9,
+    "status": "ok"
+  },
+  "timeMachine": {
+    "latestBackup": null,
+    "ageHours": null,
+    "status": "unknown"
+  }
+}
