@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: active
 created: 2026-03-14
-updated: 2026-03-14
+updated: 2026-04-11
 tags:
   - system/architecture
 topics:
@@ -42,12 +42,13 @@ C4Context
 
     System_Boundary(system, "Crumb/Tess System") {
         System(crumb, "Crumb", "Session-bound architect. Claude Code + Opus 4.6. Governed workflows, phase gates, peer review, compound engineering.")
-        System(tess_voice, "Tess Voice", "Always-on chief of staff. Haiku 4.5 via cloud. Persona-driven, Telegram-facing.")
-        System(tess_mech, "Tess Mechanic", "Background ops. qwen3-coder:30b local. Heartbeats, cron, health checks.")
+        System(tess_voice, "Tess Voice", "Always-on chief of staff. Kimi K2.5 via OpenRouter (Qwen 3.6 failover). Persona-driven, Telegram-facing.")
+        System(tess_mech, "Tess Mechanic", "Background ops. Nemotron local via Ollama. Heartbeats, cron, health checks.")
         SystemDb(vault, "Obsidian Vault", "Single source of truth. Projects, specs, plans, logs, skills, knowledge base.")
     }
 
-    System_Ext(anthropic, "Anthropic API", "Claude models for Crumb sessions and Tess voice")
+    System_Ext(anthropic, "Anthropic API", "Claude Opus 4.6 for Crumb sessions")
+    System_Ext(openrouter, "OpenRouter", "Cloud LLM gateway for Tess Voice (Kimi K2.5 primary, Qwen 3.6 failover)")
     System_Ext(openclaw, "OpenClaw Gateway", "Agent platform running Tess. LaunchDaemon on Mac Studio.")
     System_Ext(telegram, "Telegram", "Mobile interface for operator ↔ Tess")
     System_Ext(review_panel, "External LLM APIs", "GPT-5.4, Gemini, DeepSeek, Grok for peer/code review")
@@ -55,7 +56,7 @@ C4Context
     System_Ext(git, "Git / GitHub", "Version control for vault and external repos")
     System_Ext(notebooklm, "NotebookLM", "Primary doc consumption: architecture and operator docs synced to notebooks")
     System_Ext(web, "Web", "WebSearch / WebFetch for research")
-    System_Ext(ollama, "Ollama", "Local model hosting for Tess Mechanic (qwen3-coder)")
+    System_Ext(ollama, "Ollama", "Local model hosting for Tess Mechanic (Nemotron)")
     System_Ext(markitdown, "MarkItDown", "Binary-to-markdown conversion for inbox processing")
 
     Rel(danny, crumb, "Claude Code terminal sessions")
@@ -66,9 +67,9 @@ C4Context
     Rel(tess_voice, vault, "Read all; write _openclaw/ only")
     Rel(tess_mech, vault, "Read + monitor")
 
-    Rel(crumb, anthropic, "Model inference")
-    Rel(tess_voice, anthropic, "Model inference (Haiku)")
-    Rel(tess_mech, ollama, "Local inference")
+    Rel(crumb, anthropic, "Model inference (Opus 4.6)")
+    Rel(tess_voice, openrouter, "Model inference (Kimi K2.5 / Qwen 3.6)")
+    Rel(tess_mech, ollama, "Local inference (Nemotron)")
     Rel(crumb, review_panel, "Peer review dispatch")
     Rel(crumb, obsidian_cli, "Indexed queries")
     Rel(crumb, git, "Version control")
@@ -87,8 +88,8 @@ The system has one human operator (Danny) who interacts through two channels: a 
 Inside the system boundary, three agents share a single Obsidian vault:
 
 - **Crumb** reads and writes to the vault under full governance. It connects to the Anthropic API for model inference, dispatches to external LLM APIs for peer review, uses the Obsidian CLI for indexed queries, manages Git version control, and performs web research.
-- **Tess Voice** reads the entire vault but writes only to `_openclaw/` directories. It runs on the Anthropic API (Haiku) via the OpenClaw gateway, connected to Telegram.
-- **Tess Mechanic** reads and monitors the vault. It runs locally on Ollama (qwen3-coder) for structured ops work.
+- **Tess Voice** reads the entire vault but writes only to `_openclaw/` directories. It runs via the OpenClaw gateway against OpenRouter (Kimi K2.5 primary, Qwen 3.6 failover), connected to Telegram.
+- **Tess Mechanic** reads and monitors the vault. It runs locally on Ollama (Nemotron) for structured ops work.
 
 The vault is the central bus — all inter-agent communication flows through the filesystem. There is no RPC, no sockets, no direct invocation between agents.
 
@@ -133,7 +134,7 @@ Session-bound. Runs only when Danny starts a Claude Code session. Claude Opus 4.
 
 ### Tess Voice (Chief of Staff)
 
-Always-on. Runs via OpenClaw gateway connected to Telegram. Haiku 4.5 (cloud).
+Always-on. Runs via OpenClaw gateway connected to Telegram. Kimi K2.5 primary with Qwen 3.6 failover, both accessed via OpenRouter (cloud).
 
 **What Tess Voice owns:**
 - Telegram relay — bidirectional communication with Danny
@@ -154,7 +155,7 @@ Always-on. Runs via OpenClaw gateway connected to Telegram. Haiku 4.5 (cloud).
 
 ### Tess Mechanic (Background Ops)
 
-Always-on. Runs via OpenClaw. qwen3-coder:30b on local Ollama.
+Always-on. Runs via OpenClaw. Nemotron on local Ollama (`com.tess.llama-server` LaunchAgent).
 
 **What Tess Mechanic owns:**
 - Heartbeat checks (system health, service liveness, bootstrap domain availability)
@@ -191,10 +192,11 @@ Always-on. Runs via OpenClaw. qwen3-coder:30b on local Ollama.
 
 | External System | Integration | Notes |
 |----------------|-------------|-------|
-| **Anthropic API** | Model inference for Crumb (Opus) and Tess Voice (Haiku) | Primary dependency. System is non-functional without it (except Tess Mechanic). |
+| **Anthropic API** | Model inference for Crumb (Opus 4.6) | Crumb-only dependency. Crumb sessions non-functional without it. |
+| **OpenRouter** | Cloud LLM gateway for Tess Voice | Kimi K2.5 primary, Qwen 3.6 failover. Replaces direct Anthropic access for Tess Voice (migrated 2026-03-30 cloud eval). |
 | **OpenClaw** | Agent gateway platform | Runs Tess. LaunchDaemon on Mac Studio. Manages Telegram bindings, cron scheduling, plugin routing. |
 | **Telegram** | Mobile messaging | Danny ↔ Tess Voice communication channel. |
-| **Ollama** | Local model hosting | Runs qwen3-coder for Tess Mechanic. Independent of cloud availability. |
+| **Ollama** | Local model hosting | Runs Nemotron for Tess Mechanic. Managed by `com.tess.llama-server` LaunchAgent. Independent of cloud availability. |
 | **External LLM APIs** | Peer/code review panels | GPT-5.4 (OpenAI), Gemini 3.1 Pro Preview (Google), DeepSeek Reasoner, Grok 4.1 Fast (xAI). Used for cross-model validation. |
 | **Obsidian** | Note-taking app | Provides the CLI for indexed queries. Vault functions without it (native file tools as fallback), but loses speed and discovery capabilities. |
 | **Git / GitHub** | Version control | Vault is git-tracked. Software projects use external repos. |

@@ -6,8 +6,8 @@ phase: ACT
 last_gate: PLAN-to-ACT
 created: 2026-04-11
 updated: 2026-04-11
-active_task: DOC-001
-next_action: Capture live launchctl/tess-v2 state; resolve spec unknowns
+active_task: DOC-008
+next_action: Refresh operator reference docs (M3 batch 1)
 last_committed: null
 related_projects:
   - documentation-overhaul

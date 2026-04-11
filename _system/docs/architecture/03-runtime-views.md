@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: active
 created: 2026-03-14
-updated: 2026-03-14
+updated: 2026-04-11
 tags:
   - system/architecture
 topics:
@@ -101,7 +101,7 @@ sequenceDiagram
     actor Danny
     participant TG as Telegram
     participant GW as OpenClaw Gateway
-    participant TV as Tess Voice (Haiku)
+    participant TV as Tess Voice (Kimi K2.5)
     participant Vault
 
     Danny->>TG: Send message
@@ -127,13 +127,15 @@ sequenceDiagram
 
 ### Prose Summary
 
-Danny sends a Telegram message. The Telegram API delivers it to the OpenClaw gateway via webhook. The gateway routes it to the tess-voice agent (Haiku 4.5 via cloud).
+Danny sends a Telegram message. The Telegram API delivers it to the OpenClaw gateway via webhook. The gateway routes it to the tess-voice agent (Kimi K2.5 via OpenRouter, with Qwen 3.6 failover).
+
+**Interactive dispatch (Amendment Z, tess-v2 Phase IMPLEMENT as of 2026-04-11):** The dispatch flow is evolving toward an orchestrator-driven interactive model where Tess Voice can request multi-turn clarification via the bridge before committing a governed operation. Amendment Z peer-reviewed (two rounds). Phase A end-to-end loop completed 2026-04-06. Current sequence diagram reflects the stabilized quick-lookup / status-check / needs-Crumb paths — interactive-dispatch refinements are in active soak and may adjust the diagram in a later refresh.
 
 **Quick lookups:** Tess reads vault files directly and responds. **Status checks:** Tess reads project-state.yaml and recent run-log entries, formats a summary. **Governed work:** Tess recognizes the request exceeds her scope (architecture decisions, governed file modifications, convergence/peer review), stages context in `_openclaw/inbox/`, and responds "This needs a Crumb session."
 
 Tess reads the full vault but writes only to `_openclaw/` directories. No governed vault modifications happen through this flow.
 
-**Failure handling:** If cloud inference is unavailable, tess-voice falls back to limited mode (local qwen3-coder with reduced scope). If OpenClaw gateway is down, Telegram messages queue in Telegram's infrastructure until the gateway recovers.
+**Failure handling:** OpenRouter handles primary→failover routing at the gateway layer (Kimi K2.5 → Qwen 3.6). If both cloud endpoints are unavailable, tess-voice falls back to limited mode (local Nemotron via `com.tess.llama-server` with reduced scope). If the OpenClaw gateway is down, Telegram messages queue in Telegram's infrastructure until the gateway recovers.
 
 ---
 
@@ -148,7 +150,7 @@ sequenceDiagram
     participant Cap as Capture Clock<br/>(launchd)
     participant DB as SQLite<br/>(pipeline.db)
     participant Att as Attention Clock<br/>(launchd, daily)
-    participant Haiku as Triage Engine<br/>(Haiku 4.5)
+    participant Triage as Triage Engine<br/>(Kimi K2.5 via OpenRouter)
     participant TG as Telegram
     participant Inbox as _openclaw/inbox/
     participant Crumb as Crumb<br/>(/feed-pipeline)
@@ -161,9 +163,9 @@ sequenceDiagram
 
     Note over DB,TG: Stage 2: Attention
     DB->>Att: Read pending items
-    Att->>Haiku: Batch triage (10-20 items)
-    Note right of Haiku: Vault snapshot provides<br/>project context + priorities
-    Haiku-->>Att: Scored items (priority, tags, why_now, action)
+    Att->>Triage: Batch triage (10-20 items)
+    Note right of Triage: Vault snapshot provides<br/>project context + priorities
+    Triage-->>Att: Scored items (priority, tags, why_now, action)
 
     alt Meets routing bar
         Att->>Inbox: Write feed-intel-*.md
@@ -193,7 +195,7 @@ sequenceDiagram
 
 **Stage 1 (Capture Clock):** LaunchAgent jobs fetch content from configured sources (X API v2 bookmarks, TwitterAPI.io search, RSS). Content is normalized to a unified format, deduped against SQLite, and queued. Runs on per-adapter schedules, decoupled from delivery.
 
-**Stage 2 (Attention Clock):** Runs daily. Batches pending items (10–20 per LLM call) through Haiku 4.5 triage. Each item gets: priority, tags, `why_now` rationale, recommended action, confidence. A vault snapshot (project frontmatter, operator priorities, recent session summaries) provides triage context. Items meeting the routing bar land in `_openclaw/inbox/`. All items go to a Telegram digest.
+**Stage 2 (Attention Clock):** Runs daily. Batches pending items (10–20 per LLM call) through the cloud triage engine (Kimi K2.5 via OpenRouter; Qwen 3.6 failover). Each item gets: priority, tags, `why_now` rationale, recommended action, confidence. A vault snapshot (project frontmatter, operator priorities, recent session summaries) provides triage context. Items meeting the routing bar land in `_openclaw/inbox/`. All items go to a Telegram digest.
 
 **Stage 3 (Crumb Processing):** The `/feed-pipeline` skill processes the inbox. Tier 1 (high priority + high confidence + capture action) gets permanence evaluation — auto-promote to `Sources/signals/` as signal-notes (1a) or route to operator review queue (1b). Circuit breaker: >10 Tier 1 items routes all to review queue (classifier drift signal). Tier 2 (actionable items) gets one-line action extracted and routed to project run-logs. Tier 3 gets no action; TTL cron purges after 14 days.
 
@@ -262,7 +264,7 @@ sequenceDiagram
     participant TG as Telegram
     participant TV as Tess Voice
     participant Inbox as _openclaw/inbox/
-    participant BW as bridge-watcher.py<br/>(kqueue)
+    participant BW as ai.openclaw.bridge.watcher<br/>(kqueue, Python)
     participant CC as claude --print<br/>(Bridge Crumb)
     participant Outbox as _openclaw/outbox/
     participant Vault

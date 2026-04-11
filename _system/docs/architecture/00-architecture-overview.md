@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: active
 created: 2026-03-14
-updated: 2026-03-14
+updated: 2026-04-11
 tags:
   - system/architecture
 topics:
@@ -17,10 +17,10 @@ This document is the entry point for the Arc42-derived architecture documentatio
 ## Sections
 
 1. [[01-context-and-scope]] — System boundary, actors (Danny, Crumb, Tess Voice, Tess Mechanic), external interfaces, handoff model, constraints
-2. [[02-building-blocks]] — 9 subsystems in 3 tiers: agents, lenses & patterns, data & communication. Ownership map, dependency diagram, code mapping
+2. [[02-building-blocks]] — 9 subsystems in 3 tiers: agents (20 skills, 4 subagents, orchestrator), lenses & patterns (8 overlays, 6 protocols, scripts), data & communication. Ownership map, dependency diagram, code mapping.
 3. [[03-runtime-views]] — 6 sequence diagrams: session lifecycle, Tess dispatch, feed pipeline, Mission Control, bridge handoff, AKM surfacing
-4. [[04-deployment]] — Mac Studio host, 10 launchd services, network topology (Tailscale mesh), storage layout, credential management, DNS
-5. [[05-cross-cutting-concepts]] — Frontmatter schema, tag taxonomy, vault-check (30 validations), context budgets, MOC system, compound engineering, code review tiers
+4. [[04-deployment]] — Mac Studio host; two-namespace LaunchAgent architecture (`ai.openclaw.*` legacy + `com.tess.v2.*` current, migration in progress); Crumb-side support services (`com.crumb.*`); Tailscale mesh, storage layout, credential management, DNS.
+5. [[05-cross-cutting-concepts]] — Frontmatter schema, tag taxonomy (18 Level 2 kb/ tags), vault-check (~27 validations), context budgets, MOC system, compound engineering (with 2026-04-04 track/review-routing/cluster enhancements), code review tiers (Claude Opus + Codex).
 
 ## Document Hierarchy
 
@@ -51,8 +51,8 @@ Architecture docs must be consistent with the design spec. Divergence means eith
 | HITL | Human-in-the-loop — risk-tiered approval model. Low=auto, Medium=flag, High=stop. | [[05-cross-cutting-concepts]] |
 | OpenClaw | Agent gateway platform. Runs Tess as a LaunchDaemon. Manages Telegram bindings, cron, and plugin dispatch. | [[04-deployment]] |
 | Bridge | Filesystem-based handoff between Tess and Crumb via `_openclaw/inbox/` and `_openclaw/outbox/`. kqueue detection, 4-layer security. | [[01-context-and-scope]], [[03-runtime-views]] §5 |
-| Skill | Procedural expertise package in `.claude/skills/`. Loaded on-demand by description match. 22 active. | [[02-building-blocks]] §2 |
+| Skill | Procedural expertise package in `.claude/skills/`. Loaded on-demand by description match. 20 active. | [[02-building-blocks]] §2 |
 | Overlay | Expert lens injected into active skills. No procedures of their own. 8 active. Routed via overlay index. | [[02-building-blocks]] §4 |
-| vault-check | Deterministic bash script with 30 mechanical validations. The system's only enforcement that can't hallucinate. Pre-commit hook. | [[05-cross-cutting-concepts]] |
+| vault-check | Deterministic bash script with ~27 mechanical validations. The system's only enforcement that can't hallucinate. Pre-commit hook. | [[05-cross-cutting-concepts]] |
 | Compound | Reflection at every phase transition that routes insights to conventions, solution docs, or primitive proposals. | [[05-cross-cutting-concepts]] |
 | Signal-note | Lightweight knowledge capture from feed pipeline. Lives in `Sources/signals/`. Promotion path to full knowledge-note. | [[05-cross-cutting-concepts]] |

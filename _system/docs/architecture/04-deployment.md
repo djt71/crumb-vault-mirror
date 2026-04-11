@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: active
 created: 2026-03-14
-updated: 2026-03-14
+updated: 2026-04-11
 tags:
   - system/architecture
 topics:
@@ -43,14 +43,20 @@ Three macOS user accounts:
 flowchart TD
     subgraph gui_domain["gui/ domain (tess user)"]
         cc["Claude Code\n(interactive sessions)"]
-        bw["bridge-watcher.py\n(KeepAlive)"]
-        hp["health-ping\n(15 min)"]
-        ac["awareness-check\n(30 min)"]
-        et["email-triage\n(30 min, waking hrs)"]
-        vh["vault-health\n(2:00 AM)"]
-        da["daily-attention\n(6:30 AM)"]
-        or["overnight-research\n(11:00 PM)"]
-        vgc["vault-gc\n(4:00 AM)"]
+        bw["ai.openclaw.bridge.watcher\n(KeepAlive, Python)"]
+        ls["com.tess.llama-server\n(KeepAlive, Nemotron)"]
+        hp["com.tess.v2.health-ping\n(15 min)"]
+        ac["com.tess.v2.awareness-check\n(30 min)"]
+        vh["com.tess.v2.vault-health\n(2:00 AM)"]
+        da["com.tess.v2.daily-attention\n(6:30 AM)"]
+        ovr["com.tess.v2.overnight-research\n(11:00 PM)"]
+        vgc["com.tess.v2.vault-gc\n(4:00 AM)"]
+        fif["com.tess.v2.fif-capture/attention/feedback-health"]
+        scout["com.tess.v2.scout-pipeline/feedback/heartbeat"]
+        cb["com.tess.v2.connections-brainstorm"]
+        dash["com.crumb.dashboard\n(Mission Control)"]
+        vw["com.crumb.vault-web\n(Quartz mobile)"]
+        cf["com.crumb.cloudflared\n(tunnel)"]
     end
 
     subgraph gui_danny["gui/ domain (danny user)"]
@@ -63,49 +69,83 @@ flowchart TD
 
     subgraph external["External"]
         telegram["Telegram API"]
-        anthropic["Anthropic API"]
-        ollama["Ollama\n(local, qwen3-coder)"]
+        anthropic["Anthropic API\n(Crumb: Opus 4.6)"]
+        openrouter["OpenRouter\n(Tess Voice: Kimi K2.5 / Qwen 3.6)"]
+        ollama["Ollama\n(local, Nemotron)"]
     end
 
     cc -->|"inference"| anthropic
     bw -->|"triggers dispatch"| cc
-    gw -->|"Tess Voice"| anthropic
+    gw -->|"Tess Voice"| openrouter
     gw -->|"Tess Mechanic"| ollama
+    ls -->|"hosts model"| ollama
     gw <-->|"messaging"| telegram
     hp -->|"heartbeat"| telegram
     ac -->|"awareness"| telegram
-    et -->|"email alerts"| telegram
     as -->|"writes snapshots"| bw
+    cf -->|"tunnels"| dash
 
     style cc fill:#e1f5fe
     style gw fill:#fff3e0
 ```
 
+**Service namespace note:** The system is in a migration state between two LaunchAgent namespaces. The legacy `ai.openclaw.*` namespace hosts bridge-watcher and remaining Tess operations; the new `com.tess.v2.*` namespace (tess-v2 project, Phase IMPLEMENT as of 2026-04-11) hosts the current authoritative set of 14 services plus support daemons. Both namespaces coexist during migration. Email triage services (both namespaces) were shut down on 2026-04-10 (TV2-036/037 cancelled).
+
 ### Prose Summary (for environments that cannot render Mermaid)
 
 Three launchd domains host the system's processes:
 
-**`gui/` domain (tess user):** Claude Code runs as interactive terminal sessions (on-demand, not persistent). The bridge-watcher is a persistent Python process (KeepAlive) monitoring `_openclaw/inbox/` via kqueue for sub-ms file detection. Seven LaunchAgent jobs run on intervals: health-ping (15 min), awareness-check (30 min), email-triage (30 min during waking hours), vault-health (2:00 AM), daily-attention (6:30 AM), overnight-research (11:00 PM), and vault-gc (4:00 AM).
+**`gui/` domain (tess user):** Claude Code runs as interactive terminal sessions (on-demand, not persistent). The bridge-watcher (`ai.openclaw.bridge.watcher`) is a persistent Python process (KeepAlive) monitoring `_openclaw/inbox/` via kqueue for sub-ms file detection. `com.tess.llama-server` is a KeepAlive daemon hosting the local Nemotron model for Tess Mechanic and inference-heavy scheduled jobs. The tess-v2 project (Phase IMPLEMENT) registers 14 interval-scheduled `com.tess.v2.*` services — health-ping (15 min), awareness-check (30 min), vault-health (2:00 AM), vault-gc (pre-dawn), daily-attention (6:30 AM), overnight-research (11:00 PM), plus feed-intel capture/attention/feedback-health and scout-pipeline/feedback-health/weekly-heartbeat and connections-brainstorm. Crumb-side support runs as `com.crumb.*` LaunchAgents: `dashboard` (Mission Control server), `vault-web` (Quartz mobile site), `cloudflared` (tunnel to the dashboard), `vault-gc`, `qmd-index`, `system-stats`, `service-status`, and `telemetry-rollup`.
 
 **`gui/` domain (danny user):** The apple-snapshot LaunchAgent writes Apple data (Reminders, Calendar, Notes) to `_openclaw/state/` every 30 minutes during waking hours. Requires danny's GUI session to be active.
 
-**`system/` domain:** The OpenClaw gateway runs as a LaunchDaemon (`ai.openclaw.gateway`), bound to `127.0.0.1:18789`. This is the Tess runtime — manages Telegram bindings, model routing (Haiku via cloud, qwen3-coder via local Ollama), cron scheduling, and plugin dispatch.
+**`system/` domain:** The OpenClaw gateway runs as a LaunchDaemon (`ai.openclaw.gateway`), bound to `127.0.0.1:18789`. This is the Tess runtime — manages Telegram bindings, model routing (Kimi K2.5 / Qwen 3.6 via OpenRouter for Tess Voice; Nemotron via local Ollama for Tess Mechanic), cron scheduling, and plugin dispatch.
+
+**Migration state (2026-04-11):** The service layer is transitioning from the legacy `ai.openclaw.*` namespace to the new `com.tess.v2.*` namespace (tess-v2 project, 42/50 tasks complete). Bridge-watcher remains on the legacy namespace. Email triage (TV2-036/037) was cancelled and shut down 2026-04-10. TV2-043 Opportunity Scout is in re-soak; earliest gate pass Apr 13.
 
 ### Service Inventory
+
+**Infrastructure (always-on):**
 
 | Label | Type | User | Schedule | Purpose |
 |-------|------|------|----------|---------|
 | `ai.openclaw.gateway` | LaunchDaemon | openclaw | Always-on | OpenClaw gateway (Tess runtime) |
-| `com.crumb.bridge-watcher` | LaunchAgent | tess | KeepAlive | kqueue watcher → bridge dispatch |
-| `ai.openclaw.health-ping` | LaunchAgent | tess | Every 900s | Dead man's switch heartbeat |
-| `ai.openclaw.awareness-check` | LaunchAgent | tess | Every 1800s | Awareness check (bash, Telegram) |
-| `ai.openclaw.email-triage` | LaunchAgent | tess | Every 1800s (waking) | Email classification + labeling |
-| `ai.openclaw.vault-health` | LaunchAgent | tess | 2:00 AM daily | Nightly vault integrity check |
-| `ai.openclaw.daily-attention` | LaunchAgent | tess | 6:30 AM daily | Daily attention planning |
-| `ai.openclaw.overnight-research` | LaunchAgent | tess | 11:00 PM daily | Scheduled research dispatch |
-| `com.crumb.vault-gc` | LaunchAgent | tess | 4:00 AM daily | Vault garbage collection |
+| `ai.openclaw.bridge.watcher` | LaunchAgent | tess | KeepAlive | kqueue watcher → bridge dispatch (Python) |
+| `com.tess.llama-server` | LaunchAgent | tess | KeepAlive | Local Nemotron model host (Ollama) |
+| `com.crumb.dashboard` | LaunchAgent | tess | KeepAlive | Mission Control HTTP server |
+| `com.crumb.vault-web` | LaunchAgent | tess | KeepAlive | Quartz v4 static site for mobile vault access |
+| `com.crumb.cloudflared` | LaunchAgent | tess | KeepAlive | Cloudflare tunnel → dashboard (remote access) |
+
+**Tess-v2 operational services (`com.tess.v2.*` namespace, managed by `tess-v2/project-state.yaml`):**
+
+| Label | Schedule | Purpose |
+|-------|----------|---------|
+| `com.tess.v2.health-ping` | Every 900s | Dead man's switch heartbeat |
+| `com.tess.v2.awareness-check` | Every 1800s | Awareness check (Telegram) |
+| `com.tess.v2.vault-health` | 2:00 AM daily | Nightly vault integrity check |
+| `com.tess.v2.vault-gc` | Pre-dawn daily | Vault garbage collection |
+| `com.tess.v2.backup-status` | Interval | Backup state monitoring |
+| `com.tess.v2.daily-attention` | 6:30 AM daily | Daily attention planning |
+| `com.tess.v2.overnight-research` | 11:00 PM daily | Scheduled research dispatch |
+| `com.tess.v2.fif-capture` | Interval | Feed-intel capture |
+| `com.tess.v2.fif-attention` | Interval | Feed-intel attention scan |
+| `com.tess.v2.fif-feedback-health` | Interval | Feed-intel feedback health check |
+| `com.tess.v2.scout-pipeline` | Interval | Opportunity Scout daily pipeline |
+| `com.tess.v2.scout-feedback-health` | Interval | Scout feedback health |
+| `com.tess.v2.scout-weekly-heartbeat` | Weekly | Scout weekly heartbeat |
+| `com.tess.v2.connections-brainstorm` | Interval | Connections brainstorm dispatch |
+
+**Apple and cross-user services:**
+
+| Label | Type | User | Schedule | Purpose |
+|-------|------|------|----------|---------|
 | `com.crumb.apple-snapshot` | LaunchAgent | danny | Every 1800s (waking) | Apple data snapshots to `_openclaw/state/` |
 | `com.crumb.drive-sync` | LaunchAgent | danny | 5:00 AM daily | Sync docs to Google Drive for NotebookLM |
+| `com.crumb.system-stats`, `service-status`, `telemetry-rollup`, `qmd-index`, `vault-gc` | LaunchAgent | tess | Interval | Metrics, health, AKM index maintenance |
+
+**Legacy `ai.openclaw.*` services:** `ai.openclaw.fif.capture/feedback/attention`, `health-ping`, `awareness-check`, `daily-attention`, `overnight-research`, `vault-health`. These are loaded but being migrated into `com.tess.v2.*` equivalents. The authoritative service set is managed via `Projects/tess-v2/project-state.yaml` `services:` field — cross-reference at deployment time.
+
+**Project-registered services:** Projects with `repo_path` in `project-state.yaml` may list service labels in a `services` field. Session-end build verification restarts these services after code changes.
 
 **Plist locations:** `_openclaw/staging/m1/` (milestone 1 services), `_openclaw/staging/m2/` (milestone 2), `_system/scripts/com.crumb.bridge-watcher.plist`. Deployed to `~/Library/LaunchAgents/` or `/Library/LaunchDaemons/` as appropriate.
 
@@ -130,27 +170,27 @@ flowchart LR
     end
 
     subgraph internet["Internet (outbound only)"]
-        anthropic["Anthropic API"]
+        anthropic["Anthropic API\n(Crumb)"]
+        openrouter["OpenRouter\n(Tess Voice)"]
         telegram["Telegram API"]
         openai["OpenAI API"]
         google["Google APIs\n(Gemini, Gmail, Drive)"]
         deepseek["DeepSeek API"]
         xai["xAI API (Grok)"]
         github["GitHub"]
-        lucid["Lucidchart API"]
+        cloudflare["Cloudflare\n(tunnel for dashboard)"]
     end
 
     laptop -->|"SSH (port 22)"| studio
     phone -->|"Telegram"| telegram
     telegram <-->|"bot webhooks"| gw
-    cc -->|"inference"| anthropic
-    gw -->|"Tess Voice"| anthropic
-    gw -->|"Tess Mechanic"| ollama_svc
+    cc -->|"inference (Opus 4.6)"| anthropic
+    gw -->|"Tess Voice (Kimi/Qwen)"| openrouter
+    gw -->|"Tess Mechanic (Nemotron)"| ollama_svc
     cc -->|"peer/code review"| openai
     cc -->|"peer review"| google
     cc -->|"peer review"| deepseek
     cc -->|"peer review"| xai
-    cc -->|"diagrams"| lucid
     cc -->|"git push/pull"| github
     gw -->|"email ops"| google
 ```
@@ -168,12 +208,13 @@ The Mac Studio has no inbound ports open to the public internet. All remote acce
 - Ollama: `127.0.0.1:11434` (HTTP)
 
 **Outbound traffic:**
-- Anthropic API (Crumb inference + Tess Voice)
+- Anthropic API (Crumb inference — Opus 4.6)
+- OpenRouter API (Tess Voice inference — Kimi K2.5 primary, Qwen 3.6 failover)
 - OpenAI, Google, DeepSeek, xAI APIs (peer/code review panels)
 - Telegram API (Tess messaging)
 - Google APIs (Gmail, Calendar, Drive)
 - GitHub (vault and project repo operations)
-- Lucidchart API (diagram export)
+- Cloudflare (outbound tunnel for dashboard remote access)
 
 **Health check endpoints:**
 - Gateway liveness: `nc -z -w3 127.0.0.1 18789` or `curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:18789/`
@@ -249,11 +290,11 @@ Companion notes (markdown) ARE tracked — they carry the metadata, description,
 | Google/Gemini API key | `~/.config/crumb/.env` | tess | peer-review skill | Manual |
 | DeepSeek API key | `~/.config/crumb/.env` | tess | peer-review skill | Manual |
 | xAI/Grok API key | `~/.config/crumb/.env` | tess | peer-review skill | Manual |
-| Lucidchart API key | `~/.config/crumb/.env` | tess | lucidchart skill | Manual |
-| TMDB API key | `~/.config/meme-creator/tmdb-api-key` | tess | meme-creator skill | Manual |
+| OpenRouter API key | `~/.config/crumb/.env` | tess, openclaw | Tess Voice cloud inference | Manual |
 | GitHub PAT | macOS Keychain (credential-osxkeychain) | tess | Git push/pull | Auto-cached |
 | OpenClaw token | `/Users/openclaw/.openclaw/openclaw.json` | openclaw | Gateway auth | Per config |
-| Telegram bot tokens | LaunchAgent plist env vars | tess | awareness-check, email-triage, health-ping | Manual |
+| Telegram bot tokens | LaunchAgent plist env vars | tess | awareness-check, health-ping, scout services | Manual |
+| Cloudflare tunnel token | macOS Keychain | tess | cloudflared tunnel (dashboard remote access) | Manual |
 | X (Twitter) OAuth | Dynamic (Keychain refresh) | tess | feed-intel framework | Auto-refresh |
 
 ### Security Model

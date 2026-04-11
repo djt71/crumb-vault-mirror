@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: active
 created: 2026-03-14
-updated: 2026-03-14
+updated: 2026-04-11
 tags:
   - system/architecture
 topics:
@@ -97,7 +97,7 @@ New types emerge through compound engineering, not speculative predefinition.
 
 ## Vault-Check (Mechanical Enforcement)
 
-`_system/scripts/vault-check.sh` — 30 deterministic validations. The system's only enforcement mechanism that cannot hallucinate, forget, or skip steps.
+`_system/scripts/vault-check.sh` — ~27 deterministic validations (rule numbers are not dense — some checks were removed, others added; consult the script header for the authoritative list). The system's only enforcement mechanism that cannot hallucinate, forget, or skip steps.
 
 **Enforcement tiers:**
 - **Error (exit 2):** Blocks git commit. Required field violations, schema breaks, invariant violations.
@@ -183,6 +183,11 @@ Every phase transition includes a compound reflection step (enforced by Context 
 
 **Read-back:** Skills with `required_context` in their SKILL.md auto-load relevant solutions docs, closing the compound loop. `systems-analyst` and `action-architect` also glob `_system/docs/solutions/` for prior art.
 
+**2026-04-04 enhancements:**
+- **Track schema:** Compound insights now carry a `track` field distinguishing operational patterns from strategic reframings, routing them to different follow-up flows.
+- **Conditional review routing:** High-confidence compound patterns can bypass full peer review; low-confidence or cross-domain patterns are flagged for operator review before solution-doc creation.
+- **Cluster analysis:** Recurring compound insights across sessions are grouped for pattern promotion (solution → skill → primitive).
+
 Non-project sessions get compound evaluation at session end, logged to `_system/logs/session-log.md`.
 
 ---
@@ -223,7 +228,7 @@ Two-tier model for code projects (projects with `repo_path`):
 | Tier | Tool | When | Scope |
 |------|------|------|-------|
 | **Tier 1** | Sonnet inline | Every code task completion | Chunked diff review within main session |
-| **Tier 2** | Cloud panel (Opus, GPT-5.4, Devstral) | Milestone boundaries, large diffs | Full-context external review via code-review-dispatch agent |
+| **Tier 2** | Review panel — Claude Opus (API) + Codex (CLI) | Milestone boundaries, large diffs | Full-context external review via code-review-dispatch agent |
 
 vault-check §23 enforces that completed code tasks have a code review entry (or explicit skip) in the run-log. Warning level — advisory, not blocking.
 

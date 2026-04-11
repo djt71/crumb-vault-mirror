@@ -86,3 +86,63 @@ User review of spec → approval → transition to PLAN (action-architect).
 - **Action taken:** none
 - **Key artifacts for ACT:** `tasks.md` is the primary execution reference; `specification.md` for deeper context.
 
+## 2026-04-11 — DOC-001: Live state capture (M1 closeout)
+
+**Live launchctl state (filtered to relevant services):**
+
+Four service namespaces coexist — this is a significant finding that must be reflected in `04-deployment.md`:
+
+1. **`ai.openclaw.*` (legacy Tess operations, pre-TV2):**
+   - `ai.openclaw.bridge.watcher` — running (pid 745), Python KeepAlive, `/Users/tess/Library/LaunchAgents/ai.openclaw.bridge.watcher.plist`
+   - `ai.openclaw.fif.feedback` — running (pid 742)
+   - `ai.openclaw.fif.capture`, `ai.openclaw.fif.attention` — loaded, awaiting interval
+   - `ai.openclaw.health-ping`, `awareness-check`, `daily-attention`, `overnight-research`, `vault-health` — loaded, awaiting interval
+   - `ai.openclaw.email-triage` — loaded (should be verified as intentionally retained vs. zombie)
+
+2. **`com.tess.v2.*` (new TV2 operations, current authoritative set — 14 services per `tess-v2/project-state.yaml`):**
+   - `com.tess.v2.health-ping`, `awareness-check`, `backup-status`, `vault-health`, `vault-gc`
+   - `com.tess.v2.fif-capture`, `fif-attention`, `fif-feedback-health`
+   - `com.tess.v2.connections-brainstorm`, `daily-attention`, `overnight-research`
+   - `com.tess.v2.scout-pipeline`, `scout-weekly-heartbeat`, `scout-feedback-health`
+   - Plus in-launchctl but not in tess-v2 services list: `scout-feedback-poller` (pid 34516, status 1 — see IDQ-004 "create Tess-side poller plist"), `email-triage` (pid 92215 — cancelled per TV2-036/037 but still loaded; likely needs explicit unload)
+
+3. **`com.crumb.*` (Crumb-side operations):**
+   - `com.crumb.cloudflared` — running (pid 756)
+   - `com.crumb.dashboard` — running (pid 735, Mission Control)
+   - `com.crumb.vault-web` — running (pid 761, Quartz mobile site)
+   - `com.crumb.vault-gc`, `qmd-index`, `system-stats`, `service-status`, `telemetry-rollup`, `vault-rebuild` (exit 1)
+
+4. **`com.tess.*` (Tess-side supporting services):**
+   - `com.tess.llama-server` — running (pid 757) — Nemotron inference server
+   - `com.tess.nemotron-load` — model load helper
+   - `com.tess.vault-backup`, `health-check`, `backup-status`, `soak-monitor`
+
+**tess-v2 project phase:** IMPLEMENT. 42/50 tasks done, 2 cancelled (TV2-036/037 email triage shut down 2026-04-10). TV2-043 re-soak in progress: C2/C3 clean, C1 had dead-letter from pre-fix scoring (fixed f056e5b). C1 soak clock reset, earliest gate pass Apr 13.
+
+**Bridge-watcher service shape:** Unchanged since original architecture doc. Python-based, KeepAlive, path `/Users/tess/Library/LaunchAgents/ai.openclaw.bridge.watcher.plist`. The `ai.openclaw.*` namespace here is legacy — functions have been duplicated into `com.tess.v2.*` for most services, but bridge-watcher remains on the ai.openclaw namespace.
+
+**Unknowns resolved:**
+- ✅ Live `launchctl list` captured — `04-deployment.md` process model needs substantial rework (two-namespace architecture)
+- ✅ tess-v2 phase (IMPLEMENT) and soak state (TV2-043 C1 clock reset) confirmed
+- ✅ Bridge-watcher unchanged
+- ⚠️ Tess-v2 Amendment Z interactive dispatch: tess-v2 is in IMPLEMENT (42/50), Phase 4a vault semantic search landed — safe to document at high level; annotate sequence-diagram details as "soak-pending" where unstable
+
+**New finding (not in spec):** Two-namespace service architecture (ai.openclaw.* legacy + com.tess.v2.* new) is a material change that spec did not anticipate. DOC-004 scope expands to document both namespaces and the migration state. Still within "refresh" envelope — no new section needed, just more comprehensive process-model diagram.
+
+**DOC-001 state:** complete. Proceeding to DOC-002.
+
+## 2026-04-11 — M2 Architecture Refresh complete (DOC-002..DOC-007)
+
+All 6 architecture docs refreshed. Key content changes:
+
+- **01-context-and-scope.md**: Tess Voice → Kimi K2.5 (OpenRouter) + Qwen 3.6 failover. Tess Mechanic → Nemotron. Added OpenRouter as external system. Frontmatter bumped. `lifestyle` domain was already in place from an Apr 6 content edit — only frontmatter needed bumping.
+- **02-building-blocks.md**: Skill table rebuilt — 20 skills (−excalidraw, −lucidchart, −meme-creator, −obsidian-cli; +critic, +deliberation). Subagent table rebuilt — 4 rows (+deliberation-dispatch). Block-beta counts updated (20 skills, 4 agents, 6 protocols, ~20 scripts). Code Mapping counts corrected. Mermaid description updated to Mermaid + Excalidraw (alt format, not separate skill).
+- **04-deployment.md**: Process model diagram rebuilt to show two-namespace architecture (`ai.openclaw.*` legacy + `com.tess.v2.*` new). Email-triage removed from diagram. Ollama model corrected to Nemotron via `com.tess.llama-server`. Service inventory split into Infrastructure / Tess-v2 / Apple+cross-user tables. Credentials table: removed Lucidchart/TMDB, added OpenRouter + Cloudflare tunnel. Network topology updated with openrouter node.
+- **03-runtime-views.md**: Tess Voice participant relabeled to Kimi K2.5. Triage engine in feed pipeline updated. Failure handling reflects OpenRouter failover chain. Bridge-watcher label updated to `ai.openclaw.bridge.watcher`. Added Amendment Z / tess-v2 Phase IMPLEMENT note on dispatch evolution — sequence diagram covers stable paths, interactive refinements noted as soak-pending.
+- **05-cross-cutting-concepts.md**: Vault-check count updated to ~27. Code review tier 2 panel corrected to Claude Opus (API) + Codex (CLI). Compound engineering section gained 2026-04-04 enhancements (track schema, conditional review routing, cluster analysis).
+- **00-architecture-overview.md**: Terminology index corrected (20 skills, ~27 vault-check rules). Section descriptions regenerated to reflect 01–05 content.
+
+**Scope surprise:** DOC-004 discovered the two-namespace service architecture (ai.openclaw.* + com.tess.v2.*) — a material structural change the spec didn't anticipate. Still handled within refresh envelope by rebuilding the process-model diagram and service inventory table, not by adding a new section.
+
+**M2 state:** complete. Proceeding to M3 (operator docs).
+

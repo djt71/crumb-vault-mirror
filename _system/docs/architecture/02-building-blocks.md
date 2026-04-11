@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: active
 created: 2026-03-14
-updated: 2026-03-14
+updated: 2026-04-11
 tags:
   - system/architecture
 topics:
@@ -29,14 +29,14 @@ block-beta
 
     block:agents["Agents"]:3
         orchestrator["Orchestrator\n(CLAUDE.md + Claude Code)"]
-        skills["Skill System\n(22 skills)"]
-        subagents["Subagent System\n(3 agents)"]
+        skills["Skill System\n(20 skills)"]
+        subagents["Subagent System\n(4 agents)"]
     end
 
     block:lenses["Lenses & Patterns"]:3
         overlays["Overlay System\n(8 overlays)"]
-        protocols["Protocol Layer\n(5 protocols)"]
-        scripts["Script Layer\n(27 scripts)"]
+        protocols["Protocol Layer\n(6 protocols)"]
+        scripts["Script Layer\n(20 scripts)"]
     end
 
     block:data["Data & Communication"]:3
@@ -48,7 +48,7 @@ block-beta
 
 ### Prose Summary (for environments that cannot render Mermaid)
 
-Nine building blocks in three tiers. **Agents tier:** the Orchestrator (CLAUDE.md governance + Claude Code runtime), Skill System (22 procedural packages), and Subagent System (3 isolated workers). **Lenses & Patterns tier:** Overlay System (8 expert lenses), Protocol Layer (5 cross-cutting workflow patterns), and Script Layer (27 mechanical enforcement and automation scripts). **Data & Communication tier:** Vault Store (the shared filesystem — Projects, Domains, Sources, system docs), Knowledge Base (MOCs, AKM/QMD retrieval, tag taxonomy), and Bridge (Tess-Crumb communication via `_openclaw/`).
+Nine building blocks in three tiers. **Agents tier:** the Orchestrator (CLAUDE.md governance + Claude Code runtime), Skill System (20 procedural packages), and Subagent System (4 isolated workers). **Lenses & Patterns tier:** Overlay System (8 expert lenses), Protocol Layer (6 cross-cutting workflow patterns), and Script Layer (~20 mechanical enforcement and automation scripts). **Data & Communication tier:** Vault Store (the shared filesystem — Projects, Domains, Sources, system docs), Knowledge Base (MOCs, AKM/QMD retrieval, tag taxonomy), and Bridge (Tess-Crumb communication via `_openclaw/`).
 
 ---
 
@@ -77,21 +77,19 @@ Procedural expertise packages loaded on-demand based on description match.
 | action-architect | TASK/PLAN | Spec → milestones, tasks, dependencies |
 | writing-coach | Any output | Clarity, structure, tone improvement |
 | audit | Maintenance | Staleness scans, full audits, health checks |
-| obsidian-cli | Cross-cutting | Vault query routing via Obsidian CLI |
 | checkpoint | Session mgmt | State saving, context management |
 | sync | Session mgmt | Git commit, backup operations |
-| peer-review | Review | Cross-LLM artifact validation (4-model panel) |
-| code-review | Review | Two-tier: Sonnet inline (T1) + cloud panel (T2) |
+| startup | Session mgmt | Session startup hook procedures |
+| peer-review | Review | Cross-LLM artifact validation (multi-model panel) |
+| code-review | Review | Two-tier: Claude Opus (API) + Codex (CLI) |
+| critic | Review | Adversarial review — unsupported claims, logical gaps, missing perspectives (single-stage structured critique) |
+| deliberation | Review | Multi-agent deliberation on vault artifacts — dispatches to external LLM evaluators with role-specific overlays |
 | inbox-processor | Intake | Process `_inbox/` files — classify, route |
 | feed-pipeline | Intake | 3-tier feed intel routing → signal-notes |
 | researcher | Research | 6-stage evidence pipeline with citation integrity |
-| mermaid | Diagrams | Default diagramming in markdown |
-| excalidraw | Diagrams | Freeform `.excalidraw` JSON diagrams |
-| lucidchart | Diagrams | External sharing via REST API |
+| mermaid | Diagrams | Default diagramming — Mermaid in markdown + Excalidraw for freeform/sketch layouts |
 | deck-intel | Extraction | Structured intel from PPTX/PDF |
 | diagram-capture | Extraction | Visual content interpretation from images |
-| meme-creator | Creative | Meme images from quotes |
-| startup | Session mgmt | Session startup hook procedures |
 | vault-query | Cross-cutting | Structured vault queries for dispatch consumers |
 | attention-manager | Planning | Daily attention plans, monthly reviews |
 | learning-plan | Planning | Structured training plan design |
@@ -106,9 +104,10 @@ Isolated context workers for tasks that benefit from separation from the main se
 
 | Agent | Purpose | Consumers |
 |-------|---------|-----------|
-| code-review-dispatch | Tier 2 cloud panel dispatch (Opus, GPT-5.4, Devstral) | code-review skill |
-| peer-review-dispatch | 4-model prose review panel dispatch | peer-review skill |
-| test-runner | Test suite execution in external repos | code-review skill |
+| code-review-dispatch | Review panel dispatch: Claude Opus (API) + Codex (CLI) | code-review skill |
+| peer-review-dispatch | Multi-model prose review panel dispatch | peer-review skill |
+| deliberation-dispatch | Role-specific overlay + persona-biased evaluator dispatch with concurrent API calls | deliberation skill |
+| test-runner | Test suite execution in external repos (TypeScript, Node native, pytest) | code-review skill |
 
 **Location:** `.claude/agents/[name].md`
 
@@ -281,8 +280,8 @@ Which agent owns which system capability. "Owns" means sole authority to execute
 flowchart TD
     subgraph agents["Agents"]
         orch["Orchestrator\n(CLAUDE.md)"]
-        skills["Skill System\n(22 skills)"]
-        subs["Subagent System\n(3 agents)"]
+        skills["Skill System\n(20 skills)"]
+        subs["Subagent System\n(4 agents)"]
     end
 
     subgraph lenses["Lenses & Patterns"]
@@ -361,11 +360,11 @@ Where each building block lives on disk, for navigation.
 | Block | Primary Path(s) | File Count |
 |-------|-----------------|------------|
 | Orchestrator | `/CLAUDE.md`, `/AGENTS.md` | 2 |
-| Skills | `.claude/skills/*/SKILL.md` | 22 directories |
-| Subagents | `.claude/agents/*.md` | 3 files |
+| Skills | `.claude/skills/*/SKILL.md` | 20 directories |
+| Subagents | `.claude/agents/*.md` | 4 files |
 | Overlays | `_system/docs/overlays/*.md` | 9 files (incl. index) |
 | Protocols | `_system/docs/protocols/*.md` + `_system/docs/context-checkpoint-protocol.md` | 6 files |
-| Vault Store | `Projects/`, `Domains/`, `Sources/`, `_system/`, `_inbox/`, `_attachments/` | ~2800 files |
+| Vault Store | `Projects/`, `Domains/`, `Sources/`, `_system/`, `_inbox/`, `_attachments/` | ~3650 files |
 | Knowledge Base | `Domains/*/moc-*.md`, `_system/docs/kb-to-topic.yaml`, `_system/scripts/knowledge-retrieve.sh` | 15 MOCs + scripts |
-| Scripts | `_system/scripts/` | 27 files |
+| Scripts | `_system/scripts/` | ~20 files |
 | Bridge | `_openclaw/` | 16 subdirectories |
