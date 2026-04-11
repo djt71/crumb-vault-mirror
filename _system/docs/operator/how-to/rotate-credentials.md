@@ -3,7 +3,7 @@ type: how-to
 status: active
 domain: software
 created: 2026-03-14
-updated: 2026-03-14
+updated: 2026-04-11
 tags:
   - system/operator
 topics:
@@ -27,18 +27,18 @@ topics:
 | Gemini API key | Env file | `~/.config/crumb/.env` | peer-review |
 | DeepSeek API key | Env file | `~/.config/crumb/.env` | peer-review |
 | xAI/Grok API key | Env file | `~/.config/crumb/.env` | peer-review |
-| Lucidchart API key | Env file | `~/.config/crumb/.env` | lucidchart skill |
-| TMDB API key | Dedicated file | `~/.config/meme-creator/tmdb-api-key` | meme-creator |
+| OpenRouter API key | Env file | `~/.config/crumb/.env` | Tess Voice (Kimi K2.5 / Qwen 3.6) |
 | GitHub PAT | macOS Keychain | `credential-osxkeychain` cache | Git push/pull |
 | OpenClaw token | Config file | `/Users/openclaw/.openclaw/openclaw.json` | Gateway auth |
-| Telegram bot tokens | Plist env vars | LaunchAgent plists | awareness-check, email-triage, health-ping |
+| Telegram bot tokens | Plist env vars | LaunchAgent plists | awareness-check, health-ping, scout services |
+| Cloudflare tunnel token | macOS Keychain | Keychain entry | `com.crumb.cloudflared` (dashboard remote access) |
 | X OAuth | Keychain (dynamic) | Auto-refresh | feed-intel framework |
 
 ---
 
 ## Rotation Procedure
 
-### For `~/.config/crumb/.env` keys (OpenAI, Gemini, DeepSeek, xAI, Lucidchart)
+### For `~/.config/crumb/.env` keys (OpenAI, Gemini, DeepSeek, xAI, OpenRouter)
 
 1. Generate a new key from the provider's dashboard
 2. Edit the env file:
@@ -101,13 +101,11 @@ topics:
    launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/<label>.plist
    ```
 
-### For TMDB API key
+### For OpenRouter API key
 
-1. Update the key file:
-   ```bash
-   echo "NEW_KEY_HERE" > ~/.config/meme-creator/tmdb-api-key
-   ```
-2. Test: run the meme-creator skill
+1. Generate a new key at https://openrouter.ai/keys
+2. Update `~/.config/crumb/.env`: `OPENROUTER_API_KEY=...`
+3. Test: send a Telegram message to Tess Voice — verify response via Kimi K2.5. If OpenRouter is unreachable, the gateway fails over to Qwen 3.6 (same key).
 
 ---
 

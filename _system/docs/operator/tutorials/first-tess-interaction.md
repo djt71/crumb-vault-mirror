@@ -3,7 +3,7 @@ type: tutorial
 status: active
 domain: software
 created: 2026-03-14
-updated: 2026-03-14
+updated: 2026-04-11
 tags:
   - system/operator
 topics:
@@ -32,8 +32,8 @@ Type a question or request. Tess has two modes:
 
 | Agent | Model | When It Activates | Capabilities |
 |-------|-------|-------------------|-------------|
-| **Tess Voice** | Haiku (cloud) | Default for conversations | Chat, Q&A, vault reads, lightweight reasoning |
-| **Tess Mechanic** | qwen3-coder (local Ollama) | Cron jobs, operational checks | Scripted checks, Telegram alerts, automated health monitoring |
+| **Tess Voice** | Kimi K2.5 via OpenRouter (Qwen 3.6 failover) | Default for conversations | Chat, Q&A, vault reads, lightweight reasoning |
+| **Tess Mechanic** | Nemotron (local Ollama) | Cron jobs, operational checks | Scripted checks, Telegram alerts, automated health monitoring |
 
 You're talking to Tess Voice. It can:
 - Answer questions using vault knowledge
@@ -103,7 +103,7 @@ Tess responds to specific command patterns for operational tasks. Examples:
 
 ## What You've Learned
 
-- Tess Voice (Haiku) handles conversation; Tess Mechanic (qwen3-coder) handles automated checks
+- Tess Voice (Kimi K2.5 via OpenRouter) handles conversation; Tess Mechanic (local Nemotron) handles automated checks
 - Voice can read but not write to the vault
 - Escalation to Crumb goes through the bridge (inbox → watcher → Claude Code → outbox)
 - Automated messages arrive on schedule without prompting

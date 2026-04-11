@@ -3,7 +3,7 @@ type: reference
 status: active
 domain: software
 created: 2026-03-14
-updated: 2026-03-14
+updated: 2026-04-11
 tags:
   - system/operator
 topics:
@@ -41,12 +41,13 @@ crumb-vault/                           # Vault root (Obsidian vault + git repo)
 ├── Archived/
 │   ├── Projects/                      # Archived project scaffolds (same structure)
 │   └── KB/                            # Archived knowledge notes (flat, no subdirectories)
-├── Domains/                           # Domain overviews and MOCs
+├── Domains/                           # Domain overviews and MOCs (9 canonical domains)
 │   ├── Career/
 │   ├── Creative/
 │   ├── Financial/
 │   ├── Health/
 │   ├── Learning/
+│   ├── Lifestyle/
 │   ├── Relationships/
 │   ├── Software/
 │   └── Spiritual/
@@ -75,10 +76,9 @@ crumb-vault/                           # Vault root (Obsidian vault + git repo)
 │   │   ├── overlays/                  # Expert lens files (8 overlays + index)
 │   │   ├── protocols/                 # Cross-cutting workflow patterns (6 files)
 │   │   ├── solutions/                 # Compound engineering patterns
-│   │   ├── Ops/                       # Legacy operator docs (being migrated)
 │   │   └── templates/                 # Artifact templates
 │   ├── logs/                          # Operational logs (metrics, health, sync)
-│   ├── scripts/                       # Automation scripts (27 files)
+│   ├── scripts/                       # Automation scripts (~20 files)
 │   ├── reviews/                       # Non-project review outputs
 │   ├── daily/                         # Daily attention plans
 │   └── schemas/                       # Validation schemas
@@ -99,8 +99,8 @@ crumb-vault/                           # Vault root (Obsidian vault + git repo)
 │   ├── transcripts/                   # Bridge dispatch transcripts
 │   └── tess_scratch/                  # Ephemeral file exchange (gitignored)
 ├── .claude/                           # Claude Code configuration
-│   ├── skills/                        # 22 skill packages (SKILL.md each)
-│   ├── agents/                        # 3 subagent definitions
+│   ├── skills/                        # 20 skill packages (SKILL.md each)
+│   ├── agents/                        # 4 subagent definitions
 │   └── worktrees/                     # Session-scoped isolated worktrees
 ├── .git/                              # Git version control
 └── .obsidian/                         # Obsidian editor config

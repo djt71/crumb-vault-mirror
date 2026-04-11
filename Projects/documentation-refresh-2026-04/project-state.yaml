@@ -2,12 +2,12 @@ project: documentation-refresh-2026-04
 domain: software
 type: knowledge-work
 workflow: SPECIFY → PLAN → ACT
-phase: ACT
-last_gate: PLAN-to-ACT
+phase: DONE
+last_gate: ACT-complete
 created: 2026-04-11
 updated: 2026-04-11
-active_task: DOC-008
-next_action: Refresh operator reference docs (M3 batch 1)
+active_task: null
+next_action: All 12 tasks complete. Project deliverables ready for operator review. Design-spec drift flagged as follow-on (see run-log 2026-04-11 M5 section).
 last_committed: null
 related_projects:
   - documentation-overhaul

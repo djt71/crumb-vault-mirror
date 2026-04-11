@@ -3,7 +3,7 @@ type: explanation
 status: active
 domain: software
 created: 2026-03-14
-updated: 2026-03-14
+updated: 2026-04-11
 tags:
   - system/operator
 topics:
@@ -78,7 +78,7 @@ Despite different personalities, both agents operate from the same foundation:
 A single always-on agent with full governance would be simpler in theory. In practice, it would be worse:
 
 - **Context pressure:** Governed work requires deep context (specs, designs, prior art). Operational work requires broad but shallow context (status checks, inbox items, quick lookups). One agent can't serve both well within the same context window.
-- **Cost:** Running Opus 24/7 for status checks is wasteful. Tess uses Haiku for conversation and local qwen3-coder for automated checks — appropriate capability for the task.
+- **Cost:** Running Opus 24/7 for status checks is wasteful. Tess uses Kimi K2.5 (via OpenRouter, with Qwen 3.6 failover) for conversation and local Nemotron for automated checks — appropriate capability for the task.
 - **Security:** Separating the agents creates a natural security boundary. Tess can't access Crumb's credentials or modify governed files directly. The bridge protocol forces everything through CLAUDE.md governance.
 - **Personality fit:** An always-on companion needs warmth and speed. A governed executor needs rigor and deliberation. These are opposing design pressures.
 

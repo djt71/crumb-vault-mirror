@@ -146,3 +146,35 @@ All 6 architecture docs refreshed. Key content changes:
 
 **M2 state:** complete. Proceeding to M3 (operator docs).
 
+## 2026-04-11 — M3 Operator + M4 Orientation Map + M5 Close-Out
+
+**M3 approach:** grep-driven staleness edits across all 24 operator files. Touched only files with actual stale references; left clean files alone (no frontmatter churn).
+
+**M3 edits:**
+- `rotate-credentials.md`: Removed Lucidchart + TMDB credential rows and rotation sections. Added OpenRouter row + rotation procedure. Added Cloudflare tunnel token row. Updated Telegram bot token consumers (removed email-triage, added scout services).
+- `first-tess-interaction.md`: Tess Voice model row → Kimi K2.5 (OpenRouter, Qwen 3.6 failover). Tess Mechanic → Nemotron. Line 106 updated accordingly. Frontmatter bumped.
+- `why-two-agents.md`: Cost section updated (Kimi K2.5 / Nemotron instead of Haiku / qwen3-coder). Frontmatter bumped.
+- `vault-structure-reference.md`: Added Lifestyle domain row. Skill count 22→20. Subagent count 3→4. Script count 27→~20. Removed dead Ops/ subdirectory entry. Frontmatter bumped.
+- `infrastructure-reference.md`: Service inventory rebuilt with Infrastructure / Tess-v2 / Apple tables and Legacy namespace note. Outbound endpoints: added OpenRouter and Cloudflare, removed Lucidchart. Credentials: removed Lucidchart and TMDB, added OpenRouter and Cloudflare. Bridge-watcher label corrected to `ai.openclaw.bridge.watcher`.
+- `crumb-deployment-runbook.md`: API keys setup removed Lucidchart + TMDB, added OpenRouter + Cloudflare tunnel. Backup/restore sections updated. Cleanup section updated. Reference tables updated. `setup-crumb.sh` phase list updated. Frontmatter bumped.
+- Reference docs (overlays-reference, skills-reference, tag-taxonomy-reference, sqlite-schema, git-commands, tmux-commands): verified no stale model/skill refs; left frontmatter alone where unchanged (skills-reference Apr 5 and tag-taxonomy Apr 7 were already correct).
+- Tutorials + explanation docs (first-crumb-session, mission-control-orientation, how-crumb-thinks, the-vault-as-memory, feed-pipeline-philosophy): verified no stale refs via grep; no edits required. Obsidian "Excalidraw plugin" mentions in the-vault-as-memory.md refer to the Obsidian plugin, not the removed skill — retained.
+
+**M4 edits (orientation map):**
+- Skill table rebuilt: 20 rows. Removed excalidraw, lucidchart, meme-creator, obsidian-cli. Added critic, deliberation. Updated token estimates (rounded) and skill layer total to ~47,550.
+- Subagent table: 4 rows. Added deliberation-dispatch row.
+- Token Budget Summary: all counts updated (skills 22→20, subagents 3→4, total inventory 53→48, total tokens recalculated to ~86,327).
+
+**M5 cross-reference consistency check:**
+- **Skill count:** architecture 02 = 20 | skills-reference = 20 | orientation map = 20 | filesystem = 20 ✓
+- **Subagent count:** architecture 02 = 4 | orientation map = 4 | filesystem = 4 ✓
+- **Overlay count:** 8 across all docs (unchanged from overhaul project, verified)
+- **Model routing:** All Tess Voice refs now cite Kimi K2.5 (OpenRouter / Qwen 3.6 failover). All Tess Mechanic refs now cite Nemotron. Zero residual Haiku 4.5 or qwen3-coder references in architecture, operator, or orientation map.
+
+**Design-spec drift flagged (out of scope — follow-on):**
+- `_system/docs/crumb-design-spec-v2-4.md` line 243: still references `meme-creator/SKILL.md` in directory tree
+- Line 1504: still lists `obsidian-cli, meme-creator` as Phase 1 deployed skills
+- Recommendation: follow-on project `design-spec-refresh` when design spec rev cycle next occurs. Not urgent — design spec is "intent authority", and these references are in structural/historical sections rather than governing logic.
+
+**ACT state:** all 12 tasks complete. Project deliverables ready for archival-on-review.
+

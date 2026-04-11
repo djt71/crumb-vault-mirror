@@ -5,7 +5,7 @@ type: runbook
 skill_origin: inbox-processor
 status: active
 created: 2026-02-20
-updated: 2026-03-14
+updated: 2026-04-11
 tags:
   - setup
   - deployment
@@ -220,24 +220,24 @@ chmod 600 ~/.config/crumb/.env
 Add these keys (get values from your password manager or existing machine):
 
 ```bash
+# Tess Voice cloud inference (required)
+OPENROUTER_API_KEY=sk-or-...
+
 # Peer review (required for peer-review skill)
 OPENAI_API_KEY=sk-...
 GEMINI_API_KEY=AI...
 DEEPSEEK_API_KEY=sk-...
-
-# Lucidchart (required for lucidchart skill)
-LUCID_API_KEY=...
+XAI_API_KEY=xai-...
 ```
 
 **Note:** An `ANTHROPIC_API_KEY` is only needed if Claude Code can't authenticate
 via subscription (Keychain). Most setups don't need it — use subscription auth.
 
-### 4.4 TMDB API key (meme-creator skill)
+### 4.4 Cloudflare tunnel token (com.crumb.cloudflared, optional)
 
-```bash
-mkdir -p ~/.config/meme-creator
-echo "YOUR_TMDB_KEY" > ~/.config/meme-creator/tmdb-api-key
-```
+If remote dashboard access is desired, provision a Cloudflare tunnel and store
+the token in the macOS Keychain. The `com.crumb.cloudflared` LaunchAgent
+reads the token at startup and tunnels to the dashboard on demand.
 
 ---
 
@@ -773,13 +773,7 @@ from the new machine (password manager, AirDrop — **never email or Slack**).
 
 ```bash
 cat ~/.config/crumb/.env
-# Copy the output: OPENAI_API_KEY, GEMINI_API_KEY, DEEPSEEK_API_KEY, LUCID_API_KEY
-```
-
-**TMDB API key:**
-
-```bash
-cat ~/.config/meme-creator/tmdb-api-key
+# Copy the output: OPENROUTER_API_KEY, OPENAI_API_KEY, GEMINI_API_KEY, DEEPSEEK_API_KEY, XAI_API_KEY
 ```
 
 **Shell configs:**
@@ -846,11 +840,6 @@ for anything you saved. Restoration priority:
    # Paste saved contents
    chmod 600 ~/.config/crumb/.env
 
-   # TMDB key
-   mkdir -p ~/.config/meme-creator
-   nano ~/.config/meme-creator/tmdb-api-key
-   # Paste saved key
-
    # Shell config
    nano ~/.zshrc
    # Paste saved contents (merge with Homebrew PATH lines if needed)
@@ -886,7 +875,7 @@ After confirming the new machine works:
    ```
 4. **Remove config files:**
    ```bash
-   rm -rf ~/.config/crumb ~/.config/meme-creator
+   rm -rf ~/.config/crumb
    ```
 
 ---
@@ -900,8 +889,7 @@ travel with `git clone` and must be created or copied manually on each machine.
 
 | File | Purpose | Copyable? |
 |------|---------|-----------|
-| `~/.config/crumb/.env` | API keys (OpenAI, Gemini, DeepSeek, Lucidchart) | Yes — transfer securely |
-| `~/.config/meme-creator/tmdb-api-key` | TMDB API key for meme-creator skill | Yes |
+| `~/.config/crumb/.env` | API keys (OpenRouter, OpenAI, Gemini, DeepSeek, xAI) | Yes — transfer securely |
 | `~/.zshrc` | TERM export, bindkey fixes, Keychain unlock, claude alias | Yes |
 | `~/.tmux.conf` | tmux prefix, keybindings, status bar theme | Yes |
 
@@ -953,7 +941,7 @@ installation across these phases:
 4. Claude Code binary
 5. File permissions (script execute bits)
 6. Pre-commit hook (vault-check.sh)
-7. Config files (~/.config/crumb/.env, TMDB key, Lucidchart key)
+7. Config files (`~/.config/crumb/.env` with OpenRouter, peer-review panel keys)
 8. Vault validation (vault-check.sh)
 9. GitHub mirror (if configured)
 
