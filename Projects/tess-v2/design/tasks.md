@@ -131,7 +131,7 @@ Supersedes the preliminary task list in specification.md §15. Task IDs are renu
 
 | ID | Description | State | Depends On | Risk | Domain | Acceptance Criteria |
 |----|-------------|-------|------------|------|--------|-------------------|
-| TV2-045 | Paperclip integration spike — evaluate as role/coordination layer | todo | TV2-031b | medium | research | Install Paperclip. Stand up 3-role toy hierarchy (Tess GM → 2 service roles). Test whether tess-v2 contract runner can sit beneath Paperclip's task dispatch. Evaluate: (1) vault authority preserved — Paperclip doesn't bypass staging/promotion, (2) contract verification layer works under Paperclip's task checkout, (3) heartbeat scheduling compatible with existing LaunchAgent cadences, (4) dashboard provides useful operational visibility. Decision document: use Paperclip as coordination layer, build thin sub-orchestrator ourselves, or defer. |
+| TV2-045 | Paperclip integration spike — evaluate as role/coordination layer | done | TV2-031b | medium | research | **DEFER.** Stage 0 bail: no generic adapter exists (Bash/HTTP/webhook). All 7 adapters are runtime-specific (claude-local, codex-local, etc.). tess-v2's contract runner doesn't fit any adapter shape. Integration requires custom adapter → paradigm mismatch. Dashboard is the only genuine add; everything else overlaps or conflicts. No scaling triggers firing. Decision document: design/paperclip-spike-decision-2026-04-12.md. Next state-check: ~2026-07-12. |
 
 ## Phase 4b: Validation & Cutover
 

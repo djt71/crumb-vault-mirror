@@ -4,7 +4,7 @@ type: system
 phase: IMPLEMENT
 last_gate: TASK-to-IMPLEMENT
 created: 2026-03-28
-updated: 2026-04-10
+updated: 2026-04-12
 related_projects:
   - tess-operations
   - autonomous-operations
@@ -14,7 +14,7 @@ related_projects:
 repo_path: /Users/tess/crumb-apps/tess-v2
 active_task: null
 last_committed: 2026-04-10
-next_action: "42/50 done, 2 cancelled (TV2-036/037 — email triage shut down 2026-04-10). TV2-043 re-soak in progress: C2/C3 clean, C1 had dead-letter from pre-fix claude-p scoring (fixed f056e5b). C1 soak clock reset — needs 3 clean daily runs post-fix, earliest gate pass Apr 13. Blocked: TV2-038 (needs TV2-043). Open follow-ups: Tess-side poller plist (IDQ-004, blocks TV2-039), run-log rotation (3050+ lines). Pending: TV2-045 Paperclip spike."
+next_action: "43/50 done, 2 cancelled. TV2-045 Paperclip spike complete (DEFER — no generic adapter, paradigm mismatch). TV2-043 re-soak extended to Apr 14: fix deployed (ef93e1a: LIMIT 10). C2/C3 proven — 2-day C1-only re-soak Apr 13–14. Blocked: TV2-038 (needs TV2-043). Open follow-ups: Tess-side poller plist (IDQ-004, blocks TV2-039)."
 services:
   - com.tess.v2.health-ping
   - com.tess.v2.awareness-check
