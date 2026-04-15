@@ -691,3 +691,4 @@
 2026-04-11 14:53:02 SYNC docs: refresh claude-ai-context.md — 2026-04-11 state
 2026-04-12 13:33:16 SYNC feat(tess-v2): TV2-043 gate eval (FAIL→re-soak) + TV2-045 Paperclip spike (DEFER)
 2026-04-15 17:22:52 SYNC feat(tess-v2): TV2-043 gate PASS — Scout re-soak close
+2026-04-15 17:25:46 SYNC fix(vault-check): detect duplicate YAML keys in frontmatter
