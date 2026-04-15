@@ -110,6 +110,27 @@ Created TV2-056 (added to tasks.md Phase 4b) and executed end-to-end in this ses
 
 All work on Opus (session default). Delegated Phase 2 data collection to 6 parallel Explore subagents (`subagent_type: Explore`) — mechanical read-heavy work, kept main context clean. Each agent was bounded by word count (400–1200 words per response) and pre-specified SQL queries. No Sonnet delegation.
 
+### TV2-056 code review
+
+Ran `code-review` skill on commit `d8bad52`. Two-reviewer panel (Opus 4.6 via API, Codex GPT-5.3 via CLI). Test gate passed: 433/433 pytest. Review note: `Projects/tess-v2/reviews/2026-04-15-code-review-manual.md`. Review tag: `code-review-2026-04-15-tv2-056`.
+
+17 findings total, 0 CRITICAL, 4 SIGNIFICANT, 4 MINOR, 7 STRENGTH, 1 consensus (ANT-F1 + CDX-F1). No systemic clusters (findings heterogeneous).
+
+**Must-fix applied (commit `02be7b7`):**
+- **ANT-F5:** `fif-attention.sh` paused-pause heredoc omitted `tier_distribution:`, which the contract's `test_tier_distribution` content_contains requires — would fail the contract whenever FIF is paused. Added `tier_distribution: {}`.
+- **ANT-F1 + CDX-F1 (consensus):** `run-vault-check.sh`'s trailing `|| true` masked both vault-check's intentional nonzero (warnings) AND tee's unintentional write failures. If `$STAGING_PATH` became unwritable, the stale artifact would persist and satisfy `file_exists`/content checks — re-enabling the exact stale-artifact failure mode TV2-056 was meant to close, for this one contract. Replaced with preflight-truncate (fails loud if unwritable) + explicit `PIPESTATUS[1]` check on tee.
+
+**Should-fix deferred** (filed as follow-up, no urgency):
+- ANT-F3: `fif-feedback-health` service-name asymmetry (`fif-feedback-health` contract vs `fif-feedback` service line) — cosmetic only.
+- ANT-F4: `vault-gc` is the only wrapper without a `status:` field → only contract without `test_status_not_failed`. Add status emission + test.
+- ANT-F6: `vault-gc.sh` emits bare unquoted `timestamp:`; all 7 others quote it. YAML type-coercion risk.
+
+**Defer:** ANT-F2 (fif-capture brace-group subtlety — documentation only), ANT-F7 (STAGING_PATH fallback — acceptable), ANT-F8 (overnight-research `skipping` regex broadness — speculative).
+
+Codex environment notes: `mypy` not installed in .venv; `pytest` couldn't run (sandbox `/tmp` visibility). Codex compensated with static verification via `rg` + `nl -ba` of `src/tess/contract.py`, `src/tess/runner.py`, `src/tess/validator.py`, `src/tess/executors/shell.py`. Confirmed all test types (`content_contains`, `content_not_contains`, `line_count_range`, `yaml_parseable`, `file_exists`) are supported by schema + runtime dispatch, and all `service:` strings in contracts match wrapper output (via repo-wide rg cross-check).
+
+Dispatch note: initial Codex CLI call failed on stale flag `--last-message-file`; corrected to `--output-last-message`. Dispatch agent's hard-coded flag set has drifted from installed Codex CLI v0.105.0 — worth a small fix to the code-review-dispatch agent definition.
+
 **Context loaded:** dispatch queue (IDQ-002), TV2-043 staging artifacts (C1/C2/C3), scout pipeline logs, run-history, project-state.yaml, paperclip-relevance-check-2026-04-06.md, services-vs-roles-analysis.md, tasks.md, opportunity-scout source code (llm.js, assemble.js, digest-and-deliver.js)
 
 ### TV2-043 Gate Evaluation (Apr 12)
