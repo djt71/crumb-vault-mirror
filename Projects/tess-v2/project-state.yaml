@@ -13,8 +13,8 @@ related_projects:
   - agent-to-agent-communication
 repo_path: /Users/tess/crumb-apps/tess-v2
 active_task: null
-last_committed: 2026-04-10
-next_action: "44/50 done, 2 cancelled. TV2-043 GATE PASS (2026-04-15): C1 3/3 clean runs Apr 13/14/15, digests delivered (5/3/1 items), zero dead-letters post-fix. Nemotron LIMIT 10 fix (ef93e1a) holding. TV2-038 unblocked — ready to schedule 48h parallel validation. Next: TV2-038 start + IDQ-004 Tess-side poller plist (blocks TV2-039 cutover)."
+last_committed: 2026-04-15
+next_action: "44/51 done, 2 cancelled (TV2-056 added this session). TV2-043 GATE PASS earlier today. TV2-038 Phase 1+2 done, Phases 3-5 pending. TV2-056 (scout wrapper pattern applied to 8 remaining services) executed 2026-04-15 — discovered during Phase 2 when 9/15 contracts were found validating stale Apr 2-5 artifacts; scout's Apr 9 remediation pattern now applied across vault-health/vault-gc/fif-*/daily-attention/overnight-research/connections-brainstorm. 8 wrappers + 8 contracts updated, 6/8 verified live. TV2-038 Phase 5 re-collection gated on ≥48h fresh contract data post-TV2-056. Next: TV2-056 code review, TV2-038 Phase 3+4 (structural verification + migration inventory re-audit), IDQ-004 Tess-side poller plist (blocks TV2-039)."
 services:
   - com.tess.v2.health-ping
   - com.tess.v2.awareness-check

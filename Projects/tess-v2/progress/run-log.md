@@ -45,6 +45,71 @@ Re-soak exceeded the 2-day requirement (Apr 13–14) by running cleanly through 
 
 All work on Opus (session default). Mechanical vault edits only — no skill delegation warranted.
 
+---
+
+## 2026-04-15 (session 2) — TV2-038 kickoff + TV2-056 discovery and fix
+
+**Context loaded:** tasks.md (Phase 4b), migration-inventory.md, observability-design.md, service-interfaces.md, action-plan.md §Milestone 6, `~/.tess/state/run-history.db` (14 services, 4961 rows), all 8 wrapper scripts + 8 contract YAMLs in `tess-v2/scripts/` and `tess-v2/contracts/`, Scout remediation pattern from `scout-pipeline.sh`.
+
+### TV2-038 Phase 1 — methodology
+
+Wrote `design/tv2-038-validation-report.md` — schema for 15 services × 4 dimensions (output parity, missed outputs, cost, tier routing) + 4 cross-cutting sections (vault authority, evaluator separation, state reconciliation, migration inventory re-audit) + gate summary matrix.
+
+Scope decisions: 48h window 2026-04-13 → 2026-04-15; out of scope = email-triage (cancelled), morning-briefing (cancelled), platform services (dispatch, contract runner) — validated via contract infrastructure itself; Tier 1+2 ≥70% via contract-ledger; cost ceiling $75/mo pro-rated, $50/mo target.
+
+### TV2-038 Phase 2 — data collection (6 Explore subagents in parallel)
+
+Dispatched 6 subagents grouped by migration task family (TV2-032, -033, -034, -035, -043, -044). Each filled §2 per-service blocks from `run-history.db` (authoritative) + staging artifacts + OpenClaw state files. All returned successfully.
+
+**Initial findings flagged as BLOCKERS:**
+1. `fif-capture` — 0 items captured, 8 adapters skipped despite OpenClaw inbox growth
+2. `overnight-research` — Apr 13 DEAD_LETTER (semantic); Apr 14 zero-output
+
+**Root-cause triage downgraded both:**
+- `fif-capture` is architectural: both platforms share `capture-clock.js` + FIF SQLite. OpenClaw's 06:05 UTC run captures the day; Tess v2's 10:30 UTC run dedups to no-op. "Parallel operation" is semantically "one productive run per day" — not a bug, a paradigm clarification for TV2-039 cutover question.
+- `overnight-research` had two narrow bugs: NO_OP regex was case-sensitive ("No reactive items" vs script's actual "no reactive items"), and (more important) the contract artifact `research-log.yaml` was stale Apr 3.
+
+### TV2-056 — systemic finding and fix
+
+Investigating the overnight-research stale-artifact led to discovering **9 of 15 services had contracts validating Apr 2–5 artifacts**. Wrappers wrote structured YAML to stdout, captured as `execution-log.yaml` — but contracts checked per-service names (`capture-log.yaml`, `scoring-log.yaml`, `attention-log.yaml`, etc.) that had never been updated since initial migration.
+
+Scout had this same bug until the Apr 9 re-soak remediation (IDQ-002, decision: "C1/C2 wrappers write directly to staging, all 3 contracts strengthened"). Fix pattern: `LOG_FILE="${STAGING_PATH:-.}/{name}"` + `cat <<YAML | tee "$LOG_FILE"`.
+
+Created TV2-056 (added to tasks.md Phase 4b) and executed end-to-end in this session:
+
+**8 wrappers patched** (all use scout-pipeline-style `LOG_FILE` + tee):
+- `run-vault-check.sh` → vault-check-output.txt
+- `vault-gc.sh` → gc-log.yaml
+- `fif-capture.sh` → capture-log.yaml (including pause-flag case)
+- `fif-attention.sh` → scoring-log.yaml (including pause-flag case)
+- `fif-feedback-health.sh` → feedback-health.yaml
+- `daily-attention.sh` → attention-log.yaml
+- `overnight-research.sh` → research-log.yaml (+ case-insensitive NO_OP regex)
+- `connections-brainstorm.sh` → brainstorm-log.yaml
+
+**8 contracts strengthened** with content_contains/content_not_contains checks: service-name assertions, `status: "failed"` exclusions, result/summary presence, `health: down` exclusion for fif-feedback-health.
+
+**Verification:** `bash -n` on all 8 (pass). Runtime invocation with `STAGING_PATH=<tmp>`: `run-vault-check.sh` (vault-check-output.txt grown to 102+ lines during run before killed), `vault-gc.sh --dry-run` (clean), `fif-feedback-health.sh` (clean), `fif-capture.sh` (clean, dedup no-op expected), `daily-attention.sh` (idempotent skip, fresh attention-log.yaml), `connections-brainstorm.sh` (week-idempotent skip, fresh brainstorm-log.yaml). `fif-attention.sh` and `overnight-research.sh` not live-invoked (LLM cost) — mechanically identical pattern.
+
+**TV2-038 report updated:** §2 preamble now reframes the two "BLOCKERS" as non-blockers post-root-cause. Phase tracking adds 2a (TV2-056) and 5 (re-collection post-remediation).
+
+### Other findings surfaced but deferred
+
+- `email-triage` has 441 run-history entries through 2026-04-15 despite TV2-036 cancellation 2026-04-10. LaunchAgent never got unloaded cleanly. Flagged for Phase 3 state reconciliation.
+- `vault-health` OpenClaw peer last-run stale 13 days — either intentional decommission (needs migration-inventory update) or silent stop. Flagged for Phase 3.
+- `cost-tracker.yaml` doesn't exist — TV2-028 observability infrastructure not deployed. All TV2-038 cost verdicts PENDING until deployment or accepted-as-risk.
+- Tier routing 100% Tier 1 across all services — worth interrogating whether router is actually making decisions or defaulting to local.
+
+### Compound observations
+
+1. **Contract-level success can mask total functional failure.** 9 services reported "all runs staged" while their contracts validated 12-day-old files. Fresh `execution-log.yaml` (captured runtime state) existed alongside stale named artifacts, and no contract test compared timestamps. Freshness assertions (mtime > contract start, or embedded timestamp matches execution-log) should be a default check category — not an afterthought.
+2. **Root-cause first, BLOCKER classification second.** My initial Phase 2 findings called fif-capture and overnight-research BLOCKERS. 30 min of investigation downgraded both — one to architecture-not-bug, one to a narrow wrapper regex. Had I committed to the BLOCKER framing and escalated, the response would've been disproportionate. Triage is cheap and compresses surface area before commitment.
+3. **Pattern-fix discovered by one task, applied everywhere it fits.** Scout's Apr 9 remediation was effectively a template. It sat un-propagated for 6 days because no one asked "which other services have this exact shape?" That question during TV2-038 validation caught 8 more instances. Worth routine: whenever a fix for service-class-X is applied, grep the other members of class-X before closing.
+
+### Model routing
+
+All work on Opus (session default). Delegated Phase 2 data collection to 6 parallel Explore subagents (`subagent_type: Explore`) — mechanical read-heavy work, kept main context clean. Each agent was bounded by word count (400–1200 words per response) and pre-specified SQL queries. No Sonnet delegation.
+
 **Context loaded:** dispatch queue (IDQ-002), TV2-043 staging artifacts (C1/C2/C3), scout pipeline logs, run-history, project-state.yaml, paperclip-relevance-check-2026-04-06.md, services-vs-roles-analysis.md, tasks.md, opportunity-scout source code (llm.js, assemble.js, digest-and-deliver.js)
 
 ### TV2-043 Gate Evaluation (Apr 12)
