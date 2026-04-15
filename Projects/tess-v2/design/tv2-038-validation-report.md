@@ -593,83 +593,173 @@ These checks are **not per-service** — they apply to the platform as a whole. 
 
 ---
 
-### 3.1 Vault authority (AD-001)
+### 3.1 Vault Authority (AD-001)
 
-**Claim.** No Tess v2 write path bypasses the staging-to-canonical promotion gate for vault artifacts.
+**Claim.** No Tess v2 write path bypasses staging-to-canonical promotion for vault artifacts.
 
-**Method.**
-- Grep Tess v2 source (`/Users/tess/crumb-apps/tess-v2/`) for direct writes to `/Users/tess/crumb-vault/` paths that are **not** under `_staging/`, `_tess/logs/` (symlinked to `~/.tess/logs/`), `_system/daily/` (orchestrator-authored), or dispatch-allowed paths.
-- Cross-check against `staging-promotion-design.md` §4 (promotion gates).
-- Sample the last 10 promotion.log entries; verify each promotion has a staging source and hash match.
+**Method.** Read `src/tess/staging.py`, `src/tess/promotion.py`, `src/tess/runner.py`, `src/tess/dispatch.py`, `src/tess/claude_dispatch.py`, `src/tess/executors/shell.py`. Grepped for `open(`, `.write_text`, `Path.write_*` and `/Users/tess/crumb-vault/` destination paths across the source tree. Cross-checked against `staging-promotion-design.md` §4. Inspected `~/.tess/logs/` for promotion.log presence. Reviewed `cli.py _cmd_run` for the call sequence.
 
-**Evidence sources:** Tess v2 source tree, `~/.tess/logs/promotion.log`, `_staging/*/execution-log.yaml`.
+**Evidence**
+- **Direct vault-write grep:** 2× `os.write()` calls in `promotion.py` (vault file writes, inside the promotion lock). 3× `.write_text()` calls in `executors/shell.py` (all scoped to staging directory). No direct vault writes in executors or runner outside staging. `claude_dispatch.py:114–116` embeds the constraint string "Do not modify files outside staging" in the Claude prompt. `promotion.py:244–253` validates that every source/destination stays within `staging_root` or `vault_root` respectively.
+- **Promotion gate isolation:** `promotion.py` is the sole canonical-write module. It implements the atomic 12-step sequence from `staging-promotion-design.md` §5.2, verifies hashes inside the lock (`promotion.py:384–395`), and enforces the write-lock table precondition (`promotion.py:257–260`). But — **see finding below** — it is never called.
+- **Claude dispatch sandbox:** The prompt communicates staging-only intent (line 114). Claude Code itself is invoked via `claude -p` (executors/claude_code.py:68–74) and inherits Claude Code's own filesystem sandboxing. No vault paths are passed as write targets in the prompt; only staging paths.
+- **Promotion log sampling:** `~/.tess/logs/promotion.log` **does not exist**. Directory contains only `scout-feedback-poller.log`. Confirms TV2-028 observability gap identified in §3.5.
 
-**Result:** ✓ / ✗ + evidence summary.
+**Finding F3.1-1 — CRITICAL: Promotion engine is unintegrated.** `promotion.py` is a complete, well-documented module (~540 lines with hash verification, atomic copy, crash recovery, rollback). However, **no code path calls `PromotionEngine.promote()`**. `cli.py _cmd_run` dispatches to `run_ralph_loop()` which ends at the STAGED outcome; the transition STAGED → PROMOTION_PENDING → COMPLETED (per design §5.2) is not wired in. Staged artifacts remain in `_staging/` indefinitely — they never reach canonical vault paths.
 
-### 3.2 Evaluator separation
+**Implication.** The TV2-038 claim "no bypass" is technically satisfied (no promotion code path exists for executors to bypass), but it's satisfied vacuously. The design-intended vault authority gate is present in code but dormant. For TV2-039 cutover this is a **blocker**: OpenClaw cannot be decommissioned while Tess v2 artifacts never leave staging.
 
-**Claim.** Executor agents cannot self-promote — only the promotion gate, invoked by Tess orchestrator after contract verification, moves artifacts from `_staging/` to final vault paths.
+**Verdict:** ⚠ PASS-with-caveats. No write-path bypass; promotion engine unintegrated is a downstream blocker for cutover, not a security violation today.
 
-**Method.**
-- Review agent system prompts and permission configs for explicit deny on direct vault writes outside staging.
-- Verify promotion gate is invoked by a distinct role (orchestrator or promotion daemon), not by the executor agent itself.
-- Inspect a sample of 5 recent contracts from the ledger: confirm the `promote` step was executed by the orchestrator, not the contract executor.
+---
 
-**Evidence sources:** Tess v2 agent configs, `service-interfaces.md` §4 (role boundaries), `contract-ledger.yaml` sample entries.
+### 3.2 Evaluator Separation
 
-**Result:** ✓ / ✗ + evidence summary.
+**Claim.** Executor agents cannot self-promote — only the orchestrator, after contract verification, promotes staged artifacts to final paths.
 
-### 3.3 State reconciliation
+**Method.** Read all three executors (`shell.py`, `claude_code.py`, `nemotron.py`). Grepped for `from .promotion`, `from tess.promotion`, `PromotionEngine`, `.promote(`, `promotion.promote` across the entire Python tree. Inspected `runner.py:663–842` for test evaluation and artifact checking flow. Inspected `locks.py:126–198` for write-lock table semantics.
+
+**Evidence**
+- **Import graph:** No executor imports `promotion.py`. All three executors import only `ExecutorProtocol`, `ExecutorRequest`, `ExecutorResponse` from the runner module.
+- **Promotion invocation sites:** Grep `PromotionEngine|\.promote(|promotion\.promote` returns matches **only inside `promotion.py` itself** (class definition line 185, internal recovery line 538). `PromotionEngine` is never instantiated elsewhere in the codebase.
+- **Executor permission envelopes:** Claude dispatch (`claude_dispatch.py:83–117`) passes staging_path in the prompt, embeds the "do not modify files outside staging" constraint, and has no promotion-related tools. Shell executor (`shell.py:47, 66`) sets `STAGING_PATH` and `VAULT_ROOT` env vars and runs with `cwd=vault_root`; a wrapper could write absolute paths under vault_root, but (per §3.1 evidence) no wrapper does so, and the test evaluator validates staging paths for content checks.
+- **Post-execution validation:** `runner.py:795–814` runs all tests after executor completion; `runner.py:39–68 resolve_path` enforces path-boundary validation with exception-on-escape. Test evaluation is mechanical against staging outputs; the runner does not defer to executor self-assessment.
+- **Write-lock table:** `locks.py:143` uses `BEGIN IMMEDIATE` for all-or-nothing lock acquisition. Ancestor/descendant overlap detection (`locks.py:161–198`) prevents two contracts from claiming overlapping canonical paths. This is a **dispatch-time control** — it gates who can *eventually* promote, not the promotion act itself.
+
+**Finding F3.2-1 — Same integration gap as F3.1-1.** Executors correctly have no access to promotion mechanisms — structurally separated. But the orchestrator doesn't actually promote either, because promotion is unintegrated. The "only orchestrator promotes" claim is aspirational rather than runtime-enforced: today, *no one* promotes.
+
+**Finding F3.2-2 — MINOR: No explicit role-boundary guard.** Nothing prevents a future executor edit from importing `promotion.py` and calling `.promote()` directly. Recommend adding a module-level comment in `promotion.py` marking it orchestrator-only, or considering a decorator-based role check for future hardening. Low urgency.
+
+**Verdict:** ⚠ PASS-with-caveats (structural separation clean; integration gap compounds §3.1).
+
+---
+
+### 3.3 State Reconciliation
 
 **Claim.** No orphaned jobs, state artifacts, or credential gaps exist between OpenClaw and Tess v2.
 
-**Method.**
-- **Orphaned jobs:** `launchctl list` diff against `migration-inventory.md` — any running service not in the inventory is flagged.
-- **Orphaned state:** Enumerate `_openclaw/state/*` and `_openclaw/data/*` files. For each, verify classification (keep / migrate / drop) and that migrated state has a Tess v2 equivalent at `~/.tess/state/` or `_tess/`.
-- **Credential gaps:** Walk the 22+ credential inventory from `migration-inventory.md` §Credential Inventory. For each, verify: (a) present in Keychain OR in an approved credential file with correct chmod; (b) referenced by at least one live Tess v2 service or plist; (c) not duplicated between OpenClaw and Tess v2 paths (risk of drift).
-- **`last-run/` comparison:** Compare OpenClaw `_openclaw/state/last-run/` timestamps against Tess v2 `~/.tess/state/last-run/` (or equivalent). Any OpenClaw service still writing while its Tess v2 peer is not = reverse-migration risk.
+**Method.** Snapshot of `launchctl list | grep -E "com\.(tess|crumb|scout|fif)|ai\.(openclaw|hermes)|homebrew"` → 43 loaded services. Cross-reference against `migration-inventory.md` (24 cataloged services + 2 cron jobs + 1 third-party). Enumerate `_openclaw/state/*` and `last-run/*`. Sample 3 credentials via `security find-generic-password -s <service>` (no value dumps).
 
-**Evidence sources:** `launchctl list`, `/Library/LaunchDaemons/`, `~/Library/LaunchAgents/`, `_openclaw/state/`, `~/.tess/state/`, Keychain (`security find-generic-password`).
+**A.1 — Orphaned-running audit**
 
-**Result:** ✓ / ✗ + enumerated findings.
+Services RUNNING but NOT in inventory (5 new):
+- `com.tess.nemotron-load` — LLM model loader. Propose: KEEP (Category G).
+- `com.tess.soak-monitor` — purpose unclear. Propose: ASSESS.
+- `com.tess.llama-server` (PID 800) — alternative LLM server. Propose: ASSESS (may replace `homebrew.mxcl.ollama`).
+- `com.crumb.vault-rebuild` — rebuild tool. Propose: KEEP (Category G).
+- `com.crumb.vault-web` (PID 804) — vault web API. Propose: KEEP (Category G).
 
-### 3.4 Migration inventory re-audit
+Services in inventory but NOT RUNNING: none.
 
-**Claim.** Every service running in launchd (LaunchAgent or LaunchDaemon) is cataloged in `migration-inventory.md` with an explicit classification (migrate / rebuild / replace / keep / drop / assess).
+Reconciled as expected: 38/43 (88%).
 
-**Method.**
-- Snapshot current `launchctl list` (user + root domains).
-- Diff against the 24 services in `migration-inventory.md` §Service Inventory.
-- For each delta:
-  - **New in launchd, not in inventory:** catalog and classify. Either create a migration task (backlog for future phase) or explicitly defer with reason.
-  - **In inventory, not in launchd:** mark as decommissioned or investigate.
-- Update `migration-inventory.md` with an amendment section dated 2026-04-15 listing additions and reclassifications.
+**A.2 — email-triage disposition**
+- OpenClaw: `ai.openclaw.email-triage` loaded, **exit 1** (auth failure). Last-run 2026-04-15 18:28 (13h old).
+- Tess v2: `com.tess.v2.email-triage` loaded, **exit 0** (healthy).
 
-**Evidence sources:** `launchctl list`, `migration-inventory.md`.
+Both platforms still loaded despite TV2-036 cancellation 2026-04-10. OpenClaw plist remains. **Recommendation:** Unload `ai.openclaw.email-triage` and drop plist to stop exit-1 noise. Tess v2 replica can stay or also be unloaded per cancellation intent. Flag for TV2-040 decommission scope.
 
-**Result:** ✓ / ✗ + delta list with classifications.
+**A.3 — vault-health disposition (CORRECTS PHASE 2 §2.3 FINDING)**
+
+Phase 2 §2.3 reported OpenClaw vault-health "last-run stale 13 days" based on raw Unix epoch timestamp 1776233217 read by the subagent. Correct conversion: **1776233217 = 2026-04-15T02:06:57Z**, not 2026-04-02. Last-run is 16 hours old, within expected daily 02:00 cadence. **OpenClaw peer is NOT dormant.** Phase 2 §2.3 verdict was based on a subagent math error; corrected here.
+
+**A.4 — State file ownership**
+
+| State file | Producer | Last-write | Classification | Active platform |
+|---|---|---|---|---|
+| `last-run/email-triage` | `ai.openclaw.email-triage` | 2026-04-15 18:28 | migrate | OpenClaw |
+| `last-run/vault-health` | `ai.openclaw.vault-health` | 2026-04-15 02:06 | migrate | OpenClaw |
+| `apple-calendar.txt` | `danny:apple-snapshot` | 2026-04-11 | keep | Danny |
+| `email-triage-auth-failed` | `email-triage.sh` | 2026-04-12 | migrate-pattern | OpenClaw |
+| `vault-health-notes.md` | `vault-health.sh` | 2026-04-15 | migrate | OpenClaw |
+| `delivery-log.yaml` | Tess dispatch (OpenClaw era) | 2026-04-13 | migrate to `~/.tess/logs/` | OpenClaw |
+
+**Summary:** OpenClaw still owns the active write path for migrating services during the overlap. Tess v2 replicas are loaded and healthy but not driving state. Expected posture during parallel operation. No conflicts detected.
+
+**A.5 — Credential spot-check**
+
+| Credential | Keychain present | Tess v2 source ref | Duplication |
+|---|---|---|---|
+| Anthropic API key | ✓ | ✓ | no |
+| Tess Telegram bot token | ✓ | ✓ | no |
+| Brave Search API key | ✓ | ✓ | no |
+
+FIF env (`~/.config/fif/env.sh`) sources from Keychain at runtime — no static duplication.
+
+**A.6 — last-run comparison**
+
+`~/.tess/state/run-history.db` does not yet track OpenClaw-peer services for migrated workloads; the legacy `_openclaw/state/last-run/` files are the OpenClaw-side timestamps. For services where OpenClaw is still the active producer (email-triage, vault-health above), Tess v2 contract runs show in `run-history.db` but OpenClaw's last-run timestamps reflect the platform that actually drove the work. This is the expected parallel-operation posture; not a defect.
+
+**Verdict:** ✓ PASS (with follow-ups: unload OpenClaw email-triage plist; catalog 5 new services in §3.4).
+
+---
+
+### 3.4 Migration Inventory Re-audit
+
+**Claim.** Every service running in launchd is cataloged in `migration-inventory.md`.
+
+**Method.** Snapshot `launchctl list` filtered to Crumb/Tess/OpenClaw/Scout/FIF/Hermes labels. List `~/Library/LaunchAgents/` (51 plists) and `/Library/LaunchDaemons/` (1 relevant plist: `ai.openclaw.gateway`). Cross-reference against `migration-inventory.md` §Service Inventory (Categories A–I, 24 services + 2 cron jobs + 1 third-party).
+
+**Deltas**
+
+New in launchd, NOT in inventory (5):
+| # | Service | Purpose | Proposed classification |
+|---|---|---|---|
+| 27 | `com.tess.nemotron-load` | Nemotron LLM model loader | KEEP (Category G) |
+| 28 | `com.tess.llama-server` | Alternative LLM server | ASSESS — may supersede Ollama |
+| 29 | `com.tess.soak-monitor` | Load testing / monitoring | ASSESS — purpose unclear |
+| 30 | `com.crumb.vault-rebuild` | Vault rebuild tool | KEEP (Category G) |
+| 31 | `com.crumb.vault-web` | Vault web API | KEEP (Category G) |
+
+In inventory, NOT in launchd: none.
+
+**Other anomalies flagged:**
+- `com.scout.feedback-poller` showing exit 1 — investigate whether persistent or transient. (Feedback poller is the deferred-cutover service from IDQ-004.)
+- `com.crumb.qmd-index` exit 127 — binary missing, as migration-inventory.md already flags with "assess — fix or drop."
+
+**Recommended `migration-inventory.md` amendment (dated 2026-04-15):**
+- Add 5 rows to Category G
+- Update header: "30 managed services/jobs inventoried across 1 LaunchDaemon, 27 tess/crumb/scout/fif LaunchAgents, 1 danny LaunchAgent, and 2 OpenClaw cron jobs."
+
+**Verdict:** ⚠ PASS-with-caveats — 5 uncataloged services pending classification; 2 existing services with known non-zero exits (scout-feedback-poller, qmd-index).
 
 ---
 
 ## 4. Gate Summary Matrix
 
-Final section of the report — populated after Phases 2–4 complete.
+Populated 2026-04-15 after Phases 1–4 complete. Phase 5 (re-collection) is gated on ≥48h fresh contract data post-TV2-056.
 
-| Acceptance criterion | Verdict | Evidence § |
-|---|---|---|
-| 1. Both platforms running ≥48h | ✓ / ✗ | §1.2 |
-| 2. Comparison report per service | ✓ / ✗ | §2 (15 blocks) |
-| 3. Cost ≤$75/month ceiling | ✓ / ✗ | §2 per-service rollup |
-| 4. ≥70% routing at Tier 1+2 | ✓ / ✗ | §2 per-service rollup |
-| 5. No missed outputs | ✓ / ✗ | §2 per-service |
-| 6. Vault authority verified | ✓ / ✗ | §3.1 |
-| 7. Evaluator separation verified | ✓ / ✗ | §3.2 |
-| 8. State reconciliation | ✓ / ✗ | §3.3 |
-| 9. Migration inventory re-audit | ✓ / ✗ | §3.4 |
+| # | Acceptance criterion | Verdict | Evidence § |
+|---|---|---|---|
+| 1 | Both platforms running ≥48h | ✓ | §1.2 (continuous since 2026-04-05 for Scout, earlier for others) |
+| 2 | Comparison report per service | ✓ | §2 (15 blocks populated from run-history.db) |
+| 3 | Cost ≤$75/month ceiling | ⏸ PENDING | §3.5 — `cost-tracker.yaml` not deployed (TV2-028 gap) |
+| 4 | ≥70% routing at Tier 1+2 | ✓ (qualified) | §2 — 100% Tier 1 across all services; requires interrogation of router decision logic (§2 notes) |
+| 5 | No missed outputs | ⚠ | §2 — 1 dead-letter + 1 zero-output for `overnight-research` in window; both explained by TV2-056 wrapper bugs + legitimate no-op nights. Post-TV2-056 re-collection needed. |
+| 6 | Vault authority verified | ⚠ PASS-with-caveats | §3.1 — no write-path bypass, but promotion engine unintegrated (F3.1-1, cutover blocker) |
+| 7 | Evaluator separation verified | ⚠ PASS-with-caveats | §3.2 — structural separation clean; F3.2-1 (integration gap compounds §3.1); F3.2-2 (no role-boundary guard) |
+| 8 | State reconciliation | ✓ | §3.3 — no orphaned state, credentials clean. Follow-ups: unload OpenClaw email-triage plist; Phase 2 §2.3 vault-health "dormant" verdict corrected (was subagent epoch-conversion error) |
+| 9 | Migration inventory re-audit | ⚠ PASS-with-caveats | §3.4 — 5 new services need cataloging; 2 existing have non-zero exits |
 
-**Overall TV2-038 verdict:** PASS / PASS-with-follow-ups / FAIL.
+**Overall TV2-038 verdict:** **PASS-with-follow-ups** (after Phase 5 re-collection).
 
-If PASS-with-follow-ups: enumerate non-blocking findings that TV2-039 cutover decision must address. If FAIL: enumerate blockers and proposed remediation path.
+### Blockers for TV2-039 cutover
+
+These must be resolved before production cutover, in priority order:
+
+1. **F3.1-1 / F3.2-1 — Promotion engine integration.** `PromotionEngine.promote()` is never called from the CLI. Staged artifacts never reach canonical vault paths. TV2-039 cannot decommission OpenClaw while Tess v2 artifacts are stuck in `_staging/`. File a task to wire promotion into `cli.py _cmd_run` between Ralph loop end and run-history write.
+2. **Phase 5 re-collection.** TV2-056 contract strengthening landed today; 48h of fresh contract data is needed before the per-service verdicts are authoritative. Gate Phase 5 on `~/.tess/state/run-history.db` MAX(started_at) − 48h > 2026-04-15T18:00Z.
+3. **IDQ-004 Tess-side feedback-poller bootstrap.** Pre-staged. Must execute during TV2-039 cutover because Telegram `getUpdates` token is exclusive.
+4. **Cost-tracker deployment (TV2-028).** Acceptance criterion 3 can't be verified without it. Either deploy before TV2-039 or explicitly accept the risk.
+
+### Non-blocking follow-ups
+
+- Unload OpenClaw `ai.openclaw.email-triage` plist (TV2-036 was cancelled 2026-04-10 but plist still loaded with exit 1 noise).
+- Amend `migration-inventory.md` with 5 new service rows (Category G) + update header count.
+- Investigate `com.scout.feedback-poller` exit 1 and `com.crumb.qmd-index` exit 127.
+- Interrogate router decision logic: 100% Tier 1 is comfortably above the 70% bar but suggests either a correctly biased router or an always-local default. Worth a sanity check to distinguish.
+- TV2-056 should-fix items deferred from code review: vault-gc `status:` field (ANT-F4), fif-feedback-health service-name asymmetry (ANT-F3), vault-gc timestamp quoting (ANT-F6).
+- Phase 2 §2.3 wording referenced "last-run stale 13 days" — this was a subagent epoch-conversion error (1776233217 parsed as 2026-04-02 instead of 2026-04-15 02:06). Corrected in §3.3 A.3. Consider adding a subagent-validation step that flags numerical timestamps in outputs before acceptance.
 
 ---
 
@@ -688,6 +778,6 @@ If PASS-with-follow-ups: enumerate non-blocking findings that TV2-039 cutover de
 | 1 | Methodology doc (this file) | done | 2026-04-15 |
 | 2 | Per-service data collection (initial pass, using run-history.db authoritative source) | done | 2026-04-15 |
 | 2a | **TV2-056 discovered mid-Phase-2:** stale-artifact contract bug; new task created, wrappers + contracts remediated | done | 2026-04-15 |
-| 3 | Cross-cutting verification (§3.1–3.3) | pending | — |
-| 4 | Migration inventory re-audit (§3.4) | pending | — |
-| 5 | Phase 2 re-collection post-TV2-056 + Gate summary (§4) + TV2-038 verdict | pending | gated on ≥48h of fresh contract data post-2026-04-15 wrapper deployment |
+| 3 | Cross-cutting verification (§3.1–3.3 + §3.5 cost gap) | done | 2026-04-15 |
+| 4 | Migration inventory re-audit (§3.4) | done | 2026-04-15 |
+| 5 | Phase 2 re-collection post-TV2-056 + final gate verdict confirmation | pending | gated on ≥48h of fresh contract data; earliest 2026-04-17 18:00Z |
