@@ -689,3 +689,4 @@
 2026-04-11 13:49:00 SYNC docs(architecture): M2 refresh — all 6 Arc42 sections updated to 2026-04-11 state
 2026-04-11 13:58:18 SYNC docs: M3+M4+M5 — operator refresh, orientation map refresh, close-out
 2026-04-11 14:53:02 SYNC docs: refresh claude-ai-context.md — 2026-04-11 state
+2026-04-12 13:33:16 SYNC feat(tess-v2): TV2-043 gate eval (FAIL→re-soak) + TV2-045 Paperclip spike (DEFER)

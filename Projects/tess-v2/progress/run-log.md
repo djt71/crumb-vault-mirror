@@ -3,7 +3,7 @@ project: tess-v2
 type: run-log
 period: 2026-04 onwards
 created: 2026-04-10
-updated: 2026-04-10
+updated: 2026-04-15
 ---
 
 # tess-v2 — Run Log
@@ -11,7 +11,39 @@ updated: 2026-04-10
 **Previous log:** run-log-2026-03.md (45 sessions, Mar 28 – Apr 10. Project creation through Phase 4 implementation. Key milestones: Hermes GO + Nemotron GO decisions, Phase 3 architecture complete, 10 services migrated with gates passed, Phase 4a vault semantic search complete, Amendment Z Phase A live. TV2-036/037 cancelled Apr 10. TV2-043 Scout in re-soak.)
 **Rotated:** 2026-04-10
 
-## 2026-04-12 — TV2-043 gate eval + TV2-045 Paperclip spike
+## 2026-04-15 — TV2-043 gate PASS (re-soak close)
+
+**Context loaded:** project-state.yaml, dispatch queue (IDQ-002), scout-pipeline-stdout.log, opportunity-scout digests Apr 13/14/15, _staging/TV2-043-C1/execution-log.yaml, tasks.md
+
+### Gate decision
+
+**Verdict: PASS.** C1 3/3 clean runs over Apr 13/14/15:
+
+| Date | Contract | Digest | Items | Telegram msg |
+|---|---|---|---|---|
+| Apr 13 | STAGED (9/9) | delivered | 5 | 63 |
+| Apr 14 | STAGED (9/9) | delivered | 3 | 66 |
+| Apr 15 | STAGED (9/9) | delivered | 1 | 67 |
+
+Zero dead-letters post-fix. Nemotron LIMIT 10 fix (`ef93e1a`) is holding — `finish_reason === 'length'` guard never tripped across the re-soak window. C2 (feedback-health) and C3 (weekly-heartbeat) were proven at the Apr 12 eval and unchanged since.
+
+Re-soak exceeded the 2-day requirement (Apr 13–14) by running cleanly through today's Apr 15 delivery before the gate was formally closed — extra data point, same verdict.
+
+### State changes
+
+- `Projects/tess-v2/project-state.yaml`: updated 2026-04-12 → 2026-04-15, next_action rewritten (44/50 done, TV2-038 unblocked)
+- `_tess/dispatch/queue.yaml`: IDQ-002 status queued → done (completed 2026-04-15), blocked_until cleared, version 5 → 6
+- `Projects/tess-v2/design/tasks.md`: TV2-043 state todo → done, acceptance criteria annotated with PASS evidence
+- TV2-038 no longer blocked (its only open dep was TV2-043). Ready to schedule the 48h parallel validation.
+
+### Follow-ups
+
+- **IDQ-004** (Tess-side feedback-poller plist) unblocked — was gated on IDQ-002. Pre-staging complete per queue.yaml; bootstrap deferred to TV2-039 cutover.
+- **TV2-038** now schedulable. No action taken this session — flagged for next planning pass.
+
+### Model routing
+
+All work on Opus (session default). Mechanical vault edits only — no skill delegation warranted.
 
 **Context loaded:** dispatch queue (IDQ-002), TV2-043 staging artifacts (C1/C2/C3), scout pipeline logs, run-history, project-state.yaml, paperclip-relevance-check-2026-04-06.md, services-vs-roles-analysis.md, tasks.md, opportunity-scout source code (llm.js, assemble.js, digest-and-deliver.js)
 

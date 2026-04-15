@@ -229,6 +229,18 @@ check_frontmatter() {
 
     local file_has_issues=0
     local missing_fields=""
+
+    # Check for duplicate YAML keys (e.g., two "updated:" lines).
+    # Duplicate keys are valid-ish YAML (last wins) but break Quartz and other
+    # strict parsers. Detect by sorting key names and comparing adjacent lines.
+    local dup_keys
+    dup_keys=$(echo "$frontmatter" | grep -oE '^[a-zA-Z_][a-zA-Z0-9_-]*:' | sort | uniq -d) || true
+    if [ -n "$dup_keys" ]; then
+        local dup_list
+        dup_list=$(echo "$dup_keys" | sed 's/:$//' | tr '\n' ',' | sed 's/,$//')
+        warn "$relpath — duplicate YAML key(s): $dup_list"
+        file_has_issues=1
+    fi
     for field in $required; do
         # Use grep on variable directly to avoid echo|grep SIGPIPE under pipefail.
         # grep -q on a herestring avoids the pipe entirely.

@@ -5,7 +5,6 @@ domain: software
 status: draft
 created: 2026-04-09
 updated: 2026-04-09
-updated: 2026-04-09r2
 source: 2026-04-09 interactive training session (first harness iteration), Hermes source code direct verification, claude.ai external review with corrections, Hermes-native alignment audit
 tags:
   - harness

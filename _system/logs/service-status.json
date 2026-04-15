@@ -1,15 +1,15 @@
 {
-  "timestamp": "2026-04-12T17:32:32Z",
+  "timestamp": "2026-04-15T21:22:31Z",
   "services": [
     {
       "label": "ai.openclaw.gateway",
-      "pid": 321,
+      "pid": 309,
       "last_exit_status": 0,
       "state": "running"
     },
     {
       "label": "ai.openclaw.bridge.watcher",
-      "pid": 745,
+      "pid": 787,
       "last_exit_status": 0,
       "state": "running"
     },
@@ -27,7 +27,7 @@
     },
     {
       "label": "ai.openclaw.fif.feedback",
-      "pid": 742,
+      "pid": 784,
       "last_exit_status": 0,
       "state": "running"
     },
@@ -51,13 +51,13 @@
     },
     {
       "label": "com.crumb.dashboard",
-      "pid": 735,
+      "pid": 777,
       "last_exit_status": 0,
       "state": "running"
     },
     {
       "label": "com.crumb.cloudflared",
-      "pid": 756,
+      "pid": 799,
       "last_exit_status": 0,
       "state": "running"
     },

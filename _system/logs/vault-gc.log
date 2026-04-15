@@ -87,3 +87,14 @@
 [vault-gc] ops-metrics.jsonl: truncated 178 lines (kept last 1000)
 [vault-gc] health-ping.log: truncated 24 lines (kept last 1000)
 [vault-gc] done: 0 files purged, 3 logs truncated
+[vault-gc] reviews/raw (autonomous-operations): purged 4 files older than 30d
+[vault-gc] ops-metrics.jsonl: truncated 178 lines (kept last 1000)
+[vault-gc] health-ping.log: truncated 24 lines (kept last 1000)
+[vault-gc] done: 4 files purged, 2 logs truncated
+[vault-gc] ops-metrics.jsonl: truncated 164 lines (kept last 1000)
+[vault-gc] health-ping.log: truncated 24 lines (kept last 1000)
+[vault-gc] done: 0 files purged, 2 logs truncated
+[vault-gc] reviews/raw (opportunity-scout): purged 8 files older than 30d
+[vault-gc] ops-metrics.jsonl: truncated 163 lines (kept last 1000)
+[vault-gc] health-ping.log: truncated 25 lines (kept last 1000)
+[vault-gc] done: 8 files purged, 2 logs truncated

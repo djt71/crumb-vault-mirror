@@ -121,3 +121,7 @@
 2026-03-20T09:06:00-04:00 ACTION: entering Limited Mode
 2026-03-20T09:46:36-04:00 CHECK: Anthropic API unreachable (failure 1/3)
 2026-03-31T21:27:51-04:00 CHECK: Anthropic API unreachable (failure 1/3)
+2026-04-14T10:43:10-04:00 CHECK: Anthropic API unreachable (failure 1/3)
+2026-04-15T03:46:08-04:00 CHECK: Anthropic API unreachable (failure 1/3)
+2026-04-15T10:02:20-04:00 CHECK: Anthropic API unreachable (failure 1/3)
+2026-04-15T10:07:25-04:00 CHECK: Anthropic API unreachable (failure 2/3)
