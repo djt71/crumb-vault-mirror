@@ -3,13 +3,83 @@ project: tess-v2
 type: run-log
 period: 2026-04 onwards
 created: 2026-04-10
-updated: 2026-04-15
+updated: 2026-04-16
 ---
 
 # tess-v2 — Run Log
 
 **Previous log:** run-log-2026-03.md (45 sessions, Mar 28 – Apr 10. Project creation through Phase 4 implementation. Key milestones: Hermes GO + Nemotron GO decisions, Phase 3 architecture complete, 10 services migrated with gates passed, Phase 4a vault semantic search complete, Amendment Z Phase A live. TV2-036/037 cancelled Apr 10. TV2-043 Scout in re-soak.)
 **Rotated:** 2026-04-10
+
+## 2026-04-16 — Hermes update + soak review + vault-check bug fix + email-triage cleanup
+
+**Context loaded:** project-state.yaml, run-log.md (recent sessions), hermes-patch-tracking.md, hermes-go-decision.md, run-history.db (post-TV2-056 data), vault-check.sh (lines 2282–2400), shell executor (lines 38–102), vault-health contract, staging artifacts (TV2-033-C1, TV2-034-C1/C2/C3, TV2-035-C1, TV2-044-C1).
+
+### Hermes Agent v0.6.0 → v0.9.0
+
+Updated hermes-agent across 3 releases (1377 commits). Key changes for Tess:
+- **Patch #1 (reasoning field) closed.** v0.9.0 replaced the v0.7.0 `_classify_empty_content_response` classifier with a multi-stage handler: partial stream recovery → prior-turn fallback → post-tool nudge → thinking-only prefill continuation (up to 2 retries). Sufficient for Kimi's reasoning-only responses. Fork branch (`djt71/hermes-agent`) archived.
+- **Patch #2 (KeepAlive) reapplied.** Still out-of-tree in v0.9.0 at `gateway.py:1363`. Changed `SuccessfulExit: false` → unconditional `<true/>`. Plist confirmed.
+- Gateway restarted. Kimi heartbeat confirmed clean ("OK" in 2s).
+- `hermes-patch-tracking.md` updated: new procedure, update log, Patch #1 decision closed.
+
+### Soak/contract data review (TV2-038 Phase 5 check-in)
+
+Queried `run-history.db` for post-TV2-056 data (Apr 15–16). Findings:
+- **TV2-057a classifier working correctly.** All Class C services → `completed` (transition at ~00:43 UTC Apr 16). Class A services (daily-attention, connections-brainstorm) → `staged`. Zero misclassifications.
+- **TV2-056 named artifacts present** across all 8 patched services (capture-log, scoring-log, feedback-health, attention-log, brainstorm-log, etc.).
+- **14/15 services clean.** Only issue: vault-health dead-lettered (1 run, 3/5 checks passed, 2 failed).
+- **TV2-038 Phase 5 timeline:** ~27h of clean data accumulated; 48h window closes ~Apr 18 00:00 UTC.
+
+### vault-check.sh bug discovery and fix
+
+**Root cause:** vault-health contract's two new content_contains checks (added by TV2-056) caught truncated output. Script crashed at "Solution Doc Track Schema" section — `grep '^track:'` returned exit 1 on no-match, `set -euo pipefail` propagated it, `set -e` killed the script before reaching the summary.
+
+Pre-existing bug: the old 3-test contract never tested for output completeness, so the truncation was invisible. TV2-056's strengthened checks exposed it.
+
+**Fix:** 4 unprotected `grep` calls in pipelines wrapped with `{ grep ... || true; }`:
+- Line 1936: `grep "^updated:"` in cross-dependency check
+- Line 1991: `grep -oE` date extraction in context inventory check
+- Line 2067: `grep -oE` date extraction in provenance check
+- Line 2299: `grep '^track:'` in solution doc track check
+
+Also fixed the data trigger: added `track: pattern` to `_system/docs/solutions/egpu-local-compute-evaluation.md`.
+
+**Verification:** Targeted test under `set -euo pipefail` confirmed fix. Two full scans (background) completed — both reached "Vault Check Summary" and "RESULT:" lines. Next cron run (tomorrow 06:27 UTC) will be live confirmation.
+
+Audit performed by Explore subagent: all other `grep`-in-pipeline instances already had `|| true` guards — these 4 were the only gaps (plus the one already fixed at line 2299).
+
+### email-triage LaunchAgent cleanup
+
+Both `com.tess.v2.email-triage` and `ai.openclaw.email-triage` were still loaded despite TV2-036 cancellation on 2026-04-10. email-triage had accumulated 441+ run-history entries post-cancellation.
+
+- `launchctl bootout` both services
+- Plists moved to `~/Library/LaunchAgents/disabled/` (recoverable)
+- Verified: `launchctl list | grep email-triage` returns empty
+
+`com.tess.v2.email-triage` was already absent from project-state.yaml services list (correctly omitted at TV2-036 cancellation).
+
+### Compound observations
+
+1. **Contract strengthening exposes latent bugs.** The vault-health truncation was pre-existing — the script had always crashed before the summary for any vault state where a solution doc lacked `track:`. TV2-056's content_contains checks were designed to prevent stale artifacts, but they also caught this unrelated crash-before-summary failure. Adding output-completeness checks to contracts that run scripts is a general hardening pattern worth applying to other long-running contracts.
+2. **`set -euo pipefail` + `grep` in pipelines is a recurring class.** This is the same trap documented in `macos-system-notes.md` memory. Four instances survived because the script was written incrementally — each new check section was tested in isolation (where `set -e` doesn't apply to subshells) but never audited for `pipefail` interaction. When adding checks to a `set -euo pipefail` script, `grep` in a command substitution pipeline needs `{ grep ... || true; }` by default.
+3. **Cancelled services need a decommission checklist.** The email-triage LaunchAgents ran for 6 days post-cancellation because "mark task cancelled in tasks.md" didn't include "unload LaunchAgent." Service lifecycle (create plist → register in project-state → ... → unload → move plist → remove from project-state) should be a documented sequence, not ad hoc.
+
+### Model routing
+
+All work on Opus (session default). One Explore subagent for the vault-check.sh grep audit — mechanical file scanning, appropriate delegation. No Sonnet delegation.
+
+### Files touched
+
+- `_system/scripts/vault-check.sh` (4 grep pipeline fixes)
+- `_system/docs/solutions/egpu-local-compute-evaluation.md` (added `track: pattern`)
+- `Projects/tess-v2/design/hermes-patch-tracking.md` (updated for v0.9.0, patch #1 closed)
+- `~/.hermes/hermes-agent/hermes_cli/gateway.py` (KeepAlive reapply, outside vault)
+- `~/Library/LaunchAgents/disabled/` (2 plists moved)
+- `Projects/tess-v2/progress/run-log.md` (this entry)
+- `Projects/tess-v2/project-state.yaml` (updated below)
+
+---
 
 ## 2026-04-15 (session 3) — TV2-057 design note + decomposition
 

@@ -41,3 +41,4 @@ sudo: a password is required
 sudo: a terminal is required to read the password; either use the -S option to read from standard input or configure an askpass helper
 sudo: a password is required
 cp: /var/folders/cn/nd97svfj6lnct2vs9ln4pjmc0000gn/T/tmp.Q5ofvqYzum: Permission denied
+cp: /var/folders/cn/nd97svfj6lnct2vs9ln4pjmc0000gn/T/tmp.9b7JuAK4KN: Permission denied

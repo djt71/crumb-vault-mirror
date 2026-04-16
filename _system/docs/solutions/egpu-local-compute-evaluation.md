@@ -6,6 +6,7 @@ created: 2026-04-01
 updated: 2026-04-01
 skill_origin: research
 confidence: medium
+track: pattern
 linkage: discovery-only
 tags:
   - kb/software-dev

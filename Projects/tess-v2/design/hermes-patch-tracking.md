@@ -4,7 +4,7 @@ status: active
 domain: software
 project: tess-v2
 created: 2026-04-01
-updated: 2026-04-09
+updated: 2026-04-16
 ---
 
 # Hermes Agent — Local Patches
@@ -13,23 +13,28 @@ updated: 2026-04-09
 
 Originally bundled in **#4467** (closed 2026-04-01 by teknium1 on "retry loop is intended behavior" grounds). Upstream landed a softer version of the reasoning-field fix via the salvage chain below; the KeepAlive fix was never picked up.
 
-### 1. Thinking model reasoning field early exit — PARTIALLY SUPERSEDED
+### 1. Thinking model reasoning field early exit — SUPERSEDED (v0.9.0)
 
-- **File:** `run_agent.py` (~line 7920)
+- **File:** `run_agent.py` (~line 10880 in v0.9.0)
 - **Original PR:** [#4467](https://github.com/NousResearch/hermes-agent/pull/4467) — closed 2026-04-01, not merged
-- **Upstream resolution:** landed in [#4645](https://github.com/NousResearch/hermes-agent/pull/4645) (merged 2026-04-02, shipped in v0.7.0 / v2026.4.3) via salvage chain `#4467 → #4552 → #4645`. teknium1 himself cherry-picked @kshitijk4poor's #4552 rework onto main, crediting the original author. The v0.7.0 release note *"Think-only empty response classification prevents infinite retry loops"* is this fix.
-- **Semantic difference:** #4645 uses a classifier (`_classify_empty_content_response`), not a blanket early-exit. It salvages reasoning only when (a) local/custom backend + context pressure signal, OR (b) the same structured reasoning payload repeats unchanged (2nd identical response). Preserves the normal 3-retry path for one-off thinking-model responses — which was teknium1's stated concern on closing #4467.
-- **For Tess-v2's Kimi workload (OpenRouter, cron-triggered, analytical prompts):** stock v0.7.0+ should salvage on the 2nd identical reasoning payload within a single invocation, reducing wasted API calls from **3 → 1 per invocation**, not 3 → 0 like the original #4467 patch. Heartbeat/simple prompts unaffected either way.
-- **Decision pending:** whether 1 wasted Kimi call per cron run is acceptable, or whether to reapply the original early-exit as a delta on top of the #4645 classifier. Requires a short soak on stock v0.7.0+ to confirm actual behavior.
-- **Fork:** `djt71/hermes-agent` — still holds the original early-exit delta, kept for potential re-use as a delta on top of the classifier.
+- **Upstream resolution chain:** `#4467 → #4552 → #4645` (v0.7.0 classifier) → refactored in v0.9.0 into a multi-stage empty-response handler:
+  1. Partial stream recovery (use already-streamed content)
+  2. Prior-turn content fallback (housekeeping tool turns)
+  3. Post-tool empty nudge (one retry with continuation prompt)
+  4. **Thinking-only prefill continuation** — detects `reasoning`/`reasoning_content`/`reasoning_details` fields, appends assistant message as-is and continues so model sees its own reasoning on next turn. Up to 2 prefill retries.
+- **v0.7.0's `_classify_empty_content_response`** was removed by v0.9.0 — replaced by the prefill continuation approach above.
+- **For Tess-v2's Kimi workload:** stock v0.9.0 allows up to 2 prefill retries (down from 3 bare retries in v0.6.0). The model sees its own reasoning on each continuation, so subsequent attempts are more likely to produce visible content. Wasted calls: **0–2 per invocation** depending on whether Kimi produces visible text on the prefill turn.
+- **Decision: CLOSED.** Stock v0.9.0 handling is sufficient. The fork branch (`djt71/hermes-agent`, branch `fix/thinking-model-reasoning-field`) is archived for reference only — do not reapply.
+- **Fork:** `djt71/hermes-agent` — archived, 1 commit ahead of v0.6.0 main (no longer relevant).
 
 ### 2. Unconditional KeepAlive in LaunchAgent plist — STILL OUT-OF-TREE
 
-- **File:** `hermes_cli/gateway.py` (~line 871)
-- **Original PR:** bundled in #4467 — never salvaged. #4552 and #4645 are purely `run_agent.py` / reasoning-field changes and don't touch `gateway.py`.
+- **File:** `hermes_cli/gateway.py` (line 1363 in v0.9.0)
+- **Original PR:** bundled in #4467 — never salvaged upstream.
 - **What:** Changed `KeepAlive` from `SuccessfulExit: false` to unconditional `true`. Gateway now restarts after clean exits, not just crashes.
-- **Upstream status (as of v0.8.0 / v2026.4.8):** no merged PR found addressing this specifically. v0.8.0's "9 community bugfixes (gateway, cron, macOS launchd)" may or may not touch line 871 — needs a post-upgrade diff to confirm.
-- **Action:** reapply after every `hermes update` until landed upstream. A focused follow-up PR (smaller scope than #4467, no philosophical objection available) is queued as an idea but not yet drafted.
+- **Upstream status (as of v0.9.0 / v2026.4.13):** still `SuccessfulExit: false` in stock. Not addressed by v0.8.0 or v0.9.0 gateway fixes.
+- **Action:** reapply after every `hermes update` until landed upstream. Last reapplied: **2026-04-16 (v0.9.0 update)**.
+- A focused follow-up PR (smaller scope than #4467, no philosophical objection available) is queued as an idea but not yet drafted.
 
 ## Kimi K2.5 Model Behavior — reasoning_content is Default Mode
 
@@ -61,31 +66,31 @@ thinking. Kimi was responsive to direct API calls during the stall (1.4s round-t
 
 ## Before Running `hermes update`
 
-**Updated 2026-04-09 after the #4645 salvage chain was traced.**
+**Updated 2026-04-16 after v0.6.0 → v0.9.0 upgrade.**
 
-Patch #1 (reasoning field) is partially upstream as of v0.7.0 via #4645 — don't blindly cherry-pick the old delta on top, because the classifier and your early-exit would overlap. Patch #2 (KeepAlive) is still out-of-tree and always needs reapply.
+Patch #1 (reasoning field) is fully superseded — stock v0.9.0's multi-stage handler covers Kimi's thinking-only responses. Patch #2 (KeepAlive) is the only remaining out-of-tree patch.
 
 ### Procedure
 
 1. **Before update — capture baseline:**
    ```
    cd ~/.hermes/hermes-agent
-   git log --oneline fork/fix/thinking-model-reasoning-field ^main | head
-   grep -n 'reasoning_content\|SuccessfulExit' run_agent.py hermes_cli/gateway.py
+   grep -n -A 3 'KeepAlive' hermes_cli/gateway.py
    ```
 2. **Run `hermes update`.**
-3. **Verify the #4645 classifier landed:**
+3. **Verify thinking-only handling still present** (sanity check — should see `_thinking_prefill_retries`):
    ```
-   grep -n '_classify_empty_content_response' run_agent.py
+   grep -n '_thinking_prefill_retries' run_agent.py
    ```
-   Should match. If not, the update regressed or this tracking note is stale.
 4. **Diff `hermes_cli/gateway.py` for KeepAlive:**
    ```
    grep -n -A 3 'KeepAlive' hermes_cli/gateway.py
    ```
-   If still `SuccessfulExit: false` → reapply the KeepAlive patch from the fork branch.
-5. **Patch #1 decision (requires soak data on stock):**
-   - Run a short Kimi analytical-prompt soak on stock v0.7.0+ and count wasted retries per invocation (should be 1, per the classifier semantics above).
-   - If 1 retry/invocation is acceptable → drop patch #1, keep the fork branch archived for reference.
-   - If not → cherry-pick only the `run_agent.py` reasoning-field early-exit as a *delta on top of* the #4645 classifier, not as a replacement for it.
-6. **Restart gateway** and confirm Kimi behavior with a heartbeat + one analytical prompt.
+   If still `SuccessfulExit: false` → edit line ~1363: replace the `<dict>...<false/>...</dict>` block with `<true/>`.
+5. **Restart gateway** (`hermes gateway restart`) and confirm Kimi heartbeat (`hermes chat -q "Say OK" -m moonshotai/kimi-k2.5 --max-turns 1`).
+
+### Update Log
+
+| Date | From | To | Patches reapplied | Notes |
+|------|------|----|--------------------|-------|
+| 2026-04-16 | v0.6.0 (v2026.3.30) | v0.9.0 (v2026.4.13) | KeepAlive only | Patch #1 closed — stock prefill handler sufficient. 1377 commits, 3 releases. Kimi heartbeat confirmed. |

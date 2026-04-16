@@ -1933,7 +1933,7 @@ if [ -f "$XDEP_FILE" ]; then
         # Warn on "not yet scoped" with existing upstream project (>30 days uses file mtime)
         if echo "$upstream_task" | grep -qi "not yet scoped"; then
             # Only warn if the file hasn't been updated recently (proxy for staleness)
-            file_updated=$(grep "^updated:" "$XDEP_FILE" | head -1 | awk '{print $2}')
+            file_updated=$({ grep "^updated:" "$XDEP_FILE" || true; } | head -1 | awk '{print $2}')
             if [ -n "$file_updated" ]; then
                 # Calculate days since last update
                 file_epoch=$(date -j -f "%Y-%m-%d" "$file_updated" "+%s" 2>/dev/null) || true
@@ -1988,7 +1988,7 @@ check_context_inventory() {
         if [ $in_session -eq 1 ] && [ $has_skill_mention -eq 1 ]; then
             # Extract session date from header (## YYYY-MM-DD ...)
             local session_date
-            session_date=$(echo "$session_header" | grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}' | head -1)
+            session_date=$(echo "$session_header" | { grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}' || true; } | head -1)
             if [ -n "$session_date" ] && [[ "$session_date" < "$CTX_INV_ENFORCEMENT_DATE" ]]; then
                 CTX_INV_GRANDFATHERED=$((CTX_INV_GRANDFATHERED + 1))
                 return
@@ -2064,7 +2064,7 @@ check_provenance() {
         if [ $in_session -eq 1 ] && [ $has_subagent_mention -eq 1 ]; then
             # Extract session date from header (## YYYY-MM-DD ...)
             local session_date
-            session_date=$(echo "$session_header" | grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}' | head -1)
+            session_date=$(echo "$session_header" | { grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}' || true; } | head -1)
             if [ -n "$session_date" ] && [[ "$session_date" < "$PROVENANCE_ENFORCEMENT_DATE" ]]; then
                 PROVENANCE_GRANDFATHERED=$((PROVENANCE_GRANDFATHERED + 1))
                 return
@@ -2296,7 +2296,7 @@ check_solution_track() {
     TRACK_CHECKED=$((TRACK_CHECKED + 1))
 
     local track
-    track=$(awk '/^---$/{if(++c==2)exit} c==1{print}' "$file" 2>/dev/null | grep '^track:' | head -1 | sed 's/^track:[[:space:]]*//')
+    track=$(awk '/^---$/{if(++c==2)exit} c==1{print}' "$file" 2>/dev/null | { grep '^track:' || true; } | head -1 | sed 's/^track:[[:space:]]*//')
 
     if [ -z "$track" ]; then
         warn "$relpath — missing 'track' field (required: bug | pattern | convention)"

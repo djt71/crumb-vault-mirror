@@ -98,3 +98,7 @@
 [vault-gc] ops-metrics.jsonl: truncated 163 lines (kept last 1000)
 [vault-gc] health-ping.log: truncated 25 lines (kept last 1000)
 [vault-gc] done: 8 files purged, 2 logs truncated
+[vault-gc] watcher.log: truncated 5 lines (kept last 1000)
+[vault-gc] ops-metrics.jsonl: truncated 169 lines (kept last 1000)
+[vault-gc] health-ping.log: truncated 24 lines (kept last 1000)
+[vault-gc] done: 0 files purged, 3 logs truncated
