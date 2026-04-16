@@ -3,13 +3,64 @@ project: tess-v2
 type: run-log
 period: 2026-04 onwards
 created: 2026-04-10
-updated: 2026-04-16
+updated: 2026-04-16b
 ---
 
 # tess-v2 — Run Log
 
 **Previous log:** run-log-2026-03.md (45 sessions, Mar 28 – Apr 10. Project creation through Phase 4 implementation. Key milestones: Hermes GO + Nemotron GO decisions, Phase 3 architecture complete, 10 services migrated with gates passed, Phase 4a vault semantic search complete, Amendment Z Phase A live. TV2-036/037 cancelled Apr 10. TV2-043 Scout in re-soak.)
 **Rotated:** 2026-04-10
+
+## 2026-04-16b — IDQ-004: Scout feedback-poller swap test
+
+**Context loaded:** queue.yaml (IDQ-004), scout-feedback-poller-wrapper.sh, com.tess.v2.scout-feedback-poller.plist, scout-feedback-health.sh, scout-feedback-health.yaml contract.
+
+### IDQ-004 completion — Tess-side feedback-poller validated
+
+**Finding:** Both pollers were crash-looping. The Tess plist was auto-loaded by macOS on login (placing a plist in `~/Library/LaunchAgents/` causes launchd to load it automatically). Both were competing for Telegram getUpdates, generating 7.8MB of conflict errors in the Tess log.
+
+**Fix:** Disabled Tess poller via `launchctl disable` + bootout.
+
+**Swap test results:**
+1. Booted out OpenClaw poller → bootstrapped Tess poller → **clean startup** (exit 0, no getUpdates conflicts, logs writing correctly to `~/.tess/logs/`)
+2. Swapped back → OpenClaw poller resumed cleanly (exit 0)
+
+**Artifacts updated:**
+- `scout-feedback-health.sh`: Updated NOTE to reflect IDQ-004 completion, added TV2-039 cutover instruction for label switch
+- `queue.yaml`: IDQ-004 → done
+
+**Cutover note for TV2-039:** Tess poller is `launchctl disable`d. At cutover: (1) bootout OpenClaw poller, (2) `launchctl enable` + bootstrap Tess poller, (3) set `SCOUT_FEEDBACK_LABEL=com.tess.v2.scout-feedback-poller` or update default in health script.
+
+**Lesson learned:** Pre-staging plists in `~/Library/LaunchAgents/` without `launchctl disable` causes auto-load on next login. Future pre-staging should disable immediately after placing the file.
+
+### TV2-039: Cutover Decision Document
+
+Assessed go/no-go readiness against acceptance criteria:
+
+**Soak data (post-TV2-056, ~45h):** 1015 runs across 15 services. 99.8% success rate. 100% Tier 1 execution. Two issues:
+- vault-health: 1 dead_letter in 2 runs — contract spec bug (output truncation at 10m timeout), not service failure. Fixed: timeout → PT15M, content checks updated. Awaiting verification on next scheduled run.
+- health-ping: 1 dead_letter in 182 runs — isolated blip, 99.5% success.
+
+**Cost:** ~$4.42/month projected (Tier 3: overnight-research $3.90 + connections-brainstorm $0.12 + escalation $0.40). Well under $50/month target. Email-triage and morning-briefing cancellation removed $5.88/month from baseline.
+
+**Rollback:** Scout rollback runbook tested (2026-04-09), IDQ-004 swap test passed (2026-04-16). Full emergency rollback procedure documented (<30s).
+
+**Decision:** GO approved by Danny with deferred condition (vault-health contract revalidation).
+
+### Cutover Execution — 2026-04-16 ~21:20Z
+
+Danny approved GO. Cutover executed immediately:
+
+1. **Feedback-poller swap:** Booted out `com.scout.feedback-poller` → enabled + bootstrapped `com.tess.v2.scout-feedback-poller` → PID 9474, exit 0, clean startup confirmed.
+2. **OpenClaw decommission:** Booted out + disabled `com.scout.daily-pipeline`, `com.scout.weekly-heartbeat`, `com.scout.feedback-poller`. Zero OpenClaw services remaining.
+3. **Health script update:** Default label in `scout-feedback-health.sh` changed to `com.tess.v2.scout-feedback-poller`.
+4. **Final verification:** 15/15 Tess v2 services loaded. 0 OpenClaw services. Cutover complete.
+
+**Deferred condition:** vault-health contract revalidation on next scheduled run (~2026-04-17T06:30Z). Contract timeout increased to PT15M and content checks updated (earlier in this session). If it fails, investigate — does not affect cutover.
+
+**TV2-039: DONE.** Next: TV2-040 (OpenClaw decommission for migrated services — vault directory migration, plist archival).
+
+---
 
 ## 2026-04-16 — Hermes update + soak review + vault-check bug fix + email-triage cleanup
 

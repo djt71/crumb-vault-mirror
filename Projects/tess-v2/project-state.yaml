@@ -13,9 +13,8 @@ related_projects:
   - agent-to-agent-communication
 repo_path: /Users/tess/crumb-apps/tess-v2
 active_task: TV2-057a
-last_committed: 2026-04-15
-last_repo_commit: 037c363
-next_action: "45/57 done, 2 cancelled (64 total). Active: TV2-057a (code landed, backfill held). Hermes updated to v0.9.0 (Patch #1 closed, Patch #2 reapplied). vault-check.sh bug fixed (4 grep+pipefail guards). email-triage LaunchAgents unloaded and disabled. TV2-057a classifier confirmed working in production (27h clean data). Backfill HELD pending TV2-038 Phase 5 close (~2026-04-18 00:00Z); 5807 rows ready. Next: Phase 5 close (need ~24h more data), execute backfill per runbook, mark TV2-057a done, then TV2-057b. Non-blocking follow-ups: IDQ-004 Tess-side poller plist, TV2-028 cost-tracker, TV2-056 should-fix (ANT-F3/F4/F6), migration-inventory Category G amendment."
+last_committed: 2026-04-16
+next_action: "47/57 done, 2 cancelled (64 total). TV2-039 CUTOVER COMPLETE (2026-04-16): 15/15 Tess services sole operator, 0 OpenClaw services. IDQ-004 done (swap test passed). vault-health contract fix awaiting revalidation (~2026-04-17 06:30Z). Active: TV2-057a (code landed, backfill held). Next: TV2-057a backfill execution, TV2-057b, TV2-040 (OpenClaw decommission — vault dir migration). Non-blocking: TV2-028 cost-tracker, TV2-056 should-fix (ANT-F3/F4/F6), migration-inventory Category G amendment."
 services:
   - com.tess.v2.health-ping
   - com.tess.v2.awareness-check
@@ -31,3 +30,4 @@ services:
   - com.tess.v2.scout-pipeline
   - com.tess.v2.scout-weekly-heartbeat
   - com.tess.v2.scout-feedback-health
+  - com.tess.v2.scout-feedback-poller
