@@ -260,3 +260,52 @@ TV2-045 marked done. Project: 43/50 tasks done, 2 cancelled.
 
 - All work done on Opus (session default). No Sonnet delegation this session.
 - Peer review dispatched to GPT-5.4, Gemini 3.1 Pro, DeepSeek V3.2, Grok 4.1 Fast (all succeeded, ~$0.22 total estimated).
+
+## 2026-04-15 (session 4) — TV2-057a code landing + held backfill
+
+**Context loaded:** `tv2-057a-resumption-brief.md` (entry point), `project-state.yaml`, `src/tess/ralph.py`, `src/tess/cli.py` (235-260, 630-710), `src/tess/contract.py` (Contract dataclass, lines 85-125), `src/tess/history.py` (full), `tests/test_ralph.py` (full surface), `tests/test_history.py`, `contracts/*.yaml` (service-name cross-check), live `~/.tess/state/run-history.db` row counts.
+
+### Brief executed straight through
+
+Resumption brief was self-contained and accurate. Did all four pre-writing verifications (§9):
+
+1. **HEAD SHA matched** anchor `02be7b789d` exactly — line numbers in brief usable as-is.
+2. **STAGED-setting site** in ralph.py is a single return at line 285 (clean single-site downgrade — no refactor needed).
+3. **Existing `staged` test assertions** turned out to be safe: test_ralph.py uses `service: "test"` (not Class C), test_history.py uses `outcome="staged"` as schema-level test inputs not state-machine assertions, test_cli.py uses a generic mock. No existing test rewrites required.
+4. **Allowlist cross-check caught two brief errors** — `fif-feedback-health` and `scout-feedback-poller` are not actual contract `service:` field values; canonical names are `fif-feedback` and `scout-feedback`. Brief's own §4 note ("cross-verify against contracts/*.yaml") earned its keep — these would have been silent miss-classifications on the two highest-volume Class C services (1194 + 992 rows).
+
+### Implementation
+
+**Commit 1 `bd0482a`** (code landing):
+- New `src/tess/classifier.py` with `is_side_effect_contract(contract)`, hardcoded 12-service `_CLASS_C_SERVICES` frozenset + TODO marker pointing to TV2-057b's canonical_outputs schema check.
+- `ralph.TerminalOutcome.COMPLETED` added; success path in `run_ralph_loop` calls classifier and downgrades to COMPLETED for Class C contracts. Failure paths (DEAD_LETTER, ESCALATED) untouched.
+- `cli._print_result_summary` COMPLETED branch + `_cmd_run` exit code 0 for both STAGED and COMPLETED.
+- `history.summary()` default outcome dict includes `'completed': 0` so dashboards don't lose a key.
+- New `tests/test_classifier.py` (17 tests: parametrized Class C → True, Class A → False, unknown → False, empty string → False).
+- 5 new tests in `tests/test_ralph.py::TestSideEffectClassification` (Class C downgrade, Class A preservation, unknown→staged, dead-letter/escalated paths unaffected).
+- 455/455 pass (baseline 433 + 17 classifier + 5 ralph; was 452 in pre-edit run).
+
+**Commit 2 `037c363`** (held backfill):
+- New `scripts/tv2_057a_backfill.py` — dry-run by default, `--execute` to apply. Writes sentinel `dead_letter_reason='tv2-057a-backfill'` (Option A per brief §7 — `history.py` has zero migration infrastructure, schema column would be tail-wagging-dog). Refuses to re-run if sentinel rows already exist.
+- New runbook in vault: `Projects/tess-v2/design/tv2-057a-backfill-runbook.md` — prereq checks, snapshot/dry-run/execute/verify procedure, rollback (one trivial UPDATE), post-execution updates.
+- Validated against a DB copy: 5807 rows flipped (vs brief estimate 5787 — 20-row drift from new runs since brief was written), Class A unchanged, re-run is a no-op.
+
+### Decisions captured
+
+- **Option A** (sentinel in `dead_letter_reason`) — confirmed before writing. `history.py` uses bare `CREATE TABLE IF NOT EXISTS`, no alembic, no schema_version. Adding a column for an ephemeral backfill annotation would import migration ceremony for a one-time-use flag.
+- **Allowlist canonical source** — `_CLASS_C_SERVICES` lives in `classifier.py`; backfill script imports it lazily with a hardcoded fallback for portability. Single source of truth survives, but the script can run on a host without the package installed.
+
+### What's still open
+
+- Backfill execution is HELD until **TV2-038 Phase 5 close (≥2026-04-17 18:00Z)**. Running earlier would contaminate Phase 5's gate-verdict math against the pre-TV2-057a meaning of `staged`.
+- TV2-057a stays `in_progress` (not `done`) until backfill runs per runbook. Brief §11 explicitly calls this out.
+- Production launchd binary is the pre-commit version. Whether the COMPLETED downgrade goes live before manual reinstall depends on install mode (editable vs frozen) — out of scope for this commit, will verify at session-end build step.
+
+### Compound observations
+
+1. **Resumption briefs that include verification checklists pay for themselves.** §9.4 ("cross-verify allowlist") caught two service-name errors in the brief itself. Without the explicit verification step I'd have shipped two miscategorized Class C services and silently mis-classified ~2200 rows. Worth mirroring this pattern in future cross-session handoff briefs.
+2. **"Tests asserting outcome==X for service Y" needs a sharper question.** Brief §9.3 framing assumed test_history.py would need rewrites; reading the actual tests revealed they're schema-level CRUD tests with arbitrary fixture values, not state-machine predictions. The right verification question was "which tests would predict-the-wrong-outcome under the new behavior?" not "which tests mention this string?"
+
+### Model routing
+
+- All work on Opus (session default). No delegation. Mechanical work (file edits + script writing) but state-machine surface and design-decision validation warranted full reasoning.
