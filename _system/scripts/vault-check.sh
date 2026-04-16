@@ -810,9 +810,12 @@ elif [ -d "$VAULT_ROOT/Projects" ]; then
 
         PSTATE_CHECKED=$((PSTATE_CHECKED + 1))
 
-        # (a) tasks.md must exist
-        if [ -z "$tasks_file" ]; then
-            error "Projects/$project_name — project-state.yaml references active_task $active_task but tasks.md does not exist"
+        # (a) tasks.md must exist — projects use either root or design/ location
+        if [ ! -f "$tasks_file" ] && [ -f "$project_dir/design/tasks.md" ]; then
+            tasks_file="$project_dir/design/tasks.md"
+        fi
+        if [ ! -f "$tasks_file" ]; then
+            error "Projects/$project_name — project-state.yaml references active_task $active_task but tasks.md does not exist (checked project root and design/)"
             PSTATE_INCONSISTENT=$((PSTATE_INCONSISTENT + 1))
             continue
         fi

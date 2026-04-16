@@ -12,9 +12,9 @@ related_projects:
   - tess-model-architecture
   - agent-to-agent-communication
 repo_path: /Users/tess/crumb-apps/tess-v2
-active_task: null
+active_task: TV2-057a
 last_committed: 2026-04-15
-next_action: "45/51 done, 2 cancelled. TV2-056 DONE (code review complete, 2 must-fix applied, commits d8bad52 + 02be7b7; tag code-review-2026-04-15-tv2-056). TV2-043 GATE PASS earlier today. TV2-038 Phase 1+2 + 2a done, Phases 3-5 pending — Phase 5 re-collection gated on ≥48h fresh contract data post-TV2-056. Next: TV2-038 Phase 3+4 (structural verification + migration inventory re-audit), IDQ-004 Tess-side poller plist (blocks TV2-039), TV2-056 should-fix follow-ups (ANT-F3 service-name asymmetry, ANT-F4 vault-gc status field, ANT-F6 vault-gc timestamp quoting)."
+next_action: "45/57 done, 2 cancelled (64 total after 2026-04-15 decomposition). Active: TV2-057a. **Fresh-session entry point: `Projects/tess-v2/design/tv2-057a-resumption-brief.md`** — self-contained carry-forward with repo SHA anchor (02be7b789d0bccecf718fe32483464cff22db0f3), deduplicated 12-service Class C allowlist, pre-writing verifications (Verification 0 = backfill annotation mechanism: sentinel-in-dead_letter_reason vs. new column), commit structure (code landing + held backfill), do-not list. TV2-057 decomposed per `design/tv2-057-promotion-integration-note.md` (operator-reviewed 2026-04-15, §7 decisions accepted including Class B→C close per §5). Sequence: 057a (active) → 057b (schema+amendment + vault-health direct-write audit) → 057c (lock acquisition, resolve R1/R2) → 057d (per-service promotion migration, milestone-shaped) → 057e (crash recovery) → 057f (Class A backfill audit). TV2-038 Phase 5 re-collection still gated on ≥48h fresh contract data post-TV2-056 (earliest 2026-04-17 18:00Z). Backfill within 057a is held until Phase 5 closes. Non-blocking follow-ups deferred: IDQ-004 Tess-side poller plist (cutover-time), TV2-028 cost-tracker deployment, TV2-056 should-fix (ANT-F3/F4/F6), OpenClaw email-triage plist unload, migration-inventory Category G amendment."
 services:
   - com.tess.v2.health-ping
   - com.tess.v2.awareness-check

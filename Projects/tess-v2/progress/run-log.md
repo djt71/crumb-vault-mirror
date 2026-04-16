@@ -11,6 +11,90 @@ updated: 2026-04-15
 **Previous log:** run-log-2026-03.md (45 sessions, Mar 28 – Apr 10. Project creation through Phase 4 implementation. Key milestones: Hermes GO + Nemotron GO decisions, Phase 3 architecture complete, 10 services migrated with gates passed, Phase 4a vault semantic search complete, Amendment Z Phase A live. TV2-036/037 cancelled Apr 10. TV2-043 Scout in re-soak.)
 **Rotated:** 2026-04-10
 
+## 2026-04-15 (session 3) — TV2-057 design note + decomposition
+
+**Context loaded:** project-state.yaml, run-log.md (sessions 1 & 2), tv2-038-validation-report.md §4, src/tess/promotion.py (PromotionEngine surface), src/tess/cli.py (_cmd_run), src/tess/ralph.py (TerminalOutcome), src/tess/contract.py (ArtifactSpec), src/tess/locks.py (WriteLockTable signatures), staging-promotion-design.md §3.4/§5.2/§13, contract-schema.md, service-interfaces.md (Outputs rows), ~/.tess/state/run-history.db (6580 rows, 6465 staged).
+
+### Resumed against TV2-039 blocker surfaced in session 2
+
+TV2-057 ("wire promotion engine into cli.py") was flagged as the top cutover blocker. Initial framing: one-session scope to call `PromotionEngine.promote()` from `_cmd_run`. Verified premise — promotion.py is 597 lines and cli.py has zero references to it.
+
+### Design-note-first sequencing (not straight to decomposition)
+
+Deep reading of `promote()` + `build_manifest()` surfaced dependencies: no `canonical_outputs` field on ArtifactSpec, no WriteLockTable acquisition anywhere, no COMPLETED in TerminalOutcome, no caller for steps 9–12 of the promotion sequence. `staging-promotion-design.md` §13 Open Question #1 admits the service-interface mapping was deferred — and TV2-021b shipped without closing it. This isn't a wiring gap; it's multiple primitives missing.
+
+Operator reviewer then pushed back on my scope framing with a sharper observation: only ~5 of 15 services actually produce canonical vault files. The rest are pure side-effects (Telegram/SQLite/HTTP/deleted files). The "wire promotion" framing was solving the wrong problem — prior question is "what are these services contractually producing, and which ones even have something to promote."
+
+### Segmented row counts (load-bearing evidence)
+
+Queried `run-history.db` by service+outcome. Final taxonomy of 6465 staged rows:
+- **Class A** (promoting to canonical vault path): vault-health (13), daily-attention (596), connections-brainstorm (13) — 622 rows, 9.6%
+- **Class B** (writing to `_openclaw/` mirror paths): overnight-research (11), fif-capture (13) — 24 rows, 0.4%
+- **Class C** (side-effect only): 10 services — 5763 rows, 89.1%
+- Test/dev: 56 rows, 0.9%
+
+~90% of the "staged" population has no canonical file to promote. That's not a promotion-wiring gap; it's a state-machine semantic conflation — STAGED is being used for two classes that should have different terminal paths.
+
+### Design note written + 4 rounds of reviewer push-back
+
+Drafted `tv2-057-promotion-integration-note.md`. Reviewer returned 3 rounds of corrections:
+
+1. **Round 1:** Pushed back on scope estimate (~5 services, not 15); reframed §4 "state-machine conflation" as primary finding, not secondary; proposed hybrid schema Option C (per-service `canonical_outputs:` in service-interfaces.md with contract inheritance); flagged that router-vs-direct should be an explicit Amendment, not buried in an implementation detail.
+2. **Round 2:** Caught §4.4 arithmetic error (5776 vs 5763); flagged §4.4 Class A landmine (wrappers may currently write directly to canonical paths, bypassing staging — vault-health → vault-health-notes.md as first audit); demanded §3 Amendment name the lock-denied retry semantics as a sub-decision; recommended Class B decision be closed early, not deferred; recommended promoting §1.4 "independently shippable" observation from parenthetical to numbered finding.
+3. **Round 3:** Caught a 5776 regression in §6.A that survived round 2's fix (two of three places fixed; §6.A's count-language still read 5776). This was the exact failure mode reviewer named in round 2 — somebody writes the bulk UPDATE from a wrong number. Fix landed.
+
+### Decisions accepted (operator, 2026-04-15)
+
+All six §7 decisions closed in the note:
+1. Taxonomy A/B/C accepted
+2. Schema Option C accepted; C1/C2 inheritance mechanics deferred to 057b
+3. §3.4.2 Amendment accepted as drafted; R1/R2 retry semantics deferred to 057c
+4. State machine: Class C rows backfill `staged` → `completed` accepted
+5. **Class B closed to Class C** (mirror paths are not canonical; batch consumers tolerate torn reads; atomic promotion overkill). Backfill population: 5763 + 24 = 5787 rows.
+6. §6 ordering A → F accepted; 057a independently shippable first
+
+### Decomposition landed
+
+tasks.md amended: 6 new sub-tasks TV2-057a–f inserted between TV2-056 and TV2-038. Summary count 58 → 64. Phase 4b Cutover count 3 → 10.
+
+- **TV2-057a (medium, code):** state-machine fix — add COMPLETED, classification predicate with placeholder allowlist (TODO→057b seam), Class C downgrade at STAGED, 5787-row backfill (sequenced as separate commit, held from execution until Phase 5 closes). **Active task.**
+- **TV2-057b (medium, design+code):** Option C schema landing + §3.4.2 Amendment + vault-health direct-write audit.
+- **TV2-057c (medium, code):** WriteLockTable acquisition at run-entry, R1/R2 resolution.
+- **TV2-057d (high, code):** Per-service promotion migration. Likely milestone-shaped.
+- **TV2-057e (medium, code):** `tess recover` subcommand, crash-injection tests.
+- **TV2-057f (low, code):** Class A 622-row per-service backfill audit.
+
+### Resumption brief written
+
+Session carried to fresh session per context-budget discipline. Written `design/tv2-057a-resumption-brief.md` — self-contained carry-forward:
+- Repo SHA anchor `02be7b789d0bccecf718fe32483464cff22db0f3` so fresh session verifies line-number drift before editing
+- Deduplicated allowlist (12 services, one edit caught by reviewer: fif-capture originally listed twice)
+- Backfill-annotation decision promoted from "decide during implementation" to Verification 0 (first action in fresh session) — two options (sentinel in `dead_letter_reason` vs. new column) with lean toward A
+- Explicit do-not list; commit structure; hold condition
+
+### Compound observations
+
+1. **Design-note-first beat straight-to-decomposition.** Original plan was to go from "blocker surfaced" directly to "write 057 acceptance criteria." Dropping a 1-2 page note instead forced the taxonomy question ("how many services actually need promotion?") that reversed the entire scope framing. If the decomposition had landed first, the ~90% side-effect conflation would've been discovered during 057a implementation as an apparent bug — wasteful. Note-first surfaced it in the design phase where it's cheap. This generalizes: when the top of a decomposition is "wire X into Y" and X was designed under different assumptions than Y's reality, always check the assumption first.
+2. **The "~5 services, not 15" finding was not in any design doc.** No one had written it down because no one had asked. The Outputs column in service-interfaces.md had always been prose, never structured — which is exactly why the open question at §13 #1 went unclosed. Unstructured fields defer questions that structured fields would force. Applied consequence: when a design doc's §13 has an "Open Question" that defers a field definition, that field is a future scope bomb. Audit §13 lists for ossifying open questions during design reviews.
+3. **Reviewer caught a regression I didn't.** After round 2 I edited 5776→5763 in §1.2 and §4.4 but missed §6.A. Reviewer's round-3 flag named it explicitly: "the failure mode I named originally — somebody writes the bulk UPDATE from §6.A's number and finds a 13-row gap." That is: a critic's prior prediction, specifically shaped around how that exact mistake manifests, caught its own instantiation on the next round. Mechanical `grep` for "5776" would have caught it too, but I didn't think to grep — I relied on memory of "which places I edited." Memory of edits is a weak substitute for mechanical verification. When a number is being revised across a document, grep the old value after editing to confirm zero survivors. (Ironically this mistake matched compound observation #3 from run-log 2026-04-15 session 2: "pattern-fix discovered by one task, applied everywhere it fits" — I failed to apply my own lesson.)
+4. **Context asymmetry is real.** The reviewer's reasoning for carrying 057a to a fresh session ("continuing here means burning the rest of this thread's context window on code that a fresh session would write with cleaner working memory and full context budget for the actual code") is a reusable heuristic: design-heavy threads produce high-value artifacts that don't inform the subsequent implementation. When the plan is complete and the code is not, carry the code. This inverts the intuition of "continuity is cheap" — continuity is actually quite expensive in degraded context.
+
+### Model routing
+
+All design work on Opus (session default). No subagent delegation — the reasoning chain was tightly coupled and the context was mostly in-head. Peer-review-style pushback came from the operator directly (high-quality review input — caught three defects I didn't). No cost data to note.
+
+### Files touched
+
+- `Projects/tess-v2/design/tv2-057-promotion-integration-note.md` (new, 200+ lines, 3 revision rounds)
+- `Projects/tess-v2/design/tv2-057a-resumption-brief.md` (new)
+- `Projects/tess-v2/design/tasks.md` (6 new rows, Phase 4b summary updated)
+- `Projects/tess-v2/project-state.yaml` (active_task, next_action updated)
+- `Projects/tess-v2/progress/run-log.md` (this entry)
+
+No code changes. No commits to `/Users/tess/crumb-apps/tess-v2`.
+
+---
+
 ## 2026-04-15 — TV2-043 gate PASS (re-soak close)
 
 **Context loaded:** project-state.yaml, dispatch queue (IDQ-002), scout-pipeline-stdout.log, opportunity-scout digests Apr 13/14/15, _staging/TV2-043-C1/execution-log.yaml, tasks.md
