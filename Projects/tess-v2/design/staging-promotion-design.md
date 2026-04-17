@@ -725,7 +725,7 @@ escalation_storm:
 
 ## 13. Open Questions
 
-1. ~~**Target path derivation mechanism.**~~ **CLOSED 2026-04-17 (TV2-057b).** Mapping lives on the contract YAML as a `canonical_outputs` list, each entry specifying a `staging_name` (filename in `staging_path/`) and a `destination` (vault-relative canonical path with placeholder substitution for `{date}`, `{week}`, `{timestamp}`). Schema shape: `tv2-057-promotion-integration-note.md` §2.4. Inheritance mechanics: C2 (generation-time bake-in — the field lives directly on each contract, not resolved at runtime from `service-interfaces.md`). Absence or empty list means Class C (side-effect only, no promotion).
+1. ~~**Target path derivation mechanism.**~~ **CLOSED 2026-04-17 by Amendment AB (TV2-057b).** Mapping lives on the contract YAML as a `canonical_outputs` list, each entry specifying a `staging_name` (filename in `staging_path/`) and a `destination` (vault-relative canonical path with placeholder substitution for `{date}`, `{week}`, `{timestamp}`). Schema shape, validation rules, and classifier-seam rationale: `spec-amendment-AB-canonical-outputs.md`. Inheritance mechanics: C2 (generation-time bake-in — the field lives directly on each contract, not resolved at runtime from `service-interfaces.md`). Absence means Class C (side-effect only, no promotion); an empty list is rejected at load.
 
 2. **Promotion ordering under queue fairness.** When multiple contracts are in PROMOTION_PENDING simultaneously, should promotion order respect priority classes? Current design: FIFO (first to reach PROMOTION_PENDING promotes first). The global promotion lock serializes all promotions regardless of priority.
 

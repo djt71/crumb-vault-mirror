@@ -132,7 +132,9 @@ Both are defensible and have different failure modes for "service-interface chan
 
 > **[ACCEPTED 2026-04-17 — TV2-057b]** Option C (hybrid), resolved to C2 per §2.2 above. Open Question #1 in `staging-promotion-design.md` §13 is closed in that document by TV2-057b.
 
-### 2.4 Field shape (added 2026-04-17)
+### 2.4 Field shape (added 2026-04-17 — canonicalized as Amendment AB)
+
+> **See `spec-amendment-AB-canonical-outputs.md`** for the ratified spec amendment. The content below is the in-context design sketch that AB canonicalizes.
 
 `canonical_outputs` is a **list of output specifications**, each describing one file the service produces that requires atomic promotion from `_staging/` to a canonical vault path. Shape per entry:
 
