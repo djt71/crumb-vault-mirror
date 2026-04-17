@@ -4,7 +4,7 @@ type: design-artifact
 domain: software
 status: draft
 created: 2026-04-15
-updated: 2026-04-15
+updated: 2026-04-17
 task: TV2-038
 phase: 4b
 depends_on:
@@ -70,6 +70,35 @@ Parallel operation has been continuous since the last service migrated (2026-04-
 | **No missed outputs** | Expected-cadence runs all executed. A service with 48h cadence and one run in the window is complete. Platform-specific dead-letters are acceptable if the other platform succeeded. **Both-platform misses = gate fail.** |
 | **Tier routing** | Tess v2 contract-ledger entries in the window, fraction with `tier ∈ {1, 2}`. Target: ≥70%. |
 | **Cost ceiling** | Tess v2 `cost-tracker.yaml` pro-rated to monthly: $75/month hard ceiling for gate pass; $50/month target for TV2-039 cutover approval. |
+
+### 1.4 Phase 5 re-collection methodology (added 2026-04-17)
+
+Phase 5 re-runs the Phase 2 data collection on a clean window (post-TV2-056 contract remediation) and confirms gate verdicts. Added after Phase 4 because (a) Phase 2 contract-gate verdicts were compromised by the stale-artifact bug fixed in TV2-056, and (b) the `outcome` field semantics changed mid-project with TV2-057a.
+
+**Window.** `2026-04-15 23:00Z → 2026-04-17 23:00Z` (48h rolling, whole-hour boundaries, opens 17min after TV2-056 must-fix commit `02be7b7` landed at 22:43Z).
+
+**Outcome semantics — Class A vs Class C bifurcation.**
+
+TV2-057a (code landed 2026-04-16 00:43Z, historical backfill held pending Phase 5) split the `outcome` field into:
+
+- `outcome='staged'` — Class A: ran successfully, produced an artifact that requires promotion from `_staging/` to its canonical vault path. Promotion is the side-effect.
+- `outcome='completed'` — Class C: ran successfully, side-effect is the run itself (e.g., a ping, a pipeline trigger, a KeepAlive probe). No vault artifact to promote.
+
+**Class mapping** (per `src/tess/classifier.py:_CLASS_C_SERVICES` at TV2-057b landing):
+
+| Class | Services | Phase 5 success predicate |
+|---|---|---|
+| **Class A** (requires promotion) | `daily-attention` | `outcome = 'staged'` |
+| **Class C** (side-effect is the run) | `awareness-check`, `backup-status`, `connections-brainstorm`, `email-triage`, `fif-attention`, `fif-capture`, `fif-feedback`, `health-ping`, `overnight-research`, `scout-daily-pipeline`, `scout-feedback`, `scout-weekly-heartbeat`, `vault-gc`, `vault-health` | `outcome IN ('staged', 'completed')` — union required because the window's first ~1h 43min (23:00Z → 00:43Z 2026-04-16) predates code landing, so Class C rows there are `staged` under the old semantic. Post-00:43Z all Class C rows are `completed`. Both count as success. |
+
+**Amendment (TV2-057b, 2026-04-17):** `connections-brainstorm` and `vault-health` moved A → C. See `tv2-057-promotion-integration-note.md` §1.1 amendment. `connections-brainstorm` writes to `_openclaw/inbox/` (mirror space, not canonical — §5). `vault-health` canonical writer is still the OpenClaw plist; Tess v2 wrapper produces only staging-scoped output. Phase 5 gate-math uses the amended classification.
+
+Services outside the 1+13 mapping (`test`, `scout-feedback-health`, `scout-feedback-poller`) retain their service-specific conventions as documented in their §2 blocks.
+
+**AC #5 "No missed outputs" — re-stated for Phase 5.**
+A service's run is **successful** if its outcome is in the success predicate for its class. A run is a **failure** if `outcome='dead_letter'`. Both-platform failures on an expected-cadence run remain a gate fail.
+
+**Data source.** `~/.tess/state/run-history.db`, `run_history` table, filtered by `started_at` in the Phase 5 window. Cross-referenced against `_staging/TV2-*/` artifacts and OpenClaw last-run timestamps for peer parity.
 
 ---
 
@@ -748,7 +777,7 @@ Populated 2026-04-15 after Phases 1–4 complete. Phase 5 (re-collection) is gat
 These must be resolved before production cutover, in priority order:
 
 1. **F3.1-1 / F3.2-1 — Promotion engine integration.** `PromotionEngine.promote()` is never called from the CLI. Staged artifacts never reach canonical vault paths. TV2-039 cannot decommission OpenClaw while Tess v2 artifacts are stuck in `_staging/`. File a task to wire promotion into `cli.py _cmd_run` between Ralph loop end and run-history write.
-2. **Phase 5 re-collection.** TV2-056 contract strengthening landed today; 48h of fresh contract data is needed before the per-service verdicts are authoritative. Gate Phase 5 on `~/.tess/state/run-history.db` MAX(started_at) − 48h > 2026-04-15T18:00Z.
+2. **Phase 5 re-collection.** TV2-056 contract strengthening landed today; 48h of fresh contract data is needed before the per-service verdicts are authoritative. Gate Phase 5 on `~/.tess/state/run-history.db` MAX(started_at) − 48h > 2026-04-15T22:43Z (must-fix commit `02be7b7` landing time in UTC). **Corrected 2026-04-17:** prior draft listed the floor as `2026-04-15T18:00Z` — that calculation dropped the `-0400` offset from the 18:43 local-time landing. Phase 5 window fixed as `2026-04-15 23:00Z → 2026-04-17 23:00Z`.
 3. **IDQ-004 Tess-side feedback-poller bootstrap.** Pre-staged. Must execute during TV2-039 cutover because Telegram `getUpdates` token is exclusive.
 4. **Cost-tracker deployment (TV2-028).** Acceptance criterion 3 can't be verified without it. Either deploy before TV2-039 or explicitly accept the risk.
 
@@ -771,6 +800,127 @@ These must be resolved before production cutover, in priority order:
 
 ---
 
+## 5.1 Phase 5 execution playbook (added 2026-04-17)
+
+Run these queries at or after **2026-04-17 23:00Z** against `~/.tess/state/run-history.db`. Output feeds §2 service blocks and §3 cross-cutting. Class definitions are in §1.4.
+
+### 5.1.1 Window constants
+
+```
+START = '2026-04-15T23:00:00'
+END   = '2026-04-17T23:00:00'
+```
+
+### 5.1.2 Per-service outcome/tier breakdown (feeds §2 blocks)
+
+```sql
+SELECT service, outcome, COUNT(*) AS n,
+       SUM(CASE WHEN final_tier=1 THEN 1 ELSE 0 END) AS tier1,
+       SUM(CASE WHEN final_tier=2 THEN 1 ELSE 0 END) AS tier2,
+       SUM(CASE WHEN final_tier=3 THEN 1 ELSE 0 END) AS tier3,
+       SUM(escalated) AS escalations,
+       MIN(started_at) AS first_run,
+       MAX(started_at) AS last_run
+FROM run_history
+WHERE started_at >= '2026-04-15T23:00:00' AND started_at < '2026-04-17T23:00:00'
+GROUP BY service, outcome
+ORDER BY service, outcome;
+```
+
+### 5.1.3 Class-bifurcated success rate (feeds AC #5 verdict per service)
+
+```sql
+SELECT
+  service,
+  CASE
+    WHEN service = 'daily-attention' THEN 'A'
+    WHEN service IN ('awareness-check','backup-status','connections-brainstorm',
+                     'email-triage','fif-attention','fif-capture','fif-feedback',
+                     'health-ping','overnight-research','scout-daily-pipeline',
+                     'scout-feedback','scout-weekly-heartbeat','vault-gc','vault-health') THEN 'C'
+    ELSE '?'
+  END AS class,
+  COUNT(*) AS total_runs,
+  SUM(CASE
+    WHEN service = 'daily-attention'
+         AND outcome='staged' THEN 1
+    WHEN service IN ('awareness-check','backup-status','connections-brainstorm',
+                     'email-triage','fif-attention','fif-capture','fif-feedback',
+                     'health-ping','overnight-research','scout-daily-pipeline',
+                     'scout-feedback','scout-weekly-heartbeat','vault-gc','vault-health')
+         AND outcome IN ('staged','completed') THEN 1
+    ELSE 0
+  END) AS successes,
+  SUM(CASE WHEN outcome='dead_letter' THEN 1 ELSE 0 END) AS dead_letters
+FROM run_history
+WHERE started_at >= '2026-04-15T23:00:00' AND started_at < '2026-04-17T23:00:00'
+GROUP BY service
+ORDER BY service;
+```
+
+### 5.1.4 Dead-letter detail (feeds AC #5 "missed outputs" investigation)
+
+```sql
+SELECT service, started_at, failure_class, dead_letter_reason, duration_ms
+FROM run_history
+WHERE started_at >= '2026-04-15T23:00:00' AND started_at < '2026-04-17T23:00:00'
+  AND outcome='dead_letter'
+ORDER BY started_at;
+```
+
+### 5.1.5 Tier routing rollup (feeds AC #4)
+
+```sql
+SELECT COUNT(*) AS total_contracts,
+       SUM(CASE WHEN final_tier IN (1,2) THEN 1 ELSE 0 END) AS tier_1_or_2,
+       ROUND(100.0*SUM(CASE WHEN final_tier IN (1,2) THEN 1 ELSE 0 END)/COUNT(*), 1) AS pct,
+       SUM(escalated) AS escalations
+FROM run_history
+WHERE started_at >= '2026-04-15T23:00:00' AND started_at < '2026-04-17T23:00:00';
+```
+
+### 5.1.6 Cadence expectation matrix (for each §2 block)
+
+| Service | Class | Cadence | Expected runs/48h |
+|---|---|---|---|
+| health-ping | C | 900s | ~192 |
+| backup-status | C | 900s | ~192 |
+| fif-feedback | C | 900s | ~192 |
+| scout-feedback | C | 900s | ~192 |
+| awareness-check | C | 1800s | ~96 |
+| daily-attention | A | 1800s | ~96 |
+| vault-health | C [was A pre-057b] | daily 02:00 | 2 |
+| vault-gc | C | daily 04:00 | 2 |
+| fif-capture | C | daily 06:05 | 2 |
+| fif-attention | C | daily 07:05 | 2 |
+| overnight-research | C | daily 23:00 | 2 |
+| scout-daily-pipeline | C | daily 07:00 (runs ~11:xx) | 2 |
+| connections-brainstorm | C [was A pre-057b] | daily 86400s | 2 |
+| scout-weekly-heartbeat | C | weekly Monday (+ dry-run non-Mondays) | 2 (dry-runs Wed+Thu in window) |
+| scout-feedback-health | — | 900s | ~192 |
+| email-triage | C | (cancelled 2026-04-10 but still running — §3.3) | 0 ideal, non-zero = reconciliation gap |
+
+### 5.1.7 State reconciliation probe (feeds §3.3)
+
+```sql
+SELECT service, COUNT(*) AS runs_after_cancellation
+FROM run_history
+WHERE service='email-triage' AND started_at >= '2026-04-10T00:00:00'
+GROUP BY service;
+```
+
+Any non-zero result confirms §3.3 A.2 reconciliation gap is still open.
+
+### 5.1.8 Acceptance procedure
+
+1. Run 5.1.2 → 5.1.5. Copy each service's numbers into its §2 block under "Phase 5 update" notes (don't overwrite Phase 2 numbers — append).
+2. Compute AC #5 verdict per service: successes == total_runs − dead_letters (class-bifurcated).
+3. If 5.1.4 returns rows, investigate each dead-letter; note whether TV2-056-adjacent or new.
+4. Update §4 gate matrix row-by-row if any verdict changes from Phase 2.
+5. Close Phase 6 row `5 | pending → done | 2026-04-17` and lift the TV2-057a backfill hold in the runbook.
+
+---
+
 ## 6. Phase Tracking
 
 | Phase | Deliverable | Status | Completed |
@@ -780,4 +930,4 @@ These must be resolved before production cutover, in priority order:
 | 2a | **TV2-056 discovered mid-Phase-2:** stale-artifact contract bug; new task created, wrappers + contracts remediated | done | 2026-04-15 |
 | 3 | Cross-cutting verification (§3.1–3.3 + §3.5 cost gap) | done | 2026-04-15 |
 | 4 | Migration inventory re-audit (§3.4) | done | 2026-04-15 |
-| 5 | Phase 2 re-collection post-TV2-056 + final gate verdict confirmation | pending | gated on ≥48h of fresh contract data; earliest 2026-04-17 18:00Z |
+| 5 | Phase 2 re-collection post-TV2-056 + final gate verdict confirmation | pending | gated on ≥48h of fresh contract data; earliest **2026-04-17 23:00Z** (48h after must-fix commit `02be7b7` at 2026-04-15 22:43Z, rounded to whole hour) |

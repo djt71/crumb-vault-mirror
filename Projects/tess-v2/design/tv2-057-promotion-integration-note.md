@@ -2,9 +2,9 @@
 project: tess-v2
 type: design-note
 domain: software
-status: draft
+status: accepted
 created: 2026-04-15
-updated: 2026-04-15
+updated: 2026-04-17
 task: TV2-057
 phase: 4b
 depends_on:
@@ -17,6 +17,8 @@ tags:
   - schema
   - amendment
 ---
+
+> **Status note (2026-04-17).** Operator accepted §1–§7 during TV2-057a work and ratified §2.2 (C2 — generation-time bake-in), §5 (Class B→C), and the connections-brainstorm reclassification to Class C during TV2-057b. See §7a for the closed decisions. Sections below are the original draft plus inline amendments (marked `[AMENDED 2026-04-17]`).
 
 # TV2-057 — Promotion Integration Design Note
 
@@ -36,9 +38,16 @@ tags:
 
 | Class | Definition | Services |
 |---|---|---|
-| **A. Promoting** | Writes a file to a canonical vault path (`Projects/…`, `Domains/…`, vault root, etc.) | `vault-health`, `daily-attention`, `connections-brainstorm`, `morning-briefing` (cancelled TV2-037; **confirmed 0 rows in `run_history` — contributes nothing to the 622 Class A total**) |
-| **B. Mirror-writing (ambiguous)** | Writes to `_openclaw/` mirror paths, not canonical `Projects/` | `overnight-research` (`_openclaw/research/output/`), `fif-capture` (`_openclaw/inbox/` — but SQLite is primary) |
+| **A. Promoting** | Writes a file to a canonical vault path (`Projects/…`, `Domains/…`, vault root, etc.) | `daily-attention`, `morning-briefing` (cancelled TV2-037; **confirmed 0 rows in `run_history`**) |
+| **B. Mirror-writing (ambiguous)** | Writes to `_openclaw/` mirror paths, not canonical `Projects/` | `overnight-research` (`_openclaw/research/output/`), `fif-capture` (`_openclaw/inbox/` — but SQLite is primary), `connections-brainstorm` (`_openclaw/inbox/brainstorm-{date}.md`) |
 | **C. Side-effect only** | HTTP ping, Telegram/Discord delivery, SQLite mutations, file deletions, state-file updates outside the canonical-content graph | `health-ping`, `awareness-check`, `backup-status`, `vault-gc`, `fif-attention`, `fif-feedback`, `email-triage` (cancelled), `scout-daily-pipeline`, `scout-feedback-poller`, `scout-weekly-heartbeat` |
+
+> **[AMENDED 2026-04-17 — TV2-057b audit]** The original table listed `vault-health` and `connections-brainstorm` in Class A. TV2-057b's §4.4 audit revealed:
+>
+> - **`vault-health`** — Tess v2 `com.tess.v2.vault-health` produces only `vault-check-output.txt` in staging. The canonical `_openclaw/state/vault-health-notes.md` is still written by the (still-loaded) `ai.openclaw.vault-health` plist. Canonical-artifact ownership does not transfer to Tess v2 until TV2-040. **For 057b purposes, `vault-health` is effectively Class C** (Tess v2 produces no canonical artifact). Its Class A membership is deferred to TV2-040; when ownership transfers, `canonical_outputs` gets declared as part of that work.
+> - **`connections-brainstorm`** — wrapper writes to `_openclaw/inbox/brainstorm-{date}.md`. Per §5 (Class B ≡ Class C because `_openclaw/` is mirror space, not canonical vault), this service belongs in Class B→C, not Class A. The original §1.1 listing was self-contradictory with §5. **Reclassified to Class C** in TV2-057b.
+>
+> The only confirmed Class A service for 057b's schema work is `daily-attention` (writes directly to `_system/daily/{YYYY-MM-DD}.md` via the OpenClaw-scripted path — §4.4 landmine confirmed, migration spec lives in `tv2-057d-daily-attention-migration.md`).
 
 ### 1.2 Segmented row counts from `~/.tess/state/run-history.db`
 
@@ -50,6 +59,19 @@ Query: `SELECT service, outcome, COUNT(*) FROM run_history GROUP BY service, out
 | B. Mirror-writing | overnight-research (11), fif-capture (13) | 24 | 0.4% |
 | C. Side-effect only | awareness-check (642), backup-status (1177), email-triage (439), fif-attention (13), fif-feedback (1190), health-ping (1278), scout-daily-pipeline (10), scout-feedback (988), scout-weekly-heartbeat (13), vault-gc (13) | **5763** | **89.1%** |
 | Test/dev | test (56) | 56 | 0.9% |
+
+> **[AMENDED 2026-04-17 — post-audit accounting]** Given the §1.1 reclassification:
+>
+> | Class (amended) | Services | Staged rows | % of staged |
+> |---|---|---|---|
+> | A. Promoting (Tess v2 owns the canonical write) | daily-attention (596) | **596** | **9.2%** |
+> | Deferred to TV2-040 (OpenClaw still owns canonical write) | vault-health (13) | 13 | 0.2% |
+> | B→C. Side-effect only (merged per §5) | awareness-check (642), backup-status (1177), email-triage (439), fif-attention (13), fif-capture (13), fif-feedback (1190), health-ping (1278), overnight-research (11), scout-daily-pipeline (10), scout-feedback (988), scout-weekly-heartbeat (13), vault-gc (13), **connections-brainstorm (13)** | **5800** | **89.7%** |
+> | Test/dev | test (56) | 56 | 0.9% |
+>
+> **Change from original:** connections-brainstorm (13) moves A → C (per §5). vault-health (13) is pulled out of Class A for TV2-057b's purposes (deferred to TV2-040) — not re-counted into Class C because ownership is still OpenClaw's.
+>
+> **Backfill impact:** TV2-057a's held backfill scope grows from 5787 rows → 5800 rows (+13 for connections-brainstorm). Held amendment landed in the same backfill commit; see `tv2-057a-backfill-runbook.md`.
 
 ### 1.3 Load-bearing finding
 
@@ -95,9 +117,57 @@ Both are defensible and have different failure modes for "service-interface chan
 
 **This sub-question is explicitly deferred to decomposition.** The note flags it; it does not pick.
 
+> **[RESOLVED 2026-04-17 — TV2-057b]** **C2 — generation-time bake-in.** Field lives on the contract YAML directly; no runtime parsing of `service-interfaces.md`. Rationale:
+>
+> - No existing contract-generation tool. Building C1's markdown parser for `service-interfaces.md` (1551 lines of mixed prose + YAML fenced blocks) is substantial new infrastructure; adding one field to N contract YAMLs is trivial manual work.
+> - Post-audit, only 1 Class A contract actively owns a canonical write (`daily-attention`). C1's amortization story (one parser, many contracts) has no load-bearing many-contracts case.
+> - Tess's change profile is low-frequency schema edits by a single operator. C2's "update the contract YAML when you update the interface" discipline fits; C1's mid-flight propagation is a solution to a problem that hasn't occurred and isn't on the horizon.
+> - C2 aligns with the existing closed-schema invariant (Amendment V) — `canonical_outputs` is an authored field, validatable at load time.
+>
+> Field shape finalized in §2.4 below.
+
 ### 2.3 Default recommendation
 
 **Option C with sub-question C1-vs-C2 left open.** Resolves Open Question #1 in `staging-promotion-design.md` §13 ("Service interfaces must define the mapping from staging artifacts to canonical paths. This design assumes that mapping exists but does not define it.") which TV2-021b shipped without closing.
+
+> **[ACCEPTED 2026-04-17 — TV2-057b]** Option C (hybrid), resolved to C2 per §2.2 above. Open Question #1 in `staging-promotion-design.md` §13 is closed in that document by TV2-057b.
+
+### 2.4 Field shape (added 2026-04-17)
+
+`canonical_outputs` is a **list of output specifications**, each describing one file the service produces that requires atomic promotion from `_staging/` to a canonical vault path. Shape per entry:
+
+```yaml
+canonical_outputs:
+  - staging_name: "attention-plan.md"      # filename inside staging_path/
+    destination: "_system/daily/{date}.md" # vault-relative canonical path
+```
+
+Field semantics:
+
+- **`staging_name`** (string, required): Exact filename the wrapper writes inside the contract's `staging_path`. The promotion engine reads this file.
+- **`destination`** (string, required): Vault-relative canonical path. Placeholders allowed — `{date}` (YYYY-MM-DD UTC), `{week}` (YYYY-Www), `{timestamp}` (ISO 8601 UTC). Path is relative to vault root.
+
+Absence of the field OR empty list means the contract is Class C (side-effect only, no promotion).
+
+Classifier predicate — TV2-057b replaces the body with a two-stage check. The primary signal is the populated `canonical_outputs` field; for contracts that have not yet been migrated to carry the field (the transitional set), the original TV2-057a allowlist stays as a fallback. Unknown services default to Class A (mirrors the TV2-057a safety choice — prefer STAGED with a no-op promotion attempt over silently skipping promotion for something that needed it):
+
+```python
+def is_side_effect_contract(contract: Contract) -> bool:
+    if contract.canonical_outputs:
+        return False
+    return contract.service in _CLASS_C_SERVICES  # transitional allowlist
+```
+
+**Follow-up** (out of 057b scope): once every contract carries an explicit class marker (either non-empty `canonical_outputs` for Class A or an explicit class-declaration convention for Class C), the allowlist can be retired and absence of `canonical_outputs` becomes a hard Class C signal. Tracked as a cleanup item after TV2-057d lands.
+
+Validation rules (enforced in `contract.py`):
+- `canonical_outputs` is optional. If present, must be a non-empty list of mappings.
+- Each entry must have both `staging_name` and `destination` as strings.
+- `destination` must not start with `/` (always vault-relative).
+- `destination` must not contain `..` (no parent-directory traversal).
+- Placeholders other than the documented set (`{date}`, `{week}`, `{timestamp}`) are rejected at load.
+
+The shape is intentionally minimal. Per-output overrides (e.g., per-file `partial_promotion` mode) are not in scope for 057b and can be added as additive fields in a future amendment without breaking contracts.
 
 ---
 
@@ -178,6 +248,8 @@ These are historical records, not in-flight work. The dispatched work already ha
 
 `overnight-research` writes to `_openclaw/research/output/`. `fif-capture` writes to `_openclaw/inbox/`. Both are under `_openclaw/`, which is a **mirror directory** — content from the OpenClaw platform is rsync'd into Tess's vault, and the mirror is not the canonical authority for those paths.
 
+> **[EXTENDED 2026-04-17 — TV2-057b]** The same reasoning applies to `connections-brainstorm`, whose wrapper writes to `_openclaw/inbox/brainstorm-{date}.md`. Original §1.1 put it in Class A ("writes a file to a canonical vault path"); §5's principle ("`_openclaw/` is mirror, not canonical") contradicts that. Honoring §5 — connections-brainstorm is **Class B→C**. See §1.1 amendment.
+
 **Decision (operator-confirmed 2026-04-15):** Class B maps to Class C. No promotion. Rationale:
 
 - `_openclaw/` is mirror, not canonical. Content is rsync'd from OpenClaw and is not the authoritative graph.
@@ -217,6 +289,29 @@ Before decomposition:
 6. **§6 ordering:** Accept the sketch as a starting point, or propose alternative ordering?
 
 On operator acceptance of §1–§5, TV2-057.A–F decomposition is drafted into `tasks.md` and the first sub-task enters active work.
+
+---
+
+## 7a. Closed decisions (2026-04-17)
+
+Operator ratified §1–§5 across TV2-057a (2026-04-15) and TV2-057b (2026-04-17):
+
+| Decision | Outcome | Where it lives |
+|---|---|---|
+| §1 taxonomy | Accepted, with §4.4-audit corrections: connections-brainstorm moves A→C (per §5), vault-health deferred to TV2-040 (Tess v2 doesn't own the canonical write yet) | §1.1 amendment |
+| §2 schema location | Option C (hybrid per-service registry via `service-interfaces.md`, carried on the contract) | §2.3 accepted |
+| §2.2 C1 vs C2 | **C2 — generation-time bake-in.** Field on the contract YAML | §2.2 resolved |
+| §2.4 field shape | `canonical_outputs: [{staging_name, destination}]` with placeholder support + validation rules | §2.4 added |
+| §3 Amendment | Accepted. Landed in `staging-promotion-design.md` §3.4.2 by TV2-057b | `staging-promotion-design.md` §3.4.2 |
+| §3.2.1 lock-retry (R1 vs R2) | **Deferred to TV2-057c** (out of 057b scope, per `tasks.md`) | unchanged |
+| §4 state-machine semantics | Accepted. TV2-057a landed COMPLETED outcome + downgrade | TV2-057a commits `bd0482a`, `037c363` |
+| §5 Class B ≡ Class C | Accepted and extended to connections-brainstorm | §5 extension |
+| §6 ordering | Accepted. 057a (done, backfill held) → 057b (this work) → 057c (locks) → 057d (promotion per-service) → 057e (recovery) → 057f (Class A backfill) | `tasks.md` |
+
+Open items reserved for later sub-tasks:
+- **R1 vs R2 (lock-retry semantics)** — TV2-057c.
+- **`vault-health` canonical_outputs declaration** — TV2-040 (ownership transfer).
+- **Class A backfill disposition for daily-attention's 596 legacy rows** — TV2-057f.
 
 ---
 

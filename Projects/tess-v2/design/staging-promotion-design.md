@@ -182,6 +182,21 @@ Ancestor/descendant overlap detection uses SQLite `GLOB` with a `/*` suffix, not
 
 **Path normalization requirement:** All paths are normalized (no trailing slashes, no `..`, no double slashes) before lock acquisition. Normalization is enforced at the entry point to the lock acquisition procedure.
 
+#### 3.4.2 Dispatch modes (added 2026-04-17 — TV2-057b Amendment)
+
+Tess v2 supports two dispatch modes:
+
+- **Routed dispatch** (original design, §3.4): An orchestrator process acquires write-locks, then dispatches the contract to an executor. Lock acquisition transaction sits in the router.
+- **Direct dispatch** (current production mode): `tess run <contract.yaml>` is invoked directly by a LaunchAgent. Lock acquisition transaction sits in `_cmd_run`'s entry path, before the Ralph loop executes.
+
+In both modes, lock acquisition uses the same all-or-nothing `BEGIN IMMEDIATE` SQLite transaction with overlap detection (§3.4.1). In direct dispatch, **every `tess run` invocation has SQLite transaction semantics on its hot path.** Concurrent LaunchAgents attempting to acquire overlapping locks contend at the SQLite transaction level — the `BEGIN IMMEDIATE` discipline is sufficient to serialize them, but lock-denied must be handled as a retryable condition, not an error, since LaunchAgents will naturally race on cadence boundaries.
+
+Path-overlap detection (§3.4.1) and lock-acquisition-failure behavior (§3.5) apply identically in both modes. The target-path derivation (§3.4 "Target path derivation") is now closed (§13 Open Question #1) via the `canonical_outputs` field on the contract: each entry's `destination` (after placeholder substitution — see `contract-schema.md` / TV2-057b integration-note §2.4) is the set of paths to lock.
+
+**Open sub-question — lock-denied retry semantics (R1 vs R2).** Deferred to TV2-057c. In-invocation spin-retry (R1) masks contention behind latency; exit-and-wait-for-next-cadence (R2) surfaces it behind exit-code noise. Both are defensible; 057c picks one and implements the test plan for the chosen model. See `tv2-057-promotion-integration-note.md` §3.2.1.
+
+**Why this is called out explicitly.** If lock acquisition silently folded into `_cmd_run` as an implementation detail, the fact that every LaunchAgent invocation now executes a SQLite transaction would get rediscovered later — likely by a contention incident. Naming it in the Amendment front-loads the consequence so the TV2-057c implementation task treats it as a known design property, not an emergent surprise.
+
 ### 3.5 Lock Acquisition Failure Behavior
 
 When lock acquisition fails:
@@ -710,7 +725,7 @@ escalation_storm:
 
 ## 13. Open Questions
 
-1. **Target path derivation mechanism.** Service interfaces (TV2-021a/021b) must define the mapping from staging artifacts to canonical paths. This design assumes that mapping exists but does not define it. Confirm format during TV2-021b finalization.
+1. ~~**Target path derivation mechanism.**~~ **CLOSED 2026-04-17 (TV2-057b).** Mapping lives on the contract YAML as a `canonical_outputs` list, each entry specifying a `staging_name` (filename in `staging_path/`) and a `destination` (vault-relative canonical path with placeholder substitution for `{date}`, `{week}`, `{timestamp}`). Schema shape: `tv2-057-promotion-integration-note.md` §2.4. Inheritance mechanics: C2 (generation-time bake-in — the field lives directly on each contract, not resolved at runtime from `service-interfaces.md`). Absence or empty list means Class C (side-effect only, no promotion).
 
 2. **Promotion ordering under queue fairness.** When multiple contracts are in PROMOTION_PENDING simultaneously, should promotion order respect priority classes? Current design: FIFO (first to reach PROMOTION_PENDING promotes first). The global promotion lock serializes all promotions regardless of priority.
 

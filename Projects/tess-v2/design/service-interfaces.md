@@ -266,6 +266,8 @@ convergence_mode: "adaptive"
 
 ### 2a. Vault Health (`ai.openclaw.vault-health`)
 
+> **Class status (2026-04-17, TV2-057b):** Effectively Class C from Tess v2's perspective. The Tess v2 wrapper (`com.tess.v2.vault-health`) produces only `vault-check-output.txt` in staging. The canonical `_openclaw/state/vault-health-notes.md` is still written by the legacy OpenClaw plist. `canonical_outputs` declaration deferred to TV2-040 (OpenClaw decommission), when canonical-artifact ownership transfers to Tess v2. See `tv2-057-promotion-integration-note.md` §1.1.
+
 | Field | Value |
 |-------|-------|
 | **Inputs** | Vault files (full scan) |
@@ -722,6 +724,8 @@ convergence_mode: "adaptive"
 
 ### 4a. Daily Attention (`ai.openclaw.daily-attention`)
 
+> **Class status (2026-04-17, TV2-057b):** Class A (has canonical vault output). Current wrapper (`daily-attention.sh`) writes directly to `_system/daily/{date}.md` via the OpenClaw-scripted path, bypassing staging. This is the §4.4 direct-to-canonical landmine. TV2-057d will migrate the wrapper to produce the plan in `_staging/` and let the promotion engine atomically rename into the canonical path. Migration spec: `tv2-057d-daily-attention-migration.md`.
+
 | Field | Value |
 |-------|-------|
 | **Inputs** | Goal tracker, project states, personal context, Apple snapshots (calendar, reminders) |
@@ -786,6 +790,13 @@ max_queue_age: "PT2H"
 timeout: "PT3M"
 escalation: "tess"
 convergence_mode: "adaptive"
+
+# Class A declaration — TV2-057b.
+# Wrapper must produce `attention-plan.md` in the contract's staging_path;
+# promotion engine atomically renames into the canonical destination.
+canonical_outputs:
+  - staging_name: "attention-plan.md"
+    destination: "_system/daily/{date}.md"
 ```
 
 #### Executor Assignment
@@ -1386,6 +1397,8 @@ convergence_mode: "adaptive"
 ## 8. Connections Brainstorm (TV2-044)
 
 ### 8a. Connections Brainstorm (`com.tess.connections-brainstorm`)
+
+> **Class status (2026-04-17, TV2-057b):** Reclassified A → C. Wrapper writes to `_openclaw/inbox/brainstorm-{date}.md`. Per `tv2-057-promotion-integration-note.md` §5, `_openclaw/` is mirror space, not canonical — so this is a side-effect-only contract with no canonical promotion. Added to the Class C allowlist in `classifier.py`; 13 historical staged rows folded into the TV2-057a backfill. No `canonical_outputs` declaration.
 
 | Field | Value |
 |-------|-------|

@@ -4,7 +4,7 @@ type: runbook
 domain: software
 status: held
 created: 2026-04-15
-updated: 2026-04-15
+updated: 2026-04-17
 task: TV2-057a
 related:
   - tv2-057a-resumption-brief.md
@@ -17,28 +17,37 @@ tags:
 
 # TV2-057a — Historical Backfill Runbook
 
-> **Status: HELD.** Do not execute against `~/.tess/state/run-history.db` until **TV2-038 Phase 5 re-collection closes** (earliest **2026-04-17 18:00Z**). See §1.
+> **Status: HELD.** Do not execute against `~/.tess/state/run-history.db` until **TV2-038 Phase 5 re-collection closes** (earliest **2026-04-17 23:00Z**). See §1.
 
 ## 1. Why this is held
 
 TV2-038 Phase 5 evaluates gate verdicts against the run-history table. Phase 5's analysis assumes the pre-TV2-057a meaning of `outcome='staged'` (passed-and-awaiting-promotion). Rewriting ~5800 staged rows to `completed` mid-collection would change what Phase 5 is measuring. The backfill must wait until the Phase 5 re-collection window closes.
 
-Earliest safe execution: **2026-04-17 18:00Z** (≥48h after TV2-056 must-fix landed at 2026-04-15 ~18:00 -0400).
+Earliest safe execution: **2026-04-17 23:00Z** (≥48h after the TV2-056 must-fix commit `02be7b7` landed at 2026-04-15 22:43Z = 2026-04-15 18:43 -0400).
+
+> **Prior-draft correction (2026-04-17):** An earlier version of this runbook listed the floor as **2026-04-17 18:00Z**, derived from "≥48h after ~18:00 **-0400**." The earlier calculation dropped the -0400 offset (treated local time as UTC). The correct UTC floor is **22:43Z**, rounded up to the next whole hour = **23:00Z**. Phase 5 window fixed as `2026-04-15 23:00Z → 2026-04-17 23:00Z` (48h rolling, whole-hour boundaries).
 
 ## 2. What it does
 
-Rewrites historical `run_history` rows from `outcome='staged'` to `outcome='completed'` for the 12 Class C services. Annotates each affected row with sentinel `dead_letter_reason = 'tv2-057a-backfill'` so the migration is reversible and identifiable.
+Rewrites historical `run_history` rows from `outcome='staged'` to `outcome='completed'` for the 14 Class C services. Annotates each affected row with sentinel `dead_letter_reason = 'tv2-057a-backfill'` so the migration is reversible and identifiable.
 
 Affected services (must match `src/tess/classifier.py:_CLASS_C_SERVICES`):
 
 ```
-awareness-check       fif-feedback           scout-daily-pipeline
-backup-status         health-ping            scout-feedback
-email-triage          overnight-research     scout-weekly-heartbeat
-fif-attention         fif-capture            vault-gc
+awareness-check          fif-feedback             scout-feedback
+backup-status            health-ping              scout-weekly-heartbeat
+connections-brainstorm   overnight-research       vault-gc
+email-triage             scout-daily-pipeline     vault-health
+fif-attention
+fif-capture
 ```
 
-Class A services (`vault-health`, `daily-attention`, `connections-brainstorm`) are **not** touched.
+**Class A (not touched):** only `daily-attention` remains Class A post-TV2-057b reclassification.
+
+> **[AMENDED 2026-04-17 — TV2-057b]**
+> - `connections-brainstorm` moved A → C per `tv2-057-promotion-integration-note.md` §5 (output lives under `_openclaw/inbox/`, mirror space). Adds ~13 historical rows to the backfill.
+> - `vault-health` moved A → C because the Tess v2 wrapper currently produces no canonical artifact; ownership with the still-loaded OpenClaw plist until TV2-040. Adds ~13 historical rows to the backfill.
+> - Expected backfill row count shifts from ~5787 (original estimate) → ~5813 (+26). The live script reports the exact count during dry-run.
 
 ## 3. Procedure
 
