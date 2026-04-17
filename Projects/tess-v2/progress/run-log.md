@@ -3,13 +3,121 @@ project: tess-v2
 type: run-log
 period: 2026-04 onwards
 created: 2026-04-10
-updated: 2026-04-16b
+updated: 2026-04-17
 ---
 
 # tess-v2 — Run Log
 
 **Previous log:** run-log-2026-03.md (45 sessions, Mar 28 – Apr 10. Project creation through Phase 4 implementation. Key milestones: Hermes GO + Nemotron GO decisions, Phase 3 architecture complete, 10 services migrated with gates passed, Phase 4a vault semantic search complete, Amendment Z Phase A live. TV2-036/037 cancelled Apr 10. TV2-043 Scout in re-soak.)
 **Rotated:** 2026-04-10
+
+## 2026-04-17 — Phase 5 prep + TV2-057b full landing + Amendment AB + build-plan deliberation
+
+**Context loaded:** project-state.yaml, tasks.md TV2-057a-f rows, run-log.md recent sessions (TV2-039 cutover + TV2-057a landing), tv2-057-promotion-integration-note.md (full), tv2-057a-backfill-runbook.md, tv2-057a-resumption-brief.md, tv2-038-validation-report.md (§1–§6), staging-promotion-design.md (§3.4, §13, headers), service-interfaces.md (§2a vault-health, §4a daily-attention, §8a connections-brainstorm), src/tess/contract.py (full), src/tess/classifier.py (full), contracts/vault-health.yaml, contracts/daily-attention.yaml, contracts/connections-brainstorm.yaml, scripts/run-vault-check.sh, scripts/daily-attention.sh, scripts/connections-brainstorm.sh, _openclaw/scripts/vault-health.sh, _openclaw/scripts/daily-attention.sh, spec-amendment-AA-vault-semantic-search.md (frontmatter shape), spec-amendments-harness.md (T–Y lookup), spec-amendment-Z-interactive-dispatch.md (full Z1/Z2/Z3/Z4 + peer review action items), src/tess/dispatch.py + src/tess/session_report.py (Amendment Z live state), run-history.db (service/outcome breakdowns for Phase 5 dry-runs). 10 source docs at the design ceiling per CLAUDE.md.
+
+### Phase 5 prep for TV2-038
+
+Discovered hold-time unit error: runbook and validation-report listed the Phase 5 floor as `2026-04-17 18:00Z` but TV2-056 must-fix commit `02be7b7` landed `2026-04-15 18:43 -0400 = 22:43Z`. Earlier draft dropped the `-0400` offset. Corrected floor to `2026-04-17 23:00Z` in both documents with explanatory notes.
+
+Added §1.4 methodology to tv2-038-validation-report.md (Phase 5 window, Class A/C bifurcation, class-specific success predicates). Added §5.1 execution playbook: 7 SQL queries (window constants, outcome/tier breakdown, class-bifurcated success, dead-letter detail, tier routing, cadence matrix, state-reconciliation probe) + acceptance procedure. Dry-runs against the partial window validated SQL syntax; preview showed 14/15 services at 100% success, 1 vault-health dead_letter (matches project-state "awaiting revalidation"), 282 email-triage rows since cancellation (§3.3 gap still open), ~87% cadence fidelity across 900s/1800s services (macOS-sleep-induced StartInterval drift).
+
+### TV2-057b full execution
+
+**Audit surfaced three architectural tensions** (operator-directed decisions):
+1. **vault-health** — Tess v2 wrapper produces only `vault-check-output.txt` in staging; canonical `_openclaw/state/vault-health-notes.md` still written by the loaded `ai.openclaw.vault-health` plist. Decision: defer `canonical_outputs` declaration to TV2-040 when canonical-artifact ownership transfers.
+2. **connections-brainstorm** — wrapper writes to `_openclaw/inbox/brainstorm-{date}.md`; per integration-note §5 `_openclaw/` is mirror space. Decision: reclassify A → C, honor §5 principle over the §1.1 listing error.
+3. **daily-attention** — confirmed §4.4 landmine: wrapper shells out to `_openclaw/scripts/daily-attention.sh` which writes directly to canonical path `_system/daily/{date}.md`. Decision: pre-plan TV2-057d migration in 057b deliverable, execute in 057d.
+
+C2 (generation-time bake-in) selected for §2.2 sub-question — no existing contract-generation tool, only 1 active Class A contract, service-interfaces.md is hand-authored markdown.
+
+**Design docs:** integration-note status draft → accepted; §1.1 amendment (A→C moves), §1.2 row-count adjustment (5800 Class C), §2.2 resolved, §2.4 field-shape added, §7a closed-decisions table. `staging-promotion-design.md` §3.4.2 dispatch-modes Amendment + §13 Q1 closed. `service-interfaces.md` class-status callouts on 2a/4a/8a. `tv2-057d-daily-attention-migration.md` created (full implementation spec: current state, target state with ATTN_OUT_DIR override, change inventory, rollback, pre-flight checklist).
+
+**Code:** `src/tess/contract.py` schema v1.1.0 → v1.2.0, `CanonicalOutput` dataclass, `canonical_outputs` in `AUTHORED_FIELDS`, 13 validation rules (no absolute paths, no `..`, bare filenames, closed placeholder set `{date}/{week}/{timestamp}`, uniqueness). `src/tess/classifier.py` primary predicate swapped to `canonical_outputs`-check with transitional allowlist fallback; connections-brainstorm + vault-health added to allowlist; safe Class A default for unknowns preserved (TV2-057a safety choice). `contracts/daily-attention.yaml` schema bump + `canonical_outputs: [{staging_name: attention-plan.md, destination: _system/daily/{date}.md}]`. `scripts/tv2_057a_backfill.py` fallback allowlist synced + hold-time note corrected.
+
+**TV2-057a backfill amendment:** scope 12 → 14 services (+ connections-brainstorm, vault-health); dry-run 5807 → 5836 rows (natural drift from 2 days of runs). Runbook Class A/C lists updated. Phase 5 §1.4/§5.1.3 SQL amended to match new classification.
+
+**Tests:** +14 canonical_outputs validation tests in `test_contract.py`; classifier tests rewritten for transitional-fallback semantics (+9 tests); `test_ralph.py::TestSideEffectClassification` updated (Class A via populated field; vault-health + connections-brainstorm now Class C). Full suite 475/475 pass.
+
+### Amendment AB landing (follow-up)
+
+Operator flagged that a new schema-affecting field deserves its own Amendment letter per the T–Y / Z / AA convention. Next letter: AB. Created `spec-amendment-AB-canonical-outputs.md` (230 lines): problem statement, AD-016 architecture decision, full field shape + 9 validation rules, classifier-swap semantics + transitional fallback + safe-default-for-unknowns rationale + follow-up retirement plan, backward-compatibility analysis, related-work map. All code touchpoints tagged "Amendment AB" (`contract.py` module docstring + constants + dataclass + validation clause, `classifier.py` module docstring + function docstring, `contracts/daily-attention.yaml` inline comment). Cross-references tightened: `staging-promotion-design.md` §13 Q1 closure cites AB; integration-note §2.4 flags AB as the canonical spec.
+
+### IDQ-004 wrapper backfill
+
+`scripts/scout-feedback-poller-wrapper.sh` authored 2026-04-09, live in production since 2026-04-16 TV2-039 cutover, never committed. Landed as `chore: commit IDQ-004 scout-feedback-poller wrapper` (`7fb884c`). Code repo now clean.
+
+### Extended architectural deliberation (no code)
+
+Operator asked for analysis of Amendment Z integration with current work + correct build order. Surfaced:
+
+- **Gap 1 (autonomous-dispatch safety interlock):** Phase B could auto-dispatch a Class A contract whose promotion wiring isn't live → strands artifact in STAGED. Decision: land as spec amendment (AC) against accepted Z, not as Phase B implementation comment. Three provisions per operator: fail-closed on registry desync (declarative `canonical_outputs` + absent `MIGRATED_SERVICES` entry → reclassify to interactive, never dispatch-and-hope); registry-update-in-same-commit discipline for each TV2-057d per-service migration; patchable `MIGRATED_SERVICES` test fixture for Phase B's dispatch-router tests. Module-level registry mechanism chosen (grep-able, no contract-file churn).
+- **Gap 2 (run_history ↔ session_reports linkage):** operator pushback correct — `task_ref` already carries the join, don't pre-commit schema against unwritten code. Withdrawn.
+- **Gap 3 (interactive-planning service contract):** defer, natural Phase B day-one artifact.
+- **R1/R2 lock-retry:** operator lean R2 (exit + retry on next cadence) over R1 (in-invocation spin-retry). Queue-driven retry semantics already exist; R1 duplicates machinery + blocks dispatcher thread. Added guardrail: lock-denied exits with code `75` (`EX_TEMPFAIL` from sysexits.h) and does NOT write a `run_history` row. Keeps service-health monitors silent on ambient contention; operators see exit-75 clusters in launchd logs under pathological contention; `N` consecutive denies → Z4 reclassifies to interactive. `N` flagged as 057c implementation decision, not pre-committed.
+- **TV2-040 split:** not one task, two coupled tasks. 040a (decommission OpenClaw vault-health writer) + 040b (land Tess v2 replacement writer + AB `canonical_outputs` declaration for vault-health). Near-atomic so canonical artifact never has no writer.
+- **Amendment Z canonicalization:** still `draft`. Phase A live 11 days (since 2026-04-06), soak window closes 2026-04-20. Peer-review action items A1–A10 substantially addressed in current text; A8 (queue status enum — derived view wins per Rule 5 materialized-view model) and A10 (claims-based orphan detection vs reviewer's `_tess/sessions/active-*.yaml` proposal — implementation diverged, spec text needs alignment) are the two reconciliation items. Flip `draft` → `accepted` at 2026-04-20.
+- **TV2-057e crash recovery ↔ Z3 boundary:** owns `_staging/*/.promotion-manifest.json` + `run_history.db`; does NOT touch `claims.yaml` / `session_reports.db` (Z3's surface). Operator-scope reconciliation across surfaces. Literal §X boundary text pre-drafted for the 057e design doc.
+
+**Vault standards consolidation (upstream prerequisite for Amendment AD):** operator flagged that "Crumb's standards" are distributed across vault-check.sh, spec, CLAUDE.md, knowledge-navigation MOC system, claude-ai-context.md. Adding Tess as a second autonomous writer without consolidation = two write standards in same vault = drift. Decision: `_system/docs/vault-standards.md` is an upstream prerequisite to AD, not a side deliverable. Three-bucket classification for consolidation inconsistencies: (1) genuine conflict → needs operator decision; (2) stale text → keep current, annotate superseded; (3) under-specification → gap-remediation input. Claude drafts, operator + 4-model panel reviews. Architecture spike on `vault-check.sh` in parallel to classify its 25+ checks into per-file-clean / per-file-with-context / whole-vault-only before committing AD's enforcement mechanism.
+
+**Final build plan (locked):**
+
+```
+2026-04-17 23:00Z  TV2-038 Phase 5 → ~23:30Z backfill → TV2-057a DONE
+2026-04-18→19     TV2-057c (lock acquisition, R2 + exit-75 + N-as-decision)
+2026-04-20        Z canonicalization (A8+A10) → accepted; Amendment AC (dispatch-interlock)
+2026-04-20/21     vault-standards.md consolidation draft (three-bucket)
+                  vault-check.sh architecture spike in parallel
+2026-04-22        vault-standards 4-model peer review
+2026-04-23        vault-standards accepted; gap-remediation scoped
+2026-04-24        gap-remediation implementation
+2026-04-25        Amendment AD draft (promotion gate, path-category-scoped, no opt-out,
+                  PROMOTION_GATE_FAILED outcome, 72h retention)
+2026-04-26        vault-check.sh --file mode implementation
+2026-04-27        TV2-057d phase 1 synthetic fixtures
+2026-04-28+       TV2-057d phase 2 daily-attention migration
+TV2-040a+040b     Anywhere post-057c, operator-bandwidth-gated, near-atomic pair
+TV2-057e          Post-057d, with §X Z3 boundary section
+Later             Z Phase C (graduated autonomy), TV2-057f (Class A legacy backfill)
+```
+
+### Commits + pushes
+
+Code repo (`djt71/tess-v2`):
+- `f336ae9` — TV2-057b canonical_outputs schema + classifier swap (7 files, +450/-43)
+- `7fb884c` — IDQ-004 scout-feedback-poller wrapper backfill
+- `461ffb6` — Amendment AB code tagging (3 files, +34/-21)
+
+Vault (`djt71/crumb-vault`):
+- `ceecf8c9` — TV2-057b design landing + TV2-038 Phase 5 prep (6 files, +487/-17)
+- `083d21d2` — chore service state accumulation (41 files)
+- `e56acf2e` — Amendment AB spec doc (3 files, +230/-2)
+- `886f3b1b` — chore service state accumulation 2 (16 files)
+
+### Compound observations
+
+1. **Resumption briefs with explicit verification checklists pay for themselves, again.** TV2-057a session 4 noted this; reinforced today: the §4.4 audit would have missed both vault-health's ownership gap and connections-brainstorm's §5 contradiction without the explicit wrapper/script reading step. "Read the actual wrapper, don't trust the integration-note's §1.1 classification list" earned its keep twice.
+2. **Schema-addition reflex needs calibration.** Caught by operator: I defaulted to "add `run_history_contract_id` to session_reports" as a pre-commit when `task_ref` already carries the join. Pattern: for orchestration work with small tables and non-hot paths, prefer existing keys; for spec amendments, don't pre-commit schema against unwritten code. Saved as feedback memory (`~/.claude/projects/.../memory/feedback-schema-addition-reflex.md`).
+3. **Amendment letter discipline has value.** Danny's push to label canonical_outputs as Amendment AB (rather than an untagged schema change) creates a traceable amendment trail — future sessions can map "where did `canonical_outputs` come from?" to one letter, one spec doc, one closed-decisions table. Small ceremony, real provenance.
+4. **Upstream-consolidation-first pattern.** The vault-standards.md consolidation isn't a side deliverable — it's the prerequisite for AD. I initially skipped it and went straight to enforcement mechanics; operator catch reframed the dependency chain. Generalizable pattern: when adding a second enforcer to a rule set, check whether the rule set itself is consolidated before designing the enforcement layer. Otherwise enforcement silently encodes whatever subset the second enforcer happens to touch, and drift is guaranteed.
+5. **Meta: orchestration burden is still on the operator.** Every forward step in this session was operator-initiated (Phase 5 timing error, §4.4 audit implications, Amendment AB missing letter, vault-standards consolidation gap, three-bucket classification, N-parameter decision point). Claude closed loops; operator held the multi-session dependency graph. That's exactly what Amendment Z Phase B's interactive-planning service is designed to invert. The plan's length is a measure of that gap.
+
+### Model routing
+
+All work on Opus 4.7 1M-context (session default). No Sonnet delegation — the work was reasoning-heavy (classification tensions, amendment coordination, build-plan deliberation) and warranted full reasoning. Large context read (10 design docs at ceiling) + extensive cross-file editing justified the session model.
+
+### Code review
+
+**Skipped (TV2-057b):** 475/475 test pass, schema addition is additive + validated with per-rule tests, classifier swap preserves pre-TV2-057b behavior for all allowlisted services. Deferring formal Tier 1 review to the TV2-057c session when related state-machine changes converge — single review pass covers both landings.
+
+### What's open
+
+- **Tonight 23:00Z:** Phase 5 execution per §5.1 playbook.
+- **Post-Phase-5:** Backfill runs per tv2-057a-backfill-runbook.md §3 (snapshot, dry-run on copy, execute, verify).
+- **Post-backfill:** TV2-057a → `done`; project-state.yaml `next_action` refreshed.
+- **Tomorrow:** TV2-057c design + implementation (R2 lock-retry, exit-75, N-parameter decision).
+
+---
 
 ## 2026-04-16b — IDQ-004: Scout feedback-poller swap test
 

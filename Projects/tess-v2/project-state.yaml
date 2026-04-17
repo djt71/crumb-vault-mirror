@@ -4,7 +4,7 @@ type: system
 phase: IMPLEMENT
 last_gate: TASK-to-IMPLEMENT
 created: 2026-03-28
-updated: 2026-04-16
+updated: 2026-04-17
 related_projects:
   - tess-operations
   - autonomous-operations
@@ -13,8 +13,8 @@ related_projects:
   - agent-to-agent-communication
 repo_path: /Users/tess/crumb-apps/tess-v2
 active_task: TV2-057a
-last_committed: 2026-04-16
-next_action: "47/57 done, 2 cancelled (64 total). TV2-039 CUTOVER COMPLETE (2026-04-16): 15/15 Tess services sole operator, 0 OpenClaw services. IDQ-004 done (swap test passed). vault-health contract fix awaiting revalidation (~2026-04-17 06:30Z). Active: TV2-057a (code landed, backfill held). Next: TV2-057a backfill execution, TV2-057b, TV2-040 (OpenClaw decommission — vault dir migration). Non-blocking: TV2-028 cost-tracker, TV2-056 should-fix (ANT-F3/F4/F6), migration-inventory Category G amendment."
+last_committed: 2026-04-17
+next_action: "TV2-057b DONE (Amendment AB landed: canonical_outputs schema v1.2.0 + classifier swap + connections-brainstorm/vault-health reclassification + daily-attention Class A declaration + TV2-057d migration spec). Active: TV2-057a (code landed, backfill held until Phase 5 close). TONIGHT 23:00Z: Phase 5 execution per tv2-038-validation-report §5.1 playbook → ~23:30Z backfill → TV2-057a → done. Next (2026-04-18+): TV2-057c (lock acquisition, R2 + exit-75 + N-as-decision). Build plan locked in 2026-04-17 run-log entry: Z canonicalization + Amendment AC on 04-20; vault-standards.md consolidation + Amendment AD + TV2-057d daily-attention through 04-28+. TV2-040 split to 040a/040b near-atomic, operator-bandwidth-gated post-057c. Non-blocking: TV2-028 cost-tracker, TV2-056 should-fix (ANT-F3/F4/F6), migration-inventory Category G."
 services:
   - com.tess.v2.health-ping
   - com.tess.v2.awareness-check
