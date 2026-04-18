@@ -102,6 +102,29 @@ Additional scope added by operator:
 9. **Startup-hook visibility is a rendezvous mechanism.** The z4-candidates directory is a poor man's pub/sub: producer (`_cmd_run`) writes markers on bad days, consumer (startup hook) surfaces on every session. Operators see persistent contention without having to remember to look. Phase B will subsume the reading, but the directory itself is the durable contract. Future lesson: when building state that multiple consumers need to observe, a file-system directory of small markers is often cheaper than a queue or a dashboard.
 10. **Milestone batching pays off in test volume.** TV2-057b + 057c combined: 34 new tests covering a layered system (schema, classifier, lock table, counter, CLI integration, startup hook). Each layer is small; the composition catches the cross-layer bugs (e.g. the CLI test that patches `tess.cli.datetime` failing because `datetime` was a function-local import — a real bug the test caught before deploy). Large test suites on small surface area reveal composition bugs better than small test suites on large surface area.
 
+### Code Review — milestone TV2-057b/c
+
+- **Scope:** commits `f336ae9..e9175ba` (TV2-057b canonical_outputs + TV2-057c write-lock acquisition); 12 files, +1341/−58.
+- **Panel:** Claude Opus 4.6 (17 findings), Codex GPT-5.3-Codex (9 findings).
+- **Signals:** data/schema.
+- **Codex tools:** **skipped** — Codex's shell tools landed in the vault cwd instead of the tess-v2 repo (dispatch-agent `cwd=` plumbing issue); review grounded in inlined diff only. Logged as separate improvement item for next review cycle.
+- **Findings:** 0 CRITICAL, 6 SIGNIFICANT, 5 MINOR, 4 STRENGTH.
+- **Consensus:** 5 directly converging findings (lock-leak window, credential-sourcing in out-of-scope shell script, corrupt-counter self-heal, int/float coercion, no-op sentinel test).
+- **Clusters:** 1 systemic — `_cmd_run` lock-lifecycle error handling (3 findings → single `locks_acquired` flag fix).
+- **Contradictions:** 1 — schema-version gating policy (Opus: backward-compat preserved; Codex: forward-compat concern). Resolved operator-side via A4 (additive-forward-compat documented).
+- **Action:** Option 2 chosen (must-fix + should-fix). Applied A-S1, A1, A2, A3, A4, A5, A6, A7. Deferred A8/A9/A10 (trivia); declined F6 (atomic-write crash window, acceptable at personal scale); A12 (shell script credential sourcing) filed as out-of-scope IDQ-004 follow-up.
+- **Tests:** +9 (resolve assertion fires; corruption warnings emitted; bool/float values dropped; acquire raises → no release; record_lock_deny raises → still returns 75; reset_lock_deny_count raises → Ralph still runs). Suite 509 → 518/518.
+- **Review note:** `Projects/tess-v2/reviews/2026-04-18-code-review-milestone-tv2-057bc.md`
+- **Reviewed commit tagged:** `code-review-2026-04-18` on `e9175ba`.
+- **Response commit:** `2bf1ad5` (tess-v2 repo).
+
+### Compound observations (Part 3 — code review)
+
+11. **Codex cwd-plumbing bug in dispatch agent is a genuine capability regression.** The dispatch agent passed `repo_path` but Codex's shell tools didn't inherit it, so `pytest` and type-check never ran. Convergence with Opus was still strong enough for useful signal (5 direct matches + 2 unique-to-Codex signals), but the tool-grounding advantage was lost this cycle. File-level impact: next code-review skill invocation should first fix the dispatch-agent cwd propagation (likely a `subprocess.run(cwd=repo_path)` fix). Track in `_system/docs/solutions/` as a code-review-infrastructure pattern worth naming — if Codex's tool-grounding is frequently degraded, the "two reviewers with complementary strengths" framing weakens to "two reviewers, one degraded."
+12. **Systemic clustering catches the real structural bug.** Three findings (F4, CDX-F1, CDX-F2) each described a distinct lock-leak or R2-violation path. Addressed individually, the fix would have been three separate try/excepts. Addressed as a cluster, the fix is one `locks_acquired` flag + two narrow try/excepts around bookkeeping calls — structurally cleaner, less code, easier to reason about. The skill's Step 7b cluster analysis was the mechanism that found this; without it, three individual action items would have been landed separately.
+13. **Contradiction detection is a real two-reviewer value-add.** Opus F8 and Codex CDX-F3 looked at the same code and drew opposite conclusions (backward-compat preserved vs forward-compat-concern). Both were factually correct; the reviewers surfaced a policy question the operator had to answer, and the answer (additive-forward-compat, documented) is now a schema invariant going forward. A single reviewer would likely have only caught one framing.
+14. **"No critical findings" on a two-day-old architecture is a good outcome, not a null result.** The review found 6 SIGNIFICANT issues worth fixing, which is substantial signal. But no CRITICAL means the foundational design — explicit-now injection, classifier seam, try/finally discipline — held up under adversarial review. This calibrates expectations: future TV2 work built on this foundation can rely on the 057b/c surface rather than needing to audit it.
+
 # tess-v2 — Run Log
 
 **Previous log:** run-log-2026-03.md (45 sessions, Mar 28 – Apr 10. Project creation through Phase 4 implementation. Key milestones: Hermes GO + Nemotron GO decisions, Phase 3 architecture complete, 10 services migrated with gates passed, Phase 4a vault semantic search complete, Amendment Z Phase A live. TV2-036/037 cancelled Apr 10. TV2-043 Scout in re-soak.)
