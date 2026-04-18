@@ -2,9 +2,9 @@
 project: tess-v2
 type: runbook
 domain: software
-status: held
+status: released
 created: 2026-04-15
-updated: 2026-04-17
+updated: 2026-04-18
 task: TV2-057a
 related:
   - tv2-057a-resumption-brief.md
@@ -17,7 +17,7 @@ tags:
 
 # TV2-057a — Historical Backfill Runbook
 
-> **Status: HELD.** Do not execute against `~/.tess/state/run-history.db` until **TV2-038 Phase 5 re-collection closes** (earliest **2026-04-17 23:00Z**). See §1.
+> **Status: RELEASED 2026-04-18.** TV2-038 Phase 5 closed with verdict PASS (see `tv2-038-validation-report.md` §5.2). Backfill cleared for execution.
 
 ## 1. Why this is held
 

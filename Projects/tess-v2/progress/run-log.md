@@ -3,8 +3,104 @@ project: tess-v2
 type: run-log
 period: 2026-04 onwards
 created: 2026-04-10
-updated: 2026-04-17
+updated: 2026-04-18
 ---
+
+## 2026-04-18 — Phase 5 close + TV2-057a backfill execution
+
+**Context loaded:** project-state.yaml, run-log.md 2026-04-17 entry (Phase 5 prep + TV2-057b landing), tasks.md TV2-057 rows, tv2-038-validation-report.md §5.1 playbook, tv2-057a-backfill-runbook.md (full). Sub-10 source docs.
+
+### Verification that scheduled 23:00Z 2026-04-17 work did not execute
+
+Operator asked whether Phase 5 SQL playbook + TV2-057a backfill ran overnight per yesterday's locked build plan. Checked: (a) no commits in either repo after `461ffb6` at session end 2026-04-17, (b) no Phase 5 output artifact written, (c) `run_history.db` outcome distribution at session start showed 6637 staged / 1169 completed — pre-backfill state. Verdict: neither ran. Good news: Phase 5 window `2026-04-15T23:00:00 → 2026-04-17T23:00:00` is sealed and complete; queries could be run now against a fixed window with no timing considerations.
+
+### Phase 5 execution (§5.1 playbook)
+
+Ran 5.1.2 (per-service outcome/tier breakdown), 5.1.3 (class-bifurcated success), 5.1.4 (dead-letter detail), 5.1.5 (tier routing rollup), 5.1.7 (state reconciliation probe). Skipped 5.1.6 (cadence was eyeballed against 5.1.2 output — no drift).
+
+**Verdict: PASS.**
+- **AC #4** Tier 1+2 routing: 100.0% (1054/1054; 12 escalations from `test` service only). Threshold ≥70%.
+- **AC #5** Class-bifurcated success: 15/15 services satisfy successes == total − dead_letters.
+- **Cadence:** health-ping 192/192, awareness-check 96/96, daily-attention 96/96, fif-feedback 192/192, scout-feedback 192/192, backup-status 191/192. Actually clean — yesterday's "~87%" figure was from the partial window preview, full window shows tight cadence.
+- **Dead letters in window:** 1 row — vault-health @ 2026-04-16T06:27Z, `bad_spec` semantic failure, 870s. Matches pre-existing project-state "awaiting revalidation" item; not a TV2-056 regression, does not block gate.
+- **Reconciliation gap:** email-triage 282 runs after 2026-04-10 cancellation — known §3.3 A.2 open item, unchanged.
+- **Pre-TV2-057a stragglers in window:** Class C services show ~3-8 `staged` rows each from 2026-04-15 23:00→2026-04-16 00:30Z, all before `bd0482a` went live mid-2026-04-16. Post-057a all Class C lands `completed`. Class-bifurcated success counts both for Class C, so no verdict impact. Backfill retroactively flips these.
+
+**Option B chosen (operator-directed):** condensed §5.2 verdict block added to `tv2-038-validation-report.md` (not per-service §2 updates). Phase 6 row 5 closed: pending → done 2026-04-18. Backfill hold lifted in runbook frontmatter (status: held → released) + §1 header note rewritten.
+
+### TV2-057a backfill execution (runbook §3)
+
+Per-step execution:
+- **§3.1 Prereq:** Verified `037c363 TV2-057a: historical backfill script + runbook (held)` in `~/crumb-apps/tess-v2` git log. Phase 5 closure verified via my own §5.1 run above (runbook's `grep -A2 "phase: 5" ~/crumb-vault/Projects/tess-v2/staging/TV2-038/*.yaml` check is a convention — authoritative source is validation-report §6).
+- **§3.2 Snapshot:** `~/.tess/state/run-history.db.pre-tv2-057a-backfill` = 1884160 bytes (matches live).
+- **§3.3 Dry-run on copy:** 5836 rows across 14 Class C services (awareness-check 644, backup-status 1181, connections-brainstorm 15, email-triage 441, fif-attention 13, fif-capture 13, fif-feedback 1194, health-ping 1282, overnight-research 11, scout-daily-pipeline 10, scout-feedback 992, scout-weekly-heartbeat 13, vault-gc 13, vault-health 14).
+- **§3.4 Execute on copy + verify:** staged 6637 → 801, completed 1169 → 7006 (+1 natural drift between queries). Sentinel count 5836. `daily-attention` absent from "completed" query ✓ (only Class A). ✓
+- **§3.5 Stop services:** `launchctl unload ~/Library/LaunchAgents/com.tess.v2.*.plist` → 15 → 0 loaded. 30s wait.
+- **§3.6 Live execute:** `scripts/tv2_057a_backfill.py --execute` → Updated 5836 rows.
+- **§3.7 Restart:** `launchctl load ...` → 0 → 15 loaded. ✓
+- **§3.8 Final verify:** live DB now `staged=802, completed=7012, dead_letter=88, escalated=40`. Sentinel count 5836. `daily-attention` 722 staged / 0 completed ✓.
+
+**Before/after (live):** staged 6637 → 802, completed 1169 → 7012. 8 rows of natural drift accumulated between Phase 5 queries and final verify (total 7934 → 7942), consistent with ~30 min of elapsed service activity minus the ~30s unload window.
+
+### State updates
+
+- `tasks.md`: TV2-057a `in_progress` → `done` with full close-out summary. TV2-057b `todo` → `done` (landed 2026-04-17 per prior run-log entry; row had been stale).
+- `project-state.yaml`: active_task TV2-057a → TV2-057c; `updated: 2026-04-18`; `next_action` rewritten to reflect 057a/057b close + forward build plan.
+- `tv2-038-validation-report.md`: §5.2 verdict block added, §6 Phase Tracking row 5 closed.
+- `tv2-057a-backfill-runbook.md`: frontmatter `status: released`, § header note rewritten (HELD → RELEASED 2026-04-18 with Phase 5 PASS reference).
+
+### Compound observations
+
+1. **"Scheduled for overnight" ≠ "will happen overnight" without an agent.** Yesterday's build plan listed 23:00Z 2026-04-17 Phase 5 execution as if it were scheduled. It wasn't — it was a note that said "earliest safe execution is this time." With nothing and no one to trigger it, nothing ran. Not surprising in hindsight; worth flagging. Future: when the build plan says "X at time T," either (a) commit a LaunchAgent/cron to run it, or (b) write "next session ≥T: run X" to avoid ambiguity. This is the Tess Phase B (interactive dispatch) value proposition restated from a different angle — the operator-orchestration burden applies to one-shot scheduled tasks too, not just project-level phase transitions.
+2. **Phase 5 playbook + sealed-window approach paid off.** Yesterday's decision to codify the §5.1 playbook with explicit window constants meant today's execution was mechanical: paste queries, collect results, verdict. No interpretation drift. The window was 24h stale by time of run and results identical to what they'd have been at 23:00Z — which is the point of a sealed window. This is a durable pattern: when gating a decision on a time-bounded data collection, define the window so it's the SAME answer whenever you run it after the window closes.
+3. **Sentinel-based reversible migration worked exactly as designed.** Backfill copy-test-execute-verify took ~10 min end-to-end, no anxiety. The `dead_letter_reason='tv2-057a-backfill'` sentinel is the kind of small discipline that pays compounding dividends: if we later discover a bug in the classifier, rollback is one SQL statement, no backup-restore.
+4. **Class A `daily-attention` drift to 722 staged is the next demand signal for TV2-057c + 057d.** It means there are now 722 rows that can't advance from `staged` until lock acquisition + promotion wiring exist. Every cadence cycle adds ~48/day. Not urgent, but the queue is growing visibly — useful psychological pressure against deferring 057c.
+
+### Part 2 — TV2-057c implementation
+
+Continued same session. Operator approved four decision points with additions:
+- **D1 (resolver method):** (b) + explicit `now: datetime` parameter — no internal `datetime.now()` call. Reason: tests pin time without monkey-patching; lock-acquire and promotion resolution must agree on the same value, preventing 23:59:59 → 00:00:01 date-rollover edge cases.
+- **D2 (N threshold):** N=5 uniform as a named constant (`CONSECUTIVE_DENY_THRESHOLD`). Ceremony-budget rationale: one Class A service right now, no demand for per-service config; grep-able + tunable when a second Class A service needs different.
+- **D3 (JSON + atomic write):** write-to-temp + `os.replace` for crash-safety. Concurrent undercount race named in tests as known-acceptable (not worth file-locking to prevent; worst case = Z4 marker fires one cadence late).
+- **D4 (markers + startup-hook visibility):** z4-candidates dir read by `session-startup.sh` on every session open, count + service list surfaced in the formatted Startup Summary. Closes the Phase-A-to-Phase-B visibility gap (markers would otherwise be invisible until Phase B lands 2026-04-21+).
+
+Additional scope added by operator:
+- **Release-failure test** — lock release raising in `finally` must log ERROR to stderr but NOT affect `_cmd_run` return code. Zombie lock becomes visible as a deny on next invocation (existing mechanism).
+- **STAGED-is-success comment** — code comment explaining that post-Amendment-AB, both STAGED (Class A awaiting promotion) and COMPLETED (Class C side-effect) are success outcomes, so `return 0` on either isn't a mistake.
+
+**Files changed (code repo):**
+- `src/tess/contract.py` — module-level `datetime` import; `CanonicalOutput.resolve(now)` method with `{date}`/`{week}`/`{timestamp}` substitution + explicit-now docstring.
+- `src/tess/lock_deny.py` — **NEW.** 148 lines. `record_lock_deny`, `reset_lock_deny_count`, `list_z4_candidates`, atomic-write JSON, self-healing on corrupt counter file, candidate marker generation at threshold.
+- `src/tess/cli.py` — module-level `datetime/timezone` import; `EXIT_LOCK_DENIED=75` constant; acquire/release wiring in `_cmd_run` with Class A gate via `is_side_effect_contract`; `try/finally` release discipline; release-failure logged but swallowed; STAGED-is-success comment.
+- `tests/test_contract.py` — `TestCanonicalOutputResolve` (6 tests: date, week, timestamp, no-placeholder, multiple, explicit-now-not-datetime-now sentinel).
+- `tests/test_lock_deny.py` — **NEW.** `TestRecordLockDeny` (7), `TestResetLockDenyCount` (4), `TestListZ4Candidates` (2), `TestAtomicWriteAndRaces` (3 — including race-behavior-documented sentinel).
+- `tests/test_cli.py` — `TestLockAcquisitionClassA` (4 — acquire + release on STAGED/ESCALATED/exception), `TestLockAcquisitionClassC` (1 — skip lock entirely), `TestLockDenied` (5 — exit 75, no history row, stderr diagnostic, counter increment, reset-on-success), `TestLockReleaseFailure` (1), `TestConcurrentContention` (1 — real `WriteLockTable` integration test with held lock by another contract).
+
+**Files changed (vault):**
+- `_system/scripts/session-startup.sh` — Z4 candidates scan of `~/.tess/state/z4-candidates/` + startup-summary line when count > 0.
+
+**Test result:** 509/509 pass (475 baseline + 34 new). Startup hook manually verified: displays `- **Lock-deny candidates:** 1 (daily-attention) — persistent write-lock contention, investigate` when marker present.
+
+**Deploy mechanics:** services invoke `.venv/bin/python -m tess run` via `scripts/dispatch.sh`. Code changes take effect on next service tick — no reinstall needed. No `launchctl` cycle required. `~/.tess/state/write-locks.db` verified empty before deploy (no stale rows). Daily-attention's `canonical_outputs` field is already present in production contract (landed 2026-04-17 via TV2-057b); next 30-min-cadence tick will be the first live exercise of the lock path.
+
+### Open / next (updated)
+
+- **Deployment observation:** next daily-attention tick after session end will be the first production lock acquire. No action required unless a deny surfaces (marker at 5 consecutive).
+- **2026-04-20:** Z canonicalization (A8 + A10 reconciliation) + Amendment AC (dispatch-interlock fail-closed on registry desync).
+- **2026-04-20→23:** vault-standards.md consolidation + 4-model peer review.
+- **2026-04-25:** Amendment AD (promotion gate).
+- **2026-04-26:** vault-check.sh `--file` mode.
+- **2026-04-27→28+:** TV2-057d daily-attention migration — first Class A to get promotion wiring + cutover from direct-to-canonical write.
+- **Code review:** TV2-057b and TV2-057c deliberately landed without formal review per 2026-04-17 decision ("single review pass covers both landings"). Decision deferred to operator: run code review now, batch with TV2-057d, or defer to pre-cutover gate.
+- **Housekeeping:** delete pre-backfill snapshot after clean post-backfill day (earliest 2026-04-19).
+
+### Compound observations (Part 2)
+
+6. **Explicit-now parameter is a cheap durable pattern.** Saved as the cleanest seam for TV2-057d without any speculative abstraction. The hypothetical 23:59:59→00:00:01 date-rollover bug it prevents is exactly the kind of rare-but-catastrophic defect that's impossible to debug after the fact — the only surface would be "sometimes a lock was acquired for today but the promotion landed on yesterday's file." Cheap to add now; expensive to retrofit after a production incident.
+7. **Ceremony-budget discipline on N=5.** Easy to have over-engineered this into a per-service config with override files and documentation. The actual system today has exactly one Class A service. A named constant is right-sized; when a second Class A service wants a different value, the grep cost is ~15 seconds and the refactor is one line. Resisting speculative configurability is itself a skill worth naming.
+8. **Known-acceptable race test as behavior lock-in.** `test_known_acceptable_race_undercount_documented` doesn't actually test the race — it asserts nothing meaningful. But its *presence* in the test suite forces anyone introducing file-locking on the counter to remove the test, which surfaces the decision. Documentation via test is a cheap way to make a design tradeoff visible to future contributors who'd otherwise "fix" it.
+9. **Startup-hook visibility is a rendezvous mechanism.** The z4-candidates directory is a poor man's pub/sub: producer (`_cmd_run`) writes markers on bad days, consumer (startup hook) surfaces on every session. Operators see persistent contention without having to remember to look. Phase B will subsume the reading, but the directory itself is the durable contract. Future lesson: when building state that multiple consumers need to observe, a file-system directory of small markers is often cheaper than a queue or a dashboard.
+10. **Milestone batching pays off in test volume.** TV2-057b + 057c combined: 34 new tests covering a layered system (schema, classifier, lock table, counter, CLI integration, startup hook). Each layer is small; the composition catches the cross-layer bugs (e.g. the CLI test that patches `tess.cli.datetime` failing because `datetime` was a function-local import — a real bug the test caught before deploy). Large test suites on small surface area reveal composition bugs better than small test suites on large surface area.
 
 # tess-v2 — Run Log
 

@@ -243,6 +243,26 @@ if [ "$FEED_TOTAL" -gt 0 ]; then
     echo "  tier2_actions: $FEED_TIER2"
 fi
 
+# Z4 lock-deny candidates (TV2-057c) — services with persistent lock
+# contention. Phase B will subsume this into the planning cycle; for now the
+# startup hook surfaces the count so operators notice even before Phase B is
+# live.
+Z4_DIR="$HOME/.tess/state/z4-candidates"
+Z4_COUNT=0
+Z4_LIST=""
+if [ -d "$Z4_DIR" ]; then
+    for zf in "$Z4_DIR"/*.json; do
+        [ -f "$zf" ] || continue
+        Z4_COUNT=$((Z4_COUNT + 1))
+        zf_name=$(basename "$zf" .json)
+        Z4_LIST="${Z4_LIST:+$Z4_LIST, }$zf_name"
+    done
+fi
+echo "lock_deny_candidates: $Z4_COUNT"
+if [ "$Z4_COUNT" -gt 0 ]; then
+    echo "lock_deny_candidates_list: $Z4_LIST"
+fi
+
 # Today's date for comparison
 echo "today: $(date +%Y-%m-%d)"
 
@@ -402,6 +422,9 @@ if [ "$FEED_TOTAL" -gt 0 ]; then
 fi
 if [ "$RESEARCH_OUTPUT_COUNT" -gt 0 ]; then
     echo "- **Research output:** $RESEARCH_OUTPUT_COUNT briefs pending review in \`_openclaw/research/output/\`"
+fi
+if [ "$Z4_COUNT" -gt 0 ]; then
+    echo "- **Lock-deny candidates:** $Z4_COUNT ($Z4_LIST) — persistent write-lock contention, investigate"
 fi
 
 # Knowledge brief removed from session-start (no context to target against).

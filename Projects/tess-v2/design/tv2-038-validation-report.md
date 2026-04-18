@@ -4,7 +4,7 @@ type: design-artifact
 domain: software
 status: draft
 created: 2026-04-15
-updated: 2026-04-17
+updated: 2026-04-18
 task: TV2-038
 phase: 4b
 depends_on:
@@ -921,6 +921,28 @@ Any non-zero result confirms §3.3 A.2 reconciliation gap is still open.
 
 ---
 
+## 5.2 Phase 5 verdict (added 2026-04-18, condensed per operator direction)
+
+Queries 5.1.2–5.1.5 + 5.1.7 executed 2026-04-18 against sealed window `2026-04-15T23:00:00 → 2026-04-17T23:00:00`. Per-service numbers retained in DB (not reproduced into §2 blocks — Option B path chosen to clear runway for TV2-057a backfill + TV2-057c). Raw query outputs captured in run-log entry for 2026-04-18.
+
+**Verdict: PASS.**
+
+| AC | Target | Result | Verdict |
+|---|---|---|---|
+| #4 Tier 1+2 routing | ≥70% | 100.0% (1054/1054, 12 escalations from `test` service only) | PASS |
+| #5 Missed outputs (class-bifurcated) | successes == total − dead_letters per service | 15/15 services satisfy | PASS |
+| Cadence fidelity | Within drift of expected | health-ping 192/192, awareness-check 96/96, daily-attention 96/96, fif-feedback 192/192, scout-feedback 192/192, backup-status 191/192 | PASS |
+
+**Dead letters in window:** 1 row — `vault-health @ 2026-04-16T06:27Z, failure_class=semantic, dead_letter_reason=bad_spec, 870413ms`. Matches pre-existing project-state "vault-health awaiting revalidation" item, not a TV2-056 regression. Does not block gate.
+
+**Pre-TV2-057a stragglers:** early-window Class C `staged` rows (awareness-check 3, backup-status 6, fif-feedback 6, health-ping 6, scout-feedback 6, email-triage 3) all before TV2-057a commit `bd0482a` went live mid-2026-04-16; post-057a all Class C rows in window land as `completed`. Class-bifurcated success rule counts both states as success for Class C, so no verdict impact. (TV2-057a backfill will retroactively flip these to `completed` per runbook.)
+
+**State reconciliation probe (5.1.7):** `email-triage` 282 runs after 2026-04-10 cancellation — known §3.3 A.2 reconciliation gap, documented non-blocking follow-up.
+
+**Blockers for TV2-039 cutover:** none. (§4.4 had zero blockers listed; Phase 5 confirms.)
+
+---
+
 ## 6. Phase Tracking
 
 | Phase | Deliverable | Status | Completed |
@@ -930,4 +952,4 @@ Any non-zero result confirms §3.3 A.2 reconciliation gap is still open.
 | 2a | **TV2-056 discovered mid-Phase-2:** stale-artifact contract bug; new task created, wrappers + contracts remediated | done | 2026-04-15 |
 | 3 | Cross-cutting verification (§3.1–3.3 + §3.5 cost gap) | done | 2026-04-15 |
 | 4 | Migration inventory re-audit (§3.4) | done | 2026-04-15 |
-| 5 | Phase 2 re-collection post-TV2-056 + final gate verdict confirmation | pending | gated on ≥48h of fresh contract data; earliest **2026-04-17 23:00Z** (48h after must-fix commit `02be7b7` at 2026-04-15 22:43Z, rounded to whole hour) |
+| 5 | Phase 2 re-collection post-TV2-056 + final gate verdict confirmation | done | 2026-04-18 — verdict PASS per §5.2 (condensed write-up per Option B) |

@@ -4,7 +4,7 @@ type: system
 phase: IMPLEMENT
 last_gate: TASK-to-IMPLEMENT
 created: 2026-03-28
-updated: 2026-04-17
+updated: 2026-04-18
 related_projects:
   - tess-operations
   - autonomous-operations
@@ -12,9 +12,9 @@ related_projects:
   - tess-model-architecture
   - agent-to-agent-communication
 repo_path: /Users/tess/crumb-apps/tess-v2
-active_task: TV2-057a
+active_task: TV2-057d
 last_committed: 2026-04-17
-next_action: "TV2-057b DONE (Amendment AB landed: canonical_outputs schema v1.2.0 + classifier swap + connections-brainstorm/vault-health reclassification + daily-attention Class A declaration + TV2-057d migration spec). Active: TV2-057a (code landed, backfill held until Phase 5 close). TONIGHT 23:00Z: Phase 5 execution per tv2-038-validation-report §5.1 playbook → ~23:30Z backfill → TV2-057a → done. Next (2026-04-18+): TV2-057c (lock acquisition, R2 + exit-75 + N-as-decision). Build plan locked in 2026-04-17 run-log entry: Z canonicalization + Amendment AC on 04-20; vault-standards.md consolidation + Amendment AD + TV2-057d daily-attention through 04-28+. TV2-040 split to 040a/040b near-atomic, operator-bandwidth-gated post-057c. Non-blocking: TV2-028 cost-tracker, TV2-056 should-fix (ANT-F3/F4/F6), migration-inventory Category G."
+next_action: "TV2-057a + 057b + 057c DONE (2026-04-18). Phase 5 PASS, backfill 5836 rows executed, lock acquisition wired for Class A with R2 semantics (exit 75, no history row), CanonicalOutput.resolve(now) seam added, consecutive-deny tracking + Z4 markers + startup-hook visibility live. 509/509 tests pass. Active: Z canonicalization + Amendment AC dispatch-interlock scheduled 2026-04-20. Then vault-standards.md consolidation + 4-model peer review 04-20→23. 04-25 Amendment AD (promotion gate). 04-26 vault-check.sh --file mode. 04-27→28+ TV2-057d daily-attention migration (the first Class A to get promotion wiring). TV2-040a/040b operator-bandwidth-gated post-057c. Non-blocking: TV2-028, TV2-056 should-fix, migration-inventory Category G. Deploy note: TV2-057c code must ship to live services before lock semantics take effect — no launchctl cycle needed this session since services have no canonical_outputs field yet in production contracts (only daily-attention)."
 services:
   - com.tess.v2.health-ping
   - com.tess.v2.awareness-check
