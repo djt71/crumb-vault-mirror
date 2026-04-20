@@ -1,17 +1,18 @@
 {
-  "timestamp": "2026-04-05T19:30:00Z",
-  "lastFullAudit": "2026-04-05",
+  "timestamp": "2026-04-20T00:00:00Z",
+  "lastFullAudit": "2026-04-20",
   "daysSinceAudit": 0,
   "staleSummaries": 0,
   "orphanedSolutions": 0,
   "brokenLinks": 0,
   "docDriftIssues": 1,
+  "tessHarnessIssues": 0,
   "failureLogEntries30d": 0,
-  "archivedKbCount": 0,
+  "archivedKbCount": 1,
   "findings": {
     "high": 0,
     "medium": 0,
-    "low": 3
+    "low": 2
   },
   "status": "healthy"
 }

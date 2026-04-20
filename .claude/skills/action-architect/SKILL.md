@@ -12,6 +12,9 @@ required_context:
   - path: _system/docs/solutions/gate-evaluation-pattern.md
     condition: always
     reason: "Gate design patterns for milestone evaluation"
+  - path: _system/docs/solutions/atomic-rebuild-pattern.md
+    condition: task-involves-regenerating-live-artifact
+    reason: "Staging + atomic swap pattern for tasks that rebuild live artifacts (indexes, derived datasets, static sites, config files)"
 ---
 
 # Action Architect

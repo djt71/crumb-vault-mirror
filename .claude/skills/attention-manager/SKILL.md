@@ -51,6 +51,9 @@ required_context:
   - path: _system/docs/overlays/career-coach.md
     condition: always
     reason: "Skill leverage, reputation signal, opportunity cost"
+  - path: _system/docs/solutions/behavior-vs-meaning-in-routine-design.md
+    condition: always
+    reason: "Routine design pattern — separate behavior layer (cues, actions) from meaning layer (philosophy, why)"
 ---
 
 # Attention Manager
