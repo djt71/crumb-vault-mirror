@@ -1,6 +1,6 @@
-Mode: pre-commit (18 staged files)
+Mode: pre-commit (6 staged files)
 === 1. Frontmatter Schema Validation ===
-  Checked 0 files, 0 with issues
+  Checked 2 files, 0 with issues
 
 === 2. Summary Freshness Check ===
   Checked 0 summaries, 0 stale
@@ -18,8 +18,7 @@ Mode: pre-commit (18 staged files)
   Skipped (no staged session-log files)
 
 === 7. Project Scaffold Completeness ===
-  Skipped (no staged project files)
-  Checked 0 projects, 0 missing scaffold files
+  Checked 11 projects, 0 missing scaffold files
 
 === 8. Task Completion Evidence ===
   Skipped (no staged task or run-log files)
@@ -29,12 +28,10 @@ Mode: pre-commit (18 staged files)
   Checked 0 kb tags, 0 invalid
 
 === 10. Project-State Active Task Consistency ===
-  Skipped (no staged project-state or tasks files)
-  Checked 0 project states, 0 inconsistent
+  Checked 11 project states, 0 inconsistent
 
 === 11. Project-State last_committed Field ===
-  Skipped (no staged project-state files)
-  Checked 0 project states, 0 missing last_committed
+  Checked 11 project states, 0 missing last_committed
 
 === 12. DONE Project Design File Warning ===
   Skipped (no staged design files)
@@ -56,8 +53,7 @@ Mode: pre-commit (18 staged files)
   Checked 0 orientation MOCs, 0 with low synthesis density, 0 with thin one-liners
 
 === 22. Repo Path Validation ===
-  Skipped (no staged project-state files)
-  Checked 0 repo paths, 0 issues
+  Checked 5 repo paths, 0 issues
 
 === 23. Code Review Gate ===
   Skipped (no staged task or run-log files)
@@ -77,10 +73,10 @@ Mode: pre-commit (18 staged files)
   Checked 0 daily-attention files, 0 issues
 
 === 28. Cross-Project Dependency Validation ===
-  WARNING: XD-001 — upstream task in 'tess-operations' still 'not yet scoped' (41 days since file updated)
-  WARNING: XD-022 — upstream task in 'tess-operations' still 'not yet scoped' (41 days since file updated)
-  WARNING: XD-023 — upstream task in 'tess-operations' still 'not yet scoped' (41 days since file updated)
-  WARNING: XD-004 — upstream task in 'feed-intel-framework' still 'not yet scoped' (41 days since file updated)
+  WARNING: XD-001 — upstream task in 'tess-operations' still 'not yet scoped' (43 days since file updated)
+  WARNING: XD-022 — upstream task in 'tess-operations' still 'not yet scoped' (43 days since file updated)
+  WARNING: XD-023 — upstream task in 'tess-operations' still 'not yet scoped' (43 days since file updated)
+  WARNING: XD-004 — upstream task in 'feed-intel-framework' still 'not yet scoped' (43 days since file updated)
   Cross-project deps: 4 issues
 
 === 29. Context Inventory Completeness ===
@@ -90,7 +86,7 @@ Mode: pre-commit (18 staged files)
   Skipped (no staged run-log files)
 
 === 31. Broken Wikilink Detection ===
-  Checked 1 files, 0 broken links in 0 files
+  Checked 3 files, 0 broken links in 0 files
 
 === Solution Doc Track Schema ===
   Checked 0 solution docs, 0 track issues

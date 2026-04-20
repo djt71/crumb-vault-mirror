@@ -3,7 +3,106 @@ project: tess-v2
 type: run-log
 period: 2026-04 onwards
 created: 2026-04-10
-updated: 2026-04-18
+updated: 2026-04-20
+---
+
+## 2026-04-20 — Kimi K2.6 TV2-Cloud eval battery
+
+**Context loaded:** project-state.yaml, tv2_cloud_eval.py (MODELS/scoring), tv2-cloud-eval-spec.md (rubric), tess-voice-prompt.md (persona source), prior K2.5 results (kimi-20260403-124715.json), memory `model-kimi-recovery-fabrication.md`. Sub-8 source docs.
+
+### Purpose
+
+Evaluate newly-released Moonshot AI Kimi K2.6 (released 2026-04-13) as a candidate Tess voice/orchestration runtime. Re-test the K2.5 recovery-failure fabrication pattern against K2.6 on the cloud battery. Compare latency, throughput, and quality vs incumbent K2.5.
+
+### Work
+
+1. **K2.6 web lookup** — confirmed release on 2026-04-13, OpenRouter slug `moonshotai/kimi-k2.6`, pricing $0.95/$4 per M tokens (~2× K2.5).
+2. **Registered K2.6** in `tv2_cloud_eval.py` as model key `kimi26` (ID C12).
+3. **Persona-spec reconstruction** — `_inbox/tess-persona-spec.md` (the hardcoded path in `load_persona_spec()`) was missing. Never committed to git — always an ephemeral artifact. Reconstructed verbatim from `Archived/Projects/tess-model-architecture/design/tess-voice-prompt.md` (compressed ~1,090-token system prompt).
+4. **Full battery run** — 10 tests (TC-01…TC-10), 194,679 tokens, estimated cost $0.454. Raw results: `eval-results/kimi26-20260420-142211.json`.
+5. **Auto-metrics:** TTFT p50 11.0s (K2.5: 26.5s, −58%); TTFT p95 26.2s (K2.5: 98.0s, −73%); throughput p50 60.2 tps (K2.5: 43.6, +38%); TC-07 structured output 5/5 valid.
+6. **Spot-check on fabrication-prone paths (TC-04, TC-09):** K2.6 passed 10/10 tool-decision turns and 5/5 error-recovery scenarios with zero fabrication. Critically, TC-09 scenario 2 (`unexpected_empty_result` — the exact K2.5 stressor) produced categorical debugging instead of K2.5's invented tag-variants with false recall.
+7. **Full qualitative scoring (subagent-dispatched)** → `eval-results/cloud-eval-results-kimi26-2026-04-20.md`. Verified subagent claims against raw JSON (TC-05 reasoning, K2.5 fabrication quote).
+
+### Results
+
+- **Weighted score: 87/100** (qualified strong candidate per spec §5.1)
+- **Fabrications: 0**
+- **Per-test:** TC-01 5 · TC-02 5 · TC-03 5 · TC-04 5 · TC-05 **2** · TC-06 5 · TC-07 5 · TC-08 **1** · TC-09 5 · TC-10 5
+- **Threshold misses:** TC-05 only (needs ≥3). Rubric artifact — K2.6 refused multi-step execution without tool access (the correct Tess behavior), which the current rubric penalizes. Turn 2 (AKM archive) actually produced a 3-step playbook — the refusal framing fooled the rubric.
+- **vs K2.5:** K2.5 re-scored on current rubric ≈ 93/100. K2.6 is −6 points, entirely from TC-05. Latency, throughput, fabrication resistance all improved.
+
+### Decision
+
+- **AD-008 (K2.5 in production) holds.** Do not swap on this eval alone.
+- **Next gate:** live Hermes soak test with K2.6 before promotion — the synthesized TC-09 scenarios are a strong signal but not equivalent to a live tool-loop stressor per the `model-kimi-recovery-fabrication.md` protocol gap.
+
+### Compound observations
+
+1. **The persona-spec fixture has no durable home.** The eval loads from `_inbox/tess-persona-spec.md` — an ephemeral location that was cleared between runs. Reconstructing from the archived `tess-voice-prompt.md` worked this time because the source was frozen, but this is a reproducibility hazard: if the archived source changes or is lost, we can no longer re-score historical runs consistently. Follow-up: move to `_system/docs/tess-persona-spec.md` and update `PERSONA_SPEC_PATH` in the script — needs a spec note that frontmatter must not be present (or have the loader strip it).
+2. **Current rubric penalizes correct Tess behavior (TC-05).** The pattern has now surfaced twice (K2.5 2026-04-08 frontier survey, K2.6 today) — the multi-step orchestration test rewards a model for *pretending to execute* tool chains it doesn't have access to, which is the opposite of what Tess should do under Cardinal Rules / "don't bluff capabilities." Rubric needs a structural revision for TC-05: score on whether the model produces a correct decomposition (even if delegated to the operator), not on whether it performs the full chain. Until revised, TC-05 scores are noise for any model that respects tool boundaries.
+3. **K2.5 fabrication under empty-tool-result is not universal — K2.6 explicitly marks categorical causes.** Comparing the two responses to the same prompt: K2.5 asserts "I've seen your tagging drift between formats" (false memory) and invents specific tag variants (`#security/kb`, `#kb-security`); K2.6 lists cause *categories* (tag mismatch / term variance / index lag) and asks for operator direction. The behavioral gap is voice + epistemic humility, not raw capability. Worth naming as a pattern: "fabrication risk scales with claimed-memory phrasing ('I've seen') more than with missing evidence." Route to `model-kimi-recovery-fabrication.md` memory as a K2.6 data point.
+
+### Open / next (carry forward)
+
+- **Live Hermes soak test** — K2.6 under real Tess runtime with real tool loops. Required before AD-008 swap.
+- **Persona-spec durable location** — move out of `_inbox/`, update script path.
+- **TC-05 rubric revision** — score decomposition correctness, not execution.
+- Unchanged from prior: Z canonicalization (A8+A10), Amendment AC dispatch-interlock, vault-standards.md consolidation, TV2-057d migration.
+
+### Model routing
+
+Eval-analysis session — Opus 4.7 session default throughout. One subagent dispatched to general-purpose agent for qualitative scoring (94K tokens, 17 tool uses). Subagent output verified against raw JSON before acceptance. Delegation justified: JSON size (71KB) + rubric application would have consumed main-session context without value.
+
+---
+
+## 2026-04-19 — Post-deploy status check (TV2-057c) + snapshot cleanup
+
+**Context loaded:** project-state.yaml, run-log.md 2026-04-18 entry (TV2-057a/b/c landing). Sub-5 source docs.
+
+### Purpose
+
+Two low-cost checks proposed at session start, per operator direction: (1) verify TV2-057c lock path is healthy in production after ~29h live, (2) determine eligibility of pre-backfill snapshot cleanup per runbook §3.9 ("earliest 2026-04-19 after clean post-backfill day").
+
+### Post-deploy observation (TV2-057c, ~29h live)
+
+Window: 2026-04-18T21:00:00Z → 2026-04-19T15:50:18Z (~18.5h since 04-18 session-end checkpoint).
+
+- **Z4 candidates directory** (`~/.tess/state/z4-candidates/`): does not exist → `record_lock_deny` has never fired → zero lock contention since deploy.
+- **`~/.tess/state/write-locks.db`**: `write_locks` table present, zero rows → no stale locks, no in-flight locks at check time.
+- **daily-attention** (Class A, sole exerciser of the lock path): 38 `staged` rows over 18.5h. Expected at 30-min cadence: ~37. One extra row attributable to boundary timing. Min=21:20:10Z, max=15:50:18Z. All `staged`, none `dead_letter`/`escalated`. **Clean.**
+- **All 14 other services in window:** `completed` only. Per-service counts match expected cadence (awareness-check 38, backup-status 75, fif-feedback 76, health-ping 75, scout-feedback 76; Class C singletons 1 each). No `dead_letter`, no `escalated`, no exit-75 evidence (which by design writes no history row but also triggers no anomaly).
+
+**Verdict:** TV2-057c lock acquisition path silently working. Acquire + release on every daily-attention tick, no contention, no zombie locks, no Z4 marker production. The foundational layer held up under 29h of live traffic without operator intervention.
+
+### Snapshot cleanup
+
+- Runbook §3.9 authorized deletion "earliest 2026-04-19 after a clean post-backfill day." Post-backfill day (04-18 → 04-19) is clean per above.
+- Operator confirmed. Deleted `~/.tess/state/run-history.db.pre-tv2-057a-backfill` (1.88 MB, 2026-04-18 10:18Z).
+
+### State updates
+
+- `project-state.yaml`: `updated: 2026-04-19`.
+- No task state changes — TV2-057c already `done`, active_task remains TV2-057d.
+
+### Compound observations
+
+1. **"Silent success" is a real outcome that needs to be named.** The Z4 candidates directory's non-existence is a signal. So is the empty write-locks table. The natural reflex is "nothing to report → no log entry," but that's backwards: the lock architecture's first 29h of production is exactly when a failure would be most diagnostic. Logging the clean-state verification creates a dated baseline — next time we observe contention, we'll be able to grep for "when did this start" with a reference point.
+2. **Exit-75's design choice (no history row) is the right tradeoff for status-check UX.** It keeps the outcome column clean: `daily-attention|staged|38` — a single pure line. An exit-75-writes-a-row design would have given us `daily-attention|staged|38` + `daily-attention|lock-denied|0` and invited operator confusion about whether the zero was meaningful. The Z4 marker directory + startup-hook visibility is doing the visibility job instead, and the absence of that directory is itself the clean signal.
+3. **Runbook §3.9 with explicit-date authorization paid off.** Runbook pre-authorized snapshot deletion with a date predicate ("earliest 2026-04-19 after clean post-backfill day"). No new operator deliberation required, just re-verification of the precondition. This is cheap to write during runbook authoring and saves a full decision cycle later. Pattern worth reusing: destructive-but-recoverable operations in runbooks should specify an earliest-date + precondition rather than "after some soak period."
+
+### Open / next (unchanged)
+
+- **2026-04-20:** Z canonicalization (A8 + A10) → accepted; Amendment AC (dispatch-interlock).
+- **2026-04-20→23:** vault-standards.md consolidation + 4-model peer review.
+- **2026-04-25:** Amendment AD (promotion gate).
+- **2026-04-26:** vault-check.sh `--file` mode.
+- **2026-04-27→28+:** TV2-057d daily-attention migration.
+
+### Model routing
+
+Status-check session, low reasoning load. Opus 4.7 session default used throughout — no skill invocations, no subagent delegation warranted.
+
 ---
 
 ## 2026-04-18 — Phase 5 close + TV2-057a backfill execution

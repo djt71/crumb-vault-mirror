@@ -1,21 +1,21 @@
 {
-  "timestamp": "2026-04-18T20:31:34Z",
+  "timestamp": "2026-04-20T20:00:11Z",
   "cpu": {
-    "load_1m": 1.38,
-    "load_5m": 1.54,
-    "load_15m": 1.65,
+    "load_1m": 5.01,
+    "load_5m": 3.61,
+    "load_15m": 2.97,
     "cores": 28
   },
   "memory": {
     "total_gb": 96.0,
-    "used_gb": 53.8,
-    "available_gb": 42.4,
-    "percent_used": 56.1
+    "used_gb": 43.6,
+    "available_gb": 52.5,
+    "percent_used": 45.5
   },
   "disk": {
     "total_gb": 926.3,
     "used_gb": 11.6,
-    "available_gb": 608.6,
+    "available_gb": 607.9,
     "percent_used": 2
   },
   "gpu": {

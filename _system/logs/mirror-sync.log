@@ -710,3 +710,4 @@
 2026-04-18 10:43:14 SYNC TV2-057a/b/c close-out: Phase 5 verdict PASS, backfill executed, lock acquisition landed
 2026-04-18 11:03:12 SYNC TV2-057b/c code review: panel findings + must-fix + should-fix synthesis
 2026-04-18 11:08:07 SYNC chore: service state accumulation — 2026-04-18 session end
+2026-04-18 16:32:28 SYNC chore: session-end log — tess-v2 resume + opportunity-scout drift triage

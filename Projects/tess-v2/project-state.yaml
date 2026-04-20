@@ -4,7 +4,7 @@ type: system
 phase: IMPLEMENT
 last_gate: TASK-to-IMPLEMENT
 created: 2026-03-28
-updated: 2026-04-18
+updated: 2026-04-20
 related_projects:
   - tess-operations
   - autonomous-operations
@@ -14,7 +14,7 @@ related_projects:
 repo_path: /Users/tess/crumb-apps/tess-v2
 active_task: TV2-057d
 last_committed: 2026-04-17
-next_action: "TV2-057a + 057b + 057c DONE (2026-04-18). Phase 5 PASS, backfill 5836 rows executed, lock acquisition wired for Class A with R2 semantics (exit 75, no history row), CanonicalOutput.resolve(now) seam added, consecutive-deny tracking + Z4 markers + startup-hook visibility live. 509/509 tests pass. Active: Z canonicalization + Amendment AC dispatch-interlock scheduled 2026-04-20. Then vault-standards.md consolidation + 4-model peer review 04-20→23. 04-25 Amendment AD (promotion gate). 04-26 vault-check.sh --file mode. 04-27→28+ TV2-057d daily-attention migration (the first Class A to get promotion wiring). TV2-040a/040b operator-bandwidth-gated post-057c. Non-blocking: TV2-028, TV2-056 should-fix, migration-inventory Category G. Deploy note: TV2-057c code must ship to live services before lock semantics take effect — no launchctl cycle needed this session since services have no canonical_outputs field yet in production contracts (only daily-attention)."
+next_action: "Kimi K2.6 TV2-Cloud eval complete 2026-04-20: 87/100 weighted, 0 fabrications, qualified strong candidate. TC-05 (2/5) threshold miss is rubric artifact — K2.6 refuses tool-chain execution without access (correct Tess behavior, wrongly penalized by rubric). Latency +58%/+73% faster than K2.5 (TTFT p50/p95). AD-008 (K2.5 production) HOLDS — live Hermes soak test required before swap. Followups: (1) live Hermes soak with K2.6, (2) persona-spec durable location (move out of _inbox/, update PERSONA_SPEC_PATH in tv2_cloud_eval.py), (3) TC-05 rubric revision to score decomposition not execution. Prior plan unchanged: Z canonicalization + Amendment AC dispatch-interlock (scheduled 2026-04-20). Then vault-standards.md consolidation + 4-model peer review 04-20→23. 04-25 Amendment AD (promotion gate). 04-26 vault-check.sh --file mode. 04-27→28+ TV2-057d daily-attention migration. TV2-040a/040b operator-bandwidth-gated. Non-blocking: TV2-028, TV2-056 should-fix, migration-inventory Category G."
 services:
   - com.tess.v2.health-ping
   - com.tess.v2.awareness-check
