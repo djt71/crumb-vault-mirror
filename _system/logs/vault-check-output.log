@@ -1,6 +1,6 @@
-Mode: pre-commit (3 staged files)
+Mode: pre-commit (17 staged files)
 === 1. Frontmatter Schema Validation ===
-  Checked 2 files, 0 with issues
+  Checked 0 files, 0 with issues
 
 === 2. Summary Freshness Check ===
   Checked 0 summaries, 0 stale
@@ -26,7 +26,7 @@ Mode: pre-commit (3 staged files)
   Checked 0 completed tasks, 0 missing run-log evidence
 
 === 9. Knowledge Base Tag Validation ===
-  Checked 1 kb tags, 0 invalid
+  Checked 0 kb tags, 0 invalid
 
 === 10. Project-State Active Task Consistency ===
   Skipped (no staged project-state or tasks files)
@@ -44,10 +44,10 @@ Mode: pre-commit (3 staged files)
   Checked 0 MOC files, 0 issues
 
 === 18. Topics Resolution ===
-  Checked 1 topic entries, 0 issues
+  Checked 0 topic entries, 0 issues
 
 === 19. Topics Requirement (kb-tagged notes) ===
-  Checked 1 kb-tagged notes, 0 missing topics
+  Checked 0 kb-tagged notes, 0 missing topics
 
 === 20. Source-Index Schema Validation ===
   Checked 0 source-index files, 0 issues
@@ -90,10 +90,9 @@ Mode: pre-commit (3 staged files)
   Skipped (no staged run-log files)
 
 === 31. Broken Wikilink Detection ===
-  Checked 3 files, 0 broken links in 0 files
 
 === Solution Doc Track Schema ===
-  Checked 1 solution docs, 0 track issues
+  Checked 0 solution docs, 0 track issues
 
 === Primitive Registry ===
   Primitive registry: 0 issues
