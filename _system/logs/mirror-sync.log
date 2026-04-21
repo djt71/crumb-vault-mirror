@@ -714,3 +714,4 @@
 2026-04-20 16:00:23 SYNC tess-v2: Kimi K2.6 TV2-Cloud eval battery — 87/100, 0 fabrications
 2026-04-20 16:37:14 SYNC audit: weekly vault audit + orphan solutions triage
 2026-04-20 16:38:38 SYNC chore: service state accumulation + review raw GC
+2026-04-21 09:41:56 SYNC tess-v2: runtime swap to GPT-5.4 API + inbox design notes promoted
