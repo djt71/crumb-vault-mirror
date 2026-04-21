@@ -4,7 +4,7 @@ type: system
 phase: IMPLEMENT
 last_gate: TASK-to-IMPLEMENT
 created: 2026-03-28
-updated: 2026-04-20
+updated: 2026-04-21
 related_projects:
   - tess-operations
   - autonomous-operations
@@ -14,7 +14,7 @@ related_projects:
 repo_path: /Users/tess/crumb-apps/tess-v2
 active_task: TV2-057d
 last_committed: 2026-04-17
-next_action: "Kimi K2.6 TV2-Cloud eval complete 2026-04-20: 87/100 weighted, 0 fabrications, qualified strong candidate. TC-05 (2/5) threshold miss is rubric artifact — K2.6 refuses tool-chain execution without access (correct Tess behavior, wrongly penalized by rubric). Latency +58%/+73% faster than K2.5 (TTFT p50/p95). AD-008 (K2.5 production) HOLDS — live Hermes soak test required before swap. Followups: (1) live Hermes soak with K2.6, (2) persona-spec durable location (move out of _inbox/, update PERSONA_SPEC_PATH in tv2_cloud_eval.py), (3) TC-05 rubric revision to score decomposition not execution. Prior plan unchanged: Z canonicalization + Amendment AC dispatch-interlock (scheduled 2026-04-20). Then vault-standards.md consolidation + 4-model peer review 04-20→23. 04-25 Amendment AD (promotion gate). 04-26 vault-check.sh --file mode. 04-27→28+ TV2-057d daily-attention migration. TV2-040a/040b operator-bandwidth-gated. Non-blocking: TV2-028, TV2-056 should-fix, migration-inventory Category G."
+next_action: "Runtime swap 2026-04-20→21: Tess orchestrator moved from Kimi K2.5 (OpenRouter) to GPT-5.4 via OpenAI API (was briefly on Codex OAuth, now direct API per OpenAI's programmatic-workflow guidance). Trigger: K2.5 live latency + reasoning unacceptable in operator use despite 87/100 synthetic battery — confirmed note #3 thesis that live soak > benchmark. GPT-5.4 chosen over Sonnet 4.6 because live evidence > theory (Sonnet recommendation was partly Claude-family bias, corrected mid-session). 3 new tess-v2/design/ notes added 2026-04-20 from _inbox: codex-integration-note, live-vs-documented-hierarchy-reconciliation, model-hermes-crumb-evaluation-frame — capture the doctrine shift. AD-008 (K2.5 production) effectively superseded by runtime drift; formal AD update deferred. Followups: (1) GPT-5.4 soak observation — watch for verbosity vs persona-spec terseness, rate-limit hits, actual token volume; (2) persona-spec still in _inbox/ — durable location + PERSONA_SPEC_PATH update in tv2_cloud_eval.py deferred per Danny; (3) if K2-family retest becomes relevant, pin OpenRouter to DeepInfra first per memory/project-tess-v2-k2-route-retest.md before drawing model conclusions; (4) AD-008 supersession needs formal documentation when soak results stabilize. Prior plan for 04-20+ (Z canonicalization, vault-standards consolidation, AD Amendment, TV2-057d daily-attention, etc.) unchanged and parallel to runtime work."
 services:
   - com.tess.v2.health-ping
   - com.tess.v2.awareness-check
