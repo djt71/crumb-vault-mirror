@@ -483,7 +483,7 @@ name: writing-coach
 description: >
   Improve clarity, structure, tone, argument, and brevity of written content.
 required_context:
-  - path: _system/docs/solutions/writing-patterns/ai-telltale-anti-patterns.md
+  - path: _system/docs/solutions/ai-telltale-anti-patterns.md
     condition: audience_external
     reason: "Prevents AI-telltale patterns in deliverables"
 ---

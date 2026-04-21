@@ -93,12 +93,6 @@ Mission: build enough independent revenue that corporate work becomes a choice, 
 - **Status:** All tasks complete (53 done + 4 dropped + 3 late additions done). Superseded by tess-v2 for future Tess work.
 - **Key files:** `Projects/tess-operations/progress/run-log.md`
 
-### autonomous-operations
-- **Domain:** software | **Class:** system | **Workflow:** four-phase
-- **Phase:** DONE
-- **Status:** Phase 1 complete. M4 soak PASS: 100% replay, 100% post-AO-003 dedup, 29.6% acted-on rate. Context coverage 65% accepted (pathless items by design). Phase 2 (labeling, advanced scoring) would be a new project.
-- **Key files:** `Projects/autonomous-operations/progress/run-log.md`
-
 ### opportunity-scout
 - **Domain:** software | **Class:** system | **Workflow:** four-phase
 - **Phase:** TASK (M0+M1 complete, M2 behavioral validation in progress)
@@ -126,12 +120,6 @@ Mission: build enough independent revenue that corporate work becomes a choice, 
 - **Next action:** Phase transition to TASK, begin SEM-001 scaffolding.
 - **Key files:** `Projects/semuta/design/specification.md`
 
-### multi-agent-deliberation
-- **Domain:** software | **Class:** system | **Workflow:** four-phase
-- **Phase:** TASK (Phase 3+4 complete, INTEGRATE recommended)
-- **Status:** All 4 phases complete. H4 batch (8 cold artifacts), synthesis, meta-eval done. Gate recommendation: INTEGRATE — deliberation skill is production-ready. Total experiment cost: ~$2.
-- **Key files:** `Projects/multi-agent-deliberation/data/`, `.claude/skills/deliberation/SKILL.md`, `progress/run-log.md`
-
 ### tess-v2
 - **Domain:** software | **Class:** system | **Workflow:** four-phase
 - **Phase:** IMPLEMENT (transitioned 2026-04-01); Phase 4b cutover in flight
@@ -153,6 +141,7 @@ All in `Archived/Projects/` unless noted. Think-different stays in `Projects/` (
 |---------|-------|
 | active-knowledge-memory | QMD knowledge surfacing. Session-start trigger removed (2026-03-20), skill-activation + new-content retained. |
 | attention-manager | Daily attention skill. 30-day soak through Apr 8. |
+| autonomous-operations | Phase 1 complete (AO-001..004, M4 PASS). Phase 2 scope absorbed into tess-v2 dispatch. Archived 2026-04-21. |
 | batch-book-pipeline | 343 notes in Sources/books/. |
 | book-scout | OpenClaw book recommendation pipeline. |
 | crumb-tess-bridge | Telegram bridge + dispatch protocol. 897 tests. |
@@ -162,6 +151,7 @@ All in `Archived/Projects/` unless noted. Think-different stays in `Projects/` (
 | inbox-processor | File intake + routing skill. |
 | knowledge-navigation | QMD collections + MOC system. |
 | mcp-workspace-integration | Google Workspace MCP access (94 tools). |
+| multi-agent-deliberation | 4-phase experiment, H1–H4 complete, deliberation skill production-ready. Archived 2026-04-21. |
 | notebooklm-pipeline | NLM-to-Crumb pipeline. |
 | openclaw-colocation | Blocked on Studio hardware. |
 | pydantic-ai-adoption | ADR deferred pending MCP findings. |

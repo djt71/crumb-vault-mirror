@@ -5,7 +5,7 @@ description: >
   Use when editing emails, docs, essays, proposals, or when user says "improve this",
   "review my writing", "make this clearer", or "edit for tone".
 required_context:
-  - path: _system/docs/solutions/writing-patterns/ai-telltale-anti-patterns.md
+  - path: _system/docs/solutions/ai-telltale-anti-patterns.md
     condition: audience_external
     reason: "Prevents AI-telltale patterns in deliverables"
 model_tier: reasoning

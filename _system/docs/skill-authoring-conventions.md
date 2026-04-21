@@ -320,7 +320,7 @@ What this skill contributes to the learning system. One to three sentences stati
 
 Track estimate accuracy (planned tasks vs. actual tasks required) in
 `_system/docs/estimation-calibration.md`. When recurring problem shapes are identified,
-create or update entries in `_system/docs/solutions/problem-patterns/`.
+create or update entries in `_system/docs/solutions/` (track: pattern).
 ```
 
 ---

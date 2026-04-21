@@ -1142,7 +1142,7 @@ Start with these 7 core skills. `systems-analyst` and `action-architect` are bui
 - **Inputs:** User's problem/goal description, relevant domain summary
 - **Outputs:** `specification.md` (with frontmatter `type: specification`, `skill_origin: systems-analyst`), `specification-summary.md`
 - **Key behavior:** Gathers context via Obsidian CLI, searches `_system/docs/solutions/` for prior art matching the problem domain, runs signal scan of `Sources/signals/`, `Sources/insights/`, and `Sources/research/` filtered by `#kb/` tags with noise gate (budget-exempt), checks overlay index, clarifies through ≤5 questions, conducts first-principles analysis (problem statement, facts/assumptions/unknowns, system map, domain classification, task decomposition)
-- **Compound behavior:** Routes recurring problem shapes to `_system/docs/solutions/problem-patterns/`
+- **Compound behavior:** Routes recurring problem shapes to `_system/docs/solutions/` (track: pattern)
 - **Convergence dimensions:** Completeness, Clarity, Actionability
 - **Context contract:** Standard tier (2-4 docs) for new projects; extended tier (6-7 docs) for iteration passes. MAY request: prior art from `_system/docs/solutions/` matching the problem domain or tech stack
 
@@ -1167,7 +1167,7 @@ Start with these 7 core skills. `systems-analyst` and `action-architect` are bui
 - **Inputs:** The text to improve + intended audience/purpose
 - **Outputs:** Revised text with explanation of changes
 - **Key behavior:** Checks overlay index, applies tiered convergence (§4.2) with lightweight rubric, preserves author's voice while improving structure and clarity. Stops when all dimensions adequate, or 2 iterations without meaningful improvement, or human says "good enough"
-- **Compound behavior:** Build personal style guide in `_system/docs/solutions/writing-patterns/`
+- **Compound behavior:** Build personal style guide in `_system/docs/solutions/` (track: pattern, writing focus)
 - **Convergence dimensions:** Audience fit, Structure, Brevity
 - **Context contract:** Standard tier (1-3 docs) — text plus optional style guide and rubric
 

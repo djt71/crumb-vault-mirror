@@ -1,10 +1,12 @@
 name: autonomous-operations
 domain: software
 type: system
-phase: DONE
+phase: archived
+phase_before_archive: DONE
+archived: 2026-04-21
 last_gate: TASK-to-DONE
 created: 2026-03-12
-updated: 2026-03-26
+updated: 2026-04-21
 related_projects:
   - attention-manager
   - tess-operations

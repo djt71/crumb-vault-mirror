@@ -1,9 +1,11 @@
 project: multi-agent-deliberation
 domain: software
-phase: DONE
+phase: archived
+phase_before_archive: DONE
+archived: 2026-04-21
 status: active
 created: 2026-03-18
-updated: 2026-03-23
+updated: 2026-04-21
 last_committed: 2026-03-22
 last_gate: M3-to-M4
 active_task: null

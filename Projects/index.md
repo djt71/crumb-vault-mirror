@@ -4,7 +4,7 @@ project: null
 domain: software
 status: active
 created: 2026-02-20
-updated: 2026-03-22
+updated: 2026-04-21
 tags:
   - index
 ---
@@ -15,23 +15,25 @@ tags:
 
 | Project | Phase | Domain |
 |---------|-------|--------|
-| agent-to-agent-communication | IMPLEMENT | software |
-| autonomous-operations | TASK | software |
 | customer-intelligence | ACT | career |
-| feed-intel-framework | TASK | software |
+| firekeeper-books | ACT | creative |
 | mission-control | TASK | software |
-| multi-agent-deliberation | TASK | software |
 | opportunity-scout | TASK | software |
 | semuta | PLAN | software |
-| tess-operations | TASK | software |
-| firekeeper-books | ACT | creative |
+| tess-v2 | IMPLEMENT | software |
+
+## DONE (retained in Projects/ — KB exception)
+
+| Project | Phase | Domain | KB content |
+|---------|-------|--------|------------|
+| feed-intel-framework | DONE | software | spec + action-plan tagged `kb/software-dev` |
 
 ## Archived (in Projects/ — KB exception)
 
-| Project | Phase | Domain |
-|---------|-------|--------|
-| think-different | ARCHIVED | career |
+| Project | Phase | Domain | KB content |
+|---------|-------|--------|------------|
+| think-different | ARCHIVED | learning | 45 biographical profiles tagged `kb/history` |
 
 ## Archived (in Archived/Projects/)
 
-active-knowledge-memory, attention-manager, batch-book-pipeline, book-scout, crumb-tess-bridge, deck-intel, documentation-overhaul, inbox-processor, knowledge-navigation, mcp-workspace-integration, notebooklm-pipeline, openclaw-colocation, pydantic-ai-adoption, researcher-skill, tess-model-architecture, vault-mirror, vault-restructure, x-feed-intel
+active-knowledge-memory, agent-to-agent-communication, attention-manager, autonomous-operations, batch-book-pipeline, book-scout, crumb-tess-bridge, deck-intel, documentation-overhaul, documentation-refresh-2026-04, inbox-processor, knowledge-navigation, mcp-workspace-integration, multi-agent-deliberation, notebooklm-pipeline, openclaw-colocation, pydantic-ai-adoption, researcher-skill, tess-model-architecture, tess-operations, vault-mirror, vault-mobile-access, vault-restructure, x-feed-intel

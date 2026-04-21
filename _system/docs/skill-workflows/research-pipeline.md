@@ -42,7 +42,7 @@ Covers the three skills that take a question from raw research through validatio
 ### /writing-coach
 **Invoke:** "improve this", "review my writing", "edit for tone", "make this clearer"
 **Inputs:** The text to improve; audience and purpose (stated or inferred)
-**Outputs:** Revised text in-conversation with per-change explanations; optionally new patterns logged to `_system/docs/solutions/writing-patterns/`
+**Outputs:** Revised text in-conversation with per-change explanations; optionally new patterns logged to `_system/docs/solutions/` (track: pattern)
 
 **What happens:**
 - Establishes audience, purpose, and tone before editing
