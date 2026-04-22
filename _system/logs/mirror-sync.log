@@ -718,3 +718,4 @@
 2026-04-21 14:35:20 SYNC docs: anthropic consolidation hypothesis + framing-risk compound insight
 2026-04-21 14:37:54 SYNC chore: service state accumulation
 2026-04-21 17:49:25 SYNC chore(vault): hygiene + structural cleanup
+2026-04-21 20:38:23 SYNC docs(directive): refactor liberation-directive to project-agnostic v2.1
