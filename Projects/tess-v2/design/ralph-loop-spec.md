@@ -2,6 +2,7 @@
 type: design
 domain: software
 status: draft
+scope: general
 created: 2026-04-01
 updated: 2026-04-01
 project: tess-v2
@@ -10,6 +11,8 @@ task: TV2-020
 ---
 
 # Tess v2 — Ralph Loop Implementation Spec
+
+> **Scope:** Generally applicable beyond tess-v2. The Ralph-loop execution primitive (one contract per session, fresh context, hard stop, cumulative failure-context compaction) is a reusable pattern for any autonomous-agent system with bounded iteration budgets. See `_system/docs/tess-v2-durable-patterns.md`.
 
 Implementation-level companion to spec §9 (architecture) and state-machine-design.md §3
 (sub-states). Covers iteration budget enforcement, failure context injection, hard stop

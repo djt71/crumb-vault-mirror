@@ -1,6 +1,7 @@
 ---
 type: design
 status: draft
+scope: general
 created: 2026-04-01
 updated: 2026-04-02
 domain: software
@@ -12,6 +13,8 @@ tags:
 ---
 
 # Readiness Engine — Dependency Graph Scheduling Layer
+
+> **Scope:** Generally applicable beyond tess-v2. Dependency-graph scheduling for contract sequencing is a reusable pattern for any multi-step autonomous system where downstream work depends on upstream outcomes. See `_system/docs/tess-v2-durable-patterns.md`.
 
 **Spec Version:** 0.1.0-draft  
 **Status:** Draft  

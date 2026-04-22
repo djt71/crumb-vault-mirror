@@ -2,6 +2,7 @@
 project: tess-v2
 domain: software
 type: note
+scope: general
 skill_origin: inbox-processor
 created: 2026-04-20
 updated: 2026-04-20
@@ -14,6 +15,8 @@ tags:
 ---
 
 # Tess-v2 Evaluation Frame: Model × Hermes × Crumb
+
+> **Scope:** Generally applicable beyond tess-v2. This note captures the doctrine shift from "evaluate LLM + harness" to a sharper three-factor system model (model × harness × vault). The extracted distilled pattern lives at `_system/docs/solutions/live-soak-beats-benchmark.md`. See also `_system/docs/tess-v2-durable-patterns.md`.
 
 ## Purpose
 

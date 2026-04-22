@@ -2,6 +2,7 @@
 type: design
 domain: software
 status: draft
+scope: general
 created: 2026-04-01
 updated: 2026-04-01
 project: tess-v2
@@ -10,6 +11,8 @@ task: TV2-025
 ---
 
 # Tess v2 — Observability Infrastructure Design
+
+> **Scope:** Generally applicable beyond tess-v2. Logs-outside-vault (symlinked), structured ledger, dead-letter queue mechanics, 8-section health digest, 12-surface alert thresholds, and alert-fatigue prevention are reusable observability patterns. See `_system/docs/tess-v2-durable-patterns.md`.
 
 Defines logging paths, file inventory, rotation, the symlink convention connecting vault to external logs, health digest template, dead-letter queue mechanics, alert thresholds per surface, and schema definitions for the contract ledger and escalation log. Derived from spec §18, state-machine-design (TV2-017), contract-schema (TV2-019), escalation-storm-policy (TV2-026), queue-fairness-policy (TV2-027), bursty-cost-model (TV2-028), calibration-drift-plan (TV2-029), ralph-loop-spec (TV2-020), and service-interfaces (TV2-021b).
 

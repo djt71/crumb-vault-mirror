@@ -2,18 +2,49 @@
 project: tess-v2
 type: design-input
 domain: software
-status: draft
+status: superseded
 created: 2026-04-04
-updated: 2026-04-06
+updated: 2026-04-21
+superseded_by: spec-amendment-AC-execution-surfaces.md
+superseded_date: 2026-04-21
 source: external-systems-evaluation-2026-04-04, operator-directed architectural analysis
 tags:
   - spec-amendment
   - orchestration
   - interactive-dispatch
   - session-management
+  - superseded
 ---
 
 # Spec Amendment Z: Interactive Dispatch & Orchestrator Authority
+
+> **⚠ SUPERSEDED 2026-04-21 by Amendment AC** (`spec-amendment-AC-execution-surfaces.md`).
+>
+> Two weeks of live operation falsified Z's load-bearing thesis — that Tess should
+> be the dispatch authority for operator-interactive work. Kimi K2.5 and GPT-5.4
+> both failed the orchestrator role by operator standards despite passing synthetic
+> evaluation. Amendment AC retracts **AD-013 (Interactive Dispatch Authority)** and
+> narrows Tess's role to autonomous execution of scheduled launchd services only.
+>
+> **Retained from Z** (repurposed with writer inversion — upstream surfaces write,
+> Crumb reads):
+> - §Z1 dispatch queue schema
+> - §Z1b claims file
+> - §Z2 session report schema (including Z2's storage model and compliance mechanism)
+> - §Z3 startup hook integration + orphaned-session detection
+> - Task class taxonomy (Z1) as vocabulary
+> - AD-014 (Structured Session Reporting) — still active
+>
+> **Retired from Z:**
+> - **AD-013 (Interactive Dispatch Authority)** — reversed by AC's AD-017
+> - §Z4 Tess Planning Cycle — no autonomous planning over operator work
+> - §Z4 graduated autonomy promotion/demotion for operator-facing task classes
+> - The "hierarchy inversion" framing of the problem statement
+>
+> The original Z text is preserved below for provenance. Do not treat it as the
+> current design — read AC first.
+
+---
 
 ## Problem Statement
 

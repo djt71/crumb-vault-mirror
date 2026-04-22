@@ -2,6 +2,7 @@
 type: design
 domain: software
 status: draft
+scope: general
 created: 2026-04-01
 updated: 2026-04-01
 project: tess-v2
@@ -10,6 +11,8 @@ task: TV2-029
 ---
 
 # Confidence Calibration Drift Monitoring Plan
+
+> **Scope:** Generally applicable beyond tess-v2. 7-day rolling window drift detection, six re-calibration triggers, and five-step re-calibration procedure are reusable patterns for any system that relies on LLM confidence scores correlating with actual outcomes. See `_system/docs/tess-v2-durable-patterns.md`.
 
 Defines how to detect, trigger, and execute re-calibration of the confidence-aware escalation system (TV2-018 four-gate hybrid). Confidence scores are only useful if they correlate with actual task outcomes. This plan ensures they stay correlated.
 

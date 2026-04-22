@@ -2,6 +2,7 @@
 project: tess-v2
 type: design-input
 domain: software
+scope: general
 skill_origin: inbox-processor
 created: 2026-04-04
 updated: 2026-04-04
@@ -12,6 +13,8 @@ tags:
 ---
 
 # Pedro Franceschi Autopilot System — Pattern Extraction
+
+> **Scope:** Generally applicable beyond tess-v2. Structured extraction of the Brex autopilot's patterns: signal-injection pipeline (passive observation of operator channels), auto-resolver for low-risk decisions, People + Programs declarative filters. Note: patterns originally mapped against the now-superseded Amendment Z; reusability survives. See `_system/docs/tess-v2-durable-patterns.md`.
 
 **Source:** Core Memory Podcast, Ashley Vance interview with Pedro Franceschi (CEO/co-founder, Brex). Transcript provided by operator 2026-04-04.
 **Purpose:** Structured extraction of adoptable patterns mapped against Amendment Z and tess-v2 architecture.

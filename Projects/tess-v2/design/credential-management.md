@@ -2,6 +2,7 @@
 type: design
 domain: software
 status: draft
+scope: general
 created: 2026-04-01
 updated: 2026-04-01
 project: tess-v2
@@ -10,6 +11,8 @@ task: TV2-024
 ---
 
 # Tess v2 — Credential Management Design
+
+> **Scope:** Generally applicable beyond tess-v2. macOS Keychain single-store, runner-mediated retrieval, env-var injection per session, OAuth refresh automation, and mid-contract expiry handling are reusable patterns for any macOS-deployed system with credentialed external APIs. See `_system/docs/tess-v2-durable-patterns.md`.
 
 Comprehensive credential architecture for Tess v2: macOS Keychain as the single secret store, env var injection per Ralph loop session, OAuth refresh automation, mid-contract expiry handling, audit logging, never-in-vault enforcement, and privileged operation escalation via AD-009.
 

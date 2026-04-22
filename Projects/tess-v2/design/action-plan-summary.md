@@ -5,11 +5,18 @@ domain: software
 skill_origin: action-architect
 status: active
 created: 2026-03-28
-updated: 2026-03-28-r2
+updated: 2026-04-21
 source_updated: 2026-03-28-r2
 ---
 
 # Tess v2 — Action Plan Summary
+
+> **⚠ Scope narrowed 2026-04-21 by Amendment AC.** The milestone structure
+> below remains accurate for the scheduled-services stack (Phases 0-4, 4a,
+> 4b). Framing that casts Tess as "autonomous orchestrator" is narrowed to
+> "autonomous executor of 15 scheduled services." No milestone is
+> retired; AC changes role scope, not infrastructure delivery. Active open
+> work (TV2-038, TV2-040, TV2-057d/e/f) is preserved in full.
 
 ## Structure
 

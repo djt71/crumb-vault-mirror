@@ -3,6 +3,7 @@ project: tess-v2
 type: decision
 domain: software
 status: active
+scope: general
 created: 2026-04-12
 updated: 2026-04-12
 skill_origin: manual
@@ -17,6 +18,8 @@ related:
 ---
 
 # TV2-045 Decision: Paperclip Integration Spike
+
+> **Scope:** Generally applicable beyond tess-v2. The methodology here — staged research spikes with an explicit Stage 0 bail checkpoint that verifies the load-bearing assumption — saved ~90% of the budgeted time. Extracted pattern at `_system/docs/solutions/staged-spike-with-bail.md`. See also `_system/docs/tess-v2-durable-patterns.md`.
 
 ## Summary Recommendation
 

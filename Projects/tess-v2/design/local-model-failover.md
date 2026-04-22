@@ -1,6 +1,7 @@
 ---
 type: design
 status: active
+scope: general
 domain: software
 project: tess-v2
 task: TV2-042
@@ -10,6 +11,8 @@ updated: 2026-04-01
 ---
 
 # TV2-042: Local Model Runtime Failover Design
+
+> **Scope:** Generally applicable beyond tess-v2. Health check + auto-restart + cloud fallback routing is a reusable pattern for any system that combines local LLM serving with cloud failover. See `_system/docs/tess-v2-durable-patterns.md`.
 
 ## 1. Overview
 

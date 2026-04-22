@@ -5,7 +5,7 @@ domain: software
 skill_origin: systems-analyst
 status: active
 created: 2026-03-28
-updated: 2026-03-28-r2
+updated: 2026-04-21
 tags:
   - tess
   - orchestration
@@ -16,7 +16,27 @@ tags:
 
 # Tess v2 — Specification
 
+> **⚠ Scope narrowed 2026-04-21 by Amendment AC** (`spec-amendment-AC-execution-surfaces.md`).
+>
+> Two weeks of live operation falsified the load-bearing thesis that Tess
+> should become the autonomous orchestrator over operator-facing strategic
+> work. Amendment AC retracts the orchestrator role (see AD-017) and narrows
+> Tess to **autonomous execution of scheduled launchd services only** (15
+> `com.tess.v2.*` LaunchAgents). Operator-facing planning and dispatch move
+> to the Level 2 upstream surfaces (claude.ai, Cowork, Remote Control) and
+> Crumb / Claude Code as the Level 3 execution surface.
+>
+> The spec text below is preserved as original intent. Where it conflicts
+> with AC — specifically §1 (problem framing), §3.1 system map, §3.5
+> second-order effects, §16 success criteria — AC governs. Re-read AC
+> before acting on spec text in those sections.
+
 ## 1. Problem Statement
+
+> **AC note:** "Nothing gets built in Crumb unless Danny drives an interactive
+> session" is no longer framed as the problem. Interactive Crumb is now the
+> preferred mode, supported by upstream strategic surfaces (claude.ai,
+> Cowork). The scheduled-services side of this spec continues to apply.
 
 Nothing gets built in Crumb unless Danny drives an interactive session. Tess, running as a LaunchDaemon via OpenClaw, operates as a notification/digest layer — not the autonomous operator she was designed to become. OpenClaw's model routing is confirmed broken (v2026.3.24), making it unsuitable as the orchestration platform for a multi-model Tess.
 
@@ -157,6 +177,11 @@ Identified by external reviewers. Each should be addressed in Phase 3 design or 
 
 ### 3.5 Second-Order Effects
 
+> **AC note:** The first bullet below is partially retracted. Danny remains
+> session driver *within Crumb*; strategic direction happens on Level 2
+> upstream surfaces (claude.ai, Cowork) which feed work into Crumb. The
+> other three effects still apply to the scheduled-services side.
+
 - **Danny's role shifts.** From session-by-session driver to strategic director + spot-checker. This changes how Crumb sessions are used — less operational, more architectural.
 - **Vault write volume increases.** Multiple executors writing artifacts means more frequent commits, potential merge conflicts, vault-check running more often.
 - **Failure modes become distributed.** Instead of one agent failing visibly in a session, failures can be silent across multiple services. Monitoring and alerting become critical.
@@ -198,6 +223,27 @@ Executors write to isolated staging directories (`_staging/{contract-id}/`), nev
 
 ### AD-009: Risk-Based Escalation Gate
 In addition to the deterministic boundary check (Gate 1) and structured confidence field (Gate 2), a third gate escalates based on task risk class regardless of model confidence. Tasks touching credentials, destructive file operations, external communications, financial actions, or first-instance task classes require frontier review or deterministic policy checks. This catches dangerous failures within known task classes that the model might handle confidently but incorrectly.
+
+### ADs introduced by amendments (pointers)
+
+Subsequent amendments have introduced additional ADs. Load the amendment
+docs to get the full text; summaries here for navigation:
+
+- **AD-010** (routing by verifiability) — spec §9 / Amendment X
+- **AD-013** (Interactive Dispatch Authority) — **retracted 2026-04-21**
+  by AD-017 in Amendment AC. See `spec-amendment-Z-interactive-dispatch.md`
+  (superseded) for original framing.
+- **AD-014** (Structured Session Reporting) — Amendment Z, retained
+- **AD-015** (Vault semantic search three-layer integration) — Amendment AA
+- **AD-016** (Tess native tool access admission criteria; *also* staging-to-
+  canonical mapping as first-class contract field — numbering collision
+  between AA and AB)
+- **AD-017** (Orchestrator Role Retraction — retires AD-013) — Amendment AC.
+  Tess's role scoped to autonomous execution of 15 scheduled launchd
+  services. Not a dispatch authority for operator-interactive work.
+- **AD-018** (Execution Surface Division of Labor) — Amendment AC.
+  Four-level stack: Operator → Upstream surfaces (claude.ai / Cowork /
+  Remote Control) → Crumb / Claude Code → Tess scheduled services.
 
 ## 6. Architecture: Three-Tier Decision Model
 
@@ -829,6 +875,19 @@ During migration, both OpenClaw and the new platform run simultaneously:
 - Tess autonomously dispatching contracts and evaluating results without Danny in the loop
 
 ### Overall Project Success
+
+> **AC note (2026-04-21):** The orchestrator framing below is retracted.
+> Revised success criteria under AC:
+> - The 15 scheduled `com.tess.v2.*` services run reliably without operator
+>   attention (health-ping, vault-health, FIF capture/attention, Scout
+>   pipeline, daily-attention, overnight-research, connections-brainstorm,
+>   etc.)
+> - Work from Level 2 upstream surfaces (claude.ai, Cowork) flows cleanly
+>   into Crumb execution via the upstream work bridge (design deferred).
+> - The vault remains the single source of truth.
+> - Danny remains session driver in Crumb, with strategic thinking on
+>   upstream surfaces.
+
 - Tess operates as an autonomous orchestrator, not a notification layer
 - Work gets done while Danny sleeps
 - The vault remains the single source of truth

@@ -2,6 +2,7 @@
 type: design
 domain: software
 status: draft
+scope: general
 created: 2026-04-01
 updated: 2026-04-01
 project: tess-v2
@@ -10,6 +11,8 @@ task: TV2-028
 ---
 
 # Tess v2 — Bursty Cost Model
+
+> **Scope:** Generally applicable beyond tess-v2. Cost modeling under steady-state and bursty conditions, 3-tier daily alerts, daily/monthly caps, and escalation-chain overhead calculation are reusable patterns for LLM cost management. See `_system/docs/tess-v2-durable-patterns.md`.
 
 Cost model for Tess v2 orchestration under steady-state and bursty conditions. Supplements spec §17 with scenario analysis, daily alert thresholds, and budget cap enforcement.
 

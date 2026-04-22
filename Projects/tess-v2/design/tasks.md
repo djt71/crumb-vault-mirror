@@ -5,10 +5,19 @@ domain: software
 skill_origin: action-architect
 status: active
 created: 2026-03-28
-updated: 2026-03-28-r2
+updated: 2026-04-21
 ---
 
 # Tess v2 — Tasks
+
+> **AC scope note (2026-04-21):** Amendment AC narrows Tess's role to
+> autonomous execution of 15 scheduled launchd services. **No open task
+> is retired.** The active open items (TV2-038 validation, TV2-040
+> OpenClaw decommission, TV2-057d/e/f Class A promotion wiring) all
+> concern the scheduled-services stack, which AC keeps. Amendment Z had
+> no numbered implementation tasks and therefore retires no line items
+> here. Future tasks for the upstream work bridge (see AC Open Questions)
+> will be added when that design work begins.
 
 Supersedes the preliminary task list in specification.md §15. Task IDs are renumbered; the spec's original TV2-001–TV2-019 are retired.
 

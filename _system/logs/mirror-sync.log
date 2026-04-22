@@ -719,3 +719,4 @@
 2026-04-21 14:37:54 SYNC chore: service state accumulation
 2026-04-21 17:49:25 SYNC chore(vault): hygiene + structural cleanup
 2026-04-21 20:38:23 SYNC docs(directive): refactor liberation-directive to project-agnostic v2.1
+2026-04-21 20:43:02 SYNC chore: session-end log + service state accumulation

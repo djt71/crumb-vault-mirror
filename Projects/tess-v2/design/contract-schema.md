@@ -2,6 +2,7 @@
 type: design
 domain: software
 status: draft
+scope: general
 created: 2026-04-01
 updated: 2026-04-01
 project: tess-v2
@@ -10,6 +11,8 @@ task: TV2-019
 ---
 
 # Tess v2 — Contract Schema Design
+
+> **Scope:** Generally applicable beyond tess-v2. The contract schema (tests/artifacts/quality_checks with blocking-vs-advisory semantics, closed schemas, V1/V2/V3 verifiability tiers) is a reusable pattern for any "LLM produces work + deterministic check gates completion" system. See `_system/docs/tess-v2-durable-patterns.md`.
 
 Complete YAML schema for contract-based execution. Defines all fields, check type semantics, version strategy, validation tooling, and example contracts. Derived from spec §8-§9, state machine (TV2-017), escalation design (TV2-018), system prompt architecture (TV2-023), service interfaces (TV2-021a), and amendments T/U/V/W/X.
 

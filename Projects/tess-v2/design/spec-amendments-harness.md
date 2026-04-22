@@ -3,6 +3,7 @@ project: tess-v2
 type: design-input
 domain: software
 status: draft
+scope: general
 created: 2026-03-30
 updated: 2026-04-03
 source: design/response-harness-analysis.md
@@ -13,6 +14,8 @@ tags:
 ---
 
 # Spec Amendment Proposals — Response Validation Harness
+
+> **Scope:** Generally applicable beyond tess-v2. Amendments T/U/V/W/X/Y encode reusable LLM-harness patterns: structured diagnostics in failure context, lenient parsing, closed-schema principle, convergence rate as escalation signal, verifiability-based contract classification, plan-before-request orchestrator discipline. See `_system/docs/tess-v2-durable-patterns.md`.
 
 Design inputs from AutoBE harness analysis, mapped to spec sections. For application during Phase 3 design (TV2-017 through TV2-030).
 

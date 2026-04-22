@@ -2,6 +2,7 @@
 type: design
 domain: software
 status: draft
+scope: general
 created: 2026-04-01
 updated: 2026-04-01
 project: tess-v2
@@ -10,6 +11,8 @@ task: TV2-022
 ---
 
 # Tess v2 — Staging/Promotion Lifecycle Design
+
+> **Scope:** Generally applicable beyond tess-v2. The staging-then-promote pattern (write-lock table, hash-based conflict detection, atomic promotion, crash-recovery manifest) is reusable for any system where executor-produced artifacts must be validated before committing to a canonical location. See `_system/docs/tess-v2-durable-patterns.md`.
 
 Defines the complete lifecycle of executor-produced artifacts from staging through promotion to canonical vault paths. Covers directory structure, write-lock table, hash-based conflict detection, atomic promotion, crash recovery, retention/cleanup, and rollback. This is the implementation specification for AD-008 (staging-first writes), C9 (write-lock table / no promotion collisions), and the PROMOTING state from the contract lifecycle state machine (TV2-017).
 

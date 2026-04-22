@@ -3,6 +3,7 @@ project: tess-v2
 domain: software
 type: reference
 status: active
+scope: general
 created: 2026-03-28
 updated: 2026-03-28
 skill_origin: null
@@ -13,6 +14,8 @@ tags:
 ---
 
 ## Local Model Evaluation Protocol
+
+> **Scope:** Generally applicable beyond tess-v2. Benchmark methodology for evaluating local LLM candidates on operator-specified hardware — throughput at multiple context lengths, quality battery with expected-output schemas, thermal-cooldown handling. Reusable for any Mac-hosted local-LLM selection decision. See `_system/docs/tess-v2-durable-patterns.md`.
 
 ### Purpose
 

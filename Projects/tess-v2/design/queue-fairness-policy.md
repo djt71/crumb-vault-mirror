@@ -2,6 +2,7 @@
 type: design
 domain: software
 status: draft
+scope: general
 created: 2026-04-01
 updated: 2026-04-01
 project: tess-v2
@@ -10,6 +11,8 @@ task: TV2-027
 ---
 
 # Queue Fairness Policy
+
+> **Scope:** Generally applicable beyond tess-v2. Four priority classes, per-class max-age thresholds, pathological-contract detection, per-service slot caps with round-robin and age-boost are reusable patterns for any multi-service scheduler. See `_system/docs/tess-v2-durable-patterns.md`.
 
 Defines priority classes, max-age thresholds, pathological contract detection, fairness rules, and dead-letter queue management for the Tess v2 scheduler. Prevents queue poisoning (§2.4) and ensures no single service or failure pattern monopolizes executor slots.
 

@@ -2,6 +2,7 @@
 project: tess-v2
 type: design-input
 domain: software
+scope: general
 skill_origin: inbox-processor
 created: 2026-04-04
 updated: 2026-04-04
@@ -12,6 +13,8 @@ tags:
 ---
 
 # Session Summary: External Systems Evaluation & Tess-v2/Crumb Mapping
+
+> **Scope:** Generally applicable beyond tess-v2. Evaluation of 10 external agent systems with convergent-pattern analysis. The convergent findings ("separate strategy from execution", "orchestrator maintains continuous authority", etc.) are reusable architectural lenses. Note: some findings informed the now-superseded Amendment Z thesis; treat with Amendment AC context. See `_system/docs/tess-v2-durable-patterns.md`.
 
 **Date:** April 4, 2026
 **Scope:** Evaluated 10 external systems/concepts against the Crumb/Tess-v2 architecture. Identified converging patterns, gaps, and proposed solutions.

@@ -2,6 +2,7 @@
 type: design
 domain: software
 status: active
+scope: general
 project: tess-v2
 skill_origin: action-architect
 created: 2026-04-01
@@ -9,6 +10,8 @@ updated: 2026-04-01
 ---
 
 # TV2-023: System Prompt Architecture
+
+> **Scope:** Generally applicable beyond tess-v2. The five-layer prompt composition (header / service / overlay / vault / failure), per-layer token budgets, and compaction priority are reusable patterns for any LLM-integration system that composes prompts from multiple sources. See `_system/docs/tess-v2-durable-patterns.md`.
 
 ## 1. Overview
 

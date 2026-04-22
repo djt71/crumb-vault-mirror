@@ -3,6 +3,7 @@ project: tess-v2
 type: design
 domain: software
 status: active
+scope: general
 created: 2026-04-01
 updated: 2026-04-01
 task: TV2-018
@@ -11,6 +12,8 @@ review: reviews/2026-04-01-state-machine-escalation.md
 ---
 
 # Tess v2 — Confidence-Aware Escalation: Four-Gate Hybrid Design
+
+> **Scope:** Generally applicable beyond tess-v2. The four-gate hybrid (deterministic boundary / structured confidence / risk-based policy / convergence-rate monitoring) is a reusable pattern for any system that routes LLM work across tiers of increasing cost/capability. See `_system/docs/tess-v2-durable-patterns.md`.
 
 Detailed design for escalation logic across the contract lifecycle. Gate 1 and Gate 3 fire at ROUTING time (mechanical). Gate 2 fires within EXECUTING first-turn (executor confidence). Gate 4 runs as a background process (convergence monitoring). Defines the confidence field schema, calibration procedure, re-entry behavior, and validation test plan.
 

@@ -4,17 +4,40 @@ type: specification-summary
 domain: software
 status: active
 created: 2026-03-28
-updated: 2026-04-05
-source_updated: 2026-03-28-r2
+updated: 2026-04-21
+source_updated: 2026-04-21
 ---
 
 # Tess v2 — Specification Summary
 
+> **⚠ Scope narrowed 2026-04-21 by Amendment AC** (`spec-amendment-AC-execution-surfaces.md`).
+> Tess's orchestrator role is retracted on live-evidence grounds. Tess is
+> now scoped to autonomous execution of 15 scheduled launchd services.
+> Operator-facing planning/dispatch moves to Level 2 upstream surfaces
+> (claude.ai, Cowork, Remote Control) and Crumb / Claude Code as Level 3
+> execution. Below text is preserved as original intent; AC governs where
+> they conflict.
+
 ## Problem
 Nothing gets built unless Danny drives an interactive Crumb session. Tess is a notification layer, not an operator. OpenClaw's model routing is confirmed broken (v2026.3.24). The system needs Tess to become an autonomous orchestrator who dispatches contracts to specialized executors, with the vault as shared state.
 
+> **Revised problem statement per AC:** Interactive Crumb is the preferred
+> execution mode. The actual need is a clean **upstream work bridge** — a
+> mechanism for strategic work done on claude.ai / Cowork / Remote Control
+> to flow into Crumb for vault-grounded execution. Tess remains valuable
+> for the 15 scheduled autonomous services; it is not the orchestrator
+> for operator-facing work. OpenClaw's model routing issue is resolved by
+> Tess v2's Hermes-gateway + contract-runner stack for the scheduled
+> services.
+
 ## Solution
 Rebuild Tess as a three-tier autonomous orchestrator: local LLM (Qwen3.5 27B) for routine decisions (free), local LLM with thinking for semi-novel decisions (free), frontier models for escalation (paid). Evaluate Hermes Agent as the platform layer to replace OpenClaw. Integrate eval-based building (contracts, Ralph loops) with Crumb's existing spec-first workflow.
+
+> **Revised solution per AC:** Three-tier decision model, local-LLM runtime
+> (Nemotron Cascade 2 production-selected), Hermes gateway, and eval-based
+> contract execution machinery all ship as described — they drive the 15
+> scheduled services. Orchestration over operator-facing interactive work
+> is retracted.
 
 ## Key Architectural Decisions
 - **AD-001:** Vault is authoritative. No split-brain.
@@ -106,6 +129,13 @@ Raw telemetry lives outside the vault at `~/.tess/logs/` (symlinked as `_tess/lo
 $10-55/month total orchestration cost (target <$50, ceiling $75 during migration), with 70-90% of decisions at zero marginal cost.
 
 ## Success
+
+> **Revised per AC:** Success is (a) the 15 scheduled services run reliably
+> without operator attention; (b) work from upstream surfaces flows cleanly
+> into Crumb via the upstream work bridge; (c) vault stays authoritative;
+> (d) Danny remains session driver in Crumb with strategic work on upstream
+> surfaces. Original text preserved below.
+
 Tess autonomously dispatches contracts and evaluates results. Work gets done while Danny sleeps. The vault stays authoritative. Danny shifts from session driver to strategic director.
 
 ## Peer Review

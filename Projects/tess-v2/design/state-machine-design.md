@@ -3,6 +3,7 @@ project: tess-v2
 type: design
 domain: software
 status: active
+scope: general
 created: 2026-04-01
 updated: 2026-04-01
 task: TV2-017
@@ -11,6 +12,8 @@ review: reviews/2026-04-01-state-machine-escalation.md
 ---
 
 # Tess v2 — Contract Lifecycle State Machine
+
+> **Scope:** Generally applicable beyond tess-v2. Contract lifecycle states, transitions, immutability rules, mid-loop escalation, and write-lock vs promotion-lock separation are reusable patterns for any contract-based execution system. See `_system/docs/tess-v2-durable-patterns.md`.
 
 Defines all contract states, transitions, Ralph loop integration, four-gate escalation, staging/promotion mechanics, and immutability rules. Validated against six scenarios.
 

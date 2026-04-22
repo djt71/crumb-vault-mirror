@@ -2,6 +2,7 @@
 type: design
 domain: software
 status: draft
+scope: general
 created: 2026-04-01
 updated: 2026-04-01
 project: tess-v2
@@ -10,6 +11,8 @@ task: TV2-026
 ---
 
 # Tess v2 — Escalation Storm / Load Shedding Policy
+
+> **Scope:** Generally applicable beyond tess-v2. The 2-of-4 trigger detection, three-level shedding (advisory → queue triage → dispatch suspend), and gradual recovery pattern apply to any system with cascading-failure risk under degraded conditions. See `_system/docs/tess-v2-durable-patterns.md`.
 
 Operational policy for detecting, responding to, and recovering from escalation storm conditions. An escalation storm is the cascade described in §2.4: degrading local model performance causes more Tier 3 escalations, which increases cloud cost and queue depth, which degrades throughput further.
 

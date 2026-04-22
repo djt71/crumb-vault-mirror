@@ -1,6 +1,7 @@
 ---
 type: specification
 status: complete
+scope: general
 domain: software
 created: 2026-03-30
 updated: 2026-03-30
@@ -9,6 +10,8 @@ skill_origin: operator-authored
 ---
 
 # TV2-Cloud: Cloud Model Evaluation Battery for Tess v2
+
+> **Scope:** Generally applicable beyond tess-v2. Cloud-model evaluation battery methodology — structured prompt set across capability categories with expected-output schemas and scoring rubrics. Reusable for any frontier-model selection decision. See `_system/docs/tess-v2-durable-patterns.md`. Note: scoring-predicts-acceptability assumption was later falsified; pair with `_system/docs/solutions/live-soak-beats-benchmark.md`.
 
 **Version:** 1.0  
 **Date:** 2026-03-30  

@@ -3,6 +3,7 @@ project: tess-v2
 type: design-input
 domain: software
 status: active
+scope: general
 created: 2026-03-30
 updated: 2026-03-30
 source: https://autobe.dev/blog/function-calling-harness-qwen-meetup-korea/
@@ -14,6 +15,8 @@ tags:
 ---
 
 # Response Validation Harness — Design Input for Phase 3
+
+> **Scope:** Generally applicable beyond tess-v2. The lenient-parsing and verify-to-converge patterns here apply to any LLM integration with bounded retry budgets. See `_system/docs/tess-v2-durable-patterns.md` and the distilled pattern at `_system/docs/solutions/lenient-parsing-before-evaluation.md`.
 
 ## Source
 

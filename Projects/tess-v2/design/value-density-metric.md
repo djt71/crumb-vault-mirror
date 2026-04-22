@@ -2,6 +2,7 @@
 type: design
 domain: software
 status: draft
+scope: general
 created: 2026-04-01
 updated: 2026-04-01
 project: tess-v2
@@ -10,6 +11,8 @@ task: TV2-030
 ---
 
 # Tess v2 — Value Density Metric Design
+
+> **Scope:** Generally applicable beyond tess-v2. Revenue-weighted-completions / total-completions as a metric, service-level value classification, and the surfaces-without-re-prioritizing principle (metric informs, doesn't route) are reusable patterns. See `_system/docs/tess-v2-durable-patterns.md`.
 
 Defines the value density metric, service classification, silent stagnation detection, and health digest integration. Operationalizes the liberation directive's principle that revenue-generating work gets priority claim by providing the feedback loop that surfaces whether the system is actually doing revenue work.
 
