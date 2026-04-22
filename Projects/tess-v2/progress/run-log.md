@@ -756,3 +756,67 @@ Resumption brief was self-contained and accurate. Did all four pre-writing verif
 ### Model routing
 
 - All work on Opus (session default). No delegation. Mechanical work (file edits + script writing) but state-machine surface and design-decision validation warranted full reasoning.
+
+## 2026-04-21 (session 1) — Amendment AC: orchestrator role retraction + durable pattern preservation
+
+**Context loaded:** `_system/docs/anthropic-consolidation-hypothesis.md` (starting point), `Projects/tess-v2/design/spec-amendment-Z-interactive-dispatch.md`, `Projects/tess-v2/design/spec-amendments-harness.md`, `Projects/tess-v2/design/specification.md` (§3.1 + AD list), `Projects/tess-v2/design/specification-summary.md`, `Projects/tess-v2/design/tasks.md`, `Projects/tess-v2/design/action-plan-summary.md`, `Projects/tess-v2/project-state.yaml`, `Projects/tess-v2/design/service-interfaces.md` (service I/O details for surface mapping), `~/Library/LaunchAgents/` inventory + `launchctl list` (ground truth on what "running on Tess" means), `_system/docs/solutions/` listing.
+
+### Session arc
+
+Started from the anthropic consolidation hypothesis doc. User flagged Amendment Z as the most-impacted area but asked for a full analysis before committing to edits. Analysis identified Z as correctly-named primary impact, with secondary impacts on spec §3.1/§3.5/§16 and the service inventory.
+
+Key discoveries during scoping:
+- **Ground truth on "Tess" architecture:** the 15 `com.tess.v2.*` services are Mac Studio launchd user agents (`~/Library/LaunchAgents/com.tess.v2.*.plist`) running `bash dispatch.sh <contract>` → tess-v2 Python contract runner → Hermes gateway (KeepAlive, separate plist `ai.hermes.gateway`). Not Hermes cron. My earlier "running on Tess" language had been loose; grounded it before service-to-surface mapping.
+- **Telegram reframe:** operator-supplied update that Telegram is notifications-only, not a work-input surface. Collapsed Channels' value proposition entirely.
+- **Routines redundancy:** once Tess+Hermes was confirmed staying, Routines reduced to "smaller capability at higher cost" — redundant under always-on Mac Studio. HA-failover argument weak (shared fate with other Mac Studio dependencies).
+
+### The bigger directional shift
+
+Operator articulated a larger reframe than the hypothesis had surfaced: **Tess was being promoted to orchestrator (level 2 under operator); 2+ weeks of live operation proved Hermes Agent isn't up to that role by operator standards.** Both Kimi K2.5 (87/100 synthetic) and GPT-5.4 failed the role in live use. The operator prefers interactive work with claude.ai + Claude Code via Crumb/vault, with a bridge mechanism needed to flow work from claude.ai/Cowork into Crumb.
+
+This inverted Z's writer-reader direction: Z had Tess writing the queue, Crumb reading. AC has upstream surfaces writing (via future bridge), Crumb reading. Z's schemas survive; the role hierarchy is reversed.
+
+### Work completed
+
+**Amendment AC** drafted: `Projects/tess-v2/design/spec-amendment-AC-execution-surfaces.md`. Four-level stack (Operator → Upstream surfaces → Crumb → Tess scheduled services). AD-017 retracts AD-013. AD-018 formalizes surface division of labor. Routines + Channels evaluated and rejected. All 15 services stay on Tess. Z retained schemas for upstream work bridge (design deferred). Status: draft, pending operator ratification.
+
+**Amendment Z** marked superseded with banner at top + frontmatter fields (`status: superseded`, `superseded_by`, `superseded_date`).
+
+**Category A preservation (generally-applicable engineering knowledge):**
+- 3 distilled extractions to `_system/docs/solutions/`: `live-soak-beats-benchmark.md`, `staged-spike-with-bail.md`, `lenient-parsing-before-evaluation.md` (all with `track: pattern` per solution-doc schema)
+- Index at `_system/docs/tess-v2-durable-patterns.md` cataloging 23 reusable patterns
+- All 23 source docs tagged with `scope: general` frontmatter + short Scope banner
+
+**Dead-scope sweep:** AC narrowing banners added to `specification.md` (§1/§3.5/§16 + AD-017/AD-018 pointers after AD-009), `specification-summary.md` (problem/solution/success), `action-plan-summary.md`, `tasks.md`. No open task retired — AC narrows role scope, not infrastructure delivery. `project-state.yaml` `next_action` updated with full session summary.
+
+**Pattern enforcement proposal:** `_system/docs/proposal-pattern-enforcement-schema.md` (draft). Two-layer mechanism proposed for ensuring durable patterns get applied in future software/system projects: (1) spec frontmatter schema enforcement via vault-check for required declarations (execution_model, verifiability_tier, escalation_strategy, etc.) with enum values drawn from the durable patterns index; (2) skill-preflight injection of `tess-v2-durable-patterns.md` when systems-analyst/action-architect activate on software-domain work. Estimated ~4.5 hrs of focused work. 8 open questions flagged for operator reflection before any implementation.
+
+### Commits
+
+- `88a85e68` — AC amendment + Z supersession + durable pattern preservation (34 files, +990/-8)
+- `34e5623c` — Pattern-enforcement proposal + service state accumulation (17 files, +269/-60)
+
+### Compound observations
+
+1. **Surface-inventory-shaped framing hides candidate rejection.** The hypothesis doc inventoried 5 Anthropic surfaces (Cowork, Routines, Channels, Remote Control, Crumb) and assumed division-of-labor would assign each a role. Without the Tess-retention decision being tested first, every surface looked like it might fit somewhere. When Tess+Hermes retention was confirmed, Routines and Channels collapsed to "not needed" — but this outcome wasn't reachable from the inventory framing alone. Lesson: decide *scope of the system staying intact* before enumerating *what to add*. Otherwise every inventory item gets an unearned seat at the table. Candidate for `_system/docs/solutions/` as a companion to the existing `vendor-comparison-feature-inventory.md` — scope-first-then-inventory, not inventory-first-then-fit.
+
+2. **Category A preservation was the operator's prompt, not mine.** My initial AC draft didn't address "what happens to the genuinely useful engineering knowledge when we narrow the project?" — the operator asked the question directly ("response-harness-analysis.md, contract-schema.md, ralph-loop-spec.md, there are probably others — what's your analysis?"). Without that prompt, the tags/index/extractions wouldn't have happened in this session. Claude default is to complete the requested scope, not audit adjacent losses. Flag for future narrowing/supersession work: **always ask "what generally-applicable knowledge is embedded here that shouldn't be orphaned?"** when marking a project or design doc superseded. Applies beyond tess-v2.
+
+3. **Preservation without enforcement is ironic.** The patterns preserved today (contract schema, Ralph loop, staging/promotion, three-gate escalation, etc.) were explicitly built to mechanize what had previously been behavioral. Leaving their *application* to behavior (hope someone reads the index) contradicts their own thesis. The operator caught this after preservation was done ("is there a mechanism to ensure they're followed?"). The pattern-enforcement proposal resolves it but is a future-session commitment, not this-session work. Flag for any future "preserve doctrine" effort: **design the enforcement lever at the same time as the preservation.** Otherwise the preservation itself is a behavioral trigger.
+
+4. **Claude-Opus-as-web-chat-conversation partner vs. Crumb-as-execution-partner is real.** The hypothesis doc was triggered by an extended claude.ai web chat with Opus. That chat produced the Tess-sunset hypothesis that this session formally retracted. The "think out loud on claude.ai, then come to Crumb for execution" pattern is exactly the upstream→downstream flow AC formalizes — and that flow was used to *produce* AC. Structural validation of the division-of-labor proposed in AD-018.
+
+### Model routing
+
+- All work on Opus (session default). No delegation.
+- Substantial spec/design authorship, multi-file coordinated sweep across 34 files, schema-shaped extraction work. Opus warranted for architectural judgment and coordination burden.
+- Session was long — ~15 user turns, large tool-call volume. No compaction needed.
+
+### Session-end state
+
+- AC: `status: draft`, pending operator ratification
+- Z: superseded
+- Patterns preserved and indexed
+- Pattern-enforcement proposal: draft, 8 open questions for operator
+- TV2-057d still the active task — not touched this session
+- Two clean commits, zero errors at vault-check (4 non-blocking XD warnings, pre-existing)

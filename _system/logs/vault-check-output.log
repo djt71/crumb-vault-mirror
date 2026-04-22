@@ -1,6 +1,6 @@
-Mode: pre-commit (17 staged files)
+Mode: pre-commit (5 staged files)
 === 1. Frontmatter Schema Validation ===
-  Checked 1 files, 0 with issues
+  Checked 0 files, 0 with issues
 
 === 2. Summary Freshness Check ===
   Checked 0 summaries, 0 stale
@@ -18,8 +18,7 @@ Mode: pre-commit (17 staged files)
   Skipped (no staged session-log files)
 
 === 7. Project Scaffold Completeness ===
-  Skipped (no staged project files)
-  Checked 0 projects, 0 missing scaffold files
+  Checked 8 projects, 0 missing scaffold files
 
 === 8. Task Completion Evidence ===
   Skipped (no staged task or run-log files)
