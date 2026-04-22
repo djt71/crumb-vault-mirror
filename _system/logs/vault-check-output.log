@@ -1,12 +1,12 @@
-Mode: pre-commit (34 staged files)
+Mode: pre-commit (17 staged files)
 === 1. Frontmatter Schema Validation ===
-  Checked 33 files, 0 with issues
+  Checked 1 files, 0 with issues
 
 === 2. Summary Freshness Check ===
-  Checked 3 summaries, 0 stale
+  Checked 0 summaries, 0 stale
 
 === 3. Summary Schema Completeness ===
-  Checked 2 summary files, 0 missing source_updated
+  Checked 0 summary files, 0 missing source_updated
 
 === 4. Run-Log Structural Integrity ===
   Skipped (no staged run-log files)
@@ -18,19 +18,23 @@ Mode: pre-commit (34 staged files)
   Skipped (no staged session-log files)
 
 === 7. Project Scaffold Completeness ===
-  Checked 8 projects, 0 missing scaffold files
+  Skipped (no staged project files)
+  Checked 0 projects, 0 missing scaffold files
 
 === 8. Task Completion Evidence ===
+  Skipped (no staged task or run-log files)
   Checked 0 completed tasks, 0 missing run-log evidence
 
 === 9. Knowledge Base Tag Validation ===
   Checked 0 kb tags, 0 invalid
 
 === 10. Project-State Active Task Consistency ===
-  Checked 8 project states, 0 inconsistent
+  Skipped (no staged project-state or tasks files)
+  Checked 0 project states, 0 inconsistent
 
 === 11. Project-State last_committed Field ===
-  Checked 8 project states, 0 missing last_committed
+  Skipped (no staged project-state files)
+  Checked 0 project states, 0 missing last_committed
 
 === 12. DONE Project Design File Warning ===
   Skipped (no staged design files)
@@ -52,10 +56,12 @@ Mode: pre-commit (34 staged files)
   Checked 0 orientation MOCs, 0 with low synthesis density, 0 with thin one-liners
 
 === 22. Repo Path Validation ===
-  Checked 5 repo paths, 0 issues
+  Skipped (no staged project-state files)
+  Checked 0 repo paths, 0 issues
 
 === 23. Code Review Gate ===
-  Checked 0 post-enforcement tasks, 0 missing reviews, 123 grandfathered (before 2026-03-20)
+  Skipped (no staged task or run-log files)
+  Checked 0 post-enforcement tasks, 0 missing reviews, 0 grandfathered (before 2026-03-20)
 
 === 24. Run-Log Size Check ===
   Skipped (no staged run-log files)
@@ -84,10 +90,10 @@ Mode: pre-commit (34 staged files)
   Skipped (no staged run-log files)
 
 === 31. Broken Wikilink Detection ===
-  Checked 33 files, 0 broken links in 0 files
+  Checked 1 files, 0 broken links in 0 files
 
 === Solution Doc Track Schema ===
-  Checked 3 solution docs, 0 track issues
+  Checked 0 solution docs, 0 track issues
 
 === Primitive Registry ===
   Primitive registry: 0 issues
