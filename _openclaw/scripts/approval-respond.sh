@@ -159,18 +159,4 @@ if [[ -n "$TELEGRAM_BOT_TOKEN" ]]; then
     fi
 fi
 
-# === Discord #approvals mirror — edit original message with decision ===
-SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-discord_msg_id=$(jq -r '.discord_message_id // empty' "$APPROVAL_FILE")
-if [[ -n "$discord_msg_id" ]]; then
-    discord_status="✅ **APPROVED**"
-    [[ "$new_status" == "denied" ]] && discord_status="❌ **DENIED**"
-    discord_edit="${discord_status} — **${AID}**\n${action_type} → \`${target}\`\n$(jq -r '.summary' "$APPROVAL_FILE")\n\nDecided: ${NOW_ISO}"
-    bash "$SCRIPT_DIR/discord-post.sh" edit approvals "$discord_msg_id" "$discord_edit" 2>/dev/null || true
-fi
-
-# === Discord #audit-log — structured audit entry ===
-audit_text="📋 **${AID}** | ${action_type} → \`${target}\` | **${new_status}** | ${NOW_ISO}"
-bash "$SCRIPT_DIR/discord-post.sh" post audit-log "$audit_text" --username "Audit Log" 2>/dev/null || true
-
 echo "$new_status"

@@ -242,22 +242,5 @@ else
     log "WARN: $AID notification sent but couldn't capture message_id"
 fi
 
-# === Discord #approvals mirror (audit copy — no buttons) ===
-discord_text="🔐 **Approval Request ${AID}**\n\n"
-discord_text+="**${ACTION_TYPE}** (${SERVICE})\n"
-discord_text+="To: \`${TARGET}\` | Risk: ${RISK_LEVEL}\n\n"
-discord_text+="${SUMMARY}"
-[[ -n "$ORIGINAL_CONTEXT" ]] && discord_text+="\n\n**Context:** _${ORIGINAL_CONTEXT:0:200}_"
-[[ -n "$PREVIEW" ]] && discord_text+="\n\n**Preview:**\n\`\`\`${PREVIEW:0:300}\`\`\`"
-discord_text+="\n\n⏳ **Status:** Pending"
-
-discord_msg_id=$(bash "$SCRIPT_DIR/discord-post.sh" post approvals "$discord_text" --username "Tess Approvals" 2>/dev/null) || true
-if [[ -n "$discord_msg_id" ]]; then
-    jq --arg dmid "$discord_msg_id" '.discord_message_id = $dmid' \
-        "$APPROVALS_DIR/$AID.json" > "$APPROVALS_DIR/$AID.json.tmp" \
-        && mv "$APPROVALS_DIR/$AID.json.tmp" "$APPROVALS_DIR/$AID.json"
-    log "OK: $AID Discord mirror sent (msg_id: $discord_msg_id)"
-fi
-
 # Output AID for caller
 echo "$AID"

@@ -89,10 +89,6 @@ for approval_file in "$APPROVALS_DIR"/AID-*.json; do
             log "OK: $aid executed successfully"
             send_telegram "✅ <b>Executed</b>: ${aid}\n${action_type} → ${target}"
 
-            # Discord #audit-log — execution entry
-            bash "$SCRIPT_DIR/discord-post.sh" post audit-log \
-                "✅ **EXECUTED** — **${aid}** | ${action_type} → \`${target}\` | $(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
-                --username "Audit Log" 2>/dev/null || true
 
             executed=$((executed + 1))
             ;;
@@ -105,10 +101,6 @@ for approval_file in "$APPROVALS_DIR"/AID-*.json; do
             log "OK: $aid executed successfully"
             send_telegram "✅ <b>Executed</b>: ${aid}\n📧 ${action_type} → ${target}"
 
-            # Discord #audit-log — execution entry
-            bash "$SCRIPT_DIR/discord-post.sh" post audit-log \
-                "✅ **EXECUTED** — **${aid}** | ${action_type} → \`${target}\` | $(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
-                --username "Audit Log" 2>/dev/null || true
 
             executed=$((executed + 1))
             ;;
@@ -121,10 +113,6 @@ for approval_file in "$APPROVALS_DIR"/AID-*.json; do
             log "OK: $aid executed successfully"
             send_telegram "✅ <b>Executed</b>: ${aid}\n📅 ${action_type} → ${target}"
 
-            # Discord #audit-log — execution entry
-            bash "$SCRIPT_DIR/discord-post.sh" post audit-log \
-                "✅ **EXECUTED** — **${aid}** | ${action_type} → \`${target}\` | $(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
-                --username "Audit Log" 2>/dev/null || true
 
             executed=$((executed + 1))
             ;;

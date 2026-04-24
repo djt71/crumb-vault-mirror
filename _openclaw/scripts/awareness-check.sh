@@ -168,9 +168,6 @@ main() {
     # Check 7: Calendar staging cleanup — delete holds older than 48h (TOP-036)
     bash "$SCRIPT_DIR/calendar-staging.sh" cleanup 2>&1 || log "WARNING: calendar-staging cleanup had errors"
 
-    # Check 8: Discord bridge drain — process cross-context queue (TOP-040)
-    bash "$SCRIPT_DIR/discord-bridge.sh" drain 2>&1 || log "WARNING: discord-bridge drain had errors"
-
     if [[ "$had_errors" == "true" ]]; then
         cron_finish 1
     else
