@@ -724,3 +724,4 @@
 2026-04-21 22:08:14 SYNC docs: pattern-enforcement proposal + service state accumulation
 2026-04-21 22:11:26 SYNC tess-v2: session-end log for 2026-04-21 AC drafting session
 2026-04-24 14:12:52 SYNC retire quick-capture: strip vault-side references and add capture-tiers doc
+2026-04-24 14:38:04 SYNC chore: session-end log — capture-tiers + quick-capture retirement

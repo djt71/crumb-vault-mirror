@@ -40,7 +40,7 @@ purge_aged() {
     [ -z "$file" ] && continue
     rm -f "$file"
     count=$((count + 1))
-  done < <(find "$dir" -maxdepth 1 -name "$pattern" -type f -mtime +"$days" 2>/dev/null)
+  done < <(find "$dir" -maxdepth 1 -name "$pattern" ! -name ".gitkeep" -type f -mtime +"$days" 2>/dev/null)
 
   if [ "$count" -gt 0 ]; then
     log "$desc: purged $count files older than ${days}d"
@@ -79,8 +79,9 @@ truncate_log() {
 # 1. Transient directories — 14-day TTL
 # ============================================================
 
-purge_aged "$VAULT_ROOT/_openclaw/outbox/relayed"   14 "outbox/relayed"
+purge_aged "$VAULT_ROOT/_openclaw/outbox/relayed"    14 "outbox/relayed"
 purge_aged "$VAULT_ROOT/_openclaw/dispatch"          14 "dispatch"
+purge_aged "$VAULT_ROOT/_openclaw/dispatch/processed" 14 "dispatch/processed"
 purge_aged "$VAULT_ROOT/_openclaw/transcripts"       14 "transcripts"
 
 # ============================================================
