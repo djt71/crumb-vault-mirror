@@ -64,10 +64,6 @@ Dispatch operations (Phase 2) run via `claude --print` and may take minutes. Tes
 
 Security: ASCII-only params, bidi-override stripping, CLI output never modified.
 
-## Quick Capture vs Bridge
+## Scope
 
-**Quick capture** (`save this`, `capture this`, `read later`) — lightweight, no confirmation loop. Tess writes a `capture-YYYYMMDD-HHMMSS.md` file to `_openclaw/inbox/` via `bridge-cli.js write-capture`. Non-destructive; Crumb processes at next session startup. Hints: `research`, `review`, `file`, `read-later`.
-
-**Crumb bridge** (`ask crumb`, `@crumb`, `approve the gate`) — heavyweight, hash-bound confirmation. Use for any operation with side effects: phase gates, task dispatch, skill invocations. Tess will not proceed without explicit `CONFIRM <hash>` from the operator.
-
-Default: if the message looks like "save this URL" → quick-capture. If it looks like "start task X" or "what's the status of Y" → crumb-bridge.
+Bridge = governed operations only. Quick-capture was retired 2026-04-24 — see `_system/docs/capture-tiers.md` for the current capture design (Apple Notes as phone inbox, weekly sweep promotion to vault).

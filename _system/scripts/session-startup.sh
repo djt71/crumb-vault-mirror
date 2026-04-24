@@ -175,40 +175,6 @@ if [ -n "$DISPATCH_ORPHANS" ]; then
     echo "dispatch_orphans: $DISPATCH_ORPHANS"
 fi
 
-# Quick-capture inbox scan (CTB-034)
-CAPTURE_COUNT=0
-CAPTURE_ITEMS=""
-INBOX_DIR="$VAULT_ROOT/_openclaw/inbox"
-if [ -d "$INBOX_DIR" ]; then
-    for cf in "$INBOX_DIR"/capture-*.md; do
-        [ -f "$cf" ] || continue
-        CAPTURE_COUNT=$((CAPTURE_COUNT + 1))
-        cf_name=$(basename "$cf")
-        # Extract first non-empty body line (after frontmatter) as title
-        cf_title=$(awk '
-            NR==1 && /^---$/ { in_fm=1; next }
-            in_fm && /^---$/ { in_fm=0; next }
-            in_fm { next }
-            /^[[:space:]]*$/ { next }
-            { print; exit }
-        ' "$cf") || true
-        cf_title="${cf_title:-<no body>}"
-        # Extract processing_hint from frontmatter
-        cf_hint=$(awk 'NR==1 && /^---$/{f=1;next} f && /^---$/{exit} f && /^processing_hint:/{sub(/^processing_hint:[[:space:]]*/,""); print}' "$cf") || true
-        CAPTURE_ITEMS="${CAPTURE_ITEMS}  - ${cf_name}: ${cf_title}"
-        if [ -n "$cf_hint" ]; then
-            CAPTURE_ITEMS="${CAPTURE_ITEMS} [${cf_hint}]"
-        fi
-        CAPTURE_ITEMS="${CAPTURE_ITEMS}
-"
-    done
-fi
-echo "captures_pending: $CAPTURE_COUNT"
-if [ "$CAPTURE_COUNT" -gt 0 ]; then
-    echo "captures_pending_items:"
-    printf "%s" "$CAPTURE_ITEMS"
-fi
-
 # Overnight research output pending review
 RESEARCH_OUTPUT_COUNT=0
 RESEARCH_OUTPUT_DIR="$VAULT_ROOT/_openclaw/research/output"

@@ -1366,3 +1366,35 @@ just needs wiring from the bridge operation to the same processing functions.
 
 The `_openclaw/skills/quick-capture/` directory can be removed once the bridge
 capture operation is implemented.
+
+## Maintenance 2026-04-24 — Quick-Capture Retirement
+
+**Scope:** Retired the quick-capture pathway entirely. It had become dead weight —
+Telegram was decommissioned as an input surface (round-trip friction; note-capture
+needs a unified write+read surface, which Telegram → vault isn't). The replacement
+design uses Apple Notes as the phone inbox with a weekly sweep promotion to the main
+vault. See `_system/docs/capture-tiers.md`.
+
+**Files removed from `/Users/tess/openclaw/crumb-tess-bridge/`:**
+- `src/tess/quick-capture-skill.md` — OpenClaw skill definition
+- `src/tess/scripts/lib/capture.js` — Tess-side capture writer
+- `src/tess/test/capture.test.js`
+- `src/crumb/scripts/lib/capture-processor.js` — Crumb-side inbox processor
+- `src/crumb/test/capture-processor.test.js`
+- `src/tess/scripts/bridge-cli.js` — `write-capture` subcommand and `./lib/capture` import
+
+**Files edited in the vault:**
+- `_system/scripts/session-startup.sh` — removed capture-inbox scan block and `captures_pending` output
+- `.claude/skills/startup/SKILL.md` — removed the `captures_pending > 0` branch
+- `_system/docs/skill-workflows/crumb-tess-bridge.md` — replaced "Quick Capture vs Bridge" section with a retirement note pointing to `_system/docs/capture-tiers.md`
+
+**Retained:** `_openclaw/inbox/.processed/` and `vault-gc.sh:90` stay — `.processed/`
+is shared with the bridge, not quick-capture-only.
+
+**Test status:** 250 non-vector-dependent bridge tests pass post-edit. Vector-dependent
+tests fail on a pre-existing path issue (`/Users/tess/_openclaw/` vs `/Users/tess/openclaw/`)
+unrelated to this retirement.
+
+**If the pattern ever needs rebuilding:** scope doc at
+`Archived/Projects/crumb-tess-bridge/design/quick-capture-scope.md` remains as
+historical design reference.

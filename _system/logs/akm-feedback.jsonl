@@ -324,3 +324,4 @@
 {"timestamp": "2026-04-16T09:27:44Z", "trigger": "dispatch", "surfaced": ["Domains/career/moc-networking.md", "Domains/career/career-overview.md", "Domains/career/accounts/steelcase/meeting-prep-steelcase-2026-03-09.md", "Sources/other/infoblox-universal-ddi-competitive-index.md", "Sources/books/platt-make-digest.md"], "cross_domain": true}
 {"timestamp": "2026-04-18T14:43:34Z", "trigger": "skill-activation", "surfaced": ["Sources/research/autonomous-agent-landscape-research-brief.md"], "cross_domain": false}
 {"timestamp": "2026-04-20T20:17:30Z", "trigger": "skill-activation", "surfaced": ["Sources/research/malus-clean-room-as-a-service.md"], "cross_domain": false}
+{"timestamp":"2026-04-24T16:42:44Z","trigger":"orchestrator-tool","event":"orchestrator-tool-failure","error":"timeout","query":"Apple Notes vault inbox processing"}

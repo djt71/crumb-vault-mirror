@@ -25,4 +25,3 @@ Run the session startup script and display the results:
      e. If **dismiss**: add `dismissed: true` to the research file's `compound_insight` block
      f. If **defer**: no action — insight stays pending for next session
    - If `compound_insights_stale` > 0, flag the files from `compound_insights_stale_files` for operator decision: **revalidate** (update `valid_as_of` to today) / **dismiss** / **promote to permanent** (set `durability: permanent`, remove `valid_as_of`, add `promoted_from_perishable: true` and `promoted_at: YYYY-MM-DD`)
-   - If `captures_pending` > 0, report items from `captures_pending_items` and ask: "Process now or defer?" If process now, follow the capture processing procedure in `Projects/crumb-tess-bridge/design/capture-processing-procedure.md`
