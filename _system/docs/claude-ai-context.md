@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: active
 created: 2026-02-21
-updated: 2026-04-20
+updated: 2026-04-24
 tags:
   - system
 ---
@@ -13,7 +13,9 @@ tags:
 Orientation artifact for new claude.ai chat sessions. This file lives
 inside the mirror repo — after cloning, read this first for context.
 
-Last updated: 2026-04-20 (Kimi K2.6 TV2-Cloud eval session. Moonshot released K2.6 on 2026-04-13; registered in `tv2_cloud_eval.py` as model key `kimi26` and ran the full 10-test battery. Result: 87/100 weighted (qualified strong candidate), 0 fabrications, threshold miss on TC-05 only (rubric artifact — K2.6 correctly refuses to bluff tool access, which the current rubric penalizes). Latency meaningfully better than K2.5: TTFT p50 11.0s vs 26.5s, p95 26.2s vs 98.0s; throughput p50 60.2 vs 43.6 tps. Zero fabrication across TC-04 (10/10) and TC-09 (5/5) — including the exact `unexpected_empty_result` stressor that tripped K2.5 in the Hermes runtime 2026-04-09. AD-008 (K2.5 production) HOLDS — live Hermes soak test required before swap. Drift surfaced: persona-spec loads from ephemeral `_inbox/tess-persona-spec.md` — was missing and had to be reconstructed from archived `tess-voice-prompt.md`; needs durable home in `_system/docs/`. TC-05 rubric needs revision to score decomposition correctness rather than execution completion.)
+Last updated: 2026-04-24 (Capture-tiers design + quick-capture retirement. Reviewed a claude.ai conversation about notes organization that landed on a 5-tier capture design: stickies (at-desk ephemeral) · paper notebook (scratchpad, no sweep) · Apple Notes (flat, weekly sweep) · main vault (durable knowledge only) · work vault (confidential, separate forever). Single promotion path: Apple Notes → main vault via weekly sweep. New doc `_system/docs/capture-tiers.md` codifies the tiers plus the round-trip friction principle — *capture tools are evaluated on total write+revisit+edit cost, not write-step friction alone; a unified write/read surface beats a separated pipe*. Quick-capture pathway retired as a consequence: Telegram was decommissioned as an input surface months ago, and the infrastructure had become dead weight. Deleted from `/Users/tess/openclaw/crumb-tess-bridge/`: quick-capture skill def, Tess-side writer, Crumb-side processor, both test files, and the `write-capture` subcommand from bridge-cli.js (1,386 lines removed, 250 non-vector tests still pass). Vault-side: removed the capture-inbox scan from `session-startup.sh` and the `captures_pending > 0` branch from startup skill; replaced the Quick Capture vs Bridge section in the workflow doc with a retirement pointer. Maintenance run-log entry added to the archived crumb-tess-bridge project. Danny invoked Ceremony Budget Principle on a speculative `apple-note-export-to-inbox` Python tool that had been drafted — deleted. Commits `2956796` (OpenClaw) and `a967091b` (vault); not pushed.)
+
+Previous session (2026-04-20): Kimi K2.6 TV2-Cloud eval session. Moonshot released K2.6 on 2026-04-13; registered in `tv2_cloud_eval.py` as model key `kimi26` and ran the full 10-test battery. Result: 87/100 weighted (qualified strong candidate), 0 fabrications, threshold miss on TC-05 only (rubric artifact — K2.6 correctly refuses to bluff tool access, which the current rubric penalizes). Latency meaningfully better than K2.5: TTFT p50 11.0s vs 26.5s, p95 26.2s vs 98.0s; throughput p50 60.2 vs 43.6 tps. Zero fabrication across TC-04 (10/10) and TC-09 (5/5) — including the exact `unexpected_empty_result` stressor that tripped K2.5 in the Hermes runtime 2026-04-09. AD-008 (K2.5 production) HOLDS — live Hermes soak test required before swap. Drift surfaced: persona-spec loads from ephemeral `_inbox/tess-persona-spec.md` — was missing and had to be reconstructed from archived `tess-voice-prompt.md`; needs durable home in `_system/docs/`. TC-05 rubric needs revision to score decomposition correctness rather than execution completion.)
 
 Previous session (2026-04-17): TV2-057b / Amendment AB landing session. Canonical_outputs schema field added to contract v1.2.0; classifier swapped to the schema-field check with transitional allowlist fallback; connections-brainstorm and vault-health reclassified A→C per §4.4 audit findings; daily-attention is the one remaining Class A service with TV2-057d migration spec pre-drafted. TV2-038 Phase 5 corrected hold floor 18:00Z→23:00Z — opens tonight. Amendment AB doc canonicalized following AA/Z lettering convention. Build plan locked through 2026-04-28+: TV2-057c → Z canonicalization + Amendment AC → vault-standards.md consolidation + Amendment AD → TV2-057d daily-attention migration. TV2-040 split to 040a+040b near-atomic, operator-bandwidth-gated. Drift to flag: none surfaced in this session.)
 
@@ -191,6 +193,7 @@ All in `Archived/Projects/` unless noted. Think-different stays in `Projects/` (
 - `.obsidian/` and `_inbox/` gitignored (machine-specific / transient staging)
 - Historical log entries are immutable — grep exclusions in vault-check
 - Write tool identified as frontmatter loss vector — prefer Edit for existing files
+- Quick-capture pathway retired (2026-04-24) — Telegram decommissioned as input surface; Apple Notes + weekly sweep → main vault is the capture design. See `_system/docs/capture-tiers.md`. Codifies the round-trip friction principle: capture tools are evaluated on total write+revisit+edit cost, not write-step friction alone.
 
 ## Open Items
 

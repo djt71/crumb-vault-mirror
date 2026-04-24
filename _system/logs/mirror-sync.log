@@ -723,3 +723,4 @@
 2026-04-21 21:50:04 SYNC tess-v2: orchestrator role retraction (Amendment AC) + durable pattern preservation
 2026-04-21 22:08:14 SYNC docs: pattern-enforcement proposal + service state accumulation
 2026-04-21 22:11:26 SYNC tess-v2: session-end log for 2026-04-21 AC drafting session
+2026-04-24 14:12:52 SYNC retire quick-capture: strip vault-side references and add capture-tiers doc
