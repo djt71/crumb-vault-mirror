@@ -186,6 +186,21 @@ if [ -d "$RESEARCH_OUTPUT_DIR" ]; then
 fi
 echo "research_pending_review: $RESEARCH_OUTPUT_COUNT"
 
+# Connections-brainstorm pending review (weekly output from connections-brainstorm.sh)
+BRAINSTORM_COUNT=0
+BRAINSTORM_ITEMS=""
+for bf in "$VAULT_ROOT/_openclaw/inbox"/brainstorm-*.md; do
+    [ -f "$bf" ] || continue
+    BRAINSTORM_COUNT=$((BRAINSTORM_COUNT + 1))
+    BRAINSTORM_ITEMS="${BRAINSTORM_ITEMS}  - $(basename "$bf")
+"
+done
+echo "brainstorm_pending_review: $BRAINSTORM_COUNT"
+if [ "$BRAINSTORM_COUNT" -gt 0 ]; then
+    echo "brainstorm_pending_items:"
+    printf "%s" "$BRAINSTORM_ITEMS"
+fi
+
 # Feed-intel tier counts from FIF SQLite (MEDIUM+ only — LOW excluded everywhere)
 FEED_TOTAL=0
 FEED_TIER1=0
@@ -380,14 +395,14 @@ fi
 if [ -n "$DISPATCH_ORPHANS" ]; then
     echo "  WARNING: $DISPATCH_ORPHANS — run orphan recovery"
 fi
-if [ "$CAPTURE_COUNT" -gt 0 ]; then
-    echo "- **Captures:** $CAPTURE_COUNT pending from Tess"
-fi
 if [ "$FEED_TOTAL" -gt 0 ]; then
     echo "- **Feed intel:** $FEED_TOTAL items (T1:$FEED_TIER1 T2:$FEED_TIER2)"
 fi
 if [ "$RESEARCH_OUTPUT_COUNT" -gt 0 ]; then
     echo "- **Research output:** $RESEARCH_OUTPUT_COUNT briefs pending review in \`_openclaw/research/output/\`"
+fi
+if [ "$BRAINSTORM_COUNT" -gt 0 ]; then
+    echo "- **Brainstorms:** $BRAINSTORM_COUNT weekly connection brainstorms pending review in \`_openclaw/inbox/\`"
 fi
 if [ "$Z4_COUNT" -gt 0 ]; then
     echo "- **Lock-deny candidates:** $Z4_COUNT ($Z4_LIST) — persistent write-lock contention, investigate"

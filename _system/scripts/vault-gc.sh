@@ -101,24 +101,35 @@ for review_dir in "$VAULT_ROOT"/Projects/*/reviews/raw; do
 done
 
 # ============================================================
-# 4. BBP telemetry — 90-day TTL (operational records, keep longer)
+# 4. Attention + scout historical records — 30-day TTL
 # ============================================================
+# scout-digests: connections-brainstorm reads last 7 days; 30d gives margin
+# sidecar: path stored in attention-replay.db; content is historical only
+
+purge_aged "$VAULT_ROOT/_openclaw/data/scout-digests" 30 "data/scout-digests"
+purge_aged "$VAULT_ROOT/_openclaw/data/sidecar"       30 "data/sidecar"
+purge_aged "$VAULT_ROOT/_openclaw/feeds/digests"      30 "feeds/digests"
 
 # ============================================================
-# 4. Feed inbox TTL — 14-day TTL (feed-intel items only)
+# 5. Feed inbox TTL — 14-day TTL (feed-intel items only)
 # ============================================================
 
 purge_aged "$VAULT_ROOT/_openclaw/inbox" 14 "feed inbox" "feed-intel-*.md"
+purge_aged "$VAULT_ROOT/_openclaw/inbox" 30 "inbox brainstorms" "brainstorm-*.md"
 
 # ============================================================
-# 5. Log truncation — keep last 1000 lines
+# 6. Log truncation — keep last 1000 lines
 # ============================================================
 
-# OpenClaw operational logs
-truncate_log "$VAULT_ROOT/_openclaw/logs/watcher.log"           1000
-truncate_log "$VAULT_ROOT/_openclaw/logs/ops-metrics.jsonl"     1000
-truncate_log "$VAULT_ROOT/_openclaw/logs/health-ping.log"       1000
-truncate_log "$VAULT_ROOT/_openclaw/logs/health-ping-stderr.log" 500
+# OpenClaw operational logs: stderr → 500 lines, everything else → 1000.
+# Pattern-based so new services get coverage automatically.
+for logfile in "$VAULT_ROOT"/_openclaw/logs/*.log "$VAULT_ROOT"/_openclaw/logs/*.jsonl; do
+    [ -f "$logfile" ] || continue
+    case "$logfile" in
+        *stderr*) truncate_log "$logfile" 500 ;;
+        *)        truncate_log "$logfile" 1000 ;;
+    esac
+done
 
 # System logs
 truncate_log "$VAULT_ROOT/_system/logs/mirror-sync.log"         1000

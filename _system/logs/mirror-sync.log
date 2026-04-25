@@ -726,3 +726,4 @@
 2026-04-24 14:12:52 SYNC retire quick-capture: strip vault-side references and add capture-tiers doc
 2026-04-24 14:38:04 SYNC chore: session-end log — capture-tiers + quick-capture retirement
 2026-04-24 16:47:40 SYNC chore: prune _openclaw/ dead weight + fix vault-gc dispatch/processed coverage
+2026-04-24 16:57:07 SYNC chore: remove discord from _openclaw/ — telegram is the only delivery channel
