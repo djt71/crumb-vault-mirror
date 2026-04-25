@@ -325,3 +325,6 @@
 {"timestamp": "2026-04-18T14:43:34Z", "trigger": "skill-activation", "surfaced": ["Sources/research/autonomous-agent-landscape-research-brief.md"], "cross_domain": false}
 {"timestamp": "2026-04-20T20:17:30Z", "trigger": "skill-activation", "surfaced": ["Sources/research/malus-clean-room-as-a-service.md"], "cross_domain": false}
 {"timestamp":"2026-04-24T16:42:44Z","trigger":"orchestrator-tool","event":"orchestrator-tool-failure","error":"timeout","query":"Apple Notes vault inbox processing"}
+{"timestamp": "2026-04-25T18:43:41Z", "trigger": "skill-activation", "surfaced": ["Sources/books/liu-dns-bind-fifth-chapter-digest.md", "Sources/research/2026-03-15-critic-cloudflare-sandbox-burst-compute.md", "Sources/papers/rfc-4033-4035-dnssec-digest.md"], "cross_domain": true}
+{"timestamp": "2026-04-25T18:44:05Z", "trigger": "skill-activation", "surfaced": ["Sources/research/research-brief-2026-03-11-builder.md", "Sources/research/mcp-feasibility-crumb-tess.md", "Sources/research/autonomous-agent-landscape-research-brief.md"], "cross_domain": false}
+{"timestamp": "2026-04-25T18:53:10Z", "trigger": "skill-activation", "surfaced": ["Sources/books/community-tribes-casebook-digest.md", "Domains/career/moc-security.md", "Domains/learning/moc-crumb-architecture.md"], "cross_domain": true}

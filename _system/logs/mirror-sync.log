@@ -728,3 +728,4 @@
 2026-04-24 16:47:40 SYNC chore: prune _openclaw/ dead weight + fix vault-gc dispatch/processed coverage
 2026-04-24 16:57:07 SYNC chore: remove discord from _openclaw/ — telegram is the only delivery channel
 2026-04-24 21:21:12 SYNC chore: openclaw walkthrough — prune orphans, tooling fixes, retention policies
+2026-04-24 21:25:53 SYNC chore: session-end log — _openclaw walkthrough + tooling sweep

@@ -1,0 +1,15 @@
+# Machine-readable project state — updated at every phase transition.
+# Validated by vault-check.sh against run-log.md for consistency.
+project_class: system
+domain: software
+phase: SPECIFY
+workflow: four-phase
+last_gate: null
+active_task: null
+next_action: "SPECIFY: produce specification.md via systems-analyst (Apple Notes list/import/soft-delete plugin)"
+related_projects: []
+repo_path: /Users/tess/code/obsidian-applenotes-import
+build_command: "npm run build"
+services: []
+updated: 2026-04-25
+last_committed: 2026-04-25

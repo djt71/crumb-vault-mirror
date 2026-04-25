@@ -5,9 +5,9 @@ phase: TASK
 workflow: four-phase
 last_gate: "PLAN → TASK 2026-03-14"
 active_task: null
-next_action: "M2 behavioral validation in progress (started 2026-03-16, gate 2026-04-15). Triage upgraded to Sonnet + 4-gate scoring (actionability gate added) + enrichment fields (2026-03-18). Observe tomorrow's digest for v2.0 triage quality."
+next_action: "Synthesis + ranking prompts upgraded to v2.0 with three-tier priority injection (2026-04-25). Observe tomorrow's digest for tier-matched framing — Tier 1 frames as current execution, Tier 2 surfaces under right conditions, Tier 3 gets filtered or honestly named as misfit. Replaces prior single-motivation FI framing. M2 gate (2026-04-15) status not updated in this session."
 created: 2026-03-14
-updated: 2026-03-18
+updated: 2026-04-25
 last_committed: 2026-03-16
 services:
   - com.scout.daily-pipeline

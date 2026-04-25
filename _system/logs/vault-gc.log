@@ -133,3 +133,9 @@
 [vault-gc] ops-metrics.jsonl: truncated 133 lines (kept last 1000)
 [vault-gc] health-ping.log: truncated 24 lines (kept last 1000)
 [vault-gc] done: 10 files purged, 2 logs truncated
+[vault-gc] data/sidecar: purged 1 files older than 30d
+[vault-gc] calendar-staging.log: truncated 22 lines (kept last 1000)
+[vault-gc] daily-attention.log: truncated 43 lines (kept last 1000)
+[vault-gc] health-ping.log: truncated 10 lines (kept last 1000)
+[vault-gc] ops-metrics.jsonl: truncated 56 lines (kept last 1000)
+[vault-gc] done: 1 files purged, 4 logs truncated

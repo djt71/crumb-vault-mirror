@@ -4,7 +4,7 @@ domain: software
 type: run-log
 skill_origin: null
 created: 2026-03-14
-updated: 2026-03-14
+updated: 2026-04-25
 tags:
   - run-log
 ---
@@ -258,3 +258,26 @@ Both Haiku triage (12/12 batches) and Sonnet ranking (2/2 attempts) failed ident
 **Compound:** The actionability dimension was the missing discriminator. This is a general pattern for any AI-scored pipeline: relevance-based gates produce flat distributions when all items share the same topic domain. Adding an actionability/specificity gate creates the gradient that relevance alone can't. Applicable to feed-intel-framework if it ever gets a scoring pipeline.
 
 **Next:** Observe tomorrow's digest (first run with v2.0 triage). Key questions: (a) does the 4-gate scoring produce meaningful variance? (b) do enrichment notes give Sonnet better ranking signal? (c) does the pass threshold filter out generic content effectively?
+
+## 2026-04-25 — Three-tier priority injection in synthesis + ranking prompts
+
+**Trigger:** W17 connections-brainstorm (2026-04-20) flagged that three consecutive digests (Apr 17–19) converged on financial-independence framing despite Q2 priorities pointing elsewhere. Investigation traced the framing to hardcoded persona language at line 9 of both `prompts/digest-synthesis.md` and `prompts/digest-rank.md` — copy that did not reflect current priorities and did not read from `_system/docs/personal-context.md` (last updated 2026-04-06).
+
+**Problem identified:** Prompts treated priorities as binary (financial-independence-aligned = push, otherwise = ignore) and collapsed three signal classes into one motivation. This (a) pushed standing latent interests as if they were urgent revenue plays, and (b) misframed Tier 1 commitments that aren't revenue-bearing (garden, household cadence, daily practice, build-in-public) as off-topic.
+
+**Changes (2 modifications to opportunity-scout repo):**
+
+1. **`prompts/digest-synthesis.md` v1.0 → v2.0** — Demoted "financial independence" from primary frame to long-arc destination; promoted DDI/security expertise to always-on execution asset; added explicit three-tier Priority Tiers block (Tier 1 active Q2 commitments, Tier 2 standing latent interests, Tier 3 explicitly not pursuing); new task instruction "Match framing to tier"; new constraint "Do NOT default to financial-independence framing on every digest."
+2. **`prompts/digest-rank.md` v1.1 → v2.0** — Same Priority Tiers block. Ranking rule changed: "Rank by tier first, then by within-tier secondary signals (actionability, evidence, novelty)" — actionability/evidence/novelty become tiebreakers within tier rather than primary signals. key_insight rule extended to require tier-matched framing and honest "park for later" notes for Tier 2/3 fits.
+
+**Tier content:** Pulled directly from `_system/docs/personal-context.md` (updated 2026-04-06). Tier 1 = G1–G4 + customer engagement steady-state + equal-parts-build-and-use. Tier 2 = standing latent interests (open-source Crumb, tools-for-others, build-in-public-derived products, advanced agent patterns, FI-trajectory items). Tier 3 = "Not pursuing right now" items from personal-context (greenfield ventures, new Crumb projects, local LLM, OpenClaw colocation, gatekeeper-dependent opportunities).
+
+**Compound:** Captured as Crumb feedback memory `feedback-priority-tiers-not-binary.md` — applies to feed-pipeline, opportunity-scout, digest synthesis, brainstorm framing, dispatch routing. Also captured `feedback-feed-intel-stays-open.md` — feed-intel intake stays deliberately open; filtering belongs downstream (here in scout), not at intake.
+
+**Architecture note:** Prompts still hardcode the tier content rather than reading from `personal-context.md`. Acceptable for now — when Q2 → Q3 transition happens (or any goal shift), the prompts need a manual refresh. A future architectural fix would have the prompts read the goals file at synthesis time, but the operator chose direct injection (Option 3) over external-source-of-truth refactor (Option 2) to ship the framing fix today.
+
+**Tests:** None — prompt-only change, no code modified.
+
+**Model routing:** Main session (Opus). No delegation.
+
+**Next:** Observe tomorrow's digest (first run with v2.0 framing prompts). Validation question: do Tier 1 items get framed as relevant-to-current-execution, Tier 2 items surface as "under the right conditions," and Tier 3 items get either filtered or honestly named as misfits — instead of the prior "everything frames toward financial independence" failure mode.
