@@ -4,9 +4,9 @@ project_class: system
 domain: software
 phase: SPECIFY
 workflow: four-phase
-last_gate: "SPECIFY artifact frozen at rev 3 (2026-04-25): 2 peer-review rounds applied; G1 + G4 resolved; G2 + G3 outstanding"
+last_gate: "SPECIFY artifact frozen at rev 4 (2026-04-25): 2 peer-review rounds + pre-PLAN probes; all gates resolved (G1 ✅, G2 ✅, G4 ✅, G3 removed via v1 attachment-deferral); ready for PLAN"
 active_task: null
-next_action: "Run pre-PLAN probes G2 (note id stability) and G3 (attachment extraction approach) per acceptance criteria in specification.md §Pre-PLAN Validation Gate; then transition SPECIFY → PLAN"
+next_action: "Phase transition SPECIFY → PLAN: invoke action-architect skill (or formal Phase Transition Gate per _system/docs/context-checkpoint-protocol.md). All pre-PLAN gates resolved; spec rev 4 frozen; 25 tasks across 8 milestones await PLAN-stage decomposition into milestones + spike phases."
 related_projects: []
 repo_path: /Users/tess/code/obsidian-applenotes-import
 build_command: "npm run build"

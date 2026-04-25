@@ -178,6 +178,83 @@ All 5 proposed defaults approved (LD-05 through LD-09 in spec).
 - ✅ **G1 / A4** — soft-delete validated 2026-04-25
 - ✅ **G4** — citations pinned 2026-04-25
 
+## 2026-04-25 — G2 probe (note id stability) — VALIDATED
+
+**Action:** Wrote osascript probe `design/probes/g2-id-stability.applescript` exercising id stability across 3 Notes app restarts + title edit + body edit + folder move (within same account).
+
+**Outcome:** ✅ **VALIDATED.** id byte-identical across all in-spec scenarios.
+
+**Bonus findings (probe-derived implementation notes, captured in spec rev 4):**
+1. **Apple Notes auto-renames notes from body's first heading** — AppleScript code must address notes by id (`whose id is X`), never by name. This invalidated my initial probe's by-name re-find logic; folder-move sub-probe re-run with id-based handle succeeded.
+2. **`folder of note` raises error -1728** — must iterate folders to determine membership, can't query directly.
+3. **AppleScript `move`** works when handles are obtained fresh via id selectors.
+
+**Probe artifacts:** `design/probes/g2-id-stability.applescript`, `design/probes/g2-probe-result.md`.
+
+## 2026-04-25 — G3 probe attempt — CANNOT VALIDATE EMPIRICALLY
+
+**Action:** Surveyed user's Apple Notes library + Group Container to identify attachment-bearing notes for dual-approach probe.
+
+**Findings:**
+- User's Apple Notes library contains 3 notes total (all probe leftovers); **0 attachment-bearing notes**.
+- The spec's filesystem-cache hypothesis (`~/Library/Group Containers/group.com.apple.notes/Media/`) **does not exist on macOS 26.x**. Actual storage on this version: `NoteStore.sqlite` (likely encrypted blobs) + empty CloudKit `Assets/` cache.
+- iCloud Notes account configured (`tessservo@icloud.com`) but no notes synced to this Mac.
+
+**Three options surfaced to operator:**
+- A: defer G3 to PLAN spike with corpus prerequisite
+- B: build a test corpus now (iPhone, ~30-60 min)
+- C: drop attachments from v1 entirely (defer to v1.1)
+
+**Operator decision (2026-04-25):** **Option C** — "i don't need attachments to come over from Apple Notes, let's keep it simple."
+
+**Sub-decision:** Behavior for source notes that have attachments — Option 1 of 3: import body-only, drop attachment objects with markdown comment placeholder, soft-delete uniformly. README warns about post-retention attachment loss.
+
+## 2026-04-25 — SPECIFY artifact rev 4 — attachments deferred to v1.1
+
+**Inputs:**
+1. G2 probe result (validated)
+2. G3 probe result (cannot-validate; operator chose drop-attachments)
+3. specification.md rev 3
+
+**Outputs:**
+- `design/specification.md` rev 4 (full rewrite removing attachment surface)
+- `design/specification-summary.md` rev 4
+- `design/probes/g2-id-stability.applescript`
+- `design/probes/g2-probe-result.md`
+
+**Key changes in rev 4:**
+- LD-07 reversed: attachments NOT in v1; body-only import; placeholder comment for dropped attachment objects; soft-delete uniformly
+- LD-09 frontmatter: `imported_attachments` removed; `source_had_attachments` (count) added for v1.1 forward-compat
+- AC3 rewritten: notes with attachments → body-only with placeholder
+- AC5 simplified: composite verify covers md + index (3 checks, was 5 in rev 3)
+- AC11 simplified: no attachment write/cleanup paths
+- New AC12: README + confirm-dialog must surface attachment-loss warning prominently
+- OAI-008a + OAI-008b removed (attachment probe + extractor): task count 27 → 25
+- OAI-009 simplified: drop attachment objects with placeholder; tier-tracking unchanged
+- OAI-011 simplified: markdown only, no `createBinary`, no attachment temp dirs
+- OAI-013 modal: "has N attachments — body only" badge (informational, doesn't block selection)
+- OAI-014 confirm dialog: warns when any selected note has attachments
+- OAI-016a/b/d simplified: no attachment write/verify/cleanup
+- G3 removed from Pre-PLAN gates
+- Risk register: attachment-extraction risks dropped; new risk added (user trust erosion from undocumented attachment loss; mitigation: AC12)
+- New risk: v1.1 attachment migration timing — if v1.1 ships >30d after v1 import, attachments unrecoverable
+- Settings: "attachments folder" removed
+- Probe-derived implementation notes section added (id-based handles, folder-of-note quirk)
+
+**All pre-PLAN gates resolved.** SPECIFY artifact frozen at rev 4.
+
+## 2026-04-25 — SPECIFY done; PLAN-ready
+
+**Status:** SPECIFY artifact complete. All pre-PLAN gates resolved. Phase transition SPECIFY → PLAN is operator-controlled.
+
+**Compound reflection (cumulative across 4 SPECIFY revisions):**
+- **Pattern: pre-PLAN probes can produce scope-changing decisions, not just validation.** G3's empirical-validation barrier (no test corpus) led to a v1 simplification — an outcome the spec's pre-PLAN gate framework didn't explicitly anticipate but accommodated cleanly via the "if gate fails, return to SPECIFY" policy. The framework worked: instead of forcing a corpus build, the operator chose the simpler scope.
+- **Insight: 4 spec revisions across one calendar day produced a materially better artifact than rev 1.** Cumulative review action count: 28 (round 1) + 29 (round 2) + 1 product-scope simplification (rev 4) = ~58 individual changes. Rev 1's underspecified attachment story would have been a real PLAN/IMPLEMENT pain point if discovered late.
+- **Probe-derived bonus findings (auto-rename, folder-of-note quirk) added value beyond their stated purpose.** Both will likely save IMPLEMENT-time debugging cycles. Pattern worth reusing: pre-PLAN probes should have explicit "capture incidental findings" expectation, not just hit/miss criteria.
+- **Reviewer knowledge-cutoff false positives are predictable noise.** Two reviewers (Google, Grok) flagged macOS 26.3.1 as anachronistic in round 2; the underlying concern (probe metadata self-evidence) was real but the alarm itself was wrong. Future synthesis should pre-empt by inlining `sw_vers`-style self-evidence for any post-cutoff factual claims.
+
+**Next:** Operator transitions phase SPECIFY → PLAN per Phase Transition Gate protocol, OR pauses for session-end commit. Current vault delta is substantial (4 spec revisions, 2 probe artifacts, 2 review notes, run-log + progress-log + project-state) and warrants a single coherent commit before PLAN begins.
+
 **Compound reflection (round-2):**
 - Pattern: cross-model verdict split (2 READY / 2 ONE MORE ROUND) with no architecture concerns is a useful "ready" signal — calibration variance dominates substantive variance once major issues are addressed.
 - Insight: knowledge-cutoff dates in reviewer training produce predictable false-positive "unverifiable claim" findings on dates and version numbers from the post-cutoff present. Mitigation: inline self-evidence (e.g., `sw_vers` capture, pinned commit SHAs) for any post-cutoff factual claim.
