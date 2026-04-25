@@ -4,9 +4,9 @@ project_class: system
 domain: software
 phase: SPECIFY
 workflow: four-phase
-last_gate: null
+last_gate: "SPECIFY artifact frozen at rev 3 (2026-04-25): 2 peer-review rounds applied; G1 + G4 resolved; G2 + G3 outstanding"
 active_task: null
-next_action: "SPECIFY: produce specification.md via systems-analyst (Apple Notes list/import/soft-delete plugin)"
+next_action: "Run pre-PLAN probes G2 (note id stability) and G3 (attachment extraction approach) per acceptance criteria in specification.md §Pre-PLAN Validation Gate; then transition SPECIFY → PLAN"
 related_projects: []
 repo_path: /Users/tess/code/obsidian-applenotes-import
 build_command: "npm run build"
