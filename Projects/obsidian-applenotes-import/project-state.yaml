@@ -2,14 +2,14 @@
 # Validated by vault-check.sh against run-log.md for consistency.
 project_class: system
 domain: software
-phase: SPECIFY
+phase: PLAN
 workflow: four-phase
-last_gate: "SPECIFY artifact frozen at rev 4 (2026-04-25): 2 peer-review rounds + pre-PLAN probes; all gates resolved (G1 ✅, G2 ✅, G4 ✅, G3 removed via v1 attachment-deferral); ready for PLAN"
+last_gate: "SPECIFY → PLAN (2026-04-27): spec rev 4 frozen; all pre-PLAN gates resolved (G1✅ G2✅ G4✅; G3 removed via attachment-deferral); 25 tasks across 8 milestones ready for PLAN decomposition"
 active_task: null
-next_action: "Phase transition SPECIFY → PLAN: invoke action-architect skill (or formal Phase Transition Gate per _system/docs/context-checkpoint-protocol.md). All pre-PLAN gates resolved; spec rev 4 frozen; 25 tasks across 8 milestones await PLAN-stage decomposition into milestones + spike phases."
+next_action: "Invoke action-architect skill to produce action-plan.md and tasks.md from specification rev 4. PLAN-stage outputs: milestones with success criteria, spike phases for risk-tagged work (composite verify-before-delete adversarial tests, index repair conflict policy, TCC failure UX), atomic task list (≤5 file changes each) with dependency graph and risk levels. Source: design/specification.md rev 4 + design/specification-summary.md."
 related_projects: []
 repo_path: /Users/tess/code/obsidian-applenotes-import
 build_command: "npm run build"
 services: []
-updated: 2026-04-25
+updated: 2026-04-27
 last_committed: 2026-04-25

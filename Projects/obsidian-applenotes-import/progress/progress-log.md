@@ -3,7 +3,7 @@ type: progress-log
 project: obsidian-applenotes-import
 domain: software
 created: 2026-04-25
-updated: 2026-04-25
+updated: 2026-04-27
 ---
 
 # Obsidian Apple Notes Import — Progress Log
@@ -30,3 +30,9 @@ updated: 2026-04-25
 - 25 tasks across 8 milestones (was 27)
 - All pre-PLAN gates resolved
 - Phase: SPECIFY (frozen artifact; ready for PLAN)
+
+## 2026-04-27 — Phase transition SPECIFY → PLAN
+
+- All SPECIFY acceptance criteria met; spec rev 4 frozen
+- Phase: PLAN
+- Next: invoke action-architect to produce action-plan.md + tasks.md from spec rev 4 (milestones, spike phases for risk-tagged work, atomic tasks with dependency graph)

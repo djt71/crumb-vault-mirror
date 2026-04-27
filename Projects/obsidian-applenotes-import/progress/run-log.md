@@ -4,7 +4,7 @@ project: obsidian-applenotes-import
 domain: software
 status: active
 created: 2026-04-25
-updated: 2026-04-25
+updated: 2026-04-27
 ---
 
 # Obsidian Apple Notes Import — Run Log
@@ -261,3 +261,25 @@ All 5 proposed defaults approved (LD-05 through LD-09 in spec).
 - Insight: turndown silently drops unknown HTML tags by default (caught by Google + OpenAI); custom node-filters are required to surface the warning UX the spec promised. This was a real implementation gap masquerading as a strategy choice.
 
 **Next:** Operator runs G2 + G3 probes (or directs Claude to run them), then phase transitions SPECIFY → PLAN.
+
+### Phase Transition: SPECIFY → PLAN
+- Date: 2026-04-27
+- SPECIFY phase outputs:
+  - `design/specification.md` rev 4 (frozen)
+  - `design/specification-summary.md` rev 4
+  - `design/research-brief-plugin-platform.md` (citations pinned)
+  - `design/probes/a4-soft-delete.applescript` + `design/probes/a4-probe-result.md` (G1)
+  - `design/probes/g2-id-stability.applescript` + `design/probes/g2-probe-result.md` (G2)
+  - `reviews/2026-04-25-specification.md` (round 1) + `reviews/2026-04-25-specification-r2.md` (round 2)
+- Goal progress: all SPECIFY acceptance criteria **met**.
+  - Approved spec produced (rev 4 frozen, MAJOR scope, 25 tasks / 8 milestones)
+  - All pre-PLAN gates resolved (G1✅ G2✅ G4✅; G3 removed via v1.1 attachment deferral)
+  - Peer review discipline applied (2 rounds, 53 actions absorbed + 1 product simplification)
+  - Probe-derived implementation notes captured for IMPLEMENT-stage consumption
+- Compound: cumulative compound reflection already recorded in the 2026-04-25 "SPECIFY done; PLAN-ready" entry above (4 patterns: pre-PLAN probes can produce scope-changing decisions; multi-revision specs materially improve quality; probes yield bonus implementation findings; reviewer knowledge-cutoff false positives are predictable). No new compoundable insights from the transition itself.
+- Context usage before checkpoint: ~30% (well under 50% threshold)
+- Action taken: none (no compact/clear needed)
+- Key artifacts for PLAN phase to load:
+  - `design/specification-summary.md` (loaded)
+  - `design/specification.md` rev 4 — Constraints, Requirements, Interfaces sections (action-architect step 1 will pull targeted reads)
+  - `design/research-brief-plugin-platform.md` (Obsidian platform constraints for design decisions)
