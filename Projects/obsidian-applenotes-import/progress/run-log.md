@@ -283,3 +283,44 @@ All 5 proposed defaults approved (LD-05 through LD-09 in spec).
   - `design/specification-summary.md` (loaded)
   - `design/specification.md` rev 4 — Constraints, Requirements, Interfaces sections (action-architect step 1 will pull targeted reads)
   - `design/research-brief-plugin-platform.md` (Obsidian platform constraints for design decisions)
+
+## 2026-04-27 — PLAN: action-architect output
+
+**Inputs read (context inventory, against budget — extended tier justified by safety-critical software project + multiple required patterns):**
+1. `design/specification-summary.md` rev 4 (already loaded from phase transition)
+2. `design/specification.md` rev 4 (full — Constraints, Requirements, Interfaces sections per skill contract)
+3. `_system/docs/solutions/write-only-from-ledger.md` (skill required_context: always)
+4. `_system/docs/solutions/gate-evaluation-pattern.md` (skill required_context: always)
+5. `_system/docs/solutions/atomic-rebuild-pattern.md` (skill required_context: conditional — index repair regenerates a live artifact)
+6. `_system/docs/solutions/write-read-path-verification.md` (relevant to OAI-016b composite verify gate)
+7. `_system/docs/solutions/staged-spike-with-bail.md` (relevant to M0 PLAN-spike phase design)
+8. `_system/docs/estimation-calibration.md` (single prior data point: pydantic-ai-adoption 0.04x ratio)
+9. `_system/docs/overlays/overlay-index.md` (budget-exempt; checked — no overlay activates for implementation-level coding work)
+
+**Overlay check:** No overlay activates. Business Advisor / Career Coach / Design Advisor / etc. all anti-signal: this is implementation-level coding with no business/visual/career dimension.
+
+**Outputs:**
+- `design/action-plan.md` — 9 phases (M0 spikes + M1–M8); milestone exit gates set at PLAN time; critical path traced; pattern application called out (staged-spike-with-bail for M0; atomic-rebuild for OAI-012 index repair; gate evaluation throughout)
+- `tasks.md` — 29 atomic tasks (25 from spec rev 4 + 4 new M0 spike tasks OAI-024..027); each ≤5 file changes; AC binary testable; risk-level matches spec
+- `design/action-plan-summary.md` — phase gates table, critical path, decision lock-down list, pattern reuse, iteration budget
+
+**Key PLAN-stage value-add over spec:**
+1. **M0 spike phase made concrete** — spec's "Assumptions (PLAN spike)" (A1, A3, A5, A6) decomposed into 4 explicit spike tasks with Stage-0 budgets, bail rules, and decision-recording artifacts. Each spike produces a probe artifact under `design/probes/` and (if it changes a downstream task's approach) a `design/decisions/<NNN>-<topic>.md` record.
+2. **Milestone exit gates set at PLAN time** — every milestone (M0–M8) has fixed binary exit criteria, evaluated at phase exit not retroactively. Per gate-evaluation-pattern.
+3. **Atomic-rebuild applied to OAI-012 index repair** — eliminates "half-rebuilt index" failure mode the spec didn't explicitly call out. Build into staging, validate (parse + shape), atomic-swap. Live index never overwritten directly during rebuild.
+4. **Sequencing optimized** — M4 (OAI-012) starts as soon as OAI-002 lands (parallel to M2/M3). M7 OAI-019 starts as soon as OAI-004 lands (parallel to M5/M6). Maximizes parallelism around the M6 critical path.
+5. **Iteration budget called out** — 2–4 rework rounds expected on M6 cluster only (composite verify-before-delete adversarial tests). All other tasks single-pass.
+6. **PLAN decisions to lock** — minAppVersion (OAI-002), eslint-plugin-obsidianmd version (OAI-001), turndown vs turndown+sanitize-html (OAI-009), modal loading strategy (M0 OAI-024 outcome).
+
+**Cross-project dep check:** No cross-project dependencies. Plugin doesn't consume from or feed any other Crumb project's backlog.
+
+**Estimation calibration baseline:** Plan estimates 29 tasks. Will record actual at completion. Prior data point (pydantic-ai-adoption 0.04x) was driven by a Stage-0 bail; this project has 4 explicit bail checkpoints in M0 — same dynamic could compress timeline if any spike forces a rescope.
+
+**Plan impact assessment for peer-review offer (skill Step 6):** **MODERATE.** Architecture is unchanged from the heavily-reviewed spec rev 4 (53 review actions absorbed across 2 rounds). PLAN's novel content is operational (spike phase + milestone gates + pattern application + sequencing) — not architectural rewrites. The atomic-rebuild application to OAI-012 is the one design change of substance, but it's a hardening that aligns with an established Crumb pattern. Operator may run peer review or proceed when ready.
+
+**Compound (PLAN-stage):**
+- Pattern reuse compounded — three prior solutions docs (`gate-evaluation-pattern`, `atomic-rebuild-pattern`, `staged-spike-with-bail`) directly shaped the plan. Read-path is working: action-architect's `_system/docs/solutions/` scan surfaced all three. Per `write-read-path-verification.md`, this is the closed loop functioning as intended.
+- Insight: when SPECIFY produces a fully-decomposed task list (as rev 4 did), PLAN's job shifts from "decompose the spec" to "operationalize execution" — spike phases, gate criteria, pattern application, sequencing. The action-architect skill description leans toward decomposition; in this case decomposition was already done. Worth noting that PLAN's value-add scales with what SPECIFY left undone.
+- Insight: M0 spike phase is functionally a second pre-PLAN gate set — but executed in PLAN because the assumptions don't block PLAN drafting, only IMPLEMENT. The spec's pre-PLAN gates were assumptions whose failure would change spec scope; M0 spikes are assumptions whose failure changes implementation approach but not scope. Worth distinguishing in future projects.
+
+**Next:** Operator decides — peer review the plan, or proceed to TASK phase transition. Either path is fine; spec was heavily reviewed already.

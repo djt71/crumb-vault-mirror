@@ -1,12 +1,12 @@
-Mode: pre-commit (3 staged files)
+Mode: pre-commit (6 staged files)
 === 1. Frontmatter Schema Validation ===
-  Checked 0 files, 0 with issues
+  Checked 3 files, 0 with issues
 
 === 2. Summary Freshness Check ===
-  Checked 0 summaries, 0 stale
+  Checked 2 summaries, 0 stale
 
 === 3. Summary Schema Completeness ===
-  Checked 0 summary files, 0 missing source_updated
+  Checked 1 summary files, 0 missing source_updated
 
 === 4. Run-Log Structural Integrity ===
   Skipped (no staged run-log files)
@@ -21,7 +21,6 @@ Mode: pre-commit (3 staged files)
   Checked 9 projects, 0 missing scaffold files
 
 === 8. Task Completion Evidence ===
-  Skipped (no staged task or run-log files)
   Checked 0 completed tasks, 0 missing run-log evidence
 
 === 9. Knowledge Base Tag Validation ===
@@ -56,8 +55,7 @@ Mode: pre-commit (3 staged files)
   Checked 6 repo paths, 0 issues
 
 === 23. Code Review Gate ===
-  Skipped (no staged task or run-log files)
-  Checked 0 post-enforcement tasks, 0 missing reviews, 0 grandfathered (before 2026-03-20)
+  Checked 0 post-enforcement tasks, 0 missing reviews, 123 grandfathered (before 2026-03-20)
 
 === 24. Run-Log Size Check ===
   Skipped (no staged run-log files)
@@ -86,7 +84,7 @@ Mode: pre-commit (3 staged files)
   Skipped (no staged run-log files)
 
 === 31. Broken Wikilink Detection ===
-  Checked 2 files, 0 broken links in 0 files
+  Checked 5 files, 0 broken links in 0 files
 
 === Solution Doc Track Schema ===
   Checked 0 solution docs, 0 track issues

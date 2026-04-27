@@ -36,3 +36,13 @@ updated: 2026-04-27
 - All SPECIFY acceptance criteria met; spec rev 4 frozen
 - Phase: PLAN
 - Next: invoke action-architect to produce action-plan.md + tasks.md from spec rev 4 (milestones, spike phases for risk-tagged work, atomic tasks with dependency graph)
+
+## 2026-04-27 — PLAN: action-architect output
+
+- `design/action-plan.md` — 9 phases (M0 PLAN-spikes + M1–M8 implementation); critical path 12 tasks; milestone exit gates set at PLAN time
+- `tasks.md` — 29 atomic tasks (25 from spec + 4 new M0 spikes OAI-024..027); each ≤5 file changes; AC binary testable
+- `design/action-plan-summary.md` — phase gates, critical path, decision lock-down, pattern reuse
+- Patterns applied: staged-spike-with-bail (M0), atomic-rebuild (OAI-012 index repair), gate-evaluation (every milestone)
+- No cross-project deps
+- Plan impact: MODERATE (architecture unchanged from heavily-reviewed spec; novel content is operational — spike phase + gates + sequencing)
+- Next: operator decides peer-review vs proceed to TASK; first concrete work after TASK is M0 spikes

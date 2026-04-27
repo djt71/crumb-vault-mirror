@@ -6,10 +6,10 @@ phase: PLAN
 workflow: four-phase
 last_gate: "SPECIFY → PLAN (2026-04-27): spec rev 4 frozen; all pre-PLAN gates resolved (G1✅ G2✅ G4✅; G3 removed via attachment-deferral); 25 tasks across 8 milestones ready for PLAN decomposition"
 active_task: null
-next_action: "Invoke action-architect skill to produce action-plan.md and tasks.md from specification rev 4. PLAN-stage outputs: milestones with success criteria, spike phases for risk-tagged work (composite verify-before-delete adversarial tests, index repair conflict policy, TCC failure UX), atomic task list (≤5 file changes each) with dependency graph and risk levels. Source: design/specification.md rev 4 + design/specification-summary.md."
+next_action: "PLAN artifacts complete (design/action-plan.md, tasks.md, design/action-plan-summary.md). 29 atomic tasks across 9 phases (M0 spikes + M1–M8); MAJOR scope; no cross-project deps. Operator decides: (a) peer-review the plan (MODERATE impact — spec was heavily reviewed; PLAN's novel content is operational), or (b) proceed to PLAN → TASK phase transition. Next concrete work after TASK transition: execute M0 spikes (OAI-024..027) before any implementation."
 related_projects: []
 repo_path: /Users/tess/code/obsidian-applenotes-import
 build_command: "npm run build"
 services: []
 updated: 2026-04-27
-last_committed: 2026-04-25
+last_committed: 2026-04-27
