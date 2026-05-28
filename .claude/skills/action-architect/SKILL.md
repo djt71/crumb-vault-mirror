@@ -15,6 +15,9 @@ required_context:
   - path: _system/docs/solutions/atomic-rebuild-pattern.md
     condition: task-involves-regenerating-live-artifact
     reason: "Staging + atomic swap pattern for tasks that rebuild live artifacts (indexes, derived datasets, static sites, config files)"
+  - path: _system/docs/solutions/staged-spike-with-bail.md
+    condition: task-involves-research-or-integration-spike
+    reason: "Spike structure with Stage 0 bail checkpoint — reserves budget for load-bearing assumption verification"
 ---
 
 # Action Architect

@@ -6,11 +6,13 @@ status: active
 created: 2026-04-21
 updated: 2026-04-21
 confidence: high
+linkage: discovery-only
 tags:
   - compound
   - llm-evaluation
   - doctrine
   - model-selection
+  - kb/software-dev
 source_projects:
   - tess-v2
 source_artifacts:

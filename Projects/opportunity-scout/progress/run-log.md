@@ -281,3 +281,20 @@ Both Haiku triage (12/12 batches) and Sonnet ranking (2/2 attempts) failed ident
 **Model routing:** Main session (Opus). No delegation.
 
 **Next:** Observe tomorrow's digest (first run with v2.0 framing prompts). Validation question: do Tier 1 items get framed as relevant-to-current-execution, Tier 2 items surface as "under the right conditions," and Tier 3 items get either filtered or honestly named as misfits — instead of the prior "everything frames toward financial independence" failure mode.
+
+## 2026-05-28 — Services decommissioned (operator request)
+
+Operator directed that opportunity-scout's Telegram delivery is no longer useful and asked to retire it. All live scout launchd jobs were `disable`d + `bootout`'d in the GUI domain (`gui/$(id -u)`):
+
+- `com.tess.v2.scout-pipeline` — daily 07:00 scan → score → digest → Telegram delivery
+- `com.tess.v2.scout-weekly-heartbeat` — Monday health summary → Telegram
+- `com.tess.v2.scout-feedback-poller` — was live (PID 6924); polled Telegram for digest reactions
+- `com.tess.v2.scout-feedback-health` — poller health/process check
+
+The legacy `com.scout.*` plists (daily-pipeline, feedback-poller, weekly-heartbeat) were already unloaded and remain disabled. **No scout Telegram messages will be sent.**
+
+**Scope:** stop + disable only. Plists in `~/Library/LaunchAgents/`, the repo at `~/openclaw/opportunity-scout`, the `.env` (Telegram token/chat), and `db/scout.db` were all **left in place** — reversible via `launchctl enable gui/$(id -u)/<label>` + bootstrap. Project not archived (operator chose keep-files). Disable overrides persist across reboot/login (verified in `launchctl print-disabled`).
+
+**Note:** Mission Control dashboard health panel will now flag these services as down — expected, not a fault.
+
+**Tests:** None — operational change, no code modified.

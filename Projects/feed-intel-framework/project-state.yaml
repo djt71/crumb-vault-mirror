@@ -14,5 +14,7 @@ services:
   - ai.openclaw.fif.capture
   - ai.openclaw.fif.attention
   - ai.openclaw.fif.feedback
-updated: 2026-03-26
+updated: 2026-05-28
 last_committed: 2026-03-10
+decommissioned: 2026-05-28  # all FIF launchd jobs (both generations) disabled + booted out; files/repo/creds kept. See run-log 2026-05-28.
+services_status: disabled

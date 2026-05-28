@@ -11,6 +11,7 @@ tags:
   - llm-integration
   - contract-execution
   - response-parsing
+  - kb/software-dev
 source_projects:
   - tess-v2
 source_artifacts:

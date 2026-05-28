@@ -24,6 +24,9 @@ required_context:
   - path: _system/docs/solutions/problem-patterns/security-verification-circularity.md
     condition: software_project
     reason: "Security verification anti-pattern to avoid"
+  - path: _system/docs/solutions/lenient-parsing-before-evaluation.md
+    condition: software_project_with_llm_integration
+    reason: "Contract-runner design pattern — lenient parsing layer preserves retry budget for semantic failures"
 ---
 
 # Systems Analyst

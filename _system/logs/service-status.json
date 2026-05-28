@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-04-27T13:52:25Z",
+  "timestamp": "2026-05-28T19:41:09Z",
   "services": [
     {
       "label": "ai.openclaw.gateway",
-      "pid": 309,
+      "pid": 3599,
       "last_exit_status": 0,
       "state": "running"
     },
@@ -16,20 +16,20 @@
     {
       "label": "ai.openclaw.fif.attention",
       "pid": null,
-      "last_exit_status": 0,
-      "state": "idle_ok"
+      "last_exit_status": null,
+      "state": "not_loaded"
     },
     {
       "label": "ai.openclaw.fif.capture",
       "pid": null,
-      "last_exit_status": 0,
-      "state": "idle_ok"
+      "last_exit_status": null,
+      "state": "not_loaded"
     },
     {
       "label": "ai.openclaw.fif.feedback",
-      "pid": 784,
-      "last_exit_status": 0,
-      "state": "running"
+      "pid": null,
+      "last_exit_status": null,
+      "state": "not_loaded"
     },
     {
       "label": "ai.openclaw.awareness-check",

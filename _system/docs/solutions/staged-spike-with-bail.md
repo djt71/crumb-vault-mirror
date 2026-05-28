@@ -10,6 +10,7 @@ tags:
   - compound
   - research-methodology
   - evaluation-spike
+  - kb/software-dev
 source_projects:
   - tess-v2
 source_artifacts:

@@ -1,22 +1,22 @@
 {
-  "timestamp": "2026-04-27T13:52:56Z",
+  "timestamp": "2026-05-28T19:40:38Z",
   "cpu": {
-    "load_1m": 3.43,
-    "load_5m": 3.39,
-    "load_15m": 3.15,
+    "load_1m": 2.05,
+    "load_5m": 2.18,
+    "load_15m": 2.31,
     "cores": 28
   },
   "memory": {
     "total_gb": 96.0,
-    "used_gb": 50.2,
-    "available_gb": 47.2,
-    "percent_used": 52.2
+    "used_gb": 49.1,
+    "available_gb": 48.2,
+    "percent_used": 51.2
   },
   "disk": {
     "total_gb": 926.3,
-    "used_gb": 11.6,
-    "available_gb": 607.3,
-    "percent_used": 2
+    "used_gb": 16.6,
+    "available_gb": 576.2,
+    "percent_used": 3
   },
   "gpu": {
     "model": "Apple M3 Ultra",
