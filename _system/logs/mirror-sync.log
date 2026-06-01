@@ -738,3 +738,4 @@
 2026-05-28 15:41:29 SYNC Decommission opportunity-scout + FIF Telegram services
 2026-06-01 19:08:45 SYNC Disable feed-freshness alert in awareness-check (FIF decommissioned)
 2026-06-01 19:27:08 SYNC Mission Control: stop dashboard + retire orphaned monitors
+2026-06-01 19:33:34 SYNC Retire com.tess.health-check (broken Limited Mode failover)
