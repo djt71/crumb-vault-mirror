@@ -150,7 +150,11 @@ main() {
     local had_errors=false
 
     check_outbox || had_errors=true
-    check_feed_freshness || had_errors=true
+    # check_feed_freshness disabled 2026-06-01 — FIF capture decommissioned 2026-05-28
+    # (commit 2756dbc1), so no new feed files are written and the digest is permanently
+    # "stale", firing a false alert every 30m. Function kept defined for reversibility:
+    # re-enable this line if the x-feed-intel pipeline is ever restored.
+    # check_feed_freshness || had_errors=true
 
     # Check 3: Session debrief (TOP-047 fn3)
     # Runs session-debrief.sh in all-projects mode — cursor-based, only fires on new entries

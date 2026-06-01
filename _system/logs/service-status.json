@@ -1,15 +1,15 @@
 {
-  "timestamp": "2026-05-28T19:41:09Z",
+  "timestamp": "2026-06-01T23:08:03Z",
   "services": [
     {
       "label": "ai.openclaw.gateway",
-      "pid": 3599,
+      "pid": 782,
       "last_exit_status": 0,
       "state": "running"
     },
     {
       "label": "ai.openclaw.bridge.watcher",
-      "pid": 787,
+      "pid": 1663,
       "last_exit_status": 0,
       "state": "running"
     },
@@ -51,21 +51,21 @@
     },
     {
       "label": "com.crumb.dashboard",
-      "pid": 777,
+      "pid": 1654,
       "last_exit_status": 0,
       "state": "running"
     },
     {
       "label": "com.crumb.cloudflared",
-      "pid": 799,
+      "pid": 1672,
       "last_exit_status": 0,
       "state": "running"
     },
     {
       "label": "com.tess.health-check",
       "pid": null,
-      "last_exit_status": 0,
-      "state": "idle_ok"
+      "last_exit_status": 1,
+      "state": "idle_error"
     },
     {
       "label": "com.tess.vault-backup",
