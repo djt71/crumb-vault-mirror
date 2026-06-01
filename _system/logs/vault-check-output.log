@@ -90,6 +90,7 @@ Mode: pre-commit (1 staged files)
   Skipped (no staged run-log files)
 
 === 31. Broken Wikilink Detection ===
+  Checked 1 files, 0 broken links in 0 files
 
 === Solution Doc Track Schema ===
   Checked 0 solution docs, 0 track issues
