@@ -18,8 +18,7 @@ Mode: pre-commit (1 staged files)
   Skipped (no staged session-log files)
 
 === 7. Project Scaffold Completeness ===
-  Skipped (no staged project files)
-  Checked 0 projects, 0 missing scaffold files
+  Checked 9 projects, 0 missing scaffold files
 
 === 8. Task Completion Evidence ===
   Skipped (no staged task or run-log files)
@@ -90,6 +89,7 @@ Mode: pre-commit (1 staged files)
   Skipped (no staged run-log files)
 
 === 31. Broken Wikilink Detection ===
+  Checked 1 files, 0 broken links in 0 files
 
 === Solution Doc Track Schema ===
   Checked 0 solution docs, 0 track issues

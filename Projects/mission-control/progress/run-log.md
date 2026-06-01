@@ -3,13 +3,43 @@ type: run-log
 project: mission-control
 status: active
 created: 2026-03-07
-updated: 2026-03-30
+updated: 2026-06-01
 last_committed: 2026-03-13
 ---
 
 # Mission Control — Run Log
 
 > **Archive:** [[run-log-2026-03a]] — Project creation, SPECIFY, PLAN, Phase 0 design (M0a/M0b), Phase 1 implementation (M1-M3), Phase 2 (M4-M6 partial) — sessions 1-7 (2026-03-07 through 2026-03-13)
+
+---
+
+## 2026-06-01 (session 11) — Dashboard services stopped (monitoring-stack teardown)
+
+**Phase:** TASK (unchanged — project kept active per operator)
+**Operator:** Danny
+
+### Context
+Operator no longer has a use for the Mission Control dashboard. Traced the dependency
+cascade from the dashboard down through its monitoring feeders before acting. Decision was
+to **stop the running services but keep the project** (no archival, no phase change) for
+reversibility — same keep-files philosophy as the FIF/opportunity-scout decom (commit 2756dbc1).
+
+### Actions (launchd, gui/501 — booted out + disabled, plist files retained)
+- **`com.crumb.dashboard`** — stopped. The dashboard API server (`crumb-dashboard/packages/api/dist/server.js`). Project `mission-control` left `phase: TASK, status: active`; repo and files untouched.
+- **`com.tess.v2.awareness-check`** — stopped. tess-v2 LLM anomaly heartbeat (TV2-032-C2), the other consumer of `service-status.json`. Dropped per operator.
+- **`com.crumb.service-status`** — stopped. The 60s launchd sensor that wrote `_system/logs/service-status.json`. **Orphaned** once both consumers above were removed → retired.
+
+### Kept (deliberately)
+- **`ai.openclaw.health-ping`** (15m) — external dead-man's switch (pings hc-ping.com). Independent of the dashboard; its value is "alert operator if the whole machine goes dark." Verified it depends on `ops-metrics.jsonl` + the gateway port probe (HTTP 200 confirmed), **not** on `service-status.json`, so the sensor retirement doesn't break it.
+- **`com.crumb.vault-web`** — unrelated (serves the Quartz published-vault static site from `quartz-vault/public`), left running.
+
+### Verification
+- `launchctl list`: all three target labels absent; `health-ping` + `vault-web` still present; gateway `:18789` → HTTP 200.
+
+### Notes / follow-ups
+- Reversibility: plist files remain in `~/Library/LaunchAgents`; re-enable via `launchctl enable` + `bootstrap`.
+- Separate latent issue surfaced during tracing: **`com.tess.health-check` reports `idle_error`** (non-zero last exit) — pre-existing, unrelated to this teardown. Flagged, not acted on.
+- The earlier `awareness-check.sh` feed-freshness fix (commit 4ffbdbb4) was the original entry point into this thread.
 
 ---
 
