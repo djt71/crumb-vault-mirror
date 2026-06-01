@@ -38,7 +38,7 @@ reversibility — same keep-files philosophy as the FIF/opportunity-scout decom 
 
 ### Notes / follow-ups
 - Reversibility: plist files remain in `~/Library/LaunchAgents`; re-enable via `launchctl enable` + `bootstrap`.
-- Separate latent issue surfaced during tracing: **`com.tess.health-check` reports `idle_error`** (non-zero last exit) — pre-existing, unrelated to this teardown. Flagged, not acted on.
+- Also retired **`com.tess.health-check`** (TMA-004 Limited Mode auto-failover for the OpenClaw voice agent) — surfaced as `idle_error` during tracing. Root cause: failing every 5m under launchd because it reads Telegram creds from the login Keychain (launchd↔keychain session isolation — entries exist but launchd can't reach them; same reason awareness-check uses a plist env var). Second latent failure behind it: the `tess→openclaw` sudoers NOPASSWD entry for the swap path is missing, so failover wouldn't execute even with creds. Broken for months; operator confirmed the voice agent runs fine without auto-failover → retired (bootout + disable, files kept). Voice-agent subsystem itself left alone (gateway :18789 still live).
 - The earlier `awareness-check.sh` feed-freshness fix (commit 4ffbdbb4) was the original entry point into this thread.
 
 ---
