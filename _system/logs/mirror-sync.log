@@ -741,3 +741,4 @@
 2026-06-01 19:33:34 SYNC Retire com.tess.health-check (broken Limited Mode failover)
 2026-06-01 19:40:37 SYNC Mission Control session 11: add compound evaluation
 2026-06-01 19:45:27 SYNC Commit accumulated content changes (compound wiring, ADR, state)
+2026-06-01 19:47:49 SYNC chore: session-end state sweep — ~6 weeks accumulated runtime churn
