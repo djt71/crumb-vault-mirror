@@ -195,7 +195,6 @@ Mechanical enforcement and automation. Bash and Python scripts that run outside 
 | `feed-inbox-ttl.sh` | Cron | Feed inbox TTL cleanup for aged items |
 | `mirror-sync.sh` | Cron | Vault mirror sync to secondary location |
 | `vault-backup.sh` | Cron | Cloud backup trigger |
-| `service-status.sh` | Cron/manual | Service liveness checks |
 | `system-stats.sh` | Cron | System resource metrics |
 | `setup-crumb.sh` | Manual (new machine) | Full environment setup |
 

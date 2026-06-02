@@ -47,28 +47,24 @@ Hostnames, ports, services, credentials, and health checks for the Crumb/Tess sy
 | `ai.openclaw.gateway` | LaunchDaemon | openclaw | Always-on | OpenClaw gateway (Tess runtime) | `nc -z -w3 127.0.0.1 18789` |
 | `ai.openclaw.bridge.watcher` | LaunchAgent | tess | KeepAlive | kqueue watcher → bridge dispatch (Python) | `launchctl print gui/$(id -u)/ai.openclaw.bridge.watcher` |
 | `com.tess.llama-server` | LaunchAgent | tess | KeepAlive | Local Nemotron model host (Ollama) | `curl -s 127.0.0.1:11434/api/tags` |
-| `com.crumb.dashboard` | LaunchAgent | tess | KeepAlive | Mission Control HTTP server | Check dashboard HTTP /health |
+| `com.crumb.dashboard` | LaunchAgent | tess | KeepAlive | Mission Control HTTP server — **stopped 2026-05-28** (project still active) | Check dashboard HTTP /health |
 | `com.crumb.vault-web` | LaunchAgent | tess | KeepAlive | Quartz v4 static site for mobile vault access | Check served HTTP |
 | `com.crumb.cloudflared` | LaunchAgent | tess | KeepAlive | Cloudflare tunnel → dashboard (remote access) | `launchctl print gui/$(id -u)/com.crumb.cloudflared` |
 
-**Tess-v2 operational services (`com.tess.v2.*`, managed by `tess-v2/project-state.yaml`, 14 services):**
+**Tess-v2 operational services (`com.tess.v2.*`, managed by `tess-v2/project-state.yaml`). Authoritative live set = `project-state.yaml` `services:` ∩ `launchctl list`:**
 
 | Label | Schedule | Purpose |
 |-------|----------|---------|
 | `com.tess.v2.health-ping` | Every 900s | Dead man's switch heartbeat |
-| `com.tess.v2.awareness-check` | Every 1800s | Awareness check (Telegram) |
 | `com.tess.v2.vault-health` | 2:00 AM daily | Nightly vault integrity check |
 | `com.tess.v2.vault-gc` | Pre-dawn daily | Vault garbage collection |
 | `com.tess.v2.backup-status` | Interval | Backup state monitoring |
 | `com.tess.v2.daily-attention` | 6:30 AM daily | Daily attention planning |
-| `com.tess.v2.overnight-research` | 11:00 PM daily | Scheduled research dispatch |
-| `com.tess.v2.fif-capture` | Interval | Feed-intel capture |
-| `com.tess.v2.fif-attention` | Interval | Feed-intel attention scan |
-| `com.tess.v2.fif-feedback-health` | Interval | Feed-intel feedback health check |
-| `com.tess.v2.scout-pipeline` | Interval | Opportunity Scout daily pipeline |
-| `com.tess.v2.scout-feedback-health` | Interval | Scout feedback health |
-| `com.tess.v2.scout-weekly-heartbeat` | Weekly | Scout weekly heartbeat |
-| `com.tess.v2.connections-brainstorm` | Interval | Connections brainstorm dispatch |
+| `com.tess.v2.scout-pipeline` | Interval | Opportunity Scout daily pipeline — *not loaded, status under review* |
+| `com.tess.v2.scout-feedback-health` | Interval | Scout feedback health — *not loaded, status under review* |
+| `com.tess.v2.scout-weekly-heartbeat` | Weekly | Scout weekly heartbeat — *not loaded, status under review* |
+
+Awareness-check runs on the legacy `ai.openclaw.awareness-check` (the v2 LLM heartbeat was dropped 2026-05-28). For services removed in the 2026-05/06 teardown, see **Decommissioned services** below.
 
 **Apple and cross-user services:**
 
@@ -77,7 +73,14 @@ Hostnames, ports, services, credentials, and health checks for the Crumb/Tess sy
 | `com.crumb.apple-snapshot` | LaunchAgent | danny | Every 1800s (waking) | Apple data snapshots to `_openclaw/state/` |
 | `com.crumb.drive-sync` | LaunchAgent | danny | 5:00 AM daily | Sync operator/architecture docs to Google Drive for NotebookLM |
 
-**Legacy `ai.openclaw.*`:** `fif.capture/feedback/attention`, `health-ping`, `awareness-check`, `daily-attention`, `overnight-research`, `vault-health` — being migrated into `com.tess.v2.*` equivalents. Email triage (both namespaces) was shut down 2026-04-10 (TV2-036/037 cancelled). The authoritative service set is managed via `Projects/tess-v2/project-state.yaml` `services:` field.
+**Legacy `ai.openclaw.*`:** `health-ping`, `awareness-check`, `daily-attention`, `vault-health` (still loaded) plus `bridge.watcher`. `fif.capture/feedback/attention` and `overnight-research` were decommissioned (see below). Email triage (both namespaces) was shut down 2026-04-10 (TV2-036/037 cancelled). The authoritative service set is managed via `Projects/tess-v2/project-state.yaml` `services:` field.
+
+**Decommissioned services (2026-05/06):** Removed in the 2026-05-28 → 2026-06-01 teardown sweep (see `_system/docs/solutions/infrastructure-teardown-discipline.md`):
+- **FIF capture/attention/feedback-health** (both namespaces) — 2026-05-28.
+- **`com.crumb.service-status`** (liveness sensor) + its `service-status.json` output — 2026-06-01 (orphaned after dashboard stopped).
+- **`com.tess.v2.awareness-check`** (LLM heartbeat) — 2026-05-28 (awareness-check continues on legacy namespace).
+- **`com.tess.health-check`** (TMA-004 Limited Mode failover) — retired; script preserved, plist removed.
+- **`overnight-research`** + **`connections-brainstorm`** (both namespaces) — 2026-06-01.
 
 ### Plist Locations
 
@@ -195,7 +198,6 @@ launchctl print gui/$(id -u)/ai.openclaw.bridge.watcher 2>/dev/null | grep -q "s
 | Log | Path | Contents |
 |-----|------|----------|
 | Vault-check output | `_system/logs/vault-check-output.log` | Latest vault-check run |
-| Service status | `_system/logs/service-status.json` | Service liveness checks |
 | System stats | `_system/logs/system-stats.json` | Resource metrics |
 | LLM health | `_system/logs/llm-health.json` | LLM service health |
 | Backup status | `_system/logs/backup-status.json` | Backup operation status |

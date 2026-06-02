@@ -46,15 +46,12 @@ flowchart TD
         bw["ai.openclaw.bridge.watcher\n(KeepAlive, Python)"]
         ls["com.tess.llama-server\n(KeepAlive, Nemotron)"]
         hp["com.tess.v2.health-ping\n(15 min)"]
-        ac["com.tess.v2.awareness-check\n(30 min)"]
+        ac["ai.openclaw.awareness-check\n(30 min)"]
         vh["com.tess.v2.vault-health\n(2:00 AM)"]
         da["com.tess.v2.daily-attention\n(6:30 AM)"]
-        ovr["com.tess.v2.overnight-research\n(11:00 PM)"]
         vgc["com.tess.v2.vault-gc\n(4:00 AM)"]
-        fif["com.tess.v2.fif-capture/attention/feedback-health"]
-        scout["com.tess.v2.scout-pipeline/feedback/heartbeat"]
-        cb["com.tess.v2.connections-brainstorm"]
-        dash["com.crumb.dashboard\n(Mission Control)"]
+        scout["com.tess.v2.scout-pipeline/feedback/heartbeat\n(not loaded — status under review)"]
+        dash["com.crumb.dashboard\n(stopped 2026-05-28)"]
         vw["com.crumb.vault-web\n(Quartz mobile)"]
         cf["com.crumb.cloudflared\n(tunnel)"]
     end
@@ -89,13 +86,13 @@ flowchart TD
     style gw fill:#fff3e0
 ```
 
-**Service namespace note:** The system is in a migration state between two LaunchAgent namespaces. The legacy `ai.openclaw.*` namespace hosts bridge-watcher and remaining Tess operations; the new `com.tess.v2.*` namespace (tess-v2 project, Phase IMPLEMENT as of 2026-04-11) hosts the current authoritative set of 14 services plus support daemons. Both namespaces coexist during migration. Email triage services (both namespaces) were shut down on 2026-04-10 (TV2-036/037 cancelled).
+**Service namespace note:** The system is in a migration state between two LaunchAgent namespaces. The legacy `ai.openclaw.*` namespace hosts bridge-watcher and remaining Tess operations; the new `com.tess.v2.*` namespace (tess-v2 project) hosts the current authoritative set plus support daemons. Both namespaces coexist during migration. The authoritative live set is `Projects/tess-v2/project-state.yaml` `services:` cross-referenced with `launchctl list` — the tables below are descriptive, not authoritative. Email triage services (both namespaces) were shut down on 2026-04-10 (TV2-036/037 cancelled). See **Decommissioned services** below for services removed 2026-05/06.
 
 ### Prose Summary (for environments that cannot render Mermaid)
 
 Three launchd domains host the system's processes:
 
-**`gui/` domain (tess user):** Claude Code runs as interactive terminal sessions (on-demand, not persistent). The bridge-watcher (`ai.openclaw.bridge.watcher`) is a persistent Python process (KeepAlive) monitoring `_openclaw/inbox/` via kqueue for sub-ms file detection. `com.tess.llama-server` is a KeepAlive daemon hosting the local Nemotron model for Tess Mechanic and inference-heavy scheduled jobs. The tess-v2 project (Phase IMPLEMENT) registers 14 interval-scheduled `com.tess.v2.*` services — health-ping (15 min), awareness-check (30 min), vault-health (2:00 AM), vault-gc (pre-dawn), daily-attention (6:30 AM), overnight-research (11:00 PM), plus feed-intel capture/attention/feedback-health and scout-pipeline/feedback-health/weekly-heartbeat and connections-brainstorm. Crumb-side support runs as `com.crumb.*` LaunchAgents: `dashboard` (Mission Control server), `vault-web` (Quartz mobile site), `cloudflared` (tunnel to the dashboard), `vault-gc`, `qmd-index`, `system-stats`, `service-status`, and `telemetry-rollup`.
+**`gui/` domain (tess user):** Claude Code runs as interactive terminal sessions (on-demand, not persistent). The bridge-watcher (`ai.openclaw.bridge.watcher`) is a persistent Python process (KeepAlive) monitoring `_openclaw/inbox/` via kqueue for sub-ms file detection. `com.tess.llama-server` is a KeepAlive daemon hosting the local Nemotron model for Tess Mechanic and inference-heavy scheduled jobs. The tess-v2 project registers interval-scheduled `com.tess.v2.*` services — currently live: health-ping (15 min), vault-health (2:00 AM), vault-gc (pre-dawn), daily-attention (6:30 AM), backup-status. The awareness-check heartbeat runs on the legacy `ai.openclaw.awareness-check` (the `com.tess.v2.awareness-check` LLM heartbeat was dropped 2026-05-28). Feed-intel (capture/attention/feedback-health), overnight-research, and connections-brainstorm were decommissioned (see below); scout-pipeline/feedback-health/weekly-heartbeat are currently not loaded (status under review). Crumb-side support runs as `com.crumb.*` LaunchAgents: `vault-web` (Quartz mobile site), `cloudflared` (tunnel to the Mission Control dashboard), `vault-gc`, `qmd-index`, `system-stats`, `vault-rebuild`, and `telemetry-rollup`. `com.crumb.dashboard` (Mission Control server) is currently stopped (2026-05-28; mission-control project still active).
 
 **`gui/` domain (danny user):** The apple-snapshot LaunchAgent writes Apple data (Reminders, Calendar, Notes) to `_openclaw/state/` every 30 minutes during waking hours. Requires danny's GUI session to be active.
 
@@ -112,7 +109,7 @@ Three launchd domains host the system's processes:
 | `ai.openclaw.gateway` | LaunchDaemon | openclaw | Always-on | OpenClaw gateway (Tess runtime) |
 | `ai.openclaw.bridge.watcher` | LaunchAgent | tess | KeepAlive | kqueue watcher → bridge dispatch (Python) |
 | `com.tess.llama-server` | LaunchAgent | tess | KeepAlive | Local Nemotron model host (Ollama) |
-| `com.crumb.dashboard` | LaunchAgent | tess | KeepAlive | Mission Control HTTP server |
+| `com.crumb.dashboard` | LaunchAgent | tess | KeepAlive | Mission Control HTTP server — **stopped 2026-05-28** (mission-control project still active; cloudflared tunnel still points here) |
 | `com.crumb.vault-web` | LaunchAgent | tess | KeepAlive | Quartz v4 static site for mobile vault access |
 | `com.crumb.cloudflared` | LaunchAgent | tess | KeepAlive | Cloudflare tunnel → dashboard (remote access) |
 
@@ -121,19 +118,15 @@ Three launchd domains host the system's processes:
 | Label | Schedule | Purpose |
 |-------|----------|---------|
 | `com.tess.v2.health-ping` | Every 900s | Dead man's switch heartbeat |
-| `com.tess.v2.awareness-check` | Every 1800s | Awareness check (Telegram) |
 | `com.tess.v2.vault-health` | 2:00 AM daily | Nightly vault integrity check |
 | `com.tess.v2.vault-gc` | Pre-dawn daily | Vault garbage collection |
 | `com.tess.v2.backup-status` | Interval | Backup state monitoring |
 | `com.tess.v2.daily-attention` | 6:30 AM daily | Daily attention planning |
-| `com.tess.v2.overnight-research` | 11:00 PM daily | Scheduled research dispatch |
-| `com.tess.v2.fif-capture` | Interval | Feed-intel capture |
-| `com.tess.v2.fif-attention` | Interval | Feed-intel attention scan |
-| `com.tess.v2.fif-feedback-health` | Interval | Feed-intel feedback health check |
-| `com.tess.v2.scout-pipeline` | Interval | Opportunity Scout daily pipeline |
-| `com.tess.v2.scout-feedback-health` | Interval | Scout feedback health |
-| `com.tess.v2.scout-weekly-heartbeat` | Weekly | Scout weekly heartbeat |
-| `com.tess.v2.connections-brainstorm` | Interval | Connections brainstorm dispatch |
+| `com.tess.v2.scout-pipeline` | Interval | Opportunity Scout daily pipeline — *not loaded, status under review* |
+| `com.tess.v2.scout-feedback-health` | Interval | Scout feedback health — *not loaded, status under review* |
+| `com.tess.v2.scout-weekly-heartbeat` | Weekly | Scout weekly heartbeat — *not loaded, status under review* |
+
+Awareness-check runs on the legacy `ai.openclaw.awareness-check`, not the v2 namespace.
 
 **Apple and cross-user services:**
 
@@ -141,9 +134,16 @@ Three launchd domains host the system's processes:
 |-------|------|------|----------|---------|
 | `com.crumb.apple-snapshot` | LaunchAgent | danny | Every 1800s (waking) | Apple data snapshots to `_openclaw/state/` |
 | `com.crumb.drive-sync` | LaunchAgent | danny | 5:00 AM daily | Sync docs to Google Drive for NotebookLM |
-| `com.crumb.system-stats`, `service-status`, `telemetry-rollup`, `qmd-index`, `vault-gc` | LaunchAgent | tess | Interval | Metrics, health, AKM index maintenance |
+| `com.crumb.system-stats`, `telemetry-rollup`, `qmd-index`, `vault-gc`, `vault-rebuild` | LaunchAgent | tess | Interval | Metrics, AKM index maintenance, vault rebuild |
 
-**Legacy `ai.openclaw.*` services:** `ai.openclaw.fif.capture/feedback/attention`, `health-ping`, `awareness-check`, `daily-attention`, `overnight-research`, `vault-health`. These are loaded but being migrated into `com.tess.v2.*` equivalents. The authoritative service set is managed via `Projects/tess-v2/project-state.yaml` `services:` field — cross-reference at deployment time.
+**Legacy `ai.openclaw.*` services:** `ai.openclaw.health-ping`, `awareness-check`, `daily-attention`, `vault-health` (still loaded), plus `bridge.watcher` (KeepAlive). The `ai.openclaw.fif.capture/feedback/attention` and `ai.openclaw.overnight-research` jobs were decommissioned (see below). The authoritative service set is managed via `Projects/tess-v2/project-state.yaml` `services:` field — cross-reference at deployment time.
+
+**Decommissioned services (2026-05/06):** Removed in the 2026-05-28 → 2026-06-01 teardown sweep (see `_system/docs/solutions/infrastructure-teardown-discipline.md` and failure-log 2026-06-01):
+- **Feed-intel (FIF) capture/attention/feedback-health** (both namespaces) — 2026-05-28; FIF capture pipeline retired.
+- **`com.crumb.service-status`** (60s liveness sensor) — orphaned once the Mission Control dashboard stopped; plist + script + output removed 2026-06-01.
+- **`com.tess.v2.awareness-check`** (LLM heartbeat) — dropped 2026-05-28; awareness-check continues on the legacy namespace.
+- **`com.tess.health-check`** (TMA-004 Limited Mode auto-failover) — retired; broken for months via launchd↔Keychain isolation. Script `tess-health-check.sh` preserved for possible repair; plist removed.
+- **`overnight-research`** and **`connections-brainstorm`** (both namespaces) — 2026-06-01; both produced output nobody acted on, and overnight-research had been emitting a frozen duplicate brief for ~26 days.
 
 **Project-registered services:** Projects with `repo_path` in `project-state.yaml` may list service labels in a `services` field. Session-end build verification restarts these services after code changes.
 

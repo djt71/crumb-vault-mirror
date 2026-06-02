@@ -749,3 +749,4 @@
 2026-06-01 20:27:01 SYNC Decom overnight-research + connections-brainstorm services
 2026-06-01 20:28:44 SYNC Add topics field to teardown-discipline doc (vault-check warning)
 2026-06-01 20:38:06 SYNC Remove com.tess.health-check from service-status expected list
+2026-06-01 20:41:37 SYNC Decommission service-status sensor (dead weight)
