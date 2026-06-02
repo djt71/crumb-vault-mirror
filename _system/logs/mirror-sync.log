@@ -745,3 +745,4 @@
 2026-06-01 19:51:25 SYNC Gitignore hot-churn runtime logs; untrack from index
 2026-06-01 19:53:05 SYNC Gitignore backup-status.json (hot-churn log)
 2026-06-01 19:57:08 SYNC chore: session-end log — Telegram noise trace, monitoring teardown, git-drift cleanup
+2026-06-01 20:02:16 SYNC Compound: infrastructure-teardown-discipline solution doc

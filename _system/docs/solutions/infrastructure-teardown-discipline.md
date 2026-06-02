@@ -64,6 +64,20 @@ recurrence (the 2026-04-25 session-log entry set the trigger explicitly:
   - Six hot-churn logs were tracked in git — notably `vault-check-output.log`,
     written by the pre-commit hook *itself* — so the working tree never reached
     clean. This hid ~6 weeks of real drift (≈300 files) behind expected noise.
+- **Stale-output pipelines + dual-generation cruft (2026-06-01):**
+  `overnight-research` and `connections-brainstorm` decommissioned after review
+  found the research pipeline had emitted a byte-identical (frozen) brief every
+  Sun/Wed for ~26 days while the cron, stream rotation, and "complete" Telegram
+  all read green (see failure-log 2026-06-01) — a producer broken for a month
+  with nothing sweeping for stale *content*. Teardown also surfaced the
+  namespace-zombie shape: **four** launchd agents across two generations
+  (`ai.openclaw.*`/`com.tess.*` legacy bash + `com.tess.v2.*` dispatch-contract)
+  for two services, two copies of each script, plus contracts — the migration
+  to v2 never removed the legacy plists. Consumer-graph trace was clean: the only
+  freshness watcher (`check_feed_freshness`) was already disabled and read a
+  different dir, so no false-alarm was created. Confirms discipline 1 (no
+  end-condition on a generative pipeline → frozen output goes unnoticed) and the
+  migration-zombie corollary of discipline 2.
 
 ## Pattern
 

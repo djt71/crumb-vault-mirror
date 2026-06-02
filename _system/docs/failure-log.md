@@ -4,7 +4,7 @@ domain: null
 skill_origin: null
 status: active
 created: 2026-02-15
-updated: 2026-04-21
+updated: 2026-06-01
 tags:
   - failure-log
   - calibration
@@ -47,5 +47,15 @@ Track all failure types for calibration. Each entry is classified by type from t
 **Actual failure mode:** Asymmetric grounding across source types. The writer treated external URLs as needing citation discipline but treated internal vault paths as synthesizable from project names alone. This is a classic hallucination pattern — confident-looking structured output (bracketed wikilinks with pipe-alias display text) that was never grounded. Also a scoped risk: the reader instinctively trusts a well-formed brief uniformly, so fabricated internal links travel alongside verified external ones unless explicitly audited.
 
 **System update:** No code change yet. Capturing here so the next tess-overnight-research iteration (or a peer-review pass on the skill's writer stage) can add a vault-link verification step: before emitting a brief, resolve every `[[...]]` target against the vault and either (a) strip broken links, (b) replace with real anchors, or (c) downgrade to prose with no link. Until then, reviewer-stage audit of research briefs must include explicit link verification (applied in this case during the 2026-04-21 review; the brief itself has been disposed of since neither signal was worth promoting).
+
+## 2026-06-01 - Convergence Failure
+
+**What happened:** Reviewing the pending-review research queue (`_openclaw/research/output/`) found 8 substantive briefs spanning 2026-05-06 → 2026-05-31 that were **byte-for-byte identical** in body (md5 `e093a44…`, confirmed across all 8 with frontmatter stripped) — same "Anthropic Orbit / bcherny cron patterns / LangChain" content, same May-6 source dates, same (still-fabricated, per the 2026-04-21 entry) `[[feed-intel-framework/insights/anthropic-roadmap]]` and `[[agent-to-agent-communication/...]]` wikilinks. A 9th (2026-05-03-competitive) was a dead web-fetch stub. The `tess-overnight-research` synthesis has been frozen on May-6 output for ~26 days.
+
+**Why it passed validation:** Nothing downstream checks brief-to-brief novelty. The pending-review queue assumes each brief is fresh; there is no dedup/staleness guard comparing a new brief against the last N emitted. The cron fired correctly the whole time (all 8 dates map exactly to the Sun=competitive / Wed=builder rotation), `write_research_brief` stamped fresh frontmatter dates, and `send_notification` fired a "research complete" Telegram every Sun/Wed — so every health signal read green while the actual product was stale. Frontmatter freshness masked body staleness.
+
+**Actual failure mode:** Replayed synthesis. `overnight-research.sh` rebuilds context live each run (FIF 7-day DB query + last30days web search) and **both** streams — builder and competitive, which use different prompts and gather different context — produced identical output. Different inputs → identical output means the `openclaw agent --agent voice` synthesis step is returning a cached/memoized response regardless of prompt, not re-synthesizing. The cron/stream-selection/notification layers are healthy; the defect is isolated to the voice-agent invocation (openclaw-side; openclaw user, 600-perm keys — not inspected this session).
+
+**System update:** No code change yet. Disposition this session: all 9 briefs moved to `_openclaw/research/.processed/`, queue cleared to 0; the one real (26-day-stale, speculative) datum — the Orbit leak — was never captured to the vault and remains operator's call. Two follow-ups flagged to Danny: (1) root-cause the voice-agent response cache/memory replay in `openclaw agent --agent voice`; (2) add a staleness guard to `overnight-research.sh` — before `write_research_brief`, hash the agent body and compare against the last emitted brief; if identical (or cosine-near), suppress the write + Telegram and `cron_mark_alert` instead, so a frozen synthesis surfaces as an alert rather than a green notification.
 
 

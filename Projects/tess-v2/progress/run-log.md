@@ -3,7 +3,26 @@ project: tess-v2
 type: run-log
 period: 2026-04 onwards
 created: 2026-04-10
-updated: 2026-04-20
+updated: 2026-06-01
+---
+
+## 2026-06-01 — Decommission: overnight-research + connections-brainstorm
+
+**Context:** Session began processing the pending-review research/brainstorm queues. Review found the `overnight-research` pipeline had emitted a byte-identical (frozen) brief every Sun/Wed since 2026-05-06 — 8 dupes + 1 dead stub over 26 days — while cron, stream rotation, and "complete" Telegram all read green (logged: failure-log 2026-06-01, Convergence Failure). Both `overnight-research` and `connections-brainstorm` produce output nobody acts on; operator elected to decommission both (Ceremony Budget Principle).
+
+**Teardown (full removal, per `infrastructure-teardown-discipline.md`):**
+- **4 launchd agents across 2 generations** unloaded + deleted: `ai.openclaw.overnight-research` (legacy bash, CalendarInterval — dormant on Tahoe), `com.tess.v2.overnight-research` (live dispatch-contract), `com.tess.v2.connections-brainstorm` (live), `com.tess.connections-brainstorm` (already `.disabled` legacy stub). The v2 migration never removed the legacy plists — namespace-zombie shape.
+- **Contracts removed:** `crumb-apps/tess-v2/contracts/{overnight-research,connections-brainstorm}.yaml`
+- **Scripts removed (both copies each):** `_openclaw/scripts/{overnight-research,connections-brainstorm}.sh` (full logic, 31kb/16kb) + `crumb-apps/tess-v2/scripts/{…}.sh` (2.5kb wrappers)
+- **services list:** removed both labels from `Projects/tess-v2/project-state.yaml`
+- **Consumer-graph trace (Discipline 2):** clean. Only freshness watcher (`awareness-check` → `check_feed_freshness`) was already disabled (FIF decom 2026-05-28) and reads `feeds/`, not `research/output/` — no false-alarm created. `session-startup.sh` pending-counts and `vault-gc.sh` are passive consumers; both go inert (report 0 / nothing to GC), left in place.
+
+**Queue disposition (earlier this session):** 9 briefs → `_openclaw/research/.processed/`; 4 brainstorms → `status: reviewed`, `_openclaw/inbox/.processed/`. Both pending-review counts now 0. The one real (26-day-stale, speculative) datum — the Anthropic "Orbit" leak — was never captured to vault; left as operator's call (declined to chase given Q2 "no new projects" stance).
+
+**Compound:** Added as 4th evidence instance to `infrastructure-teardown-discipline.md` — a generative pipeline with no end-condition froze unnoticed for a month because every health signal tracked *liveness* (cron fired, file written, Telegram sent) and none tracked *content novelty*. Confirms discipline 1.
+
+**Model routing:** All Opus. No delegation — investigation + judgment-heavy teardown.
+
 ---
 
 ## 2026-04-20 — Kimi K2.6 TV2-Cloud eval battery

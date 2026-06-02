@@ -24,9 +24,7 @@ services:
   - com.tess.v2.fif-capture
   - com.tess.v2.fif-attention
   - com.tess.v2.fif-feedback-health
-  - com.tess.v2.connections-brainstorm
   - com.tess.v2.daily-attention
-  - com.tess.v2.overnight-research
   - com.tess.v2.scout-pipeline
   - com.tess.v2.scout-weekly-heartbeat
   - com.tess.v2.scout-feedback-health
