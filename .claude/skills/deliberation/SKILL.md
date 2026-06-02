@@ -11,7 +11,7 @@ context: main
 allowed-tools: Read, Write, Edit, Bash, Grep, Glob, Agent
 model_tier: reasoning
 required_context:
-  - path: _system/docs/solutions/peer-review-patterns/reasoning-token-budget.md
+  - path: _system/docs/solutions/reasoning-token-budget.md
     condition: always
     reason: "Token budget management for external evaluators"
 ---

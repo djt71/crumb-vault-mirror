@@ -11,7 +11,7 @@ context: main
 allowed-tools: Read, Write, Edit, Bash, Grep, Glob
 model_tier: reasoning
 required_context:
-  - path: _system/docs/solutions/peer-review-patterns/reasoning-token-budget.md
+  - path: _system/docs/solutions/reasoning-token-budget.md
     condition: always
     reason: "Token budget management for external reviewers"
 ---
@@ -212,7 +212,7 @@ External reviewers are **evidence gatherers**. Claude is the **decision maker**.
 
 **Subagent loads separately (not in main session context):**
 - `~/.config/crumb/.env` (API keys — loaded by subagent only)
-- `_system/docs/peer-review-denylist.md` (safety gate — checked by subagent only)
+- `_system/docs/review-safety-denylist.md` (safety gate — checked by subagent only)
 
 **AVOID:**
 - Loading full project history for context
@@ -248,7 +248,7 @@ Before marking complete, verify:
 
 ## Compound Behavior
 
-Track which models produce the most useful findings for which artifact types. When patterns emerge (e.g., "GPT consistently catches security issues," "Gemini finds edge cases"), document in `_system/docs/solutions/peer-review-patterns/`. Track review cost data for calibration against §8 estimates in the skill spec.
+Track which models produce the most useful findings for which artifact types. When patterns emerge (e.g., "GPT consistently catches security issues," "Gemini finds edge cases"), document in `_system/docs/solutions/`. Track review cost data for calibration against §8 estimates in the skill spec.
 
 ## Convergence Dimensions
 

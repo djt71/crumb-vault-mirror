@@ -21,7 +21,7 @@ required_context:
   - path: _system/docs/solutions/memory-stratification-pattern.md
     condition: software_project
     reason: "Memory architecture stratification patterns"
-  - path: _system/docs/solutions/problem-patterns/security-verification-circularity.md
+  - path: _system/docs/solutions/security-verification-circularity.md
     condition: software_project
     reason: "Security verification anti-pattern to avoid"
   - path: _system/docs/solutions/lenient-parsing-before-evaluation.md
@@ -138,7 +138,7 @@ If the specification identifies dependencies on deliverables from other projects
 ### 8. Compound Check
 
 If this problem shape recurs or reveals a reusable pattern, document it:
-- Create or update a file in `/_system/docs/solutions/problem-patterns/`
+- Create or update a file in `/_system/docs/solutions/`
 - Use standard frontmatter with tags for future retrieval
 
 ## Context Contract
@@ -185,7 +185,7 @@ Before marking complete, verify:
 
 ## Compound Behavior
 
-When recurring problem shapes are identified, create or update entries in `_system/docs/solutions/problem-patterns/` with standard frontmatter and confidence tagging. Track which problem types recur to build a library of reusable analysis frameworks.
+When recurring problem shapes are identified, create or update entries in `_system/docs/solutions/` with standard frontmatter and confidence tagging. Track which problem types recur to build a library of reusable analysis frameworks.
 
 ## Convergence Dimensions
 
