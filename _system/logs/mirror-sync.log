@@ -747,3 +747,4 @@
 2026-06-01 19:57:08 SYNC chore: session-end log — Telegram noise trace, monitoring teardown, git-drift cleanup
 2026-06-01 20:02:16 SYNC Compound: infrastructure-teardown-discipline solution doc
 2026-06-01 20:27:01 SYNC Decom overnight-research + connections-brainstorm services
+2026-06-01 20:28:44 SYNC Add topics field to teardown-discipline doc (vault-check warning)

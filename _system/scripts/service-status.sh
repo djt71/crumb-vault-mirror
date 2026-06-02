@@ -22,7 +22,6 @@ SERVICES=(
   "ai.openclaw.vault-health"
   "com.crumb.dashboard"
   "com.crumb.cloudflared"
-  "com.tess.health-check"
   "com.tess.vault-backup"
   "com.tess.backup-status"
 )
