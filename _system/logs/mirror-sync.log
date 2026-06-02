@@ -753,3 +753,4 @@
 2026-06-01 20:50:18 SYNC Docs-accuracy sweep: reflect 2026-05/06 service decommissions
 2026-06-01 21:00:15 SYNC Sweep decommissioned services from tess-v2 registry + confirm scout decom
 2026-06-01 21:07:11 SYNC Session log: research/brainstorm queue processing + service decommissions + docs/registry reconciliation
+2026-06-01 21:59:46 SYNC Vault audit 2026-06-01: fix broken skill links + convention drift
