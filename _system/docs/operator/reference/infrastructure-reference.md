@@ -60,11 +60,8 @@ Hostnames, ports, services, credentials, and health checks for the Crumb/Tess sy
 | `com.tess.v2.vault-gc` | Pre-dawn daily | Vault garbage collection |
 | `com.tess.v2.backup-status` | Interval | Backup state monitoring |
 | `com.tess.v2.daily-attention` | 6:30 AM daily | Daily attention planning |
-| `com.tess.v2.scout-pipeline` | Interval | Opportunity Scout daily pipeline — *not loaded, status under review* |
-| `com.tess.v2.scout-feedback-health` | Interval | Scout feedback health — *not loaded, status under review* |
-| `com.tess.v2.scout-weekly-heartbeat` | Weekly | Scout weekly heartbeat — *not loaded, status under review* |
 
-Awareness-check runs on the legacy `ai.openclaw.awareness-check` (the v2 LLM heartbeat was dropped 2026-05-28). For services removed in the 2026-05/06 teardown, see **Decommissioned services** below.
+Awareness-check runs on the legacy `ai.openclaw.awareness-check` (the v2 LLM heartbeat was dropped 2026-05-28). The scout services were decommissioned 2026-05-28. For all services removed in the 2026-05/06 teardown, see **Decommissioned services** below.
 
 **Apple and cross-user services:**
 
@@ -76,7 +73,8 @@ Awareness-check runs on the legacy `ai.openclaw.awareness-check` (the v2 LLM hea
 **Legacy `ai.openclaw.*`:** `health-ping`, `awareness-check`, `daily-attention`, `vault-health` (still loaded) plus `bridge.watcher`. `fif.capture/feedback/attention` and `overnight-research` were decommissioned (see below). Email triage (both namespaces) was shut down 2026-04-10 (TV2-036/037 cancelled). The authoritative service set is managed via `Projects/tess-v2/project-state.yaml` `services:` field.
 
 **Decommissioned services (2026-05/06):** Removed in the 2026-05-28 → 2026-06-01 teardown sweep (see `_system/docs/solutions/infrastructure-teardown-discipline.md`):
-- **FIF capture/attention/feedback-health** (both namespaces) — 2026-05-28.
+- **FIF capture/attention/feedback-health** (both namespaces) — 2026-05-28 (commit 2756dbc1, operator-directed).
+- **Opportunity Scout** (`scout-pipeline`/`feedback-health`/`weekly-heartbeat`/`feedback-poller`) — 2026-05-28 (same commit); project kept, repo/plists retained.
 - **`com.crumb.service-status`** (liveness sensor) + its `service-status.json` output — 2026-06-01 (orphaned after dashboard stopped).
 - **`com.tess.v2.awareness-check`** (LLM heartbeat) — 2026-05-28 (awareness-check continues on legacy namespace).
 - **`com.tess.health-check`** (TMA-004 Limited Mode failover) — retired; script preserved, plist removed.
@@ -159,7 +157,7 @@ launchctl print gui/$(id -u)/ai.openclaw.bridge.watcher       # status
 | xAI/Grok API key | `~/.config/crumb/.env` | tess | peer-review | Manual |
 | GitHub PAT | macOS Keychain (credential-osxkeychain) | tess | Git push/pull | Auto-cached |
 | OpenClaw token | `/Users/openclaw/.openclaw/openclaw.json` | openclaw | Gateway auth | Per config |
-| Telegram bot tokens | LaunchAgent plist env vars | tess | awareness-check, health-ping, scout services | Manual |
+| Telegram bot tokens | LaunchAgent plist env vars | tess | awareness-check, health-ping, vault-health, backup-status | Manual |
 | Cloudflare tunnel token | macOS Keychain | tess | `com.crumb.cloudflared` | Manual |
 | X (Twitter) OAuth | Dynamic (Keychain refresh) | tess | feed-intel framework | Auto-refresh |
 

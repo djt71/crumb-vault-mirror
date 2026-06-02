@@ -50,7 +50,6 @@ flowchart TD
         vh["com.tess.v2.vault-health\n(2:00 AM)"]
         da["com.tess.v2.daily-attention\n(6:30 AM)"]
         vgc["com.tess.v2.vault-gc\n(4:00 AM)"]
-        scout["com.tess.v2.scout-pipeline/feedback/heartbeat\n(not loaded — status under review)"]
         dash["com.crumb.dashboard\n(stopped 2026-05-28)"]
         vw["com.crumb.vault-web\n(Quartz mobile)"]
         cf["com.crumb.cloudflared\n(tunnel)"]
@@ -92,7 +91,7 @@ flowchart TD
 
 Three launchd domains host the system's processes:
 
-**`gui/` domain (tess user):** Claude Code runs as interactive terminal sessions (on-demand, not persistent). The bridge-watcher (`ai.openclaw.bridge.watcher`) is a persistent Python process (KeepAlive) monitoring `_openclaw/inbox/` via kqueue for sub-ms file detection. `com.tess.llama-server` is a KeepAlive daemon hosting the local Nemotron model for Tess Mechanic and inference-heavy scheduled jobs. The tess-v2 project registers interval-scheduled `com.tess.v2.*` services — currently live: health-ping (15 min), vault-health (2:00 AM), vault-gc (pre-dawn), daily-attention (6:30 AM), backup-status. The awareness-check heartbeat runs on the legacy `ai.openclaw.awareness-check` (the `com.tess.v2.awareness-check` LLM heartbeat was dropped 2026-05-28). Feed-intel (capture/attention/feedback-health), overnight-research, and connections-brainstorm were decommissioned (see below); scout-pipeline/feedback-health/weekly-heartbeat are currently not loaded (status under review). Crumb-side support runs as `com.crumb.*` LaunchAgents: `vault-web` (Quartz mobile site), `cloudflared` (tunnel to the Mission Control dashboard), `vault-gc`, `qmd-index`, `system-stats`, `vault-rebuild`, and `telemetry-rollup`. `com.crumb.dashboard` (Mission Control server) is currently stopped (2026-05-28; mission-control project still active).
+**`gui/` domain (tess user):** Claude Code runs as interactive terminal sessions (on-demand, not persistent). The bridge-watcher (`ai.openclaw.bridge.watcher`) is a persistent Python process (KeepAlive) monitoring `_openclaw/inbox/` via kqueue for sub-ms file detection. `com.tess.llama-server` is a KeepAlive daemon hosting the local Nemotron model for Tess Mechanic and inference-heavy scheduled jobs. The tess-v2 project registers interval-scheduled `com.tess.v2.*` services — currently live: health-ping (15 min), vault-health (2:00 AM), vault-gc (pre-dawn), daily-attention (6:30 AM), backup-status. The awareness-check heartbeat runs on the legacy `ai.openclaw.awareness-check` (the `com.tess.v2.awareness-check` LLM heartbeat was dropped 2026-05-28). Feed-intel (capture/attention/feedback-health), opportunity-scout (scout-pipeline/feedback-health/weekly-heartbeat/feedback-poller), overnight-research, and connections-brainstorm were all decommissioned (see below). Crumb-side support runs as `com.crumb.*` LaunchAgents: `vault-web` (Quartz mobile site), `cloudflared` (tunnel to the Mission Control dashboard), `vault-gc`, `qmd-index`, `system-stats`, `vault-rebuild`, and `telemetry-rollup`. `com.crumb.dashboard` (Mission Control server) is currently stopped (2026-05-28; mission-control project still active).
 
 **`gui/` domain (danny user):** The apple-snapshot LaunchAgent writes Apple data (Reminders, Calendar, Notes) to `_openclaw/state/` every 30 minutes during waking hours. Requires danny's GUI session to be active.
 
@@ -122,11 +121,8 @@ Three launchd domains host the system's processes:
 | `com.tess.v2.vault-gc` | Pre-dawn daily | Vault garbage collection |
 | `com.tess.v2.backup-status` | Interval | Backup state monitoring |
 | `com.tess.v2.daily-attention` | 6:30 AM daily | Daily attention planning |
-| `com.tess.v2.scout-pipeline` | Interval | Opportunity Scout daily pipeline — *not loaded, status under review* |
-| `com.tess.v2.scout-feedback-health` | Interval | Scout feedback health — *not loaded, status under review* |
-| `com.tess.v2.scout-weekly-heartbeat` | Weekly | Scout weekly heartbeat — *not loaded, status under review* |
 
-Awareness-check runs on the legacy `ai.openclaw.awareness-check`, not the v2 namespace.
+Awareness-check runs on the legacy `ai.openclaw.awareness-check`, not the v2 namespace. The scout services (`scout-pipeline`/`feedback-health`/`weekly-heartbeat`/`feedback-poller`) were decommissioned 2026-05-28 — see below.
 
 **Apple and cross-user services:**
 
@@ -139,7 +135,8 @@ Awareness-check runs on the legacy `ai.openclaw.awareness-check`, not the v2 nam
 **Legacy `ai.openclaw.*` services:** `ai.openclaw.health-ping`, `awareness-check`, `daily-attention`, `vault-health` (still loaded), plus `bridge.watcher` (KeepAlive). The `ai.openclaw.fif.capture/feedback/attention` and `ai.openclaw.overnight-research` jobs were decommissioned (see below). The authoritative service set is managed via `Projects/tess-v2/project-state.yaml` `services:` field — cross-reference at deployment time.
 
 **Decommissioned services (2026-05/06):** Removed in the 2026-05-28 → 2026-06-01 teardown sweep (see `_system/docs/solutions/infrastructure-teardown-discipline.md` and failure-log 2026-06-01):
-- **Feed-intel (FIF) capture/attention/feedback-health** (both namespaces) — 2026-05-28; FIF capture pipeline retired.
+- **Feed-intel (FIF) capture/attention/feedback-health** (both namespaces) — 2026-05-28 (commit 2756dbc1, operator-directed); FIF capture pipeline retired.
+- **Opportunity Scout** (`scout-pipeline`/`feedback-health`/`weekly-heartbeat`/`feedback-poller`) — 2026-05-28 (same commit 2756dbc1); pipeline no longer useful per operator. Project kept (not archived); repo/plists retained for reversibility.
 - **`com.crumb.service-status`** (60s liveness sensor) — orphaned once the Mission Control dashboard stopped; plist + script + output removed 2026-06-01.
 - **`com.tess.v2.awareness-check`** (LLM heartbeat) — dropped 2026-05-28; awareness-check continues on the legacy namespace.
 - **`com.tess.health-check`** (TMA-004 Limited Mode auto-failover) — retired; broken for months via launchd↔Keychain isolation. Script `tess-health-check.sh` preserved for possible repair; plist removed.
@@ -293,7 +290,7 @@ Companion notes (markdown) ARE tracked — they carry the metadata, description,
 | OpenRouter API key | `~/.config/crumb/.env` | tess, openclaw | Tess Voice cloud inference | Manual |
 | GitHub PAT | macOS Keychain (credential-osxkeychain) | tess | Git push/pull | Auto-cached |
 | OpenClaw token | `/Users/openclaw/.openclaw/openclaw.json` | openclaw | Gateway auth | Per config |
-| Telegram bot tokens | LaunchAgent plist env vars | tess | awareness-check, health-ping, scout services | Manual |
+| Telegram bot tokens | LaunchAgent plist env vars | tess | awareness-check, health-ping, vault-health, backup-status | Manual |
 | Cloudflare tunnel token | macOS Keychain | tess | cloudflared tunnel (dashboard remote access) | Manual |
 | X (Twitter) OAuth | Dynamic (Keychain refresh) | tess | feed-intel framework | Auto-refresh |
 
