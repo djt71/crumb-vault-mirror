@@ -1,6 +1,6 @@
-Mode: pre-commit (23 staged files)
+Mode: pre-commit (3 staged files)
 === 1. Frontmatter Schema Validation ===
-  Checked 6 files, 0 with issues
+  Checked 1 files, 0 with issues
 
 === 2. Summary Freshness Check ===
   Checked 0 summaries, 0 stale
@@ -68,7 +68,7 @@ Mode: pre-commit (23 staged files)
   Checked 0 attention-item files, 0 issues
 
 === 27. Daily-Attention Schema Validation ===
-  Checked 4 daily-attention files, 0 issues
+  Checked 0 daily-attention files, 0 issues
 
 === 28. Cross-Project Dependency Validation ===
   WARNING: XD-001 — upstream task in 'tess-operations' still 'not yet scoped' (92 days since file updated)
@@ -84,7 +84,7 @@ Mode: pre-commit (23 staged files)
   Skipped (no staged run-log files)
 
 === 31. Broken Wikilink Detection ===
-  Checked 9 files, 0 broken links in 0 files
+  Checked 2 files, 0 broken links in 0 files
 
 === Solution Doc Track Schema ===
   Checked 0 solution docs, 0 track issues

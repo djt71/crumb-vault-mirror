@@ -762,3 +762,4 @@
 2026-06-08 13:53:10 SYNC tess-danny-migration: M1 gating decisions resolved
 2026-06-08 14:01:01 SYNC tess-danny-migration: M2/P0 prep (baseline, manifest, rollback point)
 2026-06-08 14:11:13 SYNC tess-danny-migration: M2 complete — system frozen, handed off to danny session
+2026-06-08 15:13:02 SYNC tess-danny-migration: durable freeze (TDM-014) + P0 stable-tree snapshot (TDM-010)

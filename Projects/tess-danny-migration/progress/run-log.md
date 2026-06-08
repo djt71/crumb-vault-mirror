@@ -209,3 +209,34 @@ TDM-011/012 capture files **do exist** (`~/migration-{services-before,keychain-m
 13:55, live capture, all 22 agents + 15 Tier-A names) — artifacts done despite `todo` marker.
 Applied danny's doc corrections (this block + tasks.md TDM-014/010 rows + secret-manifest
 11→15 + project-state next_action). Durable freeze + commit/push + logout gated on operator.
+
+### EXECUTED — durable freeze + P0 commit (tess session, 2026-06-08, operator approved)
+- **TDM-011/012 ✅** — capture artifacts verified present (`~/migration-{keychain-manifest,
+  services-before}.txt`, 13:55 live capture; 15 Tier-A names + all 22 agents). Not re-captured
+  (content current; agent set unchanged since 13:55).
+- **TDM-014 ✅ (logout pending)** — `launchctl disable gui/501/<label>` + `bootout` for all 22
+  loaded Crumb labels. First pass: 19 out, 3 KeepAlive daemons (`hermes.gateway`,
+  `bridge.watcher`, `llama-server`) raced the bootout and respawned; once `disable` removed
+  KeepAlive they died on retry (`bootout=3 No such process`). Final: **0 Crumb agents loaded,
+  22 persistent disable overrides recorded, 0 Crumb processes running.** Durable across re-login.
+  Gotcha hit + fixed: zsh doesn't word-split unquoted `$VAR` — first loop no-opped on a
+  multiline blob; redone with `while read -r`.
+- **TDM-010 ✅** — committed stable tree (writers stopped) `75c3d37f`, pushed to
+  origin/main (`420651..75c3d37f`); `git status` clean, local = upstream. 30 files (4 migration
+  docs + agent churn: scout-digest GC deletions, state files, `_system/daily/*`, empty debrief).
+  vault-check: 0 errors, 4 non-blocking warnings (pre-existing stale cross-project deps).
+- **Rollback (corrected):** `launchctl enable gui/501/<label>` then `bootstrap` (or just log
+  into tess) — plain bootstrap is blocked while disabled. Baseline `b78f638e`.
+
+**State:** Durable freeze in place. tess writers stopped, vault pushed. **NEXT — operator:**
+log out of tess (do NOT fast-switch back until M6) → launch Claude Code as **danny** →
+danny session runs P1 (rsync TDM-020 → chown TDM-021 → path rewrite TDM-022) reading
+`/Users/Shared/crumb-migration-handoff.md`, then continues from the copied vault run-log.
+
+### Compound (this session)
+- **Pattern confirmed (route to solutions/):** "`launchctl bootout` is session-scoped; a
+  durable launchd freeze on macOS needs `disable` (persistent override DB) before bootout,
+  and KeepAlive daemons must be disabled *first* or they race-respawn the bootout." Pairs with
+  the existing keychain-as-critical-path candidate. Both earned via live execution this migration.
+- **Convention reinforced:** zsh unquoted-`$VAR` no-word-split — already in `macos-system-notes`
+  memory; recurred here. No new memory needed.
