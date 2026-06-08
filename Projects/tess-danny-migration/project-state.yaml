@@ -9,7 +9,7 @@ updated: 2026-06-08
 last_committed: 2026-06-08
 last_gate: PLAN-to-TASK
 active_task: null
-next_action: "TASK decomposition in progress — build tasks.md from runbook P0–P7 with atomic tasks + acceptance criteria. Resolve open items (duplicate-agent pruning, cloudflared tunnel UUID strategy) before IMPLEMENT. No execution has begun; nothing on system touched."
+next_action: "TASK decomposition complete — tasks.md has 22 atomic tasks (TDM-001..063) across M1 gating decisions + M2–M7. Before IMPLEMENT: resolve gating decisions TDM-001 (agent-generation pruning), TDM-002 (cloudflared tunnel UUID), TDM-003 (secret manifest). Execution is strictly sequential and soak-gated at M7. No execution has begun; nothing on system touched."
 tags:
   - migration
   - launchd

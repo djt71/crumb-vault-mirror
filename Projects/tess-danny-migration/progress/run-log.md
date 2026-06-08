@@ -87,3 +87,18 @@ before any execution.
 - Action taken: none (capacity ample)
 - Key artifacts for TASK phase: `tess-to-danny-migration-runbook.md` (serves as the
   design+plan source; no separate frontend/backend design — operational project)
+
+### TASK decomposition (same session)
+- Invoked action-architect. No overlay fired (Network Skills excludes Crumb infra).
+  Loaded [[infrastructure-teardown-discipline]] — directly relevant: it documents
+  this exact `ai.openclaw.*`/`com.tess.*`/`com.tess.v2.*` dual-generation cruft and
+  mandates a consumer-graph trace before disabling any producer. Folded both in.
+- Produced `tasks.md`: 22 atomic tasks (TDM-001..063), 3 gating decisions (M1) +
+  M2–M7, each with binary acceptance criteria, dependency chain, risk tiers.
+- Ceremony-budget call: did NOT create a duplicate `action-plan.md` — the runbook's
+  8 phases + verification gates already serve as the action plan; milestones live in
+  progress-log. Decomposition's value is the atomic task table.
+- Estimation calibration: 22 tasks planned; record planned-vs-actual at completion
+  (not yet written to estimation-calibration.md — no actuals).
+- Highest-risk tasks flagged: TDM-021 (chown), TDM-022 (path rewrite), TDM-030
+  (keychain re-key), TDM-042 (launchd bootstrap), TDM-061/062 (irreversible teardown).

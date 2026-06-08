@@ -15,7 +15,7 @@ High-level milestone tracker. Detailed session notes live in [[run-log]].
 | # | Milestone | Phase | Status |
 |---|---|---|---|
 | M0 | Plan + decisions locked; runbook written | PLAN | ✅ done (2026-06-08) |
-| M1 | Task decomposition (P0–P7 → atomic tasks) | TASK | 🔄 in progress (2026-06-08) |
+| M1 | Task decomposition (P0–P7 → atomic tasks) | TASK | ✅ done (2026-06-08) — 22 tasks in [[tasks]] |
 | M2 | P0 freeze + pre-flight + danny admin grant | IMPLEMENT | ⬜ pending |
 | M3 | P1 bulk copy + P2 path rewrite | IMPLEMENT | ⬜ pending |
 | M4 | P3 secrets + P4 runtime rebuild | IMPLEMENT | ⬜ pending |
