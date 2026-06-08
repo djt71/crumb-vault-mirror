@@ -759,3 +759,4 @@
 2026-06-01 22:13:05 SYNC chore: session-end log — context-doc regeneration + model-policy bump
 2026-06-08 13:32:41 SYNC tess-danny-migration: PLAN complete, gate to TASK
 2026-06-08 13:38:26 SYNC tess-danny-migration: TASK decomposition — 22 atomic tasks
+2026-06-08 13:53:10 SYNC tess-danny-migration: M1 gating decisions resolved

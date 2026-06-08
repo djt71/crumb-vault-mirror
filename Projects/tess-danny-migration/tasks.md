@@ -1,6 +1,7 @@
 ---
 type: tasks
 project: tess-danny-migration
+domain: software
 status: active
 created: 2026-06-08
 updated: 2026-06-08
@@ -55,7 +56,7 @@ disabling any `tess` producer.
 
 | id | description | state | depends_on | risk | domain | acceptance_criteria |
 |---|---|---|---|---|---|---|
-| TDM-030 | Re-add the **11 Tier-A** keychain items ([[secret-manifest]]) to danny's login keychain (Tier B rides the rsync — do not hand-add) | todo | TDM-011, TDM-021 | high | software | Every Tier-A name resolves via `security find-generic-password` under danny; YES/NO: any Tier-A item missing? = NO |
+| TDM-030 | Re-add the **15 Tier-A** keychain items ([[secret-manifest]]) to danny's login keychain (Tier B rides the rsync — do not hand-add) | todo | TDM-011, TDM-021 | high | software | All 15 Tier-A names resolve via `security find-generic-password` under danny; YES/NO: any Tier-A item missing? = NO |
 | TDM-031 | Re-auth Tier-A′ + tunnel: `gh auth login`, Claude Code sign-in, Google OAuth token refresh (only if `token_cache.json` refresh fails), cloudflared (UUID reuse — copy 3 files per TDM-002) | todo | TDM-021, TDM-002 | med | software | `gh auth status` ok; cloudflared `<UUID>.json`+`cert.pem` present; Claude Code authenticated; MCP google-workspace returns without auth error |
 | TDM-032 | Recreate `.hermes/hermes-agent` venv under danny (`python -m venv` + editable install) | todo | TDM-021 | med | software | `venv/bin/python` shebang points to `/Users/danny`; `hermes_cli` imports without error |
 | TDM-033 | Recreate openclaw repo venvs + `npm ci` for node services | todo | TDM-021 | med | software | Each repo with `requirements.txt` has a working danny venv; each `package.json` repo has `node_modules`; smoke import/build per repo succeeds |

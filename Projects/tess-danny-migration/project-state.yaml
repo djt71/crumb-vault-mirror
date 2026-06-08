@@ -8,8 +8,8 @@ created: 2026-06-08
 updated: 2026-06-08
 last_committed: 2026-06-08
 last_gate: PLAN-to-TASK
-active_task: null
-next_action: "M1 gating decisions ALL RESOLVED (TDM-001 keep/drop map, TDM-002 cloudflared reuse-UUID, TDM-003 secret manifest — see design/). Notable: CalendarInterval works on 26.5 (TDM-041 voided, memory corrected); TDM-030 shrunk to 11 Tier-A keychain items. Two non-blocking flags await operator: dormant monitoring stack (carry vs drop), nemotron-load drop confirm. Next: M2/P0 freeze (TDM-010..014) — first task TDM-013 grant danny admin, then commit/push repos + bootout tess agents. STILL no execution; nothing on system touched."
+active_task: TDM-013
+next_action: "M2/P0 prep DONE (TDM-011 keychain manifest=15 Tier-A; TDM-012 services baseline; TDM-010 vault pushed to f7cf4c95 = rollback point). BLOCKED: TDM-013 grant danny admin needs interactive sudo — operator runs `sudo dseditgroup -o edit -a danny -t user admin`. GATED: TDM-014 bootout (freezes live automation) must run contiguously with P1 copy block, not across a pause. Once admin granted + operator ready for the disruptive block: bootout tess agents → rsync trees → chown → path rewrite. No destructive change yet."
 tags:
   - migration
   - launchd

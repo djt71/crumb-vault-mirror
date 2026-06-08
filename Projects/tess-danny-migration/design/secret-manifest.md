@@ -12,8 +12,9 @@ task: TDM-003
 
 Secrets split into two tiers. **Only Tier A needs manual re-keying** (per-user
 keychain). Tier B is file-based and copies with the migration — though OAuth tokens
-may still need a re-auth if bound. This shrinks the runbook's original "re-add every
-keychain item" (TDM-030) to ~11 items.
+may still need a re-auth if bound. This refines the runbook's original "re-add every
+keychain item" (TDM-030) to **15 Tier-A items** (corrected 2026-06-08 from snapshot —
+x-feed-intel has 8 secrets incl. X OAuth client/refresh + youtube, not 4).
 
 > Values are never recorded here — names + consumers only. Pull values at re-key time.
 
@@ -29,6 +30,10 @@ keychain item" (TDM-030) to ~11 items.
 | `x-feed-intel.telegram-chat-id` | x-feed-intel delivery |
 | `x-feed-intel.twitterapi-io-key` | x-feed-intel capture |
 | `x-feed-intel.x-access-token` | x-feed-intel X API |
+| `x-feed-intel.x-client-id` | x-feed-intel X OAuth |
+| `x-feed-intel.x-client-secret` | x-feed-intel X OAuth |
+| `x-feed-intel.x-refresh-token` | x-feed-intel X OAuth (token refresh) |
+| `x-feed-intel.youtube-api-key` | x-feed-intel YouTube capture |
 | `book-scout.annas-archive-api-key` | `openclaw/book-scout` |
 | `google-oauth-client-id` | google-workspace / calendar / email |
 | `google-oauth-client-secret` | google-workspace / calendar / email |

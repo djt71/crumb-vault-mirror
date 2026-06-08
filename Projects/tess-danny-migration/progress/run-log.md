@@ -38,8 +38,8 @@ path-keyed `.claude` memory dir.
 - Live recon: `/Users/tess` top-level dirs + sizes, 24→26 launchd plists +
   scheduling, git remotes (vault + 7 repos), keychain item names, group
   membership (`crumbvault`: openclaw/tess/danny), shell profiles, danny home state.
-- Memory: [[macos-tahoe-calendarinterval-bug]], [[macos-system-notes]],
-  [[recurring-patterns]], [[openclaw-ops]], [[fif-operations]].
+- Memory: `macos-tahoe-calendarinterval-bug` (memory), `macos-system-notes` (memory),
+  `recurring-patterns` (memory), `openclaw-ops` (memory), `fif-operations` (memory).
 
 ### Work done
 - Full blast-radius recon (read-only).
@@ -109,7 +109,7 @@ Investigation overturned two of my own prior claims:
 - **CalendarInterval is NOT broken on 26.5.** All 4 CalendarInterval agents fire
   (`runs=11, exit 0`); `ai.openclaw.vault-health` wrote `vault-health-notes.md` at 02:07.
   The Tahoe bug was 26.3.x-specific, fixed by 26.5. → **Corrected memory
-  [[macos-tahoe-calendarinterval-bug]] + MEMORY.md index. Voided TDM-041.**
+  `macos-tahoe-calendarinterval-bug` (memory) + MEMORY.md index. Voided TDM-041.**
 - `com.crumb.vault-gc` is therefore NOT a dead zombie (it fires daily) → kept, not dropped.
 Net keep/drop ([[agent-keep-drop-map]]): 21 KEEP + ollama(brew) + dashboard(keep-unloaded);
 DROP 3 = 2 disabled email-triage + `com.tess.nemotron-load` (1040× exit 127, soak-zombie).
@@ -129,3 +129,22 @@ change. Flagged: tunnel fronts the *stopped* dashboard (dormant monitoring stack
 **Compound:** The CalendarInterval finding is a live-evidence-beats-stale-memory case
 — corrected at source. Candidate convention: "on OS-version-coupled bugs, re-verify
 against the running version before acting; memory carries the version it was observed on."
+
+### M2 / P0 freeze — prep done, gated at bootout (same session)
+Operator said proceed (context 16%, ample). Flags ride defaults (carry monitoring
+stack, drop nemotron). Executed the non-disruptive prep; held at TDM-014.
+- **TDM-012 ✅** services baseline → `~/migration-services-before.txt` (22 agents).
+- **TDM-011 ✅** keychain manifest → `~/migration-keychain-manifest.txt`. **Found 4
+  more x-feed-intel secrets** (x-client-id/secret/refresh-token, youtube-api-key) →
+  corrected [[secret-manifest]] + TDM-030 to **15 Tier-A items**.
+- **TDM-013 ⛔ BLOCKED** — `sudo dseditgroup` needs a password; can't run
+  non-interactively. Operator must run: `! sudo dseditgroup -o edit -a danny -t user admin`.
+- **TDM-010 ✅(reframed)** — vault pushed (remote HEAD `f7cf4c95`, rollback point set).
+  Reality check: `opportunity-scout` has 177 uncommitted (decommissioned repo),
+  `book-scout`/`semuta` have no remote. Decision: **do NOT force-commit churn into
+  dead repos** — rsync carries working-tree state faithfully; git-push is a rollback
+  bonus only for repos with a remote (vault done; dashboard/bridge already clean).
+- **TDM-014 ⏸ GATE** — bootout freezes live automation; must immediately precede the
+  P1 copy as one contiguous block. Not run.
+
+**State:** Still no destructive change. Admin grant + bootout+copy block pending operator.

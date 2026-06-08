@@ -1,7 +1,6 @@
-Mode: pre-commit (6 staged files)
+Mode: pre-commit (4 staged files)
 === 1. Frontmatter Schema Validation ===
-  WARNING: Projects/tess-danny-migration/tasks.md — missing required fields: domain
-  Checked 3 files, 1 with issues
+  Checked 2 files, 0 with issues
 
 === 2. Summary Freshness Check ===
   Checked 0 summaries, 0 stale
@@ -85,12 +84,7 @@ Mode: pre-commit (6 staged files)
   Skipped (no staged run-log files)
 
 === 31. Broken Wikilink Detection ===
-  WARNING: Projects/tess-danny-migration/progress/run-log.md — broken link: [[fif-operations]]
-  WARNING: Projects/tess-danny-migration/progress/run-log.md — broken link: [[macos-system-notes]]
-  WARNING: Projects/tess-danny-migration/progress/run-log.md — broken link: [[macos-tahoe-calendarinterval-bug]]
-  WARNING: Projects/tess-danny-migration/progress/run-log.md — broken link: [[openclaw-ops]]
-  WARNING: Projects/tess-danny-migration/progress/run-log.md — broken link: [[recurring-patterns]]
-  Checked 5 files, 5 broken links in 1 files
+  Checked 3 files, 0 broken links in 0 files
 
 === Solution Doc Track Schema ===
   Checked 0 solution docs, 0 track issues
@@ -102,7 +96,7 @@ Mode: pre-commit (6 staged files)
 Vault Check Summary
 ==========================================
   Errors:   0
-  Warnings: 10
+  Warnings: 4
 
 RESULT: WARNINGS (exit code 1)
 Non-blocking — review when convenient.
