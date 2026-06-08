@@ -1,0 +1,23 @@
+project: tess-danny-migration
+domain: software
+class: operational
+workflow: four-phase
+phase: TASK
+status: active
+created: 2026-06-08
+updated: 2026-06-08
+last_committed: 2026-06-08
+last_gate: PLAN-to-TASK
+active_task: null
+next_action: "TASK decomposition in progress — build tasks.md from runbook P0–P7 with atomic tasks + acceptance criteria. Resolve open items (duplicate-agent pruning, cloudflared tunnel UUID strategy) before IMPLEMENT. No execution has begun; nothing on system touched."
+tags:
+  - migration
+  - launchd
+  - keychain
+  - system/operator
+related_projects:
+  - mission-control
+  - feed-intel-framework
+  - tess-v2
+runbook: _system/docs/operator/how-to/tess-to-danny-migration-runbook.md
+notes: "Vault/ops project — no external repo, repo gate skipped per Project Creation Protocol 3b. The migration relocates ALL repos/runtime, but produces no new buildable codebase of its own."

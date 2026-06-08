@@ -756,3 +756,4 @@
 2026-06-01 21:59:46 SYNC Vault audit 2026-06-01: fix broken skill links + convention drift
 2026-06-01 22:03:21 SYNC chore: session-end log — vault audit + findings remediation
 2026-06-01 22:10:54 SYNC Regenerate claude-ai-context.md (38d stale) from verified live state
+2026-06-01 22:13:05 SYNC chore: session-end log — context-doc regeneration + model-policy bump
