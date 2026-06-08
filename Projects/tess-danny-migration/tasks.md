@@ -38,7 +38,7 @@ disabling any `tess` producer.
 | TDM-010 | Commit + push every repo (vault + 7 openclaw repos) to clean working trees | todo | — | med | software | `git status` is clean and `git push` succeeded for vault and each repo with a remote; YES/NO: any uncommitted tracked changes remain? = NO |
 | TDM-011 | Snapshot keychain item inventory to `~/migration-keychain-manifest.txt` | todo | TDM-003 | low | software | File exists and contains every secret name from TDM-003 |
 | TDM-012 | Capture running-services baseline (`launchctl list` filtered) to `~/migration-services-before.txt` | todo | — | low | software | File lists all currently-loaded Crumb/hermes/openclaw agents with PID/status |
-| TDM-013 | Grant `danny` admin (add to admin group) | todo | — | med | software | `groups danny` includes `admin`; danny can run `sudo` |
+| TDM-013 | Grant `danny` admin (add to admin group) | **done** | — | med | software | ✅ 2026-06-08 — `dseditgroup checkmember`: "yes danny is a member of admin" |
 | TDM-014 | Bootout all `tess` Crumb launchd agents to freeze writers during copy | todo | TDM-012 | med | software | `launchctl list` shows zero Crumb/hermes/openclaw agents loaded under tess; no agent writes to vault/repos after this point |
 
 ## M3 · P1 Bulk copy + P2 Path rewrite

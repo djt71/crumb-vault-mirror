@@ -16,7 +16,7 @@ High-level milestone tracker. Detailed session notes live in [[run-log]].
 |---|---|---|---|
 | M0 | Plan + decisions locked; runbook written | PLAN | ✅ done (2026-06-08) |
 | M1 | Task decomposition (P0–P7 → atomic tasks) | TASK | ✅ done (2026-06-08) — 22 tasks in [[tasks]] |
-| M2 | P0 freeze + pre-flight + danny admin grant | IMPLEMENT | ⬜ pending |
+| M2 | P0 freeze + pre-flight + danny admin grant | IMPLEMENT | ✅ done (2026-06-08) — 22 agents frozen; handed off to danny session |
 | M3 | P1 bulk copy + P2 path rewrite | IMPLEMENT | ⬜ pending |
 | M4 | P3 secrets + P4 runtime rebuild | IMPLEMENT | ⬜ pending |
 | M5 | P5 launchd standup (incl. dup pruning + calendar-interval fix) | IMPLEMENT | ⬜ pending |

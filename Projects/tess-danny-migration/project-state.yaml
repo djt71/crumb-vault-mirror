@@ -8,8 +8,8 @@ created: 2026-06-08
 updated: 2026-06-08
 last_committed: 2026-06-08
 last_gate: PLAN-to-TASK
-active_task: TDM-013
-next_action: "M2/P0 prep DONE (TDM-011 keychain manifest=15 Tier-A; TDM-012 services baseline; TDM-010 vault pushed to f7cf4c95 = rollback point). BLOCKED: TDM-013 grant danny admin needs interactive sudo — operator runs `sudo dseditgroup -o edit -a danny -t user admin`. GATED: TDM-014 bootout (freezes live automation) must run contiguously with P1 copy block, not across a pause. Once admin granted + operator ready for the disruptive block: bootout tess agents → rsync trees → chown → path rewrite. No destructive change yet."
+active_task: TDM-020
+next_action: "M2 COMPLETE — danny is admin; all 22 Crumb agents BOOTED OUT (system frozen, no writers). Handed off to a Claude session running as danny (this tess session can't sudo). NEXT (danny session): read /Users/Shared/crumb-migration-handoff.md → run P1 rsync (TDM-020) + chown (TDM-021) + P2 path rewrite (TDM-022), then continue from the copied vault run-log (P3 secrets=15 Tier-A, P4 venvs, P5 launchd per agent-keep-drop-map, P6 verify, P7 retire). ROLLBACK while frozen: re-bootstrap tess agents from a tess session — tess files untouched through P6. Rollback point: vault remote b78f638e."
 tags:
   - migration
   - launchd

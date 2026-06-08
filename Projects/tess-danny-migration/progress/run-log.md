@@ -148,3 +148,22 @@ stack, drop nemotron). Executed the non-disruptive prep; held at TDM-014.
   P1 copy as one contiguous block. Not run.
 
 **State:** Still no destructive change. Admin grant + bootout+copy block pending operator.
+
+### M2 COMPLETE + handoff to danny session (same session)
+- **TDM-013 ✅** danny granted admin (operator ran `dseditgroup` via `!`; verified
+  "yes danny is a member of admin").
+- **Execution-model decision:** this tess Bash session **cannot sudo** non-interactively
+  (verified) and `/Users/danny` isn't writable without sudo. Operator chose to **hand
+  off P1+ to a Claude session running as danny** (admin → sudo; also required natively
+  for P5 launchd bootstrap + P3/P6 re-auth).
+- **TDM-014 ✅** booted out all **22** loaded Crumb agents from tess's gui session
+  (no sudo needed — own domain). Verified zero Crumb agents loaded. **System FROZEN.**
+- **Handoff written** to `/Users/Shared/crumb-migration-handoff.md` (world-readable —
+  danny can't read tess's vault yet). Contains: current state, ready-to-run P1 rsync +
+  chown + P2 rewrite blocks, caveats (.claude handled separately; ambiguous trees to
+  confirm; .ssh/venvs excluded), and rollback procedure.
+
+**M2 done. Next:** operator launches Claude Code as **danny**; danny session reads the
+Shared handoff, runs P1 copy, then continues from the (now-copied) vault run-log.
+**Rollback while frozen:** re-bootstrap tess agents from a tess session (cheap; tess
+files untouched through P6).

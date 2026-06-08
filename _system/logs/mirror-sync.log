@@ -760,3 +760,4 @@
 2026-06-08 13:32:41 SYNC tess-danny-migration: PLAN complete, gate to TASK
 2026-06-08 13:38:26 SYNC tess-danny-migration: TASK decomposition — 22 atomic tasks
 2026-06-08 13:53:10 SYNC tess-danny-migration: M1 gating decisions resolved
+2026-06-08 14:01:01 SYNC tess-danny-migration: M2/P0 prep (baseline, manifest, rollback point)
