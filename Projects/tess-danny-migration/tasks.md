@@ -35,11 +35,11 @@ disabling any `tess` producer.
 
 | id | description | state | depends_on | risk | domain | acceptance_criteria |
 |---|---|---|---|---|---|---|
-| TDM-010 | Commit + push every repo (vault + 7 openclaw repos) to clean working trees | todo | — | med | software | `git status` is clean and `git push` succeeded for vault and each repo with a remote; YES/NO: any uncommitted tracked changes remain? = NO |
+| TDM-010 | Commit + push every repo (vault + 7 openclaw repos) to clean working trees. **Runs AFTER TDM-014** so writers are stopped and the tree is stable; commit as the tess git author before logout. | todo | TDM-014 | med | software | `git status` is clean and `git push` succeeded for vault and each repo with a remote; YES/NO: any uncommitted tracked changes remain? = NO |
 | TDM-011 | Snapshot keychain item inventory to `~/migration-keychain-manifest.txt` | todo | TDM-003 | low | software | File exists and contains every secret name from TDM-003 |
 | TDM-012 | Capture running-services baseline (`launchctl list` filtered) to `~/migration-services-before.txt` | todo | — | low | software | File lists all currently-loaded Crumb/hermes/openclaw agents with PID/status |
 | TDM-013 | Grant `danny` admin (add to admin group) | **done** | — | med | software | ✅ 2026-06-08 — `dseditgroup checkmember`: "yes danny is a member of admin" |
-| TDM-014 | Bootout all `tess` Crumb launchd agents to freeze writers during copy | todo | TDM-012 | med | software | `launchctl list` shows zero Crumb/hermes/openclaw agents loaded under tess; no agent writes to vault/repos after this point |
+| TDM-014 | **Durably** freeze tess Crumb agents: `launchctl disable gui/501/<label>` (persistent override DB) + `bootout` each, then **log out of tess**. bootout alone is session-scoped — reversed by any tess login (observed 2026-06-08 14:42, see run-log). | todo | TDM-012 | med | software | `launchctl list` shows zero Crumb/hermes/openclaw under tess **and** each label is `disable`d (survives re-login) **and** tess is logged out; no writer touches vault through M6 |
 
 ## M3 · P1 Bulk copy + P2 Path rewrite
 

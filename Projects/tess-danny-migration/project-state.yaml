@@ -9,7 +9,7 @@ updated: 2026-06-08
 last_committed: 2026-06-08
 last_gate: PLAN-to-TASK
 active_task: TDM-020
-next_action: "M2 COMPLETE — danny is admin; all 22 Crumb agents BOOTED OUT (system frozen, no writers). Handed off to a Claude session running as danny (this tess session can't sudo). NEXT (danny session): read /Users/Shared/crumb-migration-handoff.md → run P1 rsync (TDM-020) + chown (TDM-021) + P2 path rewrite (TDM-022), then continue from the copied vault run-log (P3 secrets=15 Tier-A, P4 venvs, P5 launchd per agent-keep-drop-map, P6 verify, P7 retire). ROLLBACK while frozen: re-bootstrap tess agents from a tess session — tess files untouched through P6. Rollback point: vault remote b78f638e."
+next_action: "P0 pre-flight incomplete (TDM-010 todo) and TDM-014 freeze did not hold (bootout is session-scoped; reversed by tess login 14:42 — confirmed this session, 22 agents live again). TDM-011/012 capture artifacts exist. NEXT (tess session): durable freeze = `launchctl disable gui/501/<label>` + bootout each of the 22 (TDM-014) → commit/push vault+repos (TDM-010) → log out of tess, no fast-switch back until M6. Then danny session resumes P1 (rsync TDM-020 → chown TDM-021 → path rewrite TDM-022 → P3 secrets=15 Tier-A → P4 venvs → P5 launchd → P6 verify → P7 retire). ROLLBACK: `launchctl enable` then bootstrap (disable blocks plain bootstrap); tess files untouched through P6. Rollback point: vault baseline b78f638e."
 tags:
   - migration
   - launchd

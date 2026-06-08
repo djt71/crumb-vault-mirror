@@ -58,6 +58,6 @@ x-feed-intel has 8 secrets incl. X OAuth client/refresh + youtube, not 4).
 | (plist comment) `HEALTHCHECKS_API_KEY` | healthchecks.io ping token | health-ping dead-man switch | trace to source at TDM-030 |
 
 ## Impact on tasks.md
-- **TDM-030** scope = the 11 Tier-A items only (not "every secret"). Tier B rides the rsync.
+- **TDM-030** scope = the 15 Tier-A items only (not "every secret"). Tier B rides the rsync.
 - **TDM-031** adds the Tier-A′ re-auths (gh, Claude Code, + Google OAuth token refresh if needed).
 - **TDM-011** snapshot must capture Tier-A names (done via `security dump-keychain`).

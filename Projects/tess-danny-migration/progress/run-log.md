@@ -167,3 +167,45 @@ stack, drop nemotron). Executed the non-disruptive prep; held at TDM-014.
 Shared handoff, runs P1 copy, then continues from the (now-copied) vault run-log.
 **Rollback while frozen:** re-bootstrap tess agents from a tess session (cheap; tess
 files untouched through P6).
+
+---
+
+### CORRECTION — freeze did not hold; durable re-freeze (danny session, 2026-06-08 ~14:47)
+Read-only sanity checks (danny session, before any write) found the "FROZEN" claim false:
+- tess's full stack was **live again**, all started `Mon Jun 8 14:42:47`, parent = launchd:
+  `bridge-watcher.py`, hermes `gateway run --replace`, `cloudflared tunnel run crumb-dashboard`,
+  quartz serve :8843. Vault working tree dirty (27 changes); `_openclaw/state/last-run/*`
+  written 14:42.
+- **Root cause:** `launchctl bootout` is **session-scoped**. TDM-014 unloaded the 22 agents
+  from the prior tess GUI session, but they carry `RunAtLoad`/`KeepAlive`, so the operator's
+  fast-user-switch **into tess at 14:42** auto-re-bootstrapped all of them. bootout-only is
+  not a durable freeze.
+- **Also found:** TDM-010/011/012 (P0 pre-flight) were skipped by the M2 handoff — they are
+  still `todo` and TDM-014 depends_on TDM-012. The 27 uncommitted vault changes confirm
+  TDM-010 not done. danny **can** read the vault via the `crumbvault` group, so the handoff's
+  bootstrap premise ("danny can't read the vault yet") is already obsolete.
+
+**Resolution — durable freeze (replaces bootout-only TDM-014), run from tess in this order:**
+1. TDM-012 baseline captured **while live** → `~/migration-services-before.txt`.
+2. TDM-011 keychain manifest → `~/migration-keychain-manifest.txt`.
+3. TDM-014: for every loaded Crumb label, `launchctl disable gui/501/<label>` (persistent
+   override DB — survives re-login) **then** `launchctl bootout gui/501/<label>`. Verify
+   `launchctl list | grep -icE 'hermes|openclaw|crumb|com.tess'` = 0.
+4. TDM-010: commit + push vault + 7 repos (writers now stopped → stable tree).
+5. **Log out of the tess account; do not fast-switch back until M6.**
+
+**Corrected rollback (disable changes it):** a `disable`d agent will NOT start from a plain
+`bootstrap` — must `launchctl enable gui/501/<label>` first, then bootstrap (or just log in).
+
+**State:** still no destructive change. P0 pre-flight + durable freeze pending operator (tess
+session). Rollback point unchanged: baseline tag `b78f638e` (ancestor of local HEAD
+`420eb851`); remote unverified until danny git cred (TDM-031).
+
+### tess-session verification of danny's correction (2026-06-08, this session)
+Independently confirmed before acting: running as `tess` (uid 501); **22** Crumb labels
+loaded (`launchctl list`), live PIDs on gateway/cloudflared/vault-web/bridge.watcher →
+freeze is off, danny's diagnosis holds. `/Users/danny/crumb-vault` absent → no P1 copy ran.
+TDM-011/012 capture files **do exist** (`~/migration-{services-before,keychain-manifest}.txt`,
+13:55, live capture, all 22 agents + 15 Tier-A names) — artifacts done despite `todo` marker.
+Applied danny's doc corrections (this block + tasks.md TDM-014/010 rows + secret-manifest
+11→15 + project-state next_action). Durable freeze + commit/push + logout gated on operator.
