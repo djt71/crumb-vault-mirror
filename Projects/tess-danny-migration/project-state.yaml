@@ -9,7 +9,7 @@ updated: 2026-06-08
 last_committed: 2026-06-08
 last_gate: PLAN-to-TASK
 active_task: null
-next_action: "TASK decomposition complete — tasks.md has 22 atomic tasks (TDM-001..063) across M1 gating decisions + M2–M7. Before IMPLEMENT: resolve gating decisions TDM-001 (agent-generation pruning), TDM-002 (cloudflared tunnel UUID), TDM-003 (secret manifest). Execution is strictly sequential and soak-gated at M7. No execution has begun; nothing on system touched."
+next_action: "M1 gating decisions ALL RESOLVED (TDM-001 keep/drop map, TDM-002 cloudflared reuse-UUID, TDM-003 secret manifest — see design/). Notable: CalendarInterval works on 26.5 (TDM-041 voided, memory corrected); TDM-030 shrunk to 11 Tier-A keychain items. Two non-blocking flags await operator: dormant monitoring stack (carry vs drop), nemotron-load drop confirm. Next: M2/P0 freeze (TDM-010..014) — first task TDM-013 grant danny admin, then commit/push repos + bootout tess agents. STILL no execution; nothing on system touched."
 tags:
   - migration
   - launchd

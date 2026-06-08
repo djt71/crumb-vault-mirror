@@ -102,3 +102,30 @@ before any execution.
   (not yet written to estimation-calibration.md — no actuals).
 - Highest-risk tasks flagged: TDM-021 (chown), TDM-022 (path rewrite), TDM-030
   (keychain re-key), TDM-042 (launchd bootstrap), TDM-061/062 (irreversible teardown).
+
+### M1 gating decisions — all resolved (same session)
+**TDM-001 (agent keep/drop):** Operator chose faithful-copy + drop-only-verifiably-dead.
+Investigation overturned two of my own prior claims:
+- **CalendarInterval is NOT broken on 26.5.** All 4 CalendarInterval agents fire
+  (`runs=11, exit 0`); `ai.openclaw.vault-health` wrote `vault-health-notes.md` at 02:07.
+  The Tahoe bug was 26.3.x-specific, fixed by 26.5. → **Corrected memory
+  [[macos-tahoe-calendarinterval-bug]] + MEMORY.md index. Voided TDM-041.**
+- `com.crumb.vault-gc` is therefore NOT a dead zombie (it fires daily) → kept, not dropped.
+Net keep/drop ([[agent-keep-drop-map]]): 21 KEEP + ollama(brew) + dashboard(keep-unloaded);
+DROP 3 = 2 disabled email-triage + `com.tess.nemotron-load` (1040× exit 127, soak-zombie).
+
+**TDM-002 (cloudflared):** Reuse tunnel UUID `6d7aca42-…` — copy 3 files
+(`cert.pem`, `<UUID>.json`, `config.yml`); ingress `mc.crumbos.dev` unchanged, no DNS
+change. Flagged: tunnel fronts the *stopped* dashboard (dormant monitoring stack).
+
+**TDM-003 (secret manifest, [[secret-manifest]]):** Secrets are two-tier — Tier A
+(11 keychain items, manual re-key) vs Tier B (file-based: `.openclaw/openclaw.json`,
+`.config/gws/*.json`, `health-check.env` — ride the rsync). Shrinks TDM-030 from
+"re-add everything" to 11 items.
+
+**Flags for operator:** (1) dormant monitoring stack — carry vs drop during move;
+(2) nemotron-load DROP recommended, override available. Neither blocks.
+
+**Compound:** The CalendarInterval finding is a live-evidence-beats-stale-memory case
+— corrected at source. Candidate convention: "on OS-version-coupled bugs, re-verify
+against the running version before acting; memory carries the version it was observed on."

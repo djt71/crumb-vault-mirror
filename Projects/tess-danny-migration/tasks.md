@@ -22,13 +22,13 @@ disabling any `tess` producer.
 > proxy for *code* tasks; for a scripted sweep the logical change is atomic. Footprint
 > is flagged where it exceeds the proxy.
 
-## Gating decisions (resolve before any execution — M1)
+## Gating decisions (pre-execution — all resolved 2026-06-08)
 
 | id | description | state | depends_on | risk | domain | acceptance_criteria |
 |---|---|---|---|---|---|---|
-| TDM-001 | Decide canonical launchd generation per function; produce keep/drop map for the `ai.openclaw.*` / `com.tess.*` / `com.tess.v2.*` overlap (backup-status, daily-attention, health-ping, vault-health, vault-gc) | todo | — | med | software | A keep/drop table exists listing every Crumb plist with a KEEP or DROP verdict and one-line rationale; no function has two KEEPs |
-| TDM-002 | Decide cloudflared tunnel strategy: reuse existing tunnel UUID (copy `cert.pem`/credentials) vs. provision fresh tunnel (new DNS/ingress) | todo | — | med | software | Decision recorded with the chosen UUID-handling steps and any DNS records that must change; YES/NO: does ingress hostname stay the same? |
-| TDM-003 | Build keychain secret manifest: each item name → source (keychain vs `openclaw.json`) → which agent/service consumes it | todo | — | low | software | Manifest file lists all 14+ secret names with consumer mapping; every plist/service that reads a secret is traced to a manifest row |
+| TDM-001 | Keep/drop map for launchd agents under faithful-copy policy | **done** | — | med | software | ✅ [[agent-keep-drop-map]] — 21 KEEP + ollama(brew) + dashboard(keep-file/unloaded); DROP 3 (2 disabled email-triage + nemotron-load 1040×fail). Dual-gen KEEPs intentional. **CalendarInterval fires on 26.5 → TDM-041 voided.** |
+| TDM-002 | Decide cloudflared tunnel strategy | **done** | — | med | software | ✅ **Reuse UUID `6d7aca42-…`** — copy 3 files (`cert.pem`, `<UUID>.json`, `config.yml`) to danny `.cloudflared`; ingress `mc.crumbos.dev` unchanged, no DNS change. NOTE: tunnel fronts the *stopped* dashboard (dormant monitoring stack — see coupling flag below). |
+| TDM-003 | Build secret manifest, consumer-mapped | **done** | — | low | software | ✅ [[secret-manifest]] — Tier A (11 keychain items, manual re-key) / A′ (gh + Claude Code re-auth) / B (file-based, copies with rsync). Shrinks TDM-030 scope. |
 
 ## M2 · P0 Freeze & pre-flight
 
@@ -55,8 +55,8 @@ disabling any `tess` producer.
 
 | id | description | state | depends_on | risk | domain | acceptance_criteria |
 |---|---|---|---|---|---|---|
-| TDM-030 | Re-add every keychain item from the manifest to danny's login keychain | todo | TDM-011, TDM-021 | high | software | Every name in TDM-011 manifest resolves via `security find-generic-password` under danny; YES/NO: any manifest item missing? = NO |
-| TDM-031 | Re-auth interactive credentials as danny: `gh auth login`, `cloudflared` (per TDM-002), Claude Code sign-in, MCP google-workspace/Gmail OAuth | todo | TDM-021, TDM-002 | med | software | `gh auth status` ok; cloudflared cert present; Claude Code authenticated; MCP tools return without auth error |
+| TDM-030 | Re-add the **11 Tier-A** keychain items ([[secret-manifest]]) to danny's login keychain (Tier B rides the rsync — do not hand-add) | todo | TDM-011, TDM-021 | high | software | Every Tier-A name resolves via `security find-generic-password` under danny; YES/NO: any Tier-A item missing? = NO |
+| TDM-031 | Re-auth Tier-A′ + tunnel: `gh auth login`, Claude Code sign-in, Google OAuth token refresh (only if `token_cache.json` refresh fails), cloudflared (UUID reuse — copy 3 files per TDM-002) | todo | TDM-021, TDM-002 | med | software | `gh auth status` ok; cloudflared `<UUID>.json`+`cert.pem` present; Claude Code authenticated; MCP google-workspace returns without auth error |
 | TDM-032 | Recreate `.hermes/hermes-agent` venv under danny (`python -m venv` + editable install) | todo | TDM-021 | med | software | `venv/bin/python` shebang points to `/Users/danny`; `hermes_cli` imports without error |
 | TDM-033 | Recreate openclaw repo venvs + `npm ci` for node services | todo | TDM-021 | med | software | Each repo with `requirements.txt` has a working danny venv; each `package.json` repo has `node_modules`; smoke import/build per repo succeeds |
 | TDM-034 | Verify model/ollama paths resolve under danny (`models/`, `.ollama/`, llama.cpp) | todo | TDM-020 | low | software | Ollama lists models; llama-server model path exists under `/Users/danny`; no path points at `/Users/tess` |
@@ -65,8 +65,8 @@ disabling any `tess` producer.
 
 | id | description | state | depends_on | risk | domain | acceptance_criteria |
 |---|---|---|---|---|---|---|
-| TDM-040 | Stage rewritten plists, applying the TDM-001 keep/drop map (drop pruned generations) | todo | TDM-001, TDM-022 | med | software | Staged plist set contains exactly the KEEP agents; every staged plist references `/Users/danny`; dropped agents absent |
-| TDM-041 | Convert the 4 `StartCalendarInterval` plists to `StartInterval` (vault-health, qmd-index, vault-gc, vault-backup) | todo | TDM-040 | low | software | Zero staged plists contain `StartCalendarInterval`; each converted agent has an equivalent `StartInterval` |
+| TDM-040 | Stage rewritten plists, applying the [[agent-keep-drop-map]] (exclude the 3 DROPs; carry `com.crumb.dashboard` unloaded) | todo | TDM-001, TDM-022 | med | software | Staged set = 21 KEEP + dashboard(unloaded); every staged plist references `/Users/danny`; the 3 DROP agents absent |
+| TDM-041 | ~~Convert 4 CalendarInterval → StartInterval~~ **VOID** — CalendarInterval fires normally on macOS 26.5 (verified `runs=11, exit 0`); forced conversion is needless churn. Re-open only if danny's session shows different sleep/wake firing behavior. | **void** | TDM-040 | low | software | N/A — superseded by 26.5 live evidence ([[agent-keep-drop-map]]) |
 | TDM-042 | Install staged plists to danny `~/Library/LaunchAgents` and `bootstrap` from danny's GUI session | todo | TDM-041, TDM-030, TDM-032, TDM-033 | high | software | All KEEP agents appear in danny's `launchctl list`; none in `idle_error` on first load |
 | TDM-043 | Migrate Ollama via `brew services` (not a copied plist) | todo | TDM-034 | med | software | `brew services list` shows ollama running under danny; no hand-copied ollama plist in LaunchAgents |
 
@@ -95,3 +95,13 @@ disabling any `tess` producer.
 - **M2 → M3 → M4 → M5 → M6 are strictly sequential** (freeze → copy → secrets/runtime → standup → verify).
 - **M7 is soak-gated** — do not start until M6 has been green for the agreed window.
 - Highest-risk tasks: TDM-021 (chown), TDM-022 (rewrite), TDM-030 (keychain), TDM-042 (bootstrap), TDM-061/062 (irreversible teardown).
+
+## Flags raised during M1 gating (carry into execution)
+- **Dormant monitoring stack:** `com.crumb.dashboard` (stopped 2026-06-01) + its
+  `com.crumb.cloudflared` tunnel (fronts the stopped dashboard at `mc.crumbos.dev`)
+  + telemetry feeders (`system-stats`, `telemetry-rollup`). Faithful-copy default =
+  carry forward dormant. **Optional consolidation:** drop the whole stack during the
+  move instead of replicating a decommissioned-but-running tunnel. Operator's call —
+  not blocking; defaults to carry.
+- **`com.tess.nemotron-load`:** recommended DROP (1040× exit 127). ML-adjacent soak
+  loader — operator may override to carry-and-fix. Defaults to DROP per keep/drop map.

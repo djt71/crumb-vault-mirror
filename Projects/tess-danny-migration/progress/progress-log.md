@@ -23,6 +23,14 @@ High-level milestone tracker. Detailed session notes live in [[run-log]].
 | M6 | P6 verification gates green | IMPLEMENT | ⬜ pending |
 | M7 | P7 retire tess (post-soak) | IMPLEMENT | ⬜ pending |
 
-## Open decisions (resolve in TASK)
-- Duplicate-agent pruning: canonical generation per function.
-- Cloudflared tunnel: reuse UUID (copy cert) vs fresh tunnel.
+## Gating decisions (all resolved 2026-06-08)
+- ✅ TDM-001 agent keep/drop: faithful copy; drop 3 (2 disabled email-triage +
+  nemotron-load). [[agent-keep-drop-map]]. **Found CalendarInterval works on 26.5 →
+  TDM-041 voided; memory corrected.**
+- ✅ TDM-002 cloudflared: reuse tunnel UUID, copy 3 files, ingress unchanged.
+- ✅ TDM-003 secret manifest: Tier A (11 keychain, re-key) / A′ (re-auth) / B (files
+  copy). [[secret-manifest]]. Shrinks TDM-030.
+
+## Flags carried into execution
+- Dormant monitoring stack (dashboard + cloudflared + telemetry) — carry vs drop (operator's call).
+- nemotron-load DROP recommended (1040× fail) — override available.
