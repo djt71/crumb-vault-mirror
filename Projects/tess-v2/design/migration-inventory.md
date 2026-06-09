@@ -57,7 +57,7 @@ task: TV2-001
 | 9 | `ai.openclaw.fif.attention` | 07:05 daily | Captured items | Attention scores, tier classification | ok (exit 0) | **migrate** (TV2-034) |
 | 10 | `ai.openclaw.fif.feedback` | KeepAlive | Telegram feedback commands | Score adjustments | ok (PID 49466, prev SIGKILL) | **migrate** (TV2-034) |
 
-- **Working dir:** `/Users/tess/openclaw/feed-intel-framework`
+- **Working dir:** `/Users/danny/openclaw/feed-intel-framework`
 - **Credentials:** `~/.config/fif/env.sh` (TwitterAPI.io, X OAuth, YouTube API, FIF Telegram bot, Anthropic)
 - **Pause flag:** `~/.config/fif/pause`
 
@@ -69,7 +69,7 @@ task: TV2-001
 | 12 | `com.scout.feedback-poller` | KeepAlive | Telegram feedback commands | Score adjustments | ok (PID 708) | **migrate** — needs M5 task |
 | 13 | `com.scout.weekly-heartbeat` | Monday 08:00 | Pipeline health data | Heartbeat via Telegram | ok (exit 0) | **migrate** — needs M5 task |
 
-- **Working dir:** `/Users/tess/openclaw/opportunity-scout`
+- **Working dir:** `/Users/danny/openclaw/opportunity-scout`
 - **Credentials:** Anthropic, Brave Search, Scout Telegram bot, Discord webhook
 - **Risk:** Medium — external API integrations, scoring logic
 

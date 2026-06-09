@@ -61,7 +61,7 @@ Tess (voice agent — Haiku 4.5)
   │      Download URL retrieval by document ID
   │
   ├──► Research Library (filesystem)
-  │      /Users/tess/research-library/
+  │      /Users/danny/research-library/
   │      Organized by subject
   │
   └──► Catalog Handoff (file drop)
@@ -85,7 +85,7 @@ The draft proposed a manifest-based download service (launchd + aria2c watcher).
 The bridge (crumb-tess-bridge) uses a hard-coded operation allowlist requiring spec-level changes and code changes to add new operations. Catalog entry is a one-directional, fire-and-forget handoff — it doesn't need the bridge's confirmation echo or governance protocol. Instead: Tess writes structured JSON to `_openclaw/tess_scratch/catalog/`, and Crumb processes it during inbox sweep or on-demand. This avoids reopening the bridge project (DONE phase) and uses existing infrastructure (`tess_scratch` is already a bidirectional scratch space with group permissions).
 
 **AD-3: Research library under tess user.**
-`/Users/tess/research-library/` — owned by tess, no cross-user permission complexity. Crumb reads via crumbvault group perms for catalog processing. Vault can be used as temporary staging during processing but must be cleaned up afterward.
+`/Users/danny/research-library/` — owned by tess, no cross-user permission complexity. Crumb reads via crumbvault group perms for catalog processing. Vault can be used as temporary staging during processing but must be cleaned up afterward.
 
 ### 4.3 Responsibility Split
 
@@ -123,7 +123,7 @@ The bridge (crumb-tess-bridge) uses a hard-coded operation allowlist requiring s
 
 **Download flow:**
 7. Tess retrieves download URLs for selected items via API
-8. Tess downloads each file inline (curl/aria2c), placing in `/Users/tess/research-library/[subject]/`
+8. Tess downloads each file inline (curl/aria2c), placing in `/Users/danny/research-library/[subject]/`
 9. Tess verifies MD5 against API-reported hash (if available)
 10. Tess notifies Danny: "Downloaded 3/3: [titles]" or "2/3 complete, 1 failed: [title] — [reason]"
 
@@ -306,7 +306,7 @@ Tess writes one JSON per downloaded book to `_openclaw/tess_scratch/catalog/inbo
   "language": "en",
   "edition": "Long translation, 1862",
   "file_size_bytes": 1258000,
-  "file_path": "/Users/tess/research-library/philosophy/aurelius-meditations.pdf",
+  "file_path": "/Users/danny/research-library/philosophy/aurelius-meditations.pdf",
   "subjects": ["philosophy"],
   "source_library": "libgen",
   "aa_doc_id": "md5:abc123def456",
@@ -386,7 +386,7 @@ topics:
 **Body metadata block (below title, above Overview):**
 ```
 Source file: `philosophy/aurelius-meditations.pdf`
-Library: `/Users/tess/research-library/philosophy/aurelius-meditations.pdf`
+Library: `/Users/danny/research-library/philosophy/aurelius-meditations.pdf`
 Source: LibGen via Anna's Archive | Format: PDF | Size: 1.2 MB
 Edition: Long translation, 1862 | Language: en
 Rights: Public domain
@@ -404,10 +404,10 @@ BBP discovers unprocessed books by querying source-index notes in `Sources/books
 
 ## 7. Research Library Structure
 
-`/Users/tess/research-library/` — owned by tess user.
+`/Users/danny/research-library/` — owned by tess user.
 
 ```
-/Users/tess/research-library/
+/Users/danny/research-library/
   philosophy/
   history/
   fiction/
@@ -518,7 +518,7 @@ The tool:
 |----|--------|--------|------------|
 | BST-1 | API key exposure in logs or tool output | MEDIUM | Keychain storage, key read at invocation time, never logged or written to files |
 | BST-2 | Malicious file download (PDF exploit) | LOW | MD5 verification against API hash; files stored outside vault; operator reviews before opening |
-| BST-3 | Path traversal via crafted metadata | MEDIUM | Tool validates all file paths against `/Users/tess/research-library/` prefix; rejects anything outside |
+| BST-3 | Path traversal via crafted metadata | MEDIUM | Tool validates all file paths against `/Users/danny/research-library/` prefix; rejects anything outside |
 | BST-4 | Catalog injection via crafted book metadata | MEDIUM | Catalog JSON uses strict field validation; Crumb validates on processing; source-index notes use fixed template |
 | BST-5 | API quota exhaustion | LOW | Rate limiting in tool; usage telemetry if API has limits |
 | BST-6 | Stale download URLs | LOW | Download immediately after approval; retry fetches fresh URL on failure |
@@ -567,7 +567,7 @@ Total ongoing cost: effectively zero beyond the initial donation.
 **BSC-002** — Environment validation
 - Risk: low
 - Tag: `#research`
-- Acceptance: curl verified for AA downloads; aria2c availability checked; disk space confirmed; `/Users/tess/research-library/` directory created with correct permissions; `_openclaw/tess_scratch/catalog/` directory created
+- Acceptance: curl verified for AA downloads; aria2c availability checked; disk space confirmed; `/Users/danny/research-library/` directory created with correct permissions; `_openclaw/tess_scratch/catalog/` directory created
 - Depends: —
 
 ### Milestone 1: Tess Tool — Search
@@ -589,7 +589,7 @@ Total ongoing cost: effectively zero beyond the initial donation.
 **BSC-005** — Implement `book_download` tool
 - Risk: medium
 - Tag: `#code`
-- Acceptance: Downloads files via curl to `/Users/tess/research-library/[subject]/`; verifies MD5 when available; handles download failures with retry (up to 3); writes catalog JSON to `_openclaw/tess_scratch/catalog/`; reports success/failure per item
+- Acceptance: Downloads files via curl to `/Users/danny/research-library/[subject]/`; verifies MD5 when available; handles download failures with retry (up to 3); writes catalog JSON to `_openclaw/tess_scratch/catalog/`; reports success/failure per item
 - Depends: BSC-001, BSC-003
 
 **BSC-006** — Download notification and failure handling

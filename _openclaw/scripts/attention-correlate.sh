@@ -20,10 +20,10 @@
 
 set -eu
 
-source "/Users/tess/crumb-vault/_openclaw/scripts/attention-lib.sh"
+source "/Users/danny/crumb-vault/_openclaw/scripts/attention-lib.sh"
 
 # === Constants ===
-VAULT_ROOT="/Users/tess/crumb-vault"
+VAULT_ROOT="/Users/danny/crumb-vault"
 WINDOW_48H=$((48 * 3600))
 WINDOW_7D=$((7 * 86400))
 

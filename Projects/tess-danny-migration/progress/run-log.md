@@ -240,3 +240,112 @@ danny session runs P1 (rsync TDM-020 → chown TDM-021 → path rewrite TDM-022)
   the existing keychain-as-critical-path candidate. Both earned via live execution this migration.
 - **Convention reinforced:** zsh unquoted-`$VAR` no-word-split — already in `macos-system-notes`
   memory; recurred here. No new memory needed.
+
+### P1 + P2 executed by danny session (2026-06-08, ~17:00–17:40)
+Operator runs all sudo blocks in Terminal (no tty for sudo inside Claude Code, incl. `!`);
+danny session preps + verifies each step. danny owns the vault via `crumbvault` group.
+- **TDM-035 (NEW) ✅ Re-home Homebrew** — `/opt/homebrew` was `tess:admin`, blocking
+  `brew install` and P4. `sudo chown -R danny:admin /opt/homebrew`. Gap not in original
+  graph; needed for GNU rsync + P4 venv/ollama.
+- **Tooling fix:** stock `/usr/bin/rsync` is **openrsync** — rejects `-A` (ACLs), aborts
+  on `-aHAX`. Installed GNU rsync 3.4.4 via brew; used `/opt/homebrew/bin/rsync` for P1.
+- **TDM-020 ✅ rsync** — 19 trees → `/Users/danny`, `-aHAX`, excl venv/__pycache__/node_modules.
+  fail=0, all 19 present, counts match source-minus-excludes. Restricted dotdirs OK
+  (.hermes 17,733 / .openclaw 18 / .cloudflared 4 = dir + the 3 tunnel files). NOTE:
+  `.config` + `.local` MERGED into danny's pre-existing home (rclone.conf, a claude lock
+  survived as danny's); tess versions won on collisions — benign, danny was near-fresh.
+  ~190 GiB copied (models 149G + .ollama 31G dominate).
+- **TDM-021 ✅ chown** — all 19 → `danny:staff`, then 4 group-trees
+  (crumb-vault, crumb-vault-mirror, research-library, .google_workspace_mcp) → `danny:crumbvault`.
+  Operator kept crumbvault group ("just in case") — flatten-everything idea reverted.
+  Verified: 0 files owned by tess; danny read+write OK.
+- **TDM-022 ✅ path rewrite** — `/Users/tess`→`/Users/danny` across **712 functional files**
+  (709 + 3 models scripts caught by full-tree scan). No sudo (danny owns files); reversible
+  (tess frozen/intact). Runbook's "~392" was the functional core; the naive grep hit 5081
+  because of env/build/log dirs — deliberately EXCLUDED:
+    - **PRESERVE (historical/rollback):** `Projects/tess-danny-migration/{tasks.md,run-log.md}`
+      (×2 vault+mirror = 4 refs — rollback integrity); `.hermes` historical
+      (cron/output, sessions, checkpoints, state-snapshots, logs, pastes = 3463 refs).
+    - **REBUILD, not patch (new P4 tasks):** **TDM-036** sd-env (it IS a venv — pyvenv.cfg;
+      63 refs); **TDM-037** llama.cpp/build (CMake artifacts; 842 refs).
+- **TDM-025 ✅ straggler audit** — every remaining `/Users/tess` ref is within the itemized
+  preserve/rebuild set; **0 outside**. models/.ollama clean after the 3-script fix.
+
+### P2 finished (danny session, 2026-06-08 ~18:00)
+- **TDM-024 ✅** — copied vault Claude-memory `memory/` subdir (26 curated .md incl. MEMORY.md)
+  → `~/.claude/projects/-Users-danny-crumb-vault/memory/`; rewrote `/Users/tess` +
+  `-Users-tess-crumb-vault`→danny; 0 stragglers; danny-owned. Session `.jsonl` transcripts
+  (0600 history) intentionally NOT copied — optional, not needed for function.
+- **TDM-023 ✅** — `.zprofile` created from tess's (readable), paths→danny. `.zshrc` merged
+  (tess's 0600, copied via operator sudo): kept danny's `.local/bin` prepend + tess's crumb
+  setup (keychain unlock, claude/tailscale aliases, `gapi()`), only `/Users/tess` pipx PATH
+  rewritten (rest was `~`-relative). `zsh -ic` loads clean.
+  **Finding:** tess's `.zshrc` sourced `~/crumb-vault/_system/scripts/claude-bridge-wrapper.sh`
+  which **does not exist in either vault** (stale on tess's side too) — COMMENTED OUT in danny's
+  `.zshrc` to avoid a per-shell `source` error. Re-enable if the wrapper is ever restored.
+  `obsidian.json` deferred to TDM-054 (no danny Obsidian config exists yet — set on first launch).
+
+**P0–P2 COMPLETE.** Vault copied, owned by danny, path-rewritten, shell+memory migrated.
+
+### P3 secrets (danny session, 2026-06-08 ~18:15)
+- **TDM-030 ✅** — 15 Tier-A keychain items re-keyed into danny's login keychain via
+  secret-safe two-script flow (dump as tess → 0600 transfer file → insert as danny →
+  `rm -P` shred). danny session never saw values; verified 15/15 resolve, file shredded.
+  Inserted with `-A` (no headless GUI prompt for launchd agents; security tradeoff — any
+  danny app can read; tighten with `-T` later if desired).
+- **TDM-031** — cloudflared ✅ (config.yml credentials-file→danny, UUID 6d7aca42 reused,
+  3 files via P1). Claude Code ✅ (danny authed). Google ✅ rides Tier-B (token_cache +
+  client_secret copied; refresh tested at TDM-054). **gh ⏳** — danny's stored djt71 token
+  invalid; operator running `gh auth login` (interactive, can't drive headless).
+### P4 rebuilds (danny session, 2026-06-08 ~18:30, all danny-runnable, no sudo)
+- **TDM-032 ✅** hermes venv built fresh (excluded from copy) — `python3.13 -m venv` +
+  `pip install -e ".[anthropic,messaging,cli]"`; `import hermes_cli.main` OK; pip shebang→danny.
+- **TDM-033 ✅** openclaw — 5/5 node repos installed (crumb-dashboard 324, feed-intel-framework 63,
+  opportunity-scout 43, x-feed-intel 55, book-scout 22 via `npm install` — stale lock, `npm ci`
+  rejected). No python repos in openclaw. `crumb-tess-bridge` (src only) + `semuta` (**empty —
+  only .git**) have no dep manifest → no build; semuta flagged for operator.
+- **TDM-034 ✅** ollama models present (registry.ollama.ai manifests + blobs), 0 `/Users/tess` in
+  `.ollama`; full serve test deferred to P5/P6.
+- **TDM-036 ✅** (corrected) sd-env is system-python-backed (`bin/python`→python3) — not a true
+  rebuild; path-rewrote its venv self-refs like TDM-022. 0 tess refs; py3.9 works.
+- **TDM-037 ✅→VOID rebuild** llama.cpp `build/` `/Users/tess` refs are build metadata only;
+  prebuilt `llama-cli`/`llama-server` binaries RUN (Metal loads). No recompile needed.
+
+**P0–P4 COMPLETE.** Vault+runtime migrated, secrets re-keyed, venvs/builds ready.
+### P5 launchd standup (danny session, 2026-06-08/09)
+Operator sudo-copied tess's `~/Library/LaunchAgents/*` → staging; danny rewrote paths,
+applied keep/drop, validated, bootstrapped from gui/503 (no sudo — danny's own domain).
+- **TDM-040 ✅** staged 22 plists (21 KEEP + dashboard), `/Users/tess`→danny, plutil-lint
+  clean, verified every Program/script/dep resolves (caught quartz node_modules, qmd, tess-v2
+  venv pre-bootstrap).
+- **TDM-042 ✅** installed → `~/Library/LaunchAgents`; `disable`d com.crumb.dashboard
+  (carry-unloaded); bootstrapped 21 KEEP. **ALL 21 exit 0.** Core daemons running:
+  gateway, bridge.watcher, cloudflared (tunnel→mc.crumbos.dev), vault-web:8843, llama-server.
+- **TDM-043 ✅** ollama via `brew services start ollama`.
+
+**Troubleshooting — 4 CLASSES of failure NOT catchable by P2 text-rewrite (compound lessons):**
+1. **tess-owned `/tmp` log files** (StandardOut/ErrorPath): launchd-as-danny can't open a
+   tess-owned file → `EX_CONFIG 78`. 11 stale logs from tess's pre-freeze runs blocked
+   cloudflared/system-stats/telemetry-rollup/backup-status/vault-backup/qmd-index. Fix: sudo
+   rm (sticky /tmp blocks danny); danny's launchd recreates them. *Lesson: clear/redirect
+   tess-owned /tmp artifacts as part of freeze or standup.*
+2. **Symlinks → /Users/tess** (rsync preserves targets, sed can't rewrite them): `quartz-vault/
+   content`→tess vault (caused quartz EACCES/SIGTRAP on a 0600 tess file); `.local/bin/{tess,
+   hermes}` shims. Fix: repoint. *Lesson: scan `find -type l | readlink | grep /Users/tess`.*
+3. **Copied editable venv** (tess-v2 `.venv`): `__editable__.pth`→tess src, so `import tess`
+   silently loaded tess's UN-rewritten code (default vault_root=/Users/tess) → PermissionError
+   writing tess's frozen vault. `import` "worked" = false positive. Fix: rebuild venv clean +
+   `pip install -e .`. *Lesson: rebuild copied venvs; verify module `__file__`, not just import.*
+4. **`timeout` doesn't exist on macOS** — bogus diagnostics (exit 127). Use perl/bg+sleep.
+
+**Follow-ups (NOT blocking the 21):**
+- **TDM-038 (NEW):** `.local/bin/{workspace-mcp,markitdown,python3.11}` + a uv cpython symlink
+  still point into tess's pipx/uv envs → `pipx reinstall` workspace-mcp+markitdown under danny;
+  rebuild/repoint uv python. Affects Google Workspace MCP + markitdown (inbox-processor).
+- vault-backup prune shows "Retained: 0" under launchd (iCloud dataless-file listing quirk?) —
+  backup file writes fine; verify retention logic at leisure.
+
+**P0–P5 COMPLETE. System fully live on danny.**
+**NEXT — P6 verification gates (TDM-050..054):** service list vs baseline, gateway/tunnel
+health, vault-check + session-startup scripts, scheduled-fire + Telegram bots, git push +
+feed pipeline e2e + Obsidian. Then P7 retire tess (soak-gated ≥48–72h after M6 green).

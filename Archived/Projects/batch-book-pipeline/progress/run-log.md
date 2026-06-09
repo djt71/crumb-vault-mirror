@@ -590,7 +590,7 @@ Updated `bbp006-monitor.sh` to run source-index generation before placement.
 **3. New book inventory:**
 - Identified 64 unprocessed PDFs in `research-library/` not in any manifest
 - Root cause: `pipeline.py` uses `glob("*.pdf")` (flat, not recursive) — requires per-subdirectory invocation
-- First attempt with `--input-dir /Users/tess/research-library` produced "No PDF files found"
+- First attempt with `--input-dir /Users/danny/research-library` produced "No PDF files found"
 - Fix: queued per-subdirectory iteration across all 7 subject dirs
 - book-digest + fiction-digest queued sequentially, running in background at session end
 - biography/mandela already processed (1 book, 260k tokens, 84.6s)

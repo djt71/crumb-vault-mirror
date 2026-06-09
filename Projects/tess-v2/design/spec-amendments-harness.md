@@ -37,7 +37,7 @@ Design inputs from AutoBE harness analysis, mapped to spec sections. For applica
 >   failed_checks:
 >     - check_id: "quality_check_3"
 >       expected: "vault path under Projects/tess-v2/"
->       actual: "/Users/tess/crumb-vault/Projects/tess-v2/"
+>       actual: "/Users/danny/crumb-vault/Projects/tess-v2/"
 >       delta: "absolute path instead of vault-relative path"
 >   failure_class: deterministic  # from §9.4 table
 >   retry_strategy: "fix input format, same executor"

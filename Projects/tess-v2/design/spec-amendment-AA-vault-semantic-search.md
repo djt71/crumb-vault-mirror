@@ -153,7 +153,7 @@ This gives Tess direct semantic search capability during:
       type: integer
       description: Maximum results to return
       default: 10
-  command: "/Users/tess/crumb-vault/_system/scripts/vault-search.sh"
+  command: "/Users/danny/crumb-vault/_system/scripts/vault-search.sh"
 ```
 
 **Cost impact:** Zero marginal cost. QMD runs locally. A vault search that Tess handles

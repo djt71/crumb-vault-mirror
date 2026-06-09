@@ -1,8 +1,8 @@
 2026-02-20 12:31:04 SYNC feat(vault-mirror): scaffold project and implement mirror sync
-2026-02-20 12:33:08 SKIP mirror repo not found at /Users/tess/crumb-vault-mirror
-2026-02-20 12:34:47 SKIP mirror repo not found at /Users/tess/crumb-vault-mirror
-2026-02-20 12:35:32 SKIP mirror repo not found at /Users/tess/crumb-vault-mirror
-2026-02-20 12:37:05 SKIP mirror repo not found at /Users/tess/crumb-vault-mirror
+2026-02-20 12:33:08 SKIP mirror repo not found at /Users/danny/crumb-vault-mirror
+2026-02-20 12:34:47 SKIP mirror repo not found at /Users/danny/crumb-vault-mirror
+2026-02-20 12:35:32 SKIP mirror repo not found at /Users/danny/crumb-vault-mirror
+2026-02-20 12:37:05 SKIP mirror repo not found at /Users/danny/crumb-vault-mirror
 2026-02-20 12:40:21 NOOP no effective changes after rsync
 2026-02-20 12:41:18 SYNC chore(vault-mirror): update project-state — implementation complete
 2026-02-20 12:45:28 SYNC chore(vault-mirror): update context doc and sync log — PAT clone verified
@@ -763,3 +763,4 @@
 2026-06-08 14:01:01 SYNC tess-danny-migration: M2/P0 prep (baseline, manifest, rollback point)
 2026-06-08 14:11:13 SYNC tess-danny-migration: M2 complete — system frozen, handed off to danny session
 2026-06-08 15:13:02 SYNC tess-danny-migration: durable freeze (TDM-014) + P0 stable-tree snapshot (TDM-010)
+2026-06-08 15:16:22 SYNC tess-danny-migration: mark P0 done (TDM-011/012/014/010), log freeze execution

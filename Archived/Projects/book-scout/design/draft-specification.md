@@ -273,7 +273,7 @@ executes downloads.
     {
       "id": "aa_doc_id_here",
       "status": "complete",
-      "file_path": "/Users/tess/research-library/philosophy/marcus-aurelius-meditations.pdf",
+      "file_path": "/Users/danny/research-library/philosophy/marcus-aurelius-meditations.pdf",
       "downloaded_at": "2026-02-28T14:34:22Z",
       "bytes_downloaded": 2400000,
       "md5_verified": true
@@ -344,7 +344,7 @@ Tess dispatches to `_openclaw/inbox/` using the bridge protocol:
     "author": "Marcus Aurelius",
     "year": 180,
     "format": "pdf",
-    "file_path": "/Users/tess/research-library/philosophy/aurelius-meditations.pdf",
+    "file_path": "/Users/danny/research-library/philosophy/aurelius-meditations.pdf",
     "subjects": ["philosophy", "stoicism"],
     "source_library": "libgen",
     "aa_id": "md5:abc123...",
@@ -365,7 +365,7 @@ title: "Meditations"
 author: "Marcus Aurelius"
 year: 180
 format: pdf
-file_path: "/Users/tess/research-library/philosophy/aurelius-meditations.pdf"
+file_path: "/Users/danny/research-library/philosophy/aurelius-meditations.pdf"
 source_library: libgen
 acquired_via: book-scout
 acquired_at: 2026-02-28

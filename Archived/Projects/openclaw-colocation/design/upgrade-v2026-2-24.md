@@ -107,7 +107,7 @@ Run from the primary (`tess`) user on Studio:
 
 - [ ] **Confirm isolation tests pass:**
   ```bash
-  sudo bash /Users/tess/crumb-vault/scripts/openclaw-isolation-test.sh
+  sudo bash /Users/danny/crumb-vault/scripts/openclaw-isolation-test.sh
   ```
 
 - [ ] **SBOM snapshot for comparison:**
@@ -504,8 +504,8 @@ bootstrap — `launchctl` will fail with "Input/output error" if the xattr is pr
 ### Phase 7: Re-run Isolation Tests
 
 ```bash
-sudo bash /Users/tess/crumb-vault/scripts/openclaw-isolation-test.sh 2>&1 | \
-  tee /Users/tess/crumb-vault/Projects/openclaw-colocation/progress/isolation-test-$(date +%Y%m%d)-upgrade-v2026-2-25.txt
+sudo bash /Users/danny/crumb-vault/scripts/openclaw-isolation-test.sh 2>&1 | \
+  tee /Users/danny/crumb-vault/Projects/openclaw-colocation/progress/isolation-test-$(date +%Y%m%d)-upgrade-v2026-2-25.txt
 # Expected: 9/9 pass
 ```
 
@@ -697,7 +697,7 @@ lsof -nP -iTCP:18789 -sTCP:LISTEN
 # Verify owner is openclaw, binding is 127.0.0.1
 
 # 6. Isolation tests
-sudo bash /Users/tess/crumb-vault/scripts/openclaw-isolation-test.sh
+sudo bash /Users/danny/crumb-vault/scripts/openclaw-isolation-test.sh
 ```
 
 ---

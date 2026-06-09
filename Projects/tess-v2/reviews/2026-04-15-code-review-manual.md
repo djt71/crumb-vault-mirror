@@ -27,7 +27,7 @@ safety_gate:
   soft_heuristic_triggered: true
   user_override: false
   warnings:
-    - "9 occurrences of /Users/tess/... absolute paths — intentional (vault root + hardcoded wrapper targets), not sanitized"
+    - "9 occurrences of /Users/danny/... absolute paths — intentional (vault root + hardcoded wrapper targets), not sanitized"
 reviewer_meta:
   anthropic:
     http_status: 200

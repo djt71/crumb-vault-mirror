@@ -182,9 +182,9 @@ Codex executed 27 unique commands in 122 seconds:
 
 ### CDX-F4 — SIGNIFICANT: Vault-health prompt references wrong script path
 - **File:** `_openclaw/staging/m1/vault-health-prompt.md`, line 12
-- **Finding:** References `/Users/tess/crumb-vault/scripts/vault-check.sh` but actual path is `_system/scripts/vault-check.sh`.
+- **Finding:** References `/Users/danny/crumb-vault/scripts/vault-check.sh` but actual path is `_system/scripts/vault-check.sh`.
 - **Why:** Nightly vault-health task will fail at runtime.
-- **Fix:** Update to `/Users/tess/crumb-vault/_system/scripts/vault-check.sh`.
+- **Fix:** Update to `/Users/danny/crumb-vault/_system/scripts/vault-check.sh`.
 
 ### CDX-F5 — SIGNIFICANT: Heartbeat update may silently succeed with no match
 - **File:** `_openclaw/scripts/m1-deploy.sh`, lines 135, 141

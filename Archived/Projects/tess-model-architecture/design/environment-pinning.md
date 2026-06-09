@@ -43,8 +43,8 @@ procedure to revert to the pre-implementation state if the tiered architecture f
 **Action required:** Before beginning TMA-002, snapshot the current config:
 ```bash
 sudo -u openclaw cat /Users/openclaw/.openclaw/openclaw.json > \
-  /Users/tess/crumb-vault/Projects/tess-model-architecture/design/openclaw-config-baseline.json
-shasum -a 256 /Users/tess/crumb-vault/Projects/tess-model-architecture/design/openclaw-config-baseline.json
+  /Users/danny/crumb-vault/Projects/tess-model-architecture/design/openclaw-config-baseline.json
+shasum -a 256 /Users/danny/crumb-vault/Projects/tess-model-architecture/design/openclaw-config-baseline.json
 ```
 
 ### 2.3 LaunchDaemon Configuration
@@ -121,7 +121,7 @@ sudo pkill -f "openclaw/dist/index.js"
 
 **Step 2: Restore baseline OpenClaw config**
 ```bash
-sudo -u openclaw cp /Users/tess/crumb-vault/Projects/tess-model-architecture/design/openclaw-config-baseline.json \
+sudo -u openclaw cp /Users/danny/crumb-vault/Projects/tess-model-architecture/design/openclaw-config-baseline.json \
   /Users/openclaw/.openclaw/openclaw.json
 # Verify hash matches baseline:
 sudo -u openclaw shasum -a 256 /Users/openclaw/.openclaw/openclaw.json

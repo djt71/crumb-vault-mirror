@@ -15,7 +15,7 @@
 
 set -eu
 
-VAULT_ROOT="/Users/tess/crumb-vault"
+VAULT_ROOT="/Users/danny/crumb-vault"
 TODAY=$(date +%Y-%m-%d)
 
 # === Argument validation ===

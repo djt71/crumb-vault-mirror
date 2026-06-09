@@ -11,9 +11,9 @@
 
 set -euo pipefail
 
-VAULT_ROOT="/Users/tess/crumb-vault"
+VAULT_ROOT="/Users/danny/crumb-vault"
 QMD_BIN="/opt/homebrew/bin/qmd"
-QMD_INDEX="/Users/tess/.cache/qmd/index.sqlite"
+QMD_INDEX="/Users/danny/.cache/qmd/index.sqlite"
 FEEDBACK_LOG="$VAULT_ROOT/_system/logs/akm-feedback.jsonl"
 LOW_CONFIDENCE_THRESHOLD="0.3"
 

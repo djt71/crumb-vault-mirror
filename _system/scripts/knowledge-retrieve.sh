@@ -11,7 +11,7 @@
 
 set -e
 
-VAULT_ROOT="/Users/tess/crumb-vault"
+VAULT_ROOT="/Users/danny/crumb-vault"
 QMD_BIN="$(command -v qmd 2>/dev/null || true)"
 FEEDBACK_LOG="$VAULT_ROOT/_system/logs/akm-feedback.jsonl"
 DEDUP_FILE="/tmp/akm-surfaced-$(date +%Y%m%d).txt"

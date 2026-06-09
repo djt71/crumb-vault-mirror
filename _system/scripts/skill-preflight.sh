@@ -13,7 +13,7 @@
 
 set -e
 
-VAULT_ROOT="/Users/tess/crumb-vault"
+VAULT_ROOT="/Users/danny/crumb-vault"
 KR_SCRIPT="$VAULT_ROOT/_system/scripts/knowledge-retrieve.sh"
 MAP_FILE="$VAULT_ROOT/_system/docs/skill-preflight-map.yaml"
 ACTIVE_PHASES="SPECIFY|PLAN|TASK|IMPLEMENT|ACT|CLARIFY"
@@ -53,7 +53,7 @@ export VAULT_ROOT MAP_FILE SKILL_NAME SKILL_ARGS
 PREFLIGHT_OUTPUT=$(python3 << 'PYEOF'
 import sys, json, os
 
-VAULT_ROOT = os.environ.get("VAULT_ROOT", "/Users/tess/crumb-vault")
+VAULT_ROOT = os.environ.get("VAULT_ROOT", "/Users/danny/crumb-vault")
 MAP_FILE = os.environ.get("MAP_FILE", "")
 SKILL_NAME = os.environ.get("SKILL_NAME", "")
 SKILL_ARGS = os.environ.get("SKILL_ARGS", "")

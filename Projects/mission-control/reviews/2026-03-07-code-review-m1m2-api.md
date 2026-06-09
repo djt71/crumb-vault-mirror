@@ -27,7 +27,7 @@ safety_gate:
   soft_heuristic_triggered: true
   user_override: false
   warnings:
-    - "/Users/tess/ paths in code (launchd plist, VAULT_ROOT defaults) — expected for personal project"
+    - "/Users/danny/ paths in code (launchd plist, VAULT_ROOT defaults) — expected for personal project"
 reviewer_meta:
   anthropic:
     http_status: 200
@@ -74,7 +74,7 @@ tags:
 **Fix:** Either (a) make adapters accept a vault root parameter / read `process.env` at call time inside the function body, or (b) use `vi.resetModules()` in `beforeEach` so each test gets a fresh module. Option (a) is more robust:
 ```ts
 function getVaultRoot() {
-  return process.env.VAULT_ROOT ?? '/Users/tess/crumb-vault';
+  return process.env.VAULT_ROOT ?? '/Users/danny/crumb-vault';
 }
 ```
 

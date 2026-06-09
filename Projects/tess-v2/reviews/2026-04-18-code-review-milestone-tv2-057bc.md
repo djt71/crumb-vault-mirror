@@ -27,7 +27,7 @@ safety_gate:
   soft_heuristic_triggered: true
   user_override: false
   warnings:
-    - "3 /Users/tess/ paths in scripts/scout-feedback-poller-wrapper.sh (incidental shell script in diff range, not TV2-057b/c scope)"
+    - "3 /Users/danny/ paths in scripts/scout-feedback-poller-wrapper.sh (incidental shell script in diff range, not TV2-057b/c scope)"
 reviewer_meta:
   anthropic:
     http_status: 200
@@ -42,7 +42,7 @@ reviewer_meta:
     latency_ms: 85124
     tools_run:
       - "exploratory rg/find/ls (24 commands)"
-      - "no pytest run — Codex did not reach the actual repo at /Users/tess/crumb-apps/tess-v2 (its shell tools landed in /Users/tess/crumb-vault); review grounded in inlined diff only"
+      - "no pytest run — Codex did not reach the actual repo at /Users/danny/crumb-apps/tess-v2 (its shell tools landed in /Users/danny/crumb-vault); review grounded in inlined diff only"
     token_usage:
       input_tokens: 493152
       output_tokens: 4755
@@ -59,7 +59,7 @@ tags:
 
 **Diff:** 12 files changed, +1341 / −58. Primary surfaces: `src/tess/contract.py`, `src/tess/classifier.py`, `src/tess/cli.py`, `src/tess/lock_deny.py`, `tests/test_contract.py`, `tests/test_classifier.py`, `tests/test_cli.py`, `tests/test_lock_deny.py`, `contracts/daily-attention.yaml` (schema bump), plus an incidental `scripts/scout-feedback-poller-wrapper.sh` (IDQ-004 backfill, out of scope but flagged where issues surfaced).
 
-**Reviewer dispatch note:** Codex's shell-tool execution did not honor the `-C /Users/tess/crumb-apps/tess-v2` cd root — its tools landed in the vault working directory instead. As a result, Codex could not run `pytest` or a type checker against the actual code. Its findings are grounded only in the inlined diff text. File path prefixes Codex cites (`/Users/tess/crumb-vault/src/tess/...`) should be read as `src/tess/...` relative to the tess-v2 repo. This is a tooling-glue issue with the dispatch, not a Codex limitation; investigate before next code-review run.
+**Reviewer dispatch note:** Codex's shell-tool execution did not honor the `-C /Users/danny/crumb-apps/tess-v2` cd root — its tools landed in the vault working directory instead. As a result, Codex could not run `pytest` or a type checker against the actual code. Its findings are grounded only in the inlined diff text. File path prefixes Codex cites (`/Users/danny/crumb-vault/src/tess/...`) should be read as `src/tess/...` relative to the tess-v2 repo. This is a tooling-glue issue with the dispatch, not a Codex limitation; investigate before next code-review run.
 
 ---
 
@@ -182,7 +182,7 @@ tags:
 **9 findings: 0 CRITICAL · 4 SIGNIFICANT · 3 MINOR · 2 STRENGTH**
 
 ### Tool Execution
-Codex ran 24 exploratory shell commands (rg, find, ls) trying to locate the project source tree. Its working directory was `/Users/tess/crumb-vault` (the dispatching shell's cwd) rather than `/Users/tess/crumb-apps/tess-v2` (the `-C` flag target). It never found `pyproject.toml`, `pytest.ini`, or the `src/tess/` tree, and explicitly noted: *"I could not run `pytest` or a type checker in this workspace because the Python project files are not present here. Review below is grounded in the diff text only."* No tests or type-checker output was collected. **Action item for next dispatch:** investigate why `codex -C <path> exec` doesn't propagate cwd to the shell-tool subprocesses; consider wrapping the dispatch in `subprocess.run(cwd=REPO_PATH, ...)` so Codex's exploratory tools land in the right place.
+Codex ran 24 exploratory shell commands (rg, find, ls) trying to locate the project source tree. Its working directory was `/Users/danny/crumb-vault` (the dispatching shell's cwd) rather than `/Users/danny/crumb-apps/tess-v2` (the `-C` flag target). It never found `pyproject.toml`, `pytest.ini`, or the `src/tess/` tree, and explicitly noted: *"I could not run `pytest` or a type checker in this workspace because the Python project files are not present here. Review below is grounded in the diff text only."* No tests or type-checker output was collected. **Action item for next dispatch:** investigate why `codex -C <path> exec` doesn't propagate cwd to the shell-tool subprocesses; consider wrapping the dispatch in `subprocess.run(cwd=REPO_PATH, ...)` so Codex's exploratory tools land in the right place.
 
 ### CDX-F1 — SIGNIFICANT
 - **File:** `src/tess/cli.py` (hunk `@@ -679,38 +689,86 @@`, lines ~706–731)
@@ -378,7 +378,7 @@ Both observations factual. The disagreement is whether this is a feature (additi
 
 ## Dispatch Tooling Issue (for next run)
 
-Codex's shell-tool execution did not honor `-C /Users/tess/crumb-apps/tess-v2`. Its `rg`/`find`/`ls` calls landed in the dispatching shell's cwd (`/Users/tess/crumb-vault`) so Codex never reached `pyproject.toml`, `pytest.ini`, or `src/tess/`. Outcome: **no pytest run, no type-checker run, review grounded in inlined diff only.**
+Codex's shell-tool execution did not honor `-C /Users/danny/crumb-apps/tess-v2`. Its `rg`/`find`/`ls` calls landed in the dispatching shell's cwd (`/Users/danny/crumb-vault`) so Codex never reached `pyproject.toml`, `pytest.ini`, or `src/tess/`. Outcome: **no pytest run, no type-checker run, review grounded in inlined diff only.**
 
 Convergence with Opus remained strong (5 directly matching findings) despite the tooling gap, so the review still produced useful signal. But next dispatch should investigate the fix — likely pass `cwd=repo_path` to the Codex `subprocess.run(...)` call in the dispatch agent so exploratory shell tools inherit the correct root.
 

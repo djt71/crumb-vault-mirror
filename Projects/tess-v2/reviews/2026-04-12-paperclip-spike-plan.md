@@ -27,7 +27,7 @@ safety_gate:
   soft_heuristic_triggered: true
   user_override: false
   warnings:
-    - "Soft: /Users/tess/ file paths on lines 74-76 (local file references, expected)"
+    - "Soft: /Users/danny/ file paths on lines 74-76 (local file references, expected)"
 reviewer_meta:
   openai:
     http_status: 200
@@ -602,7 +602,7 @@ Here is the structured review of the TV2-045 research spike plan.
 
 - [F8]  
   [Severity]: MINOR  
-  [Finding]: Specific file paths (e.g., `/Users/tess/crumb-apps/tess-v2/src/tess/ralph.py`) and prior memos (e.g., `paperclip-relevance-check-2026-04-06.md`) are user-specific/unverifiable.  
+  [Finding]: Specific file paths (e.g., `/Users/danny/crumb-apps/tess-v2/src/tess/ralph.py`) and prior memos (e.g., `paperclip-relevance-check-2026-04-06.md`) are user-specific/unverifiable.  
   [Why]: Reduces portability/clarity for review or team handoff.  
   [Fix]: Use relative paths or project-root references (e.g., `tess-v2/src/tess/ralph.py`).
 

@@ -50,7 +50,7 @@ AutoBE's validators produce field-level error messages: exact path, expected typ
 - What was actually produced
 - The minimal delta between actual and expected
 
-This is the difference between "contract not satisfied, try again" and "quality_check 3 failed: expected vault path under Projects/tess-v2/, got absolute filesystem path /Users/tess/crumb-vault/Projects/tess-v2/." The latter converges in fewer iterations.
+This is the difference between "contract not satisfied, try again" and "quality_check 3 failed: expected vault path under Projects/tess-v2/, got absolute filesystem path /Users/danny/crumb-vault/Projects/tess-v2/." The latter converges in fewer iterations.
 
 ### Layer 3: Lenient Input Recovery
 

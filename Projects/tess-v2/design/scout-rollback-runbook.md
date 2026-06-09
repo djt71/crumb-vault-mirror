@@ -59,7 +59,7 @@ for label in com.tess.v2.scout-pipeline \
              com.tess.v2.scout-feedback-health \
              com.tess.v2.scout-weekly-heartbeat; do
     launchctl bootout "gui/$(id -u)" \
-        "/Users/tess/Library/LaunchAgents/$label.plist"
+        "/Users/danny/Library/LaunchAgents/$label.plist"
 done
 ```
 
@@ -83,7 +83,7 @@ won't restore service.
 
 OpenClaw runs the daily pipeline at 07:00 EDT via
 `StartCalendarInterval`. The next-cycle digest should land in
-`/Users/tess/crumb-vault/_openclaw/data/scout-digests/YYYY-MM-DD.md`
+`/Users/danny/crumb-vault/_openclaw/data/scout-digests/YYYY-MM-DD.md`
 with `delivered: true` and a `telegram_msg_id`.
 
 ## Restore (after fix)
@@ -95,7 +95,7 @@ for label in com.tess.v2.scout-pipeline \
              com.tess.v2.scout-feedback-health \
              com.tess.v2.scout-weekly-heartbeat; do
     launchctl bootstrap "gui/$(id -u)" \
-        "/Users/tess/Library/LaunchAgents/$label.plist"
+        "/Users/danny/Library/LaunchAgents/$label.plist"
 done
 ```
 

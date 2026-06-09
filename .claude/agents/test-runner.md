@@ -131,6 +131,6 @@ Overall is `PASS` only if all suites pass and typecheck is clean or skipped. Any
 
 The main session spawns this agent with prompts like:
 
-- "Run the x-feed-intel test suite: source root `/Users/tess/crumb-vault/Projects/x-feed-intel/src`, suites: [{name: 'digest-pipeline', command: 'npx ts-node tests/digest-pipeline.test.ts', runner: 'custom-assert'}], env_vars: {DRY_RUN: '1'}"
-- "Run crumb-tess-bridge tests with typecheck: source root `/Users/tess/crumb-vault/Projects/crumb-tess-bridge/src`, typecheck: {command: 'npx tsc --noEmit', label: 'TypeScript'}, suites: [{name: 'bridge-e2e', command: 'node --test tests/', runner: 'node-test'}]"
-- "Run pytest suite for customer-intelligence: source root `/Users/tess/crumb-vault/Projects/customer-intelligence`, suites: [{name: 'unit', command: 'pytest tests/unit -v', runner: 'pytest'}, {name: 'integration', command: 'pytest tests/integration -v', runner: 'pytest'}]"
+- "Run the x-feed-intel test suite: source root `/Users/danny/crumb-vault/Projects/x-feed-intel/src`, suites: [{name: 'digest-pipeline', command: 'npx ts-node tests/digest-pipeline.test.ts', runner: 'custom-assert'}], env_vars: {DRY_RUN: '1'}"
+- "Run crumb-tess-bridge tests with typecheck: source root `/Users/danny/crumb-vault/Projects/crumb-tess-bridge/src`, typecheck: {command: 'npx tsc --noEmit', label: 'TypeScript'}, suites: [{name: 'bridge-e2e', command: 'node --test tests/', runner: 'node-test'}]"
+- "Run pytest suite for customer-intelligence: source root `/Users/danny/crumb-vault/Projects/customer-intelligence`, suites: [{name: 'unit', command: 'pytest tests/unit -v', runner: 'pytest'}, {name: 'integration', command: 'pytest tests/integration -v', runner: 'pytest'}]"

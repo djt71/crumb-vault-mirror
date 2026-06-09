@@ -29,7 +29,7 @@ This document defines the target operating model: Tess becomes an active operato
 This spec builds on completed projects:
 - **openclaw-colocation** (DONE) — Studio Mac M3 Ultra, dedicated `openclaw` user (uid 502), gateway on loopback (127.0.0.1:18789), LaunchDaemon supervisor, Tier 1 hardening, filesystem IPC bridge
 - **crumb-tess-bridge** (DONE) — Filesystem-based async dispatch protocol between Crumb and Tess, 37 tasks, 897 tests, operational since 2026-02-22
-- **feed-intel-framework** (TASK phase) — Pipeline codebase at `/Users/tess/openclaw/feed-intel-framework/`, M2 migration in progress
+- **feed-intel-framework** (TASK phase) — Pipeline codebase at `/Users/danny/openclaw/feed-intel-framework/`, M2 migration in progress
 - **tess-model-architecture** (DONE) — Haiku 4.5 voice agent, qwen3-coder:30b mechanic agent, health-check with local failover
 
 The gateway currently runs OpenClaw v2026.2.17. The upgrade to v2026.2.25 is a prerequisite (§14 Week 0) with a peer-reviewed runbook ready.

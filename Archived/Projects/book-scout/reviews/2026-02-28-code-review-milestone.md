@@ -28,7 +28,7 @@ safety_gate:
   soft_heuristic_triggered: true
   user_override: false
   warnings:
-    - "User path: /Users/tess (expected in personal project)"
+    - "User path: /Users/danny (expected in personal project)"
 reviewer_meta:
   anthropic:
     http_status: 200
@@ -109,7 +109,7 @@ tags:
 
 **ANT-F7** | MINOR
 - **File:** `src/book-download-tool.ts`, line 242
-- **Finding:** Path traversal guard checks `resolved.startsWith(RESEARCH_LIBRARY)` but `RESEARCH_LIBRARY` doesn't end with `/`. A path like `/Users/tess/research-library-evil/file.pdf` would pass.
+- **Finding:** Path traversal guard checks `resolved.startsWith(RESEARCH_LIBRARY)` but `RESEARCH_LIBRARY` doesn't end with `/`. A path like `/Users/danny/research-library-evil/file.pdf` would pass.
 - **Fix:** Change to `resolved.startsWith(RESEARCH_LIBRARY + "/")`.
 
 **ANT-F8** | MINOR
@@ -177,7 +177,7 @@ tags:
 
 ### Architecture Findings
 
-**ANT-A1** | MINOR — Hardcoded paths (`/Users/tess/research-library`, catalog base) duplicated in 3 files with no single source of truth.
+**ANT-A1** | MINOR — Hardcoded paths (`/Users/danny/research-library`, catalog base) duplicated in 3 files with no single source of truth.
 
 **ANT-A2** | MINOR — `RESEARCH_LIBRARY` duplicated in `format-telegram.ts` and `book-download-tool.ts`.
 

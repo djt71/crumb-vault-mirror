@@ -63,7 +63,7 @@ The `account` field in Keychain is always `tess-orchestrator` (the retrieving pr
 
 ### 1.4 Keychain Access Control
 
-- **Keychain location:** Default login keychain for `tess` user (`/Users/tess/Library/Keychains/login.keychain-db`)
+- **Keychain location:** Default login keychain for `tess` user (`/Users/danny/Library/Keychains/login.keychain-db`)
 - **ACL:** Each entry allows access only from the runner process (no global "Always Allow")
 - **No inter-user access:** Danny's Keychain is not accessed. Credentials that Danny provisions are added to the tess user's Keychain via `security add-generic-password` (one-time setup or rotation)
 

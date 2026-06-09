@@ -102,10 +102,10 @@ This is a strong, implementation-oriented spec with a clear problem statement, s
 
 - [F5]
 - [Severity]: SIGNIFICANT
-- [Finding]: The spec does not explain exactly how Quartz will consume the vault content from `/Users/tess/crumb-vault/`.
+- [Finding]: The spec does not explain exactly how Quartz will consume the vault content from `/Users/danny/crumb-vault/`.
 - [Why]: This is an implementation-critical detail. Quartz commonly expects content in a particular source/content directory or workflow. Whether the solution uses symlinks, rsync, bind-like mirroring, Quartz config pointing at a custom content root, or a preprocessing step materially affects build correctness, exclusion handling, and atomic rebuild strategy.
 - [Fix]: Add a dedicated "Content ingestion strategy" section specifying one of:
-  1. Quartz configured to read directly from `/Users/tess/crumb-vault/`;
+  1. Quartz configured to read directly from `/Users/danny/crumb-vault/`;
   2. A staged mirror of included files into Quartz's content directory before build;
   3. Symlink-based ingestion.
   Also specify how exclusions are enforced in that mechanism.

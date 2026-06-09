@@ -30,7 +30,7 @@ Historical backfill of 5787 rows ships in the same PR as a separate commit but i
 
 ## 3. Repo + code anchors
 
-**Tree:** `/Users/tess/crumb-apps/tess-v2`
+**Tree:** `/Users/danny/crumb-apps/tess-v2`
 **SHA to verify against before editing:** `02be7b789d0bccecf718fe32483464cff22db0f3` (HEAD at design time, 2026-04-15 18:43 -0400, tip of TV2-056 must-fix commit). **First action in fresh session:** run `git rev-parse HEAD` — if it's drifted, re-verify the line numbers below before editing.
 
 **Touch points (line numbers anchored to SHA above):**

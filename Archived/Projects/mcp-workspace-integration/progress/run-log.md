@@ -177,7 +177,7 @@ This approach gives Tess the same effective access without MCP — she uses dire
 
 **Artifact:** `_openclaw/lib/gws-token.sh` — bash library, sourced by any script needing Google API access.
 
-**Token store location:** `/Users/tess/.google_workspace_mcp/credentials/dturner71@gmail.com.json`
+**Token store location:** `/Users/danny/.google_workspace_mcp/credentials/dturner71@gmail.com.json`
 - Written by workspace-mcp during OAuth consent
 - Standard Google OAuth format: `token`, `refresh_token`, `expiry`, `client_id`, `client_secret`, `scopes`
 - File is 644 (world-readable); credentials dir made group-writable for crumbvault group so openclaw user can write back refreshed tokens

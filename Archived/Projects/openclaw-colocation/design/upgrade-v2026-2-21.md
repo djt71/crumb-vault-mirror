@@ -70,7 +70,7 @@ Run from the primary (`tess`) user on Studio:
   ```
 - [ ] Confirm isolation tests still pass (catch any drift since OC-011):
   ```bash
-  sudo bash /Users/tess/crumb-vault/scripts/openclaw-isolation-test.sh
+  sudo bash /Users/danny/crumb-vault/scripts/openclaw-isolation-test.sh
   ```
 - [ ] Back up full OpenClaw state (config, tokens, state/db):
   ```bash
@@ -207,8 +207,8 @@ sudo -u openclaw bash -c '
 
 ```bash
 # Full isolation test suite — run once, tee to file for both gating and archival
-sudo bash /Users/tess/crumb-vault/scripts/openclaw-isolation-test.sh 2>&1 | \
-  tee /Users/tess/crumb-vault/Projects/openclaw-colocation/progress/isolation-test-$(date +%Y%m%d)-upgrade.txt
+sudo bash /Users/danny/crumb-vault/scripts/openclaw-isolation-test.sh 2>&1 | \
+  tee /Users/danny/crumb-vault/Projects/openclaw-colocation/progress/isolation-test-$(date +%Y%m%d)-upgrade.txt
 # Expected: 9/9 pass
 ```
 
@@ -234,8 +234,8 @@ Send a test message to Tess via Telegram. Verify:
 
 ### V3: Bridge Functionality (Impact §3)
 
-- [ ] Drop a test file in `/Users/tess/crumb-vault/_openclaw/inbox/` and verify Tess processes it
-- [ ] Verify bridge outbox writing works (check `/Users/tess/crumb-vault/_openclaw/outbox/`)
+- [ ] Drop a test file in `/Users/danny/crumb-vault/_openclaw/inbox/` and verify Tess processes it
+- [ ] Verify bridge outbox writing works (check `/Users/danny/crumb-vault/_openclaw/outbox/`)
 
 ### V4: Memory/QMD Search (Impact §4.3)
 
@@ -298,7 +298,7 @@ lsof -nP -iTCP:18789 -sTCP:LISTEN
 # Verify owner is openclaw, binding is 127.0.0.1
 
 # 6. Run isolation tests to confirm rollback integrity
-sudo bash /Users/tess/crumb-vault/scripts/openclaw-isolation-test.sh
+sudo bash /Users/danny/crumb-vault/scripts/openclaw-isolation-test.sh
 ```
 
 ---

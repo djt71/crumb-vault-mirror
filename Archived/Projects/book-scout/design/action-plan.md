@@ -51,7 +51,7 @@ Critical path. The entire project depends on the API's actual shape matching ass
 Parallel with Phase 0.1. No API dependency.
 
 **Approach:**
-1. Create `/Users/tess/research-library/` with subject subdirectories
+1. Create `/Users/danny/research-library/` with subject subdirectories
 2. Create `_openclaw/tess_scratch/catalog/` directory tree (inbox/processed/failed)
 3. Verify curl works for downloads from AA (test with a known URL if available from Phase 0.1)
 4. Check aria2c availability (informational only — no functional dependency unless operator opts in)

@@ -17,7 +17,7 @@ tags:
 
 ## Core Content
 
-Book Scout gives Tess the ability to search, download, and catalog books from Anna's Archive on Danny's behalf via Telegram. Danny sends a query (topic, title, or bulk list), Tess searches the API and presents candidates, Danny approves, and Tess downloads the files to `/Users/tess/research-library/` organized by subject. After download, Tess writes a catalog JSON to `_openclaw/tess_scratch/catalog/inbox/`, which Crumb processes into a source-index note in `Sources/books/`. These notes integrate with the vault's knowledge graph and serve as the handoff point for batch-book-pipeline's digest processing.
+Book Scout gives Tess the ability to search, download, and catalog books from Anna's Archive on Danny's behalf via Telegram. Danny sends a query (topic, title, or bulk list), Tess searches the API and presents candidates, Danny approves, and Tess downloads the files to `/Users/danny/research-library/` organized by subject. After download, Tess writes a catalog JSON to `_openclaw/tess_scratch/catalog/inbox/`, which Crumb processes into a source-index note in `Sources/books/`. These notes integrate with the vault's knowledge graph and serve as the handoff point for batch-book-pipeline's digest processing.
 
 The architecture is deliberately simple: two OpenClaw tools (`book_search`, `book_download`), inline downloads via curl with constraints (100 MB size cap, 5 min timeout, .partial file pattern, max 10 per batch), and a file-based catalog handoff with a robust protocol (atomic writes, dedup, processing states, cleanup). No separate download service, no bridge dependency. The project is gated on Anna's Archive API key arrival (donation in progress), with explicit kill/pivot criteria if M0 research reveals the API doesn't exist or can't support the design.
 
@@ -25,7 +25,7 @@ The architecture is deliberately simple: two OpenClaw tools (`book_search`, `boo
 
 - **AD-1:** Inline download with constraints (no separate launchd service) — occasional-use personal library doesn't justify the infrastructure. Size cap, timeout, .partial files, batch limits.
 - **AD-2:** File-based catalog handoff via `tess_scratch/catalog/` with robust protocol (atomic writes, dedup, inbox/processed/failed states) — avoids reopening the bridge project (DONE phase, hard-coded operation allowlist)
-- **AD-3:** Research library under tess user (`/Users/tess/research-library/`) — no cross-user permission complexity
+- **AD-3:** Research library under tess user (`/Users/danny/research-library/`) — no cross-user permission complexity
 - **Format preference:** PDF preferred — filter/rank search results to prioritize PDF; flag non-PDF formats for operator decision. Aligns with BBP (PDF-only processing).
 - **Tool implementation:** Native OpenClaw tool (Node.js), consistent with x-feed-intel/FIF patterns
 - **Download client:** curl baseline, aria2c as optional upgrade

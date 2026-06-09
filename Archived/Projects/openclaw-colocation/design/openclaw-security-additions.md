@@ -76,8 +76,8 @@ pass/fail with details:
 6. What are the file permissions on ~/.openclaw/openclaw.json? (should be 640, owned by openclaw:crumbvault)
 7. What are the permissions on ~/.openclaw/ directory? (should be 700)
 8. Is the crumbvault group set up? Run: dscl . -read /Groups/crumbvault GroupMembership
-9. Is the vault read-only for openclaw? Run: touch /Users/tess/crumb-vault/.write-test 2>&1 (should fail with permission denied)
-10. Is the _openclaw sandbox writable? Run: touch /Users/tess/crumb-vault/_openclaw/inbox/.write-test && rm /Users/tess/crumb-vault/_openclaw/inbox/.write-test (should succeed)
+9. Is the vault read-only for openclaw? Run: touch /Users/danny/crumb-vault/.write-test 2>&1 (should fail with permission denied)
+10. Is the _openclaw sandbox writable? Run: touch /Users/danny/crumb-vault/_openclaw/inbox/.write-test && rm /Users/danny/crumb-vault/_openclaw/inbox/.write-test (should succeed)
 11. Is fs.workspaceOnly set to false? (should be false — vault read access is via OS-level group permissions, not app-layer restriction)
 12. Is the LaunchDaemon running? Run: launchctl print system/ai.openclaw.gateway (should show active process)
 13. Are there any API keys or tokens visible in openclaw.json? (only the gateway auth password should be there; bot tokens should be in credentials/)
@@ -120,7 +120,7 @@ If anything fails, send the full report with details on what to fix.
 Create a script and a LaunchAgent (runs under the `tess` user since it
 needs cross-user visibility for the audit checks).
 
-**Script: `/Users/tess/crumb-vault/_system/scripts/openclaw-security-audit.sh`**
+**Script: `/Users/danny/crumb-vault/_system/scripts/openclaw-security-audit.sh`**
 
 ```bash
 #!/bin/bash
@@ -206,18 +206,18 @@ CVGROUP=$(dscl . -read /Groups/crumbvault GroupMembership 2>/dev/null)
 check "crumbvault group exists with members" "$CVGROUP" "openclaw"
 
 # 9. Vault read-only for openclaw
-WRITETEST=$(sudo -u openclaw touch /Users/tess/crumb-vault/.audit-write-test 2>&1)
+WRITETEST=$(sudo -u openclaw touch /Users/danny/crumb-vault/.audit-write-test 2>&1)
 if echo "$WRITETEST" | grep -qi "permission denied"; then
     REPORT+="✅ Vault is read-only for openclaw user\n"
     ((SCORE++))
 else
-    rm -f /Users/tess/crumb-vault/.audit-write-test 2>/dev/null
+    rm -f /Users/danny/crumb-vault/.audit-write-test 2>/dev/null
     REPORT+="❌ Vault is WRITABLE by openclaw — fix permissions\n"
 fi
 
 # 10. Sandbox writable
-if sudo -u openclaw touch /Users/tess/crumb-vault/_openclaw/inbox/.audit-test 2>/dev/null; then
-    rm -f /Users/tess/crumb-vault/_openclaw/inbox/.audit-test
+if sudo -u openclaw touch /Users/danny/crumb-vault/_openclaw/inbox/.audit-test 2>/dev/null; then
+    rm -f /Users/danny/crumb-vault/_openclaw/inbox/.audit-test
     REPORT+="✅ _openclaw sandbox is writable\n"
     ((SCORE++))
 else
@@ -277,7 +277,7 @@ fi
     <key>ProgramArguments</key>
     <array>
         <string>/bin/bash</string>
-        <string>/Users/tess/crumb-vault/_system/scripts/openclaw-security-audit.sh</string>
+        <string>/Users/danny/crumb-vault/_system/scripts/openclaw-security-audit.sh</string>
     </array>
     <key>StartCalendarInterval</key>
     <dict>
@@ -287,7 +287,7 @@ fi
         <integer>0</integer>
     </dict>
     <key>StandardOutPath</key>
-    <string>/Users/tess/crumb-vault/_openclaw/inbox/security-audit-latest.txt</string>
+    <string>/Users/danny/crumb-vault/_openclaw/inbox/security-audit-latest.txt</string>
     <key>StandardErrorPath</key>
     <string>/tmp/openclaw-security-audit-error.log</string>
     <key>RunAtLoad</key>

@@ -24,7 +24,7 @@ The vault is the single source of truth for projects, knowledge, decisions, and 
 
 ## Facts
 
-- Vault: ~3600 files, ~54MB, at `/Users/tess/crumb-vault/`
+- Vault: ~3600 files, ~54MB, at `/Users/danny/crumb-vault/`
 - iPhone with Chrome (WebKit engine underneath — Apple requirement for all iOS browsers)
 - Tailscale VPN connects iPhone to Mac Studio (already configured)
 - Mac Studio has Node.js installed (OpenClaw runs on it)
@@ -54,7 +54,7 @@ The vault is the single source of truth for projects, knowledge, decisions, and 
 ### Components
 
 1. **Quartz v4** — Static site generator (Node.js), installed on Mac Studio
-2. **Vault** — Source content at `/Users/tess/crumb-vault/`
+2. **Vault** — Source content at `/Users/danny/crumb-vault/`
 3. **Web server** — `npx serve` (Node.js static file server, zero-config)
 4. **Rebuild automation** — Scheduled Quartz rebuild via launchd
 5. **Tailscale** — Private network connecting iPhone ↔ Mac Studio
@@ -66,7 +66,7 @@ The vault is the single source of truth for projects, knowledge, decisions, and 
 ┌─────────────┐     Tailscale        ┌──────────────────────────────────────┐
 │   iPhone     │◄────────────────────►│           Mac Studio                 │
 │   Chrome     │   (private net)      │                                      │
-│              │                      │  /Users/tess/quartz-vault/           │
+│              │                      │  /Users/danny/quartz-vault/           │
 │  GET :8843   │──────────────────────│──► npx serve public/ (0.0.0.0:8843) │
 │              │   ◄── HTML/CSS/JS    │                                      │
 │              │                      │  Rebuild (launchd, every 15 min)     │
@@ -83,7 +83,7 @@ Access URL: http://<mac-studio-tailscale-hostname>:8843
 Quartz v4 expects content in its `content/` directory. The vault will be symlinked:
 
 ```
-/Users/tess/quartz-vault/content → /Users/tess/crumb-vault
+/Users/danny/quartz-vault/content → /Users/danny/crumb-vault
 ```
 
 Exclusions are enforced via Quartz's `ignorePatterns` in `quartz.config.ts`, which accepts glob patterns. This avoids copying or syncing — the vault is read directly, and Quartz filters at build time.
@@ -158,8 +158,8 @@ The Web Design Preference overlay (Library mode) applies in principle — this i
 **Risk:** low
 **Dependencies:** none
 **Acceptance criteria:**
-- Quartz v4 cloned to `/Users/tess/quartz-vault/`
-- `content/` symlinked to `/Users/tess/crumb-vault/`
+- Quartz v4 cloned to `/Users/danny/quartz-vault/`
+- `content/` symlinked to `/Users/danny/crumb-vault/`
 - `ignorePatterns` in `quartz.config.ts` configured for excluded directories
 - `npx quartz build` completes successfully
 - Local preview shows vault content with wikilinks, backlinks, and tag pages resolved

@@ -138,7 +138,7 @@ tags:
   - **Severity:** MINOR
   - **Finding:** BSC-005 risk labeled medium is plausible, but the threat model includes path traversal and catalog injection—those are security-sensitive and could justify “medium-high” attention.
   - **Why:** A single path handling bug can write outside intended directories.
-  - **Fix:** Add explicit acceptance criteria in BSC-005/BSC-009: “reject any computed path that resolves outside `/Users/tess/research-library/` after realpath resolution.”
+  - **Fix:** Add explicit acceptance criteria in BSC-005/BSC-009: “reject any computed path that resolves outside `/Users/danny/research-library/` after realpath resolution.”
 
 ---
 

@@ -42,7 +42,7 @@ Tess's *effective* harness is not one surface. It's three, and each has its own 
 #### Surface 1: Hermes persistence and retrieval layers
 
 - **What:** The files Hermes loads into Tess's system prompt at session start (SOUL.md, MEMORY.md, USER.md, AGENTS.md, skill index) plus the retrieval tools available during a session (session_search over state.db, vault_search via the QMD index).
-- **Where:** Tess's local filesystem under `/Users/tess/.hermes/` and `/Users/tess/crumb-vault/` (for the cwd-scoped AGENTS.md).
+- **Where:** Tess's local filesystem under `/Users/danny/.hermes/` and `/Users/danny/crumb-vault/` (for the cwd-scoped AGENTS.md).
 - **Edit authority:** Mixed. SOUL.md and AGENTS.md are manually edited by the operator. MEMORY.md, USER.md, and skills are agent-managed via Hermes tools (memory, skill_manage). The operator can override any of them out-of-band by editing files directly.
 - **Failure modes shaped here:** Interactive session behavior — how Tess responds when Danny is actively prompting her, what she remembers across sessions, what procedures she follows when patterns match.
 - **Coverage:** This document.
@@ -50,7 +50,7 @@ Tess's *effective* harness is not one surface. It's three, and each has its own 
 #### Surface 2: Dispatch envelope composition
 
 - **What:** The prompt Tess constructs at contract runtime when she dispatches work to an autonomous executor (Nemotron, Kimi, Claude Code, Codex). Per TV2-023, this envelope has a defined six-layer composition: header / service / overlay / vault / failure / context.
-- **Where:** Built programmatically inside the tess-v2 runner at `/Users/tess/crumb-apps/tess-v2/src/tess/runner.py` and related envelope assembly code. The *content* of each layer is sourced from vault design docs (service interfaces, overlays) and runtime state (vault queries, failure history).
+- **Where:** Built programmatically inside the tess-v2 runner at `/Users/danny/crumb-apps/tess-v2/src/tess/runner.py` and related envelope assembly code. The *content* of each layer is sourced from vault design docs (service interfaces, overlays) and runtime state (vault queries, failure history).
 - **Edit authority:** Operator-authored for the structural layers (service interface definitions, overlay content). Runtime-assembled for the dynamic layers (vault query results, failure context, session state).
 - **Failure modes shaped here:** Autonomous execution behavior — how local models execute contracts, where they hallucinate or skip steps, how failures propagate. Token budgets (16K local, 32K frontier, max 3 overlays) are enforced at this surface.
 - **Coverage:** Out of scope for this document. The Surface 2 harness is documented in tess-v2 design files:
@@ -64,7 +64,7 @@ When a Surface 2 harness plan is needed — likely after the first notable auton
 #### Surface 3: Interactive session behavior (Crumb / CLAUDE.md)
 
 - **What:** The behavioral protocols that Crumb (interactive Claude Code) follows when executing under Tess's dispatch authority post-Amendment Z. These include session-end logging, session report compliance, startup hook behavior, vault-check enforcement, and all the Crumb-side conventions that shape how delegated interactive work gets executed and reported back to Tess.
-- **Where:** Primarily in `/Users/tess/crumb-vault/CLAUDE.md` and the protocols it references (`_system/docs/protocols/session-end-protocol.md`, Amendment Z Z2 session report schema, the startup hook at `_system/scripts/session-startup.sh`).
+- **Where:** Primarily in `/Users/danny/crumb-vault/CLAUDE.md` and the protocols it references (`_system/docs/protocols/session-end-protocol.md`, Amendment Z Z2 session report schema, the startup hook at `_system/scripts/session-startup.sh`).
 - **Edit authority:** Operator-authored, with Crumb as the executor that reads and complies with the content.
 - **Failure modes shaped here:** Crumb-side compliance with Tess's dispatch authority. Example failures: session report non-compliance, stale context reconstruction, session-end logging drift, wrong frontmatter on new docs, missing code review at gate transitions.
 - **Coverage:** Out of scope for this document. The Surface 3 harness is CLAUDE.md itself plus the protocols it references. When CLAUDE.md's behavior surface grows complex enough to warrant a plan document, it should live in `_system/docs/` as a sibling to this one.
@@ -98,7 +98,7 @@ Keeping the surfaces distinct prevents two common confusions:
 
 ## 2. Hermes Persistence and Retrieval Architecture (Surface 1 Reference)
 
-This section describes the mechanical structure of Tess's harness at Surface 1. The claims here are verified against Hermes source at `/Users/tess/.hermes/hermes-agent/`. Where the information is stated with a line number, that's direct source reference.
+This section describes the mechanical structure of Tess's harness at Surface 1. The claims here are verified against Hermes source at `/Users/danny/.hermes/hermes-agent/`. Where the information is stated with a line number, that's direct source reference.
 
 ### 2.1 Frozen-snapshot pattern
 
@@ -147,7 +147,7 @@ Two details worth calling out:
 
 #### SOUL.md (layer 1)
 
-Location: `/Users/tess/.hermes/SOUL.md`
+Location: `/Users/danny/.hermes/SOUL.md`
 
 Contains Tess's identity, voice, invariant rules, behavioral guidelines, security policy, and vault access rules. It is the highest-authority layer — loaded first into the system prompt, serves as the identity primer before any other content. Cannot be edited by the agent (there is no `soul_manage` tool); only the operator modifies it.
 
@@ -163,7 +163,7 @@ Current structure (as of 2026-04-09):
 
 #### MEMORY.md (layer 6)
 
-Location: `/Users/tess/.hermes/memories/MEMORY.md`
+Location: `/Users/danny/.hermes/memories/MEMORY.md`
 
 Contains learned facts specific to the operator and environment. Agent-managed via the `memory` tool. Hard cap of 2200 characters enforced by the tool — writes that would exceed the cap fail with an error, requiring consolidation or removal of existing entries first.
 
@@ -175,7 +175,7 @@ The character cap is a design constraint that drives behavior: Tess cannot accum
 
 #### USER.md (layer 7)
 
-Location: `/Users/tess/.hermes/memories/USER.md`
+Location: `/Users/danny/.hermes/memories/USER.md`
 
 Contains Tess's profile of Danny — role, preferences, communication style, workflow habits. Agent-managed via `memory(..., target='user')`. Hard cap of 1375 characters. Currently near full (~1328 / 1375 as of 2026-04-09).
 
@@ -183,7 +183,7 @@ USER.md rarely features in training sessions because it's about the operator, no
 
 #### Skills (layer 8) — with progressive disclosure
 
-Location: `/Users/tess/.hermes/skills/<category>/<skill-name>/SKILL.md` + optional supporting files (refs, templates, scripts).
+Location: `/Users/danny/.hermes/skills/<category>/<skill-name>/SKILL.md` + optional supporting files (refs, templates, scripts).
 
 **Critical detail:** What gets injected into the system prompt at session start is NOT the full content of every skill. It's a *compact index*. This is verified at `prompt_builder.py:436-555` (`build_skills_system_prompt`). The function's docstring describes it as "a compact skill index for the system prompt."
 
@@ -197,7 +197,7 @@ This has two consequences:
 
 #### AGENTS.md (layer 9)
 
-Location: `/Users/tess/crumb-vault/AGENTS.md` (the cwd-scoped one — this is what Tess sees when running from the vault root).
+Location: `/Users/danny/crumb-vault/AGENTS.md` (the cwd-scoped one — this is what Tess sees when running from the vault root).
 
 Contains project-scoped operational context. Manually edited by the operator. **Top-level only** — per the source comment at `prompt_builder.py:716` (`"""AGENTS.md — top-level only (no recursive walk)."""`), Hermes does not perform subdirectory discovery. The file found at `<cwd>/AGENTS.md` is the one and only AGENTS.md loaded.
 
@@ -246,7 +246,7 @@ The exact guidance text, verified from `prompt_builder.py`:
 
 ### 2.6 Nudge configuration (from Tess's config.yaml)
 
-Verified values from `/Users/tess/.hermes/config.yaml` as of 2026-04-09:
+Verified values from `/Users/danny/.hermes/config.yaml` as of 2026-04-09:
 
 ```yaml
 memory:
@@ -323,7 +323,7 @@ Each entry is structured:
 
 ### 3.1 Confabulation under tool failure (crucible-vault pattern)
 
-**Incident:** 2026-04-09. Tess's Hermes process was launched with `cwd=/Users/tess/` instead of the vault root. Her relative-path searches for `Projects/tess-v2/` returned empty because `/Users/tess/Projects/` doesn't exist. Instead of debugging — running `pwd`, trying absolute paths, or asking Danny — she invented a vault split. She told Danny that the tess-v2 files "live in the crucible-vault where OpenClaw operates" — a system that does not exist and that she had no evidence for. Later in the same session she acknowledged she "fabricated 'crucible-vault' out of thin air."
+**Incident:** 2026-04-09. Tess's Hermes process was launched with `cwd=/Users/danny/` instead of the vault root. Her relative-path searches for `Projects/tess-v2/` returned empty because `/Users/danny/Projects/` doesn't exist. Instead of debugging — running `pwd`, trying absolute paths, or asking Danny — she invented a vault split. She told Danny that the tess-v2 files "live in the crucible-vault where OpenClaw operates" — a system that does not exist and that she had no evidence for. Later in the same session she acknowledged she "fabricated 'crucible-vault' out of thin air."
 
 **Trigger:** A tool call (search, file read, directory listing) returns empty when Tess expected content.
 
@@ -536,7 +536,7 @@ For each layer, the intervention section describes:
 
 ### 5.2 AGENTS.md
 
-**Current state:** 73 lines at `/Users/tess/crumb-vault/AGENTS.md`. Contains Crumb system architecture, domain classification, core principles, and a "Working With Danny" section that duplicates SOUL.md Rules 1-6.
+**Current state:** 73 lines at `/Users/danny/crumb-vault/AGENTS.md`. Contains Crumb system architecture, domain classification, core principles, and a "Working With Danny" section that duplicates SOUL.md Rules 1-6.
 
 **What belongs here:**
 - Project-scoped operational context (what Crumb is, how the vault is structured, domain routing)
@@ -569,7 +569,7 @@ Recommendation: option (a) or (b). This is a separate cleanup task; flagged here
 
 ### 5.3 Skills
 
-**Current state:** ~10 skills in `/Users/tess/.hermes/skills/`. Recent addition: `operational-investigation-protocol` (self-authored 2026-04-09). Skills are indexed in the system prompt as (name, description) tuples; full content loaded on demand.
+**Current state:** ~10 skills in `/Users/danny/.hermes/skills/`. Recent addition: `operational-investigation-protocol` (self-authored 2026-04-09). Skills are indexed in the system prompt as (name, description) tuples; full content loaded on demand.
 
 **What belongs here:**
 - Reusable procedures for multi-step tasks (investigation protocols, deployment workflows, review patterns)
@@ -663,7 +663,7 @@ If the skill is good, no change. If it has issues, the operator can (a) ask Tess
 
 ### 5.6 Harness config (not a persistence layer, but relevant)
 
-**Current config (from `/Users/tess/.hermes/config.yaml`):**
+**Current config (from `/Users/danny/.hermes/config.yaml`):**
 - `flush_min_turns: 6`, `nudge_interval: 10`, `creation_nudge_interval: 15` (if present)
 - `memory_enabled: true`, `user_profile_enabled: true`
 - Tool availability varies by session context
@@ -808,7 +808,7 @@ Each exercise specifies: what it tests, setup, trigger, expected behavior, and f
 
 **Tests:** Procedural-memory quality over time
 
-**Setup:** Operator and Tess jointly review the contents of `/Users/tess/.hermes/skills/` at a scheduled cadence.
+**Setup:** Operator and Tess jointly review the contents of `/Users/danny/.hermes/skills/` at a scheduled cadence.
 
 **Trigger:** Monthly cadence OR after 5+ new skills have accumulated.
 
@@ -827,7 +827,7 @@ Each exercise specifies: what it tests, setup, trigger, expected behavior, and f
 
 **Tests:** Section 5.4 — cross-layer deduplication
 
-**Setup:** Operator reviews `/Users/tess/.hermes/memories/MEMORY.md` with Tess at a scheduled cadence.
+**Setup:** Operator reviews `/Users/danny/.hermes/memories/MEMORY.md` with Tess at a scheduled cadence.
 
 **Trigger:** Monthly cadence OR when MEMORY.md approaches 2000/2200 chars.
 
@@ -846,7 +846,7 @@ Each exercise specifies: what it tests, setup, trigger, expected behavior, and f
 
 **Tests:** Section 5.2 — project-scope integrity
 
-**Setup:** Operator reviews `/Users/tess/crumb-vault/AGENTS.md`.
+**Setup:** Operator reviews `/Users/danny/crumb-vault/AGENTS.md`.
 
 **Trigger:** When SOUL.md is edited (check for new duplicates) OR when AGENTS.md grows beyond ~100 lines.
 
@@ -1053,7 +1053,7 @@ Currently we correct reactively as issues arise. Could we design a proactive tra
 
 **Status:** Known cleanup item from Section 5.2. The "Working With Danny" section in AGENTS.md duplicates SOUL.md Rules 1-6.
 
-**Next task:** Edit `/Users/tess/crumb-vault/AGENTS.md` to remove or point to SOUL.md for the behavioral rules. Target: next session or whenever operator has 5 minutes to spare.
+**Next task:** Edit `/Users/danny/crumb-vault/AGENTS.md` to remove or point to SOUL.md for the behavioral rules. Target: next session or whenever operator has 5 minutes to spare.
 
 ### 8.9 Transparency-over-coherence SOUL.md rule (concrete next task)
 
@@ -1081,19 +1081,19 @@ Target: next SOUL.md editing session.
 
 ### 9.1 Tess persistence layer file locations
 
-- **SOUL.md:** `/Users/tess/.hermes/SOUL.md`
-- **MEMORY.md:** `/Users/tess/.hermes/memories/MEMORY.md`
-- **USER.md:** `/Users/tess/.hermes/memories/USER.md`
-- **Skills directory:** `/Users/tess/.hermes/skills/`
-- **AGENTS.md:** `/Users/tess/crumb-vault/AGENTS.md`
-- **Config:** `/Users/tess/.hermes/config.yaml`
+- **SOUL.md:** `/Users/danny/.hermes/SOUL.md`
+- **MEMORY.md:** `/Users/danny/.hermes/memories/MEMORY.md`
+- **USER.md:** `/Users/danny/.hermes/memories/USER.md`
+- **Skills directory:** `/Users/danny/.hermes/skills/`
+- **AGENTS.md:** `/Users/danny/crumb-vault/AGENTS.md`
+- **Config:** `/Users/danny/.hermes/config.yaml`
 
 ### 9.2 Hermes source (for direct verification)
 
-- **System prompt builder:** `/Users/tess/.hermes/hermes-agent/run_agent.py` — `_build_system_prompt()` at line 2536
-- **Prompt builder module:** `/Users/tess/.hermes/hermes-agent/agent/prompt_builder.py` — `load_soul_md()`, `build_skills_system_prompt()`, `build_context_files_prompt()`, `SESSION_SEARCH_GUIDANCE` / `SKILLS_GUIDANCE` / `MEMORY_GUIDANCE` definitions
-- **Memory tool:** `/Users/tess/.hermes/hermes-agent/tools/memory_tool.py` — `MemoryStore` class, `memory` tool implementation
-- **Skill manager:** `/Users/tess/.hermes/hermes-agent/tools/skill_manager_tool.py` — `skill_manage` tool, skill lifecycle
+- **System prompt builder:** `/Users/danny/.hermes/hermes-agent/run_agent.py` — `_build_system_prompt()` at line 2536
+- **Prompt builder module:** `/Users/danny/.hermes/hermes-agent/agent/prompt_builder.py` — `load_soul_md()`, `build_skills_system_prompt()`, `build_context_files_prompt()`, `SESSION_SEARCH_GUIDANCE` / `SKILLS_GUIDANCE` / `MEMORY_GUIDANCE` definitions
+- **Memory tool:** `/Users/danny/.hermes/hermes-agent/tools/memory_tool.py` — `MemoryStore` class, `memory` tool implementation
+- **Skill manager:** `/Users/danny/.hermes/hermes-agent/tools/skill_manager_tool.py` — `skill_manage` tool, skill lifecycle
 
 Primary source verification is the authoritative way to validate claims about Hermes behavior. Web documentation is advisory; the code on this machine is ground truth.
 
@@ -1107,7 +1107,7 @@ Primary source verification is the authoritative way to validate claims about He
 
 ### 9.4 Surface 3 cross-references
 
-- `/Users/tess/crumb-vault/CLAUDE.md` — Crumb interactive session behavior
+- `/Users/danny/crumb-vault/CLAUDE.md` — Crumb interactive session behavior
 - `_system/docs/protocols/session-end-protocol.md` — session-end sequence Crumb follows
 - `Projects/tess-v2/design/spec-amendment-Z-interactive-dispatch.md` — Amendment Z dispatch authority and session report schema (Z2)
 - `_system/scripts/session-startup.sh` — startup hook
@@ -1120,7 +1120,7 @@ Primary source verification is the authoritative way to validate claims about He
 ### 9.6 Session records
 
 - **First training session:** `_system/logs/session-log.md` entry `## 2026-04-09 15:50 — Tess interactive training session + TV2-043 poller pre-staging`
-- **First self-authored harness skill:** `/Users/tess/.hermes/skills/software-development/operational-investigation-protocol/SKILL.md` (created 2026-04-09)
+- **First self-authored harness skill:** `/Users/danny/.hermes/skills/software-development/operational-investigation-protocol/SKILL.md` (created 2026-04-09)
 
 ### 9.7 Related Tess runtime config
 

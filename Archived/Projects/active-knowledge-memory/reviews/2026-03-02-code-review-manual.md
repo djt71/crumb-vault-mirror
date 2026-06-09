@@ -28,7 +28,7 @@ safety_gate:
   soft_heuristic_triggered: true
   user_override: false
   warnings:
-    - "Hardcoded path /Users/tess/crumb-vault in line 73 (expected for personal vault script)"
+    - "Hardcoded path /Users/danny/crumb-vault in line 73 (expected for personal vault script)"
 reviewer_meta:
   anthropic:
     http_status: 200
@@ -134,7 +134,7 @@ tags:
 
 ### ANT-F18 [MINOR] — Hardcoded vault path
 **File:** `knowledge-retrieve.sh`, line 16
-**Finding:** `VAULT_ROOT="/Users/tess/crumb-vault"` not portable. Use env var with fallback.
+**Finding:** `VAULT_ROOT="/Users/danny/crumb-vault"` not portable. Use env var with fallback.
 
 ### ANT-F19 [MINOR] — Missing argument validation for flags
 **File:** `knowledge-retrieve.sh`, lines 55-62

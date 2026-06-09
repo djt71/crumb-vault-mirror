@@ -386,7 +386,7 @@ The spec requires "export is one-at-a-time, operator-initiated, approval-gated."
 
 1. **TOP-019 (done):** Sudoers entry created at `/etc/sudoers.d/openclaw-apple` — `openclaw ALL=(tess) NOPASSWD:` scoped to 7 binaries (remindctl, icalBuddy, osascript, memo, ls, cat, cp). Verified via `sudo -l -U openclaw`.
 
-2. **TOP-020 (done):** `apple-cmd.sh` wrapper created at `_openclaw/bin/apple-cmd.sh`. Resolves command names to absolute paths, validates against allowed list, sets `HOME=/Users/tess` and uses `env_keep+=HOME` to pass through sudo boundary. Verified: `sudo -u openclaw apple-cmd.sh osascript` returns `tess`.
+2. **TOP-020 (done):** `apple-cmd.sh` wrapper created at `_openclaw/bin/apple-cmd.sh`. Resolves command names to absolute paths, validates against allowed list, sets `HOME=/Users/danny` and uses `env_keep+=HOME` to pass through sudo boundary. Verified: `sudo -u openclaw apple-cmd.sh osascript` returns `tess`.
 
 3. **Apple stream parked:** Discovered `tess` macOS user has her own Apple ID, not Danny's. The CLIs running as tess would access tess's (empty) iCloud data, not Danny's. Needs a `danny` macOS user created with Danny's iCloud signed in. Deferred — pivoted to Google.
 
@@ -425,8 +425,8 @@ The spec requires "export is one-at-a-time, operator-initiated, approval-gated."
 - `Projects/tess-operations/tasks.md` — TOP-046 acceptance criteria
 - `_openclaw/scripts/meeting-prep.sh` — reference pattern (data gathering + agent invocation + Telegram delivery)
 - `_openclaw/scripts/cron-lib.sh` — shared cron infrastructure
-- `/Users/tess/openclaw/feed-intel-framework/state/pipeline.db` — FIF SQLite schema (dashboard_actions, posts, adapter_runs)
-- `/Users/tess/openclaw/feed-intel-framework/state/digests/` — digest file format
+- `/Users/danny/openclaw/feed-intel-framework/state/pipeline.db` — FIF SQLite schema (dashboard_actions, posts, adapter_runs)
+- `/Users/danny/openclaw/feed-intel-framework/state/digests/` — digest file format
 
 ### Work completed
 
@@ -475,7 +475,7 @@ The spec requires "export is one-at-a-time, operator-initiated, approval-gated."
 - `Projects/tess-operations/design/tess-chief-of-staff-spec.md` — HEARTBEAT.md scope cap (§4)
 - `_openclaw/staging/m1/mechanic-HEARTBEAT.md` — existing heartbeat checks
 - `_openclaw/staging/m1/morning-briefing-prompt.md` — morning briefing prompt
-- `/Users/tess/openclaw/feed-intel-framework/state/pipeline.db` — FIF SQLite (adapter_runs, posts, cost_log, feedback tables)
+- `/Users/danny/openclaw/feed-intel-framework/state/pipeline.db` — FIF SQLite (adapter_runs, posts, cost_log, feedback tables)
 
 ### Work completed
 

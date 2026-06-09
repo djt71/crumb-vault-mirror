@@ -557,7 +557,7 @@ All design work on Opus (session default). No subagent delegation — the reason
 - `Projects/tess-v2/project-state.yaml` (active_task, next_action updated)
 - `Projects/tess-v2/progress/run-log.md` (this entry)
 
-No code changes. No commits to `/Users/tess/crumb-apps/tess-v2`.
+No code changes. No commits to `/Users/danny/crumb-apps/tess-v2`.
 
 ---
 

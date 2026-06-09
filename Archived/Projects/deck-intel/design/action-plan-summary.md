@@ -35,7 +35,7 @@ tags:
 ## Dependencies
 
 - PyMuPDF and LibreOffice not currently installed — DI-001 handles this
-- markitdown available at `/Users/tess/.local/bin/markitdown`
+- markitdown available at `/Users/danny/.local/bin/markitdown`
 - diagram-capture skill exists and defines composable interface
 
 ## Risk Profile

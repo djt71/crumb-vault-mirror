@@ -20,7 +20,7 @@ related_projects:
   - active-knowledge-memory
   - customer-intelligence
   - crumb-tess-bridge
-repo_path: /Users/tess/openclaw/crumb-dashboard
+repo_path: /Users/danny/openclaw/crumb-dashboard
 build_command: "npm run build"
 services:
   - com.crumb.dashboard

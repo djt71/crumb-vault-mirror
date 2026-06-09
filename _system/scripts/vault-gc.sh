@@ -12,7 +12,7 @@
 
 set -eu
 
-VAULT_ROOT="${VAULT_ROOT:-/Users/tess/crumb-vault}"
+VAULT_ROOT="${VAULT_ROOT:-/Users/danny/crumb-vault}"
 
 # Counters
 total_deleted=0

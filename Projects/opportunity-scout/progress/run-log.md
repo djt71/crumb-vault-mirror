@@ -197,7 +197,7 @@ Both Haiku triage (12/12 batches) and Sonnet ranking (2/2 attempts) failed ident
 **Secondary issue:** First successful manual run (post-env-fix) ranked and synthesized correctly but Telegram delivery failed: "message is too long" (5288 chars vs 4096 limit). Sonnet's verbose insights pushed the 7-item digest over the limit.
 
 **Fixes applied (commit c22f183):**
-1. **Plist PATH** — added `/Users/tess/.local/bin` to `com.scout.daily-pipeline.plist`
+1. **Plist PATH** — added `/Users/danny/.local/bin` to `com.scout.daily-pipeline.plist`
 2. **ANTHROPIC_API_KEY** — added to plist EnvironmentVariables
 3. **Telegram chunking** — new `sendLongMessage()` in `telegram.js` splits at `\n\n` boundaries when >4096 chars
 4. **Shell safety** — replaced fragile `$(cat tmpfile)` command substitution with `$SCOUT_SYSTEM_PROMPT` env var in all three LLM call sites (triage, ranking, synthesis). Eliminates quoting bugs from prompt content containing `"`, `` ` ``, or `$`.

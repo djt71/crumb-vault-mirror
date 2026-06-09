@@ -22,7 +22,7 @@ owned by `openclaw` user.
 
 - **macOS:** 26.3 (Darwin 25.3.0)
 - **Test directory:** `/private/tmp/ctb-watch-test/`
-- **Target directory:** `/Users/tess/crumb-vault/_openclaw/inbox/`
+- **Target directory:** `/Users/danny/crumb-vault/_openclaw/inbox/`
 - **Current user:** tess (uid=501)
 - **Directory owner:** openclaw (uid=502)
 - **Shared group:** crumbvault (gid=501), members: openclaw, tess
@@ -257,20 +257,20 @@ The watcher runs as a `KeepAlive` LaunchAgent:
     <key>ProgramArguments</key>
     <array>
         <string>/usr/bin/python3</string>
-        <string>/Users/tess/crumb-vault/_system/scripts/bridge-watcher.py</string>
+        <string>/Users/danny/crumb-vault/_system/scripts/bridge-watcher.py</string>
     </array>
     <key>KeepAlive</key>
     <true/>
     <key>ProcessType</key>
     <string>Adaptive</string>
     <key>StandardOutPath</key>
-    <string>/Users/tess/crumb-vault/_openclaw/logs/watcher.log</string>
+    <string>/Users/danny/crumb-vault/_openclaw/logs/watcher.log</string>
     <key>StandardErrorPath</key>
-    <string>/Users/tess/crumb-vault/_openclaw/logs/watcher.err</string>
+    <string>/Users/danny/crumb-vault/_openclaw/logs/watcher.err</string>
     <key>EnvironmentVariables</key>
     <dict>
         <key>HOME</key>
-        <string>/Users/tess</string>
+        <string>/Users/danny</string>
     </dict>
 </dict>
 </plist>

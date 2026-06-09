@@ -44,13 +44,13 @@ This spec defines how Tess gains access to Google services, what she's allowed t
 - **Tess (unattended scripts):** Direct REST API calls via `_openclaw/lib/gws-token.sh`. Bash library provides `gws_get_token` (auto-refresh), `gws_gmail_search`, `gws_gmail_get`, `gws_gmail_batch_label`, `gws_calendar_events`. Token source: MCP server's credential store at `~/.google_workspace_mcp/credentials/`.
 - **Interactive Tess (Telegram):** OpenClaw skill at `_openclaw/skills/google-workspace/SKILL.md` uses `gws-token.sh` for Calendar, Gmail, and Contacts queries.
 
-**Token lifecycle:** OAuth tokens are stored by the MCP server at `/Users/tess/.google_workspace_mcp/credentials/dturner71@gmail.com.json`. Auto-refresh handled by `gws_get_token`. If the refresh token is revoked by Google, re-consent is required via MCP OAuth flow (trigger any MCP tool call from Crumb, or run `workspace-mcp` with credentials env vars). First auth failure triggers a Telegram alert; subsequent failures log only.
+**Token lifecycle:** OAuth tokens are stored by the MCP server at `/Users/danny/.google_workspace_mcp/credentials/dturner71@gmail.com.json`. Auto-refresh handled by `gws_get_token`. If the refresh token is revoked by Google, re-consent is required via MCP OAuth flow (trigger any MCP tool call from Crumb, or run `workspace-mcp` with credentials env vars). First auth failure triggers a Telegram alert; subsequent failures log only.
 
 **Previous tooling (retired):** `gws` CLI (Google Workspace CLI, Rust-based). Removed from all operational scripts March 2026. Old credential store at `~/.config/gws/` is no longer used. See git history for original implementation.
 
 ### 2.5 Credential Storage and Cross-User Access
 
-**Credential store:** `/Users/tess/.google_workspace_mcp/credentials/dturner71@gmail.com.json` — written by workspace-mcp during OAuth consent. Standard Google OAuth format (`token`, `refresh_token`, `expiry`, `client_id`, `client_secret`, `scopes`).
+**Credential store:** `/Users/danny/.google_workspace_mcp/credentials/dturner71@gmail.com.json` — written by workspace-mcp during OAuth consent. Standard Google OAuth format (`token`, `refresh_token`, `expiry`, `client_id`, `client_secret`, `scopes`).
 
 **Cross-user access:** File permissions `rw-rw-r--`, group `crumbvault`. The `openclaw` user (in `crumbvault` group) has read+write access for token refresh persistence.
 

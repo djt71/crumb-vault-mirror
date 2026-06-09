@@ -53,7 +53,7 @@ loading follows the same discovery mechanism as interactive mode (working direct
 ### Test Command (run manually)
 
 ```bash
-time claude --print "What project instructions do you see from CLAUDE.md? List the first 3 section headers you can identify." --cwd /Users/tess/crumb-vault
+time claude --print "What project instructions do you see from CLAUDE.md? List the first 3 section headers you can identify." --cwd /Users/danny/crumb-vault
 ```
 
 ### Expected Behavior
@@ -89,13 +89,13 @@ This confirms tools ARE available in `--print` mode. The `--allowedTools` and
 
 ```bash
 # File read
-time claude --print "Read the file /Users/tess/crumb-vault/Projects/crumb-tess-bridge/project-state.yaml and tell me the exact value of the phase field" --cwd /Users/tess/crumb-vault
+time claude --print "Read the file /Users/danny/crumb-vault/Projects/crumb-tess-bridge/project-state.yaml and tell me the exact value of the phase field" --cwd /Users/danny/crumb-vault
 
 # File write (to /tmp for safety)
-time claude --print "Write the text 'hello from print mode' to /private/tmp/claude-print-test.txt then confirm the write by reading it back" --cwd /Users/tess/crumb-vault
+time claude --print "Write the text 'hello from print mode' to /private/tmp/claude-print-test.txt then confirm the write by reading it back" --cwd /Users/danny/crumb-vault
 
 # Bash execution
-time claude --print "Run 'echo hello-from-print-mode' using bash and show me the output" --cwd /Users/tess/crumb-vault
+time claude --print "Run 'echo hello-from-print-mode' using bash and show me the output" --cwd /Users/danny/crumb-vault
 ```
 
 ### Verdict: **PENDING EMPIRICAL CONFIRMATION**
@@ -120,7 +120,7 @@ This implies MCP servers from `.claude/settings.json` ARE loaded by default (oth
 ### Test Command (run manually)
 
 ```bash
-time claude --print "List all MCP tools or servers you have access to. If you have none, say NONE." --cwd /Users/tess/crumb-vault
+time claude --print "List all MCP tools or servers you have access to. If you have none, say NONE." --cwd /Users/danny/crumb-vault
 ```
 
 ### Verdict: **PENDING EMPIRICAL CONFIRMATION**
@@ -135,9 +135,9 @@ default MCP loading, implying defaults load from project settings.
 ### Test Commands (run manually, 3 runs)
 
 ```bash
-time claude --print "Say exactly: PONG" --cwd /Users/tess/crumb-vault
-time claude --print "Say exactly: PONG" --cwd /Users/tess/crumb-vault
-time claude --print "Say exactly: PONG" --cwd /Users/tess/crumb-vault
+time claude --print "Say exactly: PONG" --cwd /Users/danny/crumb-vault
+time claude --print "Say exactly: PONG" --cwd /Users/danny/crumb-vault
+time claude --print "Say exactly: PONG" --cwd /Users/danny/crumb-vault
 ```
 
 ### Verdict: **PENDING EMPIRICAL MEASUREMENT**
@@ -227,7 +227,7 @@ likely hang waiting for interactive permission approval.
 For the bridge runner, the recommended configuration is:
 
 ```bash
-cd /Users/tess/crumb-vault
+cd /Users/danny/crumb-vault
 claude --print \
   --tools "Read,Write,Edit,Bash,Glob,Grep" \
   --permission-mode dontAsk \
@@ -307,7 +307,7 @@ overloaded, it can fall back to Sonnet automatically.
 The help shows `prompt` as an argument, and `--input-format` supports `text` (default)
 and `stream-json`. For the bridge, we can either:
 - Pass the bridge request as a CLI argument: `claude --print "process this request: ..."`
-- Pipe it via stdin: `cat request.json | claude --print --cwd /Users/tess/crumb-vault`
+- Pipe it via stdin: `cat request.json | claude --print --cwd /Users/danny/crumb-vault`
 
 The piped approach avoids shell escaping issues with JSON payloads.
 
@@ -319,7 +319,7 @@ The piped approach avoids shell escaping issues with JSON payloads.
 #!/bin/bash
 # Bridge runner — invoked by file watcher (launchd KeepAlive process)
 
-VAULT="/Users/tess/crumb-vault"
+VAULT="/Users/danny/crumb-vault"
 REQUEST_FILE="$1"
 
 cd "$VAULT"

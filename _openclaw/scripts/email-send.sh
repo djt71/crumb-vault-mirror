@@ -26,7 +26,7 @@
 set -eu
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-VAULT_ROOT="/Users/tess/crumb-vault"
+VAULT_ROOT="/Users/danny/crumb-vault"
 BRIDGE_DIR="$VAULT_ROOT/_openclaw"
 LOG_FILE="$BRIDGE_DIR/logs/email-send.log"
 SECURITY_LOG="$BRIDGE_DIR/logs/google-security.log"

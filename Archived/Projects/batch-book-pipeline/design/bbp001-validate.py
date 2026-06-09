@@ -14,7 +14,7 @@ from google import genai
 # --- Config ---
 API_KEY = os.environ["GEMINI_API_KEY"]
 MODEL = "gemini-3.1-pro-preview"
-BASE = Path("/Users/tess/crumb-vault")
+BASE = Path("/Users/danny/crumb-vault")
 PDF_DIR = BASE / "_inbox" / "bbp-pdfs"
 SAMPLES_DIR = BASE / "Projects" / "batch-book-pipeline" / "design" / "samples"
 

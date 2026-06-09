@@ -9,4 +9,4 @@ last_gate: IMPLEMENT-to-DONE
 active_task: null
 next_action: "Project complete. 37 tasks, 897 tests, bridge operational since 2026-02-22."
 last_committed: 2026-02-25
-repo_path: /Users/tess/openclaw/crumb-tess-bridge
+repo_path: /Users/danny/openclaw/crumb-tess-bridge

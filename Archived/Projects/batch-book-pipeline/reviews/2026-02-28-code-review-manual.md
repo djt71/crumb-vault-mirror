@@ -28,7 +28,7 @@ safety_gate:
   soft_heuristic_triggered: true
   user_override: false
   warnings:
-    - "user path: /Users/tess (line 50)"
+    - "user path: /Users/danny (line 50)"
     - "high entropy false positives: function names, config strings (19 matches, all benign)"
 reviewer_meta:
   anthropic:
@@ -145,7 +145,7 @@ if line.startswith("GEMINI_API_KEY="):
 ## F6
 - **Severity**: SIGNIFICANT
 - **File**: pipeline.py, line 40
-- **Finding**: `VAULT_ROOT` is hardcoded to `/Users/tess/crumb-vault`. This makes the script non-portable and will silently write to the wrong location (or fail) on any other machine or user account.
+- **Finding**: `VAULT_ROOT` is hardcoded to `/Users/danny/crumb-vault`. This makes the script non-portable and will silently write to the wrong location (or fail) on any other machine or user account.
 - **Why**: Even for a personal project, this breaks the moment you run from a different machine, a CI environment, or change your username.
 - **Fix**: Use an environment variable with a fallback:
 ```python

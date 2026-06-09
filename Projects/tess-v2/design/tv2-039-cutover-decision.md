@@ -86,7 +86,7 @@ All Tess v2 services wrap the same underlying scripts/tools as OpenClaw. Rollbac
 
 ```bash
 # Step 1: Bootout all Tess v2 services
-for plist in /Users/tess/Library/LaunchAgents/com.tess.v2.*.plist; do
+for plist in /Users/danny/Library/LaunchAgents/com.tess.v2.*.plist; do
     label=$(basename "$plist" .plist)
     launchctl bootout "gui/$(id -u)/$label" 2>/dev/null
     echo "Booted out: $label"
@@ -100,7 +100,7 @@ for label in com.scout.daily-pipeline com.scout.feedback-poller \
     else
         echo "RESTORE: $label"
         launchctl bootstrap "gui/$(id -u)" \
-            "/Users/tess/Library/LaunchAgents/$label.plist"
+            "/Users/danny/Library/LaunchAgents/$label.plist"
     fi
 done
 
@@ -129,7 +129,7 @@ launchctl bootout "gui/$(id -u)/com.scout.feedback-poller"
 # Enable and bootstrap Tess poller
 launchctl enable "gui/$(id -u)/com.tess.v2.scout-feedback-poller"
 launchctl bootstrap "gui/$(id -u)" \
-    /Users/tess/Library/LaunchAgents/com.tess.v2.scout-feedback-poller.plist
+    /Users/danny/Library/LaunchAgents/com.tess.v2.scout-feedback-poller.plist
 
 # Verify
 sleep 3 && launchctl list | grep feedback-poller

@@ -13,5 +13,5 @@ related_projects:
   - batch-book-pipeline
   - crumb-tess-bridge
   - feed-intel-framework
-repo_path: /Users/tess/openclaw/book-scout
+repo_path: /Users/danny/openclaw/book-scout
 next_action: "Project complete. 10 tasks, 199 tests, plugin deployed. See design/catalog-handoff-guide.md for operations."

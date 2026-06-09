@@ -37,8 +37,8 @@ updated: 2026-04-04
 ### PLAN → IMPLEMENT (collapsed — tasks already defined in spec)
 
 **VMA-001: Install and configure Quartz v4** ✅
-- Quartz v4.5.2 cloned to `/Users/tess/quartz-vault/`
-- Content symlinked: `content/ → /Users/tess/crumb-vault/`
+- Quartz v4.5.2 cloned to `/Users/danny/quartz-vault/`
+- Content symlinked: `content/ → /Users/danny/crumb-vault/`
 - `ignorePatterns` configured for all excluded directories
 - Build: 2240 files parsed, 3539 emitted in **19 seconds**
 - Search index: 22MB (FlexSearch contentIndex.json)
@@ -60,7 +60,7 @@ updated: 2026-04-04
 **VMA-004: Automated rebuild** ✅
 - `rebuild.sh`: builds to `public-next/`, validates, atomic rename swap, rollback on failure
 - LaunchAgent: `com.crumb.vault-rebuild` (every 900s / 15 min)
-- Build logs at `/Users/tess/quartz-vault/logs/rebuild.log`
+- Build logs at `/Users/danny/quartz-vault/logs/rebuild.log`
 
 ### Phase Transition: IMPLEMENT → DONE
 - Date: 2026-04-04

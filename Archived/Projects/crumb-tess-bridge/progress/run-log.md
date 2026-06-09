@@ -1375,7 +1375,7 @@ needs a unified write+read surface, which Telegram → vault isn't). The replace
 design uses Apple Notes as the phone inbox with a weekly sweep promotion to the main
 vault. See `_system/docs/capture-tiers.md`.
 
-**Files removed from `/Users/tess/openclaw/crumb-tess-bridge/`:**
+**Files removed from `/Users/danny/openclaw/crumb-tess-bridge/`:**
 - `src/tess/quick-capture-skill.md` — OpenClaw skill definition
 - `src/tess/scripts/lib/capture.js` — Tess-side capture writer
 - `src/tess/test/capture.test.js`
@@ -1392,7 +1392,7 @@ vault. See `_system/docs/capture-tiers.md`.
 is shared with the bridge, not quick-capture-only.
 
 **Test status:** 250 non-vector-dependent bridge tests pass post-edit. Vector-dependent
-tests fail on a pre-existing path issue (`/Users/tess/_openclaw/` vs `/Users/tess/openclaw/`)
+tests fail on a pre-existing path issue (`/Users/danny/_openclaw/` vs `/Users/danny/openclaw/`)
 unrelated to this retirement.
 
 **If the pattern ever needs rebuilding:** scope doc at

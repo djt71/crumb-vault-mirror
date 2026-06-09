@@ -21,7 +21,7 @@ updated: 2026-06-01
 pending:
   - id: VAL-001
     failure_mode: "§3.1 — Confabulation under tool failure (crucible-vault pattern)"
-    archetypal_incident: "2026-04-09 crucible-vault fabrication. Tess's Hermes process launched with cwd=/Users/tess/ instead of vault root; relative-path searches for Projects/tess-v2/ returned empty; instead of debugging she invented a 'crucible-vault where OpenClaw operates' to explain the absence."
+    archetypal_incident: "2026-04-09 crucible-vault fabrication. Tess's Hermes process launched with cwd=/Users/danny/ instead of vault root; relative-path searches for Projects/tess-v2/ returned empty; instead of debugging she invented a 'crucible-vault where OpenClaw operates' to explain the absence."
     intervention:
       - "SOUL.md Rule 7 added (environmental hypotheses require verification)"
       - "SOUL.md Vault Access section revised (absolute-path discipline + pwd-first debug)"

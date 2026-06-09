@@ -174,7 +174,7 @@ All 10 action items (A1-A10) applied as revision r1 to action-plan.md, tasks.md,
 
 | Check | Result | Notes |
 |---|---|---|
-| Research library dirs | PASS (created) | `/Users/tess/research-library/` with 7 subject subdirs |
+| Research library dirs | PASS (created) | `/Users/danny/research-library/` with 7 subject subdirs |
 | Catalog handoff dirs | PASS (created) | `_openclaw/tess_scratch/catalog/{inbox,processed,failed}/` |
 | Ownership/permissions | PASS (caveat) | Library group is `staff` not `crumbvault` — world-readable so functional, but note for future |
 | Atomic rename test | PASS | Same-filesystem rename works as expected |
@@ -196,7 +196,7 @@ All 10 action items (A1-A10) applied as revision r1 to action-plan.md, tasks.md,
 **Architecture finding:** OpenClaw has two extension mechanisms — skills (prompt-based) and plugins (TypeScript, `api.registerTool()`). FIF/x-feed-intel are standalone apps, NOT OpenClaw plugins. Book-scout follows the plugin pattern (spec assumption A7 partially validated — HTTP-calling tools work fine, but the pattern is plugins, not the FIF adapter pattern).
 
 **Implementation:**
-- External code repo: `/Users/tess/openclaw/book-scout/` (git initialized)
+- External code repo: `/Users/danny/openclaw/book-scout/` (git initialized)
 - Plugin structure: `index.ts` + `openclaw.plugin.json` + `src/book-search-tool.ts`
 - HTML parsing via cheerio — extracts title, authors, publisher, language, format, size, year, content_type, source_libraries, md5
 - PDF results sorted first (priority: PDF > EPUB > MOBI > DJVU)
@@ -228,7 +228,7 @@ All 10 action items (A1-A10) applied as revision r1 to action-plan.md, tasks.md,
 1. `specification.md` — §4.5 (Telegram interaction), §6 (catalog schema), §7 (naming/subjects)
 2. `design/tasks.md` — BSC-004 through BSC-006 acceptance criteria
 3. `design/api-research.md` — download API details (M0 output)
-4. `/Users/tess/openclaw/book-scout/src/book-search-tool.ts` — existing code
+4. `/Users/danny/openclaw/book-scout/src/book-search-tool.ts` — existing code
 
 ### BSC-004: Search Result Formatting for Telegram — COMPLETE
 - `src/format-telegram.ts`: numbered list per §4.5, non-PDF ⚠️ flagging, edition grouping via title normalization, source name mapping, message splitting at 4096 chars
@@ -269,7 +269,7 @@ All 10 action items (A1-A10) applied as revision r1 to action-plan.md, tasks.md,
 2. `design/tasks.md` — BSC-007 through BSC-010 acceptance criteria
 3. `Sources/books/augustine-confessions-of-st-augustine-index.md` — existing BBP source-index (format reference)
 4. `_system/scripts/batch-book-pipeline/generate-source-index.py` — BBP discovery mechanism
-5. `/Users/tess/openclaw/book-scout/src/catalog-handoff.ts` — catalog schema/types
+5. `/Users/danny/openclaw/book-scout/src/catalog-handoff.ts` — catalog schema/types
 
 ### BSC-007: Crumb Catalog Processor — COMPLETE
 - `_system/scripts/book-scout/catalog-processor.sh`: bash script
@@ -402,7 +402,7 @@ All code tasks covered by milestone review above (panel: Opus + Codex, 16 findin
 
 ### Deployment Issues Resolved (5)
 1. **Catalog directory permissions** — `_openclaw/tess_scratch/catalog/{inbox,processed,failed}` needed `g+w` for openclaw user write access
-2. **Research library permissions** — `/Users/tess/research-library/` dirs needed `chgrp crumbvault` + `g+w` + setgid
+2. **Research library permissions** — `/Users/danny/research-library/` dirs needed `chgrp crumbvault` + `g+w` + setgid
 3. **Keychain cross-user access** — API key stored in tess's Keychain, duplicated to openclaw's Keychain
 4. **SOUL.md deployment** — copied from `_openclaw/staging/SOUL.md` to live workspace
 5. **Plugin registration** — `plugins install --link` rejected (uid ownership check in `checkPathStatAndPermissions`). Fix: copied plugin to workspace extensions dir
@@ -451,7 +451,7 @@ Diagnostic timeline:
 - Code change deployed to both source repo and workspace extensions copy
 
 ### Download Results
-- 9/10 PDFs downloaded successfully to `/Users/tess/research-library/`
+- 9/10 PDFs downloaded successfully to `/Users/danny/research-library/`
   - Fiction (5): eco-name-rose, flaubert-madame-bovary, king-shining, martel-life-pi, weir-martian
   - History (2): abouzeid-no-turning-back, weiner-legacy-ashes-history
   - Science (2): bone-mars-observers-guide, levitt-freakonomics

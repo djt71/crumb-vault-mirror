@@ -270,7 +270,7 @@ cat > ~/Library/LaunchAgents/com.tess.vault-backup.plist << 'EOF'
     <key>ProgramArguments</key>
     <array>
         <string>/bin/bash</string>
-        <string>/Users/tess/crumb-vault/_system/scripts/vault-backup.sh</string>
+        <string>/Users/danny/crumb-vault/_system/scripts/vault-backup.sh</string>
     </array>
     <key>StartCalendarInterval</key>
     <dict>

@@ -25,7 +25,7 @@ is ever narrowed, archived, or restructured.
 The narrowing of tess-v2 by Amendment AC (2026-04-21) — retracting Tess's
 orchestrator role and scoping it to autonomous scheduled services — does
 *not* retire any of the patterns below. They continue to drive the
-production contract runner at `/Users/tess/crumb-apps/tess-v2/` and remain
+production contract runner at `/Users/danny/crumb-apps/tess-v2/` and remain
 applicable to any future LLM-in-a-role design work.
 
 ## Curation Status

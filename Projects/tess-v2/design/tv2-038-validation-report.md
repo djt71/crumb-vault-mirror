@@ -491,7 +491,7 @@ Populated from `~/.tess/state/run-history.db` queries, `_staging/TV2-*/` artifac
 
 #### Output parity
 - OpenClaw poller: actively running (verified via Tess-side health check).
-- Tess v2 poller: pre-staged but not bootstrapped. Plist and wrapper exist at `/Users/tess/Library/LaunchAgents/com.tess.v2.scout-feedback-poller.plist` and `/Users/tess/crumb-apps/tess-v2/scripts/scout-feedback-poller-wrapper.sh`; bootstrap deferred to TV2-039 cutover execution (IDQ-004 plan).
+- Tess v2 poller: pre-staged but not bootstrapped. Plist and wrapper exist at `/Users/danny/Library/LaunchAgents/com.tess.v2.scout-feedback-poller.plist` and `/Users/danny/crumb-apps/tess-v2/scripts/scout-feedback-poller-wrapper.sh`; bootstrap deferred to TV2-039 cutover execution (IDQ-004 plan).
 - Content comparison: Only OpenClaw is the active poller, by design.
 - Result: N/A (deferred service per IDQ-004 plan)
 
@@ -626,7 +626,7 @@ These checks are **not per-service** — they apply to the platform as a whole. 
 
 **Claim.** No Tess v2 write path bypasses staging-to-canonical promotion for vault artifacts.
 
-**Method.** Read `src/tess/staging.py`, `src/tess/promotion.py`, `src/tess/runner.py`, `src/tess/dispatch.py`, `src/tess/claude_dispatch.py`, `src/tess/executors/shell.py`. Grepped for `open(`, `.write_text`, `Path.write_*` and `/Users/tess/crumb-vault/` destination paths across the source tree. Cross-checked against `staging-promotion-design.md` §4. Inspected `~/.tess/logs/` for promotion.log presence. Reviewed `cli.py _cmd_run` for the call sequence.
+**Method.** Read `src/tess/staging.py`, `src/tess/promotion.py`, `src/tess/runner.py`, `src/tess/dispatch.py`, `src/tess/claude_dispatch.py`, `src/tess/executors/shell.py`. Grepped for `open(`, `.write_text`, `Path.write_*` and `/Users/danny/crumb-vault/` destination paths across the source tree. Cross-checked against `staging-promotion-design.md` §4. Inspected `~/.tess/logs/` for promotion.log presence. Reviewed `cli.py _cmd_run` for the call sequence.
 
 **Evidence**
 - **Direct vault-write grep:** 2× `os.write()` calls in `promotion.py` (vault file writes, inside the promotion lock). 3× `.write_text()` calls in `executors/shell.py` (all scoped to staging directory). No direct vault writes in executors or runner outside staging. `claude_dispatch.py:114–116` embeds the constraint string "Do not modify files outside staging" in the Claude prompt. `promotion.py:244–253` validates that every source/destination stays within `staging_root` or `vault_root` respectively.

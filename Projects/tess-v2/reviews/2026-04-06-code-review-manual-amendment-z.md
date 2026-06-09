@@ -27,7 +27,7 @@ safety_gate:
   soft_heuristic_triggered: true
   user_override: false
   warnings:
-    - "Hardcoded path /Users/tess/crumb-vault in dispatch.py DEFAULT_VAULT_ROOT"
+    - "Hardcoded path /Users/danny/crumb-vault in dispatch.py DEFAULT_VAULT_ROOT"
 reviewer_meta:
   anthropic:
     http_status: 200
@@ -120,7 +120,7 @@ tags:
 
 ### ANT-F10 — MINOR
 **File:** `src/tess/dispatch.py`, lines 25-27
-**Finding:** `DEFAULT_VAULT_ROOT` hardcoded to `/Users/tess/crumb-vault`.
+**Finding:** `DEFAULT_VAULT_ROOT` hardcoded to `/Users/danny/crumb-vault`.
 **Fix:** Use `Path.home() / "crumb-vault"` or make parameter required.
 
 ### ANT-F11 — MINOR

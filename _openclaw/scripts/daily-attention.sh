@@ -12,8 +12,8 @@
 #
 # Usage (manual): bash daily-attention.sh [--dry-run]
 
-source "/Users/tess/crumb-vault/_openclaw/scripts/cron-lib.sh"
-source "/Users/tess/crumb-vault/_openclaw/scripts/attention-lib.sh"
+source "/Users/danny/crumb-vault/_openclaw/scripts/cron-lib.sh"
+source "/Users/danny/crumb-vault/_openclaw/scripts/attention-lib.sh"
 source "$VAULT_ROOT/_openclaw/lib/gws-token.sh"
 
 # === Constants ===

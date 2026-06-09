@@ -38,7 +38,7 @@ nothing on `tess` is deleted until `danny` is verified green over a soak window.
    `openclaw.json`. Every item must be re-added to `danny`'s keychain by hand
    (P3). Miss one → the dependent agent fails silently at next fire.
 2. **Python venvs are not relocatable.** `.hermes/hermes-agent/venv` (700M) and
-   openclaw repo venvs hardcode `/Users/tess` in shebangs + `pyvenv.cfg`.
+   openclaw repo venvs hardcode `/Users/danny` in shebangs + `pyvenv.cfg`.
    **Recreate**, do not copy (P4).
 3. **launchd is per-user + session-bound.** danny's agents must be bootstrapped
    from danny's GUI login (`launchctl bootstrap gui/$(id -u danny)`). danny being
@@ -104,8 +104,8 @@ health-ping, vault-gc, vault-health). `disabled/`: email-triage ×2.
 
 1. **Commit/push every repo.** Vault currently has uncommitted changes.
    ```sh
-   cd /Users/tess/crumb-vault && git add -A && git commit -m "pre-migration snapshot" && git push
-   for d in /Users/tess/openclaw/*/; do (cd "$d" && git add -A && git commit -m "pre-migration snapshot" 2>/dev/null && git push 2>/dev/null); done
+   cd /Users/danny/crumb-vault && git add -A && git commit -m "pre-migration snapshot" && git push
+   for d in /Users/danny/openclaw/*/; do (cd "$d" && git add -A && git commit -m "pre-migration snapshot" 2>/dev/null && git push 2>/dev/null); done
    ```
 2. **Capture secret inventory** to a checklist file (names only, values pulled at P3):
    ```sh
@@ -135,7 +135,7 @@ for tree in crumb-vault crumb-vault-mirror quartz-vault research-library crumb-a
             .hermes .local .claude .config .openclaw .tess .cloudflared .codex \
             .ollama .google_workspace_mcp; do
   sudo rsync -aHAX --exclude 'venv/' --exclude '__pycache__/' --exclude 'node_modules/' \
-    "/Users/tess/$tree" "$DEST/"
+    "/Users/danny/$tree" "$DEST/"
 done
 sudo chown -R danny:staff /Users/danny/{crumb-vault,research-library,...}   # see note
 # Group-owned trees keep group crumbvault (danny is already a member):
@@ -146,17 +146,17 @@ needed (remotes are HTTPS, so git push uses the `gh:github.com` keychain cred in
 
 ### P2 — Path rewrite (run as danny)
 
-Rewrite `/Users/tess` → `/Users/danny` across **text files only**, excluding
+Rewrite `/Users/danny` → `/Users/danny` across **text files only**, excluding
 `.git/`, `node_modules/`, `venv/`, and binaries.
 
 ```sh
 cd /Users/danny
 grep -rIl --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=venv \
-  "/Users/tess" crumb-vault openclaw crumb-apps research-library .hermes .config .claude \
-  | while read -r f; do sed -i '' 's#/Users/tess#/Users/danny#g' "$f"; done
+  "/Users/danny" crumb-vault openclaw crumb-apps research-library .hermes .config .claude \
+  | while read -r f; do sed -i '' 's#/Users/danny#/Users/danny#g' "$f"; done
 
 # Shell profiles
-sed -i '' 's#/Users/tess#/Users/danny#g' /Users/danny/.zshrc /Users/danny/.zprofile
+sed -i '' 's#/Users/danny#/Users/danny#g' /Users/danny/.zshrc /Users/danny/.zprofile
 
 # Obsidian vault registration
 #   edit ~/Library/Application Support/obsidian/obsidian.json → path /Users/danny/crumb-vault
@@ -164,10 +164,10 @@ sed -i '' 's#/Users/tess#/Users/danny#g' /Users/danny/.zshrc /Users/danny/.zprof
 # Rename the path-keyed Claude memory dir
 mv "/Users/danny/.claude/projects/-Users-tess-crumb-vault" \
    "/Users/danny/.claude/projects/-Users-danny-crumb-vault"
-sed -i '' 's#-Users-tess-crumb-vault#-Users-danny-crumb-vault#g; s#/Users/tess#/Users/danny#g' \
+sed -i '' 's#-Users-tess-crumb-vault#-Users-danny-crumb-vault#g; s#/Users/danny#/Users/danny#g' \
    /Users/danny/.claude/projects/-Users-danny-crumb-vault/memory/*.md
 ```
-Verify zero stragglers (outside .git): `grep -rI --exclude-dir=.git "/Users/tess" /Users/danny/crumb-vault | head`.
+Verify zero stragglers (outside .git): `grep -rI --exclude-dir=.git "/Users/danny" /Users/danny/crumb-vault | head`.
 
 ### P3 — Credentials (run as danny; needs secret values)
 
@@ -237,7 +237,7 @@ for d in /Users/danny/openclaw/*/; do [ -f "$d/package.json" ] && (cd "$d" && np
 
 Until P7, rollback is cheap: re-bootstrap tess's agents
 (`launchctl bootstrap gui/$(id -u tess) <plist>` from tess's session), point
-Obsidian back to `/Users/tess/crumb-vault`. tess copies are untouched through P6.
+Obsidian back to `/Users/danny/crumb-vault`. tess copies are untouched through P6.
 
 ## Open items to resolve during execution
 

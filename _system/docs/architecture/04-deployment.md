@@ -224,7 +224,7 @@ The Mac Studio has no inbound ports open to the public internet. All remote acce
 ### On-Host Storage
 
 ```
-/Users/tess/
+/Users/danny/
 ├── crumb-vault/                    # THE VAULT — Obsidian + git-tracked
 │   ├── Projects/                   # Active project scaffolds
 │   ├── Archived/Projects/          # Archived projects

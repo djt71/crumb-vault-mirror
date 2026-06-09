@@ -22,9 +22,9 @@
 set -eu
 
 # --- Configuration ---
-ENV_FILE="${TESS_HEALTHCHECK_ENV:-/Users/tess/.config/tess/health-check.env}"
+ENV_FILE="${TESS_HEALTHCHECK_ENV:-/Users/danny/.config/tess/health-check.env}"
 STATE_FILE="/tmp/tess-health-check.state"
-LOG_FILE="/Users/tess/crumb-vault/_system/logs/health-check.log"
+LOG_FILE="/Users/danny/crumb-vault/_system/logs/health-check.log"
 OPENCLAW_CONFIG="/Users/openclaw/.openclaw/openclaw.json"
 OPENCLAW_WORKSPACE="/Users/openclaw/.openclaw/workspace"
 GATEWAY_SERVICE="system/ai.openclaw.gateway"

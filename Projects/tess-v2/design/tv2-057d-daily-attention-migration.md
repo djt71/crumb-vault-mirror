@@ -31,7 +31,7 @@ tags:
 
 1. **LaunchAgent:** `com.tess.v2.daily-attention` (StartInterval 1800s) invokes the contract runner with `contracts/daily-attention.yaml`.
 2. **Runner:** executes `scripts/daily-attention.sh` (the Tess v2 wrapper) via `command_exit_zero` test.
-3. **Wrapper (`scripts/daily-attention.sh:22`):** shells out to `/Users/tess/crumb-vault/_openclaw/scripts/daily-attention.sh` — the OpenClaw production script.
+3. **Wrapper (`scripts/daily-attention.sh:22`):** shells out to `/Users/danny/crumb-vault/_openclaw/scripts/daily-attention.sh` — the OpenClaw production script.
 4. **OpenClaw script (`_openclaw/scripts/daily-attention.sh`):**
    - Idempotency check at `:53` — if `$VAULT_ROOT/_system/daily/{YYYY-MM-DD}.md` exists, exit 0 immediately.
    - Otherwise: gather context (goal-tracker, projects, calendar, Apple snapshots, signals), call Anthropic Opus, generate plan, write atomically:

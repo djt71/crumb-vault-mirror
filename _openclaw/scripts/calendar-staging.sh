@@ -22,7 +22,7 @@
 set -eu
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-VAULT_ROOT="/Users/tess/crumb-vault"
+VAULT_ROOT="/Users/danny/crumb-vault"
 BRIDGE_DIR="$VAULT_ROOT/_openclaw"
 LOG_FILE="$BRIDGE_DIR/logs/calendar-staging.log"
 CALENDARS_CONFIG="$BRIDGE_DIR/config/google-calendars.json"

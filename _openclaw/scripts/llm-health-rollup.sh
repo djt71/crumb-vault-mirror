@@ -18,7 +18,7 @@
 
 set -eu
 
-VAULT_ROOT="/Users/tess/crumb-vault"
+VAULT_ROOT="/Users/danny/crumb-vault"
 METRICS_JSONL="$VAULT_ROOT/_openclaw/logs/ops-metrics.jsonl"
 GATEWAY_LOG_DIR="/tmp/openclaw"
 OUTPUT_FILE="$VAULT_ROOT/_system/logs/llm-health.json"

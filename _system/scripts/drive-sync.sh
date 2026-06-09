@@ -13,7 +13,7 @@
 
 set -eu
 
-VAULT_ROOT="/Users/tess/crumb-vault"
+VAULT_ROOT="/Users/danny/crumb-vault"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REMOTE="gdrive"
 RCLONE_CONFIG="/Users/danny/.config/rclone/rclone.conf"

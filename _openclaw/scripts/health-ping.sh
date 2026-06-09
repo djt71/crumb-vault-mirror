@@ -15,7 +15,7 @@
 # Both must pass for the ping to fire. Either failure = ping stops = alert after 2h.
 #
 # Usage: Run via cron every 15 minutes (4x/hour, well within 2-hour failure window).
-#   */15 * * * * /Users/tess/crumb-vault/_openclaw/scripts/health-ping.sh
+#   */15 * * * * /Users/danny/crumb-vault/_openclaw/scripts/health-ping.sh
 #
 # Setup:
 #   1. Create health monitor account (free tier): https://uptimerobot.com
@@ -34,7 +34,7 @@ GATEWAY_HOST="127.0.0.1"
 GATEWAY_PORT="18789"
 GATEWAY_TIMEOUT=5
 
-VAULT_ROOT="/Users/tess/crumb-vault"
+VAULT_ROOT="/Users/danny/crumb-vault"
 METRICS_LOG="$VAULT_ROOT/_openclaw/logs/ops-metrics.jsonl"
 # Max age (in seconds) for "job ran recently" — 4 hours (generous; heartbeat runs every 30-60 min)
 JOB_MAX_AGE=14400

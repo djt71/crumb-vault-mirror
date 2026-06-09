@@ -69,7 +69,7 @@ The result: feed-intel is a well-specified, well-tested system that can't fulfil
 
 ### 3.1 Where the Code Lives
 
-The framework codebase stays at `/Users/tess/openclaw/feed-intel-framework/`. This is already on the Mac Studio (Tess's machine). No code move needed.
+The framework codebase stays at `/Users/danny/openclaw/feed-intel-framework/`. This is already on the Mac Studio (Tess's machine). No code move needed.
 
 ### 3.2 How Tess Runs It
 
@@ -83,7 +83,7 @@ All cron jobs use explicit JSON payloads with isolated sessions and delivery blo
   "sessionTarget": "isolated",
   "payload": {
     "kind": "agentTurn",
-    "message": "Run feed-intel capture clock: node /Users/tess/openclaw/feed-intel-framework/dist/capture/cli.js"
+    "message": "Run feed-intel capture clock: node /Users/danny/openclaw/feed-intel-framework/dist/capture/cli.js"
   }
 }
 ```
@@ -96,7 +96,7 @@ All cron jobs use explicit JSON payloads with isolated sessions and delivery blo
   "sessionTarget": "isolated",
   "payload": {
     "kind": "agentTurn",
-    "message": "Run feed-intel attention clock: node /Users/tess/openclaw/feed-intel-framework/dist/attention/cli.js. After triage, generate digest and deliver to Telegram."
+    "message": "Run feed-intel attention clock: node /Users/danny/openclaw/feed-intel-framework/dist/attention/cli.js. After triage, generate digest and deliver to Telegram."
   },
   "delivery": {
     "channel": "telegram",

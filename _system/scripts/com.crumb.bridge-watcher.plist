@@ -8,11 +8,11 @@
     <key>ProgramArguments</key>
     <array>
         <string>/opt/homebrew/bin/python3</string>
-        <string>/Users/tess/crumb-vault/_system/scripts/bridge-watcher.py</string>
+        <string>/Users/danny/crumb-vault/_system/scripts/bridge-watcher.py</string>
     </array>
 
     <key>WorkingDirectory</key>
-    <string>/Users/tess/crumb-vault</string>
+    <string>/Users/danny/crumb-vault</string>
 
     <key>KeepAlive</key>
     <true/>
@@ -26,18 +26,18 @@
     <key>EnvironmentVariables</key>
     <dict>
         <key>HOME</key>
-        <string>/Users/tess</string>
+        <string>/Users/danny</string>
         <key>PATH</key>
-        <string>/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/tess/.local/bin</string>
+        <string>/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/danny/.local/bin</string>
         <key>CRUMB_VAULT_ROOT</key>
-        <string>/Users/tess/crumb-vault</string>
+        <string>/Users/danny/crumb-vault</string>
     </dict>
 
     <key>StandardOutPath</key>
-    <string>/Users/tess/crumb-vault/_openclaw/logs/watcher.log</string>
+    <string>/Users/danny/crumb-vault/_openclaw/logs/watcher.log</string>
 
     <key>StandardErrorPath</key>
-    <string>/Users/tess/crumb-vault/_openclaw/logs/watcher.err</string>
+    <string>/Users/danny/crumb-vault/_openclaw/logs/watcher.err</string>
 
     <!-- Note: No ANTHROPIC_API_KEY in plist. Phase 1 ops use direct node
          invocation (no API key needed). Phase 2 claude --print path sources

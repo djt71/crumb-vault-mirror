@@ -17,7 +17,7 @@
 
 set -eu
 
-VAULT_ROOT="/Users/tess/crumb-vault"
+VAULT_ROOT="/Users/danny/crumb-vault"
 CURSOR_DIR="$VAULT_ROOT/_openclaw/state/last-run"
 TODAY=$(date +%Y-%m-%d)
 

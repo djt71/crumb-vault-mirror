@@ -6,8 +6,8 @@ phase_before_archive: DONE
 workflow: four-phase
 last_gate: "IMPLEMENT→DONE 2026-03-08 — decommissioned in favor of feed-intel-framework"
 active_task: null
-next_action: "Decommissioned. All X feed processing handled by FIF. Repo preserved at /Users/tess/openclaw/x-feed-intel/ for reference."
+next_action: "Decommissioned. All X feed processing handled by FIF. Repo preserved at /Users/danny/openclaw/x-feed-intel/ for reference."
 related_projects: [feed-intel-framework]
-repo_path: /Users/tess/openclaw/x-feed-intel
+repo_path: /Users/danny/openclaw/x-feed-intel
 updated: 2026-03-08
 last_committed: 30ce944

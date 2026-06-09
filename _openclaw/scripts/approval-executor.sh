@@ -17,7 +17,7 @@
 set -eu
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-VAULT_ROOT="/Users/tess/crumb-vault"
+VAULT_ROOT="/Users/danny/crumb-vault"
 BRIDGE_DIR="$VAULT_ROOT/_openclaw"
 APPROVALS_DIR="$BRIDGE_DIR/state/approvals"
 LOG_FILE="$BRIDGE_DIR/logs/approval-contract.log"

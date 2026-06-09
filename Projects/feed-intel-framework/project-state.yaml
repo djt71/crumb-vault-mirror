@@ -8,7 +8,7 @@ last_gate: "TASK → DONE 2026-03-26"
 active_task: null
 next_action: "Phase 1 complete (M1–M5). M6/M7 deferred as Phase 2. Reddit adapter code done, API credentials pending Reddit approval."
 related_projects: [x-feed-intel]
-repo_path: /Users/tess/openclaw/feed-intel-framework
+repo_path: /Users/danny/openclaw/feed-intel-framework
 build_command: "npm run build"
 services:
   - ai.openclaw.fif.capture

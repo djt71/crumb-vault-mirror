@@ -30,7 +30,7 @@
 set -eu
 
 # === Constants ===
-VAULT_ROOT="/Users/tess/crumb-vault"
+VAULT_ROOT="/Users/danny/crumb-vault"
 DOSSIER_DIR="$VAULT_ROOT/Projects/customer-intelligence/dossiers"
 SE_INVENTORY="$VAULT_ROOT/Domains/Career/se-management-inventory.md"
 SIGNAL_NOTES_DIR="$VAULT_ROOT/_system/signal-notes"

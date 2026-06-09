@@ -32,11 +32,11 @@ Limited Mode: external health-check cron swaps voice to local model when Anthrop
 | Gateway logs | `/Users/openclaw/.openclaw/logs/gateway.log` |
 | Gateway plist | `/Library/LaunchDaemons/ai.openclaw.gateway.plist` |
 | Identity doc (SOUL.md) | `/Users/openclaw/.openclaw/workspace/SOUL.md` |
-| Identity staging | `/Users/tess/crumb-vault/_openclaw/staging/SOUL.md` |
-| Health-check script | `/Users/tess/crumb-vault/_system/scripts/tess-health-check.sh` |
-| Health-check env | `/Users/tess/.config/tess/health-check.env` (Anthropic key only; Telegram creds in Keychain) |
+| Identity staging | `/Users/danny/crumb-vault/_openclaw/staging/SOUL.md` |
+| Health-check script | `/Users/danny/crumb-vault/_system/scripts/tess-health-check.sh` |
+| Health-check env | `/Users/danny/.config/tess/health-check.env` (Anthropic key only; Telegram creds in Keychain) |
 | Health-check plist | `design/com.tess.health-check.plist` (install to `~/Library/LaunchAgents/`) |
-| Health-check log | `/Users/tess/crumb-vault/_system/logs/health-check.log` |
+| Health-check log | `/Users/danny/crumb-vault/_system/logs/health-check.log` |
 | Health-check state | `/tmp/tess-health-check.state` |
 | Baseline config | `design/openclaw-config-baseline.json` |
 | Production config | `design/openclaw-config-production.json` (credentials redacted) |
@@ -162,11 +162,11 @@ sudo launchctl kickstart -k "system/ai.openclaw.gateway"
 
 1. **Create env file and Keychain entries:**
    ```bash
-   mkdir -p /Users/tess/.config/tess
+   mkdir -p /Users/danny/.config/tess
    cp Projects/tess-model-architecture/design/health-check.env.example \
-      /Users/tess/.config/tess/health-check.env
+      /Users/danny/.config/tess/health-check.env
    # Edit with real ANTHROPIC_API_KEY value
-   chmod 600 /Users/tess/.config/tess/health-check.env
+   chmod 600 /Users/danny/.config/tess/health-check.env
 
    # Telegram credentials are shared with x-feed-intel via Keychain:
    #   security add-generic-password -a x-feed-intel -s x-feed-intel.telegram-bot-token -w "TOKEN"
@@ -207,7 +207,7 @@ sudo launchctl kickstart -k "system/ai.openclaw.gateway"
 launchctl unload ~/Library/LaunchAgents/com.tess.health-check.plist
 rm ~/Library/LaunchAgents/com.tess.health-check.plist
 sudo rm /etc/sudoers.d/tess-health-check
-rm /Users/tess/.config/tess/health-check.env
+rm /Users/danny/.config/tess/health-check.env
 rm /tmp/tess-health-check.state
 ```
 
@@ -218,7 +218,7 @@ When updating SOUL.md (voice persona):
 1. Edit `_openclaw/staging/SOUL.md` (vault source of truth).
 2. Deploy to workspace:
    ```bash
-   sudo cp /Users/tess/crumb-vault/_openclaw/staging/SOUL.md \
+   sudo cp /Users/danny/crumb-vault/_openclaw/staging/SOUL.md \
      /Users/openclaw/.openclaw/workspace/SOUL.md
    sudo chown openclaw:staff /Users/openclaw/.openclaw/workspace/SOUL.md
    ```

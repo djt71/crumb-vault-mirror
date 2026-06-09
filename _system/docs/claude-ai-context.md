@@ -108,7 +108,7 @@ Directory location is authoritative for archived-vs-active; project docs carry n
 - **Phase:** IMPLEMENT · **active_task:** TV2-057d · **updated:** 2026-06-01
 - **Status:** Tess v2 sole-operator on a reduced launchd service set (was ~15 at cutover; trimmed hard by the decommission wave). Amendment AC (draft) narrows Tess to scheduled-services-only execution and retracts the orchestrator role; Amendment Z superseded. 23 Category-A engineering patterns extracted to `_system/docs/tess-v2-durable-patterns.md` (survive project narrowing). Runtime: Kimi K2.5 → GPT-5.4 experimentation underway.
 - **Next:** ratify AC via operator approval, then upstream-work-bridge analysis OR resume TV2-057d promotion wiring (operator discretion). Open follow-ups: GPT-5.4 soak, persona-spec durable home, K2-family retest pinning, AD-008 supersession doc.
-- **Key files:** `Projects/tess-v2/design/spec-amendment-AC-execution-surfaces.md`, `Projects/tess-v2/progress/run-log.md`; repo `/Users/tess/crumb-apps/tess-v2/`
+- **Key files:** `Projects/tess-v2/design/spec-amendment-AC-execution-surfaces.md`, `Projects/tess-v2/progress/run-log.md`; repo `/Users/danny/crumb-apps/tess-v2/`
 
 ### customer-intelligence — career / knowledge / three-phase
 - **Phase:** ACT · **updated:** 2026-04-27
@@ -126,13 +126,13 @@ Directory location is authoritative for archived-vs-active; project docs carry n
 - **Phase:** PLAN · **updated:** 2026-04-27
 - **Status:** PLAN artifacts complete — 29 atomic tasks across 9 phases (M0 spikes + M1–M8), MAJOR scope, no cross-project deps.
 - **Next:** operator decides peer-review-the-plan vs. PLAN→TASK transition; then run M0 spikes (OAI-024..027).
-- **Key files:** `Projects/obsidian-applenotes-import/design/action-plan.md`, `tasks.md`; repo `/Users/tess/code/obsidian-applenotes-import`
+- **Key files:** `Projects/obsidian-applenotes-import/design/action-plan.md`, `tasks.md`; repo `/Users/danny/code/obsidian-applenotes-import`
 
 ### mission-control — software / system / four-phase
 - **Phase:** TASK (Phase 3) · **updated:** 2026-03-30
 - **Status:** Phase 2 done (M5/M6/M7). M3.1 (Intel Feed Density Redesign) done. **The dashboard service was stopped 2026-06-01** (operator no longer wants it); project kept active, not archived.
 - **Next:** M3.1 → M8 (Intel Production); M9/M10 independent. Reassess scope given dashboard pause.
-- **Key files:** `Projects/mission-control/design/tasks.md`, `progress/run-log.md`; repo `/Users/tess/openclaw/crumb-dashboard`
+- **Key files:** `Projects/mission-control/design/tasks.md`, `progress/run-log.md`; repo `/Users/danny/openclaw/crumb-dashboard`
 
 ### opportunity-scout — software / system / four-phase
 - **Phase:** TASK · **updated:** 2026-05-28
@@ -149,7 +149,7 @@ Directory location is authoritative for archived-vs-active; project docs carry n
 ### feed-intel-framework — software / system / four-phase
 - **Phase:** DONE · **updated:** 2026-05-28
 - **Status:** Phase 1 complete (M1–M5, 5 adapters: X/RSS/YouTube/HN/arXiv). **Capture decommissioned 2026-05-28** (services list now empty). Reddit adapter code done, API credentials pending. M6/M7 were deferred as Phase 2.
-- **Key files:** `Projects/feed-intel-framework/progress/run-log.md`; repo `/Users/tess/openclaw/feed-intel-framework`
+- **Key files:** `Projects/feed-intel-framework/progress/run-log.md`; repo `/Users/danny/openclaw/feed-intel-framework`
 
 ### think-different — learning / KB exception
 - **Phase:** ARCHIVED, but kept in `Projects/` (not `Archived/`) because it holds 45 biographical profiles in the active knowledge graph. `updated:` 2026-02-18.

@@ -392,7 +392,7 @@ Complete working config:
 
 ```bash
 # PATH
-export PATH="$PATH:/Users/tess/.local/bin"
+export PATH="$PATH:/Users/danny/.local/bin"
 
 # Terminal
 export TERM=xterm-256color

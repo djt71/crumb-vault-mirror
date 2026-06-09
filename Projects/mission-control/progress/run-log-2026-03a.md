@@ -766,7 +766,7 @@ Updated feed-pipeline SKILL.md with new Step 0: "Dashboard-Queued Promotions."
 
 **Design decisions:**
 - Step 0 is self-contained — references Step 5 sub-steps but doesn't modify the inbox workflow. Both paths coexist cleanly.
-- DB path uses `$HOME` expansion (not hardcoded `/Users/tess`) for portability.
+- DB path uses `$HOME` expansion (not hardcoded `/Users/danny`) for portability.
 - Failed `consumed_at` writes are tolerable — dedup in Step 5.1 collision check makes re-processing idempotent.
 
 ### Acceptance Criteria Check

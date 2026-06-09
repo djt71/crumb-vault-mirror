@@ -7,7 +7,7 @@
 #   tess-operations action-plan M0.4 (ops metrics), M0.5 (cron guardrails)
 #
 # Usage:
-#   source "/Users/tess/crumb-vault/_openclaw/scripts/cron-lib.sh"
+#   source "/Users/danny/crumb-vault/_openclaw/scripts/cron-lib.sh"
 #   cron_init "morning-briefing" --wall-time 900
 #   # ... do work ...
 #   cron_set_tokens 1500 800
@@ -17,7 +17,7 @@
 set -eu
 
 # === Constants ===
-readonly VAULT_ROOT="/Users/tess/crumb-vault"
+readonly VAULT_ROOT="/Users/danny/crumb-vault"
 readonly OC_HOME="/Users/openclaw"
 readonly OC_CONFIG_DIR="$OC_HOME/.openclaw"
 readonly BRIDGE_DIR="$VAULT_ROOT/_openclaw"

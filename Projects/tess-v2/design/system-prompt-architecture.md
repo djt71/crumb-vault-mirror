@@ -384,7 +384,7 @@ Return your result as a YAML execution_result envelope.
 # Layer 2: Service Context
 ## Action Class: vault-write
 Writes structured markdown artifacts to staging. Executor produces files with
-valid YAML frontmatter. All paths are vault-relative from /Users/tess/crumb-vault/.
+valid YAML frontmatter. All paths are vault-relative from /Users/danny/crumb-vault/.
 
 ## Executor Profile: nemotron-cascade-2
 - Context budget: 16K tokens

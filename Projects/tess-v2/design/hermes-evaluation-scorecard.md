@@ -203,7 +203,7 @@ Note: Guardrail pass threshold in §13.2 is 1.0 (non-negotiable). Current score:
 **Architecture:**
 - File tools: `read_file`, `write_file`, `patch`, `search` — available in Telegram toolset
 - Terminal tool: can run arbitrary commands (git, obsidian-cli, etc.)
-- Gateway WorkingDirectory: `/Users/tess/.hermes/hermes-agent` (NOT the vault)
+- Gateway WorkingDirectory: `/Users/danny/.hermes/hermes-agent` (NOT the vault)
 - Terminal CWD: `"."` (resolves to hermes-agent directory in gateway context)
 - MESSAGING_CWD: commented out in .env
 
@@ -298,6 +298,6 @@ The external orchestration path is architecturally sound — arguably better tha
 
 ### Pre-Soak Fixes Required
 
-1. **Fix vault CWD** — Set `terminal.cwd` to `/Users/tess/crumb-vault` in config.yaml
+1. **Fix vault CWD** — Set `terminal.cwd` to `/Users/danny/crumb-vault` in config.yaml
 2. **Investigate .env key detection** — Determine if display bug or real loading failure. Test OpenRouter failover.
 3. Both must be resolved before TV2-007 begins.

@@ -4,7 +4,7 @@
 # Output: _system/logs/system-stats.json
 set -eu
 
-VAULT_ROOT="${VAULT_ROOT:-/Users/tess/crumb-vault}"
+VAULT_ROOT="${VAULT_ROOT:-/Users/danny/crumb-vault}"
 OUTPUT="$VAULT_ROOT/_system/logs/system-stats.json"
 TMP_OUTPUT="${OUTPUT}.tmp"
 

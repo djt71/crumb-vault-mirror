@@ -241,7 +241,7 @@ treat Perplexity's summary verdict as zero signal.
 ### FIF-001: Framework project structure and module layout — DONE
 
 **Deliverables:**
-- Project scaffold at `/Users/tess/openclaw/feed-intel-framework/`
+- Project scaffold at `/Users/danny/openclaw/feed-intel-framework/`
 - 8 placeholder modules: manifest, capture, triage, digest, router, feedback, cost, health
 - Schema initialization (`src/shared/schema.ts`) — all 8 tables from §8 with indexes, IF NOT EXISTS idempotency
 - DB connection (`src/shared/db.ts`) — configurable path, WAL mode, foreign keys

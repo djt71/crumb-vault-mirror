@@ -5,7 +5,7 @@
 # Output: _system/logs/backup-status.json
 set -eu
 
-VAULT_ROOT="${VAULT_ROOT:-/Users/tess/crumb-vault}"
+VAULT_ROOT="${VAULT_ROOT:-/Users/danny/crumb-vault}"
 OUTPUT="$VAULT_ROOT/_system/logs/backup-status.json"
 TMP_OUTPUT="${OUTPUT}.tmp"
 

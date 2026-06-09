@@ -5,14 +5,14 @@
 # Provides: DB init, path normalization, alias resolution, CRUD for all tables
 #
 # Usage:
-#   source "/Users/tess/crumb-vault/_openclaw/scripts/attention-lib.sh"
+#   source "/Users/danny/crumb-vault/_openclaw/scripts/attention-lib.sh"
 #   attn_init_db
 #   attn_log_cycle "ok" "/path/to/artifact.md" "/path/to/sidecar.json" ...
 
 set -eu
 
 # === Constants ===
-readonly ATTN_VAULT_ROOT="/Users/tess/crumb-vault"
+readonly ATTN_VAULT_ROOT="/Users/danny/crumb-vault"
 readonly ATTN_DATA_DIR="$ATTN_VAULT_ROOT/_openclaw/data"
 readonly ATTN_DB="$ATTN_DATA_DIR/attention-replay.db"
 readonly ATTN_SCHEMA="$ATTN_DATA_DIR/attention-schema.sql"
