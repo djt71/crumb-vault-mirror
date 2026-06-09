@@ -5,11 +5,11 @@ workflow: four-phase
 phase: TASK
 status: active
 created: 2026-06-08
-updated: 2026-06-08
-last_committed: 2026-06-08
-last_gate: PLAN-to-TASK
-active_task: TDM-020
-next_action: "M2 COMPLETE (durable). TDM-011/012/014/010 ✅ this session: 22 Crumb agents disabled (persistent gui/501 overrides — survive re-login) + booted out (0 loaded, 0 processes); vault committed `75c3d37f` + pushed origin/main (clean tree). DURABLE FREEZE HOLDS. NEXT — operator: log out of tess (NO fast-switch back until M6) → launch Claude Code as danny → danny session runs P1 reading /Users/Shared/crumb-migration-handoff.md: rsync (TDM-020) → chown (TDM-021) → path rewrite (TDM-022), then continues from copied vault run-log (P3 secrets=15 Tier-A → P4 venvs → P5 launchd per agent-keep-drop-map → P6 verify → P7 retire). ROLLBACK: `launchctl enable gui/501/<label>` then bootstrap (disable blocks plain bootstrap), or just log into tess; tess files untouched through P6. Rollback point: vault baseline b78f638e (remote HEAD now 75c3d37f)."
+updated: 2026-06-09
+last_committed: 2026-06-09
+last_gate: M6-green
+active_task: TDM-060
+next_action: "P0–P6 COMPLETE. System fully live on danny (21/21 launchd agents green, daemons + tunnel + ollama healthy, secrets re-keyed, venvs/builds rebuilt, vault path-rewritten + committed HEAD 14337c3b). M6 GREEN 2026-06-09 — Telegram bots, Obsidian, Google MCP, git push all operator-verified. SOAK GATE: P7 (retire tess) eligible after 48–72h green → ~2026-06-11 to 06-12. NEXT — P7 (soak-gated): TDM-060 consumer-graph trace (no danny svc reads /Users/tess) → TDM-061 permanently disable + archive tess plists → TDM-062 reclaim/archive tess-side data (CLOSES rollback window) → TDM-063 final docs + commit. ROLLBACK until P7: `launchctl enable gui/501/<label>` then bootstrap, or log into tess; tess files untouched through P6. Baseline b78f638e."
 tags:
   - migration
   - launchd

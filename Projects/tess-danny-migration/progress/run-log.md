@@ -346,6 +346,25 @@ applied keep/drop, validated, bootstrapped from gui/503 (no sudo — danny's own
   backup file writes fine; verify retention logic at leisure.
 
 **P0–P5 COMPLETE. System fully live on danny.**
-**NEXT — P6 verification gates (TDM-050..054):** service list vs baseline, gateway/tunnel
-health, vault-check + session-startup scripts, scheduled-fire + Telegram bots, git push +
-feed pipeline e2e + Obsidian. Then P7 retire tess (soak-gated ≥48–72h after M6 green).
+
+### P6 verification — M6 GREEN (2026-06-09)
+- **TDM-038 ✅** pipx shims repointed to danny — `markitdown` (pinned back to faithful 0.1.5)
+  + `workspace-mcp`; tess-pointing shims gone.
+- **TDM-050 ✅** loaded set vs baseline: 21/21 KEEP, 3 DROP absent, dashboard unloaded.
+- **TDM-051 ✅** daemons healthy: gateway, cloudflared (tunnel), ollama (v0.17.0), vault-web→200.
+- **TDM-052 ✅** vault-check 0 errors (warnings non-blocking, pre-existing cross-project deps +
+  2 broken-link warns in the runbook doc); session-startup ok.
+- **TDM-053 ✅** scheduled agents firing (exit 0); **Telegram approval + awareness bots replied
+  (operator-verified)**.
+- **TDM-054 ✅** git push works (gh auth); **Obsidian opens `/Users/danny/crumb-vault`
+  (operator-verified)**; feed pipeline ok.
+- **TDM-031 ✅** Google Workspace verified by operator alongside the above.
+- Vault committed + pushed: P2 path-rewrite + run-log in history (HEAD 14337c3b);
+  git identity set to `Danny <dturner71@gmail.com>`.
+
+**M6 GREEN as of 2026-06-09.** Soak window starts now; **P7 (retire tess) eligible after
+48–72h green → ~2026-06-11 to 2026-06-12.**
+**NEXT — P7 (TDM-060..063), soak-gated:** TDM-060 consumer-graph trace (confirm no danny
+service reads /Users/tess), TDM-061 permanently disable + archive tess plists, TDM-062
+reclaim/archive tess-side data (closes rollback window), TDM-063 final docs + commit.
+Rollback until P7: `launchctl enable gui/501/<label>` then bootstrap (baseline b78f638e).
