@@ -140,6 +140,7 @@ Track estimate accuracy (planned tasks vs. actual tasks required) in `_system/do
 
 Before marking complete, verify:
 - [ ] All major work is represented — no critical gaps
+- [ ] Every end-state deliverable in the spec's completion contract maps to a producing task (deliverables-contract cross-check)
 - [ ] Tasks are properly sequenced with accurate dependency mapping
 - [ ] Risk levels match actual stakes and reversibility
 - [ ] Every task has binary testable acceptance criteria

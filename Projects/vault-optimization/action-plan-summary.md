@@ -34,7 +34,19 @@ commit; VO-031/032 blocked on Appendix A frozen + AS M6 sign-off (XD-027).
 workflows + close-out with operating-note finalize (VO-034–036).
 
 **Key resolution:** M3 produces changesets; all mutations execute in M4 batches
-— spec VO-005/006/007 ACs are verified at batch checkpoints B3–B6.
+— spec VO-005/006/007 ACs are verified at batch checkpoints B3–B6 (explicit
+traceability map: VO-006→B3, VO-005→B4+B5, VO-007→B6).
 
 **High-risk (stop-and-ask):** VO-027, VO-028, VO-031, VO-032. Every M4 batch is
 an interruptible commit checkpoint (liberation-directive compliance).
+
+**Peer review (round 1, 2026-06-10, 4/4 reviewers, no CRITICALs):** 2 must-fix
++ 9 should-fix amendments applied same day. Key additions: batch-open checks on
+every M4 batch (changeset staleness re-validation + inventory drift diff, with
+operator re-review on evidence-status changes); cross-batch integrity rule
+(forward-fix from git history, or halt-M4 + restore + re-enter M3); sub-batch
+rule (VO-029 = 3 sub-batches by risk profile); functional fast-pass of
+touched-surface Tier-1 workflows at each batch commit; soak failure protocol
+(fix-forward vs revert) + soak end = max(B6+14d, B6+8 working sessions); B6
+pack frozen pending-AS-025-release; per-batch named changeset packs with own
+approval records. Review note: `reviews/2026-06-10-action-plan.md`.

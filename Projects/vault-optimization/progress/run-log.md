@@ -151,3 +151,23 @@ Design doc + summary updated to record decisions inline. PLAN gate passed.
 - Bulk-deletion footprint rule: ≤5 *edited* files per batch commit; deleted files enumerated in run-log, not counted against task footprint.
 
 **Peer review offer (step 6): HIGH impact** — irreversible structural deletions + multi-skill modification → recommend peer review of action-plan.md before IMPLEMENT. Awaiting operator: 'peer review' or 'proceed'.
+
+## 2026-06-10 — TASK: operator decisions + peer review dispatch
+
+**Operator decisions:** (1) peer review of action-plan.md approved — dispatching; (2) compound candidate approved — deliverables-contract cross-check added as one line to action-architect Output Quality Checklist (`.claude/skills/action-architect/SKILL.md`). Compound insight executed (routed: primitive update, not solutions doc).
+
+## 2026-06-10 — Action plan peer review: round 1 + amendments
+
+**Dispatch:** 4/4 reviewers first-attempt (GPT-5.4 62.5s, Gemini 3.1 Pro 55.3s, DeepSeek V4 Pro 110.2s, Grok 4.3 12.8s; ≈$0.10 estimated). Safety gate: 2 soft entropy flags, both false positives (topic tag, path phrase). Review note + synthesis: `reviews/2026-06-10-action-plan.md` (+4 raw JSONs).
+
+**Grok calibration watch review 2:** 9 findings — 0 fabrications, 1 misread (GRK-F3), 1 noise (GRK-F4); tally in peer-review-config.md. One more review to close the watch.
+
+**Synthesis verdict:** no CRITICALs; structure + changeset/execution split + A10 closure drew 4/4 STRENGTHs. **2 must-fix + 9 should-fix, all applied same day** (assess-on-merits precedent from spec round):
+- A1 (must): cross-batch integrity — batch-open changeset-staleness check; forward-fix-from-git rule; halt-M4 + restore + re-enter-M3 fallback (OAI-F13, GEM-F2, DS-F4 consensus)
+- A2 (must): drift control — inventory re-diff at M3 close + every batch open; new items dispositioned pre-batch; evidence-status changes return to operator (OAI-F26/F30)
+- A3–A11 (should): soak failure protocol + working-session/"needed" definitions + max() end-condition; per-batch named changeset packs + spec-AC→checkpoint traceability map; VO-026 frozen pending-AS-025-release + VO-033 AS-025 verification AC; sub-batch rule + VO-029 3-way split by risk profile; functional fast-pass at batch commits; citation pass (baseline→run-log, calibration→estimation-calibration.md, gates→cross-project-deps.md, vault-check→script); definitional tightening; A12 disposition stated; tasks.md cross-reference + embed-both-artifacts rule for future plan reviews.
+- Declined (recorded with categories in synthesis): OAI-F8, DS-F2, OAI-F12, OAI-F16 (incorrect premise — per-task ACs/edges live in tasks.md, which reviewers didn't receive), GRK-F3 (misread), GRK-F4 (noise), GEM-F2 sequential-drafting option (overkill vs refresh-at-execution).
+
+**Meta-lesson (captured as A11, no new solutions doc):** reviewing action-plan.md without tasks.md generated 4 incorrect-premise findings — plan reviews must embed the AC source artifact.
+
+Amendments applied to action-plan.md + tasks.md; action-plan-summary.md refreshed. Re-review skipped (amendments follow panel consensus; same operator precedent as spec round).
