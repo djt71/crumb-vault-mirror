@@ -254,3 +254,30 @@ Fresh session carried M2 from VO-011 through VO-017: keep-set manifest built (19
 **Session-report step:** attempted per protocol §2 (tess CLI) — see note below this entry for outcome; zombie-producer flag on session_reports.db write stands (retire/re-point decision lives at VO-025/B6 ceremony classification).
 
 *Session-report outcome: written successfully (tess CLI alive — session_id 20260610T214515f609183, row 18, sequence 3 for 2026-06-10). qmd update ran; inbox .processed empty; failure-log not warranted (clean session); code-review sweep + build verification skipped (no repo_path).*
+
+## 2026-06-10 — M2 continuation: VO-018–022 session
+
+**Session start (fresh, vault-based state reconstruction):** project-state + run-log tail + tasks.md (VO-016–022 rows) + action-plan-summary + design D2/D3 sections + spec deliverable #2 + manifest (header, schema, all 58 delete/merge rows). Context inventory: 6 project docs (standard tier, 5+1 justified: manifest is the work surface for all five tasks); no overlays (unchanged — Crumb-internal infra); no skill invocations planned (direct task execution under IMPLEMENT). Mechanical grep surveys delegated to read-only Explore subagents (mechanical work, parallel; provenance spot-check on return per CLAUDE.md Subagent Validation).
+
+**Plan:** VO-019 (vault-internal survey, 2 agent chunks) + VO-020 (system surfaces, 1 agent) in background; VO-018 (operating note draft) + VO-021 (Archived/ enumeration) in main session meanwhile; VO-022 (storage policy) after VO-021; synthesis + survey doc + sign-offs at end.
+
+## 2026-06-10 — VO-018–022 complete (M2 closes except VO-016)
+
+**VO-018 — operating note draft.** `_system/docs/crumb-operating-note.md` created (medium-risk new file — flagged): 4 sections (identity from accepted v3 ADR; must-exist set keyed to manifest categories; deliberately-excluded list incl. skill-workflows orphan layer + dormant-marking; future-addition rubric = the four spec-deliverable-#2 questions verbatim + ceremony-budget cross-ref). Marked DRAFT-pending-VO-036 in header. ACs ✓.
+
+**VO-019/020 — consumer-graph surveys.** Mechanical sweeps delegated to 3 read-only Explore subagents (Sonnet; ~209k subagent tokens, 228 tool uses total, single-pass each); main-session provenance spot-checks on all load-bearing claims — 2 agent misclassifications corrected (compound-insight tag ≠ schema dependency; liberation-directive hit = instance filename false positive), 1 line-number misreport (content verified). Output: `design/consumer-graph-survey.md` — 58/58 rows with consumer lists, 7 system surfaces swept, remediation-consumer index for B-pack assembly. ACs ✓.
+
+**⚠️ Evidence-status changes (amendment A2 — returned to operator):**
+1. **dns-recon.sh** no-evidence → proven-active: `customer-intelligence/import-workflow.md` (phase ACT) invokes it + requires its output (4 ref points). Manifest row reclassified, prop flipped to keep, wholesale sign-off VOIDED for this row. **Operator decision needed: keep (recommended) or delete + remediate import-workflow.**
+2. **feed-pipeline-calibration.jsonl** superseded → sunset-tied: kept feed-pipeline skill still appends (SKILL.md:450). Deletion now gated on AS-028; manifest annotated.
+3. **briefs/ schemas** supersession stands, but kept-skill `brief_schema:` frontmatter lines (researcher/critic/vault-query/feed-pipeline) require B4/B5 coordination in the VO-023 pack — recorded in survey doc.
+
+**AS-029 memory handoff (per VO-020 AC):** `~/.claude/.../memory/canonical-taxonomy-sync-points.md:31` names `_system/perplexity/crumb-vault-context.md` (delete-listed) as a taxonomy sync point — memory rewrite required when the perplexity cluster deletes. Flagged here for the AS run-log pickup.
+
+**VO-021 — Archived/ enumeration.** `design/archived-enumeration.md`: 24 projects + KB enumerated with commands; headline — 147 MB is ~133 MB *untracked* .venv trees (batch-book-pipeline 97M incl. accidental recursive `scripts/_system/` copy; pydantic-ai-adoption 36M); tracked content = 880 files / 14 MB. Exceptions: E1 notebooklm workflow-guide (2 live consumers), E2 vault-mirror spec (live MOC + documents live mirror-sync), E3 multi-agent-deliberation data/ (32 deliberation records + ratings; **live defect found: kept deliberation skill writes to `Projects/multi-agent-deliberation/data/` which doesn't exist — actual store is in Archived/; re-point at B5**). Decisions flagged: D1 solutions-linkage-proposal (delete + link remediation, operator confirm at B1), D2 capture-tiers git-citation remediation, D3 A11 list → VO-024, D4 audit/attention-manager skill refs → B5. ACs ✓.
+
+**VO-022 — storage policy.** `design/storage-policy.md`: three outcomes (a)/(b)/(c) stated separately; _attachments orphan plan (scope = 9 files, expected yield ≈0); non-md top-N audit (think-different jpg keep, tess-v2 venv → AS-030 flag, wyner pdf keep); dead-logs producer-alive table (health-check*.log + launchd pair → B2-iii; akm-feedback.jsonl has live producer knowledge-retrieve.sh → keep + 1MB rotation watch); log rotation steady-state rules; **git-history-rewrite decision: NO rewrite, recorded explicitly** (rationale: 47MB .git healthy, venvs never tracked, rewrite would break the git-history-is-the-archive premise; revisit conditions stated) — operator confirmation of this default rides with the decision batch below. ACs ✓.
+
+**M2 status:** VO-011–015, 017–022 done. Remaining: VO-016 (Appendix A freeze — AS session-boundary timing). M3 (VO-023–026) unblocked except VO-026 (AS-025 gate).
+
+**Operator decision batch (pending):** (1) dns-recon.sh keep vs delete+remediate; (2) storage-policy no-rewrite default confirm; (3) D1 solutions-linkage-proposal delete confirm (can also ride to B1 exception review).

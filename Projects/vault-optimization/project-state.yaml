@@ -10,6 +10,6 @@ related_projects:
 # No repo_path: vault-only project — produces no code, only vault restructuring artifacts.
 # External repo gate explicitly skipped (vault-only software per CLAUDE.md §3b).
 active_task: null
-next_action: "M2 in progress: VO-011–015 + VO-017 done (manifest complete, all no-evidence deletes operator-signed 2026-06-10; FIF archival deferred). Fresh session next: VO-018 (operating note draft), VO-019/020 (consumer-graph surveys over delete rows), VO-021/022 (Archived/ enumeration + storage policy). VO-016 (Appendix A freeze) needs AS session-boundary timing. VO-031/032 still blocked on Appendix A frozen + AS M6 sign-off (XD-027)."
+next_action: "M2 nearly closed: VO-018-022 done (operating note draft, consumer surveys, Archived enumeration, storage policy). PENDING OPERATOR: dns-recon.sh keep-vs-delete (A2 evidence change, sign-off voided), no-history-rewrite confirm, D1 solutions-linkage-proposal. VO-016 (Appendix A freeze) needs AS session boundary. Next mechanical work: VO-023/024 changeset packs (M3) — note B4/B5 brief_schema coordination + deliberation-skill re-point (E3 defect) + E1-E3 extractions feed VO-028."
 last_committed: 2026-06-10
 services: []
