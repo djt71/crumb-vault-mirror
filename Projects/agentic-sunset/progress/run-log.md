@@ -71,3 +71,12 @@ tags:
 **Artifacts:** design/service-inventory.md (disposition table + consumer-sweep list), design/teardown-design.md (7-phase sequence A–G, reversibility contract, target architecture, upstream migration), design/teardown-design-summary.md. Spec criterion 1 amended.
 
 **Next:** operator validates design → PLAN→TASK gate → action-architect decomposition.
+
+### Phase Transition: PLAN → TASK
+- Date: 2026-06-10
+- PLAN phase outputs: design/service-inventory.md, design/teardown-design.md, design/teardown-design-summary.md, spec criterion 1 amendment
+- Goal progress: design complete — disposition for all 26 items, consumer-sweep list, 7-phase sequence, reversibility contract, upstream migration design. Operator validated ("good, please proceed").
+- Compound: insight noted — **dual-scheduler drift**: a path migration left the same job (drive-sync) scheduled in BOTH crontab and launchd, one on the stale path; sweep *all* schedulers when migrating paths. Queued with platform-absorption insight for session-end routing (likely additions to infrastructure-teardown-discipline.md / macos-system-notes memory, ask-first).
+- Context usage before checkpoint: estimated 55-60% — proceeding; favoring summaries for new loads
+- Action taken: none
+- Key artifacts for TASK phase: teardown-design-summary.md + service-inventory.md (both in context)

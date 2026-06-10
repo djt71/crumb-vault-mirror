@@ -1,8 +1,8 @@
 name: agentic-sunset
 domain: software
 type: system
-phase: PLAN
-last_gate: SPECIFY-to-PLAN
+phase: TASK
+last_gate: PLAN-to-TASK
 created: 2026-06-10
 updated: 2026-06-10
 related_projects:
@@ -14,6 +14,6 @@ related_projects:
 # No repo_path: decommission project — produces no code, only teardown + vault artifacts.
 # External repo gate explicitly skipped (spec §Domain Classification).
 active_task: null
-next_action: "PLAN: investigate live system (plists, consumers, dashboard deps, ollama usage, shared libs) and produce design/service-inventory.md + design/teardown-design.md for operator validation."
+next_action: "TASK: action-architect decomposition of 7-phase teardown design into atomic tasks (tasks.md) with acceptance criteria."
 last_committed: 2026-06-10
 services: []
