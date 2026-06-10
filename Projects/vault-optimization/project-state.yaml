@@ -10,6 +10,6 @@ related_projects:
 # No repo_path: vault-only project — produces no code, only vault restructuring artifacts.
 # External repo gate explicitly skipped (vault-only software per CLAUDE.md §3b).
 active_task: null
-next_action: "M3: VO-023/024 done + all three packs APPROVED 2026-06-10 (B5 exception: critic/writing-coach merges declined, both keep; 20 skills -> 17). Next: VO-025 ceremony classification (fresh session); VO-026 gated on AS-025; VO-016 on AS session boundary. M3 close needs: VO-025/026 + drift diff (baseline re-diff)."
+next_action: "M3: VO-023/024/025 done (ceremony classification: 31->21 steps proposed, zombie list incl. session_reports.db write, A10 metrics recorded). ALL remaining VO work gated on AS: VO-026 (B6 pack) on AS-025; VO-016 (Appendix A freeze) on AS session boundary; M3-close drift diff runs after VO-026. Operator item pending: 34-item _openclaw/inbox/ feed backlog (process or discard)."
 last_committed: 2026-06-10
 services: []

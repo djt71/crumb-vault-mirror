@@ -791,3 +791,4 @@
 2026-06-10 18:54:49 SYNC vault-optimization: M2 VO-018-022 — operating note draft, consumer-graph surveys (58 rows, 7 system surfaces), Archived/ enumeration (venv finding, E1-E3 exceptions), storage policy (no-rewrite decision); dns-recon A2 reclassification returned to operator
 2026-06-10 18:59:59 SYNC vault-optimization: operator decision batch — dns-recon keep (A2), no-history-rewrite final, D1 delete+remediate confirmed
 2026-06-10 19:01:38 SYNC chore: session-end log — vault-optimization M2 completion session close (VO-018–022, decision batch, compound eval, cost obs, session report)
+2026-06-10 19:37:07 SYNC vault-optimization: M3 VO-023/024 — B3/B4/B5 changeset packs drafted + approved (B5 exception: critic/writing-coach merges declined, 20 skills -> 17); manifest pending rows resolved (R1-R16, F5-F7); A11 cleanup list; 17 trigger-condition description rewrites; 2 linked gotchas

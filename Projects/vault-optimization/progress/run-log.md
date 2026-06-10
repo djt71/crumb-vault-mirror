@@ -335,3 +335,23 @@ Fresh session carried VO-023 + VO-024 end-to-end: 13 pending-doc skims via one r
 **Cost observation (model routing):** judgment work (16 disposition resolutions, pack assembly, A11 scoping, description rewrites) on session model — appropriate. One Explore subagent for the 13-doc skim + 6 overlap comparisons (session-default model, single pass, quality: pass — no misclassifications found on spot-check; overlap verdicts load-bearing for R5/R7/R8/R13 and verified against quoted line numbers). No external review spend. No routing adjustments indicated.
 
 **Protocol steps:** project-state refreshed (step 3 ✓); failure-log not warranted (clean session); code-review sweep + build verification skipped (no repo_path); substantial delta flagged + descriptive commit (3 new pack files + manifest/tasks/state edits); session report + qmd + inbox sweep below.
+
+## 2026-06-10 — VO-025 complete: ceremony step classification + A10 metrics
+
+**Session start (fresh, vault-based state reconstruction):** project-state + run-log tail + tasks.md VO-025/026 rows + action-plan M3 § + design D5 (VO-007 axis) + spec VO-007 row. Context inventory: 5 project docs + 3 ceremony source docs (context-checkpoint-protocol, session-end-protocol, inbox-processor SKILL.md §Procedure — the classification subjects, not analysis corpus). No overlays (unchanged); no skill invocations (direct task execution under IMPLEMENT); evidence via direct greps (mechanical, main session — small surface, no subagent fan-out warranted).
+
+**Deliverable:** `design/ceremony-classification.md` — all 4 ceremonies classified per step with named consumer/enforcer per kept step; A10 metrics table; zombie list; B6/B5/AS-028 routing.
+
+**Headline classifications:**
+- **Phase gates:** 11 steps → 6 (merges: goal-progress+progress-log→transition-log; /context-check→band-evaluation; verify-outputs→verify-summaries; "Proceed" step cut as zero-content). Compound reflection kept as named step (constitutional anchor).
+- **Context-checkpoint (mid-session):** 2 → 1 (check+act per band). Degradation guide/positioning guidance kept (consumed reference, not steps).
+- **Session-end:** 10 → 7. **Zombie confirmed: step 2 session report → session_reports.db** (producer alive, consumer decommissioned — Tess layer dark 2026-06-10; mission-control dashboard src has zero session_reports reads; dispatch claim doubly dead). Recommend retire over re-point. Step 8 (.processed sweep) cut as redundant — vault-gc.sh (kept, plist loaded) purges same dir on 1-day TTL. "6b" AKM residue text = textual zombie. Steps 9+10 merge (commit&push).
+- **Intake (inbox-processor):** 8 → 7 (compound-check folds into verify/report close-out; B5-coordinated edit since skill files are B5 territory). Feed intake excluded — disposition lives at B5 #F7/AS-028. Batch-prompting escape valve already addresses the health-assessment heavy-intake concern.
+
+**A10 metrics recorded:** 31 mandatory steps → 21 proposed; zombies 1 hard + 2 textual → 0 at B6; kept-step consumer coverage 21/21. VO-026 checklist diff is the no-semantics-lost instrument.
+
+**Adjacent findings (routed):** (1) startup-hook `feed_intel_inbox` counter reads decommissioned FIF SQLite → permanently 0 while `_openclaw/inbox/` holds a **34-item backlog** (2026-05-26→28, pre-FIF-decommission) — counter fix → B6 candidate w/ AS-028 coordination; (2) backlog itself → **operator decision pending** (process via feed-pipeline or discard); (3) vault-gc.sh comment role-inversion → one-line B6 fix. Stale refs for B6: Frontend/Backend Designer trigger names (agents don't exist), frontend/backend-design-summary examples.
+
+**VO-025 ACs:** all four pass (4 ceremonies classified ✓, every kept step names consumer/enforcer ✓, zombie list includes session_reports.db write ✓, metrics table ✓). tasks.md → done.
+
+**M3 status:** VO-023/024/025 done. Remaining for M3 close: VO-026 (B6 pack — **gated on AS-025**, classification input now ready) + M3-close drift diff (run at actual close, after VO-026). VO-016 (Appendix A freeze) still on AS session-boundary timing. No VO work unblocked beyond this point — project waits on AS gates.
