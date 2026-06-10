@@ -3,7 +3,7 @@ type: config
 domain: software
 status: active
 created: 2026-02-18
-updated: 2026-02-23
+updated: 2026-06-10
 models:
   openai:
     model: gpt-5.4
@@ -16,13 +16,13 @@ models:
     env_key: GEMINI_API_KEY
     max_tokens: 8192
   deepseek:
-    model: deepseek-reasoner
+    model: deepseek-v4-pro
     endpoint: https://api.deepseek.com/chat/completions
     env_key: DEEPSEEK_API_KEY
     max_tokens: 8192
     token_param: max_tokens
   grok:
-    model: grok-4-1-fast-reasoning
+    model: grok-4.3
     endpoint: https://api.x.ai/v1/chat/completions
     env_key: XAI_API_KEY
     max_tokens: 8192
@@ -64,7 +64,11 @@ Model configuration, retry policy, and reviewer-specific settings for the peer-r
 - `token_param`: The JSON key used for max token limit in the API payload. OpenAI GPT-5.4 uses `max_completion_tokens`; DeepSeek and most OpenAI-compatible APIs use `max_tokens`. Set per provider.
 - `max_tokens` (DeepSeek): The `deepseek-reasoner` alias is **not version-pinned** — as of Feb 2026 it resolves to DeepSeek V3.2 (not the original R1, despite the alias name). The model uses reasoning tokens internally (`<think>` blocks). The `max_tokens: 8192` controls output tokens only — reasoning chains run separately. If reviews start coming back truncated, bump to 16384. Monitor on first few runs before preemptively increasing.
 
-**Grok (xAI):** `grok-4-1-fast-reasoning` is an OpenAI-compatible chat completions API at `api.x.ai`. Pricing: $0.20/M input, $0.50/M output — the cheapest reviewer in the lineup. Has reasoning capabilities and a 2M token context window. Uses `max_tokens` (not `max_completion_tokens`). Auth: `Authorization: Bearer $XAI_API_KEY`. Add key to `~/.config/crumb/.env` as `XAI_API_KEY`.
+**Grok (xAI):** `grok-4.3` (released 2026-04-30) is an OpenAI-compatible chat completions API at `api.x.ai`. Pricing: $1.25/M input, $2.50/M output (tiered — requests over 200k total tokens bill higher). Reasoning model, 1M token context window. Uses `max_tokens` (not `max_completion_tokens`). Auth: `Authorization: Bearer $XAI_API_KEY`. Key in `~/.config/crumb/.env` as `XAI_API_KEY`. Replaced `grok-4-1-fast-reasoning`, which xAI removed from the API (confirmed absent from /v1/models 2026-06-10).
+
+**Grok 4.3 calibration watch (OPEN, 2026-06-10):** The Grok family carries a documented fabrication record — Grok 4.20 produced 12+ fabrications *with full context provided* in the TV2-Cloud eval (see memory `model-grok-fabrications.md`), and that note warns against trusting successor versions without re-testing. grok-4.3 is untested by us. **For its first 2–3 reviews, audit findings Perplexity-style:** verify each GRK finding against the actual artifact before counting it in synthesis; tally fabricated/misread findings in this note. Drop from `default_reviewers` if the fabrication pattern persists. Operator decision 2026-06-10: enable with this watch rather than drop.
+
+*Watch tally — review 1 (2026-06-10, vault-optimization spec): 8 findings — 0 fabrications, 1 misread (GRK-F7: claimed a decision gate was absent that the artifact contains), 1 noise. Fast (12.9s) and short (987 completion tokens) vs panel norm ~2-7k. Findings that landed: GRK-F1 (boundary), GRK-F3 (CRITICAL, backup verification — consensus), GRK-F4 (evidence), GRK-F5 (ceremony metric, unique). Acceptable; watch continues.*
 
 **Grok calibration note (2026-02-23, 3 reviews):** First review (diagramming skills) showed positivity bias (8/15 STRENGTHs). Prompt addendum added. M1 capture clock review: improved but still monitoring. M2/M3 review: 11/15 issues (73%) — addendum working well. Unique valuable findings: maxPosts cap (F4), vault_target trim (F5), liveness false-positive (F9). **Verdict: keep.** Grok is producing genuine unique insights at the lowest per-review cost ($0.02-0.04).
 
@@ -74,9 +78,11 @@ Model configuration, retry policy, and reviewer-specific settings for the peer-r
 
 **Perplexity verdict calibration (2026-02-23, 3 spec/design reviews):** Perplexity returned "Needs rework" on 3 consecutive reviews (spec, migration, action plan). In all 3 cases the individual findings did not support that severity — the synthesis classified most findings as should-fix or defer, not must-fix/blocking. **Treat Perplexity's summary verdict as having zero signal.** Read it as "has significant findings" and evaluate the actual findings on their merits. The per-finding analysis remains valuable for spec/design artifacts; the verdict is noise.
 
-**DeepSeek model identity:** The `deepseek-reasoner` alias resolves to **DeepSeek-V3.2-Thinking** as of 2026-02-20, confirmed by the official V3.2 technical paper published on that date. V3.2 includes purpose-built agentic task capabilities (trained on 85K synthesized prompts across 1,800 environments) and benchmarks competitively with GPT-5 on reasoning tasks. The alias is not version-pinned — the `system_fingerprint` field in raw JSON responses is the only version signal. Log it in `reviewer_meta` for audit trail if the model shifts again.
+**DeepSeek model identity:** `deepseek-v4-pro` (2026): 1.6T-parameter MoE (49B activated), 1M context, thinking + non-thinking modes. Replaced the `deepseek-reasoner` alias (→ V3.2-Thinking), which is officially deprecated 2026-07-24 and already absent from the /models endpoint (confirmed 2026-06-10). Historical note: `deepseek-reasoner` resolved to DeepSeek-V3.2-Thinking as of 2026-02-20. Log `system_fingerprint` from raw JSON in `reviewer_meta` for audit trail if the model shifts again.
 
-**Cost note:** GPT-5.4 pricing is $2.50/M input, $15.00/M output. Gemini 3.1 Pro pricing is $2.00/M input (same as Gemini 3 Pro — free upgrade). DeepSeek V3.2 pricing is approximately $0.55/M input, $2.19/M output. Grok 4.1 Fast pricing is $0.20/M input, $0.50/M output. Estimated 4-model review cost is ~$0.20–0.26 per artifact.
+**Cost note (refreshed 2026-06-10):** GPT-5.4 pricing is $2.50/M input, $15.00/M output. Gemini 3.1 Pro pricing is $2.00/M input (same as Gemini 3 Pro — free upgrade). DeepSeek V4 Pro pricing is $1.74/M input, $3.48/M output. Grok 4.3 pricing is $1.25/M input, $2.50/M output. Estimated 4-model review cost is ~$0.25–0.35 per artifact.
+
+**Panel roster audit (2026-06-10):** Live /models check across all four providers. OpenAI flagship still GPT-5.4 (gpt-5.4-2026-03-05; 5.4-pro exists, not adopted — cost). Google pro-class still gemini-3.1-pro-preview (Gemini 3.5 generation is flash-tier only so far). DeepSeek and Grok slots were dead (models removed from APIs) — updated per operator decisions above.
 
 **Drift from skill spec:** The values above reflect runtime-tuned settings. The original skill spec (`_system/docs/peer-review-skill-spec.md`) records the initial design values: `gemini-2.5-pro` (→ `gemini-3.1-pro-preview`), `max_tokens: 4096` for all providers (→ 8192), `curl_timeout: 60` (→ 120), `perplexity/sonar-reasoning-pro` (→ `deepseek/deepseek-reasoner`). The original three-provider default was GPT-5.2 Thinking, Gemini 2.5 Pro, Sonar Reasoning Pro — now GPT-5.4, Gemini 3.1 Pro Preview, DeepSeek V3.2-Thinking (via `deepseek-reasoner`). Model upgrades: OpenAI GPT-5.2 → GPT-5.4 (2026-03-14); Gemini 3 Pro Preview → Gemini 3.1 Pro Preview (2026-03-14, forced by deprecation — old model shut down 2026-03-09). This config file is authoritative for runtime behavior; the skill spec records the design baseline. Note: the design spec v1.7.1 changelog also references the old three-provider lineup and should be updated when the spec is next revised.
 

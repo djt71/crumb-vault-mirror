@@ -1,0 +1,15 @@
+name: vault-optimization
+domain: software
+type: system
+phase: PLAN
+last_gate: SPECIFY-to-PLAN
+created: 2026-06-10
+updated: 2026-06-10
+related_projects:
+  - agentic-sunset
+# No repo_path: vault-only project — produces no code, only vault restructuring artifacts.
+# External repo gate explicitly skipped (vault-only software per CLAUDE.md §3b).
+active_task: null
+next_action: "PLAN (fresh session): load specification-summary.md + review synthesis; design the optimization plan. First task on entry to IMPLEMENT will be VO-001 (ADR acceptance — read-only, may proceed during AS M3–M5). VO-005/007 gated on Appendix A matrix + AS M6 sign-off (XD-027)."
+last_committed: 2026-06-10
+services: []

@@ -51,6 +51,7 @@ Tracks specific, directional blocking relationships between projects with resolu
 | XD-020 | MC Customer: Comms Cadence (XD-007) | Google Workspace MCP access | mcp-workspace-integration | MWI-005 (concurrent access validated) | blocked | Same as XD-019 — Google side addressed by MCP integration. |
 | XD-021 | pydantic-ai-adoption ADR §2.2 resolution | MCP feasibility findings | mcp-workspace-integration | MWI-002 (spike validation) | blocked | Spike results resolve the feasibility brief that ADR §2.2 deferred. |
 | XD-026 | tess-danny-migration P7 closeout (DONE-superseded) | tess-plist retirement executed in broader teardown | agentic-sunset | AS-002 (disable daemons) + AS-007 (closeouts) | pending | agentic-sunset supersedes P7 (decision 2026-06-10). NOTE: many rows above reference projects in agentic-sunset's teardown scope (tess-operations, feed-intel-framework, A2A, autonomous-operations) — sweep this table for mooted rows at AS-007. |
+| XD-027 | vault-optimization VO-005 (primitive pruning) + VO-007 (ceremony reduction) | CLAUDE.md diff, skills+memory cleanup, directory archival complete | agentic-sunset | AS-025–029 (M6) | pending | VO defines core functionality now (VO-001–004 can proceed); shared surfaces (CLAUDE.md, skills, memory, _openclaw/_tess/_staging) are AS-owned until M6 closes. Boundary settled at VO TASK phase. |
 
 ## Resolved Dependencies
 
