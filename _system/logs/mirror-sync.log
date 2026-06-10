@@ -766,3 +766,4 @@
 2026-06-08 15:16:22 SYNC tess-danny-migration: mark P0 done (TDM-011/012/014/010), log freeze execution
 2026-06-09 19:24:52 SYNC tess-danny-migration: P0–P5 complete — system live on danny
 2026-06-09 19:34:51 SYNC tess-danny-migration: commit P2 vault path-rewrite + live state snapshot
+2026-06-09 19:39:10 SYNC tess-danny-migration: M6 green — P6 verification complete, P7 soak-gated

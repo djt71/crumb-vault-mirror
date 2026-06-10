@@ -11,6 +11,8 @@ tags:
   - research-methodology
   - evaluation-spike
   - kb/software-dev
+topics:
+  - moc-crumb-operations
 source_projects:
   - tess-v2
 source_artifacts:

@@ -12,6 +12,8 @@ tags:
   - contract-execution
   - response-parsing
   - kb/software-dev
+topics:
+  - moc-crumb-architecture
 source_projects:
   - tess-v2
 source_artifacts:

@@ -586,3 +586,14 @@
 [vault-gc] watcher.log: truncated 13 lines (kept last 1000)
 [vault-gc] ops-metrics.jsonl: truncated 56 lines (kept last 1000)
 [vault-gc] done: 5 files purged, 6 logs truncated
+[vault-gc] data/scout-digests: purged 1 files older than 30d
+[vault-gc] data/sidecar: purged 1 files older than 30d
+[vault-gc] feeds/digests: purged 1 files older than 30d
+[vault-gc] feed inbox: purged 9 files older than 14d
+[vault-gc] awareness-check-stdout.log: truncated 7 lines (kept last 1000)
+[vault-gc] calendar-staging.log: truncated 14 lines (kept last 1000)
+[vault-gc] daily-attention.log: truncated 70 lines (kept last 1000)
+[vault-gc] health-ping.log: truncated 134 lines (kept last 1000)
+[vault-gc] watcher.log: truncated 14 lines (kept last 1000)
+[vault-gc] ops-metrics.jsonl: truncated 41 lines (kept last 1000)
+[vault-gc] done: 12 files purged, 6 logs truncated

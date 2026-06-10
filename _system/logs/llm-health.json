@@ -1,1 +1,1 @@
-{"models":[{"provider":"anthropic","model":"claude-haiku-4-5-20251001","callCount":846,"successRate":0.62,"p95LatencyMs":null,"lastCall":"2026-06-08T18:42:57Z","degradationNotes":["318 job failure(s) in last 7 days"]}],"lastUpdated":"2026-06-09T23:38:13Z"}
+{"models":[{"provider":"anthropic","model":"claude-haiku-4-5-20251001","callCount":812,"successRate":0.73,"p95LatencyMs":null,"lastCall":"2026-06-10T15:50:13Z","degradationNotes":["219 job failure(s) in last 7 days"]}],"lastUpdated":"2026-06-10T16:18:34Z"}

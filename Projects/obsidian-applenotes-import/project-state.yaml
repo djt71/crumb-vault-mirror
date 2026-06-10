@@ -8,8 +8,10 @@ last_gate: "SPECIFY → PLAN (2026-04-27): spec rev 4 frozen; all pre-PLAN gates
 active_task: null
 next_action: "PLAN artifacts complete (design/action-plan.md, tasks.md, design/action-plan-summary.md). 29 atomic tasks across 9 phases (M0 spikes + M1–M8); MAJOR scope; no cross-project deps. Operator decides: (a) peer-review the plan (MODERATE impact — spec was heavily reviewed; PLAN's novel content is operational), or (b) proceed to PLAN → TASK phase transition. Next concrete work after TASK transition: execute M0 spikes (OAI-024..027) before any implementation."
 related_projects: []
-repo_path: /Users/danny/code/obsidian-applenotes-import
-build_command: "npm run build"
+# repo_path/build_command deferred to TASK→IMPLEMENT external-repo gate (CLAUDE.md §3b).
+# Project is pre-M0-spike (OAI-024..027); repo not yet created. Intended values:
+#   repo_path: <confirm dir at gate — convention ~/openclaw/obsidian-applenotes-import>
+#   build_command: "npm run build"
 services: []
 updated: 2026-04-27
 last_committed: 2026-04-27
