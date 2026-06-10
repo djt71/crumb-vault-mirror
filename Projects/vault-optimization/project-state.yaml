@@ -10,6 +10,6 @@ related_projects:
 # No repo_path: vault-only project — produces no code, only vault restructuring artifacts.
 # External repo gate explicitly skipped (vault-only software per CLAUDE.md §3b).
 active_task: null
-next_action: "TASK gate: operator decision on action-plan peer review (HIGH impact — recommended) or proceed; then operator reviews task decomposition → Context Checkpoint → IMPLEMENT starting VO-010 (ADR acceptance, operator session). VO-031/032 blocked on Appendix A frozen + AS M6 sign-off (XD-027)."
+next_action: "Peer review round 1 complete, 11 amendments applied. TASK gate: operator approves decomposition → Context Checkpoint → IMPLEMENT starting VO-010 (ADR acceptance, operator session — answer the ADR's open questions). VO-031/032 blocked on Appendix A frozen + AS M6 sign-off (XD-027)."
 last_committed: 2026-06-10
 services: []

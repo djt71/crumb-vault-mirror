@@ -780,3 +780,4 @@
 2026-06-10 15:10:38 SYNC chore: session-end log — vault-optimization SPECIFY session close (cost obs, session report, tess-report zombie flag)
 2026-06-10 15:25:17 SYNC vault-optimization: PLAN complete — optimization design (D1–D6) + 4 gate decisions, transition to TASK
 2026-06-10 15:31:13 SYNC vault-optimization: TASK — action plan (M1–M5) + 27 atomic tasks VO-010–036, XD-027 gates task-precise, calibration row
+2026-06-10 15:47:38 SYNC vault-optimization: action-plan peer review round 1 — 4/4 panel, 2 must-fix + 9 should-fix applied; action-architect deliverables cross-check added
