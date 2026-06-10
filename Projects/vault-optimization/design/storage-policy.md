@@ -123,10 +123,9 @@ rely on for retrieval, and buy ~tens of MB. The aggressive-deletion strategy
 self-defeating. Revisit only if `.git` exceeds ~500 MB or a secret-removal
 need arises (those are new decisions, new ADR).
 
-*(Operator confirmation of this default rides with the next decision batch —
-flagged in the VO-022 run-log entry; until confirmed, treat as
-proposed-default. Per design U4 the policy records the decision either way —
-the recorded decision is "no rewrite".)*
+*(Operator confirmed 2026-06-10, in-conversation question gate — decision is
+final. Per design U4 the policy records the decision either way — the
+recorded decision is "no rewrite".)*
 
 ## AC check (VO-022)
 

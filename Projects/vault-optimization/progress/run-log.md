@@ -281,3 +281,12 @@ Fresh session carried M2 from VO-011 through VO-017: keep-set manifest built (19
 **M2 status:** VO-011–015, 017–022 done. Remaining: VO-016 (Appendix A freeze — AS session-boundary timing). M3 (VO-023–026) unblocked except VO-026 (AS-025 gate).
 
 **Operator decision batch (pending):** (1) dns-recon.sh keep vs delete+remediate; (2) storage-policy no-rewrite default confirm; (3) D1 solutions-linkage-proposal delete confirm (can also ride to B1 exception review).
+
+## 2026-06-10 — Operator decision batch resolved (question gate)
+
+All three pending decisions answered in-conversation, 2026-06-10:
+1. **dns-recon.sh: KEEP** (A2 re-review complete) — manifest row updated to keep; prior wholesale delete sign-off superseded for this row. No remediation of import-workflow.md needed.
+2. **Git-history rewrite: NO REWRITE confirmed** — storage-policy.md caveat removed; decision final (revisit conditions stand).
+3. **D1 solutions-linkage-proposal: delete + remediate link confirmed** — recorded in archived-enumeration.md; no further review at B1 for this item.
+
+M2 fully unblocked except VO-016 (AS session-boundary timing). No open operator items for VO until B-pack approvals (M3).
