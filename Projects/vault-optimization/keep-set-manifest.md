@@ -124,11 +124,11 @@ PID 689 live).
 | item | type | rubric | evidence | disposition | owner | operator-review |
 |---|---|---|---|---|---|---|
 | backup-status.sh | script | proven-active + structural-necessity | com.tess.backup-status plist (loaded); writes `_system/logs/backup-status.json` (current) | keep | VO (B4) | — |
-| batch-moc-placement.py | script | no-evidence | one-shot MOC migration tool; 0 structural refs, 0 log mentions; last commit 2026-03-06 | prop: delete | VO (B4) | required (VO-017) |
+| batch-moc-placement.py | script | no-evidence | one-shot MOC migration tool; 0 structural refs, 0 log mentions; last commit 2026-03-06 | prop: delete | VO (B4) | approved+signed 2026-06-10 (operator, wholesale) |
 | bridge-watcher.py | script | superseded | Tess-bridge watcher — bridge decommissioned (agentic-sunset); 0 live refs; last commit 2026-02-25; companion plist already retired into scripts dir | prop: delete (AS concurrence — sunset-tied) | VO (B4) | — |
-| clear-claude-cache.sh | script | no-evidence | 0 structural refs, 0 log mentions; last commit 2026-02-20 | prop: delete | VO (B4) | required (VO-017) |
+| clear-claude-cache.sh | script | no-evidence | 0 structural refs, 0 log mentions; last commit 2026-02-20 | prop: delete | VO (B4) | approved+signed 2026-06-10 (operator, wholesale) |
 | com.crumb.bridge-watcher.plist | script-dir artifact | superseded | retired plist file parked in scripts dir (not in LaunchAgents); producer bridge-watcher.py superseded | prop: delete with bridge-watcher.py | VO (B4) | — |
-| dns-recon.sh | script | no-evidence | operator network-tool (career/SE); 1 log mention, no structural refs; last commit 2026-03-10 | prop: operator decision — work utility, not Crumb surface | VO (B4) | required (VO-017) |
+| dns-recon.sh | script | no-evidence | operator network-tool (career/SE); 1 log mention, no structural refs; last commit 2026-03-10 | prop: delete (operator-approved 2026-06-10) | VO (B4) | approved+signed 2026-06-10 (operator, wholesale) |
 | drive-sync-computer-filter.txt | sync filter | structural-necessity | consumed by drive-sync.sh (grep hit); allowlist patterns for Drive sync | keep (follows drive-sync.sh) | VO (B4) | — |
 | drive-sync.sh | script | proven-active + structural-necessity | com.crumb.drive-sync plist (loaded); secondary backup chain (D4 B0) | keep | VO (B4) | — |
 | knowledge-retrieve.sh | script | structural-necessity | called by skill-preflight.sh (PreToolUse hook chain — CLAUDE.md knowledge-retrieval automation) | keep | VO (B4) | — |
@@ -224,7 +224,7 @@ referenced solutions qualify as compound-provenance under the narrowed Tier 2
 
 | item | type | rubric | evidence | disposition | owner | operator-review |
 |---|---|---|---|---|---|---|
-| adr-cli-native-agent-architecture | doc | no-evidence | refs=0, last=2026-02-25; ADR for CLI-native agent (Tess-era); decision provenance only | prop: delete — superseded by v3 ADR; provenance lives in git | VO (B3) | required (VO-017) |
+| adr-cli-native-agent-architecture | doc | no-evidence | refs=0, last=2026-02-25; ADR for CLI-native agent (Tess-era); decision provenance only | prop: delete — superseded by v3 ADR; provenance lives in git | VO (B3) | approved+signed 2026-06-10 (operator, wholesale) |
 | adr-crumb-v3-knowledge-store-identity | doc | proven-active + structural-necessity | accepted 2026-06-10 (VO-010); identity baseline for this project | keep | VO (B3) | — |
 | agent-skills-best-practices | doc | proven-active (light) | refs=3, last=2026-03-01; feeds skill-authoring | prop: merge-into:skill-authoring-conventions — VO-024 | VO (B3) | — |
 | anthropic-consolidation-hypothesis | doc | proven-active (light) | refs=4, last=2026-04-21; analysis note | pending — VO-024 | VO (B3) | — |
@@ -234,7 +234,7 @@ referenced solutions qualify as compound-provenance under the narrowed Tier 2
 | claude-ai-session-prompt | doc | proven-active (light) | refs=2, last=2026-02-20; pairs with claude-ai-context | prop: merge-into:claude-ai-context — VO-024 | VO (B3) | — |
 | claude-code-ssh-setup | doc | proven-active | refs=5, last=2026-06-09; ops runbook | keep | VO (B3) | — |
 | code-review-config | doc | structural-necessity | refs=12; consumed by code-review skill (panel roster, dispatch config) | keep | VO (B3) | — |
-| code-setup-prerequisites | doc | no-evidence | refs=0, last=2026-02-26 | prop: delete | VO (B3) | required (VO-017) |
+| code-setup-prerequisites | doc | no-evidence | refs=0, last=2026-02-26 | prop: delete | VO (B3) | approved+signed 2026-06-10 (operator, wholesale) |
 | compound-enhancements-spec | doc | superseded | refs=1 (its own summary), last=2026-04-04; executed spec — enhancements shipped | prop: delete (provenance in git) | VO (B3) | — |
 | compound-enhancements-spec-summary | doc | superseded | refs=0; summary of executed spec | prop: delete with parent | VO (B3) | — |
 | context-checkpoint-protocol | doc | structural-necessity | refs=15; CLAUDE.md Phase Transition Gate loads it (REQUIRED); executed twice 2026-06-10 | keep — B6 ceremony-diff target | VO (B3/B6) | — |
@@ -266,7 +266,7 @@ referenced solutions qualify as compound-provenance under the narrowed Tier 2
 | peer-review-config | doc | structural-necessity | refs=36, last=2026-06-10 (Grok watch tally updated today); peer-review skill roster | keep | VO (B3) | — |
 | peer-review-skill-spec | doc | superseded | refs=8, last=2026-02-20; executed spec — skill shipped 2026-02 | prop: delete (provenance in git) | VO (B3) | — |
 | personal-context | doc | structural-necessity | refs=33; CLAUDE.md Overlay Routing § exempts it from budget = always-loadable operator context | keep | VO (B3) | — |
-| proposal-pattern-enforcement-schema | doc | no-evidence | refs=1, last=2026-04-21; unexecuted schema proposal (matches operator feedback: don't pre-commit schema against unwritten paths) | prop: delete | VO (B3) | required (VO-017) |
+| proposal-pattern-enforcement-schema | doc | no-evidence | refs=1, last=2026-04-21; unexecuted schema proposal (matches operator feedback: don't pre-commit schema against unwritten paths) | prop: delete | VO (B3) | approved+signed 2026-06-10 (operator, wholesale) |
 | review-safety-denylist | doc | structural-necessity | refs=13; peer-review/deliberation safety gate consumes it | keep | VO (B3) | — |
 | security-kb-plan | doc | proven-active (light) | refs=1, last=2026-03-06; batches 1–5 done, batch 6 dispatched (session-log:428) | pending — VO-024 (completed-plan test) | VO (B3) | — |
 | security-kb-sources | doc | proven-active (light) | refs=2; source catalog feeding security KB | keep — KB-adjacent reference | VO (B3) | — |
@@ -280,11 +280,11 @@ referenced solutions qualify as compound-provenance under the narrowed Tier 2
 | tess-crumb-comparison | doc | superseded | refs=11 (historical), last=2026-03-14 | prop: delete (AS concurrence) | VO (B3) | — |
 | tess-v2-durable-patterns | doc | proven-active | refs=27, last=2026-06-09; the designated post-sunset knowledge carrier | keep | VO (B3) | — |
 | vault-intake-map | doc | proven-active (light) | refs=3, last=2026-02-27 | pending — VO-024 (currency check vs capture-tiers) | VO (B3) | — |
-| vault-intake-overview-diagram | doc | no-evidence | refs=0, last=2026-02-27 | prop: delete | VO (B3) | required (VO-017) |
-| vault-intake-overview-diagram.excalidraw | data file | no-evidence | refs=0 (only its own md wrapper); source file of above | prop: delete with wrapper | VO (B3) | required (VO-017) |
+| vault-intake-overview-diagram | doc | no-evidence | refs=0, last=2026-02-27 | prop: delete | VO (B3) | approved+signed 2026-06-10 (operator, wholesale) |
+| vault-intake-overview-diagram.excalidraw | data file | no-evidence | refs=0 (only its own md wrapper); source file of above | prop: delete with wrapper | VO (B3) | approved+signed 2026-06-10 (operator, wholesale) |
 | vault-restructure-analysis-20260220 | doc | contingency-keep | refs=5, last=2026-02-24; Feb restructure provenance — predecessor analysis to this project | pending — VO-024 (provenance test; VO spec may supersede) | VO (B3) | — |
 | vault-restructure-discussion-20260220 | doc | contingency-keep | refs=5; discussion record for above | pending — VO-024 | VO (B3) | — |
-| vault-startup-detection-diagram | doc | no-evidence | refs=0, last=2026-02-27 | prop: delete | VO (B3) | required (VO-017) |
+| vault-startup-detection-diagram | doc | no-evidence | refs=0, last=2026-02-27 | prop: delete | VO (B3) | approved+signed 2026-06-10 (operator, wholesale) |
 | www-design-taste-profile | doc | structural-necessity | refs=6; Web Design Preference overlay companion (taste profile) | keep | VO (B3) | — |
 
 ## Docs — `_system/docs/skill-workflows/` (15, per-file: dispositions will differ)
@@ -296,21 +296,21 @@ an orphan as a whole; per-file rubrics below reflect subject status too.
 
 | item | type | rubric | evidence | disposition | owner | operator-review |
 |---|---|---|---|---|---|---|
-| skill-workflows/attention-manager | workflow doc | no-evidence | refs=0, last=2026-03-12 | prop: delete (layer orphan) | VO (B3) | required (VO-017) |
-| skill-workflows/code-review | workflow doc | no-evidence | refs=0, last=2026-03-12 | prop: delete (layer orphan) | VO (B3) | required (VO-017) |
+| skill-workflows/attention-manager | workflow doc | no-evidence | refs=0, last=2026-03-12 | prop: delete (layer orphan) | VO (B3) | approved+signed 2026-06-10 (operator, wholesale) |
+| skill-workflows/code-review | workflow doc | no-evidence | refs=0, last=2026-03-12 | prop: delete (layer orphan) | VO (B3) | approved+signed 2026-06-10 (operator, wholesale) |
 | skill-workflows/crumb-tess-bridge | workflow doc | superseded | refs=2 (historical), last=2026-04-24; bridge decommissioned | prop: delete | VO (B3) | — |
-| skill-workflows/diagramming | workflow doc | no-evidence | refs=0, last=2026-03-12 | prop: delete (layer orphan) | VO (B3) | required (VO-017) |
+| skill-workflows/diagramming | workflow doc | no-evidence | refs=0, last=2026-03-12 | prop: delete (layer orphan) | VO (B3) | approved+signed 2026-06-10 (operator, wholesale) |
 | skill-workflows/fif-triage-and-signals | workflow doc | superseded | refs=1, last=2026-03-12; FIF decommissioned | prop: delete | VO (B3) | — |
-| skill-workflows/inbox-processing-ops | workflow doc | no-evidence | refs=0, last=2026-03-12 | prop: delete (layer orphan) | VO (B3) | required (VO-017) |
-| skill-workflows/intake-processing | workflow doc | no-evidence | refs=0, last=2026-03-12 | prop: delete (layer orphan) | VO (B3) | required (VO-017) |
-| skill-workflows/learning-plan | workflow doc | no-evidence | refs=0, last=2026-03-12 | prop: delete (layer orphan) | VO (B3) | required (VO-017) |
-| skill-workflows/overlays | workflow doc | no-evidence | refs=0, last=2026-03-12 | prop: delete (layer orphan) | VO (B3) | required (VO-017) |
-| skill-workflows/project-specification | workflow doc | no-evidence | refs=0, last=2026-03-12 | prop: delete (layer orphan) | VO (B3) | required (VO-017) |
-| skill-workflows/research-pipeline | workflow doc | no-evidence | refs=0, last=2026-04-21 | prop: delete (layer orphan) | VO (B3) | required (VO-017) |
-| skill-workflows/session-lifecycle | workflow doc | no-evidence | refs=0, last=2026-03-12 | prop: delete (layer orphan) | VO (B3) | required (VO-017) |
+| skill-workflows/inbox-processing-ops | workflow doc | no-evidence | refs=0, last=2026-03-12 | prop: delete (layer orphan) | VO (B3) | approved+signed 2026-06-10 (operator, wholesale) |
+| skill-workflows/intake-processing | workflow doc | no-evidence | refs=0, last=2026-03-12 | prop: delete (layer orphan) | VO (B3) | approved+signed 2026-06-10 (operator, wholesale) |
+| skill-workflows/learning-plan | workflow doc | no-evidence | refs=0, last=2026-03-12 | prop: delete (layer orphan) | VO (B3) | approved+signed 2026-06-10 (operator, wholesale) |
+| skill-workflows/overlays | workflow doc | no-evidence | refs=0, last=2026-03-12 | prop: delete (layer orphan) | VO (B3) | approved+signed 2026-06-10 (operator, wholesale) |
+| skill-workflows/project-specification | workflow doc | no-evidence | refs=0, last=2026-03-12 | prop: delete (layer orphan) | VO (B3) | approved+signed 2026-06-10 (operator, wholesale) |
+| skill-workflows/research-pipeline | workflow doc | no-evidence | refs=0, last=2026-04-21 | prop: delete (layer orphan) | VO (B3) | approved+signed 2026-06-10 (operator, wholesale) |
+| skill-workflows/session-lifecycle | workflow doc | no-evidence | refs=0, last=2026-03-12 | prop: delete (layer orphan) | VO (B3) | approved+signed 2026-06-10 (operator, wholesale) |
 | skill-workflows/tess-operations | workflow doc | superseded | refs=0, last=2026-03-12; Tess runtime decommissioned | prop: delete | VO (B3) | — |
-| skill-workflows/vault-access | workflow doc | no-evidence | refs=0, last=2026-03-12 | prop: delete (layer orphan) | VO (B3) | required (VO-017) |
-| skill-workflows/vault-gardening | workflow doc | no-evidence | refs=0, last=2026-03-12; NB: operator/how-to/vault-gardening.md duplicates topic | prop: delete (layer orphan) | VO (B3) | required (VO-017) |
+| skill-workflows/vault-access | workflow doc | no-evidence | refs=0, last=2026-03-12 | prop: delete (layer orphan) | VO (B3) | approved+signed 2026-06-10 (operator, wholesale) |
+| skill-workflows/vault-gardening | workflow doc | no-evidence | refs=0, last=2026-03-12; NB: operator/how-to/vault-gardening.md duplicates topic | prop: delete (layer orphan) | VO (B3) | approved+signed 2026-06-10 (operator, wholesale) |
 
 ## Docs — subdirectory clusters
 
@@ -350,7 +350,7 @@ dispositions here. Rubric reflects activity evidence.
 |---|---|---|---|---|---|---|
 | agentic-sunset | project record | proven-active | phase IMPLEMENT, last=2026-06-10; XD-027 counterpart | keep | AS (active) | — |
 | customer-intelligence | project record | proven-active | phase ACT, last=2026-06-01 | keep | VO (B3) | — |
-| feed-intel-framework | project record | contingency-keep | phase DONE, last=2026-06-09; runtime decommissioned — record is provenance; 4 run-log files incl. phase1 | keep; archival = operator call (flag at VO-017); run-log consolidation at VO-022 | VO (B3) | — |
+| feed-intel-framework | project record | contingency-keep | phase DONE, last=2026-06-09; runtime decommissioned — record is provenance; 4 run-log files incl. phase1 | keep record in place; formal archival deferred (operator 2026-06-10 — "for now"); run-log consolidation at VO-022 | VO (B3) | — |
 | firekeeper-books | project record | proven-active (dormant 2mo) | phase ACT, last=2026-04-07 | keep | VO (B3) | — |
 | mission-control | project record | proven-active | phase TASK, last=2026-06-09; repo_path project; dashboard stack = its deliverable (A3-kept) | keep | VO (B3) | — |
 | obsidian-applenotes-import | project record | proven-active | phase PLAN, last=2026-06-10 (today) | keep | VO (B3) | — |

@@ -10,6 +10,6 @@ related_projects:
 # No repo_path: vault-only project — produces no code, only vault restructuring artifacts.
 # External repo gate explicitly skipped (vault-only software per CLAUDE.md §3b).
 active_task: null
-next_action: "M2 in progress: VO-011–015 done (manifest complete, 199 rows, zero unknowns). Next: VO-017 operator review of 19 no-evidence delete candidates (list in run-log 2026-06-10 M2 entry); VO-021/022 (Archived/ enumeration + storage policy) unblocked for mechanical work; VO-016 (Appendix A freeze) needs AS session-boundary timing. VO-018/019/020 gated on VO-017."
+next_action: "M2 in progress: VO-011–015 + VO-017 done (manifest complete, all no-evidence deletes operator-signed 2026-06-10; FIF archival deferred). Fresh session next: VO-018 (operating note draft), VO-019/020 (consumer-graph surveys over delete rows), VO-021/022 (Archived/ enumeration + storage policy). VO-016 (Appendix A freeze) needs AS session-boundary timing. VO-031/032 still blocked on Appendix A frozen + AS M6 sign-off (XD-027)."
 last_committed: 2026-06-10
 services: []

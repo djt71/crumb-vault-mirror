@@ -232,3 +232,13 @@ Single session carried PLAN (design D1–D6 + 4 operator gate decisions) → TAS
 **No-evidence delete candidates queued for VO-017 operator review (19 rows):** batch-moc-placement.py, clear-claude-cache.sh, dns-recon.sh, adr-cli-native-agent-architecture, code-setup-prerequisites, proposal-pattern-enforcement-schema, vault-intake-overview-diagram (.md + .excalidraw), vault-startup-detection-diagram, + 12 skill-workflows layer files (superseded rows need no per-item sign-off per D1 rule, but sunset-tied ones carry AS-concurrence flags into VO-023/024 packs).
 
 **M2 remaining:** VO-016 (Appendix A freeze — time with AS session boundary), VO-017 (operator sign-offs), VO-018 (post-017), VO-019/020 (post-017), VO-021/022 (unblocked — next mechanical work).
+
+## 2026-06-10 — VO-017 complete: operator sign-off on no-evidence deletes
+
+**Operator decision (in-conversation, 2026-06-10): "approve all"** — wholesale sign-off on all 21 no-evidence delete rows (3 scripts incl. dns-recon work-utility call, 6 root-doc rows incl. the diagram .md/.excalidraw pair, 12 skill-workflows layer files). Manifest operator-review cells updated to `approved+signed 2026-06-10 (operator, wholesale)`; dns-recon disposition resolved to prop: delete.
+
+**feed-intel-framework:** operator said "keep feed-intel-framework in archive for now" — recorded as: record stays in place (phase DONE, Projects/), no deletion, **formal archival deferred**. Interpretation note: not moved to Archived/ — that would put it inside B1 deletion scope; if operator intended a formal archival, it should wait until after B1 executes (flagged here for visibility).
+
+**VO-017 AC:** zero no-evidence delete rows without operator sign-off ✓ (21/21 signed).
+
+**Unblocked:** VO-018 (operating note draft), VO-019/020 (consumer-graph surveys over all delete rows). VO-021/022 remain unblocked. VO-016 still waits on AS session boundary. Recommend fresh session for VO-019–022 (grep-heavy surveys + Archived/ enumeration; current session context high after manifest build).
