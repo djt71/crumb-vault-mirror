@@ -789,3 +789,4 @@
 2026-06-10 16:44:11 SYNC vault-optimization: VO-017 — operator sign-off recorded on 21 no-evidence delete rows; FIF archival deferred
 2026-06-10 17:46:36 SYNC chore: session-end log — vault-optimization M2 evidence session close (VO-011–017, compound eval, cost obs, session report)
 2026-06-10 18:54:49 SYNC vault-optimization: M2 VO-018-022 — operating note draft, consumer-graph surveys (58 rows, 7 system surfaces), Archived/ enumeration (venv finding, E1-E3 exceptions), storage policy (no-rewrite decision); dns-recon A2 reclassification returned to operator
+2026-06-10 18:59:59 SYNC vault-optimization: operator decision batch — dns-recon keep (A2), no-history-rewrite final, D1 delete+remediate confirmed

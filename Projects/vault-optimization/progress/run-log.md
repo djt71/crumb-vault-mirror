@@ -290,3 +290,13 @@ All three pending decisions answered in-conversation, 2026-06-10:
 3. **D1 solutions-linkage-proposal: delete + remediate link confirmed** — recorded in archived-enumeration.md; no further review at B1 for this item.
 
 M2 fully unblocked except VO-016 (AS session-boundary timing). No open operator items for VO until B-pack approvals (M3).
+
+## 2026-06-10 — Session end (M2 completion session)
+
+Fresh session carried VO-018–022 plus the operator decision batch: operating note drafted, consumer-graph surveys completed via 3 parallel read-only subagents with main-session provenance checks, Archived/ enumerated (venv weight finding), storage policy written (no-rewrite final), and three operator decisions resolved at a question gate (dns-recon keep / no-rewrite / D1 delete+remediate). Three commits pushed (af14d46a M2 artifacts, 99932b75 decisions, + sync commits). M2 closes except VO-016 (AS session-boundary timing).
+
+**Compound evaluation:** one insight worth flagging, routed as run-log + survey-doc record (first instance, no solutions doc): **bulk evidence passes that grep only constitutional/structural surfaces miss project-doc consumers** — VO-012/013 swept CLAUDE.md/settings/preflight/logs but not `Projects/*/`(non-log), which is exactly where dns-recon.sh's live consumer sat; the A2 amendment (evidence-status changes return to operator) caught it as designed, which also counts as a confirming instance for the peer-review panel's A2 must-fix. If a second missed-surface instance appears, promote to `_system/docs/solutions/` as an evidence-pass coverage checklist. Secondary: subagent fan-out for mechanical surveys worked cleanly with spot-check validation (2 misclassifications caught — both interpretive overreach, the known failure mode; mechanical hits were 100% accurate on checks).
+
+**Cost observation (model routing):** judgment work (classification corrections, exception extraction, operating note, storage policy decisions) on session model — appropriate. Mechanical surveys delegated to 3 Sonnet Explore subagents (~209k subagent tokens total, single-pass each, quality: pass with minor corrections) — right call vs. burning main context on 58×9 greps; would repeat. No external review spend. No routing adjustments indicated.
+
+**Protocol steps:** project-state refreshed (step 3 ✓, next_action current); failure-log not warranted (clean session); code-review sweep + build verification skipped (no repo_path); session report → tess CLI below; qmd update + inbox sweep below.
