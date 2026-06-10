@@ -10,6 +10,6 @@ related_projects:
 # No repo_path: vault-only project — produces no code, only vault restructuring artifacts.
 # External repo gate explicitly skipped (vault-only software per CLAUDE.md §3b).
 active_task: null
-next_action: "M2 done except VO-016 (Appendix A freeze - AS session boundary). All operator decisions resolved 2026-06-10 (dns-recon KEEP, no-rewrite confirmed, D1 delete+remediate). Next: VO-023/024 changeset packs (M3, fresh session) - note B4/B5 brief_schema coordination, deliberation-skill re-point (E3 defect), E1-E3 extractions feed VO-028."
+next_action: "M3: VO-023/024 done + all three packs APPROVED 2026-06-10 (B5 exception: critic/writing-coach merges declined, both keep; 20 skills -> 17). Next: VO-025 ceremony classification (fresh session); VO-026 gated on AS-025; VO-016 on AS session boundary. M3 close needs: VO-025/026 + drift diff (baseline re-diff)."
 last_committed: 2026-06-10
 services: []
