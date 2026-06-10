@@ -133,3 +133,21 @@ Design doc + summary updated to record decisions inline. PLAN gate passed.
 - Context usage before checkpoint: low (fresh session; 4 docs + design writes — well under 50%)
 - Action taken: none (proceed in-session)
 - Key artifacts for TASK phase: `specification-summary.md`, `design/optimization-design-summary.md` (both in context), spec Task Decomposition table + acceptance criteria
+
+## 2026-06-10 — TASK: action-architect
+
+**Context inventory (action-architect, standard tier):** spec + spec-summary, design + design-summary already in session context (written/read this session — no re-load). New loads: `_system/docs/estimation-calibration.md` (tail), XD-027 row, baseline regeneration via Bash (budget-exempt mechanical), skill-preflight knowledge brief (ambient — DNS/visualization, not relevant, discarded). Signal scan (step 1b): keyword sweep over Sources/signals+insights surfaced no new how-to-build signals beyond those folded into the spec at SPECIFY (systematicls, trq212, skillsbench) — no operator re-prompt (ceremony budget). Overlay check: no match (unchanged).
+
+**Inventory baseline regenerated (per D1):** 2,511 md files (+7 since spec snapshot); other counts unchanged (20 skills / 4 agents / 8 overlays / 20 scripts / 6 protocols / 25 solutions / 12 projects / 10 plists; Archived/ 147M). Snapshot recorded in action-plan.md header.
+
+**Artifacts:** `action-plan.md` (5 milestones M1–M5), `tasks.md` (27 atomic tasks VO-010–036), `action-plan-summary.md`.
+
+**Decomposition decisions:**
+- 9 spec lines → 27 atomic (3.0x) — agentic-sunset teardown calibration (2.6x, "2–3 atomic per scrap-N-things line") applied predictively; calibration row added to estimation-calibration.md.
+- Spec tension resolved: VO-005/006/007 become *changeset-definition* tasks (M3, no mutations); all deletions/edits execute under M4 batch discipline (B0 backup gate first); spec ACs for those groups verified at batch checkpoints B3–B6.
+- A10 closed (no longer deferred): ceremony metrics defined at VO-025 — per-ceremony mandatory-step counts before/after, zombie count → 0, named consumer/enforcer per kept step, checklist diff proves no gate semantics lost. Soak end-condition defined at VO-034: 14 calendar days AND ≥8 sessions from B6 commit, whichever later.
+- Operating-note split encoded: VO-018 draft / VO-036 finalize (PLAN gate decision).
+- XD-027 row updated: gates now task-precise (VO-031/032 ← Appendix A frozen + AS M6 sign-off; VO-026/033 ← AS-025). VO-031/032 created in `blocked` state.
+- Bulk-deletion footprint rule: ≤5 *edited* files per batch commit; deleted files enumerated in run-log, not counted against task footprint.
+
+**Peer review offer (step 6): HIGH impact** — irreversible structural deletions + multi-skill modification → recommend peer review of action-plan.md before IMPLEMENT. Awaiting operator: 'peer review' or 'proceed'.

@@ -1,0 +1,51 @@
+---
+type: tasks
+project: vault-optimization
+domain: software
+skill_origin: action-architect
+status: active
+created: 2026-06-10
+updated: 2026-06-10
+source: action-plan.md
+source_updated: 2026-06-10
+topics:
+  - moc-crumb-operations
+tags:
+  - tasks
+---
+
+# vault-optimization — Tasks
+
+Atomic tasks VO-010–036 (spec group in brackets). States: pending | in_progress
+| done | blocked. Bulk-deletion batches: ≤5 *edited* files per commit; deleted
+files enumerated in run-log.
+
+| id | description | state | depends_on | risk_level | domain | acceptance_criteria |
+|----|-------------|-------|------------|------------|--------|---------------------|
+| VO-010 | [VO-001] Refresh + accept v3 identity ADR: review Tier 1/2/3 vs post-sunset reality, answer its 4 open questions, status → accepted; record proceed/re-plan gate outcome | pending | — | medium | software | ADR frontmatter `status: accepted`? All 5 acceptance boxes checked? 4 open questions answered in ADR? Gate outcome + operator sign-off in run-log? |
+| VO-011 | [VO-002] Create keep-set-manifest.md: baseline snapshot header (2026-06-10 regen) + one row per inventory item, schema per design D1 | pending | VO-010 | low | software | Manifest exists? Row count matches baseline (20 skills, 4 agents, 8 overlays, 20 scripts, 6 protocols, 25 solutions + doc clusters, 12 projects, 10 plists)? Every row has type + owner placeholder? |
+| VO-012 | [VO-002] Evidence pass: skills + agents (rubric category + citation per row; agents follow parent skill) | pending | VO-011 | low | software | Every skill/agent row has one of 5 rubric categories? Evidence cell non-blank with citation? Zero "unknown"? |
+| VO-013 | [VO-002] Evidence pass: scripts + live plists (structural reference counts as use) | pending | VO-011 | low | software | Every script/plist row categorized with citation? Dashboard-stack rows marked operator-kept (assumption A3)? |
+| VO-014 | [VO-002] Evidence pass: overlays + protocols (index presence alone ≠ evidence) | pending | VO-011 | low | software | Every overlay/protocol row categorized with citation? Protocols referenced only by decommissioned surfaces marked superseded? |
+| VO-015 | [VO-002] Evidence pass: _system/docs clusters incl. solutions + project records | pending | VO-011 | low | software | Every doc-cluster/solutions/project row categorized with citation? Zero "unknown" rows manifest-wide? |
+| VO-016 | [VO-002] Appendix A ownership matrix complete + frozen; AS concurrence recorded in both run-logs | pending | VO-011 | medium | software | Every joint surface has owner + gate per D1 schema? AS run-log concurrence note exists? Matrix marked frozen? |
+| VO-017 | [VO-002] Operator review of all no-evidence deletion candidates; sign-offs recorded | pending | VO-012, VO-013, VO-014, VO-015 | medium | software | Zero no-evidence delete rows without operator sign-off in manifest? |
+| VO-018 | [VO-002] Core-functionality operating note — DRAFT (identity, must-exist set, deliberately-excluded list, future-addition decision rubric) | pending | VO-010, VO-017 | low | software | Note exists with all 4 sections? Marked draft-pending-VO-036? Rubric matches spec deliverable #2 questions? |
+| VO-019 | [VO-003] Consumer-graph survey, vault-internal surfaces: wikilinks, plain-path grep, MOCs — all delete rows | pending | VO-017 | low | software | Every delete row has consumer list (possibly empty) in design/consumer-graph-survey.md? Commands recorded verbatim? |
+| VO-020 | [VO-003] Consumer-graph survey, system surfaces: hooks/settings, plists, backup/sync filters, .obsidian, dashboard/web config, harness memory, glob conventions | pending | VO-017 | low | software | All 6 system surfaces swept with recorded commands? Memory-file hits handed to AS-029 via run-log note? |
+| VO-021 | [VO-004] Archived/ enumeration + canonical-exception extraction list (delete-unless-canonical rule) | pending | VO-011 | low | software | Full Archived/ listing recorded? Every exception justified as canonical-reference or compound-provenance? |
+| VO-022 | [VO-004] Storage policy doc: three-outcome distinction, _attachments orphan-sweep plan, non-md top-N audit, log rotation policy, git-history-rewrite decision | pending | VO-021 | medium | software | Policy doc has all 5 elements? (a)/(b)/(c) outcomes stated separately? History-rewrite decision recorded explicitly either way? |
+| VO-023 | [VO-005] B4/B5 changeset: prune lists + per-item remediation maps + trigger-condition description rewrite for every kept skill + gotchas where failure on record | pending | VO-017, VO-019, VO-020 | medium | software | Changeset covers every delete/merge row for scripts/protocols/overlays/skills/agents? Every kept skill has drafted trigger-condition description? Gotchas cite a recorded failure? |
+| VO-024 | [VO-006] B3 changeset: docs cluster map (constitutional/skill-referenced/solutions/orphan), dispositions, A11 Archived/-as-category taxonomy cleanup list | pending | VO-017, VO-019 | low | software | Every _system/docs + solutions row mapped to a cluster? Superseded entries deleted-or-justified per spec retention rule? A11 list included? |
+| VO-025 | [VO-007] Ceremony step classification (phase gates, context-checkpoint, session-end, intake): load-bearing/zombie/mergeable + A10 metrics (step counts before/after, zombie→0, named consumer per kept step) | pending | VO-010 | medium | software | All 4 ceremonies classified per step? Every kept step names its consumer/enforcer? Zombie list includes session_reports.db write? Metrics table recorded? |
+| VO-026 | [VO-007] B6 changeset: protocol rewrite diffs + CLAUDE.md second-pass diff PROPOSAL (apply is stop-and-ask, post-AS-025) | pending | VO-025, AS-025 | medium | software | Diff per protocol doc with ceremony rationale? Checklist diff proves no phase-gate semantics lost? CLAUDE.md changes proposed, not applied? |
+| VO-027 | [VO-008/B0] Backup verification gate: git-remote restore-drill on throwaway clone (≥1 file per top-level dir + ignored-path check); Drive/mirror freshness as secondary | pending | VO-022 | high | software | Drill passed and procedure+results in run-log BEFORE any deletion? Ignored-path coverage documented? |
+| VO-028 | [VO-008/B1] Archived/ batch: extract exceptions per VO-021, delete directory, remediate consumers, vault-check, commit | pending | VO-027, VO-021, VO-019 | high | software | Exceptions moved out first? Archived/ deleted? Consumers remediated same batch? vault-check green at commit? Deletions enumerated in run-log? |
+| VO-029 | [VO-008/B2] Attachments/logs batch: _attachments orphans, non-md heavyweights, dead logs (producer-alive check) per storage policy | pending | VO-027, VO-022 | medium | software | All deletions match policy? Producer-alive check recorded for each log artifact? Green at commit? |
+| VO-030 | [VO-008/B3] Docs batch: execute VO-024 changeset with per-item consumer remediation | pending | VO-027, VO-024 | medium | software | Changeset fully applied? Zero dead wikilinks to deleted/AS-archived paths in kept docs? Green at commit? |
+| VO-031 | [VO-008/B4] Scripts/protocols/overlays batch: execute VO-023 prune list with remediation | blocked | VO-027, VO-023, VO-016, AS-M6-signoff | high | software | Appendix A frozen + AS M6 sign-off verified in AS run-log before start? Every pruned item's consumers remediated same batch? Green at commit? |
+| VO-032 | [VO-008/B5] Skills/agents batch: prune + apply description rewrites | blocked | VO-031, AS-M6-signoff | high | software | Pruned counts reported? Every kept skill description states trigger conditions? Green at commit? |
+| VO-033 | [VO-008/B6] Ceremony batch: apply VO-026 protocol rewrites; CLAUDE.md edits individually stop-and-ask | pending | VO-032, VO-026 | medium | software | Protocol diffs applied as approved? Each CLAUDE.md edit operator-approved individually? Green at commit? |
+| VO-034 | [VO-009] Instantiate + start soak: 14 calendar days AND ≥8 sessions from B6 commit (whichever later); pass criteria logged | pending | VO-033 | low | software | Window + end-condition + pass criteria in run-log? Start date = B6 commit date? |
+| VO-035 | [VO-009] Execute 6 Tier-1 validation workflows (design D6) and record outcomes | pending | VO-034 | medium | software | All 6 runs recorded pass/fail? Failures triaged blocker vs fix-forward? Skill-routing spot-checks included? |
+| VO-036 | [VO-009] Soak close-out: validation record, operating note finalized, operator sign-off, project completion check | pending | VO-035, soak-end-condition | medium | software | Soak passed (zero urgent restores, no repeated workarounds)? Validation record written? Operating note `status: final`? All 6 spec end-state deliverables exist? Operator sign-off in run-log? |
