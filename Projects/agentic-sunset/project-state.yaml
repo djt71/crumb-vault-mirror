@@ -13,7 +13,7 @@ related_projects:
   - opportunity-scout
 # No repo_path: decommission project — produces no code, only teardown + vault artifacts.
 # External repo gate explicitly skipped (spec §Domain Classification).
-active_task: AS-011
-next_action: "AS-011 blocked on operator (pause healthchecks check 'tess-mac-studio-health' via UI or provide write key) → then M2 daemon teardown (AS-013–016). AS-010/012/017 done."
+active_task: AS-016
+next_action: "AS-016 24h quiet verification due 2026-06-11 (~14:15 EDT): no Telegram, no alerts, keep-set green. Then M3 (AS-018/019 relabel + vault-health) and parallel M4/M5 tasks. M2 teardown complete 2026-06-10."
 last_committed: 2026-06-10
 services: []

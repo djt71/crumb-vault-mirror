@@ -118,3 +118,17 @@ tags:
 Remaining schedulers for drive-sync: launchd 5am daily + post-commit hook (both danny source). Restore path: snapshot doc + git history of plist (plist itself outside vault — content recorded in snapshot).
 
 **Next:** operator unblocks AS-011 → M2 (AS-013–016).
+
+## 2026-06-10 — IMPLEMENT M2: daemon teardown
+
+**AS-011 ✓** — operator paused `tess-mac-studio-health` via UI; API-verified `status=paused`.
+
+**AS-013 ✓ / AS-014 ✓** — all 14 agentic labels booted out, zero failures; plists moved to `_system/archive/launchagents-retired/` (git-tracked restore path): hermes.gateway, llama-server, bridge.watcher, awareness-check, daily-attention, health-ping, openclaw vault-health, telemetry-rollup, com.tess.v2.×5, apple-snapshot.
+
+**AS-015 ✓** — `brew services stop ollama` clean.
+
+**Verification:** `launchctl list` shows zero scrapped labels; ports 8080/11434 closed (no listeners); keep-set intact (9 loaded: cloudflared, vault-web live; drive-sync, qmd-index, system-stats, vault-gc, vault-rebuild, tess.backup-status, tess.vault-backup scheduled). Dashboard still down per snapshot anomaly — AS-021.
+
+**AS-016 ▶ in progress** — 24h quiet clock started 2026-06-10 ~14:15 EDT. Check 2026-06-11: no Telegram, no monitoring alerts, keep-set green. M3 relabeling (AS-018/019) and everything downstream gated on it.
+
+**Hermes/OpenClaw layer is now fully dark.** Telegram will be silent from this point — that silence is intentional.

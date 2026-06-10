@@ -773,3 +773,4 @@
 2026-06-10 13:53:23 SYNC agentic-sunset: PLAN→TASK gate — design validated, entering TASK
 2026-06-10 13:57:33 SYNC agentic-sunset: TASK — action-plan + 23 atomic tasks (AS-010–AS-032), estimation calibration row
 2026-06-10 13:59:51 SYNC agentic-sunset: TASK→IMPLEMENT gate — plan approved, entering M1
+2026-06-10 14:06:59 SYNC agentic-sunset: M1 — AS-010 snapshot, AS-012 verify, AS-017 drive-sync fix (stale tess source eliminated); AS-011 blocked on operator
