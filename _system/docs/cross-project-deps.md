@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: active
 created: 2026-03-07
-updated: 2026-03-07
+updated: 2026-06-10
 tags:
   - system
   - cross-project
@@ -50,6 +50,7 @@ Tracks specific, directional blocking relationships between projects with resolu
 | XD-019 | MC Customer: Relationship Heat Map (XD-005) | Google Workspace MCP access | mcp-workspace-integration | MWI-005 (concurrent access validated) | blocked | MCP integration provides the Google/Apple integration XD-005 was waiting on (Google side). Apple side still unscoped. |
 | XD-020 | MC Customer: Comms Cadence (XD-007) | Google Workspace MCP access | mcp-workspace-integration | MWI-005 (concurrent access validated) | blocked | Same as XD-019 — Google side addressed by MCP integration. |
 | XD-021 | pydantic-ai-adoption ADR §2.2 resolution | MCP feasibility findings | mcp-workspace-integration | MWI-002 (spike validation) | blocked | Spike results resolve the feasibility brief that ADR §2.2 deferred. |
+| XD-026 | tess-danny-migration P7 closeout (DONE-superseded) | tess-plist retirement executed in broader teardown | agentic-sunset | AS-002 (disable daemons) + AS-007 (closeouts) | pending | agentic-sunset supersedes P7 (decision 2026-06-10). NOTE: many rows above reference projects in agentic-sunset's teardown scope (tess-operations, feed-intel-framework, A2A, autonomous-operations) — sweep this table for mooted rows at AS-007. |
 
 ## Resolved Dependencies
 

@@ -1,0 +1,19 @@
+name: agentic-sunset
+domain: software
+type: system
+phase: PLAN
+last_gate: SPECIFY-to-PLAN
+created: 2026-06-10
+updated: 2026-06-10
+related_projects:
+  - tess-v2
+  - tess-danny-migration
+  - mission-control
+  - feed-intel-framework
+  - opportunity-scout
+# No repo_path: decommission project — produces no code, only teardown + vault artifacts.
+# External repo gate explicitly skipped (spec §Domain Classification).
+active_task: null
+next_action: "PLAN: investigate live system (plists, consumers, dashboard deps, ollama usage, shared libs) and produce design/service-inventory.md + design/teardown-design.md for operator validation."
+last_committed: 2026-06-10
+services: []
