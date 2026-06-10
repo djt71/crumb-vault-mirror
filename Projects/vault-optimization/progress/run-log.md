@@ -84,3 +84,52 @@ Session-end protocol run: report written to session_reports.db (`20260610T190927
 **Cost observation (model routing):** systems-analyst + peer-review synthesis kept on session model (reasoning tier) — appropriate, both were judgment-heavy. Mechanical dispatch delegated to peer-review-dispatch subagent (~55k subagent tokens, 12 tool uses, clean single-pass). External review cost ≈$0.30 (4 reviewers, new pricing). No Sonnet delegation this session — no execution-tier skills invoked.
 
 **Protocol zombie flag (for AS-025/029 or VO-007):** session-end step 2 writes session reports to `~/.tess/state/session_reports.db` — its consumer (Tess) is decommissioned, so this is now an orphaned producer per infrastructure-teardown-discipline #2. Wrote the report this session for protocol compliance; the step should be retired or re-pointed when the session-end protocol is next revised.
+
+## 2026-06-10 — PLAN: context inventory
+
+Fresh session, vault-based state reconstruction (project-state.yaml + run-log).
+
+**Context inventory (PLAN, standard tier — 4 docs):**
+1. `specification-summary.md` — entry point
+2. `specification.md` (full) — design must cover all 9 tasks' methodology, evidence rubric, VO-008 execution model
+3. `_system/docs/adr-crumb-v3-knowledge-store-identity.md` — Tier 1/2/3 model, boundary cases, open questions (VO-001 target)
+4. `reviews/2026-06-10-specification.md` — synthesis excerpts only: deferred items A10 (soak/ceremony metrics → TASK), A11 (Archived/-as-category cleanup → VO-006), A12 (vault-only wording → Appendix A)
+- Overlay check: none loaded (unchanged from SPECIFY assessment — Crumb-internal infra)
+- Conventions check (design-spec v2-4, grep-scoped): PLAN produces design docs in `design/`; gate is risk-tiered
+
+**PLAN deliverable:** `design/optimization-design.md` + summary — evidence/manifest schema, consumer-graph protocol, ownership matrix structure, batch execution design, soak design, AS sequencing.
+
+## 2026-06-10 — PLAN: design written
+
+**Artifacts:** `design/optimization-design.md` + `design/optimization-design-summary.md`.
+
+**Design decisions (D1–D6):**
+- D1: manifest schema (item/rubric/evidence/disposition/owner/operator-review), type-specific evidence commands, Appendix A ownership-matrix schema with per-surface gates. Manifest scope = primitives + `_system/` docs + project records; KB content excluded (operator to confirm). Orphaned `session_reports.db` readable as supplementary evidence — not kept alive for it.
+- D2: nine-surface consumer-graph protocol with recorded commands → `design/consumer-graph-survey.md` at VO-003.
+- D3: storage policy structure on the three-outcome distinction; Archived/ exception-extraction before deletion; dead-log producer-alive check; history rewrite default-out (U4 decision recorded either way).
+- D4: batch design — B0 backup restore-drill gate, B1 Archived → B2 attachments/logs → B3 docs → B4 scripts/protocols/overlays → B5 skills/agents → B6 ceremony. Primitives last so VO-009 description re-tests run against the final surface. Grounded against live plist inventory (10 active, incl. operator-kept dashboard stack per A3).
+- D5: ceremony steps classified load-bearing / zombie / mergeable; trigger-condition descriptions on all kept skills; gotchas only where a failure is on record.
+- D6: six representative Tier-1 soak workflows; metrics deferred to TASK per A10.
+
+**Gap found:** end-state deliverable #2 (core-functionality operating note) has no producing task in the spec's decomposition — proposed VO-002 draft / VO-009 finalize split; fix at TASK refinement.
+
+**PLAN gate (risk-tiered):** design contains high-risk decisions (VO-008 batch model, Archived/ deletion order, backup authority) → operator approval required before TASK. Open decisions: (1) KB-content exclusion from manifest scope, (2) authoritative restore source for B0 drill, (3) batch order, (4) operating-note split.
+
+## 2026-06-10 — PLAN gate: operator decisions
+
+All four gate decisions resolved (operator, 4-question gate — all recommended options accepted):
+1. Manifest scope: **KB content excluded** (Sources/, Domains/ are Tier-1 data, not surface; weight via VO-004 only)
+2. B0 authoritative restore source: **git remote** (matches "git history is the archive"); Drive/mirror = secondary freshness checks
+3. Batch order: **as designed** — B1 Archived/ → B2 attachments/logs → B3 docs → B4 scripts/protocols/overlays → B5 skills/agents → B6 ceremony
+4. Operating note: **split** — VO-002 draft, VO-009 finalize; action-architect encodes at TASK
+
+Design doc + summary updated to record decisions inline. PLAN gate passed.
+
+### Phase Transition: PLAN → TASK
+- Date: 2026-06-10
+- PLAN phase outputs: `design/optimization-design.md` (D1–D6), `design/optimization-design-summary.md`, 4 gate decisions recorded
+- Goal progress: PLAN deliverable met — design covers all 9 tasks' execution mechanics (evidence schema, consumer-graph protocol, ownership-matrix schema, batch model, soak shape); high-risk decisions operator-approved; A10 metrics and the operating-note task fix explicitly routed to TASK
+- Compound: one candidate flagged for operator approval (not auto-written, per Ask First): **deliverables-contract cross-check** — spec's end-state deliverable #2 had no producing task; proposed routing is a one-line check in action-architect's procedure ("every end-state deliverable maps to a producing task"), not a new solutions doc. Single observed instance → medium confidence
+- Context usage before checkpoint: low (fresh session; 4 docs + design writes — well under 50%)
+- Action taken: none (proceed in-session)
+- Key artifacts for TASK phase: `specification-summary.md`, `design/optimization-design-summary.md` (both in context), spec Task Decomposition table + acceptance criteria
