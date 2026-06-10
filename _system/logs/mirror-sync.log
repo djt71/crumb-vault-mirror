@@ -772,3 +772,4 @@
 2026-06-10 13:50:05 SYNC agentic-sunset: PLAN — service inventory (SCRAP-15/KEEP-11), 7-phase teardown design, spec criterion amended
 2026-06-10 13:53:23 SYNC agentic-sunset: PLAN→TASK gate — design validated, entering TASK
 2026-06-10 13:57:33 SYNC agentic-sunset: TASK — action-plan + 23 atomic tasks (AS-010–AS-032), estimation calibration row
+2026-06-10 13:59:51 SYNC agentic-sunset: TASK→IMPLEMENT gate — plan approved, entering M1

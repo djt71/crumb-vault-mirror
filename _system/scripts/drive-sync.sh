@@ -13,6 +13,9 @@
 
 set -eu
 
+# Callers vary (launchd, git post-commit hook) — hook context lacks homebrew in PATH
+export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
+
 VAULT_ROOT="/Users/danny/crumb-vault"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REMOTE="gdrive"

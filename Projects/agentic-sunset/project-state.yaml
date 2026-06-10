@@ -13,7 +13,7 @@ related_projects:
   - opportunity-scout
 # No repo_path: decommission project — produces no code, only teardown + vault artifacts.
 # External repo gate explicitly skipped (spec §Domain Classification).
-active_task: AS-010
-next_action: "IMPLEMENT M1: AS-010 restore snapshot → AS-011 pause healthchecks check → AS-012 drive-sync verification."
+active_task: AS-011
+next_action: "AS-011 blocked on operator (pause healthchecks check 'tess-mac-studio-health' via UI or provide write key) → then M2 daemon teardown (AS-013–016). AS-010/012/017 done."
 last_committed: 2026-06-10
 services: []

@@ -99,3 +99,22 @@ tags:
 - Context usage before checkpoint: estimated ~60-65% — proceeding; summaries only for any new loads
 - Action taken: none
 - Key artifacts for IMPLEMENT phase: tasks.md, service-inventory.md, teardown-design.md §1 sequencing (all in context)
+
+## 2026-06-10 — IMPLEMENT M1 (+ AS-017 pulled forward)
+
+**AS-010 ✓** — restore snapshot written (`design/restore-snapshot.md`): 26 plists, crontab, brew services, PIDs. **Anomaly: com.crumb.dashboard plist exists but service NOT loaded — port 3100 dead, tunnel serving 404.** The mission-control "keep" applies to an already-down service. Re-bootstrap scheduled for AS-021.
+
+**AS-011 ⛔ blocked on operator** — healthchecks.io has one check, `tess-mac-studio-health` (15m ping, currently up). The only local key (`hcr_…`, dashboard plist) is read-only — cannot pause via API. Searched tess-v2/_openclaw/.hermes configs: no write key on disk. Operator must pause via UI or supply full-access key. M2 (daemon teardown) gated on this.
+
+**AS-012 ✓** — drive-sync verification, worst case confirmed:
+- Both crontab (hourly) and com.crumb.drive-sync plist (5am) ran the **tess copy** (`VAULT_ROOT=/Users/tess/crumb-vault`) → **Google Drive / NotebookLM / Perplexity Computer received the frozen tess vault (HEAD Jun 8, migration P0 freeze) for ~2 days.**
+- Danny vault's git post-commit hook runs the danny copy (correct source) but it failed `rclone not found` — hook context lacks /opt/homebrew/bin in PATH.
+
+**AS-017 ✓ (pulled forward per plan)** —
+1. `drive-sync.sh` (danny): added `export PATH=/opt/homebrew/bin:...` for hook context.
+2. Plist repointed tess→danny path, `plutil` lint OK, bootout+bootstrap clean.
+3. Crontab removed entirely (`crontab -r`) — empty, duplicate scheduling gone.
+4. Manual run exit 0, log clean DONE 14:03 — Drive now receives current vault.
+Remaining schedulers for drive-sync: launchd 5am daily + post-commit hook (both danny source). Restore path: snapshot doc + git history of plist (plist itself outside vault — content recorded in snapshot).
+
+**Next:** operator unblocks AS-011 → M2 (AS-013–016).
