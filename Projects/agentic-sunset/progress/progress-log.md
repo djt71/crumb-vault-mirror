@@ -17,3 +17,4 @@ tags:
 |---|---|---|
 | 2026-06-10 | SPECIFY | Project created; footprint surveyed (25 plists / 3 label generations / 7 live daemons); 4 scope decisions locked; specification drafted, awaiting operator validation |
 | 2026-06-10 | SPECIFY→PLAN | Spec validated by operator (peer review declined); gate complete; entering PLAN — teardown design + service inventory |
+| 2026-06-10 | PLAN | Live investigation complete (26 items, consumer graph, dashboard deps); disposition map SCRAP-15/KEEP-11; 7-phase teardown design written; awaiting operator design validation |

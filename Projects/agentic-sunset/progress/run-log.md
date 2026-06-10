@@ -52,3 +52,22 @@ tags:
 - Context usage before checkpoint: estimated <50% (moderate session; /context not tool-invocable — estimate)
 - Action taken: none
 - Key artifacts for PLAN phase: specification-summary.md (in context), infrastructure-teardown-discipline.md (loaded)
+
+## 2026-06-10 — PLAN
+
+**Investigation:** two parallel Explore agents (read-only): (1) full plist/script/consumer inventory — all 26 scheduled items, hc-ping URLs, shared-lib deps, ollama usage, tess-user state, apple-snapshot diagnosis; (2) dashboard-stack dependency map — adapters, data sources, panel-by-panel degradation.
+
+**Key findings (changed the plan):**
+- vault-web ≠ dashboard: it's a separate Quartz static-publishing stack (vault-web :8843 + vault-rebuild 15m + qmd-index). Kept per operator decision ("keep everything" on dashboard stack) → end state is 11 labels, not ~8. Spec success criterion 1 amended accordingly (reality-diverges → spec updated first).
+- **Drive-sync stale-source risk (HIGH):** crontab AND plist both target `/Users/tess/crumb-vault/...` — Google Drive/NotebookLM may be receiving a stale vault copy. Verify Phase A, fix Phase C.
+- Ollama verified vestigial (zero references in active code) → SCRAP. Live LLM was llama.cpp :8080 (Hermes-only) → SCRAP.
+- healthchecks.io check 2d06…9231 must be paused BEFORE health-ping stops (false-alarm window). Dashboard plist holds a healthchecks API key usable for this.
+- vault-health.sh sources _openclaw/scripts/cron-lib.sh — relocate to _system/scripts/lib/ before _openclaw archive. Other keep-set scripts self-contained.
+- Dashboard intel page reads FIF pipeline.db (static SQLite) → frozen-but-functional after teardown; pipeline.db must not move. telemetry-rollup loss degrades gracefully (stale badges).
+- apple-snapshot exit-127 root cause: target script doesn't exist at /Users/tess path → SCRAP.
+- /Users/tess still exists; its LaunchAgents unreadable without sudo — operator-assisted check needed before closeout (P7 residual).
+- AS-001 (inventory) absorbed into PLAN as design work — TASK phase renumbers.
+
+**Artifacts:** design/service-inventory.md (disposition table + consumer-sweep list), design/teardown-design.md (7-phase sequence A–G, reversibility contract, target architecture, upstream migration), design/teardown-design-summary.md. Spec criterion 1 amended.
+
+**Next:** operator validates design → PLAN→TASK gate → action-architect decomposition.

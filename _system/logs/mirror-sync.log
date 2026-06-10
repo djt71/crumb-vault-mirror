@@ -768,3 +768,4 @@
 2026-06-09 19:34:51 SYNC tess-danny-migration: commit P2 vault path-rewrite + live state snapshot
 2026-06-09 19:39:10 SYNC tess-danny-migration: M6 green — P6 verification complete, P7 soak-gated
 2026-06-10 12:43:25 SYNC chore: session-end log — audit remediation (M1-M3) + git cred repair
+2026-06-10 13:42:09 SYNC agentic-sunset: SPECIFY complete — spec, scaffold, XD-026; SPECIFY→PLAN gate

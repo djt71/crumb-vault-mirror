@@ -103,7 +103,7 @@ The self-built agentic infrastructure layer (Tess v2 scheduled services, Hermes 
 
 ## Success Criteria
 
-1. `launchctl list` shows only: dashboard stack (3), consolidated plumbing (≤5 labels, one generation), and unrelated system agents. Zero `ai.openclaw.*`, `ai.hermes.*`, `com.tess.*` labels loaded.
+1. `launchctl list` shows only the 11 keep-labels under one `com.crumb.*` generation — plumbing ×6 (vault-backup, backup-status, drive-sync, vault-gc, vault-health, system-stats) + dashboard/publishing ×5 (dashboard, cloudflared, vault-web, vault-rebuild, qmd-index) — plus unrelated system agents. Zero `ai.openclaw.*`, `ai.hermes.*`, `com.tess.*` labels loaded; crontab empty. *(Amended 2026-06-10 after PLAN investigation: Quartz publishing stack is 3 extra labels within the kept dashboard stack; backup-status + system-stats kept as dashboard feeders.)*
 2. No new false-signal alerts (Telegram, hc-ping, dashboard) for 7 consecutive days post-teardown.
 3. Vault backup and drive-sync verified green throughout — no coverage gap at any point.
 4. Daily-attention (and any retained digest) running upstream via Claude.AI/scheduled agents, or explicitly declined and documented.
