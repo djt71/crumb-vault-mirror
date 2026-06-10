@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: active
 created: 2026-02-21
-updated: 2026-06-01
+updated: 2026-06-10
 tags:
   - system
 ---
@@ -14,7 +14,30 @@ Orientation artifact for a fresh session reading this repo (claude.ai chat, a
 new Claude Code session, or any agent cloning `github.com/djt71/crumb-vault`).
 Read this first — it is sufficient for most questions.
 
-Last updated: 2026-06-01 (full regeneration). The 38 days since the prior
+Last updated: 2026-06-10. **The agentic infrastructure layer is being fully
+decommissioned** — project `agentic-sunset` (software, four-phase) ran SPECIFY
+through IMPLEMENT-M2 in one day on operator directive: the self-built always-on
+agent stack (Tess/OpenClaw/Hermes) drifted from original intent, produced zero
+revenue, and ~90% of its function is now native in Claude.AI / Claude Code.
+
+- **Dark as of 2026-06-10 ~14:15 EDT:** Hermes gateway, llama-server, Ollama,
+  bridge watcher, all `ai.openclaw.*` jobs, all `com.tess.v2.*` contracts,
+  telemetry-rollup, apple-snapshot — 14 labels + Ollama booted out, plists
+  archived (git-tracked) in `_system/archive/launchagents-retired/`. Telegram
+  silence is intentional. healthchecks.io check `tess-mac-studio-health` paused.
+- **Critical bug found+fixed en route:** both drive-sync schedulers ran the
+  stale `/Users/tess/crumb-vault` copy → Google Drive/NotebookLM received a
+  frozen vault since Jun 8. Fixed (plist repointed, crontab removed, PATH fix
+  for the post-commit hook). Drive is current again.
+- **In flight:** AS-016 24h quiet verification (due 2026-06-11 ~14:15) gates
+  M3–M7: plumbing relabel to one `com.crumb.*` generation, runtime archive +
+  reboot test, daily-attention → scheduled Claude agent, CLAUDE.md surgery,
+  closeouts (tess-v2 → DONE, tess-danny-migration → DONE/P7-superseded), 7-day
+  soak. See `Projects/agentic-sunset/` (tasks.md, design/service-inventory.md).
+- **Model policy update:** Crumb now runs both Opus 4.8 and Fable 5 (top-tier
+  frontier models only — tier is the non-negotiable, not the model line).
+
+Previous update 2026-06-01 (full regeneration). The 38 days since the prior
 update (2026-04-24) were dominated by an **infrastructure decommission wave**
 and a **tess-v2 role narrowing**, not new feature work:
 
@@ -93,7 +116,7 @@ sessions; all other work continues in parallel (three tiers: active / standing-l
 
 **Four-surface model (snapshot):**
 - **Crumb** (Claude Code, top-tier Opus — currently 4.8 — per `crumb-model-policy`) — deep work, specs, strategy
-- **Tess** (OpenClaw) — always-on execution of scheduled services; runtime in flux (Kimi K2.5 → GPT-5.4 soak; Mechanic: local Nemotron via `com.tess.llama-server`)
+- **Tess** (OpenClaw) — **decommissioned 2026-06-10** (agentic-sunset): scheduled-service execution moves to plain launchd plumbing + scheduled Claude agents; Hermes/local-LLM runtime archived
 - **Perplexity Computer** — research, daily operational awareness
 - **Chrome** (Claude browser extension) — authenticated website actions
 
@@ -104,7 +127,7 @@ Primary revenue bet: **Firekeeper Books** (Prompt 1).
 State below is pulled from each project's `project-state.yaml` (authoritative).
 Directory location is authoritative for archived-vs-active; project docs carry no status field.
 
-### tess-v2 — software / system / four-phase
+### tess-v2 — software / system / four-phase  *(closing: → DONE at agentic-sunset AS-030)*
 - **Phase:** IMPLEMENT · **active_task:** TV2-057d · **updated:** 2026-06-01
 - **Status:** Tess v2 sole-operator on a reduced launchd service set (was ~15 at cutover; trimmed hard by the decommission wave). Amendment AC (draft) narrows Tess to scheduled-services-only execution and retracts the orchestrator role; Amendment Z superseded. 23 Category-A engineering patterns extracted to `_system/docs/tess-v2-durable-patterns.md` (survive project narrowing). Runtime: Kimi K2.5 → GPT-5.4 experimentation underway.
 - **Next:** ratify AC via operator approval, then upstream-work-bridge analysis OR resume TV2-057d promotion wiring (operator discretion). Open follow-ups: GPT-5.4 soak, persona-spec durable home, K2-family retest pinning, AD-008 supersession doc.
@@ -154,16 +177,13 @@ Directory location is authoritative for archived-vs-active; project docs carry n
 ### think-different — learning / KB exception
 - **Phase:** ARCHIVED, but kept in `Projects/` (not `Archived/`) because it holds 45 biographical profiles in the active knowledge graph. `updated:` 2026-02-18.
 
-## Live Services (verified via `launchctl`, 2026-06-01)
+## Live Services (verified via `launchctl`, 2026-06-10 post-teardown)
 
-Three plist generations coexist (the v2 migration never removed the legacy
-plists — this dual/triple-generation cruft is the dominant teardown surprise):
-- **Crumb (`com.crumb.*`):** system-stats, telemetry-rollup, vault-gc, vault-rebuild, vault-web (Quartz site), qmd-index, cloudflared
-- **Tess legacy (`ai.openclaw.*`):** awareness-check, daily-attention, health-ping (external dead-man's switch), vault-health, bridge.watcher
-- **Tess v2 (`com.tess.v2.*`):** vault-health, vault-gc, backup-status, health-ping, daily-attention
-- **Tess other (`com.tess.*`):** vault-backup, llama-server, backup-status, nemotron-load
+The three-generation plist cruft is **gone** (agentic-sunset M2). Loaded now:
+- **Plumbing:** com.crumb.{vault-gc, drive-sync, system-stats, qmd-index} + com.tess.{vault-backup, backup-status} *(the two com.tess.* labels relabel to com.crumb.* at AS-018)*
+- **Publishing/dashboard stack:** com.crumb.{cloudflared, vault-web, vault-rebuild}; `com.crumb.dashboard` plist exists but the service was deliberately stopped 2026-06-01 — restart is an operator decision (kept for possible repurpose)
 
-Recently **removed** (do not expect these): `com.crumb.dashboard`, `com.crumb.service-status`, `com.tess.health-check`, `com.tess.v2.awareness-check`, `overnight-research`, `connections-brainstorm`, all FIF-capture and opportunity-scout jobs.
+Everything else (`ai.hermes.*`, `ai.openclaw.*`, `com.tess.v2.*`, llama-server, Ollama, telemetry-rollup, apple-snapshot) is retired — plists in `_system/archive/launchagents-retired/`, runtimes archived-in-place on disk. Do not expect Telegram traffic, hc-ping pings, or `_openclaw/` log churn.
 
 ## Recent Key Decisions
 

@@ -77,10 +77,10 @@ unbound      none
 ## Anomalies found at snapshot time
 
 1. **com.crumb.dashboard is NOT loaded** — plist exists, service absent from launchctl,
-   port 3100 dead (`curl :3100/api/health` → no response). The cloudflared tunnel
-   (mc.crumbos.dev → :3100) is currently serving 404. The mission-control "keep"
-   decision applies to a service that is already down. Action: re-bootstrap at M4
-   (AS-021 verification) — operator informed.
+   port 3100 dead, tunnel serving 404. CORRECTION (session-end review of
+   claude-ai-context.md): the dashboard was **deliberately stopped 2026-06-01**
+   ("operator no longer wants it") — not a migration casualty. Do NOT auto-restart
+   at AS-021; restart is an operator decision (stack kept for possible repurpose).
 2. apple-snapshot exit 127 (known — script missing, SCRAP at AS-014).
 3. bridge.watcher had PID 677 at session start; PID column empty at snapshot — it
    cycles. Disposition unchanged (SCRAP).

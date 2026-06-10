@@ -132,3 +132,22 @@ Remaining schedulers for drive-sync: launchd 5am daily + post-commit hook (both 
 **AS-016 ▶ in progress** — 24h quiet clock started 2026-06-10 ~14:15 EDT. Check 2026-06-11: no Telegram, no monitoring alerts, keep-set green. M3 relabeling (AS-018/019) and everything downstream gated on it.
 
 **Hermes/OpenClaw layer is now fully dark.** Telegram will be silent from this point — that silence is intentional.
+
+## 2026-06-10 — Session end
+
+**Session scope:** project created → SPECIFY → PLAN → TASK → IMPLEMENT M1+M2 in one session, operator-gated at every transition. Drive-sync stale-source bug found and fixed same-day.
+
+**Correction logged:** dashboard down-state is deliberate (stopped 2026-06-01, operator decision) — not a migration casualty as the restore snapshot first guessed. AS-021 amended: no auto-restart; dashboard restart is a separate operator decision.
+
+**AS-016 handoff:** 24h quiet check due 2026-06-11 ~14:15+. A session-local one-shot (14:33) exists but dies with this session (CronCreate `durable` flag not honored in this build — flag accepted but job reports session-only); operator will prompt "run the quiet check" in tomorrow's session. Cloud /schedule was evaluated and rejected: cloud agents cannot run launchctl/local checks.
+
+**Compound evaluation:** two insights queued for AS-032 routing (already recorded at their gates): (1) platform absorption as standing teardown trigger; (2) dual-scheduler drift — path migrations must sweep ALL schedulers (cron + launchd + git hooks), found as crontab+plist+post-commit-hook all running drive-sync with two different source paths. A third candidate from session-end: **CronCreate durable flag silently ignored** — harness quirk, routed to memory (claude-code-harness) rather than solutions.
+
+**Session-end protocol notes:**
+- Amendment Z session report: **skipped with reason** — the consumer (Tess morning briefing / session_reports.db) was decommissioned this session; writing reports nothing reads violates teardown discipline. Protocol doc update queued in AS-028.
+- Code review sweep: no repo_path on this project; only code change was a 3-line PATH/source fix to `drive-sync.sh`, verified by execution (manual run + hook-triggered run both clean). Logged skip: Code Review — Skipped (AS-017): config-tier script fix, execution-verified.
+- Model routing (cost observation): no Sonnet delegation this session — all skill work (systems-analyst, action-architect) ran on session model; 3 Explore subagents inherited session model. Heavy ops: two parallel investigation agents (PLAN) — quality pass, no rework.
+- claude-ai-context.md refreshed (was 9 days stale, flagged at startup).
+- qmd index updated; inbox .processed empty; failure log not warranted (clean session).
+
+**Next session:** run AS-016 quiet check (operator will prompt) → if green, M3 (AS-018/019) on operator go-ahead.
