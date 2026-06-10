@@ -204,3 +204,13 @@ Open questions status: Q1 answered by events (pollers gone, intake stays open); 
 **VAL disposition handoff:** VAL-001/002/003 closed as superseded by this acceptance; the `tess-harness-plan-tracking.yaml` file update rides with AS-030 (tess-v2 closures are AS-owned) — flagged here for the AS run-log.
 
 **VO-010 ACs:** all four pass (status accepted ✓, 5 boxes ✓, open questions answered ✓, gate outcome + sign-off this entry ✓). tasks.md updated to done. **Next: VO-011+ (M2 evidence passes) in a fresh session** — context moderate-high after PLAN+TASK+review+VO-010.
+
+## 2026-06-10 — Session end
+
+Single session carried PLAN (design D1–D6 + 4 operator gate decisions) → TASK (action-plan + 27 tasks + panel review + 11 amendments + compound fix to action-architect) → IMPLEMENT M1 (VO-010: ADR accepted, MC boundary decision). Two phase-transition checkpoints ran in-session; context bands held (never exceeded proceed band before VO-010, which was deliberately light).
+
+**Compound evaluation:** primary insight already routed mid-session (A11 embed-the-AC-source rule → action plan + review note + memory). Secondary observation, no doc: the **dated Acceptance Refresh pattern** for accepting a stale ADR — refresh section prevails over the original snapshot, original retained as provenance, inline annotations pointing forward — worked cleanly; if it recurs (second stale-ADR acceptance), capture as a solutions entry. Pending compound candidate from SPECIFY session (external-model roster rot) still awaits operator decision.
+
+**Cost observation (model routing):** all reasoning-tier work (PLAN design, action-architect, review synthesis, ADR analysis/acceptance) on session model — appropriate, judgment-heavy throughout. Mechanical dispatch delegated to peer-review-dispatch subagent (~60k subagent tokens, 16 tool uses, clean single-pass). External review ≈$0.10 (4 reviewers; Grok 12.8s/$0.01-class). No execution-tier skills invoked → no Sonnet delegation. No routing adjustments indicated.
+
+**Session-end protocol notes:** session report written to session_reports.db (zombie-producer flag from previous session stands — retire/re-point at VO-025/B6); no failure-log entry (clean session); code-review sweep + build verification skipped (no repo_path).
