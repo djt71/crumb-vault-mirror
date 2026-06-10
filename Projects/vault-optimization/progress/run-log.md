@@ -76,3 +76,11 @@ Plus 5 should-fix (A5–A9), 3 defer (A10–A12). Notable contradiction resolved
 - Context usage before checkpoint: high (long session: SPECIFY + panel audit + review cycle) — PLAN should start from a fresh session via vault reconstruction
 - Action taken: commit + recommend fresh session for PLAN
 - Key artifacts for PLAN phase: `specification-summary.md` (primary), `reviews/2026-06-10-specification.md` synthesis section (A10–A12 deferred items), `_system/docs/adr-crumb-v3-knowledge-store-identity.md` (VO-001 target)
+
+## 2026-06-10 — Session end
+
+Session-end protocol run: report written to session_reports.db (`20260610T190927f103764`); inbox `.processed/` empty; qmd index updated (20 hashes pending `qmd embed` — non-blocking); no failure-log entry (session clean); no code-review sweep (no repo_path).
+
+**Cost observation (model routing):** systems-analyst + peer-review synthesis kept on session model (reasoning tier) — appropriate, both were judgment-heavy. Mechanical dispatch delegated to peer-review-dispatch subagent (~55k subagent tokens, 12 tool uses, clean single-pass). External review cost ≈$0.30 (4 reviewers, new pricing). No Sonnet delegation this session — no execution-tier skills invoked.
+
+**Protocol zombie flag (for AS-025/029 or VO-007):** session-end step 2 writes session reports to `~/.tess/state/session_reports.db` — its consumer (Tess) is decommissioned, so this is now an orphaned producer per infrastructure-teardown-discipline #2. Wrote the report this session for protocol compliance; the step should be retired or re-pointed when the session-end protocol is next revised.
