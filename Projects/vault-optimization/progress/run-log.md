@@ -171,3 +171,21 @@ Design doc + summary updated to record decisions inline. PLAN gate passed.
 **Meta-lesson (captured as A11, no new solutions doc):** reviewing action-plan.md without tasks.md generated 4 incorrect-premise findings — plan reviews must embed the AC source artifact.
 
 Amendments applied to action-plan.md + tasks.md; action-plan-summary.md refreshed. Re-review skipped (amendments follow panel consensus; same operator precedent as spec round).
+
+## 2026-06-10 — Pre-VO-010: ADR-vs-goals analysis
+
+Operator requested analysis of the v3 ADR against project goals before IMPLEMENT entry. Delivered in-conversation; conclusion: **minor drift → proceed**, with a four-point refresh agenda for VO-010:
+1. Tier 3 re-stated as executed/AS-owned (sunset M1/M2 already tore most of it down; remainder is AS M6/M7 per XD-027)
+2. Tier 2 narrowed to a canonical-reference/compound-provenance exception list — "keep dormant" predates the aggressive-deletion decision and contradicts it (spec amendment A8 killed dormant-marking)
+3. Mission Control disposition ("shed") must be reconciled with the later operator decision to keep the dashboard stack (spec assumption A3) — the one live boundary-case decision
+4. Tier 1 skill enumeration (17/20 skills) demoted to presumptive-keep — tiers govern categories; the VO-002 manifest owns item-level dispositions (SkillsBench evidence)
+Open questions status: Q1 answered by events (pollers gone, intake stays open); Q2 = point 3 above; Q3 recommend outside-Crumb read-only runtime; Q4 settled by AS-029 ownership + model-behavior memories demonstrably earning keep. Also: liberation-directive refs in CLAUDE.md are NOT Tess-specific — survive the rewrite. **Operator endorsed the analysis ("great, pls proceed").**
+
+### Phase Transition: TASK → IMPLEMENT
+- Date: 2026-06-10
+- TASK phase outputs: `action-plan.md` (M1–M5, peer-reviewed round 1, 11 amendments applied), `tasks.md` (27 atomic tasks VO-010–036), `action-plan-summary.md`, `reviews/2026-06-10-action-plan.md` (+4 raw JSONs), XD-027 task-precise update, estimation-calibration row, action-architect deliverables cross-check (compound, operator-approved)
+- Goal progress: all TASK acceptance criteria met — decomposition complete with binary ACs and dependency edges, risk levels assigned, calibration consistent (3.0x vs 2.6x precedent), HIGH-impact peer review completed with must-fix amendments applied
+- Compound: TASK-phase insight already routed — embed-the-AC-source-artifact rule for plan reviews captured as amendment A11 in the plan + review note (first instance; no solutions doc). Prior pending candidate (external-model roster rot) remains awaiting operator decision — not re-raised this phase
+- Context usage before checkpoint: moderate (~50-60% — long session: PLAN + TASK + review cycle). Proceed band; VO-010 is a light ADR-edit task. If IMPLEMENT continues past VO-010, prefer fresh session for M2 evidence passes
+- Action taken: none (proceed in-session for VO-010 only)
+- Key artifacts for IMPLEMENT phase: `tasks.md` (AC source), `_system/docs/adr-crumb-v3-knowledge-store-identity.md` (VO-010 target, in context), refresh agenda above

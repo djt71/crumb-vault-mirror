@@ -1,15 +1,15 @@
 name: vault-optimization
 domain: software
 type: system
-phase: TASK
-last_gate: PLAN-to-TASK
+phase: IMPLEMENT
+last_gate: TASK-to-IMPLEMENT
 created: 2026-06-10
 updated: 2026-06-10
 related_projects:
   - agentic-sunset
 # No repo_path: vault-only project — produces no code, only vault restructuring artifacts.
 # External repo gate explicitly skipped (vault-only software per CLAUDE.md §3b).
-active_task: null
-next_action: "Peer review round 1 complete, 11 amendments applied. TASK gate: operator approves decomposition → Context Checkpoint → IMPLEMENT starting VO-010 (ADR acceptance, operator session — answer the ADR's open questions). VO-031/032 blocked on Appendix A frozen + AS M6 sign-off (XD-027)."
+active_task: VO-010
+next_action: "VO-010 in progress: ADR refresh per endorsed 4-point agenda + MC boundary-case decision → status: accepted. Then M2 evidence passes (VO-011+) in a fresh session. VO-031/032 blocked on Appendix A frozen + AS M6 sign-off (XD-027)."
 last_committed: 2026-06-10
 services: []
