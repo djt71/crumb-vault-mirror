@@ -80,3 +80,13 @@ tags:
 - Context usage before checkpoint: estimated 55-60% — proceeding; favoring summaries for new loads
 - Action taken: none
 - Key artifacts for TASK phase: teardown-design-summary.md + service-inventory.md (both in context)
+
+## 2026-06-10 — TASK (action-architect)
+
+**Context inventory:** spec summary, teardown-design.md, service-inventory.md, action-plan inputs — all authored this session, in context (0 new doc loads). Estimation-calibration history read (1 doc). Knowledge brief (hook, ambient): no bearing on teardown mechanics. Signal scan: deferred to SPECIFY result (no relevant hits). No overlay.
+
+**Artifacts:** action-plan.md (7 milestones, M1–M7 ↔ phases A–G), tasks.md (23 atomic tasks AS-010–AS-032, supersedes spec provisional AS-001–009), action-plan-summary.md. Estimation-calibration row added (9 provisional → 23 actual, 2.6x — teardown decomposition pattern noted).
+
+**Gate structure:** AS-011 (pause healthchecks) blocks all teardown; AS-025 (CLAUDE.md) is the sole stop-and-ask; AS-021 (reboot) + AS-022 (sudo tess check) operator-assisted; AS-017 (drive-sync fix) can run early — stale-sync risk is urgent.
+
+**Next:** TASK→IMPLEMENT gate, then M1 (AS-010–012).

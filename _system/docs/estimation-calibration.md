@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: active
 created: 2026-03-16
-updated: 2026-03-16
+updated: 2026-06-10
 tags:
   - system
   - estimation
@@ -19,6 +19,7 @@ Maintained by action-architect skill (compound behavior).
 | Project | Task Range | Estimated | Actual | Ratio | Notes |
 |---------|-----------|-----------|--------|-------|-------|
 | pydantic-ai-adoption | PAA-001–PAA-010 | 2–3 days | ~1 hour | 0.04x | Falsifiable checkpoint (PAA-006) triggered NO-GO on pydantic-evals. Pytest pivot eliminated YAML dataset + evaluator framework overhead. Bash→Python extraction was mechanical (no coupling issues). Estimate assumed pydantic-evals would pass checkpoint. |
+| agentic-sunset | AS-010–AS-032 | 9 provisional tasks (spec) | 23 atomic tasks (TASK phase) | 2.6x | Spec-stage decomposition of a teardown undercounted: consumer sweeps, no-gap relabeling, operator-assisted steps (reboot/sudo), and verification waits (24h quiet, 7-day soak) each became standalone tasks once the live inventory existed. Pattern: infra teardown ≈ 2–3 tasks per "scrap N things" spec line. Actual duration TBD at close. |
 
 ## Patterns
 
