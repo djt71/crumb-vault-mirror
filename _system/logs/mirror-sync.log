@@ -786,3 +786,4 @@
 2026-06-10 16:05:30 SYNC vault-optimization: VO-010 complete — crumb-v3 ADR accepted (gate: proceed); Acceptance Refresh + MC runtime-shed-dashboard-kept decision
 2026-06-10 16:09:55 SYNC chore: session-end log — vault-optimization PLAN→TASK→M1 session close (compound eval, cost obs, session report)
 2026-06-10 16:31:44 SYNC vault-optimization: M2 VO-011–015 — keep-set manifest complete (199 rows, 4 evidence passes, zero unknowns)
+2026-06-10 16:44:11 SYNC vault-optimization: VO-017 — operator sign-off recorded on 21 no-evidence delete rows; FIF archival deferred

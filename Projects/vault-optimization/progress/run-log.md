@@ -242,3 +242,15 @@ Single session carried PLAN (design D1–D6 + 4 operator gate decisions) → TAS
 **VO-017 AC:** zero no-evidence delete rows without operator sign-off ✓ (21/21 signed).
 
 **Unblocked:** VO-018 (operating note draft), VO-019/020 (consumer-graph surveys over all delete rows). VO-021/022 remain unblocked. VO-016 still waits on AS session boundary. Recommend fresh session for VO-019–022 (grep-heavy surveys + Archived/ enumeration; current session context high after manifest build).
+
+## 2026-06-10 — Session end (M2 evidence session)
+
+Fresh session carried M2 from VO-011 through VO-017: keep-set manifest built (199 rows, 13 sections), all four evidence passes completed with recorded commands, zero unknown rows, and operator wholesale sign-off on all 21 no-evidence delete rows (+ FIF archival deferred, dns-recon delete approved). Two commits pushed (aa74ae72 manifest, 5808df55 sign-off). M2 remainder: VO-018–022 (fresh session), VO-016 (AS session-boundary timing).
+
+**Compound evaluation:** no new solutions doc. (1) skill-workflows orphan layer is a clean confirming instance of the existing Ceremony Budget Principle (capability added without consumer wiring → zero adoption) — evidence recorded in manifest + run-log, principle already constitutional. (2) Methodological note already recorded in VO-014 entry: prose-name grep over hyphenated-slug grep for activation evidence (slug grep under-matches by ~6x on overlays). (3) Cluster-row-with-explosion-rule worked on first use (schemas cluster split a2a/deliberation) — pattern stays manifest-local unless it recurs elsewhere.
+
+**Cost observation (model routing):** all judgment work (rubric assignment, supersession calls, evidence synthesis) on session model — appropriate throughout. All evidence gathering via direct Bash greps (mechanical, budget-exempt) — no skill invocations, no subagent dispatch, no external review spend. No routing adjustments indicated.
+
+**Session-report step:** attempted per protocol §2 (tess CLI) — see note below this entry for outcome; zombie-producer flag on session_reports.db write stands (retire/re-point decision lives at VO-025/B6 ceremony classification).
+
+*Session-report outcome: written successfully (tess CLI alive — session_id 20260610T214515f609183, row 18, sequence 3 for 2026-06-10). qmd update ran; inbox .processed empty; failure-log not warranted (clean session); code-review sweep + build verification skipped (no repo_path).*
