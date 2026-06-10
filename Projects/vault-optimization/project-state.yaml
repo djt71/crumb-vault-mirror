@@ -9,7 +9,7 @@ related_projects:
   - agentic-sunset
 # No repo_path: vault-only project — produces no code, only vault restructuring artifacts.
 # External repo gate explicitly skipped (vault-only software per CLAUDE.md §3b).
-active_task: VO-010
-next_action: "VO-010 in progress: ADR refresh per endorsed 4-point agenda + MC boundary-case decision → status: accepted. Then M2 evidence passes (VO-011+) in a fresh session. VO-031/032 blocked on Appendix A frozen + AS M6 sign-off (XD-027)."
+active_task: null
+next_action: "M1 complete (VO-010 done — ADR accepted, gate outcome proceed). Fresh session: M2 evidence passes starting VO-011 (manifest skeleton from regenerated baseline). M2 is read-only and parallel-safe with AS M3–M5; VO-016 (Appendix A freeze) needs AS concurrence timing. VO-031/032 blocked on Appendix A frozen + AS M6 sign-off (XD-027)."
 last_committed: 2026-06-10
 services: []

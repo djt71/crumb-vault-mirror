@@ -1,9 +1,9 @@
 ---
 type: reference
 domain: software
-status: proposed
+status: accepted
 created: 2026-05-15
-updated: 2026-05-15
+updated: 2026-06-10
 skill_origin: compound
 confidence: high
 tags:
@@ -15,6 +15,8 @@ related_projects:
   - tess-v2
   - feed-intel-framework
   - mission-control
+  - agentic-sunset
+  - vault-optimization
 supersedes:
   - "Implicit framing of Crumb as 'personal multi-agent OS'"
 informed_by:
@@ -29,7 +31,61 @@ topics:
 
 ## Status
 
-**Proposed.** Awaiting operator approval and optional external review (peer-review or deliberation).
+**Accepted** — 2026-06-10, operator sign-off via vault-optimization VO-010
+(decision-gate outcome: **proceed** — minor drift, no re-plan). The identity
+statement and tier model are ratified as written; the 2026-05-15 snapshot
+content below is refreshed by the Acceptance Refresh section, which prevails
+where they differ. Original text retained as provenance.
+
+## Acceptance Refresh (2026-06-10)
+
+Accepted thirteen days and one project after drafting: agentic-sunset ("AS")
+M1+M2 have executed most of Tier 3, and two operator decisions postdate the
+draft (aggressive deletion — git history is the archive; dashboard stack
+kept). Four refresh points:
+
+1. **Tier 3 is largely executed or AS-owned.** Tess plists, bridge wiring,
+   FIF pollers, Ollama: torn down in AS M1/M2. Remainder (CLAUDE.md diff,
+   `_openclaw`/`_tess`/`_staging` archival, skills + memory cleanup) is AS
+   M6/M7 scope per XD-027. This ADR ratifies the *category*; it does not
+   authorize work owned elsewhere.
+2. **Tier 2 is narrowed.** "Keep, dormant" predates the aggressive-deletion
+   decision and is superseded by it: the working tree retains only items
+   qualifying as **canonical-reference or compound-provenance** (the
+   vault-optimization VO-006 retention rule); everything else in the original
+   Tier 2 list lives in git history. Item-level dispositions belong to the
+   keep-set manifest (VO-002), not this ADR.
+3. **Mission Control: runtime shed, stripped dashboard kept** (operator
+   decision 2026-06-10, reconciling the original "shed" proposal with the AS
+   decision to keep the dashboard stack). MC-as-runtime-ops-manager is gone;
+   dashboard/vault-web/cloudflared survive as a knowledge-work viewing
+   surface. Individual panels face the VO-002 evidence rubric — dead runtime
+   panels (service health, queues) are stripped in vault-optimization.
+4. **Tier 1's skill enumeration is presumptive, not binding.** The tier
+   defines the *category* (knowledge-work skills stay); whether each of the
+   17 listed skills stays, merges, or goes is decided by the VO-002 evidence
+   rubric (SkillsBench: focused beats exhaustive).
+
+**Open questions, answered at acceptance:**
+1. *Feed intel scheduled aspect:* answered by events — pollers decommissioned
+   (AS); manual-drop/NotebookLM intake stays open (standing operator
+   feedback). Ratified.
+2. *Mission Control specifics:* refresh point 3 above.
+3. *Reactivation policy:* ratified as hypothesized — future scheduled
+   automation lives **outside Crumb** in a separate runtime that reads the
+   vault and never writes back. No in-vault automation re-entry without a new
+   ADR.
+4. *Tess memory entries:* ownership settled — AS-029 owns memory cleanup
+   (joint-surface contract, VO-002 Appendix A). Model-behavior memories
+   (Grok/Kimi fabrication records) are confirmed keeps — durable model
+   knowledge, actively in use (review-panel calibration watch). Ops memories
+   already flagged decommissioned pending AS-029 rewrite.
+
+**Implications addenda:** project closures (tess-v2, feed-intel-framework,
+mission-control phase changes) are AS-030–032 scope, not triggered by this
+acceptance. Liberation-directive references in CLAUDE.md are **not**
+Tess-specific (operator strategy, independent of the agentic layer) — they
+survive the CLAUDE.md rewrite.
 
 ## Decision
 
@@ -88,6 +144,7 @@ Three tiers, not a binary keep/shed:
 - Feed intel intake (`_openclaw/inbox/` as passive drop zone) and feed-pipeline skill (operator-triggered processing)
 
 **Tier 2 — Keep, Dormant (historical record, no further development)**
+*(Narrowed at acceptance — see Acceptance Refresh #2: working tree keeps only canonical-reference/compound-provenance items; the rest lives in git history.)*
 - Tess v2 specs, designs, run-logs, decision records, eval results
 - Feed intel framework project artifacts (specs, designs)
 - OpenClaw colocation spec and reference docs
@@ -96,6 +153,7 @@ Three tiers, not a binary keep/shed:
 - These do not decay if untouched and are valuable as compound-engineering provenance
 
 **Tier 3 — Remove (decaying operational surface)**
+*(Largely executed by agentic-sunset M1/M2 as of acceptance; remainder AS-owned — see Acceptance Refresh #1.)*
 - Tess v2 launchd services (~15 plists)
 - Bridge dispatch protocol active wiring (BRIDGE DISPATCH stage output, bridge queues)
 - Staging / promotion machinery for autonomous vault writes
@@ -120,7 +178,7 @@ The three ambiguous surfaces, each with proposed disposition and rationale. Oper
 
 ### 2. Mission Control Dashboard
 
-**Proposal:** Shed.
+**Proposal:** Shed. *(Adjusted at acceptance: runtime shed, stripped dashboard kept — see Acceptance Refresh #3.)*
 
 **Rationale:** Mission Control exists to manage runtime ops. If Crumb v3 has no runtime ops to manage, the dashboard is a solution without a problem. The audit-status JSON written by the audit skill (step 17) should be removed from the audit procedure when MC is decommissioned.
 
@@ -207,11 +265,11 @@ Each Pass 2 work item is its own decision and may warrant its own ADR or project
 
 For this ADR to be considered accepted:
 
-- [ ] Operator confirms the identity statement
-- [ ] Operator confirms or adjusts the three boundary case decisions (feed intel split, Mission Control shed, dispatch skills keep)
-- [ ] Operator confirms VAL disposition (close as superseded)
-- [ ] (Optional but recommended) External peer-review or deliberation pass on this ADR
-- [ ] Pass 2 work items scheduled (not necessarily executed) as separate projects or decisions
+- [x] Operator confirms the identity statement *(2026-06-10, VO-010 — ratified as written)*
+- [x] Operator confirms or adjusts the three boundary case decisions *(2026-06-10: feed intel split confirmed (pollers already gone); Mission Control adjusted — runtime shed, stripped dashboard kept; dispatch skills keep confirmed)*
+- [x] Operator confirms VAL disposition *(2026-06-10: VAL-001/002/003 closed as superseded)*
+- [x] External review *(satisfied indirectly: the ADR-as-baseline was reviewed by the 4-model panel twice — vault-optimization specification round 1 and action-plan round 1, both 2026-06-10; no direct ADR dispatch deemed necessary)*
+- [x] Pass 2 work items scheduled *(agentic-sunset AS-025–032 = CLAUDE.md revision + runtime/directory removal; vault-optimization VO-011–036 = skill/overlay pruning and the rest — both projects active with task-level gates per XD-027)*
 
 ## Open Questions for the Operator
 

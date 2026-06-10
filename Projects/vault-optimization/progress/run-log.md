@@ -189,3 +189,18 @@ Open questions status: Q1 answered by events (pollers gone, intake stays open); 
 - Context usage before checkpoint: moderate (~50-60% — long session: PLAN + TASK + review cycle). Proceed band; VO-010 is a light ADR-edit task. If IMPLEMENT continues past VO-010, prefer fresh session for M2 evidence passes
 - Action taken: none (proceed in-session for VO-010 only)
 - Key artifacts for IMPLEMENT phase: `tasks.md` (AC source), `_system/docs/adr-crumb-v3-knowledge-store-identity.md` (VO-010 target, in context), refresh agenda above
+
+## 2026-06-10 — VO-010 complete: v3 ADR accepted
+
+**Decision gate outcome: PROCEED** (minor drift — identity statement and tier model unchanged; snapshot content refreshed). **Operator sign-off: 2026-06-10** — analysis endorsed in-conversation ("great, pls proceed") + explicit MC boundary-case decision via question gate.
+
+**ADR edits** (`_system/docs/adr-crumb-v3-knowledge-store-identity.md`):
+- Frontmatter `status: proposed → accepted`, updated 2026-06-10, related_projects += agentic-sunset, vault-optimization
+- New **Acceptance Refresh (2026-06-10)** section (prevails over 2026-05-15 snapshot where they differ; original retained as provenance): (1) Tier 3 executed/AS-owned, (2) Tier 2 narrowed to canonical-reference/compound-provenance (aggressive-deletion supersedes "keep dormant"), (3) **MC: runtime shed, stripped dashboard kept** (operator decision — dashboard/vault-web/cloudflared survive as knowledge-work viewing surface; panels face VO-002 rubric), (4) Tier 1 skill enumeration demoted to presumptive — manifest owns item dispositions
+- All 4 open questions answered in the ADR (pollers-by-events / MC above / reactivation = outside-Crumb read-only runtime, no in-vault automation without new ADR / Tess memories = AS-029 ownership, model-behavior memories confirmed keeps)
+- All 5 acceptance boxes checked (external-review box satisfied indirectly — ADR-as-baseline panel-reviewed twice today; noted inline)
+- Inline annotations at Tier 2, Tier 3, and MC boundary case pointing to the refresh section
+
+**VAL disposition handoff:** VAL-001/002/003 closed as superseded by this acceptance; the `tess-harness-plan-tracking.yaml` file update rides with AS-030 (tess-v2 closures are AS-owned) — flagged here for the AS run-log.
+
+**VO-010 ACs:** all four pass (status accepted ✓, 5 boxes ✓, open questions answered ✓, gate outcome + sign-off this entry ✓). tasks.md updated to done. **Next: VO-011+ (M2 evidence passes) in a fresh session** — context moderate-high after PLAN+TASK+review+VO-010.
