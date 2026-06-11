@@ -4,7 +4,7 @@ type: system
 phase: IMPLEMENT
 last_gate: TASK-to-IMPLEMENT
 created: 2026-06-10
-updated: 2026-06-10
+updated: 2026-06-11
 related_projects:
   - tess-v2
   - tess-danny-migration
@@ -14,6 +14,6 @@ related_projects:
 # No repo_path: decommission project — produces no code, only teardown + vault artifacts.
 # External repo gate explicitly skipped (spec §Domain Classification).
 active_task: AS-016
-next_action: "AS-016 24h quiet verification due 2026-06-11 (~14:15 EDT): no Telegram, no alerts, keep-set green. Then M3 (AS-018/019 relabel + vault-health) and parallel M4/M5 tasks. M2 teardown complete 2026-06-10."
-last_committed: 2026-06-10
+next_action: "AS-016 RE-check due 2026-06-12 ~11:00 EDT (first check NOT GREEN: system-daemon ai.openclaw.gateway survivor — booted out + archived same day; healthchecks re-paused; clock restarted). Green → M3 (AS-018/019) on operator go-ahead. AS-022 enumeration already done (disable/archive of dormant tess+openclaw plists remains). Telegram briefing gap is expected — AS-023 is the replacement."
+last_committed: 2026-06-11
 services: []

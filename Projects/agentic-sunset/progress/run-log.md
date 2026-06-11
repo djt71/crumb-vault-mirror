@@ -183,3 +183,20 @@ Remaining schedulers for drive-sync: launchd 5am daily + post-commit hook (both 
 **Compound candidate (route at AS-032):** per-user launchctl sweeps miss system-domain daemons — teardown inventories must enumerate `/Library/LaunchDaemons` + `/Library/LaunchAgents` + every user's domain, not just the operating user's.
 
 **2026-06-11 ~11:15 EDT addenda:** (1) operator re-paused `tess-mac-studio-health` via UI — API-verified `status=paused`; (2) operator fixed archived gateway plist ownership (chown danny:staff). All AS-016 remediation items closed except the restarted 24h window itself. Quiet conditions now fully set: gateway dead, check paused, keep-set green.
+
+## 2026-06-11 — Session end
+
+**Session scope:** AS-016 first quiet check (NOT GREEN) → root-cause → same-day remediation: system-level `ai.openclaw.gateway` LaunchDaemon discovered (Telegram briefing + Discord bot still live), operator-executed bootout + archive, AS-022 enumeration pulled forward (both tess and openclaw users), healthchecks re-paused (API-verified), quiet clock restarted → due 2026-06-12 ~11:00 EDT.
+
+**Compound evaluation:** one insight recorded mid-session, queued for AS-032 routing: **per-user launchctl sweeps structurally miss system-domain daemons** — teardown inventories must enumerate `/Library/LaunchDaemons` + `/Library/LaunchAgents` + every user account's domain (this machine had three: danny, tess, openclaw). Candidate destination: `infrastructure-teardown-discipline.md` (existing-doc update, ask-first). Secondary observation, no routing needed: the quiet-check pattern worked exactly as designed — the 24h gate caught a survivor that point-in-time verification missed.
+
+**Session-end protocol notes:**
+- Amendment Z session report: skipped with reason — consumer (session_reports.db) decommissioned; protocol doc update queued in AS-028 (same skip as 2026-06-10 session).
+- Project state refreshed: next_action rewritten (was stale re: 14:15 due time), updated/last_committed → 2026-06-11.
+- Failure log: not warranted — clean session, first-check failure was the gate doing its job.
+- Code review sweep: no repo_path, no code changes (ops actions only — launchctl, file moves, API calls). N/A.
+- Build verification: no repo_path. N/A.
+- Model routing (cost observation): no skill invocations, no subagent delegation — entire session on session model (Fable 5) with direct tool calls; appropriate for live ops/diagnosis work. Token-notable: none (no large file loads; targeted reads only).
+- Operator interactions: sudo command execution (bootout/mv/chown), healthchecks UI re-pause, Telegram briefing receipt confirmation, 14:34 ping self-identification.
+
+**Next session:** "run the quiet check" (operator prompt, ~11:00 EDT 2026-06-12) → green → M3 (AS-018/019) on go-ahead.
