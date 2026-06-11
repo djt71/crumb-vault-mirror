@@ -151,3 +151,33 @@ Remaining schedulers for drive-sync: launchd 5am daily + post-commit hook (both 
 - qmd index updated; inbox .processed empty; failure log not warranted (clean session).
 
 **Next session:** run AS-016 quiet check (operator will prompt) → if green, M3 (AS-018/019) on operator go-ahead.
+
+## 2026-06-11 — AS-016 quiet check: NOT GREEN
+
+**Verdict: NO** (checked 10:39–10:50 EDT, ~20.4h into the 24h window — moot, two criteria already failed).
+
+**1. No Telegram traffic — FAIL (infrastructure live).** `openclaw-gateway` (node, PID 312) running under the separate `openclaw` user account since boot, with an ESTABLISHED TLS connection to 149.154.166.110:443 (Telegram DC range) and local listeners on 18789/18791. The M2 teardown swept only danny's gui domain; the `openclaw` user domain was never enumerated — AS-022 scoped only the `tess` user. Socket byte counts are keepalive-scale (rx 12.5KB/tx 2.4KB on current socket); operator to confirm phone-side silence. Danny-side evidence is clean: booted labels' logs end 14:04–14:12 EDT Jun 10 (watcher's final line is its own SIGTERM), ports 8080/11434 closed, no hermes/ollama processes.
+
+**2. No monitoring alerts — FAIL.** "DOWN | tess-mac-studio-health" email delivered 16:49 EDT Jun 10 (unread, Label_25). Chain: check paused 14:11 → stray ping 14:34:20 EDT auto-resumed it (healthchecks resumes paused checks on ping; manual_resume=false) → 15m period + 2h grace → down flip 16:49 → email. Check status now `down`. Pinger unidentified: not health-ping (dead 14:12, hourly at :04), not backup-status (no curl in script), not tess-v2 health-ping (last ran 14:04). **RESOLVED 2026-06-11: operator self-identified — Danny resumed the check via the healthchecks.io UI at ~14:34.** Alert chain was operator-induced, not a rogue component. Check still needs re-pausing.
+
+**3. Keep-set green — PASS.** 9/9 labels loaded, status 0 (cloudflared + vault-web running w/ PIDs; 7 scheduled). Zero scrapped labels in danny domain. Fresh 3 AM backup tarball (crumb-vault-2026-06-11_0300.tar.gz, 117MB) in iCloud.
+
+**Context finding:** machine rebooted Jun 10 12:47 EDT — *before* the 14:12 teardown, so current state is not a post-teardown reboot test; AS-021 still required. The reboot is how openclaw-gateway came up (RunAtLoad in the openclaw domain, presumably).
+
+**Minor:** backup-status.json false-negative (`vaultBackup: n/a` despite fresh tarball) — script can't list `~/Library/Mobile Documents` from launchd context (TCC). Fold fix into AS-019/M3 rework.
+
+**Remediation proposed (operator decision):** (1) expand AS-022 to enumerate + boot BOTH tess and openclaw user domains (sudo), disable+archive the gateway plist per standing decision; (2) identify the 14:34 pinger during that sweep; (3) re-pause healthchecks check after sweep; (4) restart 24h quiet clock. AS-016 remains in-progress; M3 stays gated.
+
+## 2026-06-11 — Gateway root cause + teardown (AS-016 remediation)
+
+**Root cause of survivor:** `/Library/LaunchDaemons/ai.openclaw.gateway.plist` — root-owned SYSTEM-level daemon (KeepAlive, RunAtLoad, UserName=openclaw, node gateway on 18789). All prior sweeps were per-user-domain; a system daemon is invisible to them. Its internal cron (`~openclaw/.openclaw/cron/jobs.json`, active — modified 10:02 today) was sending the Telegram morning briefing (operator confirmed receipt this morning); config also had a live Discord bot (mechanic-bot), both channels enabled.
+
+**Teardown (operator-executed via sudo, ~10:55 EDT):** `launchctl bootout system/ai.openclaw.gateway` + plist moved to `_system/archive/launchagents-retired/` (disable+archive per standing decision). Verified: zero gateway processes, ports 18789/18791 closed, zero Telegram DC sockets, /Library/LaunchDaemons clean of agentic plists. Archived plist still root-owned (chown arg got line-wrapped) — readable/committable, cosmetic fix pending. ⚠️ archived plist embeds BOOK_SCOUT_API_KEY verbatim (precedent: existing archived plists carry hc-ping URLs/token env refs; vault remote private; operator may rotate key if desired).
+
+**AS-022 enumeration pulled forward (sudo, both users):**
+- openclaw user domain (502): only Apple system services live. Dormant in `~openclaw/Library/LaunchAgents/`: `ai.openclaw.gateway.plist` (Mar 15 — newer than system copy) + `.disabled` variant. No GUI session → won't load unless openclaw logs in. Disable/archive action remains for AS-022.
+- tess user: no GUI session, agents dormant. `~tess/Library/LaunchAgents/` full inventory (24 plists) incl. agentic set: ai.hermes.gateway, ai.openclaw.×5, com.tess.llama-server, **com.tess.nemotron-load (previously unknown)**, com.tess.v2.×5, homebrew.mxcl.ollama, com.crumb.telemetry-rollup — resurrection risk on any tess GUI login. Disable/archive action remains for AS-022.
+
+**Quiet clock RESTARTED:** 24h window from 2026-06-11 ~10:55 EDT → re-check 2026-06-12 ~11:00 EDT. Expected state for green: no Telegram (briefing gap tomorrow is EXPECTED — gateway cron dead; AS-023 is the replacement), no alerts (operator to re-pause healthchecks check via UI), keep-set green.
+
+**Compound candidate (route at AS-032):** per-user launchctl sweeps miss system-domain daemons — teardown inventories must enumerate `/Library/LaunchDaemons` + `/Library/LaunchAgents` + every user's domain, not just the operating user's.

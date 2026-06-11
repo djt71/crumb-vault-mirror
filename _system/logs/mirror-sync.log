@@ -792,3 +792,4 @@
 2026-06-10 18:59:59 SYNC vault-optimization: operator decision batch — dns-recon keep (A2), no-history-rewrite final, D1 delete+remediate confirmed
 2026-06-10 19:01:38 SYNC chore: session-end log — vault-optimization M2 completion session close (VO-018–022, decision batch, compound eval, cost obs, session report)
 2026-06-10 19:37:07 SYNC vault-optimization: M3 VO-023/024 — B3/B4/B5 changeset packs drafted + approved (B5 exception: critic/writing-coach merges declined, 20 skills -> 17); manifest pending rows resolved (R1-R16, F5-F7); A11 cleanup list; 17 trigger-condition description rewrites; 2 linked gotchas
+2026-06-10 19:49:59 SYNC vault-optimization: M3 VO-025 — ceremony classification: 4 ceremonies, 31->21 mandatory steps proposed, zombie list (session_reports.db write + 2 textual), A10 metrics 21/21 consumer coverage; adjacent: dead FIF feed counter + 34-item inbox backlog flagged
