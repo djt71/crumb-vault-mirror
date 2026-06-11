@@ -355,3 +355,7 @@ Fresh session carried VO-023 + VO-024 end-to-end: 13 pending-doc skims via one r
 **VO-025 ACs:** all four pass (4 ceremonies classified ✓, every kept step names consumer/enforcer ✓, zombie list includes session_reports.db write ✓, metrics table ✓). tasks.md → done.
 
 **M3 status:** VO-023/024/025 done. Remaining for M3 close: VO-026 (B6 pack — **gated on AS-025**, classification input now ready) + M3-close drift diff (run at actual close, after VO-026). VO-016 (Appendix A freeze) still on AS session-boundary timing. No VO work unblocked beyond this point — project waits on AS gates.
+
+## 2026-06-11 — Adjacent item closed: feed backlog operator decision (discard)
+
+**Operator decision (logged from non-VO session for traceability):** The `_openclaw/inbox/` backlog flagged at VO-025 ("operator decision pending — process via feed-pipeline or discard") resolved: **discard**, per Danny during the liberation-directive v3 session. Executed 2026-06-11 — 22 `feed-intel-*` items deleted (flag counted 34 on 2026-06-10; 22 present at execution), inbox now empty. The startup-hook `feed_intel_inbox` counter fix (reads decommissioned FIF SQLite, permanently 0) remains a B6 candidate w/ AS-028 coordination — unchanged by this decision.
