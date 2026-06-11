@@ -15,6 +15,8 @@ tags:
 
 **Status:** Snapshot extracted from liberation-directive.md v1.1 (2026-03-19) on 2026-04-21. Preserved verbatim for later revision — surfaces, credit assumptions, and rollout details are frozen in time and likely stale. Do not treat this as a live architecture description; cross-check against current reality before acting on anything here.
 
+**Superseded (2026-06-11):** the live surface roster and policies now live in [[work-surfaces]]. This snapshot is historical provenance only.
+
 **Why extracted:** The liberation directive is a strategic directive — mission, priorities, prompts, metrics. System architecture (surfaces, models, connectors, credit budgets) doesn't belong in the same doc. Extracted pending a review that will decide what — if any — of this content should be rewritten, updated, or retired.
 
 ---

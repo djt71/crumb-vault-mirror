@@ -200,3 +200,19 @@ Remaining schedulers for drive-sync: launchd 5am daily + post-commit hook (both 
 - Operator interactions: sudo command execution (bootout/mv/chown), healthchecks UI re-pause, Telegram briefing receipt confirmation, 14:34 ping self-identification.
 
 **Next session:** "run the quiet check" (operator prompt, ~11:00 EDT 2026-06-12) → green → M3 (AS-018/019) on go-ahead.
+
+## 2026-06-11 — Operator decision (cross-project, work-surfaces session): inbox consolidation
+
+**Decision:** `_openclaw/inbox/` is **defunct** — the two-inbox era ends. `_inbox/` +
+inbox-processor is the single universal intake for all work surfaces; feed-type items,
+if they still arrive, become a classification inside inbox-processor, not a parallel
+pipeline. Standing feedback unchanged: intake stays deliberately open (no upstream
+strategic-fit filters).
+
+**Execution lands here:** AS-026 (archive `_openclaw/` — no need to spare inbox paths
+beyond dashboard-read items per existing inventory) and AS-028 (feed-pipeline
+retire/dormant call — consolidation strengthens the retire case). Decision record:
+`_system/docs/work-surfaces.md` § Intake (created this session, non-project), with the
+companion write-boundary ADR (`_system/docs/adr-vault-write-boundary.md`) sanctioning
+the AS-023 write path (`_system/daily/` is the first Class 1 drop zone — relevant to
+AS-023 substrate choice and design).
