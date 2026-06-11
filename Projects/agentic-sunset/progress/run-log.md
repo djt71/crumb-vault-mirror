@@ -181,3 +181,5 @@ Remaining schedulers for drive-sync: launchd 5am daily + post-commit hook (both 
 **Quiet clock RESTARTED:** 24h window from 2026-06-11 ~10:55 EDT → re-check 2026-06-12 ~11:00 EDT. Expected state for green: no Telegram (briefing gap tomorrow is EXPECTED — gateway cron dead; AS-023 is the replacement), no alerts (operator to re-pause healthchecks check via UI), keep-set green.
 
 **Compound candidate (route at AS-032):** per-user launchctl sweeps miss system-domain daemons — teardown inventories must enumerate `/Library/LaunchDaemons` + `/Library/LaunchAgents` + every user's domain, not just the operating user's.
+
+**2026-06-11 ~11:15 EDT addenda:** (1) operator re-paused `tess-mac-studio-health` via UI — API-verified `status=paused`; (2) operator fixed archived gateway plist ownership (chown danny:staff). All AS-016 remediation items closed except the restarted 24h window itself. Quiet conditions now fully set: gateway dead, check paused, keep-set green.
