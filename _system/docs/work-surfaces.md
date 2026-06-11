@@ -48,8 +48,8 @@ to the quarterly mission check: restart as the one intentional local viewing sur
 cut. Open-ended limbo is not an option.
 
 **Out, explicitly:**
-- **Perplexity (Comet + Computer)** — unused; dropped. Subscription cancellation is a
-  Track 1 action (banked dollars are liberation progress).
+- **Perplexity (Comet + Computer)** — unused; dropped. Subscription cancelled
+  (operator, 2026-06-11) — banked dollars are liberation progress.
 - **Channels (Telegram/Discord/iMessage into a live session)** — excluded on principle:
   requires a persistent always-on local session, which is standing infrastructure in
   platform clothing. Named here to prevent re-litigating.
@@ -166,17 +166,17 @@ an inbox category. All operator-triggered, all within the existing skill.
 
 ---
 
-## Verification List (before designing against either scheduler)
+## Verification List — COMPLETE (2026-06-11)
 
-April-era product claims are stale. Re-verify against current primary docs:
-
-1. Cowork scheduled-task mechanics (cadence floor, machine/app requirements, skipped-run
-   behavior, single-device lock status).
-2. Whether Cowork honors a folder's CLAUDE.md and hooks (vault-standards portability).
-3. Cowork's memory mechanism and what context it loads.
-4. Routines current capabilities (cadence floor, clone/PR write model, connector access).
-
-Results land in the AS-023 design, not here.
+All four items verified against current primary docs. Results:
+`Projects/agentic-sunset/design/scheduler-verification-2026-06.md`. Headlines: Cowork
+scheduled tasks confirmed (local, live filesystem, catch-up on wake) but Cowork does
+**not** read CLAUDE.md or fire lifecycle hooks — scheduled-task prompts must be
+self-contained; git pre-commit vault-check **does** fire on Cowork commits (the Class 3
+commit-boundary guard holds). Routines stable and unchanged, but cloud runs can't fire
+local git hooks — never enable "unrestricted branch pushes" for crumb-vault. Net: the
+Cowork-scheduled tilt for AS-023 strengthens; one pilot observation item remains
+(whether Cowork shares the Claude Code project memory directory).
 
 ---
 

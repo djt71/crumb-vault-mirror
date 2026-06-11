@@ -216,3 +216,16 @@ retire/dormant call — consolidation strengthens the retire case). Decision rec
 companion write-boundary ADR (`_system/docs/adr-vault-write-boundary.md`) sanctioning
 the AS-023 write path (`_system/daily/` is the first Class 1 drop zone — relevant to
 AS-023 substrate choice and design).
+
+## 2026-06-11 — Scheduler product verification complete (AS-023 input)
+
+**Work:** Re-verified April 2026 Cowork + Routines claims against current primary docs
+(two parallel research agents, primary-source citations). Artifact:
+`design/scheduler-verification-2026-06.md`. Verdict: Cowork-scheduled tilt for AS-023
+strengthens — live-vault write + vault-check fires on Cowork commits; but Cowork reads
+no CLAUDE.md and fires no lifecycle hooks, so the AS-023 task prompt must be
+self-contained. Routines: stable, but cloud runs can't fire local git hooks — operator
+guard: never enable "unrestricted branch pushes" for crumb-vault. Pilot observation
+item: whether Cowork shares the Claude Code project memory dir. Work-surfaces
+verification list marked complete. (Adjacent operator action: Perplexity subscription
+cancelled — roster doc updated.)
