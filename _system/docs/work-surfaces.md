@@ -159,8 +159,14 @@ an inbox category. All operator-triggered, all within the existing skill.
 
 - Don't run Crumb and Cowork on the same project simultaneously — same working tree,
   last-write-wins.
-- Binary artifacts follow the existing companion-note convention; the sweeping Crumb
-  session backfills where Cowork doesn't.
+- **Cowork sweep mechanism (Class 3):** detection is git itself — Cowork edits surface
+  as a dirty working tree, which every Crumb session sees at startup (harness git-status
+  snapshot + startup-hook `git pull`). Crumb triages foreign changes at session start
+  (frontmatter backfill, companion notes for binaries, run-log line); the session-end
+  commit then enforces mechanically — vault-check refuses the commit until frontmatter
+  is right. Companion notes are the one soft spot (caught by orphan sweep/audit on a
+  delay, not at commit). To close the window after a substantial Cowork session, end it
+  with "commit this" — git hooks fire for Cowork commits too.
 - Scheduled writers commit immediately with a recognizable prefix; the session-startup
   `git pull` absorbs their writes into the next Crumb session.
 

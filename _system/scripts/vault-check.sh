@@ -107,6 +107,27 @@ error() {
     ERRORS=$((ERRORS + 1))
 }
 
+# Frontmatter schema issues BLOCK at the commit boundary (pre-commit mode):
+# the commit gate is the convention guard for surfaces that don't load
+# CLAUDE.md (Cowork, scheduled writers — see adr-vault-write-boundary.md
+# guardrail #3). Full-scan mode stays warning-level so audits report
+# existing debt without blocking.
+fm_issue() {
+    if [ "$SCOPE" = "staged" ]; then
+        error "$1"
+    else
+        warn "$1"
+    fi
+}
+
+# Self-documenting guidance for whoever (or whatever) hit the gate.
+# $1 = the required field set for this file's path
+fm_guidance() {
+    echo "          required fields for this path: $1"
+    echo "          schema reference: _system/docs/file-conventions.md (\"YAML Frontmatter\" section)"
+    echo "          fix the frontmatter, then retry the commit"
+}
+
 # ============================================================================
 # SHARED: Robust frontmatter extraction
 #
@@ -193,27 +214,11 @@ check_frontmatter() {
             ;;
     esac
 
-    if ! has_frontmatter "$file"; then
-        warn "$relpath — no YAML frontmatter found"
-        FRONTMATTER_FILES_WITH_ISSUES=$((FRONTMATTER_FILES_WITH_ISSUES + 1))
-        FRONTMATTER_FILES_CHECKED=$((FRONTMATTER_FILES_CHECKED + 1))
-        return
-    fi
-
-    local frontmatter
-    frontmatter=$(extract_frontmatter "$file")
-
-    if [ -z "$frontmatter" ]; then
-        warn "$relpath — empty frontmatter block"
-        FRONTMATTER_FILES_WITH_ISSUES=$((FRONTMATTER_FILES_WITH_ISSUES + 1))
-        FRONTMATTER_FILES_CHECKED=$((FRONTMATTER_FILES_CHECKED + 1))
-        return
-    fi
-
     # Determine which fields are required for this file's location.
     # - _system/docs/: global files, project field is optional
     # - Projects/: directory location is authoritative per §4.1.6,
     #   so status is NOT required (active = in Projects/, archived = in Archived/Projects/)
+    # (Computed before the presence checks so failure guidance can name the set.)
     local required="$REQUIRED_FIELDS"
     case "$relpath" in
         Projects/*)
@@ -226,6 +231,25 @@ check_frontmatter() {
             required="type status created updated"
             ;;
     esac
+
+    if ! has_frontmatter "$file"; then
+        fm_issue "$relpath — no YAML frontmatter found"
+        fm_guidance "$required"
+        FRONTMATTER_FILES_WITH_ISSUES=$((FRONTMATTER_FILES_WITH_ISSUES + 1))
+        FRONTMATTER_FILES_CHECKED=$((FRONTMATTER_FILES_CHECKED + 1))
+        return
+    fi
+
+    local frontmatter
+    frontmatter=$(extract_frontmatter "$file")
+
+    if [ -z "$frontmatter" ]; then
+        fm_issue "$relpath — empty frontmatter block"
+        fm_guidance "$required"
+        FRONTMATTER_FILES_WITH_ISSUES=$((FRONTMATTER_FILES_WITH_ISSUES + 1))
+        FRONTMATTER_FILES_CHECKED=$((FRONTMATTER_FILES_CHECKED + 1))
+        return
+    fi
 
     local file_has_issues=0
     local missing_fields=""
@@ -251,8 +275,11 @@ check_frontmatter() {
     done
 
     if [ $file_has_issues -eq 1 ]; then
-        missing_fields="${missing_fields%, }"
-        warn "$relpath — missing required fields: $missing_fields"
+        if [ -n "$missing_fields" ]; then
+            missing_fields="${missing_fields%, }"
+            fm_issue "$relpath — missing required fields: $missing_fields"
+            fm_guidance "$required"
+        fi
         FRONTMATTER_FILES_WITH_ISSUES=$((FRONTMATTER_FILES_WITH_ISSUES + 1))
     fi
 
@@ -753,6 +780,8 @@ check_kb_tags() {
 
         if [ $found -eq 0 ]; then
             error "$relpath — non-canonical Level 2 kb tag: #kb/$level2 (full tag: #kb/$tag_path)"
+            echo "          canonical Level 2 tags: $CANONICAL_KB_TAGS"
+            echo "          new Level 2 tags require operator approval; Level 3 subtopics under an existing Level 2 are open"
             KB_TAGS_INVALID=$((KB_TAGS_INVALID + 1))
         fi
     done <<< "$kb_tags"
