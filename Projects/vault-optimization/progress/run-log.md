@@ -359,3 +359,21 @@ Fresh session carried VO-023 + VO-024 end-to-end: 13 pending-doc skims via one r
 ## 2026-06-11 — Adjacent item closed: feed backlog operator decision (discard)
 
 **Operator decision (logged from non-VO session for traceability):** The `_openclaw/inbox/` backlog flagged at VO-025 ("operator decision pending — process via feed-pipeline or discard") resolved: **discard**, per Danny during the liberation-directive v3 session. Executed 2026-06-11 — 22 `feed-intel-*` items deleted (flag counted 34 on 2026-06-10; 22 present at execution), inbox now empty. The startup-hook `feed_intel_inbox` counter fix (reads decommissioned FIF SQLite, permanently 0) remains a B6 candidate w/ AS-028 coordination — unchanged by this decision.
+
+## 2026-06-12 — VO-026 complete: B6 changeset pack drafted + approved (question gate)
+
+**Context inventory:** project-state + run-log tail + tasks.md VO-026/033 rows + design D5/B6 row + ceremony-classification.md (full — the pack's input) + the two target protocol docs (full — diff subjects) + inbox-processor SKILL.md §7-8 + session-startup.sh counter blocks (targeted reads). CLAUDE.md already in session context (post-AS-025 text). 5 project docs + 4 edit-target sources; no overlays; direct task execution under IMPLEMENT.
+
+**Correction at session start:** operator prompt said "proceed with VO-025" — tasks.md shows VO-025 done 2026-06-10 (stale memory pointer, fixed). Actual unblocked task: VO-026 (AS-025 gate cleared earlier today). Proceeded with operator intent.
+
+**Deliverable:** `design/changeset-b6-ceremony.md` — five items: B6-1 phase-gate procedure rewrite 11→6 (full replacement §Procedure + 11-row field-by-field checklist diff — the no-semantics-lost instrument; stale Frontend/Backend-Designer + design-summary-example refs fixed), B6-2 session-end rewrite 10→7 (zombie session report CUT-retire-not-repoint; 6b AKM residue deleted; .processed sweep cut; commit+push merged; 6a/6b numbering drift fixed), B6-3 inbox-processor §7+8 fold (B5-coordinated single edit), B6-4 CLAUDE.md second pass (one line: conditional commit & push), B6-5 session-startup.sh dead-counter sweep.
+
+**Ground-truth deltas incorporated (classification was 06-10; three AS events since):** AS-026 archived `_openclaw/` → step-8 cut rationale upgrades to "target dir gone", vault-gc comment fix mooted; AS-028 retired feed-pipeline outright → counter "re-point" option dead, remove is the only disposition; AS-025 applied → CLAUDE.md diff drafted against current text, freeze tag reduces to frozen-pending-operator-apply.
+
+**Scope expansion found at drafting (flagged in pack, put to operator):** classification named 1 zombie startup counter; verification grep found **6** counter blocks reading dead sources (`_openclaw/feeds/research`, `~/.tess/state/dispatch`, `_openclaw/research/output`, `_openclaw/inbox/brainstorm-*`, FIF pipeline.db, `~/.tess/state/z4-candidates`) — all emitting permanently-zero keys into every startup context.
+
+**Question gate (operator, in-conversation, 2026-06-12):** (1) B6-1..B6-4 **APPROVED as drafted**; (2) B6-5 **APPROVED at full six-counter sweep scope**. Approval recorded in pack header. Apply remains stop-and-ask per edit at VO-033 (VO-008 B6 batch).
+
+**VO-026 ACs:** all three pass (diff per protocol doc w/ rationale ✓; checklist diff field-by-field ✓; CLAUDE.md diff frozen, tagged, not applied ✓). tasks.md → done.
+
+**M3 status:** VO-023/024/025/026 done, all four packs (B3-B6) drafted AND approved. M3 close remaining: drift diff (run at actual close). VO-016 still on AS session-boundary timing. Apply batches (VO-031/032/033) follow M4 order.

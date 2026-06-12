@@ -4,12 +4,12 @@ type: system
 phase: IMPLEMENT
 last_gate: TASK-to-IMPLEMENT
 created: 2026-06-10
-updated: 2026-06-10
+updated: 2026-06-12
 related_projects:
   - agentic-sunset
 # No repo_path: vault-only project — produces no code, only vault restructuring artifacts.
 # External repo gate explicitly skipped (vault-only software per CLAUDE.md §3b).
 active_task: null
-next_action: "M3: VO-023/024/025 done (ceremony classification: 31->21 steps proposed, zombie list incl. session_reports.db write, A10 metrics recorded). ALL remaining VO work gated on AS: VO-026 (B6 pack) on AS-025; VO-016 (Appendix A freeze) on AS session boundary; M3-close drift diff runs after VO-026. Operator item pending: 34-item _openclaw/inbox/ feed backlog (process or discard)."
-last_committed: 2026-06-10
+next_action: "VO-026 done + APPROVED 2026-06-12 (B6 pack frozen: B6-1..4 as drafted, B6-5 full six-counter sweep; apply waits at VO-033). M3 close remaining: drift diff (run at actual close). VO-016 (Appendix A freeze) on AS session boundary; VO-031/032/033 apply batches follow. Feed-backlog operator item resolved 2026-06-11 (discarded)."
+last_committed: 2026-06-12
 services: []
