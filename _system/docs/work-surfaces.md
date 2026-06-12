@@ -4,7 +4,7 @@ domain: null
 status: active
 skill_origin: null
 created: 2026-06-11
-updated: 2026-06-11
+updated: 2026-06-12
 supersedes:
   - "_system/docs/liberation-surfaces-snapshot.md (April 2026 four-surface model)"
 related:
@@ -106,7 +106,7 @@ not hand-edited. Canonical knowledge originating anywhere but the vault is a def
 | Vault | Canonical, sole originator |
 | Claude Code memory dir | Collaboration memory + vault pointers (existing discipline; AS-029 owns cleanup) |
 | claude.ai project memory | Disposable cache, fed by projection (`claude-ai-context.md`); zero-loss if wiped |
-| Cowork memory | Same class as claude.ai, mechanics pending verification |
+| Cowork memory | Same class as claude.ai; standing conventions fed by projection ([[cowork-global-instructions]] → Cowork global-instructions setting); memory mechanics pending verification |
 | Glean | Foreign canonical store (employer's corpus) — not a cache, never projected into or from automatically |
 
 **Flow rules:** outbound = vault → regenerated projections. Inbound = operator-mediated
