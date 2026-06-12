@@ -332,3 +332,37 @@ updated: 2026-04-02
 3. Set up Midjourney account and run first Frankenstein/Odyssey test illustrations
 
 ---
+
+## 2026-06-12 — Drive reconciliation: Perplexity-Frankenstein work product imported
+
+**Context:** Project run-log was silent since 2026-04-07 and the June 10 audit flagged 64-day staleness. Danny confirmed substantial Title #1 work happened outside the vault during April, stored in Google Drive folder `Perplexity-Frankenstein` (Perplexity Computer work product). Full import executed this session.
+
+**What the off-vault work contains (April 1–20):**
+- Editorial pipeline essentially complete for Frankenstein: cleaned 1818 source text, structural outline (27 sections verified against Gutenberg #41445), 1818-vs-1831 textual comparison, readability assessment
+- Illustration design: illustration map (70KB), style direction brief (v1 + v2 — v2 adds greyscale-first design principle), Midjourney v7 test prompts (Apr 13)
+- Front matter drafted: Introduction, Note on This Edition, About Firekeeper Books
+- Assembled manuscript (431KB) + EPUB production guide
+- **Edition spec: 23 original illustrations** — cover, frontispiece, title-page vignette, 20 section openers
+- Drive `images/` folder created Apr 13, modified 2026-06-12 20:40 (currently empty via connector) — illustration generation is the active workstream, designated this session's work
+
+**Import mechanics:**
+- 12 docs fetched via claude.ai Drive connector (3 parallel subagents + 2 inline), Perplexity backslash-escaping normalized, frontmatter with `drive_file_id` provenance on every file
+- 2 large files (`frankenstein-1818-clean.md` 409KB, `06a-assembled-manuscript.md` 431KB) transferred byte-exact via `_inbox/` download — bodies verified byte-identical with `cmp` (model transcription rejected for source-text fidelity)
+- Pre-existing `01-competitive-intelligence.md` (imported earlier today) body unescaped to match
+- Numbering gaps preserved from source: no 02b, no 05x
+
+**Status implications (operator confirmation pending where noted):**
+- M-1 spike effectively passed (go) — implied by the April production push; never formally recorded
+- Phase 2 learning-plan equivalent (style development) progressed substantially off-vault; `ai-art-inventory.md` is stale (still shows Phase 1, Apr 7)
+- Illustration production (23-piece spec) is the current critical path for Title #1
+- Odyssey/Nolan timing (film July 17) needs a re-scope decision — flagged, not yet decided
+
+**Compound:** Off-vault work surfaces (Perplexity Computer) accumulate real project state invisible to vault staleness checks — the project looked dead while its editorial pipeline was being completed. The Drive folder pattern (`Perplexity-<title>`) is now a known surface; future status checks on this project should include a Drive-folder mtime probe before declaring staleness. Candidate connection to existing stale-project-drift observations (third recurrence noted in 2026-06-10 audit) — the "silence" in at least this case was off-vault activity, not pause.
+
+**Model routing:** Opus/Fable main session; 3 Sonnet-tier general-purpose subagents for parallel verbatim transcription (10 files, all passed completeness checks — pass quality, no rework).
+
+**Next:**
+1. Illustration generation work session (Drive `images/` folder) — designated this-session work
+2. Update `ai-art-inventory.md` to current phase reality
+3. Odyssey re-scope decision (film lands 2026-07-17)
+4. Commit imported artifacts
