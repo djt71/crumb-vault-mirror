@@ -377,3 +377,18 @@ Fresh session carried VO-023 + VO-024 end-to-end: 13 pending-doc skims via one r
 **VO-026 ACs:** all three pass (diff per protocol doc w/ rationale ✓; checklist diff field-by-field ✓; CLAUDE.md diff frozen, tagged, not applied ✓). tasks.md → done.
 
 **M3 status:** VO-023/024/025/026 done, all four packs (B3-B6) drafted AND approved. M3 close remaining: drift diff (run at actual close). VO-016 still on AS session-boundary timing. Apply batches (VO-031/032/033) follow M4 order.
+
+## 2026-06-12 — Early partial B3 apply (operator manual sweep) + reconciliation
+
+**Event:** At 16:29, during session-end, operator manually trashed 16 `_system/docs` + `_system/perplexity/` files via Obsidian — detected as unstaged deletions at the session-end commit's status check; deletion source identified via Trash forensics (all 16 present in ~/.Trash; `_system/docs` mtime 16:29:11). Operator confirmed deliberate cleanup at question gate.
+
+**Reconciliation against the approved B3 pack:**
+- **12 of 16 = approved B3 delete rows** → kept deleted, committed this entry: claude-ai-session-prompt (R2), code-setup-prerequisites, openclaw-colocation-spec (+summary), openclaw-crumb-reference, openclaw-memory-research, openclaw-skill-integration, vault-intake-overview-diagram (+.excalidraw), perplexity/ ×3.
+- **4 of 16 = B3 Constitutional KEEPS, restored** via `git restore`: crumb-v2-system-health-assessment (CLAUDE.md-cited), capture-tiers (R9 dependency), claude-code-ssh-setup, crumb-studio-migration (remediation target of the colocation deletion). Operator sweep used the B3 *filename pattern* memory, not the disposition list — keeps were collateral.
+- **Operator also deleted 89 `_system/daily/` daily-attention artifacts** (Mar–Jun) — not pack-scoped; Class 1 operational consumables, operator-owned, git history preserves; confirmed intentional at question gate, committed.
+
+**Remediations executed (per approved pack, early):** architecture/04-deployment ×2 + crumb-studio-migration ×3 colocation-spec refs → git-provenance citations; crumb-design-spec-v2-4 §integration-reference → git citation (order gate AS-029 verified done); claude-ai-session-prompt body folded into claude-ai-context.md as Appendix (R2 merge-into); canonical-taxonomy-sync-points memory: perplexity sync-point removed + dead `_openclaw/scripts/daily-attention.sh` sync-point removed (AS-026 archival).
+
+**B3 status:** PARTIALLY APPLIED EARLY (12 rows of the delete list + their remediations). Remainder of B3 (root-doc deletes incl. feed-intel-processing-chain, tess-crumb-*, R5/R6/R8/R9/R10 rows, solutions deletes, skill-workflows orphans, etc.) still applies at VO-031 batch open — **batch-open checks must treat these 12 rows as done** (changeset-staleness check will surface them; this entry is the provenance).
+
+**Compound candidate (first instance):** operator-manual applies happen out-of-band when delete lists live in operator memory — batch discipline assumed Claude executes; vault detected the divergence only via session-end status check + Trash forensics. If a second out-of-band apply occurs, propose: approved-pack summary view for operator (one page, keep/delete columns) so manual sweeps work from the disposition list, not recall.

@@ -14,7 +14,7 @@ topics:
 
 This section describes the physical hosting, process model, network topology, storage layout, credential management, and DNS configuration of the Crumb/Tess system.
 
-**Source attribution:** Synthesized from the design spec ([[crumb-design-spec-v2-4]] §7, §9), [[crumb-deployment-runbook]], [[crumb-studio-migration]], [[openclaw-colocation-spec]], LaunchAgent/LaunchDaemon plists in `_openclaw/staging/`, and live system state.
+**Source attribution:** Synthesized from the design spec ([[crumb-design-spec-v2-4]] §7, §9), [[crumb-deployment-runbook]], [[crumb-studio-migration]], the openclaw-colocation-spec (retired 2026-06-12, full text in git history at `_system/docs/openclaw-colocation-spec.md`), LaunchAgent/LaunchDaemon plists in `_openclaw/staging/`, and live system state.
 
 ---
 
@@ -337,7 +337,7 @@ Two deployment runbooks exist for different scenarios:
 | Crumb Deployment | `_system/docs/operator/how-to/crumb-deployment-runbook.md` | Fresh Crumb install on macOS. 8 phases: deps → Claude Code → Git → vault → shell → client → verify → enhancements | ~45 min (fresh), ~15 min (migration) |
 | Studio Migration | `_system/docs/crumb-studio-migration.md` | Full system migration including OpenClaw. 14 phases: system → brew → Python → Claude Code → Git → PAT → vault → config → OpenClaw user → permissions → Docker → services | ~2 hours |
 
-**OpenClaw colocation spec:** Full security architecture at `_system/docs/openclaw-colocation-spec.md` (67 KB). Covers the two-layer security model, vault access model, threat model (18 threats + mitigations), and hardening tiers.
+**OpenClaw colocation spec:** Retired 2026-06-12 (B3 disposition — OpenClaw runtime decommissioned by agentic-sunset). Full security architecture (two-layer security model, vault access model, 18-threat model + mitigations, hardening tiers) preserved in git history at `_system/docs/openclaw-colocation-spec.md`.
 
 ---
 

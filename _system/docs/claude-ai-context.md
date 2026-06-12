@@ -220,3 +220,23 @@ Start with run-logs (small, recent state) before specs (large, full design). Rea
 **Per-project:** `Projects/<name>/progress/run-log.md` (recent state) → `Projects/<name>/design/` (plans/specs).
 
 **Reference:** `_system/docs/operator/reference/` (skills-, overlays-, infrastructure-reference) · `_system/docs/solutions/` (compound patterns) · `_system/logs/session-log.md` (non-project history).
+
+## Appendix: Session Bootstrap Prompt (folded from claude-ai-session-prompt.md, retired 2026-06-12 per B3 R2)
+
+Paste this as the first message in a new claude.ai conversation (replace
+`<YOUR_PAT>` with the current fine-grained PAT):
+
+> Clone this repo and read the context file for orientation:
+>
+> ```
+> git clone https://djt71:<YOUR_PAT>@github.com/djt71/crumb-vault-mirror.git
+> cat crumb-vault-mirror/_system/docs/claude-ai-context.md
+> ```
+>
+> This is a read-only mirror of my vault's system artifacts. It contains
+> system docs, skill definitions, project specs, plans, and progress logs
+> — but no personal content or credentials. It auto-syncs from the main
+> vault on every commit.
+>
+> Note: `raw.githubusercontent.com` and `api.github.com` are blocked in
+> that compute environment. Use `git clone` via `github.com` instead.
