@@ -37,6 +37,8 @@ This is aggressive but feasible because: (a) M-1 spike and M0 design system appl
 
 **If the schedule slips:** Shipping the Odyssey in July or even early August still catches the wave. The search demand from a Nolan movie sustains for months, not days. Don't sacrifice quality for the deadline.
 
+> **Status note (2026-06-12):** The schedule above is historical — it was never executed. Current sequence: **M-1B local pipeline spike** (see spec §10) → M0 → M1 → M2, single-title focus on Frankenstein. All Odyssey milestones are gated on M0 passing with real hour data. M-1 concluded retroactively as Stop (purchases and competitive review completed; operator verdict: competition genuinely bad, gap confirmed; Midjourney failed the quality bar). Editorial pipeline for Frankenstein is complete — M1.1–M1.3 and the illustration map (M1.4, at 23 pieces, not 16–20) are effectively done via the April Perplexity work product. The live work is M1.5 (illustrations), pending the M-1B gate.
+
 ---
 
 ## M-1: Tool & Process Spike (Shared — applies to both titles)
@@ -137,7 +139,7 @@ Recommendation: use the 1818 text with a brief note explaining the choice. It di
 
 | # | Action | Owner | Done When |
 |---|--------|-------|-----------|
-| M2.1 | Publish to KDP — upload epub, cover, fill metadata, set pricing ($7.99). Royalty election: if USCO copyright registration is in place, select "I own the copyright" for 70%; otherwise select "public domain work" for 35%. Do NOT select "public domain" if registration is pending — that election is a one-way door. | Danny + Claude | Live on Amazon |
+| M2.1 | Publish to KDP — upload epub, cover, fill metadata, set pricing ($7.99). Royalty election: select "public domain work" at 35%. **The 70% path is closed** (spec §7, 2026-06-12) — do not attempt the "I own the copyright" election for primarily-PD titles. Complete the KDP AI-content disclosure during setup. | Danny + Claude | Live on Amazon |
 | M2.2 | Publish to Kobo Writing Life | Claude | Live on Kobo |
 | M2.3 | Publish to Google Play Books | Claude | Live on Google Play |
 | M2.4 | Publish to Apple Books for Authors (direct — D2D prohibits PD content) | Danny | Live on Apple Books |

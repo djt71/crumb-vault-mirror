@@ -10,6 +10,8 @@ updated: 2026-03-17
 
 M-1 prerequisite. Buy, read on actual Kindle device, and evaluate before touching any illustration tools.
 
+> **Status (operator report, 2026-06-12):** M-1.1 purchases were completed in April 2026 and the editions reviewed. **Verdict: the competitive work is genuinely bad** — the quality floor is even lower than this framework assumed, which strengthens the gap thesis. Per-edition written notes were not captured at the time; the deep market analysis lives in `title-01-frankenstein/01-competitive-intelligence.md` (Perplexity, April 2026). The Coulthart and Wrightson editions remain the quality benchmarks for the M-1B spike and M0 gate.
+
 ## Purchase List
 
 ### Must Buy

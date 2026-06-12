@@ -8,7 +8,7 @@ last_gate: CLARIFY-to-ACT
 created: 2026-03-17
 updated: 2026-06-12
 active_task: null
-next_action: "Title #1 illustration production — 23-piece spec (cover, frontispiece, vignette, 20 section openers); Drive images/ is the working surface. Generate against 03a-illustration-map + 03c-test-prompts. Then: update ai-art-inventory to current phase reality; Odyssey re-scope decision (Nolan film 2026-07-17). Editorial pipeline complete per 2026-06-12 Drive import — see run-log."
+next_action: "M-1B local pipeline spike (spec §10): Draw Things on Mac Studio, 2-3 scenes from 03a-illustration-map, 3-session budget, go/iterate/stop written to design/spike-findings.md. Time-log mandatory from session 1. Everything else gated: M0 on M-1B; all Odyssey milestones on M0 + hour data. 70% royalty closed; open AI disclosure adopted; spec updated 2026-06-12."
 last_committed: null
 related_projects:
   - opportunity-scout

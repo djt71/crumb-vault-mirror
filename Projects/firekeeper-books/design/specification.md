@@ -4,13 +4,13 @@ domain: creative
 type: specification
 skill_origin: null
 created: 2026-03-17
-updated: 2026-03-31
+updated: 2026-06-12
 ---
 
-# Wisdom Library — Phase 1 Specification
+# Firekeeper Books — Phase 1 Specification
 
 **Phase:** 1 — Premium Illustrated Ebook Editions
-**Classification:** Internal — Danny + Crumb/Tess
+**Classification:** Internal — Danny + Crumb
 **Parent research:** [[side-hustle-v7-public-domain-wisdom-library]]
 
 ---
@@ -23,7 +23,7 @@ Make foundational human expression — philosophy, fiction, drama, poetry — be
 
 ## 2. Phase 1 Scope
 
-Produce and publish beautifully designed, illustrated digital editions of public domain texts — spanning fiction, drama, poetry, and philosophy. Ebook only — audiobook and multilingual editions are deferred to Phase 2 and Phase 3 respectively. Fiction-first strategy: illustrations are the moat, and fiction maximizes that moat through concrete visual anchor points (characters, settings, dramatic scenes). First title is Frankenstein (1818 text), second is The Odyssey (timed to the Nolan film, July 17, 2026). The series identity and design system must accommodate all genres from the start.
+Produce and publish beautifully designed, illustrated digital editions of public domain texts — spanning fiction, drama, poetry, and philosophy. Ebook only — audiobook and multilingual editions are deferred to Phase 2 and Phase 3 respectively. Fiction-first strategy: illustrations are the moat, and fiction maximizes that moat through concrete visual anchor points (characters, settings, dramatic scenes). First title is Frankenstein (1818 text). The Odyssey is the planned second title, gated on the Frankenstein M0 outcome — the pre-release window for the Nolan adaptation (July 17, 2026) has passed; any Odyssey edition now targets the film's long tail (see §4a, §10). The series identity and design system must accommodate all genres from the start.
 
 ### In Scope
 
@@ -33,7 +33,7 @@ Produce and publish beautifully designed, illustrated digital editions of public
 - AI-generated original illustrations (10+ per title, KDP requirement)
 - Cover design (series-consistent, AI-generated with human art direction)
 - Ebook formatting and production (epub/mobi)
-- Publishing to KDP (Amazon), Kobo, Google Play, Apple Books (via aggregator) — **wide distribution from day one**
+- Publishing to KDP (Amazon), Kobo, Google Play, Apple Books (direct via Apple Books for Authors — D2D prohibits PD content) — **wide distribution from day one**
 - Marketplace optimization (metadata, categories, keywords, description)
 - **Launch marketing** — Goodreads presence, targeted Reddit engagement, landing page (scope TBD)
 - Sales tracking and validation metrics
@@ -71,6 +71,8 @@ Produce and publish beautifully designed, illustrated digital editions of public
 
 **Kill criteria:** If the first title generates <10 sales in 90 days with no review traction, the market hypothesis is invalidated at the current positioning. Reassess before investing in additional titles.
 
+**Marketing confound (added 2026-06-12):** Sales volume conflates product signal with distribution signal. Before reading <10 sales as product failure, verify that at least one discovery channel actually delivered impressions (category rank movement, page traffic, click data where available). A kill verdict requires distinguishing "nobody wants this" from "nobody saw this" — the latter is solvable and must not kill a viable product.
+
 ---
 
 ## 4. First Title: Frankenstein — Mary Shelley
@@ -103,13 +105,15 @@ Produce and publish beautifully designed, illustrated digital editions of public
 - Minimal footnotes (only where meaning is genuinely obscured)
 - About the series / catalog page at end
 
-**Target illustration count:** 16–20 (cover + chapter openers + key interior scenes). Exceeds KDP's 10-illustration minimum.
+**Target illustration count:** 23 — cover, frontispiece, title-page vignette, and 20 section openers spanning the Letters and all three volumes. Locked April 2026 in `title-01-frankenstein/04b-note-on-this-edition.md` and the assembled manuscript. Exceeds KDP's 10-illustration minimum.
+
+**Current state (2026-06-12):** The editorial pipeline is complete — clean 1818 source text (verified against Gutenberg #41445), structural outline, 1818-vs-1831 comparison, readability assessment, front matter (introduction, edition note, publisher page), assembled manuscript, and EPUB production guide, all in `title-01-frankenstein/` (imported from the Perplexity-Frankenstein Drive work product). Zero illustrations have been accepted. Illustration production is the sole critical path; see §5 and §10 (M-1B).
 
 ## 4a. Second Title: The Odyssey — Homer
 
 ### Why This Title
 
-- **Hard external deadline:** Christopher Nolan's Odyssey film releases July 17, 2026. Search demand will spike for months. Timing this edition to the cultural moment is free marketing.
+- **Cultural moment (revised 2026-06-12):** Christopher Nolan's Odyssey film releases July 17, 2026. The pre-release window is no longer reachable. The remaining opportunity is the film's long tail — theatrical run, post-release discussion, and the home-release bump later in the year. Production is gated on the Frankenstein M0 outcome (§10). Note: a PD-translation edition competes with in-copyright modern translations (Wilson, Fagles) for film-driven buyers, which caps the upside.
 - Naturally episodic — every book is a distinct visual set piece. Cyclops, Sirens, Scylla, Circe, Penelope at the loom. Possibly the single best PD text for an illustrated edition.
 - 24 books = 24+ natural illustration breakpoints.
 - Visual world (Mediterranean light, mythic scale, monsters and gods) is dramatically different from Frankenstein's gothic aesthetic — proves the series design system works across genres.
@@ -168,13 +172,14 @@ Works across philosophy, fiction, drama, poetry — not genre-specific. Simple, 
 - Each book's illustration should reflect its thematic content
 - **Must work across genres.** The style system must flex from gothic horror (Frankenstein) to mythic epic (Odyssey) to philosophy (future titles) without requiring a redesign. Fiction has stronger visual anchor points (characters, settings, action) which may actually be easier to illustrate consistently. The M-1 spike tests both Frankenstein and Odyssey scenes specifically to validate cross-genre coherence.
 
-**AI illustration tooling:** To be determined through M0 comparative evaluation. The spec does not lock into a single tool. Leading candidates as of March 2026:
+**AI illustration tooling (revised 2026-06-12):** The cloud-tool spike (Midjourney v7, April 2026) did not clear the operator's quality bar, and the metered, weakly-reproducible cloud loop fought systematic iteration. Strategy is now a **local generation pipeline** on Danny's Mac Studio (M3 Ultra, 96GB unified memory — comfortably in class for FLUX-tier and newer open models):
 
-- **Midjourney (V7):** Strongest option for stylized, artistic illustration. Style Reference feature enables locking an aesthetic across a series with minimal drift. Mature prompt ecosystem. Weakness: Discord-based workflow can be clunky; character consistency across scenes requires workarounds. $10–30/month.
-- **Google Nano Banana 2 (Gemini 3.1 Flash Image):** Launched February 2026. Strong character consistency (up to 5 characters maintained across a workflow), fast iteration, free through Gemini app. Particularly compelling for fiction titles where the same characters appear across multiple illustrations. Weakness: optimized more for photorealism than the timeless artistic styles this project requires. Less mature for tight art direction.
-- **DALL-E (via ChatGPT):** Conversational editing loop is low-friction. Good for iterative refinement. Weakness: character identity can drift across longer sequences; less stylistic range than Midjourney.
+- **Draw Things** (free, Apple-native, MLX-accelerated) — primary tool. Batch panel generation + curation, LoRA support, no Python stack.
+- **ComfyUI** — escalation path when ControlNet-grade composition control or automated multi-stage workflows are needed.
+- **Core workflow:** batch panels per scene → curate → style LoRA trained on the curated seed set for series-wide consistency → ControlNet/img2img/inpainting for composition control and refinement. Fixed seeds and parameter sweeps make iteration reproducible.
+- **Model selection** happens inside M-1B (FLUX-family, Qwen-Image, Z-Image-Turbo, SDXL-lineage candidates). **License check is mandatory at selection** — commercial-use terms vary across open-weight models.
 
-**M0 comparative evaluation:** Run the same 3–4 illustration prompts (covering both philosophical/abstract and narrative/scenic subjects) through all three tools. Evaluate against:
+**M0 evaluation criteria** (unchanged — applied to the local pipeline):
 
 1. **Timeless aesthetic** — Does it look like book illustration, or does it look like "AI art"? Hyperrealistic/oversaturated AI look is disqualifying.
 2. **Cross-illustration coherence** — Can the tool produce 4+ images that feel like they belong in the same book?
@@ -182,9 +187,9 @@ Works across philosophy, fiction, drama, poetry — not genre-specific. Simple, 
 4. **Character consistency** (for fiction titles) — Can the same character be recognizably maintained across scenes?
 5. **Prompt fidelity** — Does the tool follow specific compositional and stylistic instructions, or does it fight art direction?
 
-A combined workflow is also possible — e.g., Midjourney for style establishment, Nano Banana 2 for character consistency in fiction. M0 should test both single-tool and combined approaches.
+A hybrid workflow remains possible — e.g., the strongest April Midjourney outputs seeding the style-LoRA training set. M-1B tests the pure-local path first; hybrids only if it stalls.
 
-**Budget:** $10–30/month (Midjourney) + $0 (Nano Banana 2 via Gemini free tier) + $0 (DALL-E via existing ChatGPT). Total tooling cost remains minimal regardless of which tool wins.
+**Budget:** $0/month marginal (local generation on owned hardware). Cloud subscriptions can lapse unless the hybrid path needs them.
 
 **Critical risk:** Illustration consistency is the single highest technical risk in Phase 1. If none of the evaluated tools can produce a coherent visual series from a style guide and structured prompts, the entire value proposition collapses. M-1 spike provides initial signal; M0 is the hard gate.
 
@@ -196,16 +201,16 @@ A combined workflow is also possible — e.g., Midjourney for style establishmen
 
 | Step | Owner | Estimated Effort | Notes |
 |------|-------|-----------------|-------|
-| 1. Source text acquisition | Tess | <1 hour | Project Gutenberg download, clean text extraction |
-| 2. Text preparation | Tess + Danny review | 2–4 hours | Formatting cleanup, structure verification |
-| 3. Translation/editorial work | Danny + Tess assist | 2–8 hours (modern PD English) to 15–25 hours (archaic translation modernization) | **Critical path.** Effort depends on source text age and readability. Frankenstein (1818 English) needs light editorial; Odyssey translations vary widely. First title calibrates. |
+| 1. Source text acquisition | Crumb | <1 hour | Project Gutenberg download, clean text extraction |
+| 2. Text preparation | Crumb + Danny review | 2–4 hours | Formatting cleanup, structure verification |
+| 3. Translation/editorial work | Danny + Crumb assist | 2–8 hours (modern PD English) to 15–25 hours (archaic translation modernization) | **Critical path.** Effort depends on source text age and readability. Frankenstein (1818 English) needs light editorial; Odyssey translations vary widely. First title calibrates. |
 | 4. Introduction writing | Danny | 2–3 hours | Brief contextual intro (original content) |
-| 5. Illustration generation | Tess + Danny art direction | 6–10 hours | AI generation with iterative prompting for consistency |
-| 6. Cover design | Tess + Danny art direction | 2–4 hours | Series-consistent cover from template + title-specific art |
-| 7. Ebook formatting | Tess | 2–4 hours | Epub generation using Calibre/Sigil or Atticus |
+| 5. Illustration generation | Crumb + Danny art direction | 6–10 hours | Local pipeline (panels + style LoRA). Estimate unvalidated — Spike 1 produced zero accepted illustrations; M-1B recalibrates |
+| 6. Cover design | Crumb + Danny art direction | 2–4 hours | Series-consistent cover from template + title-specific art |
+| 7. Ebook formatting | Crumb | 2–4 hours | Epub generation using Calibre/Sigil or Atticus |
 | 8. Quality assurance | Danny | 2–3 hours | Full read-through on Kindle app, formatting check, illustration review |
-| 9. Marketplace listing | Tess + Danny review | 1–2 hours | Metadata, description, categories, keywords, pricing |
-| 10. Publishing | Tess | <1 hour | Upload to KDP, Kobo, Google Play, Apple (via aggregator) |
+| 9. Marketplace listing | Crumb + Danny review | 1–2 hours | Metadata, description, categories, keywords, pricing |
+| 10. Publishing | Crumb | <1 hour | Upload to KDP, Kobo, Google Play, Apple (via aggregator) |
 
 **Estimated total per title:** 25–45 hours (first title; range reflects Haines vs Long translation choice + design system setup). Subsequent titles lower as templates stabilize and translation pace is known.
 
@@ -215,14 +220,14 @@ A combined workflow is also possible — e.g., Midjourney for style establishmen
 
 ### Pipeline Automation Targets
 
-After the first title is produced with Tess assistance, identify which steps can be further automated:
+After the first title is produced with Crumb assistance, identify which steps can be further automated:
 
 - Text acquisition and cleanup: highly automatable
-- Translation modernization assist: semi-automatable (Tess drafts suggestions, Danny decides)
-- Illustration generation: semi-automatable (Tess generates, Danny approves)
+- Translation modernization assist: semi-automatable (Crumb drafts suggestions, Danny decides)
+- Illustration generation: semi-automatable (Crumb generates, Danny approves)
 - Cover design from template: highly automatable once template exists
 - Ebook formatting: highly automatable once template exists
-- Marketplace listing: semi-automatable (Tess drafts, Danny reviews)
+- Marketplace listing: semi-automatable (Crumb drafts, Danny reviews)
 
 **Target steady-state for titles 4+:** 15–20 hours per title, primarily translation, art direction, and QA.
 
@@ -232,17 +237,19 @@ After the first title is produced with Tess assistance, identify which steps can
 
 ### Platform Priority
 
-| Platform | Priority | Royalty | Notes |
+| Platform | Priority | PD Royalty (verified Apr 2026) | Notes |
 |----------|----------|---------|-------|
-| Direct (firekeeperbooks.com) | Highest margin | ~95% via Payhip (~$7.59 net) | Direct upload. Highest per-sale revenue. |
-| KDP (Amazon) | Primary volume | 35% for PD content (~$2.80 at $7.99) | Direct upload. No KDP Select. 70% if USCO registration accepted. |
-| Kobo Writing Life | Secondary | 70% (~$5.59) | Direct upload. Strong international (190+ countries). |
-| Google Play Books | Secondary | 52% (~$4.15) | Direct upload. Smaller market but growing. |
-| Apple Books for Authors | Secondary | 70% (~$5.59) | Direct upload (NOT via D2D — see below). |
+| Direct (firekeeperbooks.com via Payhip) | Highest margin | ~95% minus payment fees (~$7.06 net) | Requires audience — pairs with build-in-public strategy. |
+| Google Play Books | Best retail channel | 70% — no PD penalty found (~$5.59) | 2× Amazon's per-sale revenue. |
+| Apple Books for Authors | Secondary | ~45% for PD (~$3.60) | Direct upload (NOT via D2D — see below). |
+| KDP (Amazon) | Discovery volume | 35% for PD content (~$2.80) | Worst margin, biggest market. No KDP Select. |
+| Kobo Writing Life | Presence only | 20% for PD (~$1.60) | Brutal PD rate — publish for completeness, don't invest. |
 
-**Distribution model:** Wide from day one. No KDP Select. **Wide-first, not Amazon-first.** The 35% KDP royalty for public domain content makes Amazon the worst-paying channel. Revenue mix target: 50% KDP / 15% direct / 15% Kobo / 10% Apple / 10% Google. Blended per-sale: ~$4.02 (35% KDP) or ~$5.30 (if 70% KDP achieved).
+Royalty corrections per the April 2026 competitive-intelligence research (`title-01-frankenstein/01-competitive-intelligence.md` §5) — the original spec assumed standard 70% rates on Kobo/Apple; PD-specific rates are materially worse.
 
-**KDP 35% PD restriction:** KDP restricts public domain content to 35% royalty. "The 70% royalty option is for in-copyright works only." Escape hatch: substantial original content (16+ illustrations, original introduction, editorial adaptation) may qualify as derivative work eligible for 70%. Requires USCO copyright registration ($65, 3–11 months processing) and selecting "I own the copyright" at upload. **Title #1 launches at 35%. 70% is a Title #2 play** once USCO registration is in place. See `title-01-frankenstein/research/` for detailed findings.
+**Distribution model:** Wide from day one. No KDP Select. **Wide-first, not Amazon-first.** The 35% KDP royalty for public domain content makes Amazon the worst-paying channel. Revenue mix target: 50% KDP / 15% direct / 15% Google / 15% Apple / 5% Kobo. Blended per-sale: ~$3.90 at $7.99.
+
+**KDP 35% PD restriction — 70% path closed (decided 2026-06-12):** KDP restricts works "consisting primarily of public domain content" to 35% royalty. The previously-considered escape hatch (USCO registration + "I own the copyright" election) is rejected: a full-length PD novel with illustrations and brief apparatus is *primarily* public domain on any honest reading; USCO registration of AI-generated illustrations is itself doubtful (human-authorship requirement); and a flagged election risks delayed or blocked publication. **All primarily-PD titles elect 35%, permanently.** The wide-first channel mix is the margin strategy, not a royalty workaround. See `title-01-frankenstein/01-competitive-intelligence.md` §5 and `title-01-frankenstein/research/` for findings.
 
 **KDP Select rationale:** KDP Select's promotional tools would juice numbers in ways that contaminate the validation signal. KU reads count as "sales" but represent fundamentally different buyer behavior. Going wide produces cleaner data, avoids 90-day exclusivity lock-in, and tests multi-platform viability immediately.
 
@@ -348,9 +355,14 @@ Self-employment income. Consult accountant for quarterly estimated tax obligatio
 
 Legally ambiguous. AI-generated illustrations may not be copyrightable under current US Copyright Office guidance, which means limited IP protection for the visual identity. The brand, series consistency, and curation are the moat, not individual image copyrights.
 
-### KDP AI Disclosure
+### AI Disclosure Posture (decided 2026-06-12)
 
-Required during title setup. Confidential — not shown to customers. Not a friction point.
+**Open disclosure.** Two layers:
+
+1. **KDP disclosure** — required during title setup, confidential to Amazon. Mechanical.
+2. **Public front-matter disclosure** — the Note on This Edition states plainly that the illustrations were made with AI tools under sustained human art direction (`title-01-frankenstein/04b-note-on-this-edition.md`). The half-quiet route is incompatible with a brand whose core wedge is honesty (genuine 1818 text vs. competitors' false claims). "Commissioned" language removed from the publisher page (2026-06-12).
+
+**Marketing implication:** Do not market into AI-hostile communities (r/books, r/horrorlit) without the disclosure leading; expect and absorb some backlash there. Build-in-public documentation of the craft — art direction, curation, refinement — is the aligned channel: it converts the disclosure from a liability into proof of work.
 
 ---
 
@@ -372,6 +384,23 @@ Required during title setup. Confidential — not shown to customers. Not a fric
 - Document tool workflow, prompting patterns, and quality observations per tool
 
 **Gate criteria:** Go = at least 3 of 6 illustrations feel like they belong together AND are clearly better than competitive review. Iterate = promising but needs refinement. Stop = tools can't produce what we need.
+
+**M-1 outcome (recorded retroactively 2026-06-12):** Prerequisites were completed in April — competitive ebooks purchased and reviewed; operator verdict: the existing competition is genuinely bad, confirming the gap thesis and a lower quality floor than assumed. Midjourney testing did not clear the operator's quality bar; no gate decision was recorded at the time and the project stalled ~10 weeks. Retroactive verdict: **Stop** on the cloud-tool approach. Superseded by M-1B.
+
+### M-1B: Local Pipeline Spike (added 2026-06-12)
+
+**Goal:** Determine whether the local generation pipeline (§5) can produce illustrations that clear the operator's quality bar at acceptable time cost. This is a bounded spike with a kill criterion — not an open-ended learning project.
+
+**Setup:** Draw Things on the Mac Studio (M3 Ultra, 96GB). Candidate models pulled and license-checked at session 1.
+
+**Method:** 2–3 scenes from `title-01-frankenstein/03a-illustration-map.md` (suggested: the creation, Arctic ice, the creature in the Alps — the M-1 scenes, for comparability). Adapt `03c-test-prompts.md` from Midjourney syntax. Batch panels per scene → curate → iterate. Benchmark every session against the Coulthart and Wrightson editions, not against other AI output.
+
+**Budget: 3 logged sessions (~6–9 hours).** Time-log entries are mandatory from session 1 — per-title hour data is the number the whole catalog thesis depends on.
+
+**Gate (written decision in `design/spike-findings.md`):**
+- **Go** = ≥3 images across ≥2 scenes that feel like one book AND that Danny would put his name on at $7.99. Proceed to M0 (style LoRA + design prototype).
+- **Iterate** = clear trajectory toward the bar. At most 2 further sessions, then a final go/stop — no second iterate.
+- **Stop** = the bar isn't reachable at acceptable effort. Trigger strategic rethink: (a) human-illustrator pivot — different cost model, likely print-first/crowdfunded business shape; or (b) archive with editorial assets banked (the 1818 edition work retains value for any future path). An illustration-light edition is NOT a fallback — it abandons the moat and re-enters the commodity tier.
 
 ### M0: Design Prototype (Frankenstein-focused, series-portable)
 
@@ -402,7 +431,9 @@ If these criteria are not met, production does NOT proceed.
 - Marketplace listings prepared (KDP, Kobo, Google Play, Apple Books, firekeeperbooks.com)
 - Launch marketing materials prepared
 
-### OD-Pre: Odyssey Pre-Production (runs parallel with Frankenstein M1)
+### OD-Pre: Odyssey Pre-Production (GATED — decision after Frankenstein M0)
+
+**Gating note (2026-06-12):** All OD milestones are frozen until the Frankenstein M0 gate passes and real per-title hour data exists. The pre-film window has passed; see §4a.
 
 **Deliverables:**
 - Translation selected (Butler, Pope, Cowper, or Lawrence) with rationale documented
@@ -428,7 +459,7 @@ If these criteria are not met, production does NOT proceed.
 
 ### OD-M2: Odyssey Published
 
-**Target:** Late June 2026 (3–4 weeks before film). Acceptable: anytime before end of July.
+**Target:** Superseded (2026-06-12). If the post-M0 decision is go, target the film's long tail — late theatrical window through home release.
 
 **Deliverables:**
 - Live on all platforms + direct sales
@@ -454,8 +485,8 @@ The catalog spans fiction, drama, poetry, and philosophy. The unifying principle
 
 | # | Title | Author | Edition | Status | Notes |
 |---|-------|--------|---------|--------|-------|
-| 1 | Frankenstein | Mary Shelley | 1818 text (PD) | **In production** | Fiction-first strategy. Gothic aesthetic, strong visual anchor points. |
-| 2 | The Odyssey | Homer | Translation TBD (Butler, Pope, Cowper, or Lawrence) | **Pre-production** | Timed to Nolan film (Jul 17, 2026). 24 books, epic visual potential. |
+| 1 | Frankenstein | Mary Shelley | 1818 text (PD) | **M-1B illustration spike** — editorial complete | Fiction-first strategy. Gothic aesthetic, strong visual anchor points. |
+| 2 | The Odyssey | Homer | Translation TBD (Butler, Pope, Cowper, or Lawrence) | **Gated on M0** | Pre-film window passed; targets film long tail if greenlit. 24 books, epic visual potential. |
 
 ### Next Candidates (post-validation)
 
@@ -542,18 +573,24 @@ When choosing the next title to produce, evaluate against:
 | 10 | Scope | Fiction-first. Frankenstein → Odyssey → catalog expansion. Meditations deferred (Stoicism shelf saturated). | §1, §2, §4, §11 |
 | 11 | Validation threshold | Lowered from 75 to 30–40 sales (Business Advisor flag: false negatives from insufficient distribution). | §3 |
 | 12 | LLC timing | Deferred to post-M3 validation. | §9 |
+| 13 | Illustration count (Title #1) | **23** — cover, frontispiece, title-page vignette, 20 section openers. Locked in front matter + assembled manuscript. | §4 |
+| 14 | KDP 70% royalty election | **Closed (2026-06-12).** All primarily-PD titles elect 35%, permanently. Wide-first channel mix is the margin strategy. | §7 |
+| 15 | AI illustration tooling | **Local pipeline** (Draw Things primary, ComfyUI escalation) after the Midjourney spike failed the quality bar. M-1B is the bounded re-spike. | §5, §10 |
+| 16 | AI disclosure posture | **Open disclosure** — public front-matter statement + KDP disclosure. Honesty positioning requires it. | §9 |
+| 17 | Odyssey timing | Pre-film window passed. All OD milestones gated on Frankenstein M0 + hour data. | §4a, §10 |
 
 ### Remaining Open Items
 
 | # | Item | Status | Owner |
 |---|------|--------|-------|
 | A | ~~Register `firekeeperbooks.com` + verify USPTO Class 016/041~~ | **DONE.** Domain registered 2026-03-18. USPTO clear — no live marks in Class 016 or 041. | Danny |
-| B | Odyssey translation comparison: Butler vs. Pope vs. Cowper vs. Lawrence | To do during OD-Pre | Danny + Tess |
+| B | Odyssey translation comparison: Butler vs. Pope vs. Cowper vs. Lawrence | To do during OD-Pre | Danny + Crumb |
 | C | Michigan LLC formation timing | Decide before M2 | Danny |
-| D | AI illustration tool evaluation | M-1/M0 deliverable | Danny + Tess |
-| E | Launch marketing scope | Define during M1 | Danny + Tess |
-| F | USCO copyright registration for Frankenstein edition | Start after M1, before Title #2 | Danny |
-| G | KDP 70% royalty election — pursue for Title #2 (Odyssey) once USCO reg in hand | Post-USCO | Danny |
+| D | ~~AI illustration tool evaluation~~ | **Superseded by M-1B local spike** (§10, 2026-06-12) | Danny + Crumb |
+| E | Launch marketing scope | Define during M1 | Danny + Crumb |
+| F | ~~USCO copyright registration for Frankenstein edition~~ | **Dropped 2026-06-12.** Registration served the 70% election, which is closed. Revisit only if infringement protection becomes a real concern. | Danny |
+| G | ~~KDP 70% royalty election for Title #2~~ | **Closed 2026-06-12** — see §7. No primarily-PD title pursues 70%. | — |
+| H | Model license verification for commercial use (chosen local model) | M-1B session 1 | Danny + Crumb |
 
 ---
 

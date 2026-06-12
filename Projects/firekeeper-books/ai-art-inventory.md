@@ -5,42 +5,42 @@ type: reference
 skill_origin:
 status: active
 created: 2026-04-07
-updated: 2026-04-07
+updated: 2026-06-12
 tags:
   - learning-plan-tracker
   - ai-art
-  - midjourney
 ---
 
 # AI Art Learning Plan Inventory
 
-Trackable commitments for the [[ai-art-learning-plan]]. This is the **behavior layer** — see the plan doc for the meaning layer (skill classification, phase goals, anti-pattern study, philosophy, resources).
+Trackable commitments for the [[ai-art-learning-plan]]. This is the **behavior layer** — see the plan doc for the meaning layer. Pattern: [[behavior-vs-meaning-in-routine-design]].
 
-This file gets rewritten at each phase transition. Items below reflect the **current active phase** of the plan. Pattern: see [[behavior-vs-meaning-in-routine-design]].
+This file gets rewritten at each phase transition. Items below reflect the **current active phase**.
 
 ## Current Phase
 
-**Phase 1: Tool Fluency & Anti-Pattern Recognition** — Apr 2 to Apr 8 (1 day remaining as of 2026-04-07).
+**M-1B: Local Pipeline Spike** — started 2026-06-12, budget 3 logged sessions (~6–9 hours). See spec §10 for the full gate definition.
 
-**Sprint context (2026-04-07):** The plan was rediscovered on Apr 7 after being unexecuted for the first 5 days of Phase 1. Running Phase 1 as a compressed 1-2 day sprint (Apr 7-8) rather than the original 6-day window. Phase 2 starts on original schedule (Apr 8) regardless — best-effort execution on Phase 1 activities in the remaining window, with the understanding that the Phase 1 goal (10-15 experimental illustrations) may not fully land. This is the first real test of the plan-tracking system surfacing drift; see [[behavior-vs-meaning-in-routine-design]].
+**Context:** The original Phase 1/2 plan (Midjourney) stalled in April — the tool never cleared Danny's quality bar. The plan's tool assumptions are superseded: local generation (Draw Things on the Mac Studio, batch panels + style LoRA) replaces cloud prompting. The learning goal is unchanged — art direction aptitude and a style system worthy of the edition — but the practice loop is now panels-and-curation, not prompt-and-pray. The 2026-04-07 compressed-sprint entry stands as the record of the first drift detection; this rewrite is the second.
 
-Aligns with M-1 tool spike. Phase 2 (Style Development & Art Direction) starts Apr 8 and runs through Apr 14 — see [[ai-art-learning-plan]] for details.
+## Spike Sessions (M-1B)
 
-## Recurring (Phase 1)
+- **Session 1:** Draw Things install + candidate models pulled (license-checked for commercial use — open item H) + first batch panels on scene 1 (the creation). Log hours in `progress/time-log.md` under a new M-1B heading. — [cadence: once]
+- **Session 2:** Batch panels scenes 2–3 (Arctic ice, creature in the Alps) using adapted `03c` prompts; curate keepers; note what's working against the Coulthart/Wrightson bar. — [cadence: once]
+- **Session 3:** Refinement pass on best candidates (img2img/inpaint); write go/iterate/stop decision to `design/spike-findings.md`. — [cadence: once]
 
-### Daily
-- Midjourney parameter experimentation session (~30 min — pick one parameter family per session: `--ar`, `--stylize`, `--weird`, `--chaos`, `--sref`) — [cadence: daily]
+## Per-Session Discipline (every session)
 
-### Weekly
-- Anti-pattern study session (one focused 30-60 min review of "obviously AI" failure modes, with notes captured in vault) — [cadence: weekly]
-- First test illustrations (target 2-3 across both Frankenstein and Odyssey worlds before phase ends) — [cadence: weekly]
-- Reference image curation (build the seed pool for Phase 2 `--sref` work) — [cadence: weekly]
+- Time-log entry (start/stop) — the catalog thesis depends on this number
+- Save keeper candidates + their generation settings (model, seed, params) — reproducibility is the point of going local
+- One-line benchmark verdict: closer to or further from the Coulthart/Wrightson bar than last session?
 
 ## Phase Transition Watch
 
-- **2026-04-08:** Phase 1 → Phase 2 transition. Phase 2 = Style Development & Art Direction (Apr 8-14). Goal: 5-8 prototype illustrations clearing the M0 gate.
-- At transition: rewrite this file with Phase 2 items. Carry any Phase 1 items still in flight into a "Carry-Forward from Phase 1" section.
+- **Gate decision after session 3** (hard stop — iterate verdict buys at most 2 more sessions, once).
+- On **Go**: rewrite this file for M0 (style LoRA training + design prototype items).
+- On **Stop**: rewrite this file as closed; spike findings feed the strategic rethink.
 
 ## Carry-Forward
 
-- (empty — items that roll across daily artifacts will surface here once attention-manager has been reading this file for a few days)
+- Anti-pattern study (from Phase 1): the "obviously AI" failure-mode eye matters *more* with open disclosure — curation quality is the public proof of work.

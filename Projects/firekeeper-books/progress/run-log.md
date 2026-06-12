@@ -366,3 +366,41 @@ updated: 2026-04-02
 2. Update `ai-art-inventory.md` to current phase reality
 3. Odyssey re-scope decision (film lands 2026-07-17)
 4. Commit imported artifacts
+
+## 2026-06-12 — Project sanity check + spec realignment (same session, continued)
+
+**Context:** Before starting illustration work, Danny requested a top-to-bottom project sanity check. Full artifact review: spec, spec-summary, action plan, competitive review framework, Perplexity competitive intelligence, time-log, imported production assets.
+
+**Sanity check findings (full assessment delivered in session):**
+1. **Core verdict:** Bones good (real gap, sound channels, editorial complete); the project structurally avoided its existential question — illustration capability — for 10 weeks while completing all non-moat work. Front matter committed to 23 illustrations before one existed.
+2. **70% royalty path closed.** Tension between 2026-03-19 insight (USCO registration → 70%) and the deeper April research ("primarily PD" test + AI-illustration registrability doubts) resolved in favor of: 35% permanently, wide-first mix is the margin strategy.
+3. **Honesty trap found and fixed:** publisher page claimed illustrations "commissioned specifically for that edition"; zero AI disclosure existed in front matter — incompatible with the honesty-wedge positioning.
+4. **Odyssey pre-film window gone** (film 2026-07-17); PD translations also compete with Wilson/Fagles for film buyers.
+5. Channel royalty table in spec was stale vs. April research (Kobo 70%→20% PD, Apple 70%→~45%, Google 52%→70%).
+6. Time-log empty since creation — per-title hour data (the catalog-thesis number) never collected.
+
+**Operator decisions (all four recommendations accepted):**
+1. Local-AI pivot: M-1B bounded spike (Draw Things, Mac Studio M3 Ultra/96GB, panels + style LoRA workflow)
+2. AI disclosure: open posture — public front-matter disclosure + KDP disclosure
+3. Spec amendments: proceed
+4. Bank editorial work; nothing else touched until gate passes
+PLUS: spec updated to current state; M-1.1/M-1.2 confirmed complete (operator report: competitive work reviewed, "genuinely bad" — gap thesis strengthened; per-edition notes not captured at the time).
+
+**Changes executed:**
+- `design/specification.md` — major revision (updated: 2026-06-12): title fixed (Wisdom Library → Firekeeper Books), Tess → Crumb throughout; §2 Odyssey gated; §3 marketing-confound note on kill criteria; §4 count 23 + current-state block; §4a film window reframed; §5 tooling rewritten for local pipeline; §6 illustration estimate flagged unvalidated; §7 PD royalty table corrected + 70% closed + mix retargeted (blended ~$3.90); §9 AI disclosure posture; §10 M-1 retroactive Stop + new M-1B spike with 3-session budget and kill criterion + OD gating; §11 statuses; §13 resolved 13–17, open items D/F/G closed, H added (model license check)
+- `design/specification-summary.md` — regenerated (source_updated: 2026-06-12)
+- `design/action-plan.md` — M2.1 royalty election corrected (35%, AI disclosure step added); status note marking schedule historical + current sequence
+- `design/competitive-review.md` — M-1.1/M-1.2 completion + operator verdict recorded
+- `title-01-frankenstein/04c-about-firekeeper-books.md` + manuscript copy — "commissioned" → "created"
+- `title-01-frankenstein/04b-note-on-this-edition.md` + manuscript copy — AI disclosure paragraph added (human art direction, honesty rationale)
+- `ai-art-inventory.md` — rewritten for M-1B (3 spike sessions, per-session discipline incl. time-log + benchmark verdict)
+- `project-state.yaml` — next_action = M-1B spike
+
+**Compound:** (1) "The moat is the part that doesn't exist" — projects under quality-bar pressure complete tractable peripheral work while the critical-path capability stalls unexamined; gates that aren't formally closed get silently routed around. Detection signal: deliverables referencing outputs that don't exist yet (front matter promising 23 illustrations). Candidate pattern for `_system/docs/solutions/` — second observation needed. (2) Positioning-integrity check: when a brand's wedge is honesty, audit ALL customer-facing language against it ("commissioned" was one word, one Goodreads thread away from brand damage). (3) Research supersession: when later deeper research contradicts an earlier compound insight (70% royalty), the spec must pick one — carrying both invites the wrong election at publish time.
+
+**Model routing:** Opus/Fable main session throughout — interactive sanity check + spec surgery, not delegable. WebSearch (2 queries) for 2026 local-gen landscape verification.
+
+**Next:**
+1. M-1B session 1: Draw Things install, model pull + license check (open item H), first panels on "the creation" scene
+2. Adapt `03c-test-prompts.md` Midjourney syntax → FLUX/SD natural language (Crumb task, before or during session 1)
+3. Gate decision in `design/spike-findings.md` after session 3
