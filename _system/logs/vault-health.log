@@ -1,0 +1,5 @@
+2026-06-12T16:00:26Z vault-check: exit=1 errors=0 warnings=82
+2026-06-12T16:00:26Z git-status: clean=false 13 uncommitted file(s)
+2026-06-12T16:00:26Z stale-projects: count=4 customer-intelligence, firekeeper-books, think-different, semuta
+2026-06-12T16:00:26Z OK: wrote health notes to /Users/danny/crumb-vault/_system/logs/vault-health-notes.md
+2026-06-12T16:00:26Z OK: warnings only — written to health notes

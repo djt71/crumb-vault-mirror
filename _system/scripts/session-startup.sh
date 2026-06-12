@@ -23,6 +23,19 @@ else
     echo ""
 fi
 
+# --- Step 1b: backup retention prune (agentic-sunset AS-018 fold-in) ---
+# launchd can't list the iCloud backup dir (TCC), so the prune inside
+# vault-backup.sh is a no-op when run from launchd. This hook runs in the
+# user GUI context, which can list it — retention lives here instead.
+BACKUP_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/crumb-backups"
+PRUNE_LIST=$(ls -t "$BACKUP_DIR"/crumb-vault-*.tar.gz 2>/dev/null | tail -n +31) || true
+if [ -n "$PRUNE_LIST" ]; then
+    PRUNE_COUNT=$(echo "$PRUNE_LIST" | wc -l | tr -d ' ')
+    echo "$PRUNE_LIST" | while IFS= read -r f; do rm -f "$f"; done
+    echo "--- backup prune: removed $PRUNE_COUNT tarball(s) beyond 30 ---"
+    echo ""
+fi
+
 # --- Step 2: vault-check.sh ---
 # SKIPPED at startup -- vault-check runs on every commit via pre-commit hook.
 # Running it here added ~26s to startup (bash YAML parsing across 100+ files).

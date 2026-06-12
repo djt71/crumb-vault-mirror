@@ -229,3 +229,54 @@ guard: never enable "unrestricted branch pushes" for crumb-vault. Pilot observat
 item: whether Cowork shares the Claude Code project memory dir. Work-surfaces
 verification list marked complete. (Adjacent operator action: Perplexity subscription
 cancelled — roster doc updated.)
+
+## 2026-06-12 — AS-016 quiet check (re-run): GREEN ✅
+
+**Verdict: YES** (checked 11:38 EDT, ~24.7h into the restarted window from 2026-06-11 ~10:55 EDT).
+
+**1. No Telegram traffic — PASS.** Zero gateway/hermes/ollama processes; zero sockets to Telegram DC ranges (149.154.*, 91.108.*); ports 18789/18791/8080/11434 closed; `/Library/LaunchDaemons` clean of agentic plists. Operator confirmed phone-side silence — no morning briefing (gap is the expected green state; AS-023 is the replacement), no other messages since teardown.
+
+**2. No monitoring alerts — PASS.** healthchecks.io API (read-only `hcr_` key from dashboard plist env): `tess-mac-studio-health` status `paused`, last_ping unchanged at 2026-06-10T18:34:20Z (the known operator UI-resume) — nothing pinged it during the window, so no stray pinger remains. Gmail (dturner71@gmail.com, same account that received the Jun 10 DOWN email): zero healthchecks messages after 2026-06-11. Note: google-workspace MCP auth expired mid-check; degraded to claude.ai Gmail connector, which was verified able to see healthchecks mail (Jun 10 DOWN email visible).
+
+**3. Keep-set green — PASS.** 9/9 labels loaded, status 0: cloudflared (PID 684) + vault-web (PID 689) running; drive-sync, qmd-index, system-stats, vault-gc, vault-rebuild, tess.backup-status, tess.vault-backup scheduled. Zero scrapped labels in danny domain. Fresh 3 AM tarball `crumb-vault-2026-06-12_0300.tar.gz` in iCloud crumb-backups.
+
+**Procedure note:** deliberately did NOT touch the hc-ping URL — a GET pings the check and auto-resumes a paused check (yesterday's alert-chain mechanism). Status verified via management API only.
+
+**AS-016 → done.** M3 (AS-018/019) now unblocked, pending operator go-ahead. AS-020/023/025 also ungated.
+
+## 2026-06-12 — M3 execution: AS-018 swap + AS-019 vault-health rebuild
+
+**Context inventory:** tasks.md (M3 rows), action-plan.md §M3, teardown-design.md Phase C + §3, archived `ai.openclaw.vault-health.plist` (schedule/env reference), `vault-backup.sh`, `backup-status.sh`, `_openclaw/scripts/{vault-health.sh,cron-lib.sh}`. Operator go-ahead given after AS-016 GREEN.
+
+**AS-018 — backup relabel (swap complete, scheduled-fire confirmation pending):**
+- New plists `com.crumb.vault-backup` (3 AM, +PATH/HOME env) and `com.crumb.backup-status` (900s, RunAtLoad, +env) written to `~/Library/LaunchAgents/`.
+- Old `com.tess.*` pair: bootout + disable + plists moved to `_system/archive/launchagents-retired/`.
+- New labels bootstrapped; `launchctl list` shows both at status 0, zero `com.tess.*` remaining anywhere in danny domain.
+- Kickstart verification: `com.crumb.vault-backup` ran end-to-end via launchd → `crumb-vault-2026-06-12_1150.tar.gz` (129M) created. **First scheduled 3 AM fire confirms tomorrow** (AS-031 soak also covers).
+- **TCC false-negative FIXED** (folded in per 2026-06-11 note): `vault-backup.sh` now writes marker `_system/logs/vault-backup-last.json` (filename/epoch/size) after each successful run; `backup-status.sh` falls back to the marker when the iCloud dir listing comes up empty under launchd. Verified: `backup-status.json` now reports `vaultBackup: ok` from launchd context (was `n/a` for months).
+- **New finding:** the retention prune in `vault-backup.sh` (`ls -t | tail +31 | xargs rm`) is ALSO blind under launchd TCC — pruning has silently never run from launchd ("Backups retained: 0" in every log). Currently harmless: 11 tarballs / 968M (cadence gaps kept it under the 30 cap). Hardened: script now logs an explicit WARNING when the listing fails instead of a misleading count. Real fix needs a user-context prune (e.g. session-start hook) or an FDA grant — operator decision, deferred. `timeMachine: unknown` in backup-status is the same TCC class, pre-existing, untouched.
+
+**AS-019 — vault-health rebuild: DONE ✓**
+- `cron-lib.sh` git-mv'd `_openclaw/scripts/` → `_system/scripts/lib/`, de-agented: kill-switch `_system/state/maintenance` (was `~openclaw/.openclaw/`), metrics `_system/logs/ops-metrics.jsonl`, last-run `_system/state/last-run`, locks `/tmp/crumb-cron-locks`. Public API unchanged.
+- New `_system/scripts/vault-health.sh`: same three checks (vault-check, git status, stale project-state 14d), log-only — Telegram delivery stripped; findings → `_system/logs/vault-health-notes.md` (removed when clean), log → `_system/logs/vault-health.log`. Pull model per design §3.
+- New `com.crumb.vault-health` plist (nightly 2 AM, PATH/HOME env, WorkingDirectory vault) bootstrapped.
+- Acceptance verified: label loaded (status 0); launchd-context run exit 0 (metrics: success, 414s wall — note: vault-check full scan uses ~70% of the 600s wall-time budget; bump if vault grows); both scripts grep fully clean for telegram/openclaw.
+- First real run produced notes: 82 warnings / 0 errors (venv .md junk under tess-v2, run-log rotation candidates, archived-brief broken links — known full-scan noise; much of it disappears at AS-026 archive).
+
+**Keep-set is now 10 labels** (9 + com.crumb.vault-health), matching the design end-state modulo com.crumb.dashboard (deliberately stopped). M4 (AS-020/021/022) and AS-023/024/025 remain.
+
+**2026-06-12 addendum — retention prune fix (operator-approved, AS-018 fold-in):** prune moved to `session-startup.sh` (new Step 1b) — the hook runs in user GUI context where the iCloud dir lists fine, so no FDA grant needed. Same keep-30 policy; silent when nothing to prune. `vault-backup.sh`'s own prune left in place as a harmless second path, its zero-count message downgraded to a NOTE pointing at the hook. Verified: keep-4 dry-run selects the 7 oldest correctly, keep-30 selects 0, full hook exits 0. Drift bound: a long no-session gap accumulates extra tarballs until the next session start prunes back to 30 — acceptable.
+
+## 2026-06-12 — AS-020/023/024/025: breadcrumbs, decline, migration doc, CLAUDE.md surgery
+
+**Context inventory:** tasks.md, teardown-design.md (Phase D dir list, §2 reversibility, §4 replacement table), service-inventory.md (per-service "what it was"), CLAUDE.md (grep sweep), teardown-design frontmatter pattern.
+
+**AS-020 — DONE ✓:** README-ARCHIVED.md written to all 7 runtime locations (`~/.hermes`, `~/openclaw/{feed-intel-framework, opportunity-scout, crumb-tess-bridge, x-feed-intel, book-scout}`, `~/crumb-apps/tess-v2`), each with what/why/restore/date, grep-verified. Restore paths point at the git-tracked plist archive; gateway-cron consumers (FIF, scouts) note the system-domain sudo restore path; book-scout README repeats the BOOK_SCOUT_API_KEY rotation flag. `~/openclaw/crumb-dashboard` and `~/openclaw/semuta` correctly excluded (live).
+
+**AS-023 — DONE ✓ (decline):** operator declined a scheduled daily-attention replacement — on-demand only via attention-manager skill. Decline documented per acceptance (here + upstream-migration.md). Reversal is one-line: schedule can be created anytime; skill and artifact unchanged.
+
+**AS-024 — DONE ✓:** `design/upstream-migration.md` written — all 5 functions from design §4 mapped (daily-attention→declined/on-demand, monitors→dropped, feed intel→Claude.AI pull, Telegram→push-notifications/Gmail MCP, research→deep-research skill), parity gaps accepted (no unattended freshness, no briefing, no digests), reversal paths noted.
+
+**AS-025 — DONE ✓ (high-risk, diff-approved):** operator approved removing the Bridge Dispatch Stage Output section from CLAUDE.md; applied; greps clean for bridge-dispatch/dispatch-stage. Deliberately retained: `~/openclaw/[project-name]/` code-dir convention (live — semuta) and Phase-3 "dispatch manifest" (Sonnet-delegation handoff, unrelated). Protocol doc archival itself stays in AS-028. vault-check exercises at next commit.
+
+**Remaining:** AS-021/022 (operator-assisted: reboot test, sudo dormant-plist sweep) → AS-026 (vault `_openclaw/` archive) → AS-027/028/029 → AS-030 closeouts → AS-031 soak → AS-032. AS-018 3 AM fire confirms tomorrow.

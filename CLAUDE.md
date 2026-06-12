@@ -215,9 +215,6 @@ Steps: (1) log with compound evaluation, (2) failure-log if session went poorly 
 - Conditional commit: log-only delta → lightweight commit; substantial delta → flag to user; no changes → skip.
 References: spec §6, §4.8.
 
-## Bridge Dispatch Stage Output
-When running as a dispatch stage (system prompt says "BRIDGE DISPATCH"), load and follow `_system/docs/protocols/bridge-dispatch-protocol.md` for stage output JSON.
-
 ## External Tools
 - **MarkItDown:** CLI for binary-to-markdown conversion. Used by inbox-processor skill
   and inline attachment protocol. Invocation: `markitdown <filepath>`. See spec §7.9.

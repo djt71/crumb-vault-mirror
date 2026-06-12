@@ -13,25 +13,36 @@ BACKUP_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/crumb-backups"
 
 timestamp=$(date -u +%Y-%m-%dT%H:%M:%SZ)
 
-# Vault backup: find latest file
+# Vault backup: find latest file. Direct listing fails under launchd (TCC blocks
+# ~/Library/Mobile Documents) — fall back to the marker vault-backup.sh writes.
+MARKER="$VAULT_ROOT/_system/logs/vault-backup-last.json"
 vault_file="null"
 vault_age="null"
 vault_status="\"n/a\""
+latest=""
+mtime="0"
 if [ -d "$BACKUP_DIR" ]; then
   latest=$(/bin/ls -1t "$BACKUP_DIR" 2>/dev/null | grep '^crumb-vault-.*\.tar\.gz$' | head -1)
   if [ -n "$latest" ]; then
-    vault_file="\"$latest\""
     mtime=$(stat -f '%m' "$BACKUP_DIR/$latest" 2>/dev/null || echo "0")
-    now=$(date +%s)
-    age_hours=$(( (now - mtime) / 3600 ))
-    vault_age="$age_hours"
-    if [ "$age_hours" -gt 48 ]; then
-      vault_status="\"error\""
-    elif [ "$age_hours" -gt 26 ]; then
-      vault_status="\"warn\""
-    else
-      vault_status="\"ok\""
-    fi
+  fi
+fi
+if [ -z "$latest" ] && [ -f "$MARKER" ]; then
+  latest=$(sed -n 's/.*"latestFile": *"\([^"]*\)".*/\1/p' "$MARKER")
+  mtime=$(sed -n 's/.*"epoch": *\([0-9]*\).*/\1/p' "$MARKER")
+  mtime=${mtime:-0}
+fi
+if [ -n "$latest" ] && [ "$mtime" -gt 0 ]; then
+  vault_file="\"$latest\""
+  now=$(date +%s)
+  age_hours=$(( (now - mtime) / 3600 ))
+  vault_age="$age_hours"
+  if [ "$age_hours" -gt 48 ]; then
+    vault_status="\"error\""
+  elif [ "$age_hours" -gt 26 ]; then
+    vault_status="\"warn\""
+  else
+    vault_status="\"ok\""
   fi
 fi
 

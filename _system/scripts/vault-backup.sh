@@ -23,11 +23,24 @@ tar -czf "$BACKUP_DIR/$FILENAME" -C "$(dirname "$VAULT")" "$(basename "$VAULT")"
 if [ $? -eq 0 ]; then
     SIZE=$(du -h "$BACKUP_DIR/$FILENAME" | cut -f1)
     echo "✅ Backup complete: $FILENAME ($SIZE)"
-    
-    # Prune old backups — keep last 30
+
+    # Marker for backup-status.sh — launchd context can't list the iCloud dir (TCC),
+    # so status falls back to this file when the directory listing comes up empty
+    MARKER="$VAULT/_system/logs/vault-backup-last.json"
+    printf '{"latestFile": "%s", "epoch": %s, "sizeBytes": %s}\n' \
+        "$FILENAME" "$(date +%s)" "$(stat -f '%z' "$BACKUP_DIR/$FILENAME")" > "$MARKER"
+
+
+    # Prune old backups — keep last 30. Under launchd this listing is blocked
+    # (TCC on the iCloud dir) and the prune is a no-op; the session-startup
+    # hook runs the same prune from user context as the reliable path.
     ls -t "$BACKUP_DIR"/crumb-vault-*.tar.gz 2>/dev/null | tail -n +31 | xargs rm -f 2>/dev/null
     REMAINING=$(ls "$BACKUP_DIR"/crumb-vault-*.tar.gz 2>/dev/null | wc -l | tr -d ' ')
-    echo "   Backups retained: $REMAINING"
+    if [ "$REMAINING" -eq 0 ]; then
+        echo "   NOTE: dir listing blocked (launchd TCC) — prune deferred to session-start hook"
+    else
+        echo "   Backups retained: $REMAINING"
+    fi
 else
     echo "ERROR: Backup failed" >&2
     exit 1

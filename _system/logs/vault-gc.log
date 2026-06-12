@@ -608,3 +608,7 @@
 [vault-gc] watcher.log: truncated 6 lines (kept last 1000)
 [vault-gc] ops-metrics.jsonl: truncated 54 lines (kept last 1000)
 [vault-gc] done: 14 files purged, 6 logs truncated
+[vault-gc] data/scout-digests: purged 1 files older than 30d
+[vault-gc] data/sidecar: purged 1 files older than 30d
+[vault-gc] feeds/digests: purged 1 files older than 30d
+[vault-gc] done: 3 files purged, 0 logs truncated

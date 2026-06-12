@@ -1,30 +1,24 @@
 #!/usr/bin/env bash
-# cron-lib.sh — Shared infrastructure for all Tess operational cron jobs
+# cron-lib.sh — Shared infrastructure for Crumb launchd jobs
 #
-# Sources:
-#   tess-operations chief-of-staff spec §13 (kill-switch)
-#   tess-operations chief-of-staff spec §11 (per-job token budgets)
-#   tess-operations action-plan M0.4 (ops metrics), M0.5 (cron guardrails)
+# Relocated from the bridge-layer scripts dir 2026-06-12 (agentic-sunset
+# AS-019); legacy agent paths repointed to _system/. Originally built for
+# tess-operations (kill-switch §13, token budgets §11, ops metrics M0.4).
 #
 # Usage:
-#   source "/Users/danny/crumb-vault/_openclaw/scripts/cron-lib.sh"
-#   cron_init "morning-briefing" --wall-time 900
+#   source "/Users/danny/crumb-vault/_system/scripts/lib/cron-lib.sh"
+#   cron_init "vault-health" --wall-time 600
 #   # ... do work ...
-#   cron_set_tokens 1500 800
-#   cron_set_cost "0.03"
 #   cron_finish 0
 
 set -eu
 
 # === Constants ===
 readonly VAULT_ROOT="/Users/danny/crumb-vault"
-readonly OC_HOME="/Users/openclaw"
-readonly OC_CONFIG_DIR="$OC_HOME/.openclaw"
-readonly BRIDGE_DIR="$VAULT_ROOT/_openclaw"
-readonly KILL_SWITCH_FILE="$OC_CONFIG_DIR/maintenance"
-readonly LOCK_DIR="/tmp/openclaw-cron-locks"
-readonly METRICS_LOG="$BRIDGE_DIR/logs/ops-metrics.jsonl"
-readonly LAST_RUN_DIR="$BRIDGE_DIR/state/last-run"
+readonly KILL_SWITCH_FILE="$VAULT_ROOT/_system/state/maintenance"
+readonly LOCK_DIR="/tmp/crumb-cron-locks"
+readonly METRICS_LOG="$VAULT_ROOT/_system/logs/ops-metrics.jsonl"
+readonly LAST_RUN_DIR="$VAULT_ROOT/_system/state/last-run"
 
 # === Internal State ===
 _CRON_JOB_ID=""
@@ -40,7 +34,7 @@ _CRON_INITIALIZED=false
 _CRON_FINISHED=false
 
 # === Kill-Switch ===
-# Checks for ~/.openclaw/maintenance file. Exits 0 if in maintenance.
+# Checks for _system/state/maintenance file. Exits 0 if in maintenance.
 # Can be called standalone (e.g., from heartbeat entry points).
 check_kill_switch() {
     if [[ -f "$KILL_SWITCH_FILE" ]]; then

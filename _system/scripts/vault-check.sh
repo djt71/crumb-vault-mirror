@@ -2217,7 +2217,7 @@ check_wikilinks() {
         _system/docs/crumb-design-spec*) return 0;;
         */reviews/*) return 0;;
         .claude/skills/*/SKILL.md) return 0;;
-        _openclaw/state/vault-health-notes.md) return 0;;
+        _system/logs/vault-health-notes.md) return 0;;
     esac
 
     # Extract wikilinks outside of code blocks.
