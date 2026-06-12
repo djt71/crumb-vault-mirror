@@ -14,6 +14,6 @@ related_projects:
 # No repo_path: decommission project — produces no code, only teardown + vault artifacts.
 # External repo gate explicitly skipped (spec §Domain Classification).
 active_task: AS-021
-next_action: "2026-06-12 mega-sweep: AS-016 GREEN + AS-019/020/023(decline)/024/025/026/028/029 done. Next session (2026-06-13): confirm AS-018 (3 AM tarball via com.crumb.vault-backup + backup-status.json ok) and AS-027 (tree clean after full scheduler cycle). Then operator-assisted AS-021 reboot test + AS-022 dormant-plist sudo sweep → AS-030 closeouts → AS-031 soak → AS-032. Dashboard intel live-render check deferred to dashboard restart (AS-026 verified at code level)."
-last_committed: 2026-06-11
+next_action: "AS-022 done 2026-06-12 (both users' dormant plists archived, secrets redacted). Remaining: AS-021 reboot test (operator, end-of-day — last human-gated item) → 2026-06-13 session opener: confirm AS-018 (3 AM tarball via com.crumb.vault-backup + backup-status.json ok), AS-027 (tree clean after full scheduler cycle), AS-021 post-reboot inventory → AS-030 closeouts → AS-031 soak → AS-032. Dashboard intel live-render check deferred to dashboard restart (AS-026 verified at code level)."
+last_committed: 2026-06-12
 services: []

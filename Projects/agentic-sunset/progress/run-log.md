@@ -316,3 +316,23 @@ cancelled — roster doc updated.)
 **Cost observation:** no Sonnet delegation this session — all work main-session (Fable 5); mechanical skills (sync/checkpoint procedures) executed inline rather than as skill invocations, appropriate for a teardown session where every step needed operator-visible judgment. No token-heavy anomalies; longest single operation was the 414s vault-check full scan inside vault-health's verification run.
 
 **Next session opener:** confirm AS-018 (3 AM tarball `crumb-vault-2026-06-13_0300.tar.gz` via com.crumb.vault-backup + backup-status.json `ok`) and AS-027 (tree clean after full scheduler cycle) — then AS-021/022 await operator (reboot, sudo).
+
+## 2026-06-12 — AS-022: tess + openclaw dormant-plist sweep (operator sudo)
+
+**Context inventory:** tasks.md (AS-021/022 rows), run-log 2026-06-11 enumeration section, `_system/archive/launchagents-retired/` listing (naming convention + collision check).
+
+**Ordering note:** executed before AS-021 with operator approval, inverting the declared dependency. Rationale: tess/openclaw LaunchAgents are login-gated, not boot-gated (neither user has a GUI session), so the reboot test is unaffected — and sweeping first makes AS-021's post-reboot inventory a stronger final check.
+
+**Enumeration (operator sudo, re-list + zero-active check):**
+- tess `~/Library/LaunchAgents/`: 24 plists + `disabled/` subdir (2 more: ai.openclaw.email-triage, com.tess.v2.email-triage — both stack residue). All 26 files agentic/crumb-stack; nothing benign. Override DB: everything disabled EXCEPT `homebrew.mxcl.ollama` => enabled (would start on tess login).
+- openclaw `~/Library/LaunchAgents/`: ai.openclaw.gateway.plist + .disabled variant (agentic) + 3 Google updater plists (benign). Override DB: `ai.openclaw.gateway` => enabled.
+- Zero active confirmed: launchctl print user/501 + user/502 greps matched only disabled-override entries, no running services — consistent with 2026-06-11 finding.
+- Oddity (no action): tess override DB contains one corrupted entry — a newline-joined list of 22 labels recorded as a single "disabled" key, residue of a past malformed `launchctl disable` call. Lives in launchd's override store, not a file; harmless.
+
+**Action (operator sudo, ~16:09 EDT):** per-user subdirs created to avoid collisions with existing danny-domain archives: ALL tess entries (24 plists + disabled/ subdir) → `_system/archive/launchagents-retired/tess-user/`; both openclaw gateway plists → `openclaw-user/`; Google updater plists deliberately left in place. `chown -R danny:staff` applied in same command (no line-wrap repeat). Verified: tess LaunchAgents dir empty; openclaw dir holds only the 3 Google files.
+
+**Secret sweep (pre-commit):** found live secrets embedded verbatim — Telegram bot token (Tess awareness bot) in 4 plists (awareness-check, vault-health, both email-triage) + Healthchecks API key in com.crumb.dashboard.plist. **Operator decision: redact before commit** (beyond the BOOK_SCOUT_API_KEY keep-verbatim precedent — these were live credentials headed for permanent git history). Values replaced with `REDACTED-AS-022-2026-06-12-*` placeholders; verified 0 residuals across both subdirs. hc-ping UUID URL left as-is (ping-only, same class as existing archived plists). Restore path unaffected — credentials belong in Keychain per standing lesson, never in plist env blocks.
+
+**Acceptance:** Both users' agents enumerated in run-log (2026-06-11 + today's re-list); zero active; dormant agentic plists disabled/archived: **YES** ✓
+
+**Resurrection surface now closed:** a tess or openclaw GUI login starts nothing — both LaunchAgents dirs are clean of agentic plists. Remaining for AS-021: post-reboot danny-domain inventory match only.
