@@ -280,3 +280,17 @@ cancelled — roster doc updated.)
 **AS-025 — DONE ✓ (high-risk, diff-approved):** operator approved removing the Bridge Dispatch Stage Output section from CLAUDE.md; applied; greps clean for bridge-dispatch/dispatch-stage. Deliberately retained: `~/openclaw/[project-name]/` code-dir convention (live — semuta) and Phase-3 "dispatch manifest" (Sonnet-delegation handoff, unrelated). Protocol doc archival itself stays in AS-028. vault-check exercises at next commit.
 
 **Remaining:** AS-021/022 (operator-assisted: reboot test, sudo dormant-plist sweep) → AS-026 (vault `_openclaw/` archive) → AS-027/028/029 → AS-030 closeouts → AS-031 soak → AS-032. AS-018 3 AM fire confirms tomorrow.
+
+## 2026-06-12 — AS-026: vault surgery (_openclaw/_tess/_staging archived)
+
+**Pre-move verification (what gets spared and what breaks):**
+- FIF `pipeline.db` lives OUTSIDE the vault (`~/openclaw/feed-intel-framework/state/`) — untouched by this move.
+- Dashboard source grep: the ONLY vault `_openclaw` reference is `FEED_INBOX_DIR = '_openclaw/inbox'` in `intel.ts`, and both usages are try/catch-wrapped ("Inbox dir missing or unreadable — not an error"). Nothing inside vault `_openclaw/` needed sparing — the design's spare-list concern resolves to the external db.
+- Keep-set script audit: `vault-gc.sh` purge targets under `_openclaw` all no-op on missing dirs (`purge_aged` early-returns; log loop `[ -f ]`-guarded); `session-startup.sh` scans all guarded; `mirror-sync.sh` include patterns match-nothing harmlessly. Dead lines left in place — trimming queued under AS-028/029 cleanup.
+- `vault-check.sh` wikilink exemption repointed `_openclaw/state/vault-health-notes.md` → `_system/logs/vault-health-notes.md` (file moved in AS-019).
+
+**Execution:** checkpoint commit 92e27cc first (rollback point), then `git mv _openclaw Archived/_openclaw`, `git mv _tess Archived/_tess`, `_staging/TV2-*` ×14 → `Archived/_staging/`, empty `_staging/` removed.
+
+**Post-move verification:** pipeline.db intact; session-startup hook exit 0 (dispatch/research/brainstorm/feed counts all degrade to 0); manual vault-gc run exit 0 ("nothing to clean"); vault-check passes at the commit gate. **Live dashboard intel render check deferred** — dashboard deliberately stopped since 2026-06-01, restart is an operator decision; code-level verification stands in (acceptance noted accordingly). Pre-existing uncommitted deletion `_openclaw/data/scout-digests/2026-05-11.md` (vault-gc's own purge) folded into the checkpoint commit.
+
+**Ripple:** `_openclaw/inbox` (already defunct per work-surfaces) now physically gone from the live tree; feed-pipeline skill and vault-query/deliberation Tess surfaces still reference it — AS-028 scope, unchanged.

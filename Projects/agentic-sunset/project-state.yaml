@@ -13,7 +13,7 @@ related_projects:
   - opportunity-scout
 # No repo_path: decommission project — produces no code, only teardown + vault artifacts.
 # External repo gate explicitly skipped (spec §Domain Classification).
-active_task: AS-021
-next_action: "2026-06-12 sweep: AS-019/020/023(decline)/024/025 done; AS-018 confirms at first scheduled 3 AM fire 2026-06-13 (check tarball + backup-status.json next session). Next: AS-026 vault `_openclaw/` archive is UNGATED (deps AS-019+AS-025 done); AS-021 reboot test + AS-022 dormant-plist sweep (operator-assisted: restart, sudo) gate AS-030 closeouts. Retention prune resolved (session-startup.sh Step 1b); timeMachine status 'unknown' under launchd remains (cosmetic)."
+active_task: AS-027
+next_action: "2026-06-12 sweep: AS-019/020/023(decline)/024/025/026 done; AS-018 confirms at first scheduled 3 AM fire 2026-06-13 (check tarball + backup-status.json next session). Ungated: AS-027 (gitignore churn — needs one full scheduler cycle to verify), AS-028 (skills cleanup), AS-029 (memory refresh). Operator-assisted: AS-021 reboot test + AS-022 dormant-plist sweep (restart, sudo) — gate AS-030 closeouts. Dashboard intel live-render check deferred to dashboard restart (AS-026 verified at code level)."
 last_committed: 2026-06-11
 services: []
