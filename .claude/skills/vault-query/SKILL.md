@@ -4,24 +4,10 @@ description: >
   Query the Crumb vault for structured facts, recent activity, and relevant
   notes on a given account, topic, or domain. Uses obsidian-cli for indexed
   searches when available, falls back to native file tools. Produces structured
-  output suitable for consumption by Tess or other agents.
-  Use when a dispatch brief requests vault knowledge retrieval,
-  or when user says "query the vault", "what do we know about",
+  output for the operator or for downstream skills and workflows.
+  Use when user says "query the vault", "what do we know about",
   "vault lookup", or "find in vault".
 model_tier: execution
-capabilities:
-  - id: vault.query.facts
-    brief_schema: vault-query-brief
-    produced_artifacts:
-      - "_openclaw/tess_scratch/vault-query-*.md"
-    cost_profile:
-      model: claude-sonnet-4-6
-      estimated_tokens: 30000
-      estimated_cost_usd: 0.25
-      typical_wall_time_seconds: 60
-    supported_rigor: [light, standard]
-    required_tools: [Read, Glob, Grep, Bash]
-    quality_signals: [relevance, format]
 ---
 
 # Vault Query
@@ -30,11 +16,10 @@ capabilities:
 
 You retrieve structured knowledge from the Crumb vault. You are a lookup tool, not a researcher — you find and organize what already exists in the vault, you don't generate new analysis or search the web.
 
-Your output goes to Tess (for orchestration decisions) or to the operator (for quick lookups). Keep it factual, sourced to specific vault files, and concise.
+Your output goes to the operator (for quick lookups) or to a calling skill/workflow. Keep it factual, sourced to specific vault files, and concise.
 
 ## When to Use This Skill
 
-- Tess dispatches a vault-query brief (e.g., before SE account prep)
 - Operator asks "what do we know about [account/topic]"
 - A workflow needs vault context before external research
 - Pre-call brief needs account history and recent activity
@@ -42,13 +27,12 @@ Your output goes to Tess (for orchestration decisions) or to the operator (for q
 **Not this skill:**
 - Web research (use researcher skill)
 - Vault modifications (use appropriate domain skill)
-- Feed-intel processing (use feed-pipeline)
 
 ## Procedure
 
-### Step 1: Parse Brief
+### Step 1: Parse the Request
 
-Extract from the brief:
+Extract from the request:
 - **query** (required): what to look up
 - **output_format** (default: structured): how to format results
 - **scope** (optional): domain/project/tag/recency constraints
@@ -56,7 +40,7 @@ Extract from the brief:
 
 ### Step 2: Search the Vault
 
-Use these search strategies in order, scoped by the brief:
+Use these search strategies in order, scoped by the request:
 
 1. **Project state** — if query matches a project name, read its `project-state.yaml` and recent run-log entries
 2. **Domain MOCs** — check `Domains/*/moc-*.md` for topic orientation
@@ -69,17 +53,9 @@ Use obsidian-cli (`obsidian search`, `obsidian tag`, `obsidian backlinks`) when 
 
 ### Step 3: Assemble Output
 
-Write results to `_openclaw/tess_scratch/vault-query-{slug}.md` with:
+Return results inline in the session (default). If a calling workflow asks for a file, write to the path it specifies. Structure:
 
 ```markdown
----
-type: vault-query-result
-query: "{original query}"
-created: {ISO-8601}
-scope: {scope if provided}
-notes_consulted: {count}
----
-
 # Vault Query: {query}
 
 ## Key Facts
@@ -97,7 +73,7 @@ notes_consulted: {count}
 
 ### Step 4: Return
 
-Output the path to the results file. If the query found nothing relevant, say so explicitly — don't pad with tangential results.
+If the query found nothing relevant, say so explicitly — don't pad with tangential results.
 
 ## Obsidian CLI Reference
 

@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: active
 created: 2026-02-21
-updated: 2026-06-10
+updated: 2026-06-12
 tags:
   - system
 ---
@@ -14,28 +14,29 @@ Orientation artifact for a fresh session reading this repo (claude.ai chat, a
 new Claude Code session, or any agent cloning `github.com/djt71/crumb-vault`).
 Read this first — it is sufficient for most questions.
 
-Last updated: 2026-06-10. **The agentic infrastructure layer is being fully
-decommissioned** — project `agentic-sunset` (software, four-phase) ran SPECIFY
-through IMPLEMENT-M2 in one day on operator directive: the self-built always-on
-agent stack (Tess/OpenClaw/Hermes) drifted from original intent, produced zero
-revenue, and ~90% of its function is now native in Claude.AI / Claude Code.
+Last updated: 2026-06-12. **The agentic infrastructure decommission is nearly
+complete** — project `agentic-sunset`: the self-built always-on agent stack
+(Tess/OpenClaw/Hermes) drifted from original intent, produced zero revenue, and
+~90% of its function is now native in Claude.AI / Claude Code.
 
-- **Dark as of 2026-06-10 ~14:15 EDT:** Hermes gateway, llama-server, Ollama,
-  bridge watcher, all `ai.openclaw.*` jobs, all `com.tess.v2.*` contracts,
-  telemetry-rollup, apple-snapshot — 14 labels + Ollama booted out, plists
-  archived (git-tracked) in `_system/archive/launchagents-retired/`. Telegram
-  silence is intentional. healthchecks.io check `tess-mac-studio-health` paused.
-- **Critical bug found+fixed en route:** both drive-sync schedulers ran the
-  stale `/Users/tess/crumb-vault` copy → Google Drive/NotebookLM received a
-  frozen vault since Jun 8. Fixed (plist repointed, crontab removed, PATH fix
-  for the post-commit hook). Drive is current again.
-- **In flight:** AS-016 24h quiet verification (due 2026-06-11 ~14:15) gates
-  M3–M7: plumbing relabel to one `com.crumb.*` generation, runtime archive +
-  reboot test, daily-attention → scheduled Claude agent, CLAUDE.md surgery,
-  closeouts (tess-v2 → DONE, tess-danny-migration → DONE/P7-superseded), 7-day
-  soak. See `Projects/agentic-sunset/` (tasks.md, design/service-inventory.md).
-- **Model policy update:** Crumb now runs both Opus 4.8 and Fable 5 (top-tier
-  frontier models only — tier is the non-negotiable, not the model line).
+- **Dark since 2026-06-10/11:** all agentic launchd labels + Ollama booted out
+  (incl. the system-level `ai.openclaw.gateway` LaunchDaemon survivor found at
+  the first quiet check). Plists archived (git-tracked) in
+  `_system/archive/launchagents-retired/`. Telegram silence is intentional.
+  healthchecks.io check `tess-mac-studio-health` paused.
+- **AS-016 quiet gate GREEN 2026-06-12**, then M3/M5/M6 executed same day:
+  backup jobs relabeled to `com.crumb.*` (3 AM scheduled-fire confirmation
+  2026-06-13); vault-health rebuilt log-only (no Telegram, no `_openclaw/`
+  deps); README-ARCHIVED breadcrumbs in all 7 runtime dirs; daily-attention
+  replacement **declined** (on-demand attention-manager only — see
+  `Projects/agentic-sunset/design/upstream-migration.md`); CLAUDE.md
+  bridge-dispatch section removed; **vault `_openclaw/`, `_tess/`,
+  `_staging/TV2-*` archived to `Archived/`** (pipeline.db external, spared);
+  feed-pipeline skill retired; churn logs gitignored.
+- **Remaining:** AS-021 reboot test + AS-022 dormant-plist sweep (operator-
+  assisted), AS-030 closeouts, AS-031 7-day soak, AS-032 compound/archival.
+- **Model policy:** Crumb runs both Opus 4.8 and Fable 5 (top-tier frontier
+  models only — tier is the non-negotiable, not the model line).
 
 Previous update 2026-06-01 (full regeneration). The 38 days since the prior
 update (2026-04-24) were dominated by an **infrastructure decommission wave**
@@ -98,27 +99,23 @@ as external memory and single source of truth. Canonical spec:
 - **Vault location:** Mac Studio (`tess@`), accessed via SSH from work Mac
 - **Obsidian:** runs on the Studio. Both instances can run simultaneously — `workspace.json` is gitignored
 - **Claude Code sessions:** run on the Studio
-- **Tess (OpenClaw agent):** communicates via `_openclaw/`
+- **Tess (OpenClaw agent):** decommissioned 2026-06-10; former bridge dir lives at `Archived/_openclaw/`
 - **Validation gate:** `_system/scripts/vault-check.sh` (pre-commit hook)
-- **Counts (verified 2026-06-01):** 20 skills · 8 overlays · 9 canonical domains
+- **Counts (verified 2026-06-12):** 19 skills · 8 overlays · 9 canonical domains
 - **Domains:** software, career, learning, health, financial, relationships, creative, spiritual, lifestyle
 
 ## Strategic Directive: Liberation
 
-**Governing document:** `_system/directives/liberation-directive.md` (v2.1, 2026-04-21)
+**Governing document:** `_system/directives/liberation-directive.md` (v3, 2026-06-11 — constitution: three-pillar mission, six gates, two tracks; philosophy wins on conflict)
 
 Mission: build enough independent revenue that corporate work becomes a choice,
-not a dependency. As of v2.1 the directive describes only aspirations, gates, and
-metrics — the project-specific six-prompt portfolio and four-surface architecture
-were moved to `_system/docs/liberation-surfaces-snapshot.md`; specific bets now
-live in their own projects. Revenue-generating work gets priority claim on
-sessions; all other work continues in parallel (three tiers: active / standing-latent / noise).
+not a dependency. Revenue-generating work gets priority claim on sessions; all
+other work continues in parallel (three tiers: active / standing-latent / noise).
 
-**Four-surface model (snapshot):**
-- **Crumb** (Claude Code, top-tier Opus — currently 4.8 — per `crumb-model-policy`) — deep work, specs, strategy
-- **Tess** (OpenClaw) — **decommissioned 2026-06-10** (agentic-sunset): scheduled-service execution moves to plain launchd plumbing + scheduled Claude agents; Hermes/local-LLM runtime archived
-- **Perplexity Computer** — research, daily operational awareness
-- **Chrome** (Claude browser extension) — authenticated website actions
+**Work surfaces:** live roster + write-boundary classes are in the work-surfaces
+doc (7 surfaces incl. the Glean airlock, verified 2026-06-11). Tess/OpenClaw
+decommissioned 2026-06-10; Perplexity subscription cancelled 2026-06-11;
+`_inbox/` is the universal intake (`_openclaw/inbox/` defunct and archived).
 
 Primary revenue bet: **Firekeeper Books** (Prompt 1).
 
@@ -177,13 +174,13 @@ Directory location is authoritative for archived-vs-active; project docs carry n
 ### think-different — learning / KB exception
 - **Phase:** ARCHIVED, but kept in `Projects/` (not `Archived/`) because it holds 45 biographical profiles in the active knowledge graph. `updated:` 2026-02-18.
 
-## Live Services (verified via `launchctl`, 2026-06-10 post-teardown)
+## Live Services (verified via `launchctl`, 2026-06-12 post-M3)
 
-The three-generation plist cruft is **gone** (agentic-sunset M2). Loaded now:
-- **Plumbing:** com.crumb.{vault-gc, drive-sync, system-stats, qmd-index} + com.tess.{vault-backup, backup-status} *(the two com.tess.* labels relabel to com.crumb.* at AS-018)*
+One clean `com.crumb.*` generation — 10 labels, zero `com.tess.*`/`ai.*`:
+- **Plumbing:** com.crumb.{vault-backup 3am, backup-status 15m, drive-sync 5am, vault-gc 4am, vault-health 2am, system-stats, qmd-index 5:30am}
 - **Publishing/dashboard stack:** com.crumb.{cloudflared, vault-web, vault-rebuild}; `com.crumb.dashboard` plist exists but the service was deliberately stopped 2026-06-01 — restart is an operator decision (kept for possible repurpose)
 
-Everything else (`ai.hermes.*`, `ai.openclaw.*`, `com.tess.v2.*`, llama-server, Ollama, telemetry-rollup, apple-snapshot) is retired — plists in `_system/archive/launchagents-retired/`, runtimes archived-in-place on disk. Do not expect Telegram traffic, hc-ping pings, or `_openclaw/` log churn.
+Everything agentic is retired — plists in `_system/archive/launchagents-retired/`, runtimes archived-in-place on disk with README-ARCHIVED breadcrumbs. Do not expect Telegram traffic, hc-ping pings, or `_openclaw/` churn. Known TCC quirk: launchd can't list the iCloud backup dir — backup-status uses a marker-file fallback; retention prune runs from the session-startup hook.
 
 ## Recent Key Decisions
 
@@ -198,10 +195,10 @@ Everything else (`ai.hermes.*`, `ai.openclaw.*`, `com.tess.v2.*`, llama-server, 
 
 ## Open Items
 
-- **`claude-ai-context.md`:** regenerated 2026-06-01 (this pass).
-- **opportunity-scout & feed-intel-framework:** pipelines decommissioned but projects not archived — operator archive decision pending (left as-is 2026-06-01).
+- **agentic-sunset endgame:** AS-018 3 AM fire check (2026-06-13), AS-021/022 (operator: reboot + sudo sweep), AS-030 closeouts (tess-v2 → DONE, tess-danny-migration → DONE, XD sweep), AS-031 soak, AS-032 compound routing.
+- **opportunity-scout & feed-intel-framework:** pipelines decommissioned but projects not archived — archival proposals come at AS-032.
 - **firekeeper-books project-state stale** (2026-04-07) — primary revenue bet is due a status refresh.
-- **Stale cross-project deps:** XD-001/004/022/023 reference upstream tasks in archived `tess-operations` / `feed-intel-framework` (unscoped 85+ days) — vault-check warns on commit.
+- **Stale skill body-text residuals:** audit §15 (Tess harness audit), learning-plan §7 (Tess check-ins), researcher (bridge-dispatch invocation rows) reference dead infra — descriptions are clean (AS-028); route body cleanup via vault-optimization or next audit.
 
 ## Architecture Notes
 

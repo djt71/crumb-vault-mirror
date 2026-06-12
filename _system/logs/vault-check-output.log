@@ -1,6 +1,6 @@
-Mode: pre-commit (193 staged files)
+Mode: pre-commit (9 staged files)
 === 1. Frontmatter Schema Validation ===
-  Checked 1 files, 0 with issues
+  Checked 2 files, 0 with issues
 
 === 2. Summary Freshness Check ===
   Checked 0 summaries, 0 stale
@@ -80,28 +80,7 @@ Mode: pre-commit (193 staged files)
   Skipped (no staged run-log files)
 
 === 31. Broken Wikilink Detection ===
-  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-06-builder.md — broken link: [[agent-to-agent-communication/design/orchestration-patterns]]
-  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-06-builder.md — broken link: [[feed-intel-framework/insights/anthropic-roadmap]]
-  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-06-builder.md — broken link: [[Projects/tess-v2/design/scheduled-services]]
-  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-10-competitive.md — broken link: [[agent-to-agent-communication/design/orchestration-patterns]]
-  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-10-competitive.md — broken link: [[feed-intel-framework/insights/anthropic-roadmap]]
-  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-10-competitive.md — broken link: [[Projects/tess-v2/design/scheduled-services]]
-  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-13-builder.md — broken link: [[agent-to-agent-communication/design/orchestration-patterns]]
-  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-13-builder.md — broken link: [[feed-intel-framework/insights/anthropic-roadmap]]
-  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-13-builder.md — broken link: [[Projects/tess-v2/design/scheduled-services]]
-  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-17-competitive.md — broken link: [[agent-to-agent-communication/design/orchestration-patterns]]
-  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-17-competitive.md — broken link: [[feed-intel-framework/insights/anthropic-roadmap]]
-  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-17-competitive.md — broken link: [[Projects/tess-v2/design/scheduled-services]]
-  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-20-builder.md — broken link: [[agent-to-agent-communication/design/orchestration-patterns]]
-  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-20-builder.md — broken link: [[feed-intel-framework/insights/anthropic-roadmap]]
-  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-20-builder.md — broken link: [[Projects/tess-v2/design/scheduled-services]]
-  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-24-competitive.md — broken link: [[agent-to-agent-communication/design/orchestration-patterns]]
-  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-24-competitive.md — broken link: [[feed-intel-framework/insights/anthropic-roadmap]]
-  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-24-competitive.md — broken link: [[Projects/tess-v2/design/scheduled-services]]
-  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-27-builder.md — broken link: [[agent-to-agent-communication/design/orchestration-patterns]]
-  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-27-builder.md — broken link: [[feed-intel-framework/insights/anthropic-roadmap]]
-  ... and 9 more broken links (showing first 20)
-  Checked 57 files, 29 broken links in 9 files
+  Checked 7 files, 0 broken links in 0 files
 
 === Solution Doc Track Schema ===
   Checked 0 solution docs, 0 track issues
@@ -113,7 +92,6 @@ Mode: pre-commit (193 staged files)
 Vault Check Summary
 ==========================================
   Errors:   0
-  Warnings: 20
+  Warnings: 0
 
-RESULT: WARNINGS (exit code 1)
-Non-blocking — review when convenient.
+RESULT: CLEAN (exit code 0)

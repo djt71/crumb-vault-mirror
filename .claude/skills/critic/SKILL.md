@@ -3,26 +3,12 @@ name: critic
 description: >
   Adversarial review of vault artifacts: find unsupported claims, logical gaps,
   missing perspectives, and verify citations independently. Single-stage structured
-  critique with severity ratings. Tess-dispatchable via capability resolution.
+  critique with severity ratings.
   Use when artifact quality gates require adversarial analysis, or when user says
   "critique this", "find problems", "adversarial review", or "check citations".
 context: main
 allowed-tools: Read, Glob, Grep, WebSearch, WebFetch, Bash, Write, Edit
 model_tier: reasoning
-capabilities:
-  - id: review.adversarial.standard
-    brief_schema: review-brief
-    produced_artifacts:
-      - "_system/reviews/*.md"
-      - "Projects/*/reviews/*.md"
-    cost_profile:
-      model: claude-opus-4-6
-      estimated_tokens: 80000
-      estimated_cost_usd: 1.20
-      typical_wall_time_seconds: 300
-    supported_rigor: [light, standard, deep]
-    required_tools: [Read, Glob, Grep, WebSearch, WebFetch, Write]
-    quality_signals: [citation, format]
 ---
 
 # Critic
@@ -45,11 +31,6 @@ full vault access.
 
 ## When to Use This Skill
 
-**Tess-dispatched (autonomous):**
-- Artifact's rigor profile is `standard` or `deep`
-- Downstream impact is `high` or `critical`
-- Budget allows (~$1.20/invocation at Opus pricing)
-
 **Operator-invoked (manual):**
 - User says "critique this", "find problems", "adversarial review", "check citations"
 - User wants a structured quality check before committing to a decision
@@ -62,18 +43,9 @@ full vault access.
 
 ## Procedure
 
-### Step 1: Accept Brief
+### Step 1: Accept the Request
 
-If Tess-dispatched, parse the `review-brief` schema fields from the dispatch:
-- `artifact_path` (required)
-- `artifact_type` (required)
-- `review_focus` (optional — defaults to full checklist)
-- `rigor` (optional — defaults to `standard`)
-- `context` (optional)
-- `downstream_impact` (optional)
-- `citation_check` (optional — defaults to `true`)
-
-If operator-invoked, determine the artifact interactively:
+Determine the artifact interactively:
 - Ask what to review if not specified
 - Infer `artifact_type` from frontmatter or content
 - Default rigor to `standard`
@@ -189,7 +161,6 @@ The review lives next to the artifact it reviews — colocated for discoverabili
 |---|---|
 | `Projects/{project}/` | `Projects/{project}/reviews/{date}-critic-{slug}.md` |
 | `Sources/{type}/` | `Sources/{type}/{date}-critic-{slug}.md` |
-| `_openclaw/research/output/` (staging) | `_openclaw/research/output/{date}-critic-{slug}.md` |
 | Anywhere else | `_system/reviews/{date}-critic-{slug}.md` (fallback) |
 
 Create the target directory if it doesn't exist. The `critic-` prefix in the filename
@@ -204,9 +175,9 @@ Write the critique with this frontmatter:
 type: review
 review_type: critic
 artifact_path: [vault-relative path]
-artifact_type: [from brief]
+artifact_type: [from request]
 review_mode: full
-rigor: [from brief]
+rigor: [from request]
 recommendation: [accept/revise/reject]
 findings_count:
   critical: [n]
@@ -228,14 +199,10 @@ Display a concise summary in conversation:
 - Citation verification score (n/m verified)
 - Link to the full review note
 
-If Tess-dispatched: the summary is returned as the dispatch result. Tess uses the
-`recommendation` field to decide whether to deliver the original artifact or flag
-for operator review.
-
 ## Context Contract
 
 **MUST have:**
-- The artifact to review (artifact_path from brief)
+- The artifact to review (artifact_path from request)
 
 **MAY request:**
 - Referenced vault docs (wikilinks from the artifact — budget 3-5)
