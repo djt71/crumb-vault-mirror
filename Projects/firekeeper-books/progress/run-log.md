@@ -404,3 +404,30 @@ PLUS: spec updated to current state; M-1.1/M-1.2 confirmed complete (operator re
 1. M-1B session 1: Draw Things install, model pull + license check (open item H), first panels on "the creation" scene
 2. Adapt `03c-test-prompts.md` Midjourney syntax → FLUX/SD natural language (Crumb task, before or during session 1)
 3. Gate decision in `design/spike-findings.md` after session 3
+
+## 2026-06-13 — M-1B session 1: local pipeline first light (Z-Image)
+
+**Context:** Continuation of the 2026-06-12 sanity-check session. Selected and pulled local image models, then ran the first M-1B spike panel. (Date rolled to 06-13 during the session.)
+
+**Model selection (open item H — license check):** All four pulls are commercial-safe. Final set: SDXL Base v1.0, **Juggernaut XL Ragnarok** (full precision; rejected v9-Lightning/Reborn — Lightning's weak negative-prompt behavior defeats the SDXL lane's purpose, which is CFG + negative control), **Z-Image Turbo** (Apache 2.0), **Qwen Image 2512** (Dec-2025 refresh of Qwen-Image; "Image Edit" deferred to M0 refinement — it's instruction-editing, not generation). FLUX dev models deliberately skipped (non-commercial license).
+
+**Session 1 run:** Scene 1 (Workshop) on Z-Image Turbo only; 4 candidates reviewed (`~/Pictures/firekeeper-mb1/session-1/`). Full per-candidate analysis in [[spike-findings]].
+
+**Two findings worth surfacing:**
+1. **Z-Image Turbo produced near-plate-quality engraving texture from positive prompt alone** — no negative prompt, low CFG. The distilled "fast lane" is a quality contender, inverting the spike's working assumption (Z-Image = volume, SDXL = quality) pending Juggernaut/Qwen runs. Style/texture is effectively solved at session 1.
+2. **All four candidates missed the same two composition instructions** (behind-view; face-in-shadow) — expected at Z-Image's near-zero guidance. The remaining gap is composition obedience, i.e. art direction, not image quality. Revised "face-hidden" prompt staged for session 2, to run across all three models for an apples-to-apples panel at 16 images/model with hit-rate capture.
+
+**State for resume:** M-1B mid-session-1. Next session: run revised Scene-1 prompt on Z-Image (rerun) + Juggernaut Ragnarok + Qwen 2512, 16 each, per-model subfolders, seeds in filenames, capture keeper settings (missed in session 1). Spike budget: 3 sessions, gate decision to [[spike-findings]]. Watching for a Qwen-composition / Z-Image-texture hybrid production shape.
+
+**Process gaps to close (flagged honestly):**
+- **Time-log:** actual session-1 hours not captured — placeholder left in `progress/time-log.md` for Danny to fill. Per-title hours are the catalog-thesis number; this discipline has to hold from here.
+- **Seeds:** candidate 1 and 3 seeds not recorded before review — recover from Draw Things history if still available, else accept loss and enforce seed-in-filename from session 2.
+
+**Compound:** **"The fast/cheap tier can be the quality tier — test the cheap option first not just for calibration but as a real contender."** The spike pre-assigned roles (Z-Image = throughput, SDXL = quality) on reputation; one panel overturned it. Generalizes beyond image models — when fanning out across tiered options (models, tools, vendors), run the cheap tier on the real task early; its reputation for being the "draft" option may be stale. Low confidence (one observation, not yet confirmed against Juggernaut/Qwen) — flag, don't promote. Ties to [[recurring-patterns]] (model-routing assumptions).
+
+**Model routing:** Fable 5 main session throughout — image-vision review and art direction are not delegable. No subagents this segment.
+
+**Next:**
+1. Danny fills session-1 hours in time-log
+2. M-1B session 2: revised prompt × 3 models × 16, hit-rate + seed capture
+3. Findings accrue to [[spike-findings]]; gate after session 3

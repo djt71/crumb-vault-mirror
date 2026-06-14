@@ -1,13 +1,13 @@
 ---
 type: state
 status: active
-created: 2026-06-12
-updated: 2026-06-12
+created: 2026-06-13
+updated: 2026-06-13
 ---
 
-# Vault Health Notes — 2026-06-12
+# Vault Health Notes — 2026-06-13
 
-## Warnings (82)
+## Warnings (84)
   WARNING: Projects/tess-v2/scripts/.venv/lib/python3.14/site-packages/idna-3.11.dist-info/licenses/LICENSE.md — no YAML frontmatter found
   WARNING: Projects/tess-v2/scripts/.venv/lib/python3.14/site-packages/httpcore-1.0.9.dist-info/licenses/LICENSE.md — no YAML frontmatter found
   WARNING: Projects/tess-v2/scripts/.venv/lib/python3.14/site-packages/pip/_vendor/idna/LICENSE.md — no YAML frontmatter found
@@ -32,6 +32,8 @@ updated: 2026-06-12
   WARNING: Projects/agentic-sunset/progress/run-log.md — session '## 2026-06-10 — PLAN' mentions skill invocation but has no context inventory
   WARNING: Projects/agentic-sunset/progress/run-log.md — session '## 2026-06-10 — Session end' mentions skill invocation but has no context inventory
   WARNING: Projects/agentic-sunset/progress/run-log.md — session '## 2026-06-11 — Operator decision (cross-project, work-surfaces session): inbox consolidation' mentions skill invocation but has no context inventory
+  WARNING: Projects/agentic-sunset/progress/run-log.md — session '## 2026-06-12 — AS-026: vault surgery (_openclaw/_tess/_staging archived)' mentions skill invocation but has no context inventory
+  WARNING: Projects/agentic-sunset/progress/run-log.md — session '## 2026-06-12 — AS-027/028/029: gitignore churn, skills cleanup, memory refresh' mentions skill invocation but has no context inventory
   WARNING: Projects/tess-v2/progress/run-log-2026-03.md — session '## 2026-03-29 — Feed intel actions: security + browser tools' mentions skill invocation but has no context inventory
   WARNING: Projects/tess-v2/progress/run-log-2026-03.md — session '## 2026-03-30b — Soak Extension + Kimi Soak Setup + DeepSeek Audit' mentions skill invocation but has no context inventory
   WARNING: Projects/tess-v2/progress/run-log-2026-03.md — session '## 2026-04-01e — Phase Transition: TASK → IMPLEMENT' mentions skill invocation but has no context inventory
@@ -72,29 +74,26 @@ updated: 2026-06-12
   WARNING: Projects/mission-control/progress/run-log.md — session '## 2026-03-30 (session 10) — M3.1: Intelligence Feed Density Redesign' mentions subagent delegation but has no provenance assessment
   WARNING: _system/docs/operator/how-to/tess-to-danny-migration-runbook.md — broken link: [[macos-tahoe-calendarinterval-bug]]
   WARNING: _system/docs/operator/how-to/tess-to-danny-migration-runbook.md — broken link: [[recurring-patterns]]
-  WARNING: _openclaw/research/.processed/research-brief-2026-05-31-competitive.md — broken link: [[Projects/tess-v2/design/scheduled-services]]
-  WARNING: _openclaw/research/.processed/research-brief-2026-05-31-competitive.md — broken link: [[agent-to-agent-communication/design/orchestration-patterns]]
-  WARNING: _openclaw/research/.processed/research-brief-2026-05-31-competitive.md — broken link: [[feed-intel-framework/insights/anthropic-roadmap]]
-  WARNING: _openclaw/research/.processed/research-brief-2026-05-24-competitive.md — broken link: [[Projects/tess-v2/design/scheduled-services]]
-  WARNING: _openclaw/research/.processed/research-brief-2026-05-24-competitive.md — broken link: [[agent-to-agent-communication/design/orchestration-patterns]]
-  WARNING: _openclaw/research/.processed/research-brief-2026-05-24-competitive.md — broken link: [[feed-intel-framework/insights/anthropic-roadmap]]
-  WARNING: _openclaw/research/.processed/research-brief-2026-05-13-builder.md — broken link: [[Projects/tess-v2/design/scheduled-services]]
-  WARNING: _openclaw/research/.processed/research-brief-2026-05-13-builder.md — broken link: [[agent-to-agent-communication/design/orchestration-patterns]]
-  WARNING: _openclaw/research/.processed/research-brief-2026-05-13-builder.md — broken link: [[feed-intel-framework/insights/anthropic-roadmap]]
-  WARNING: _openclaw/research/.processed/research-brief-2026-05-17-competitive.md — broken link: [[Projects/tess-v2/design/scheduled-services]]
-  WARNING: _openclaw/research/.processed/research-brief-2026-05-17-competitive.md — broken link: [[agent-to-agent-communication/design/orchestration-patterns]]
-  WARNING: _openclaw/research/.processed/research-brief-2026-05-17-competitive.md — broken link: [[feed-intel-framework/insights/anthropic-roadmap]]
-  WARNING: _openclaw/research/.processed/research-brief-2026-05-27-builder.md — broken link: [[Projects/tess-v2/design/scheduled-services]]
-  WARNING: _openclaw/research/.processed/research-brief-2026-05-27-builder.md — broken link: [[agent-to-agent-communication/design/orchestration-patterns]]
-  WARNING: _openclaw/research/.processed/research-brief-2026-05-27-builder.md — broken link: [[feed-intel-framework/insights/anthropic-roadmap]]
-  WARNING: _openclaw/research/.processed/research-brief-2026-05-10-competitive.md — broken link: [[Projects/tess-v2/design/scheduled-services]]
-  WARNING: _openclaw/research/.processed/research-brief-2026-05-10-competitive.md — broken link: [[agent-to-agent-communication/design/orchestration-patterns]]
-  WARNING: _openclaw/research/.processed/research-brief-2026-05-10-competitive.md — broken link: [[feed-intel-framework/insights/anthropic-roadmap]]
-
-## Git Status
-13 uncommitted file(s)
+  WARNING: Projects/agentic-sunset/design/upstream-migration.md — broken link: [[feedback-feed-intel-stays-open]]
+  WARNING: Archived/Projects/vault-restructure/design/migration-plan.md — broken link: [[openclaw-colocation-spec]]
+  WARNING: Archived/Projects/vault-restructure/design/migration-plan.md — broken link: [[openclaw-colocation-spec-summary]]
+  WARNING: Archived/Projects/vault-restructure/design/migration-plan.md — broken link: [[openclaw-crumb-reference]]
+  WARNING: Archived/Projects/openclaw-colocation/design/ref-openclaw-spec-overview.md — broken link: [[openclaw-colocation-spec-summary]]
+  WARNING: Archived/Projects/openclaw-colocation/design/ref-openclaw-crumb-reference.md — broken link: [[openclaw-crumb-reference]]
+  WARNING: Archived/Projects/openclaw-colocation/design/ref-openclaw-colocation-spec.md — broken link: [[openclaw-colocation-spec]]
+  WARNING: Archived/Projects/batch-book-pipeline/design/moc-scaffolding-proposal.md — broken link: [[source-id-index]]
+  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-31-competitive.md — broken link: [[Projects/tess-v2/design/scheduled-services]]
+  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-31-competitive.md — broken link: [[agent-to-agent-communication/design/orchestration-patterns]]
+  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-31-competitive.md — broken link: [[feed-intel-framework/insights/anthropic-roadmap]]
+  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-24-competitive.md — broken link: [[Projects/tess-v2/design/scheduled-services]]
+  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-24-competitive.md — broken link: [[agent-to-agent-communication/design/orchestration-patterns]]
+  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-24-competitive.md — broken link: [[feed-intel-framework/insights/anthropic-roadmap]]
+  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-13-builder.md — broken link: [[Projects/tess-v2/design/scheduled-services]]
+  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-13-builder.md — broken link: [[agent-to-agent-communication/design/orchestration-patterns]]
+  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-13-builder.md — broken link: [[feed-intel-framework/insights/anthropic-roadmap]]
+  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-17-competitive.md — broken link: [[Projects/tess-v2/design/scheduled-services]]
 
 ## Stale Projects (14+ days)
-customer-intelligence, firekeeper-books, think-different, semuta
+customer-intelligence, think-different, opportunity-scout, semuta
 
 

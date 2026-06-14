@@ -6,9 +6,9 @@ phase: ACT
 workflow: CLARIFY → ACT
 last_gate: CLARIFY-to-ACT
 created: 2026-03-17
-updated: 2026-06-12
+updated: 2026-06-13
 active_task: null
-next_action: "M-1B local pipeline spike (spec §10): Draw Things on Mac Studio, 2-3 scenes from 03a-illustration-map, 3-session budget, go/iterate/stop written to design/spike-findings.md. Time-log mandatory from session 1. Everything else gated: M0 on M-1B; all Odyssey milestones on M0 + hour data. 70% royalty closed; open AI disclosure adopted; spec updated 2026-06-12."
+next_action: "M-1B session 2 (spec §10 / design/spike-findings.md): run revised Scene-1 prompt on Z-Image Turbo (rerun) + Juggernaut XL Ragnarok + Qwen 2512, 16 images/model, per-model subfolders, seeds in filenames. Session 1 finding: Z-Image solved texture, composition obedience is the open test. Danny to fill session-1 hours in time-log. Gate decision after session 3. Everything gated: M0 on M-1B; Odyssey on M0 + hours."
 last_committed: null
 related_projects:
   - opportunity-scout
