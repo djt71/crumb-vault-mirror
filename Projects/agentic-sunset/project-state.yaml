@@ -4,7 +4,7 @@ type: system
 phase: IMPLEMENT
 last_gate: TASK-to-IMPLEMENT
 created: 2026-06-10
-updated: 2026-06-12
+updated: 2026-06-14
 related_projects:
   - tess-v2
   - tess-danny-migration
@@ -14,6 +14,6 @@ related_projects:
 # No repo_path: decommission project — produces no code, only teardown + vault artifacts.
 # External repo gate explicitly skipped (spec §Domain Classification).
 active_task: AS-021
-next_action: "AS-022 done 2026-06-12 (both users' dormant plists archived, secrets redacted). Remaining: AS-021 reboot test (operator, end-of-day — last human-gated item) → 2026-06-13 session opener: confirm AS-018 (3 AM tarball via com.crumb.vault-backup + backup-status.json ok), AS-027 (tree clean after full scheduler cycle), AS-021 post-reboot inventory → AS-030 closeouts → AS-031 soak → AS-032. Dashboard intel live-render check deferred to dashboard restart (AS-026 verified at code level)."
+next_action: "AS-018 + AS-027 confirmed done 2026-06-14 (two scheduled backup cycles 06-13/06-14 fired under com.crumb.vault-backup, status.json ok; tree-clean closed by gitignoring 6th churn file _system/state/last-run/vault-health). AS-021 reboot resurrection test (operator) is now the SOLE open human-gated item — post-reboot launchctl list must match the 10-label com.crumb.* end-state (8 idle jobs + cloudflared + vault-web; dashboard deliberately absent). On AS-021 pass → AS-030 closeouts (tess-v2/tess-danny-migration → DONE, mission-control paused note, XD-026 resolve) → AS-031 7-day soak → AS-032 final compound+archival. Dashboard intel live-render check deferred to dashboard restart (AS-026 verified at code level)."
 last_committed: 2026-06-12
 services: []

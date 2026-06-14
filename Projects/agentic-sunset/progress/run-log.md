@@ -336,3 +336,17 @@ cancelled — roster doc updated.)
 **Acceptance:** Both users' agents enumerated in run-log (2026-06-11 + today's re-list); zero active; dormant agentic plists disabled/archived: **YES** ✓
 
 **Resurrection surface now closed:** a tess or openclaw GUI login starts nothing — both LaunchAgents dirs are clean of agentic plists. Remaining for AS-021: post-reboot danny-domain inventory match only.
+
+## 2026-06-14 — Session opener: AS-018 + AS-027 confirmations (06-13 session skipped)
+
+**Context:** No session ran 2026-06-13, so the planned opener confirmations execute now; two scheduled backup cycles (06-13 03:00, 06-14 03:00) have fired in the interim — stronger evidence than the single fire the plan called for.
+
+**AS-018 ✓ → done.** Two scheduled tarballs present in iCloud under the new label (`com.crumb.vault-backup`): `crumb-vault-2026-06-13_0300.tar.gz` (120.2 MB) + `crumb-vault-2026-06-14_0300.tar.gz` (120.2 MB). `_system/logs/backup-status.json` reports `status: ok`, latestFile = 06-14 tarball, ageHours 14. Marker file (`vault-backup-last.json`) agrees. Old `com.tess.vault-backup`/`com.tess.backup-status` labels absent from `launchctl list`. Retention holding <30 files. (Aside: TimeMachine sub-status = `unknown`/null — separate check, out of AS-018 scope; noted for AS-031 soak.)
+
+**Keep-set inventory check:** `launchctl list` shows exactly 10 `com.crumb.*` labels — 8 scheduled jobs idle at status 0 (backup-status, drive-sync, qmd-index, system-stats, vault-backup, vault-gc, vault-health, vault-rebuild) + 2 running services (cloudflared PID, vault-web PID). `com.crumb.dashboard` correctly absent (deliberately stopped since 2026-06-01). Zero tess/openclaw/hermes/ollama/llama survivors.
+
+**AS-027 ✓ → done.** Post-cycle the tree was NOT clean: `_system/state/last-run/vault-health` (an 11-byte epoch marker, tracked since its dir was created 06-12 12:00, rewritten every vault-health run: `1781280026`→`1781417219`) was the 6th churn file, missed in the 06-12 sweep. Fix: gitignored `_system/state/last-run/` + `git rm --cached` (kept on disk). `git check-ignore` confirms; tree reaches clean post-commit. TCC note reconfirmed: the user shell CAN list the iCloud backup dir even though launchd can't — the marker-file design remains correct.
+
+**Risk:** low (gitignore extension + untrack of toolchain churn, within AS-027 scope). Proceed + flag.
+
+**Remaining:** AS-021 (operator reboot resurrection test) is now the **sole** open human-gated item before AS-030. Its only check is a post-reboot `launchctl list` match against the 10-label end-state above. AS-030 closeouts unblock the moment AS-021 passes; then AS-031 soak (7 days) → AS-032.

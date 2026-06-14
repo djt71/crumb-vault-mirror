@@ -8,3 +8,8 @@
 2026-06-13T06:07:17Z stale-projects: count=4 customer-intelligence, think-different, opportunity-scout, semuta
 2026-06-13T06:07:17Z OK: wrote health notes to /Users/danny/crumb-vault/_system/logs/vault-health-notes.md
 2026-06-13T06:07:17Z OK: warnings only — written to health notes
+2026-06-14T06:06:59Z vault-check: exit=1 errors=0 warnings=85
+2026-06-14T06:06:59Z git-status: clean=false 1 uncommitted file(s)
+2026-06-14T06:06:59Z stale-projects: count=4 customer-intelligence, think-different, opportunity-scout, semuta
+2026-06-14T06:06:59Z OK: wrote health notes to /Users/danny/crumb-vault/_system/logs/vault-health-notes.md
+2026-06-14T06:06:59Z OK: warnings only — written to health notes
