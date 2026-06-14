@@ -3,13 +3,13 @@ domain: software
 class: system
 workflow: four-phase
 phase: TASK
-status: active
+status: paused
 created: 2026-03-07
-updated: 2026-03-30
+updated: 2026-06-14
 last_committed: 2026-03-17
 last_gate: PLAN-to-TASK
 active_task: null
-next_action: "Phase 2 complete. Phase 3 available. M3.1 (Intel Feed Density Redesign) added — Surface-inspired dense list, multi-axis filters, raw scores, shared tier config. M3.1 blocks M8. Spec §6.3 amended (Amendment S). Build order: M3.1 → M8; M9/M10 independent. Start with MC-080 (tier config) + MC-082 (dense list layout)."
+next_action: "[PAUSED 2026-06-14 — agentic-sunset AS-030] Not closed, paused. The dashboard server (com.crumb.dashboard, Express :3100) has been deliberately stopped since 2026-06-01 (operator decision, predates the teardown); agentic-sunset did NOT restart it. The rest of the dashboard/publishing stack is RETAINED and live (reboot-verified AS-021 2026-06-14): cloudflared tunnel + vault-web (:8843, HTTP 200) + vault-rebuild (15m) + qmd-index + system-stats. Restart of the dashboard itself = standalone operator decision (re-enable com.crumb.dashboard plist + `npm run build`, repo /Users/danny/openclaw/crumb-dashboard). Backlog impact: several MC panels depend on now-decommissioned agentic upstreams (tess-operations, FIF, A2A, autonomous-operations) — those cross-project deps are mooted in _system/docs/cross-project-deps.md; MC features on surviving upstreams (Google MCP, XD-019/020/021) remain dormant-but-viable. No active development; reactivation operator-initiated. --- Pre-pause state (for history): Phase 2 complete. Phase 3 available. M3.1 (Intel Feed Density Redesign) added — Surface-inspired dense list, multi-axis filters, raw scores, shared tier config. M3.1 blocks M8. Spec §6.3 amended (Amendment S). Build order: M3.1 → M8; M9/M10 independent. Start with MC-080 (tier config) + MC-082 (dense list layout)."
 tags:
   - dashboard
   - dataviz

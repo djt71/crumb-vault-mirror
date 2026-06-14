@@ -301,3 +301,14 @@ reversibility — same keep-files philosophy as the FIF/opportunity-scout decom 
 
 ---
 
+## 2026-06-14 — PAUSED note (agentic-sunset AS-030)
+
+mission-control is **paused, not closed.** The dashboard server (`com.crumb.dashboard`, :3100) has been deliberately stopped since 2026-06-01 (operator decision, predates the teardown). agentic-sunset kept the entire dashboard/publishing stack for possible repurpose and did NOT restart the dashboard.
+
+- **Live (reboot-verified AS-021, 2026-06-14):** cloudflared tunnel, vault-web :8843 (HTTP 200), vault-rebuild (15m), qmd-index, system-stats — the Quartz publishing + ops-feeder half of the stack runs normally.
+- **Down (deliberate):** `com.crumb.dashboard` Express server. Restart is a standalone operator decision: re-enable the plist + `npm run build` (repo `/Users/danny/openclaw/crumb-dashboard`).
+
+**Impact on backlog:** MC panels that depend on decommissioned agentic upstreams are no longer buildable as specified — their cross-project deps are mooted in `_system/docs/cross-project-deps.md`: tess-operations rows (XD-001/004/008/013/016/022/023), A2A rows (XD-006/010/012), autonomous-operations rows (XD-017/018). MC features on surviving upstreams (Google Workspace MCP — XD-019/020/021) remain dormant-but-viable. The three "no upstream project exists" wishlist rows (XD-005/007/009) are untouched — they were never blocked on teardown'd infra.
+
+**Phase unchanged** — stays TASK, `status: paused`. Reactivation is operator-initiated.
+

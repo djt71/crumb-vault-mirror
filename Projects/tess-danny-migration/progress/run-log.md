@@ -368,3 +368,19 @@ applied keep/drop, validated, bootstrapped from gui/503 (no sudo — danny's own
 service reads /Users/tess), TDM-061 permanently disable + archive tess plists, TDM-062
 reclaim/archive tess-side data (closes rollback window), TDM-063 final docs + commit.
 Rollback until P7: `launchctl enable gui/501/<label>` then bootstrap (baseline b78f638e).
+
+## 2026-06-14 — CLOSEOUT: tess-danny-migration → DONE (P7 superseded by agentic-sunset, AS-030)
+
+**Trigger:** agentic-sunset AS-030. The migration reached M6 GREEN 2026-06-09 (system fully live on danny, operator-verified). P7 (retire tess) was explicitly superseded by agentic-sunset on 2026-06-10 (XD-026) and executed there rather than under TDM-060..063.
+
+**P7 disposition (executed in agentic-sunset, not here):**
+- **TDM-060** consumer-graph trace → covered by agentic-sunset AS-012 + AS-022 (confirmed no danny service reads /Users/tess; in the process found + fixed the drive-sync stale-source bug that was syncing the frozen /Users/tess vault to Google Drive/NotebookLM).
+- **TDM-061** disable + archive tess plists → agentic-sunset AS-022 (2026-06-12, operator sudo): all tess + openclaw user-domain LaunchAgents disabled + archived to `_system/archive/launchagents-retired/{tess,openclaw}-user/`; live secrets (TG bot token ×4, hc API key) redacted before commit.
+- **TDM-062** reclaim/archive tess-side data → folded into agentic-sunset AS-032 archival proposal (deferred, operator-gated).
+- **TDM-063** final docs → this entry.
+
+**Boot verification:** agentic-sunset AS-021 (2026-06-14) — post-reboot `launchctl list` shows zero tess/openclaw resurrection; the danny keep-set (10 `com.crumb.*`) comes up clean. The rollback window is formally closed (tess files archived, not deleted — still reversible per `restore-snapshot.md`).
+
+**Disposition:** phase TASK → DONE, status → done. Stays in `Projects/` (archival is operator-initiated; vault/ops project, no repo).
+
+**Cross-refs:** XD-026 resolved in cross-project-deps.md; agentic-sunset run-log 2026-06-14; tess-v2 also closed DONE this task.

@@ -350,3 +350,41 @@ cancelled — roster doc updated.)
 **Risk:** low (gitignore extension + untrack of toolchain churn, within AS-027 scope). Proceed + flag.
 
 **Remaining:** AS-021 (operator reboot resurrection test) is now the **sole** open human-gated item before AS-030. Its only check is a post-reboot `launchctl list` match against the 10-label end-state above. AS-030 closeouts unblock the moment AS-021 passes; then AS-031 soak (7 days) → AS-032.
+
+## 2026-06-14 — AS-021: reboot resurrection test (operator) — PASS
+
+**Trigger:** Operator rebooted the machine and returned ("just completed the reboot"). This is the sole boot-gated check.
+
+**Method:** post-reboot `launchctl list` (danny / uid 503) reconciled against the design end-state — keep-set match + scrapped-label resurrection check + running-service liveness.
+
+**Timing observation (recorded for completeness):** first `launchctl list` immediately on return showed **zero** `com.crumb.*` labels — GUI login agents had not finished bootstrapping. Seconds later all 10 were present. Resurrection is clean but not instantaneous; not a failure mode, just login-agent bootstrap latency. (Worth knowing for any future automated reboot check — don't sample launchctl in the first ~minute post-login.)
+
+**Result — exact match to end-state inventory (dashboard excluded):**
+- **10 `com.crumb.*` labels live**, reconciled 1:1 against the service-inventory disposition table: 8 idle scheduled jobs (system-stats `KEEP-D`, vault-backup `KEEP-P`, backup-status `KEEP-P`, vault-gc `KEEP-P`, vault-health `KEEP-P`/new, drive-sync `FIX`, vault-rebuild `KEEP-D`, qmd-index `KEEP-D`) + 2 running services (cloudflared **PID 1195**, vault-web **PID 1198**).
+- **Liveness:** vault-web :8843 → HTTP 200; cloudflared holds live PID.
+- **Scrapped-label resurrection check — all ABSENT:** `com.tess.*`, `com.tess.v2.*`, `ai.openclaw.*` (incl. gateway), `ai.hermes.gateway`, `homebrew.mxcl.ollama`, `com.crumb.apple-snapshot`, `com.crumb.telemetry-rollup`. The AS-022 pre-sweep held — nothing from the tess/openclaw user domains came up either (login-gated, no GUI session).
+- **`com.crumb.dashboard`** correctly absent (override DB `=> disabled`; deliberately stopped since 2026-06-01 — restart remains a separate operator decision, not auto-restored).
+- Harmless: `com.crumb.telemetry-rollup` still reads `=> enabled` in the override registry but its plist is archived, so it cannot load — consistent with SCRAP.
+
+**Acceptance:** Post-reboot `launchctl list` matches end-state inventory exactly (dashboard excluded): **YES** ✓
+
+**Gate impact:** AS-021 was the last open human-gated item. AS-030 (project closeouts: tess-v2 → DONE, tess-danny-migration → DONE/P7-superseded, mission-control paused note, XD-026 resolve) is now fully unblocked — all deps (AS-021/022/024/027/028/029) done. Then AS-031 7-day soak → AS-032 final compound + archival proposals.
+
+## 2026-06-14 — AS-030: project closeouts + XD sweep — DONE
+
+**Context inventory (in context, 0 new doc loads beyond targets):** tasks.md (AS-030 row + deps), the three target project-states (tess-v2, tess-danny-migration, mission-control) + their run-log tails, cross-project-deps.md (full). Risk: low (planned closeouts on reversible phase fields + a tracking table). Proceeded after operator go-ahead.
+
+**Closeouts executed:**
+- **tess-v2 → DONE** (was IMPLEMENT). Closeout entry written. The Tess execution layer it built is fully decommissioned + reboot-verified absent, so the project's subject no longer exists; the draft AC narrowing amendment is overtaken by events (no ratification needed). Durable knowledge preserved independently (23 Category A patterns + index + 3 `solutions/` extractions; repo retained). KB-bearing → stays in Projects/; archival deferred to AS-032.
+- **tess-danny-migration → DONE** (was TASK, status → done). Closeout entry written. P7 (retire tess) was superseded by agentic-sunset and executed here: TDM-060 ↔ AS-012/022, TDM-061 ↔ AS-022, TDM-062 → AS-032, TDM-063 → the closeout entry. Rollback window formally closed by AS-022/AS-021 (archived, not deleted).
+- **mission-control → PAUSED** (phase unchanged at TASK, status active → paused). NOT closed — the dashboard/publishing stack is kept; only `com.crumb.dashboard` is deliberately stopped (since 2026-06-01). Paused note added to project-state + run-log; restart is a standalone operator decision.
+
+**XD table sweep (`_system/docs/cross-project-deps.md`):**
+- **XD-026 → Resolved** (with resolution text + date 2026-06-14).
+- **17 rows mooted** (status → `mooted`, dated note): tess-operations rows XD-001/004(FIF)/008/013/016/022/023; A2A rows XD-003/006/010/012; autonomous-operations rows XD-017/018; tess-v2 rows XD-024/025; FIF/MAD row XD-002/011. Marked in place (disable+archive ethos — not deleted), reversible.
+- **XD-027 note updated** — AS-side (M6 AS-025–029 + AS-021) now satisfied; VO-031/032 gated only on VO-016. Row stays active (it's vault-optimization's gate to close).
+- **6 rows left active by judgment, flagged to operator:** XD-005/007/009 ("no upstream project exists" — MC wishlist, never blocked on teardown'd infra); XD-019/020/021 (upstream mcp-workspace-integration survives — Google Workspace MCP is now native/live; dormant only because MC is paused).
+
+**Acceptance:** Both project-states phase DONE with closeout entries; XD-026 in Resolved; mooted rows marked: **YES** ✓
+
+**Gate impact:** Only AS-031 (7-day soak) and AS-032 (final compound + archival proposals) remain. AS-031 has nothing to *do* today beyond starting the clock — daily green check (fresh backup tarball, drive-sync green from danny path, no alerts, vault-web up, tree clean) for 7 consecutive days. First soak day = 2026-06-14 (today's evidence: AS-018 confirmed 2 backup cycles; AS-021 keep-set green; vault-web :8843 → 200). Target soak completion ~2026-06-21 → then AS-032.

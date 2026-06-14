@@ -839,3 +839,23 @@ This inverted Z's writer-reader direction: Z had Tess writing the queue, Crumb r
 - Pattern-enforcement proposal: draft, 8 open questions for operator
 - TV2-057d still the active task — not touched this session
 - Two clean commits, zero errors at vault-check (4 non-blocking XD warnings, pre-existing)
+
+## 2026-06-14 — CLOSEOUT: tess-v2 → DONE (agentic-sunset AS-030)
+
+**Trigger:** agentic-sunset AS-030 project closeout. AS-021 reboot resurrection test passed 2026-06-14 — the entire Tess execution layer (`com.tess.v2.*` launchd services) is decommissioned, archived, and verified absent across a cold boot. tess-v2's subject no longer exists.
+
+**Disposition:** phase IMPLEMENT → DONE. Not archived — stays in `Projects/` (KB-bearing); archival to `Archived/` is AS-032's separate operator proposal.
+
+**What this closes:**
+- The draft AC narrowing amendment (`status: draft`, never ratified) is overtaken by events: it scoped Tess to "autonomous execution of 15 scheduled launchd services only," and those services are exactly what agentic-sunset scrapped. No ratification needed.
+- TV2-057d (promotion wiring) and all in-flight scheduled-services work — moot; the infrastructure is removed.
+- The pattern-enforcement proposal (draft, 8 open questions) remains a standing future-session item, independent of this closure.
+
+**What survives this closure (preserved independently):**
+- 23 Category A engineering patterns — `_system/docs/tess-v2-durable-patterns.md` (index) + the 23 design docs tagged `scope: general`.
+- 3 durable-pattern extractions — `_system/docs/solutions/{live-soak-beats-benchmark, staged-spike-with-bail, lenient-parsing-before-evaluation}.md`.
+- Repo `/Users/danny/crumb-apps/tess-v2` retained (disable+archive, never delete).
+
+**Reversibility:** phase is reversible; repo + design docs intact. Restore = phase → IMPLEMENT + re-bootstrap archived plists (agentic-sunset `design/restore-snapshot.md`).
+
+**Cross-refs:** agentic-sunset run-log 2026-06-14 (AS-021/AS-030); XD-024 + XD-025 mooted in cross-project-deps.md; tess-danny-migration also closed DONE this task.
