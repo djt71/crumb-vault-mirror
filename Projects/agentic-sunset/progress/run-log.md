@@ -416,3 +416,9 @@ cancelled — roster doc updated.)
 **Model routing:** all work main-session Opus 4.8; no Sonnet delegation — the session was judgment-dense (project-lifecycle closeouts, XD-row classification, a tool-selection correction). Appropriate. No token-heavy anomalies.
 
 **State for next session:** AS-031 soak day 2 (2026-06-15) — run the 5-point check at session opener, tick the tracker. Only AS-031 + AS-032 remain.
+
+## 2026-06-14 — Cross-project concurrence (vault-optimization VO-016)
+
+Recorded from a vault-optimization session for XD-027 traceability — **not AS work**, no AS action required. VO-016 froze the joint-surface ownership matrix (`Projects/vault-optimization/keep-set-manifest.md` Appendix A).
+
+**AS concurrence:** AS M6 (AS-025–029) complete 2026-06-12 + AS-021 reboot passed 2026-06-14 fully satisfy the AS-side gates the matrix records — CLAUDE.md (AS-025-first), skills/agents (AS-028 sunset-tied removal + AS M6 sign-off), harness memory (AS-029 ownership, VO never writes), `_openclaw/_tess/_staging` (AS-026/027, VO never touches). VO-031/032 (B4/B5 primitive batches) were gated only on VO-016; this freeze closes that gate. See `Projects/vault-optimization/progress/run-log.md` (VO-016 entry, same date). AS-031 soak tracker unaffected (day 1 already logged 2026-06-14; next check day 2 = 2026-06-15).

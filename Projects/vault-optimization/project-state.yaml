@@ -4,12 +4,12 @@ type: system
 phase: IMPLEMENT
 last_gate: TASK-to-IMPLEMENT
 created: 2026-06-10
-updated: 2026-06-12
+updated: 2026-06-14
 related_projects:
   - agentic-sunset
 # No repo_path: vault-only project — produces no code, only vault restructuring artifacts.
 # External repo gate explicitly skipped (vault-only software per CLAUDE.md §3b).
 active_task: null
-next_action: "VO-026 done + APPROVED 2026-06-12 (B6 pack frozen: B6-1..4 as drafted, B6-5 full six-counter sweep; apply waits at VO-033). M3 close remaining: drift diff (run at actual close). VO-016 (Appendix A freeze) on AS session boundary; VO-031/032/033 apply batches follow. Feed-backlog operator item resolved 2026-06-11 (discarded)."
+next_action: "VO-016 DONE 2026-06-14 — Appendix A ownership matrix FROZEN + AS concurrence in both run-logs. AS M6 gate cleared per XD-027 (AS-025–029 complete 2026-06-12 + AS-021 reboot 2026-06-14). **M2 + M3 now both COMPLETE** (all four changeset packs B3–B6 drafted + approved; B3 partially applied early via operator manual sweep 2026-06-12). VO-031/032 unblocked (blocked→pending). **Project poised at M4 entry — the destructive batch sequence (STOP-AND-ASK).** Next = VO-027 (B0 git-remote restore-drill gate, HIGH-risk) which also folds in the M3-close/M4-entry inventory drift diff (batch-open check per amendment A2). Then B1 Archived/ → B2 attachments/logs → B3 docs (remainder past the 12 early rows) → B4 scripts/protocols/overlays → B5 skills/agents → B6 ceremony (VO-028–033), then M5 soak (VO-034–036). No VO work proceeds without operator go-ahead to enter M4."
 last_committed: 2026-06-12
 services: []

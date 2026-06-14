@@ -392,3 +392,19 @@ Fresh session carried VO-023 + VO-024 end-to-end: 13 pending-doc skims via one r
 **B3 status:** PARTIALLY APPLIED EARLY (12 rows of the delete list + their remediations). Remainder of B3 (root-doc deletes incl. feed-intel-processing-chain, tess-crumb-*, R5/R6/R8/R9/R10 rows, solutions deletes, skill-workflows orphans, etc.) still applies at VO-031 batch open — **batch-open checks must treat these 12 rows as done** (changeset-staleness check will surface them; this entry is the provenance).
 
 **Compound candidate (first instance):** operator-manual applies happen out-of-band when delete lists live in operator memory — batch discipline assumed Claude executes; vault detected the divergence only via session-end status check + Trash forensics. If a second out-of-band apply occurs, propose: approved-pack summary view for operator (one page, keep/delete columns) so manual sweeps work from the disposition list, not recall.
+
+## 2026-06-14 — VO-016 complete: Appendix A ownership matrix frozen (M2 closes)
+
+**Session start (fresh, vault-based state reconstruction):** project-state + run-log (full) + tasks.md + action-plan-summary + cross-project-deps.md (XD-027) + agentic-sunset project-state + AS run-log tail + manifest Appendix A. Context inventory: 6 project/system docs (standard tier); no overlays (unchanged — Crumb-internal infra); no skill invocations (direct task execution under IMPLEMENT).
+
+**Gate cleared:** XD-027 confirms AS-side fully satisfied — **AS M6 (AS-025–029) complete 2026-06-12 + AS-021 reboot passed 2026-06-14**. VO-016 was the only remaining gate on VO-031/032 (B4/B5 primitive batches); it was parked solely on AS session-boundary timing, now cleared.
+
+**VO-016 executed:**
+- **Appendix A frozen** (`keep-set-manifest.md`): header `NOT YET FROZEN` → `FROZEN 2026-06-14`; all 8 joint-surface rows owner + gate verified per D1 schema; added `Gate status` column recording per-gate met/pending/N-A (ownership frozen regardless of gate passage). Gate states: CLAUDE.md MET, skills/agents MET (AS M6), harness-memory N/A (AS-029 owns, VO never writes), `_openclaw/_tess/_staging` N/A (AS archived), scripts/protocols/overlays MET (this freeze), docs+solutions no-gate, `Archived/_attachments` PENDING (opens at VO-027 B0 restore-drill), live plists dashboard-locked + rest-per-manifest.
+- **AS concurrence recorded in both run-logs** (per AC): VO run-log = this entry; AS run-log = cross-project concurrence entry 2026-06-14 (explicitly tagged not-AS-work, soak tracker untouched).
+
+**VO-016 ACs:** all three pass — every joint surface has owner + gate per D1 schema ✓; AS run-log concurrence note exists ✓; matrix marked frozen ✓. tasks.md → done.
+
+**Milestone status: M2 COMPLETE** (VO-011–022 all done). **M3 already complete** (VO-023–026 all drafted + approved; B3 partially applied early via operator manual sweep 2026-06-12). **Project now poised at M4 entry** — the destructive batch sequence. Next task **VO-027 (B0 git-remote restore-drill gate)** is HIGH-risk and stop-and-ask; it is the gate before any deletion batch and folds in the M3-close/M4-entry inventory drift diff (batch-open check per peer-review amendment A2). No further VO work is unblocked without operator go-ahead on entering M4.
+
+**Compound:** no new solutions doc — VO-016 was a clean timing-gated freeze with no surprises; AS-side gates resolved exactly as XD-027 predicted. Confirming instance only.

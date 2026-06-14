@@ -367,18 +367,22 @@ dispositions here. Rubric reflects activity evidence.
 | think-different | project record | structural-necessity (archival policy) | phase ARCHIVED in Projects/ — KB exception per CLAUDE.md (standalone KB artifacts stay) | keep | VO (B3) | — |
 | vault-optimization | project record | proven-active | this project | keep | VO (this project) | — |
 
-## Appendix A — joint-surface ownership matrix (VO-016; NOT YET FROZEN)
+## Appendix A — joint-surface ownership matrix (VO-016; FROZEN 2026-06-14)
 
-Schema per design D1. To be completed + frozen at VO-016 with AS concurrence
-recorded in both run-logs.
+Schema per design D1. **Frozen 2026-06-14** (VO-016). AS concurrence recorded in
+both run-logs: VO run-log VO-016 entry (2026-06-14) and AS run-log cross-project
+concurrence entry (2026-06-14). All AS-side gates satisfied — AS M6 (AS-025–029)
+complete 2026-06-12 + AS-021 reboot passed 2026-06-14 (XD-027). The `Gate status`
+column records whether each gate is *met* (ownership is frozen regardless; gate
+status governs when VO may act on the surface).
 
-| Surface | Proposed owner | Gate | Status |
-|---|---|---|---|
-| CLAUDE.md | AS (AS-025 first), VO-007 second pass | AS-025 complete | draft |
-| `.claude/skills`, `.claude/agents` | joint — AS-028 removes sunset-tied, VO-005 optimizes remainder | AS M6 sign-off | draft |
-| Harness memory (`~/.claude/.../memory/`) | AS (AS-029) | analysis-only for VO | draft |
-| `_openclaw/`, `_tess/`, `_staging/` | AS (AS-026/027) | VO never touches | draft |
-| `_system/scripts/`, protocols, overlays | VO | Appendix A frozen | draft |
-| `_system/docs/` + solutions | VO (VO-006) | — | draft |
-| `Archived/`, `_attachments/` | VO (VO-004/008) | backup gate | draft |
-| Live plists (10 incl. dashboard stack) | dashboard stack: operator-kept (A3); rest: per manifest | new decision required to touch dashboard stack | draft |
+| Surface | Owner | Gate | Gate status | Frozen |
+|---|---|---|---|---|
+| CLAUDE.md | AS (AS-025 first), VO-007 second pass | AS-025 complete | MET (AS-025 done; B6 second pass applies at VO-033) | frozen |
+| `.claude/skills`, `.claude/agents` | joint — AS-028 removes sunset-tied, VO-005 optimizes remainder | AS M6 sign-off | MET (AS M6 complete 2026-06-12) | frozen |
+| Harness memory (`~/.claude/.../memory/`) | AS (AS-029) | analysis-only for VO | N/A — VO never writes (AS-029 owns) | frozen |
+| `_openclaw/`, `_tess/`, `_staging/` | AS (AS-026/027) | VO never touches | N/A — out of VO scope (AS archived 2026-06-12) | frozen |
+| `_system/scripts/`, protocols, overlays | VO | Appendix A frozen | MET (this freeze) | frozen |
+| `_system/docs/` + solutions | VO (VO-006) | — | no gate | frozen |
+| `Archived/`, `_attachments/` | VO (VO-004/008) | backup gate (VO-027) | PENDING — opens at VO-027 B0 restore-drill | frozen |
+| Live plists (10 incl. dashboard stack) | dashboard stack: operator-kept (A3); rest: per manifest | new decision required to touch dashboard stack | dashboard stack: locked (operator decision required); rest: per manifest | frozen |
