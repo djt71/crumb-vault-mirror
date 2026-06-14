@@ -402,3 +402,17 @@ cancelled — roster doc updated.)
 - Day 5 — 2026-06-18 — pending
 - Day 6 — 2026-06-19 — pending
 - Day 7 — 2026-06-20 — pending → on 7/7 green, mark AS-031 done, advance to AS-032
+
+## 2026-06-14 — Session-end (compound evaluation)
+
+**Session summary:** Operator rebooted → AS-021 reboot resurrection test PASSED (10-label keep-set resurrects, nothing agentic comes back, dashboard correctly off). AS-030 closeouts executed (tess-v2 → DONE, tess-danny-migration → DONE, mission-control → paused; XD-026 resolved + 17 rows mooted). AS-031 soak started, day 1 GREEN. `claude-ai-context.md` refreshed to current state. Two commits + pushes (ac101ad4, 9d5cc303), both vault-check 0/0.
+
+**Compound evaluation:**
+1. **`/schedule` (cloud routines) cannot run local-state checks — tool-selection gotcha.** I offered, and the operator agreed to, a `/schedule` for the AS-031 soak — then caught at setup that `/schedule` creates *cloud* agents that can't reach this Mac's launchd, `localhost:8843`, the iCloud backup dir, or the local working tree (4 of the 5 soak checks). Self-corrected to a session-opener-driven check (zero new infra, on-ethos for a teardown). **Routing:** recorded to the `recurring-patterns` auto-memory (operational/tool-selection gotcha class, alongside CLI-flag-hallucination and prompt-env-mismatch). General lesson: match the scheduler's execution locus to where the state lives — cloud scheduler ⇒ repo/remote state only; local launchd/cron or session-opener ⇒ host state.
+2. **`session-end-protocol.md` carries stale dead-infra steps.** Step 2 (Amendment Z `tess session-report` → `~/.tess/state/session_reports.db`) and Step 8 (`rm -f _openclaw/inbox/.processed/*`) both reference infrastructure this very project decommissioned (Tess runtime; `_openclaw/` archived to `Archived/`). The doc (updated 2026-04-06) predates the teardown. **Routing:** flag for vault-optimization / next audit — same class as the AS-028 "stale skill body-text residuals" open item (audit §15, learning-plan §7, researcher). Did NOT run those two steps this session (dead infra). Not fixing inline — out of AS scope; logged for the owning sweep.
+
+**Code review sweep:** N/A — agentic-sunset has no `repo_path` (vault-only teardown). No code tasks this session; all changes are vault docs (YAML/markdown). Build verification: N/A (no build_command).
+
+**Model routing:** all work main-session Opus 4.8; no Sonnet delegation — the session was judgment-dense (project-lifecycle closeouts, XD-row classification, a tool-selection correction). Appropriate. No token-heavy anomalies.
+
+**State for next session:** AS-031 soak day 2 (2026-06-15) — run the 5-point check at session opener, tick the tracker. Only AS-031 + AS-032 remain.

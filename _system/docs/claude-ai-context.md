@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: active
 created: 2026-02-21
-updated: 2026-06-12
+updated: 2026-06-14
 tags:
   - system
 ---
@@ -14,10 +14,10 @@ Orientation artifact for a fresh session reading this repo (claude.ai chat, a
 new Claude Code session, or any agent cloning `github.com/djt71/crumb-vault`).
 Read this first — it is sufficient for most questions.
 
-Last updated: 2026-06-12. **The agentic infrastructure decommission is nearly
-complete** — project `agentic-sunset`: the self-built always-on agent stack
-(Tess/OpenClaw/Hermes) drifted from original intent, produced zero revenue, and
-~90% of its function is now native in Claude.AI / Claude Code.
+Last updated: 2026-06-14. **The agentic infrastructure decommission is functionally
+complete — only a 7-day stability soak remains** (project `agentic-sunset`): the
+self-built always-on agent stack (Tess/OpenClaw/Hermes) drifted from original intent,
+produced zero revenue, and ~90% of its function is now native in Claude.AI / Claude Code.
 
 - **Dark since 2026-06-10/11:** all agentic launchd labels + Ollama booted out
   (incl. the system-level `ai.openclaw.gateway` LaunchDaemon survivor found at
@@ -33,8 +33,14 @@ complete** — project `agentic-sunset`: the self-built always-on agent stack
   bridge-dispatch section removed; **vault `_openclaw/`, `_tess/`,
   `_staging/TV2-*` archived to `Archived/`** (pipeline.db external, spared);
   feed-pipeline skill retired; churn logs gitignored.
-- **Remaining:** AS-021 reboot test + AS-022 dormant-plist sweep (operator-
-  assisted), AS-030 closeouts, AS-031 7-day soak, AS-032 compound/archival.
+- **Reboot-verified 2026-06-14 (AS-021):** a cold boot resurrects exactly the
+  10-label `com.crumb.*` keep-set and nothing agentic — the decommission holds
+  across reboot. AS-022 dormant-plist sweep done 2026-06-12.
+- **Closeouts done (AS-030, 2026-06-14):** tess-v2 → DONE, tess-danny-migration →
+  DONE (P7 superseded), mission-control → paused; `cross-project-deps.md` swept
+  (XD-026 resolved, 17 rows mooted).
+- **Remaining:** AS-031 7-day soak (day 1 GREEN 2026-06-14; 7/7 target 2026-06-20)
+  → AS-032 compound routing + archival proposals.
 - **Model policy:** Crumb runs both Opus 4.8 and Fable 5 (top-tier frontier
   models only — tier is the non-negotiable, not the model line).
 
@@ -124,11 +130,10 @@ Primary revenue bet: **Firekeeper Books** (Prompt 1).
 State below is pulled from each project's `project-state.yaml` (authoritative).
 Directory location is authoritative for archived-vs-active; project docs carry no status field.
 
-### tess-v2 — software / system / four-phase  *(closing: → DONE at agentic-sunset AS-030)*
-- **Phase:** IMPLEMENT · **active_task:** TV2-057d · **updated:** 2026-06-01
-- **Status:** Tess v2 sole-operator on a reduced launchd service set (was ~15 at cutover; trimmed hard by the decommission wave). Amendment AC (draft) narrows Tess to scheduled-services-only execution and retracts the orchestrator role; Amendment Z superseded. 23 Category-A engineering patterns extracted to `_system/docs/tess-v2-durable-patterns.md` (survive project narrowing). Runtime: Kimi K2.5 → GPT-5.4 experimentation underway.
-- **Next:** ratify AC via operator approval, then upstream-work-bridge analysis OR resume TV2-057d promotion wiring (operator discretion). Open follow-ups: GPT-5.4 soak, persona-spec durable home, K2-family retest pinning, AD-008 supersession doc.
-- **Key files:** `Projects/tess-v2/design/spec-amendment-AC-execution-surfaces.md`, `Projects/tess-v2/progress/run-log.md`; repo `/Users/danny/crumb-apps/tess-v2/`
+### tess-v2 — software / system / four-phase  *(DONE — closed at agentic-sunset AS-030, 2026-06-14)*
+- **Phase:** DONE · **active_task:** — · **updated:** 2026-06-14
+- **Status:** Closed. The Tess execution layer it built was fully decommissioned by agentic-sunset (all `com.tess.v2.*` labels scrapped + reboot-verified absent at AS-021); the draft Amendment AC (which scoped Tess to scheduled-services-only) is overtaken by events — those services no longer exist. **Durable knowledge preserved independently:** 23 Category-A engineering patterns in `_system/docs/tess-v2-durable-patterns.md` + 3 `solutions/` extractions; repo retained (disable+archive, not deleted). Stays in `Projects/` (KB-bearing); move-to-`Archived/` deferred to AS-032 operator proposal.
+- **Key files:** `Projects/tess-v2/progress/run-log.md` (closeout 2026-06-14); `_system/docs/tess-v2-durable-patterns.md`; repo `/Users/danny/crumb-apps/tess-v2/`
 
 ### customer-intelligence — career / knowledge / three-phase
 - **Phase:** ACT · **updated:** 2026-04-27
@@ -148,11 +153,11 @@ Directory location is authoritative for archived-vs-active; project docs carry n
 - **Next:** operator decides peer-review-the-plan vs. PLAN→TASK transition; then run M0 spikes (OAI-024..027).
 - **Key files:** `Projects/obsidian-applenotes-import/design/action-plan.md`, `tasks.md`; repo `/Users/danny/code/obsidian-applenotes-import`
 
-### mission-control — software / system / four-phase
-- **Phase:** TASK (Phase 3) · **updated:** 2026-03-30
-- **Status:** Phase 2 done (M5/M6/M7). M3.1 (Intel Feed Density Redesign) done. **The dashboard service was stopped 2026-06-01** (operator no longer wants it); project kept active, not archived.
-- **Next:** M3.1 → M8 (Intel Production); M9/M10 independent. Reassess scope given dashboard pause.
-- **Key files:** `Projects/mission-control/design/tasks.md`, `progress/run-log.md`; repo `/Users/danny/openclaw/crumb-dashboard`
+### mission-control — software / system / four-phase  *(paused)*
+- **Phase:** TASK (Phase 3) · **status:** paused · **updated:** 2026-06-14
+- **Status:** **Paused, not closed (agentic-sunset AS-030, 2026-06-14).** The dashboard server (`com.crumb.dashboard`, :3100) has been deliberately stopped since 2026-06-01; the rest of the publishing stack (cloudflared, vault-web :8843, vault-rebuild, qmd-index) stays live and reboot-verified (AS-021). Many planned panels depended on now-decommissioned agentic upstreams — those cross-project deps are mooted in `cross-project-deps.md`. Phase 2 done (M5/M6/M7); M3.1 done.
+- **Next:** reactivation is operator-initiated (re-enable dashboard plist + `npm run build`). Surviving-upstream features (Google MCP — XD-019/020/021) remain dormant-but-viable.
+- **Key files:** `Projects/mission-control/progress/run-log.md`; repo `/Users/danny/openclaw/crumb-dashboard`
 
 ### opportunity-scout — software / system / four-phase
 - **Phase:** TASK · **updated:** 2026-05-28
@@ -174,7 +179,7 @@ Directory location is authoritative for archived-vs-active; project docs carry n
 ### think-different — learning / KB exception
 - **Phase:** ARCHIVED, but kept in `Projects/` (not `Archived/`) because it holds 45 biographical profiles in the active knowledge graph. `updated:` 2026-02-18.
 
-## Live Services (verified via `launchctl`, 2026-06-12 post-M3)
+## Live Services (verified via `launchctl`, 2026-06-12 post-M3; reboot-verified 2026-06-14 via AS-021)
 
 One clean `com.crumb.*` generation — 10 labels, zero `com.tess.*`/`ai.*`:
 - **Plumbing:** com.crumb.{vault-backup 3am, backup-status 15m, drive-sync 5am, vault-gc 4am, vault-health 2am, system-stats, qmd-index 5:30am}
@@ -195,7 +200,7 @@ Everything agentic is retired — plists in `_system/archive/launchagents-retire
 
 ## Open Items
 
-- **agentic-sunset endgame:** AS-018 3 AM fire check (2026-06-13), AS-021/022 (operator: reboot + sudo sweep), AS-030 closeouts (tess-v2 → DONE, tess-danny-migration → DONE, XD sweep), AS-031 soak, AS-032 compound routing.
+- **agentic-sunset endgame:** AS-018/027 confirmed (06-13/14), AS-021 reboot test PASSED + AS-022 sweep + AS-030 closeouts all DONE (2026-06-14). **Only AS-031 7-day soak (day 1 GREEN, 7/7 target 2026-06-20) + AS-032 compound routing/archival remain.**
 - **opportunity-scout & feed-intel-framework:** pipelines decommissioned but projects not archived — archival proposals come at AS-032.
 - **firekeeper-books project-state stale** (2026-04-07) — primary revenue bet is due a status refresh.
 - **Stale skill body-text residuals:** audit §15 (Tess harness audit), learning-plan §7 (Tess check-ins), researcher (bridge-dispatch invocation rows) reference dead infra — descriptions are clean (AS-028); route body cleanup via vault-optimization or next audit.

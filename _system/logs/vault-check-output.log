@@ -1,6 +1,6 @@
 Mode: pre-commit (2 staged files)
 === 1. Frontmatter Schema Validation ===
-  Checked 0 files, 0 with issues
+  Checked 1 files, 0 with issues
 
 === 2. Summary Freshness Check ===
   Checked 0 summaries, 0 stale
@@ -28,10 +28,12 @@ Mode: pre-commit (2 staged files)
   Checked 0 kb tags, 0 invalid
 
 === 10. Project-State Active Task Consistency ===
-  Checked 12 project states, 0 inconsistent
+  Skipped (no staged project-state or tasks files)
+  Checked 0 project states, 0 inconsistent
 
 === 11. Project-State last_committed Field ===
-  Checked 12 project states, 0 missing last_committed
+  Skipped (no staged project-state files)
+  Checked 0 project states, 0 missing last_committed
 
 === 12. DONE Project Design File Warning ===
   Skipped (no staged design files)
@@ -53,7 +55,8 @@ Mode: pre-commit (2 staged files)
   Checked 0 orientation MOCs, 0 with low synthesis density, 0 with thin one-liners
 
 === 22. Repo Path Validation ===
-  Checked 5 repo paths, 0 issues
+  Skipped (no staged project-state files)
+  Checked 0 repo paths, 0 issues
 
 === 23. Code Review Gate ===
   Skipped (no staged task or run-log files)
@@ -82,7 +85,7 @@ Mode: pre-commit (2 staged files)
   Skipped (no staged run-log files)
 
 === 31. Broken Wikilink Detection ===
-  Checked 1 files, 0 broken links in 0 files
+  Checked 2 files, 0 broken links in 0 files
 
 === Solution Doc Track Schema ===
   Checked 0 solution docs, 0 track issues
