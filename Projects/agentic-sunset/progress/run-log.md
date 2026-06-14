@@ -387,4 +387,18 @@ cancelled — roster doc updated.)
 
 **Acceptance:** Both project-states phase DONE with closeout entries; XD-026 in Resolved; mooted rows marked: **YES** ✓
 
-**Gate impact:** Only AS-031 (7-day soak) and AS-032 (final compound + archival proposals) remain. AS-031 has nothing to *do* today beyond starting the clock — daily green check (fresh backup tarball, drive-sync green from danny path, no alerts, vault-web up, tree clean) for 7 consecutive days. First soak day = 2026-06-14 (today's evidence: AS-018 confirmed 2 backup cycles; AS-021 keep-set green; vault-web :8843 → 200). Target soak completion ~2026-06-21 → then AS-032.
+**Gate impact:** Only AS-031 (7-day soak) and AS-032 (final compound + archival proposals) remain. AS-031 has nothing to *do* today beyond starting the clock — daily green check (fresh backup tarball, drive-sync green from danny path, no alerts, vault-web up, tree clean) for 7 consecutive days. First soak day = 2026-06-14 (today's evidence: AS-018 confirmed 2 backup cycles; AS-021 keep-set green; vault-web :8843 → 200). Target soak completion 2026-06-20 → then AS-032.
+
+## AS-031 — 7-Day Soak Tracker (started 2026-06-14)
+
+**Daily green check, 5 points:** (1) fresh backup tarball under `com.crumb.vault-backup`; (2) drive-sync green from the danny path; (3) no healthchecks alerts (check stays paused); (4) vault-web :8843 up + keep-set = 10 `com.crumb.*`; (5) working tree clean. **Target: 7 consecutive green → AS-031 done → AS-032.**
+
+**Mechanism (chosen over `/schedule`):** `/schedule` creates *cloud* routines that cannot reach this Mac's launchd / `localhost:8843` / iCloud backup dir / local working tree — so it cannot run this soak. Driving it instead via the **session-opener** (zero new daemon — on-ethos for a teardown): each Crumb session, run the 5-point check and tick the day below. No-session days are backfilled after the fact from `_system/logs/backup-status.json` + `_system/logs/vault-backup-last.json` (the backup writes daily regardless of sessions). Check commands captured in Day 1 below. *(Alt available on request: a temporary local launchd timer, auto-removed at AS-032 — declined by default as it re-adds the exact infra this project removes + risks AS-027-style commit churn.)*
+
+- **Day 1 — 2026-06-14 ✅ GREEN.** Backup: `status: ok`, `crumb-vault-2026-06-14_0300.tar.gz` (120.2 MB), ageHours 16, marker agrees. Drive-sync: post-commit hook ran 19:11 from danny path — NotebookLM + Computer sync DONE, no errors (`/tmp/drive-sync.log`). Alerts: healthchecks paused, none. vault-web :8843 → HTTP 200; keep-set = 10 `com.crumb.*` (reboot-verified earlier today via AS-021). Tree: clean post-commit `ac101ad4`. (TimeMachine sub-status still `unknown`/null — known separate check, out of soak scope; noted for AS-032.)
+- Day 2 — 2026-06-15 — pending
+- Day 3 — 2026-06-16 — pending
+- Day 4 — 2026-06-17 — pending
+- Day 5 — 2026-06-18 — pending
+- Day 6 — 2026-06-19 — pending
+- Day 7 — 2026-06-20 — pending → on 7/7 green, mark AS-031 done, advance to AS-032

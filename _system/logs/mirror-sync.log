@@ -814,3 +814,4 @@
 2026-06-12 17:48:40 SYNC firekeeper-books: sanity check → spec realignment + M-1B local pipeline spike
 2026-06-13 20:29:34 SYNC firekeeper-books: M-1B session 1 — local pipeline first light (Z-Image)
 2026-06-14 17:14:27 SYNC agentic-sunset: AS-018 + AS-027 done — two scheduler cycles confirmed, last-run marker churn closed
+2026-06-14 19:11:15 SYNC agentic-sunset: AS-021 reboot test PASS + AS-030 closeouts done
