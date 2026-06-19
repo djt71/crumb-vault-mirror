@@ -1,11 +1,11 @@
 ---
 type: state
 status: active
-created: 2026-06-14
-updated: 2026-06-14
+created: 2026-06-18
+updated: 2026-06-18
 ---
 
-# Vault Health Notes — 2026-06-14
+# Vault Health Notes — 2026-06-18
 
 ## Warnings (85)
   WARNING: Projects/tess-v2/scripts/.venv/lib/python3.14/site-packages/idna-3.11.dist-info/licenses/LICENSE.md — no YAML frontmatter found
@@ -26,7 +26,6 @@ updated: 2026-06-14
   WARNING: Domains/Learning/moc-religion.md — 2 Core one-liner(s) have <10 chars of description after the link (§5.6.6)
   WARNING: Domains/Learning/moc-philosophy.md — 2 Core one-liner(s) have <10 chars of description after the link (§5.6.6)
   WARNING: Domains/Learning/moc-psychology.md — orientation MOC has 12 Core entries but Synthesis has <30 words
-  WARNING: Projects/tess-v2/progress/run-log-2026-03.md — 3026 lines (threshold: 1000) — consider rotation
   WARNING: Projects/mission-control/progress/run-log-2026-03a.md — 2161 lines (threshold: 1000) — consider rotation
   WARNING: Projects/feed-intel-framework/progress/run-log.md — session '## 2026-05-28 — Pipeline decommissioned (operator request)' mentions skill invocation but has no context inventory
   WARNING: Projects/agentic-sunset/progress/run-log.md — session '## 2026-06-10 — PLAN' mentions skill invocation but has no context inventory
@@ -34,6 +33,7 @@ updated: 2026-06-14
   WARNING: Projects/agentic-sunset/progress/run-log.md — session '## 2026-06-11 — Operator decision (cross-project, work-surfaces session): inbox consolidation' mentions skill invocation but has no context inventory
   WARNING: Projects/agentic-sunset/progress/run-log.md — session '## 2026-06-12 — AS-026: vault surgery (_openclaw/_tess/_staging archived)' mentions skill invocation but has no context inventory
   WARNING: Projects/agentic-sunset/progress/run-log.md — session '## 2026-06-12 — AS-027/028/029: gitignore churn, skills cleanup, memory refresh' mentions skill invocation but has no context inventory
+  WARNING: Projects/agentic-sunset/progress/run-log.md — session '## 2026-06-14 — Session-end (compound evaluation)' mentions skill invocation but has no context inventory
   WARNING: Projects/tess-v2/progress/run-log-2026-03.md — session '## 2026-03-29 — Feed intel actions: security + browser tools' mentions skill invocation but has no context inventory
   WARNING: Projects/tess-v2/progress/run-log-2026-03.md — session '## 2026-03-30b — Soak Extension + Kimi Soak Setup + DeepSeek Audit' mentions skill invocation but has no context inventory
   WARNING: Projects/tess-v2/progress/run-log-2026-03.md — session '## 2026-04-01e — Phase Transition: TASK → IMPLEMENT' mentions skill invocation but has no context inventory
@@ -93,9 +93,6 @@ updated: 2026-06-14
   WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-13-builder.md — broken link: [[Projects/tess-v2/design/scheduled-services]]
   WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-13-builder.md — broken link: [[agent-to-agent-communication/design/orchestration-patterns]]
   WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-13-builder.md — broken link: [[feed-intel-framework/insights/anthropic-roadmap]]
-
-## Git Status
-1 uncommitted file(s)
 
 ## Stale Projects (14+ days)
 customer-intelligence, think-different, opportunity-scout, semuta

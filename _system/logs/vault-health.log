@@ -13,3 +13,23 @@
 2026-06-14T06:06:59Z stale-projects: count=4 customer-intelligence, think-different, opportunity-scout, semuta
 2026-06-14T06:06:59Z OK: wrote health notes to /Users/danny/crumb-vault/_system/logs/vault-health-notes.md
 2026-06-14T06:06:59Z OK: warnings only — written to health notes
+2026-06-15T06:07:30Z vault-check: exit=1 errors=0 warnings=85
+2026-06-15T06:07:30Z git-status: clean=true 
+2026-06-15T06:07:30Z stale-projects: count=4 customer-intelligence, think-different, opportunity-scout, semuta
+2026-06-15T06:07:30Z OK: wrote health notes to /Users/danny/crumb-vault/_system/logs/vault-health-notes.md
+2026-06-15T06:07:30Z OK: warnings only — written to health notes
+2026-06-16T06:07:23Z vault-check: exit=1 errors=0 warnings=85
+2026-06-16T06:07:23Z git-status: clean=true 
+2026-06-16T06:07:23Z stale-projects: count=4 customer-intelligence, think-different, opportunity-scout, semuta
+2026-06-16T06:07:23Z OK: wrote health notes to /Users/danny/crumb-vault/_system/logs/vault-health-notes.md
+2026-06-16T06:07:23Z OK: warnings only — written to health notes
+2026-06-17T06:07:02Z vault-check: exit=1 errors=0 warnings=85
+2026-06-17T06:07:02Z git-status: clean=true 
+2026-06-17T06:07:02Z stale-projects: count=4 customer-intelligence, think-different, opportunity-scout, semuta
+2026-06-17T06:07:02Z OK: wrote health notes to /Users/danny/crumb-vault/_system/logs/vault-health-notes.md
+2026-06-17T06:07:02Z OK: warnings only — written to health notes
+2026-06-18T06:07:06Z vault-check: exit=1 errors=0 warnings=85
+2026-06-18T06:07:06Z git-status: clean=true 
+2026-06-18T06:07:06Z stale-projects: count=4 customer-intelligence, think-different, opportunity-scout, semuta
+2026-06-18T06:07:06Z OK: wrote health notes to /Users/danny/crumb-vault/_system/logs/vault-health-notes.md
+2026-06-18T06:07:06Z OK: warnings only — written to health notes

@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: active
 created: 2026-02-21
-updated: 2026-06-14
+updated: 2026-06-19
 tags:
   - system
 ---
@@ -14,7 +14,7 @@ Orientation artifact for a fresh session reading this repo (claude.ai chat, a
 new Claude Code session, or any agent cloning `github.com/djt71/crumb-vault`).
 Read this first — it is sufficient for most questions.
 
-Last updated: 2026-06-14. **The agentic infrastructure decommission is functionally
+Last updated: 2026-06-19. **The agentic infrastructure decommission is functionally
 complete — only a 7-day stability soak remains** (project `agentic-sunset`): the
 self-built always-on agent stack (Tess/OpenClaw/Hermes) drifted from original intent,
 produced zero revenue, and ~90% of its function is now native in Claude.AI / Claude Code.
@@ -201,6 +201,7 @@ Everything agentic is retired — plists in `_system/archive/launchagents-retire
 ## Open Items
 
 - **agentic-sunset endgame:** AS-018/027 confirmed (06-13/14), AS-021 reboot test PASSED + AS-022 sweep + AS-030 closeouts all DONE (2026-06-14). **Only AS-031 7-day soak (day 1 GREEN, 7/7 target 2026-06-20) + AS-032 compound routing/archival remain.**
+- **Residual cloud-side teardown state (found 2026-06-19):** tess-operations' server-side **Gmail filters** (TOP-017, on dturner71@gmail.com) survived the local teardown and silently force-archived ~3 months of personal mail (incl. the Beacon Zen sangha group) until operator-remediated 2026-06-19. **AS-032 to add an external-artifact sweep** — Google agent calendars, Drive `Agent/*` tree, and the "Tess Ops" Discord server may also persist. The AS inventory covered local host state only; externally-hosted config is invisible to `launchctl`/`crontab`/filesystem sweeps.
 - **opportunity-scout & feed-intel-framework:** pipelines decommissioned but projects not archived — archival proposals come at AS-032.
 - **firekeeper-books project-state stale** (2026-04-07) — primary revenue bet is due a status refresh.
 - **Stale skill body-text residuals:** audit §15 (Tess harness audit), learning-plan §7 (Tess check-ins), researcher (bridge-dispatch invocation rows) reference dead infra — descriptions are clean (AS-028); route body cleanup via vault-optimization or next audit.
