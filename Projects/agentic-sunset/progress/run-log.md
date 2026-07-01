@@ -389,19 +389,20 @@ cancelled — roster doc updated.)
 
 **Gate impact:** Only AS-031 (7-day soak) and AS-032 (final compound + archival proposals) remain. AS-031 has nothing to *do* today beyond starting the clock — daily green check (fresh backup tarball, drive-sync green from danny path, no alerts, vault-web up, tree clean) for 7 consecutive days. First soak day = 2026-06-14 (today's evidence: AS-018 confirmed 2 backup cycles; AS-021 keep-set green; vault-web :8843 → 200). Target soak completion 2026-06-20 → then AS-032.
 
-## AS-031 — 7-Day Soak Tracker (started 2026-06-14)
+## AS-031 — 7-Day Soak Tracker (started 2026-06-14) — ❌ VOID / FAILED (restarted 2026-07-01, see below)
 
 **Daily green check, 5 points:** (1) fresh backup tarball under `com.crumb.vault-backup`; (2) drive-sync green from the danny path; (3) no healthchecks alerts (check stays paused); (4) vault-web :8843 up + keep-set = 10 `com.crumb.*`; (5) working tree clean. **Target: 7 consecutive green → AS-031 done → AS-032.**
 
 **Mechanism (chosen over `/schedule`):** `/schedule` creates *cloud* routines that cannot reach this Mac's launchd / `localhost:8843` / iCloud backup dir / local working tree — so it cannot run this soak. Driving it instead via the **session-opener** (zero new daemon — on-ethos for a teardown): each Crumb session, run the 5-point check and tick the day below. No-session days are backfilled after the fact from `_system/logs/backup-status.json` + `_system/logs/vault-backup-last.json` (the backup writes daily regardless of sessions). Check commands captured in Day 1 below. *(Alt available on request: a temporary local launchd timer, auto-removed at AS-032 — declined by default as it re-adds the exact infra this project removes + risks AS-027-style commit churn.)*
 
 - **Day 1 — 2026-06-14 ✅ GREEN.** Backup: `status: ok`, `crumb-vault-2026-06-14_0300.tar.gz` (120.2 MB), ageHours 16, marker agrees. Drive-sync: post-commit hook ran 19:11 from danny path — NotebookLM + Computer sync DONE, no errors (`/tmp/drive-sync.log`). Alerts: healthchecks paused, none. vault-web :8843 → HTTP 200; keep-set = 10 `com.crumb.*` (reboot-verified earlier today via AS-021). Tree: clean post-commit `ac101ad4`. (TimeMachine sub-status still `unknown`/null — known separate check, out of soak scope; noted for AS-032.)
-- Day 2 — 2026-06-15 — pending
-- Day 3 — 2026-06-16 — pending
-- Day 4 — 2026-06-17 — pending
-- Day 5 — 2026-06-18 — pending
-- Day 6 — 2026-06-19 — pending
-- Day 7 — 2026-06-20 — pending → on 7/7 green, mark AS-031 done, advance to AS-032
+- Day 2 — 2026-06-15 — ✅ GREEN (backfilled 07-01): tarball `crumb-vault-2026-06-15_0300.tar.gz` present.
+- Day 3 — 2026-06-16 — ✅ GREEN (backfilled): tarball `…06-16_0300` present.
+- Day 4 — 2026-06-17 — ✅ GREEN (backfilled): tarball `…06-17_0300` present.
+- Day 5 — 2026-06-18 — ⚠️ BROKE MID-DAY: `…06-18_0300` fired at 03:00, then **machine rebooted 14:21** and the keep-set did NOT resurrect (headless reboot — no GUI login followed). Last green backup of the run.
+- Day 6 — 2026-06-19 — ❌ RED: keep-set dark; no backup written; the 06-19 Gmail-remediation session skipped the soak opener so it went unnoticed.
+- Day 7 — 2026-06-20 → 2026-06-30 — ❌ RED (11 consecutive days dark): no backups, vault-web down, no drive-sync. Detected 2026-07-01.
+- **Outcome: FAILED.** Root cause = GUI-login-gated resurrection + a headless reboot (see 2026-07-01 entry). 7-consecutive-green not met. Soak restarted from Day 1 = 2026-07-01.
 
 ## 2026-06-14 — Session-end (compound evaluation)
 
@@ -438,3 +439,38 @@ Recorded from a vault-optimization session for XD-027 traceability — **not AS 
 **Soak note:** AS-031 day 6 (2026-06-19) 5-point check **not run** this session (Gmail-remediation, not an AS soak opener) — backfillable from `backup-status.json` + `vault-backup-last.json`. Day 7 target 2026-06-20.
 
 **Model routing:** all main-session Opus 4.8 — vault-archaeology + judgment-dense classification of ~200 archived threads (sangha vs. marketing vs. pre-automation). No delegation. Token-heavy op: paginating the archived-thread search (large snippet payloads), acceptable for the precision required.
+
+## 2026-07-01 — AS-031 soak check → FAILED (13-day silent outage) + restored + restarted
+
+**Trigger:** Operator opener — "let's check the agentic sunset soak." First soak opener since 2026-06-14 (day-1). Session ran over **SSH** (10.0.0.161), which turned out to be central to the diagnosis.
+
+**Discovery (5-point check, all-red at first glance):** zero `com.crumb.*` in `launchctl list`; vault-web :8843 → HTTP 000; `backup-status.json` frozen at 2026-06-18; last tarball `crumb-vault-2026-06-18_0300`. Nearly declared total-stack-down — then applied the [[recurring-patterns]] prompt-env-mismatch reflex and **verified the execution context before alarming.**
+
+**Root cause (proven, not inferred):** `stat /dev/console` = **root** (login window, no GUI user) + `SSH_CONNECTION` set + `launchctl print gui/503` → **error 125 "domain does not support specified action"** (no Aqua session exists). Boot time = **Thu 2026-06-18 14:21** (uptime 13d), reboot history confirms. The keep-set is all `~/Library/LaunchAgents` = **GUI-login-gated**; the 06-18 reboot was headless (SSH-only since), so nothing bootstrapped. Two signals were domain-independent and confirmed a *real* outage (not just a visibility artifact): `curl :8843` (network) and the **absent tarballs** (files, not launchd state). So: genuine 13-day outage of backups + vault-web + drive-sync, uncaught because the session-opener soak depends on sessions running and the sparse ones in-window skipped it.
+
+**Restoration (operator GUI-logged-in on request):** keep-set resurrected exactly per AS-021 — `launchctl print gui/503` LOADED-services block shows all **10** (`cloudflared` PID 20409, `vault-web` PID 20412 → :8843 200, + 8 idle scheduled jobs); dashboard correctly disabled; **zero tess/openclaw/hermes/ollama loaded** (the agentic labels seen in `print` output are override-registry ghosts only — plists archived, cannot load — exactly as AS-021 documented; verified by isolating the `services = {}` block from the disabled-services block). Working tree clean.
+
+**Backup gap closed:** `launchctl kickstart -k gui/503/com.crumb.vault-backup` → `crumb-vault-2026-07-01_1359.tar.gz` (115M, `gzip -t` OK). Then kicked `…backup-status` to reconcile monitoring → `backup-status.json`: `latestFile 2026-07-01_1359 / ageHours 0 / status ok`. (A first status read showed stale-red — timing race, the status job ran ~4 min before the tarball finished; resolved by the second kick.)
+
+**Design decision (operator, "document + accept"):** the GUI-login-gated resurrection is now a **documented operating assumption**, not a defect to fix. Offered + **declined**: (a) re-enable an off-host healthchecks watchdog, (b) convert unattended services to boot-time LaunchDaemons. Recorded in `design/service-inventory.md` → new "Operating Assumption — Resurrection is GUI-login-gated" section (operating rule: GUI-login after every reboot; verify :8843 + backup-status; kickstart to close gaps). Residual detection-latency risk knowingly accepted.
+
+**Compound evaluation:**
+1. **prompt-env-mismatch nearly caused a false alarm — the reflex held.** An SSH shell cannot see (or introspect) GUI-session LaunchAgents; `launchctl list`/`print gui/…` are misleading from the wrong domain. General rule reinforced: when a whole-stack signal reads dead, confirm the *observer's* domain before concluding the *system* is down — cross-check with domain-independent signals (network sockets, files on disk). Same family as the AS-031 scheduler-execution-locus lesson. → already covered by [[recurring-patterns]]; no new memory.
+2. **The soak's own detection mechanism is its weak point — and it failed exactly as feared.** A session-opener-driven check cannot catch an outage during a 13-day gap with no (or opener-skipping) sessions. Operator declined the off-host watchdog, so this latency is accepted going forward — the soak proves steady-state stability *given the machine stays GUI-logged-in*, not unattended-reboot resilience. Documented in service-inventory.
+3. **AS-021's "resurrection holds across a cold boot" was over-generalized.** It holds across a boot *followed by GUI login*. Corrected in service-inventory + [[project-agentic-sunset]] memory.
+
+**Code review sweep:** N/A — no `repo_path` (vault-only teardown); changes are vault docs + live launchd kickstarts (no code).
+
+**State for next session:** AS-031 restarted, Day 1 = 2026-07-01 (below). AS-032 unchanged (external-artifact sweep + final compound + archival proposals) and still gated on the fresh 7/7. **New standing item for AS-032/end-state:** the GUI-login-after-reboot operating rule.
+
+## AS-031 — 7-Day Soak Tracker v2 (restarted 2026-07-01, supersedes the 06-14 run)
+
+Same 5-point daily green check + session-opener mechanism as v1 (see voided tracker above). **Accepted limitation (operator, 2026-07-01):** a headless reboot pauses the soak and requires a GUI login to resume — not counted as a stack failure, but the affected day(s) are RED until backups+web are confirmed back. Target: 7 consecutive green → AS-031 done → AS-032.
+
+- **Day 1 — 2026-07-01 ✅ GREEN.** Backup: `crumb-vault-2026-07-01_1359.tar.gz` (115M, gzip OK), `backup-status.json` status ok / ageHours 0. vault-web :8843 → 200; keep-set = 10 loaded in `gui/503` (cloudflared/vault-web PIDs live). Alerts: healthchecks removed/none. Tree: clean (pre-commit). *(drive-sync: loaded + armed; `/tmp/drive-sync.log` was cleared by the reboot — will confirm green on this session's post-commit sync hook.)*
+- Day 2 — 2026-07-02 — pending
+- Day 3 — 2026-07-03 — pending
+- Day 4 — 2026-07-04 — pending
+- Day 5 — 2026-07-05 — pending
+- Day 6 — 2026-07-06 — pending
+- Day 7 — 2026-07-07 — pending → on 7/7 green, mark AS-031 done, advance to AS-032

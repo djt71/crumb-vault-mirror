@@ -4,7 +4,7 @@ project: agentic-sunset
 domain: software
 status: active
 created: 2026-06-10
-updated: 2026-06-10
+updated: 2026-07-01
 topics:
   - moc-crumb-operations
 tags:
@@ -57,7 +57,16 @@ Downstream tasks apply this table mechanically.
 | com.crumb.vault-rebuild | 15m | Quartz rebuild → public/ (atomic swap) | vault-web content freshness | **KEEP-D** |
 | com.crumb.qmd-index | daily 5:30am | qmd update+embed (search index) | Dashboard search API | **KEEP-D** |
 
-**End state: 11 loaded labels** — plumbing ×6 (vault-backup, backup-status, drive-sync, vault-gc, vault-health, system-stats) + dashboard/publishing ×5 (dashboard, cloudflared, vault-web, vault-rebuild, qmd-index). Zero `ai.*`/`com.tess.*` labels.
+**End state: 11 loaded labels** — plumbing ×6 (vault-backup, backup-status, drive-sync, vault-gc, vault-health, system-stats) + dashboard/publishing ×5 (dashboard, cloudflared, vault-web, vault-rebuild, qmd-index). Zero `ai.*`/`com.tess.*` labels. *(In practice the running keep-set is 10 — `com.crumb.dashboard` is deliberately stopped since 2026-06-01; restart is a standalone operator decision.)*
+
+## Operating Assumption — Resurrection is GUI-login-gated *(added 2026-07-01, operator decision "document + accept")*
+
+Every keep-set label is a per-user **LaunchAgent** in `~/Library/LaunchAgents`; they bootstrap only into danny's **Aqua GUI login session** (`gui/503`). Accepted consequences:
+
+- **A headless reboot leaves the keep-set dark.** After a reboot nothing loads until danny completes a *graphical* login. An SSH / background session (`user/503`) does not bootstrap these agents and cannot even enumerate them (`launchctl print gui/503` → error 125 while no GUI session exists).
+- **The AS-021 resurrection guarantee is contingent on that GUI login.** AS-021 passed 2026-06-14 only because a GUI login followed the reboot. A **headless reboot 2026-06-18 14:21 left backups + vault-web + drive-sync dark for 13 days, uncaught** (see run-log 2026-07-01) — restored the moment danny GUI-logged-in.
+- **Operating rule — after any reboot of this Mac, GUI-login to resurrect the keep-set.** Verify: `curl -s -o /dev/null -w '%{http_code}' localhost:8843` → 200, and `backup-status.json` → `status: ok` / low `ageHours`. To close a backup gap immediately: `launchctl kickstart -k gui/503/com.crumb.vault-backup` (then `…/com.crumb.backup-status` to refresh the status file).
+- **No off-host watchdog exists** — the healthchecks.io dead-man check was removed with `health-ping` (SCRAP). Silent-outage detection therefore relies on the AS-031 session-opener check or manual observation. Re-adding an off-host monitor was offered and **declined** 2026-07-01. This residual detection-latency risk is knowingly accepted.
 
 ## Consumer-Graph Sweep List (teardown discipline #2)
 

@@ -41,7 +41,7 @@ Mode: pre-commit (3 staged files)
   Checked 0 MOC files, 0 issues
 
 === 18. Topics Resolution ===
-  Checked 1 topic entries, 0 issues
+  Checked 2 topic entries, 0 issues
 
 === 19. Topics Requirement (kb-tagged notes) ===
   Checked 0 kb-tagged notes, 0 missing topics
@@ -82,7 +82,9 @@ Mode: pre-commit (3 staged files)
   Skipped (no staged run-log files)
 
 === 31. Broken Wikilink Detection ===
-  Checked 2 files, 0 broken links in 0 files
+  WARNING: Projects/agentic-sunset/progress/run-log.md — broken link: [[project-agentic-sunset]]
+  WARNING: Projects/agentic-sunset/progress/run-log.md — broken link: [[recurring-patterns]]
+  Checked 2 files, 2 broken links in 1 files
 
 === Solution Doc Track Schema ===
   Checked 0 solution docs, 0 track issues
@@ -94,6 +96,7 @@ Mode: pre-commit (3 staged files)
 Vault Check Summary
 ==========================================
   Errors:   0
-  Warnings: 0
+  Warnings: 2
 
-RESULT: CLEAN (exit code 0)
+RESULT: WARNINGS (exit code 1)
+Non-blocking — review when convenient.
