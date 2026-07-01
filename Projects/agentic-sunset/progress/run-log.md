@@ -467,10 +467,14 @@ Recorded from a vault-optimization session for XD-027 traceability — **not AS 
 
 Same 5-point daily green check + session-opener mechanism as v1 (see voided tracker above). **Accepted limitation (operator, 2026-07-01):** a headless reboot pauses the soak and requires a GUI login to resume — not counted as a stack failure, but the affected day(s) are RED until backups+web are confirmed back. Target: 7 consecutive green → AS-031 done → AS-032.
 
-- **Day 1 — 2026-07-01 ✅ GREEN.** Backup: `crumb-vault-2026-07-01_1359.tar.gz` (115M, gzip OK), `backup-status.json` status ok / ageHours 0. vault-web :8843 → 200; keep-set = 10 loaded in `gui/503` (cloudflared/vault-web PIDs live). Alerts: healthchecks removed/none. Tree: clean (pre-commit). *(drive-sync: loaded + armed; `/tmp/drive-sync.log` was cleared by the reboot — will confirm green on this session's post-commit sync hook.)*
+- **Day 1 — 2026-07-01 ✅ GREEN.** Backup: `crumb-vault-2026-07-01_1359.tar.gz` (115M, gzip OK), `backup-status.json` status ok / ageHours 0. vault-web :8843 → 200; keep-set = 10 loaded in `gui/503` (cloudflared/vault-web PIDs live). Alerts: healthchecks removed/none. Tree: clean (pre-commit). drive-sync: ✅ confirmed green — commit `12a9549b` post-commit hook fired 14:10:42 (NotebookLM + Computer sync done, no errors). **Day 1 fully green on all 5 points.**
 - Day 2 — 2026-07-02 — pending
 - Day 3 — 2026-07-03 — pending
 - Day 4 — 2026-07-04 — pending
 - Day 5 — 2026-07-05 — pending
 - Day 6 — 2026-07-06 — pending
 - Day 7 — 2026-07-07 — pending → on 7/7 green, mark AS-031 done, advance to AS-032
+
+## 2026-07-01 — Session-end
+
+Soak-check session (opener → failure → restore → restart, full entry above). Closed cleanly: commit `12a9549b` pushed to origin/main (vault-check 0 errors; 2 non-blocking `[[memory]]` wikilink warnings, expected class); post-commit drive-sync green (14:10:42) — soak v2 Day 1 fully green ×5. `qmd update` done (1 updated). Amendment-Z session-report + `_openclaw/inbox` sweep skipped (dead infra, decommissioned by this project). No failure-log (session executed well; the 13-day outage is a system incident, captured above with compound routing — not a session-process failure). Model routing: all main-session Opus 4.8; no delegation (diagnosis + judgment-dense throughout). **Next session: run the soak opener, tick Day 2 (2026-07-02).**

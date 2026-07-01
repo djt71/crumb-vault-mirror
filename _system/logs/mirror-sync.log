@@ -820,3 +820,4 @@
 2026-06-14 19:39:29 SYNC vault-optimization: VO-016 — Appendix A frozen, M2 complete; at M4 entry gate
 2026-06-14 19:39:56 SYNC vault-optimization: record last_committed 2026-06-14 (VO-016 session)
 2026-06-19 14:35:19 SYNC chore: session-end log — agentic-sunset residual Gmail-filter teardown gap
+2026-07-01 14:10:09 SYNC agentic-sunset: AS-031 soak v1 FAILED (headless-reboot outage) → restored + restarted v2
