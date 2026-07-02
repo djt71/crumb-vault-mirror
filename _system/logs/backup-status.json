@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-07-01T23:00:13Z",
+  "timestamp": "2026-07-02T19:45:37Z",
   "vaultBackup": {
-    "latestFile": "crumb-vault-2026-07-01_1359.tar.gz",
-    "ageHours": 5,
+    "latestFile": "crumb-vault-2026-07-02_0300.tar.gz",
+    "ageHours": 12,
     "status": "ok"
   },
   "timeMachine": {

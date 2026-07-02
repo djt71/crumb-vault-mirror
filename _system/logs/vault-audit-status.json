@@ -1,18 +1,18 @@
 {
-  "timestamp": "2026-06-10T00:00:00Z",
-  "lastFullAudit": "2026-06-10",
-  "daysSinceAudit": 9,
+  "timestamp": "2026-07-01T20:01:37-04:00",
+  "lastFullAudit": "2026-07-01",
+  "daysSinceAudit": 21,
   "staleSummaries": 0,
-  "orphanedSolutions": 0,
+  "orphanedSolutions": 1,
   "brokenLinks": 0,
-  "docDriftIssues": 2,
+  "docDriftIssues": 5,
   "tessHarnessIssues": 3,
   "failureLogEntries30d": 1,
   "archivedKbCount": 1,
   "findings": {
-    "high": 0,
-    "medium": 4,
-    "low": 7
+    "high": 3,
+    "medium": 5,
+    "low": 4
   },
-  "status": "warning"
+  "status": "error"
 }

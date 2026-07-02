@@ -33,3 +33,8 @@
 2026-06-18T06:07:06Z stale-projects: count=4 customer-intelligence, think-different, opportunity-scout, semuta
 2026-06-18T06:07:06Z OK: wrote health notes to /Users/danny/crumb-vault/_system/logs/vault-health-notes.md
 2026-06-18T06:07:06Z OK: warnings only — written to health notes
+2026-07-02T06:07:13Z vault-check: exit=1 errors=0 warnings=85
+2026-07-02T06:07:13Z git-status: clean=false 2 uncommitted file(s)
+2026-07-02T06:07:13Z stale-projects: count=11 feed-intel-framework, tess-v2, customer-intelligence, firekeeper-books, vault-optimization, obsidian-applenotes-import, think-different, opportunity-scout, mission-control, tess-danny-migration, semuta
+2026-07-02T06:07:13Z OK: wrote health notes to /Users/danny/crumb-vault/_system/logs/vault-health-notes.md
+2026-07-02T06:07:13Z OK: warnings only — written to health notes

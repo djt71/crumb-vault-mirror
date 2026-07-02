@@ -1,11 +1,11 @@
 ---
 type: state
 status: active
-created: 2026-06-18
-updated: 2026-06-18
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
-# Vault Health Notes — 2026-06-18
+# Vault Health Notes — 2026-07-02
 
 ## Warnings (85)
   WARNING: Projects/tess-v2/scripts/.venv/lib/python3.14/site-packages/idna-3.11.dist-info/licenses/LICENSE.md — no YAML frontmatter found
@@ -76,6 +76,8 @@ updated: 2026-06-18
   WARNING: _system/docs/operator/how-to/tess-to-danny-migration-runbook.md — broken link: [[macos-tahoe-calendarinterval-bug]]
   WARNING: _system/docs/operator/how-to/tess-to-danny-migration-runbook.md — broken link: [[recurring-patterns]]
   WARNING: Projects/agentic-sunset/design/upstream-migration.md — broken link: [[feedback-feed-intel-stays-open]]
+  WARNING: Projects/agentic-sunset/progress/run-log.md — broken link: [[project-agentic-sunset]]
+  WARNING: Projects/agentic-sunset/progress/run-log.md — broken link: [[recurring-patterns]]
   WARNING: Projects/firekeeper-books/progress/run-log.md — broken link: [[recurring-patterns]]
   WARNING: Archived/Projects/vault-restructure/design/migration-plan.md — broken link: [[openclaw-colocation-spec]]
   WARNING: Archived/Projects/vault-restructure/design/migration-plan.md — broken link: [[openclaw-colocation-spec-summary]]
@@ -91,10 +93,11 @@ updated: 2026-06-18
   WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-24-competitive.md — broken link: [[agent-to-agent-communication/design/orchestration-patterns]]
   WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-24-competitive.md — broken link: [[feed-intel-framework/insights/anthropic-roadmap]]
   WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-13-builder.md — broken link: [[Projects/tess-v2/design/scheduled-services]]
-  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-13-builder.md — broken link: [[agent-to-agent-communication/design/orchestration-patterns]]
-  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-13-builder.md — broken link: [[feed-intel-framework/insights/anthropic-roadmap]]
+
+## Git Status
+2 uncommitted file(s)
 
 ## Stale Projects (14+ days)
-customer-intelligence, think-different, opportunity-scout, semuta
+feed-intel-framework, tess-v2, customer-intelligence, firekeeper-books, vault-optimization, obsidian-applenotes-import, think-different, opportunity-scout, mission-control, tess-danny-migration, semuta
 
 
