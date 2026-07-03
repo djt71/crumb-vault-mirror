@@ -408,3 +408,47 @@ Fresh session carried VO-023 + VO-024 end-to-end: 13 pending-doc skims via one r
 **Milestone status: M2 COMPLETE** (VO-011–022 all done). **M3 already complete** (VO-023–026 all drafted + approved; B3 partially applied early via operator manual sweep 2026-06-12). **Project now poised at M4 entry** — the destructive batch sequence. Next task **VO-027 (B0 git-remote restore-drill gate)** is HIGH-risk and stop-and-ask; it is the gate before any deletion batch and folds in the M3-close/M4-entry inventory drift diff (batch-open check per peer-review amendment A2). No further VO work is unblocked without operator go-ahead on entering M4.
 
 **Compound:** no new solutions doc — VO-016 was a clean timing-gated freeze with no surprises; AS-side gates resolved exactly as XD-027 predicted. Confirming instance only.
+
+## 2026-07-03 — M4 ENTRY + VO-027 complete: B0 restore-drill gate PASSED + drift diff clean
+
+**M4 entry approved (operator, in-conversation, 2026-07-03)** — "Yes, run VO-027 now"; deletion batches VO-028+ still stop at their own gates.
+
+**Session start (fresh, vault-based state reconstruction):** project-state + run-log tail + tasks.md + action-plan (B0/M4 sections + baseline block) + design D1 (regen command set) + storage-policy (freshness targets) + .gitignore. Context inventory: 5 project docs + 2 system surfaces (standard tier); no overlays; no skill invocations (direct task execution under IMPLEMENT). Stale memory pointer fixed at session start (memory said "next VO-025" — done 06-10; second instance of the 06-12 pattern, memory files updated).
+
+### M3-close / M4-entry inventory drift diff (batch-open check per A2)
+
+Regenerated per D1 command set vs 2026-06-10 baseline (2,511→2,515 md · 20/4/8/20/6/25/12/10):
+
+| Surface | Baseline | Now | Verdict |
+|---|---|---|---|
+| md files (find, on-disk) | 2,515 | 2,412 | **Explained** — 103 tracked deletions = exactly the 06-12 operator sweep (12 B3 rows + 89 `_system/daily/` + perplexity ×3, run-log reconciliation entry); +76 adds = project artifacts + AS-027's 191-file formerly-ignored archive intake (md subset); untracked-churn remainder = 06-11 backlog discard + inbox processing |
+| skills | 20 | 19 | **Explained** — feed-pipeline retired to `_system/archive/skills-retired/` by AS-028 (`afe2d7a8`); B5 pack row F7 (keep-with-strip) superseded → **B5 batch-open treats as done** |
+| agents | 4 | 4 | unchanged |
+| overlays | 8 | 8 | unchanged (raw `grep -c '^|'` reads 15 — index now carries a 2nd companion-doc table; 8 overlay files verified by ls) |
+| scripts | 20 | 22 | **Explained** — +`vault-health.sh` + `lib/cron-lib.sh`, both AS-019 keep-set members (`d5759325`); post-baseline, not in manifest → **B4 batch-open note: AS-owned keeps, out of B4 scope** |
+| protocols | 6 | 5 | **Explained** — `bridge-dispatch-protocol.md` archived by AS-028; was already "superseded" at VO-014 → **B4 batch-open treats its row as done** |
+| solutions | 25 | 25 | unchanged |
+| projects | 12 | 12 | unchanged |
+| plists (on disk) | 10 | 11 | **Explained** — +`com.crumb.vault-health.plist` (AS-019, keep-set); dashboard plist retained-disabled as before |
+| Archived/ | 147M | 149M | **REAL SCOPE DRIFT** — see below |
+
+**B1 scope drift (carries to VO-028 batch-open):** `Archived/_openclaw`, `Archived/_tess`, `Archived/_staging` were created by AS-026/027 (2026-06-12) *after* the VO-021 enumeration — three top-level dirs now inside B1's delete-unless-canonical scope with no enumeration rows and no exception decisions. These are the sunset's provenance/rollback archives (rollback window formally closed 06-14 per AS-022/021, so deletion is *permissible* — but it is an operator disposition call, not pack-covered). **VO-028 batch-open MUST: re-enumerate Archived/, present AS-archive disposition to operator.** Live-dependency check done now: the GWS OAuth token store used by the live workspace-mcp is at `~/.google_workspace_mcp/credentials/` (outside vault); `Archived/_openclaw/lib/gws-token.sh` is a dead archived reader — no live consumer reads from Archived/. ✓
+
+**Drift verdict: no unexplained drift; no changeset stale in a blocking way.** Three notes carried forward: B1 re-enumeration + AS-archive disposition (VO-028); B4 bridge-dispatch row done + 2 new AS-owned scripts out of scope (VO-031); B5 F7 done (VO-032). B3's 12 pre-applied rows already on record (06-12 entry).
+
+### B0 restore-drill (git remote, authoritative source)
+
+**Freshness (secondary checks first):** `backup-status.json` status ok, tarball `crumb-vault-2026-07-03_0300.tar.gz` (120.8 MB) ageHours 10; drive-sync 05:00 run DONE clean; mirror-sync last SYNC 07-02 15:53 = last commit (post-commit trigger, current). All fresh ✓. (Same-session AS-031 Day-3 soak check corroborates.)
+
+**Procedure + results:**
+1. `git ls-remote origin main` = local HEAD = `49143a99` (remote current, tree clean) ✓
+2. Fresh clone of `https://github.com/djt71/crumb-vault.git` → throwaway dir in session scratchpad (`vo027-restore-drill/`); clone HEAD `49143a99`, 3,227 tracked files ✓
+3. **Sample restore verification — 11 files, ≥1 per top-level dir, sha256 clone-vs-vault: 11/11 MATCH.** CLAUDE.md (root) · .claude/skills/systems-analyst/SKILL.md · _system/scripts/vault-check.sh · **Archived/_openclaw/lib/gws-token.sh (new B1-scope content restores)** · Domains/Career/accounts/auto-club-group/meeting-prep-2026-03-19.md · Projects/vault-optimization/tasks.md · Sources/articles/chrlschn-mcp-dead-long-live-mcp-index.md · _attachments/career/SEC2-security-ecosystem-visual-capture.md · _scratch/akm-test-prompt.md · Sources/articles/.gitkeep · **Projects/think-different/attachments/albert-einstein.jpg (tracked binary restores byte-identical)** ✓
+4. **vault-check on restored clone (`--full .`): 0 errors, 76 warnings, exit 1 (non-blocking).** Warnings are pre-existing content debt, not restore artifacts — dominated by broken wikilinks inside `Archived/` research briefs pointing at decommissioned paths (B1 deletion scope; consistent with the 07-01 audit's known post-teardown link debt). Blocking-gate semantics: pre-commit blocks exit 2 only → **restored set passes** ✓
+5. Throwaway clone deleted after drill.
+
+**Ignored-path coverage (documented per AC):** clone correctly **lacks** `_inbox/`, `.mcp.json`, `.trash/`, `_system/logs/` churn set (backup-status.json, vault-backup-last.json, …), `_system/state/last-run/`, non-whitelisted binaries (e.g. `_attachments/learning/wyner-fluent-forever.pdf`) — all confirmed absent-in-clone/present-locally. **Coverage for these:** `vault-backup.sh` tars the *entire* vault dir with **zero exclusions** → every gitignored path is in the nightly iCloud tarball (fresh today, gzip-tested 07-01); runtime logs/state additionally regenerate from live jobs; `.mcp.json` secrets deliberately out of git (tarball-only — correct). One hygiene note: `.obsidian/` is gitignored but 3 files are tracked-before-ignore (app.json, appearance.json, core-plugins.json) — they restore fine (present in clone); rest of `.obsidian/` is tarball-covered. Not a gap; noted for B6-adjacent cleanup if ever wanted.
+
+**VO-027 ACs:** drill passed + procedure/results in run-log BEFORE any deletion ✓ · ignored-path coverage documented ✓ · restored sample passes vault-check (0 errors; non-blocking warnings are pre-existing, enumerated) ✓. tasks.md → done.
+
+**Gate state: B0 GREEN — M4 batch sequence is open.** Next: VO-028 (B1 Archived/) — batch-open = changeset-staleness check + fresh drift diff + **Archived/ re-enumeration + operator disposition on `_openclaw`/`_tess`/`_staging` AS archives** + exception-extraction (E1/E2/E3) before any deletion. HIGH risk, stop-and-ask.

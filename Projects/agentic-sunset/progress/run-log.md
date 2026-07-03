@@ -468,8 +468,8 @@ Recorded from a vault-optimization session for XD-027 traceability — **not AS 
 Same 5-point daily green check + session-opener mechanism as v1 (see voided tracker above). **Accepted limitation (operator, 2026-07-01):** a headless reboot pauses the soak and requires a GUI login to resume — not counted as a stack failure, but the affected day(s) are RED until backups+web are confirmed back. Target: 7 consecutive green → AS-031 done → AS-032.
 
 - **Day 1 — 2026-07-01 ✅ GREEN.** Backup: `crumb-vault-2026-07-01_1359.tar.gz` (115M, gzip OK), `backup-status.json` status ok / ageHours 0. vault-web :8843 → 200; keep-set = 10 loaded in `gui/503` (cloudflared/vault-web PIDs live). Alerts: healthchecks removed/none. Tree: clean (pre-commit). drive-sync: ✅ confirmed green — commit `12a9549b` post-commit hook fired 14:10:42 (NotebookLM + Computer sync done, no errors). **Day 1 fully green on all 5 points.**
-- Day 2 — 2026-07-02 — pending
-- Day 3 — 2026-07-03 — pending
+- Day 2 — 2026-07-02 — ✅ GREEN (backfilled 07-03): tarball `crumb-vault-2026-07-02_0300.tar.gz` (120.7 MB) present; drive-sync ran twice, both DONE no errors (05:00 scheduled + 15:53 post-commit, `/tmp/drive-sync.log`); no reboot (cloudflared/vault-web PIDs 20409/20412 continuous since the 07-01 restore ⇒ stack up all day).
+- **Day 3 — 2026-07-03 ✅ GREEN** (live check, session opener). Backup: `crumb-vault-2026-07-03_0300.tar.gz` (120.8 MB), `backup-status.json` status ok / ageHours 10, marker agrees. drive-sync: 05:00 run DONE, NotebookLM + Computer sync clean. Alerts: none (healthchecks removed). vault-web :8843 → 200; keep-set = 10 `com.crumb.*` listed, cloudflared PID 20409 + vault-web PID 20412 live. Tree: clean. (Session over SSH but `/dev/console` owner = danny — GUI session up, agents visible and loaded.)
 - Day 4 — 2026-07-04 — pending
 - Day 5 — 2026-07-05 — pending
 - Day 6 — 2026-07-06 — pending

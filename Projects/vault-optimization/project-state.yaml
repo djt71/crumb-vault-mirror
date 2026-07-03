@@ -4,12 +4,12 @@ type: system
 phase: IMPLEMENT
 last_gate: TASK-to-IMPLEMENT
 created: 2026-06-10
-updated: 2026-06-14
+updated: 2026-07-03
 related_projects:
   - agentic-sunset
 # No repo_path: vault-only project — produces no code, only vault restructuring artifacts.
 # External repo gate explicitly skipped (vault-only software per CLAUDE.md §3b).
 active_task: null
-next_action: "VO-016 DONE 2026-06-14 — Appendix A ownership matrix FROZEN + AS concurrence in both run-logs. AS M6 gate cleared per XD-027 (AS-025–029 complete 2026-06-12 + AS-021 reboot 2026-06-14). **M2 + M3 now both COMPLETE** (all four changeset packs B3–B6 drafted + approved; B3 partially applied early via operator manual sweep 2026-06-12). VO-031/032 unblocked (blocked→pending). **Project poised at M4 entry — the destructive batch sequence (STOP-AND-ASK).** Next = VO-027 (B0 git-remote restore-drill gate, HIGH-risk) which also folds in the M3-close/M4-entry inventory drift diff (batch-open check per amendment A2). Then B1 Archived/ → B2 attachments/logs → B3 docs (remainder past the 12 early rows) → B4 scripts/protocols/overlays → B5 skills/agents → B6 ceremony (VO-028–033), then M5 soak (VO-034–036). No VO work proceeds without operator go-ahead to enter M4."
+next_action: "M4 ENTERED 2026-07-03 (operator-approved) — VO-027 DONE: B0 restore-drill PASSED (clone @49143a99, 11/11 sha256 incl. binary; vault-check on clone 0 errors; tarball zero-exclusions covers all ignored paths) + drift diff CLEAN (all deltas AS-attributed: skills 20→19 feed-pipeline, protocols 6→5 bridge-dispatch, +2 AS scripts, +1 vault-health plist). **B0 GREEN — batch sequence open.** Next = VO-028 (B1 Archived/, HIGH-risk, stop-and-ask). VO-028 batch-open MUST: re-enumerate Archived/ (AS-026/027 added _openclaw/_tess/_staging AFTER the VO-021 enumeration — no exception rows exist) + operator disposition on those AS archives + finalize/commit E1-E3 exception extraction BEFORE deletion. Carried notes: B4 open = bridge-dispatch row done + vault-health.sh/lib out of scope; B5 open = row F7 done; B3 open = 12 rows pre-applied 06-12. Then B2→B6 (VO-029–033), M5 soak (VO-034–036)."
 last_committed: 2026-06-14
 services: []

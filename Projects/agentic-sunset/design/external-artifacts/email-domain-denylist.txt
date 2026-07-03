@@ -1,0 +1,41 @@
+# Email Domain Denylist — sends to these domains are BLOCKED even with valid approval
+# Source: tess-operations TOP-037 (email send with technical enforcement)
+#
+# One domain per line. Comments (#) and blank lines are ignored.
+# Applies to: recipient domain (the part after @)
+# Blocked sends trigger a security event log + Telegram alert.
+#
+# Edit this file to add/remove domains. Changes take effect immediately.
+
+# === Government ===
+.gov
+.mil
+.gov.uk
+.gov.au
+.gov.ca
+.gc.ca
+.gov.in
+.gov.br
+
+# === Financial institutions ===
+# Major US banks
+chase.com
+bankofamerica.com
+wellsfargo.com
+citibank.com
+citi.com
+capitalone.com
+usbank.com
+pnc.com
+tdbank.com
+regions.com
+
+# === Financial regulators ===
+sec.gov
+finra.org
+fdic.gov
+occ.treas.gov
+cfpb.gov
+
+# === Tax / IRS ===
+irs.gov

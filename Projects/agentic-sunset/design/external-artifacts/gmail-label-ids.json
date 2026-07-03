@@ -1,0 +1,18 @@
+{
+  "@Action/Followup": "Label_35",
+  "@Action/ReadLater": "Label_37",
+  "@Action/Reply": "Label_34",
+  "@Action/Schedule": "Label_36",
+  "@Agent/APPROVAL": "Label_28",
+  "@Agent/DONE": "Label_29",
+  "@Agent/IN": "Label_25",
+  "@Agent/OUT": "Label_27",
+  "@Agent/WIP": "Label_26",
+  "@Risk/Confidential": "Label_33",
+  "@Risk/High": "Label_32",
+  "@Trust/External": "Label_31",
+  "@Trust/Internal": "Label_30",
+  "P/Admin": "Label_39",
+  "P/Personal": "Label_40",
+  "P/Work": "Label_38"
+}

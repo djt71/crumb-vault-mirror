@@ -1,11 +1,11 @@
 ---
 type: state
 status: active
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
-# Vault Health Notes — 2026-07-02
+# Vault Health Notes — 2026-07-03
 
 ## Warnings (85)
   WARNING: Projects/tess-v2/scripts/.venv/lib/python3.14/site-packages/idna-3.11.dist-info/licenses/LICENSE.md — no YAML frontmatter found
@@ -93,9 +93,6 @@ updated: 2026-07-02
   WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-24-competitive.md — broken link: [[agent-to-agent-communication/design/orchestration-patterns]]
   WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-24-competitive.md — broken link: [[feed-intel-framework/insights/anthropic-roadmap]]
   WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-13-builder.md — broken link: [[Projects/tess-v2/design/scheduled-services]]
-
-## Git Status
-2 uncommitted file(s)
 
 ## Stale Projects (14+ days)
 feed-intel-framework, tess-v2, customer-intelligence, firekeeper-books, vault-optimization, obsidian-applenotes-import, think-different, opportunity-scout, mission-control, tess-danny-migration, semuta
