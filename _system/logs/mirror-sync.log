@@ -824,3 +824,4 @@
 2026-07-01 19:13:16 SYNC chore: session-end log — AS-031 soak v2 Day 1 fully green (drive-sync confirmed)
 2026-07-02 15:53:43 SYNC chore: session-end log — full vault audit (weekly+monthly) recorded
 2026-07-03 14:22:18 SYNC vault-optimization: M4 ENTERED — VO-027 B0 restore-drill PASSED + drift diff clean; AS-031 soak v2 days 2-3 GREEN
+2026-07-03 14:26:18 SYNC vault-optimization: VO-008 B1 (1/2) — canonical-exception extraction E1-E4 + consumer remediation

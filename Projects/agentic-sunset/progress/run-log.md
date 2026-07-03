@@ -478,3 +478,10 @@ Same 5-point daily green check + session-opener mechanism as v1 (see voided trac
 ## 2026-07-01 — Session-end
 
 Soak-check session (opener → failure → restore → restart, full entry above). Closed cleanly: commit `12a9549b` pushed to origin/main (vault-check 0 errors; 2 non-blocking `[[memory]]` wikilink warnings, expected class); post-commit drive-sync green (14:10:42) — soak v2 Day 1 fully green ×5. `qmd update` done (1 updated). Amendment-Z session-report + `_openclaw/inbox` sweep skipped (dead infra, decommissioned by this project). No failure-log (session executed well; the 13-day outage is a system incident, captured above with compound routing — not a session-process failure). Model routing: all main-session Opus 4.8; no delegation (diagnosis + judgment-dense throughout). **Next session: run the soak opener, tick Day 2 (2026-07-02).**
+
+## 2026-07-03 — Cross-project note (vault-optimization VO-028 B1): AS archives deleted, AS-032 inputs extracted
+
+Recorded from a vault-optimization session — **not AS work**. VO-028 B1 deleted `Archived/` wholesale (operator disposition: "E4-extract config, delete rest"). Effects on AS:
+- **AS-032 sweep inputs preserved:** `Archived/_openclaw/config/` 4-pack extracted to `Projects/agentic-sunset/design/external-artifacts/` (`google-calendars.json` = Calendar sweep targets; `gmail-label-ids.json` = Gmail remediation record; + denylist, operator_priorities).
+- **Git-provenance pointers for AS-032** (content now history-only, all at `49143a99` or earlier): `git show 49143a99:Archived/Projects/tess-operations/design/tess-google-services-spec.md` (also `tess-comms-channel-spec`, `tess-apple-services-spec` same path root); `google-drive-folders.json` was already history-only pre-archival (removed at `44248ac4` — retrieve via `git show 44248ac4^:_openclaw/config/google-drive-folders.json`).
+- `Archived/_openclaw` / `_tess` / `_staging` (AS-026/027 archives) deleted with the batch — rollback window was formally closed 2026-06-14 (AS-022/021); provenance preserved in git history. AS-031 soak unaffected (no live surface touched; keep-set untouched).
