@@ -197,10 +197,10 @@ launchctl print gui/$(id -u)/ai.openclaw.bridge.watcher 2>/dev/null | grep -q "s
 |-----|------|----------|
 | Vault-check output | `_system/logs/vault-check-output.log` | Latest vault-check run |
 | System stats | `_system/logs/system-stats.json` | Resource metrics |
-| LLM health | `_system/logs/llm-health.json` | LLM service health |
 | Backup status | `_system/logs/backup-status.json` | Backup operation status |
 | Mirror sync | `_system/logs/mirror-sync.log` | Mirror sync status |
-| Ops metrics | `_system/logs/ops-metrics.json` | Operational metrics |
+| Ops metrics | `_system/logs/ops-metrics.jsonl` | Cron job metrics (cron-lib.sh) |
+| Vault health | `_system/logs/vault-health.log` + `vault-health-notes.md` | Nightly content-health scan |
 | AKM feedback | `_system/logs/akm-feedback.jsonl` | Active Knowledge Memory feedback |
 | Bridge watcher | `_openclaw/logs/watcher.log` | Bridge watcher activity |
 

@@ -486,3 +486,41 @@ Regenerated per D1 command set vs 2026-06-10 baseline (2,511→2,515 md · 20/4/
 **Model routing:** all main-session (Fable 5, first session on it); no Sonnet delegation — session was judgment-dense end to end (M4 gate, disposition calls, destructive batch execution). No skill invocations (direct task execution under IMPLEMENT); no token-heavy anomalies (full vault-check on clone ran ~4 min in background, backgrounding kept it off the critical path).
 
 **State for next session:** VO at M4 with B1 done — next VO-029 (B2) or VO-030 (B3), both unblocked, batch-open checks required. AS-031 soak day 4 check due 2026-07-04 (session-opener mechanism).
+
+## 2026-07-03 — VO-029 complete: B2 attachments/logs batch EXECUTED (3 sub-batches)
+
+**Session start (fresh, vault-based state reconstruction):** project-state + run-log tail + tasks.md VO-029 row + storage-policy.md (full — the batch's governing pack). Context inventory: 4 project docs + targeted evidence greps (producers, consumers, .gitignore); no overlays; no skill invocations (direct task execution under IMPLEMENT). Medium risk — proceed + flag per tier.
+
+**Batch-open checks (logged per sub-batch, before execution):** changeset staleness on storage-policy (VO-022, 2026-06-10) verified via fresh re-audits below — one disposition superseded by events (tess-v2 venv, sub-batch ii) and one disposition pointer found dangling (vault-audit-status.json, sub-batch iii); both resolved and recorded in-line. Drift diff: fresh this session's morning entries (VO-027, same day) — not re-run.
+
+### Sub-batch (i) — `_attachments/` orphan sweep (low risk)
+
+**Orphan check (fresh audit 2026-07-03):** 9 files, 4.7 MB (7 tracked + 2 gitignored binaries). Per-file companion/inbound-embed evidence: 3× `infoblox-universal-ddi-customer-fig*.png` ← embedded by `Sources/other/infoblox-universal-ddi-customer-pres-digest.md` ✓ · `wyner-fluent-forever.pdf` ← companion note beside it ✓ · `friday-fuel-*-companion.md` + `inbound-infoblox-*-companion.md` ← linked from `Domains/Career/career-overview.md` ✓ · `SEC2-security-ecosystem-visual-capture.md` = md capture content, not a binary orphan (kept). **Yield: 0 orphans — matches policy prediction (≈0). Recorded either way per policy.** Only action: untracked `.DS_Store` junk removed from disk (regenerating macOS noise, not a policy item).
+
+### Sub-batch (ii) — non-md heavyweights (medium risk)
+
+**Size audit re-run per drift rule (top-20 >1M, excludes .git/.obsidian; Archived/ no longer exists):** 3 hits — `james-watson.jpg` 9.1M (keep — active think-different embed, unchanged) · `tess-v2/scripts/.venv/**/_pydantic_core*.so` 4.0M (see below) · `wyner-fluent-forever.pdf` 3.9M (keep — live companion, gitignored by design, unchanged).
+
+**Disposition change, flagged (policy said "rides with AS-030, not VO scope"):** AS-030 closed tess-v2 → DONE on 2026-06-14 *without* deleting the vault-side venv — the ride never happened; the drift-rule re-audit caught it still present. Present-state evidence: project DONE, execution layer decommissioned + reboot-verified absent, external repo retained separately at `~/crumb-apps/tess-v2`, venv untracked (0 git impact), regenerable by definition, and the source of vault-health.sh's nightly frontmatter-warning noise ("venv .md junk under tess-v2"). **Deleted `Projects/tess-v2/scripts/.venv/` — 23 MB, 1,953 untracked files.** Tess-v2 dir now 3.7 MB. Vault-wide venv scan confirms zero remaining venv trees. Cross-note written to AS run-log (the policy's original flag target). vault-health-notes.md warnings self-clear at tonight's run.
+
+### Sub-batch (iii) — dead logs (producer-alive rule, low risk)
+
+**Producer-alive evidence (fresh, per log):**
+- `health-check.log` + `health-check-launchd.err` + `health-check-launchd.log` — producer `tess-health-check.sh` dead since 2026-06-01: no matching plist in `~/Library/LaunchAgents/` (only `com.crumb.vault-health.plist` matches health*), script itself B4 delete-listed (dies at VO-031). **Deleted — 3 tracked files, `git rm`.**
+- `llm-health.json` + `ops-metrics.json` (both last written 2026-06-10 — the day the Tess/dashboard layer went dark) — **no producer anywhere**: zero references in `_system/scripts/`, hooks, or any loaded plist. Dead under the standing rule. **Deleted — 2 untracked files; their 2 dead `.gitignore` lines removed same batch.**
+- Keeps verified live: `akm-feedback.jsonl` (skill-preflight hook; 103K, under the 1 MB rotation watch) · `session-log.md`/`-2026-02` (session-end protocol) · `mirror-sync.log`/`vault-gc.log`/`vault-check-output.log` (live plists/hooks) · `system-stats.json` (system-stats.sh + live plist, current today) · `backup-status.json`/`vault-backup-last.json` (backup jobs, current) · `ops-metrics.jsonl` + `vault-health.log` + `vault-health-notes.md` (cron-lib.sh + vault-health.sh, AS-019 keep-set — post-policy additions, producers verified).
+- `vault-audit-status.json` — **kept; disposition pointer was dangling.** Storage policy deferred to "VO-025 ceremony classification" but the classification doc never mentions it (VO-025's scope was the 4 ceremonies; audit skill step 17 wasn't in it, and the B5 pack's audit-skill rows cover D4 Archived/-purge steps only). Producer alive (audit skill step 17, last write 07-01 = last full audit); consumer MC dashboard paused-not-deleted (AS-030). Producer-alive rule → keep; deleting would just regenerate at next audit. **Routed: B5 batch-open addendum (VO-032) — operator decides audit SKILL.md step 17 retire-vs-keep given dashboard pause.**
+
+**Consumer remediation (same batch, D4 discipline):** `infrastructure-reference.md` Log Locations table — 2 dead rows (llm-health.json, ops-metrics.json) removed; ops-metrics row re-pointed to live `.jsonl` + vault-health rows added (B3 pack does not own this doc — verified, so remediation lands here). `.gitignore` ×2 dead lines removed.
+
+**Functional fast-pass:** residual-reference sweep on all deletions — remaining hits are: `tess-health-check.sh:27` (the B4-delete-listed producer itself, never runs — plist gone), AS/tess-v2 design docs (historical project records, untouched by convention), vault-health-notes.md (regenerates clean tonight), VO project docs (this batch's own provenance). Zero live consumers of deleted content ✓. All keeps present ✓.
+
+**Adjacent findings (routed):** (1) `infrastructure-reference.md:205` "Bridge watcher | `_openclaw/logs/watcher.log`" — pre-existing dead row (openclaw layer deleted), not this batch's deletion → **B3 awareness** (doc not currently in B3 pack; candidate addendum). (2) vault-audit-status/step-17 → **B5 addendum** (above).
+
+**Deletions enumerated:** 3 tracked (`_system/logs/health-check.log`, `health-check-launchd.err`, `health-check-launchd.log`) + untracked: `llm-health.json`, `ops-metrics.json`, `_attachments/.DS_Store`, `Projects/tess-v2/scripts/.venv/` (1,953 files, 23 MB). Disk recovered ≈23 MB.
+
+**Commit note:** sub-batches (i) and (ii) produced zero tracked deltas (i = zero-yield, ii = untracked venv), so the per-sub-batch commits collapse into one batch commit carrying sub-batch (iii)'s tracked deletions + remediations + this record. Green + fast-pass verified before it (above; vault-check runs at pre-commit).
+
+**VO-029 ACs:** batch-open checks logged per sub-batch ✓ · orphan check (i), size audit (ii), producer-alive evidence (iii) recorded per respective sub-batch ✓ · all deletions match policy (venv disposition-change flagged with rationale; standing dead-producer rule applied to the 2 stale JSONs) ✓ · green + fast-pass at the (collapsed) batch commit ✓. tasks.md → done.
+
+**Next: VO-030 (B3 docs remainder)** — 12 rows pre-applied 06-12; carried notes: moc-crumb-architecture:38 broken crumb-tess-bridge link + infrastructure-reference Bridge-watcher dead row (this batch). Then VO-031 (B4), VO-032 (B5, + step-17 addendum), VO-033 (B6).
