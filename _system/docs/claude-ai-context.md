@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: active
 created: 2026-02-21
-updated: 2026-06-19
+updated: 2026-07-03
 tags:
   - system
 ---
@@ -14,8 +14,22 @@ Orientation artifact for a fresh session reading this repo (claude.ai chat, a
 new Claude Code session, or any agent cloning `github.com/djt71/crumb-vault`).
 Read this first — it is sufficient for most questions.
 
-Last updated: 2026-06-19. **The agentic infrastructure decommission is functionally
-complete — only a 7-day stability soak remains** (project `agentic-sunset`): the
+Last updated: 2026-07-03. **Two headline changes since 06-19:** (1) the
+agentic-sunset stability soak v1 **FAILED** — a headless reboot on 2026-06-18
+left the stack dark 13 days (keep-set resurrection is GUI-login-gated, now a
+documented operating assumption: GUI-login after every reboot, then verify
+:8843 + backup-status); soak **v2 restarted 2026-07-01, day 3/7 green**.
+(2) vault-optimization **entered M4** (destructive batches): B0 restore-drill
+gate passed and **B1 deleted `Archived/` entirely** (857 tracked files + 133M
+untracked venvs, ~149M disk recovered; commits `f3ee74ad`/`f00b43ca`).
+Canonical exceptions extracted first: NLM workflow guide + vault-mirror spec →
+`_system/docs/`, deliberation record store → `_system/data/deliberations/`,
+`_openclaw/config` 4-pack → `Projects/agentic-sunset/design/external-artifacts/`
+(AS-032 sweep inputs). **Anything formerly under `Archived/` is git-history-only
+now** (`git show 49143a99:Archived/<path>`).
+
+**The agentic infrastructure decommission is functionally
+complete — only the soak + AS-032 closeout remain** (project `agentic-sunset`): the
 self-built always-on agent stack (Tess/OpenClaw/Hermes) drifted from original intent,
 produced zero revenue, and ~90% of its function is now native in Claude.AI / Claude Code.
 
@@ -30,17 +44,23 @@ produced zero revenue, and ~90% of its function is now native in Claude.AI / Cla
   deps); README-ARCHIVED breadcrumbs in all 7 runtime dirs; daily-attention
   replacement **declined** (on-demand attention-manager only — see
   `Projects/agentic-sunset/design/upstream-migration.md`); CLAUDE.md
-  bridge-dispatch section removed; **vault `_openclaw/`, `_tess/`,
-  `_staging/TV2-*` archived to `Archived/`** (pipeline.db external, spared);
+  bridge-dispatch section removed; vault `_openclaw/`, `_tess/`,
+  `_staging/TV2-*` archived to `Archived/` (pipeline.db external, spared) —
+  **and `Archived/` itself deleted 2026-07-03 (VO-028 B1; git history is the archive)**;
   feed-pipeline skill retired; churn logs gitignored.
 - **Reboot-verified 2026-06-14 (AS-021):** a cold boot resurrects exactly the
-  10-label `com.crumb.*` keep-set and nothing agentic — the decommission holds
-  across reboot. AS-022 dormant-plist sweep done 2026-06-12.
+  10-label `com.crumb.*` keep-set and nothing agentic. **Corrected 2026-07-01:**
+  this holds across a reboot *followed by GUI login* — resurrection is
+  GUI-login-gated (LaunchAgents, not Daemons); a headless reboot leaves the
+  stack dark until someone logs in (operator-accepted limitation).
+  AS-022 dormant-plist sweep done 2026-06-12.
 - **Closeouts done (AS-030, 2026-06-14):** tess-v2 → DONE, tess-danny-migration →
   DONE (P7 superseded), mission-control → paused; `cross-project-deps.md` swept
   (XD-026 resolved, 17 rows mooted).
-- **Remaining:** AS-031 7-day soak (day 1 GREEN 2026-06-14; 7/7 target 2026-06-20)
-  → AS-032 compound routing + archival proposals.
+- **Remaining:** AS-031 7-day soak **v2** (v1 failed — headless-reboot outage;
+  v2 day 1 = 2026-07-01, day 3/7 green, 7/7 target 2026-07-07) → AS-032
+  compound routing + **external-artifact sweep** (Google Calendar/Drive/Discord
+  residue; inputs preserved in `design/external-artifacts/`) + archival proposals.
 - **Model policy:** Crumb runs both Opus 4.8 and Fable 5 (top-tier frontier
   models only — tier is the non-negotiable, not the model line).
 
@@ -105,7 +125,7 @@ as external memory and single source of truth. Canonical spec:
 - **Vault location:** Mac Studio (`tess@`), accessed via SSH from work Mac
 - **Obsidian:** runs on the Studio. Both instances can run simultaneously — `workspace.json` is gitignored
 - **Claude Code sessions:** run on the Studio
-- **Tess (OpenClaw agent):** decommissioned 2026-06-10; former bridge dir lives at `Archived/_openclaw/`
+- **Tess (OpenClaw agent):** decommissioned 2026-06-10; the archived bridge dir was deleted with `Archived/` 2026-07-03 (git-history-only)
 - **Validation gate:** `_system/scripts/vault-check.sh` (pre-commit hook)
 - **Counts (verified 2026-06-12):** 19 skills · 8 overlays · 9 canonical domains
 - **Domains:** software, career, learning, health, financial, relationships, creative, spiritual, lifestyle
@@ -129,6 +149,17 @@ Primary revenue bet: **Firekeeper Books** (Prompt 1).
 
 State below is pulled from each project's `project-state.yaml` (authoritative).
 Directory location is authoritative for archived-vs-active; project docs carry no status field.
+
+### vault-optimization — software / system / four-phase  *(most active)*
+- **Phase:** IMPLEMENT (M4 — destructive batch sequence) · **updated:** 2026-07-03
+- **Status:** M1–M3 complete (manifest + consumer surveys + all changeset packs B3–B6 approved). M4 entered 2026-07-03: VO-027 (B0 restore-drill gate) PASSED, VO-028 (B1 `Archived/` deletion) EXECUTED — ~149M recovered, exceptions extracted (see header). 20→17 skill consolidation planned at B5.
+- **Next:** VO-029 (B2 attachments/logs, 3 sub-batches) → VO-030 (B3 docs) → VO-031/032 (B4/B5 primitives) → VO-033 (B6 ceremony) → M5 soak.
+- **Key files:** `Projects/vault-optimization/tasks.md`, `progress/run-log.md`, `design/changeset-b*.md`, `keep-set-manifest.md`
+
+### agentic-sunset — software / system / four-phase
+- **Phase:** IMPLEMENT (soak) · **updated:** 2026-07-03
+- **Status:** Decommission functionally complete + reboot-verified (GUI-login caveat above). Soak v2 day 3/7 green (tracker in run-log).
+- **Next:** 7/7 green (target 2026-07-07) → AS-032 (external-artifact sweep + compound + archival proposals) → project close.
 
 ### tess-v2 — software / system / four-phase  *(DONE — closed at agentic-sunset AS-030, 2026-06-14)*
 - **Phase:** DONE · **active_task:** — · **updated:** 2026-06-14
@@ -200,7 +231,7 @@ Everything agentic is retired — plists in `_system/archive/launchagents-retire
 
 ## Open Items
 
-- **agentic-sunset endgame:** AS-018/027 confirmed (06-13/14), AS-021 reboot test PASSED + AS-022 sweep + AS-030 closeouts all DONE (2026-06-14). **Only AS-031 7-day soak (day 1 GREEN, 7/7 target 2026-06-20) + AS-032 compound routing/archival remain.**
+- **agentic-sunset endgame:** all teardown tasks DONE + reboot-verified. **Only AS-031 soak v2 (day 3/7, target 2026-07-07) + AS-032 remain.** Operating rule: GUI-login after every reboot (headless reboot = stack stays dark).
 - **Residual cloud-side teardown state (found 2026-06-19):** tess-operations' server-side **Gmail filters** (TOP-017, on dturner71@gmail.com) survived the local teardown and silently force-archived ~3 months of personal mail (incl. the Beacon Zen sangha group) until operator-remediated 2026-06-19. **AS-032 to add an external-artifact sweep** — Google agent calendars, Drive `Agent/*` tree, and the "Tess Ops" Discord server may also persist. The AS inventory covered local host state only; externally-hosted config is invisible to `launchctl`/`crontab`/filesystem sweeps.
 - **opportunity-scout & feed-intel-framework:** pipelines decommissioned but projects not archived — archival proposals come at AS-032.
 - **firekeeper-books project-state stale** (2026-04-07) — primary revenue bet is due a status refresh.

@@ -470,3 +470,19 @@ Regenerated per D1 command set vs 2026-06-10 baseline (2,511→2,515 md · 20/4/
 **VO-028 ACs:** batch-open checks logged ✓ · exception list finalized + committed BEFORE deletion ✓ (`f3ee74ad`) · Archived/ deleted ✓ · consumers remediated same batch ✓ · vault-check green + fast-pass at commit ✓ (deletion commit below) · deletions enumerated in run-log ✓ (857 by-reference + venv trees). tasks.md → done.
 
 **Next: VO-029 (B2 attachments/logs, 3 sub-batches by risk profile)** — batch-open checks per sub-batch; VO-030 (B3 docs remainder) also unblocked. B1 exception note: E4 was operator-added at batch open (not in VO-021) — enumeration doc left as-was (historical); this entry is E4's provenance.
+
+## 2026-07-03 — Session-end (compound evaluation)
+
+**Session summary:** Triple-scope session: (1) AS-031 soak v2 days 2–3 ticked green (day 2 backfilled from tarball + drive-sync evidence + PID continuity); (2) VO-027 B0 restore-drill gate PASSED + M4-entry drift diff clean → M4 entered on operator go-ahead; (3) VO-028 B1 executed full cycle — E1–E4 extraction commit `f3ee74ad`, Archived/ deletion commit `f00b43ca` (857 tracked + ~133M untracked venvs), same-batch remediations, fast-pass green. All pushed. claude-ai-context.md refreshed (was 14d stale; now reflects soak v1 failure/v2, M4, Archived/ deletion).
+
+**Compound evaluation:**
+1. **Stale project-memory pointer, second instance** (memory said "next VO-025"; actual next was VO-027 — same class as 2026-06-12's stale pointer). Confirming instance of the project-pitfalls trust hierarchy (vault state > memory); handled by updating memory at state-reconstruction time. New micro-rule adopted: refresh the project memory pointer at session end whenever project state advanced (done this session). No new solutions doc.
+2. **The A2 batch-open discipline caught real scope drift on first live use** — the drift diff surfaced three post-enumeration dirs (AS archives) inside B1's delete scope, forcing an explicit operator disposition (E4) instead of a silent wholesale delete. Confirming instance of the amendment's design intent; validates keeping batch-open checks mandatory for B2–B6. No new doc.
+3. **Frontmatter commit-gate first live catch** — the 2026-06-11 fm_issue fix blocked the extraction commit on 2 moved files missing schema fields for their new locations. Gate works as designed; lesson folded into practice: `git mv` across schema boundaries (Archived→_system/docs, →Projects/) needs a frontmatter pass before commit. Noted here; B2–B6 have no cross-boundary moves of this class remaining except B3 merges (aware).
+4. **Git-hook output noise nearly misread as a wrong commit** (post-commit mirror hook echoes rename/create lines + a "sync:"-prefixed mirror commit id). Verified ground truth via `git show --stat` before reacting — recurring-patterns prompt-env/verify-before-alarm reflex, confirming instance.
+
+**Code review sweep:** N/A — no `repo_path` (vault-only). **Build verification:** N/A. **Amendment Z + inbox sweep:** skipped (dead infra, decommissioned). **Failure log:** not warranted — session executed cleanly.
+
+**Model routing:** all main-session (Fable 5, first session on it); no Sonnet delegation — session was judgment-dense end to end (M4 gate, disposition calls, destructive batch execution). No skill invocations (direct task execution under IMPLEMENT); no token-heavy anomalies (full vault-check on clone ran ~4 min in background, backgrounding kept it off the critical path).
+
+**State for next session:** VO at M4 with B1 done — next VO-029 (B2) or VO-030 (B3), both unblocked, batch-open checks required. AS-031 soak day 4 check due 2026-07-04 (session-opener mechanism).
