@@ -1,9 +1,10 @@
 ---
 type: reference
+project: agentic-sunset
 domain: software
-status: active
+status: archived
 created: 2026-02-23
-updated: 2026-04-24
+updated: 2026-07-03
 skill_origin: null
 tags:
   - feed-intel

@@ -36,7 +36,7 @@ to detect and route NLM exports.
 ## Workflow
 
 For the full step-by-step guide (setup, export paths, batch strategy, troubleshooting):
-[[workflow-guide|NLM Pipeline Workflow Guide]]
+[[notebooklm-workflow-guide|NLM Pipeline Workflow Guide]]
 
 Quick reference:
 

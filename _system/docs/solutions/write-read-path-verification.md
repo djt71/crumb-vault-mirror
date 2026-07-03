@@ -73,4 +73,4 @@ down" is confused with "it will be found when needed."
 
 ## Related
 
-- [[solutions-linkage-proposal]] — Proposes mechanical enforcement of this pattern specifically for solutions docs, via `required_context` and `consumed_by` fields in skill/solution frontmatter.
+- Solutions-linkage proposal — proposed mechanical enforcement of this pattern for solutions docs via `required_context`/`consumed_by` frontmatter fields. Never executed; deleted with `Archived/` (VO-028 B1, 2026-07-03). Git provenance: `git show 49143a99:Archived/KB/solutions-linkage-proposal.md`.

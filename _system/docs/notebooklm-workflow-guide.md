@@ -2,8 +2,9 @@
 project: notebooklm-pipeline
 domain: learning
 type: reference
+status: active
 created: 2026-02-20
-updated: 2026-02-24
+updated: 2026-07-03
 tags:
   - notebooklm
   - pipeline

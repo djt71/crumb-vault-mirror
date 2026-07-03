@@ -53,7 +53,7 @@ The load-bearing idea behind this design. Apple Notes beats Telegram-to-vault pi
 
 A tool that lets you revisit what you captured without switching apps wins the capture contest. Telegram-to-vault was always going to lose this for note-taking — once sent, the thought was gone from Telegram until the next Crumb session, with no intermediate read or edit. That's a difference in kind, not degree.
 
-This is why the quick-capture mechanism was retired (2026-04-24) — see retirement note in `Archived/Projects/crumb-tess-bridge/progress/run-log.md`. It was solving the capture problem one layer too low; the write step was frictionless but the round-trip cost was high.
+This is why the quick-capture mechanism was retired (2026-04-24) — see retirement note in the crumb-tess-bridge run-log (deleted with `Archived/`, VO-028 B1 2026-07-03; git provenance: `git show 49143a99:Archived/Projects/crumb-tess-bridge/progress/run-log.md`). It was solving the capture problem one layer too low; the write step was frictionless but the round-trip cost was high.
 
 ## What NOT to Build
 
