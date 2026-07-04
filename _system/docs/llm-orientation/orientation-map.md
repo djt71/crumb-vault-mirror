@@ -3,7 +3,7 @@ type: reference
 status: active
 domain: software
 created: 2026-03-14
-updated: 2026-04-11
+updated: 2026-07-04
 tags:
   - system/llm-orientation
 topics:
@@ -37,26 +37,22 @@ Index of every LLM-consumed document in the Crumb/Tess system — location, toke
 |-------|----------|-------------|-------------|----------------|-------------------|
 | action-architect | `.claude/skills/action-architect/SKILL.md` | ~1,500 | Skill trigger phrase | Workflow decomposition changes | [[02-building-blocks]] §Skills |
 | attention-manager | `.claude/skills/attention-manager/SKILL.md` | ~2,400 | "plan my day", "daily attention" | Goal-tracker schema, attention planning | [[03-runtime-views]] §AKM |
-| audit | `.claude/skills/audit/SKILL.md` | ~1,800 | "audit vault", "check for drift" | Vault-check rule changes | [[05-cross-cutting-concepts]] §vault-check |
-| checkpoint | `.claude/skills/checkpoint/SKILL.md` | ~550 | Phase transitions | Context management changes | [[05-cross-cutting-concepts]] §Context Budget |
+| audit | `.claude/skills/audit/SKILL.md` | ~2,100 | "audit vault", "check for drift", "checkpoint", phase transitions | Vault-check rule changes | [[05-cross-cutting-concepts]] §vault-check |
 | code-review | `.claude/skills/code-review/SKILL.md` | ~3,000 | "review this code" | Review panel model changes | [[02-building-blocks]] §Code Review |
 | critic | `.claude/skills/critic/SKILL.md` | ~1,800 | "critique this", "find problems", "adversarial review" | Critic framework changes | [[02-building-blocks]] §Skills |
-| deck-intel | `.claude/skills/deck-intel/SKILL.md` | ~2,600 | "process this deck" | Extraction format changes | [[02-building-blocks]] §Skills |
+| deck-intel | `.claude/skills/deck-intel/SKILL.md` | ~3,300 | "process this deck", "capture this diagram" | Extraction format changes | [[02-building-blocks]] §Skills |
 | deliberation | `.claude/skills/deliberation/SKILL.md` | ~3,500 | "deliberate on", "panel review" | Evaluator panel, overlay routing | [[02-building-blocks]] §Skills |
-| diagram-capture | `.claude/skills/diagram-capture/SKILL.md` | ~2,350 | "capture this diagram" | Image classification changes | [[02-building-blocks]] §Skills |
-| feed-pipeline | `.claude/skills/feed-pipeline/SKILL.md` | ~3,400 | "process feed items" | FIF schema changes, tier logic | [[03-runtime-views]] §Feed Pipeline |
 | inbox-processor | `.claude/skills/inbox-processor/SKILL.md` | ~6,700 | "process inbox" | Sentinel format, routing rules | [[02-building-blocks]] §Skills |
-| learning-plan | `.claude/skills/learning-plan/SKILL.md` | ~2,900 | "learn", "training plan" | Pedagogy framework changes | [[02-building-blocks]] §Skills |
 | mermaid | `.claude/skills/mermaid/SKILL.md` | ~4,000 | "diagram this", "chart", "excalidraw", "sketch" | Mermaid or Excalidraw syntax changes | [[02-building-blocks]] §Skills |
 | peer-review | `.claude/skills/peer-review/SKILL.md` | ~2,650 | "peer review", "get review" | Review panel model changes | [[02-building-blocks]] §Skills |
 | researcher | `.claude/skills/researcher/SKILL.md` | ~4,150 | "research", "investigate" | Pipeline stage changes | [[02-building-blocks]] §Skills |
 | startup | `.claude/skills/startup/SKILL.md` | ~400 | Session start | Startup sequence changes | [[03-runtime-views]] §Session Lifecycle |
 | sync | `.claude/skills/sync/SKILL.md` | ~500 | Session end, milestones | Commit/push logic changes | [[05-cross-cutting-concepts]] §Git Patterns |
-| systems-analyst | `.claude/skills/systems-analyst/SKILL.md` | ~1,650 | "analyze this", "write a spec" | Spec schema changes | [[02-building-blocks]] §Skills |
+| systems-analyst | `.claude/skills/systems-analyst/SKILL.md` | ~2,600 | "analyze this", "write a spec", "learning plan" | Spec schema changes | [[02-building-blocks]] §Skills |
 | vault-query | `.claude/skills/vault-query/SKILL.md` | ~700 | "query the vault" | Query format changes | [[02-building-blocks]] §Skills |
 | writing-coach | `.claude/skills/writing-coach/SKILL.md` | ~1,000 | "improve this", "review my writing" | Writing evaluation changes | [[02-building-blocks]] §Skills |
 
-**Skill layer total:** ~47,550 tokens (all 20 skills; only 1-3 loaded per session). Removed since 2026-03-14: excalidraw, lucidchart, meme-creator, obsidian-cli. Added: critic, deliberation.
+**Skill layer total:** ~40,500 tokens (all 16 skills; only 1-3 loaded per session). Removed since 2026-03-14: excalidraw, lucidchart, meme-creator, obsidian-cli, feed-pipeline (AS-028); merged at VO B5: checkpoint→audit, diagram-capture→deck-intel, learning-plan→systems-analyst. Added: critic, deliberation.
 
 ---
 
@@ -143,15 +139,13 @@ Index of every LLM-consumed document in the Crumb/Tess system — location, toke
 
 | Subsystem | Coverage | Documents |
 |-----------|----------|-----------|
-| Session lifecycle | Full | CLAUDE.md, startup SKILL.md, session-end-protocol, checkpoint SKILL.md |
-| Skill system | Full | 22 SKILL.md files, skill-preflight-map.yaml |
+| Session lifecycle | Full | CLAUDE.md, startup SKILL.md, session-end-protocol, audit SKILL.md (checkpoint procedure) |
+| Skill system | Full | 16 SKILL.md files, skill-preflight-map.yaml |
 | Overlay system | Full | overlay-index.md, 8 overlay files |
-| Feed pipeline | Full | feed-pipeline SKILL.md, file-conventions.md |
 | AKM/Knowledge | Full | file-conventions.md, kb-to-topic.yaml |
 | Code review | Full | code-review SKILL.md, code-review-config.md, code-review-dispatch agent |
 | Peer review | Full | peer-review SKILL.md, peer-review-dispatch agent |
 | vault-check | Full | CLAUDE.md §File Access, file-conventions.md |
-| Tess personality | Full | SOUL.md, IDENTITY.md |
 
 ### Subsystems With Gaps
 

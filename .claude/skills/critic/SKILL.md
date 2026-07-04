@@ -1,11 +1,11 @@
 ---
 name: critic
 description: >
-  Adversarial review of vault artifacts: find unsupported claims, logical gaps,
-  missing perspectives, and verify citations independently. Single-stage structured
-  critique with severity ratings.
-  Use when artifact quality gates require adversarial analysis, or when user says
-  "critique this", "find problems", "adversarial review", or "check citations".
+  Adversarial review of a vault artifact: unsupported claims, logical gaps,
+  missing perspectives, independent citation verification, severity-rated
+  findings. Use when user says "critique this", "find problems",
+  "adversarial review", "check citations", or a quality gate requires
+  adversarial analysis.
 context: main
 allowed-tools: Read, Glob, Grep, WebSearch, WebFetch, Bash, Write, Edit
 model_tier: reasoning

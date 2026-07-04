@@ -1,8 +1,9 @@
 ---
 name: sync
 description: >
-  Sync vault state with external systems: git commit, cloud backup, etc.
-  Use at end of session or major milestones.
+  Sync vault state with external systems: git commit, push, cloud backup.
+  Use at session-end sequence steps 4-5, at major milestones, or when user
+  says "sync", "commit", "push the vault".
 model_tier: execution
 ---
 

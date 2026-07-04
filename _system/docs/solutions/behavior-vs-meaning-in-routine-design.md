@@ -4,7 +4,7 @@ domain: software
 status: active
 track: pattern
 created: 2026-04-07
-updated: 2026-04-07
+updated: 2026-07-04
 tags:
   - system-design
   - attention-manager
@@ -65,7 +65,7 @@ The tracker is small, mechanical, and read by automation. The reference is rich,
 - **attention-manager** scans for `*-inventory.md` files in `Projects/` and `Domains/` and processes their cadence-annotated items alongside the SE inventory. Behavior-layer files are exempt from the source-doc budget (mechanical extraction only).
 - **Reference docs** are loaded only when re-grounding is needed — when motivation flags, when seasons change, when the practice needs re-tuning. The compound retrieval / library-grounding lens in attention-manager can surface them on demand.
 - **Phase transitions** in the reference doc trigger an inventory rewrite. The two stay loosely synchronized via a `Phase Transition Watch` section in the inventory.
-- **The `learning-plan` skill** should emit *both* layers as a default when a plan has daily/weekly cadence — not as an optional Tess integration step.
+- **The learning-plan variant of the `systems-analyst` skill** should emit *both* layers as a default when a plan has daily/weekly cadence.
 
 ## Origin
 

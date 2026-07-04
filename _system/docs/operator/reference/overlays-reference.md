@@ -3,7 +3,7 @@ type: reference
 status: active
 domain: software
 created: 2026-03-14
-updated: 2026-03-14
+updated: 2026-07-04
 tags:
   - system/operator
 topics:
@@ -108,7 +108,7 @@ Complete index of Crumb's 8 expert lens overlays with activation signals, lens q
 
 ## How Overlays Work
 
-- **Loaded by skills:** Skills with overlay check steps (systems-analyst, action-architect, writing-coach, learning-plan, attention-manager) match the current task against the overlay index and load matching overlays
+- **Loaded by skills:** Skills with overlay check steps (systems-analyst — incl. learning-plan variant, action-architect, writing-coach, attention-manager) match the current task against the overlay index and load matching overlays
 - **Operator override:** Any overlay can be loaded explicitly by the operator
 - **Additive only:** Overlays add lens questions to the active skill — they don't replace the skill procedure
 - **Budget exception:** Overlays and `personal-context.md` don't count against the source document budget
@@ -120,7 +120,6 @@ Complete index of Crumb's 8 expert lens overlays with activation signals, lens q
 | systems-analyst | Matches task against index (Step 2) |
 | action-architect | Matches task against index (Step 2) |
 | writing-coach | Matches audience against index (Step 2) |
-| learning-plan | Matches skill domain against index (Step 2) |
 | attention-manager | **Always** loads Life Coach + Career Coach |
 
 ---

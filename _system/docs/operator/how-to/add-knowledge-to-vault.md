@@ -3,7 +3,7 @@ type: how-to
 status: active
 domain: software
 created: 2026-03-14
-updated: 2026-03-14
+updated: 2026-07-04
 tags:
   - system/operator
 topics:
@@ -126,16 +126,13 @@ Run vault-check (via pre-commit hook). Fix any errors:
 
 ---
 
-## Method 3: Feed Pipeline Promotion
+## Method 3: Feed Pipeline Promotion (RETIRED)
 
-For content captured by the feed-intel pipeline (X, RSS, YouTube, HN, arXiv):
-
-1. Items arrive in `_openclaw/inbox/feed-intel-*.md`
-2. Run the feed-pipeline skill: `process feed items`
-3. High-confidence items auto-promote to `Sources/signals/` as signal-notes
-4. Borderline items go to the review queue for manual decision
-
-See [[run-feed-pipeline]] for full details.
+The feed-intel pipeline (X, RSS, YouTube, HN, arXiv → `_openclaw/inbox/` →
+feed-pipeline skill → `Sources/signals/`) was decommissioned with the agentic
+layer (AS-028, 2026-06); the skill and its how-to docs live in git history.
+Existing signal-notes in `Sources/signals/` remain valid knowledge. New
+external captures route through `_inbox/` + inbox-processor (Method 1).
 
 ---
 

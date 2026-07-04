@@ -1,12 +1,10 @@
 ---
 name: peer-review
 description: >
-  Send a Crumb artifact to one or more external LLMs for structured review.
-  Collects responses, writes a consolidated review note to the vault.
-  Use for spec review, skill critique, architecture validation, writing feedback,
-  or any artifact that benefits from cross-model analysis.
-  Use when user says "peer review", "get review", "cross-model review",
-  "send for review", or "run peer review".
+  Send a Crumb artifact to one or more external LLMs for structured review;
+  write a consolidated review note to the vault. Use when user says
+  "peer review", "get review", "cross-model review", "send for review", or
+  for HIGH-impact artifacts (specs, skills, architecture, plans) at phase gates.
 context: main
 allowed-tools: Read, Write, Edit, Bash, Grep, Glob
 model_tier: reasoning
@@ -245,6 +243,10 @@ Before marking complete, verify:
 - [ ] Finding IDs are namespaced per reviewer
 - [ ] Severity labels are normalized to canonical buckets
 - [ ] Summary presented in conversation with link to review note (Step 5)
+
+## Gotchas
+
+- **Grok-family reviewers carry a fabrication calibration watch** — weigh Grok findings against the calibration tally in `_system/docs/peer-review-config.md` before accepting; do not treat volume of findings as signal. *Record: VO run-log 2026-06-10 (watch review 2: 9 findings — 1 misread, 1 noise) + peer-review-config.md calibration tally + model-grok-fabrications memory.*
 
 ## Compound Behavior
 

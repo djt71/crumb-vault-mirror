@@ -2,12 +2,10 @@
 name: inbox-processor
 description: >
   Process files dropped into _inbox/: classify, add frontmatter, summarize,
-  and route to the correct vault location. Handles markdown files directly
-  and creates companion notes for binary files (PDF, DOCX, PPTX, XLSX, images).
-  Detects NotebookLM exports via sentinel markers and routes to Sources/ as
-  knowledge notes. Detects orphan binaries in attachment directories missing
-  companion notes. Use when user says "process inbox", "check inbox",
-  "I dropped some files in", or "orphan sweep".
+  route to vault locations; companion notes for binaries; NotebookLM-export
+  detection; orphan-binary sweeps. Use when user says "process inbox",
+  "check inbox", "I dropped files in", "orphan sweep", or unprocessed files
+  sit in _inbox/.
 model_tier: reasoning
 ---
 

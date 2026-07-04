@@ -1,9 +1,10 @@
 ---
 name: action-architect
 description: >
-  Decompose approved specs and designs into milestones, action plans, and atomic tasks.
-  Use when specs/designs are approved and it's time to plan implementation, or when user
-  says "break this down", "create tasks", "what's the plan", or "next steps".
+  Decompose an approved spec or design into milestones, action plans, and
+  atomic tasks with acceptance criteria. Use when a spec/design was just
+  approved and implementation planning is next, or when user says "break this
+  down", "create tasks", "what's the plan", or "next steps".
 model_tier: reasoning
 required_context:
   - path: _system/docs/solutions/write-only-from-ledger.md

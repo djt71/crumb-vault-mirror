@@ -42,15 +42,6 @@ action-architect:
     - "Verify approved specification-summary exists before decomposing"
   required_inputs: []
 
-feed-pipeline:
-  kb_eligible: true
-  query_hints: []
-  reminders:
-    - "Project run-log cross-post: for each linked project, append entry to progress/run-log.md"
-  required_inputs:
-    - _system/docs/file-conventions.md
-    - _system/docs/kb-to-topic.yaml
-
 inbox-processor:
   kb_eligible: false
   query_hints: []
@@ -80,12 +71,6 @@ researcher:
   query_hints: []
   reminders:
     - "Write telemetry to research/telemetry-[dispatch].yaml after synthesis"
-  required_inputs: []
-
-learning-plan:
-  kb_eligible: true
-  query_hints: []
-  reminders: []
   required_inputs: []
 
 writing-coach:

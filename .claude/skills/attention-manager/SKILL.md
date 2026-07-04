@@ -1,15 +1,13 @@
 ---
 name: attention-manager
 description: >
-  Curate a daily attention plan or run a monthly review. Reads goal-tracker,
-  SE inventory, active projects, and personal context. Applies Life Coach +
-  Career Coach lenses. Produces a checkbox-style daily artifact or monthly
-  synthesis. Use when user says "plan my day", "daily attention", "what should
-  I focus on", or "monthly review".
+  Produce the daily attention plan or monthly review from goal-tracker,
+  SE inventory, active projects, and personal context (Life Coach + Career
+  Coach lenses). Use when user says "plan my day", "daily attention",
+  "what should I focus on", or "monthly review".
 model_tier: reasoning
 capabilities:
   - id: attention.daily
-    brief_schema: null
     produced_artifacts:
       - "_system/daily/YYYY-MM-DD.md"
     cost_profile:
@@ -21,7 +19,6 @@ capabilities:
     required_tools: [Read, Write, Glob, Grep]
     quality_signals: [relevance, format]
   - id: attention.monthly
-    brief_schema: null
     produced_artifacts:
       - "_system/daily/review-YYYY-MM.md"
     cost_profile:
@@ -137,7 +134,7 @@ Glob _system/daily/????-??-??.md
 ### 2. Scan Active Projects
 
 Read `project-state.yaml` from each active project directory. Extract
-`next_action` where not null. Skip `Archived/Projects/`.
+`next_action` where not null.
 
 ```
 Glob Projects/*/project-state.yaml

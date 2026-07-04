@@ -43,8 +43,7 @@ All work is classified into domains that determine workflow depth:
 - **systems-analyst** — Structured specification from ambiguous problems
 - **action-architect** — Decompose specs into milestones and tasks
 - **writing-coach** — Improve clarity, structure, tone, and brevity
-- **audit** — Vault health checks, drift detection, staleness scans
-- **checkpoint** — Log progress, compact context, verify vault files
+- **audit** — Vault health checks, drift detection, staleness scans; state checkpoints (log progress, compact context, verify vault files)
 - **sync** — Git commit, cloud backup at session end or milestones
 - **inbox-processor** — Classify and route files dropped into `_inbox/`
 - **peer-review** — Send artifacts to external LLMs for structured review

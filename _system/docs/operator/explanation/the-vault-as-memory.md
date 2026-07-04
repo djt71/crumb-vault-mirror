@@ -3,7 +3,7 @@ type: explanation
 status: active
 domain: software
 created: 2026-03-14
-updated: 2026-03-14
+updated: 2026-07-04
 tags:
   - system/operator
 topics:
@@ -37,7 +37,7 @@ Knowledge enters the vault through several pipelines:
 | Entry Point | Pipeline | Output |
 |-------------|----------|--------|
 | NotebookLM digests | inbox-processor skill | Knowledge-notes in `Sources/` |
-| Feed-intel items | feed-pipeline skill | Signal-notes in `Sources/signals/` |
+| Feed-intel items (historical) | feed-pipeline skill (retired AS-028; intake now via `_inbox/`) | Signal-notes in `Sources/signals/` |
 | Manual drops | `_inbox/` → inbox-processor | Routed to appropriate location |
 | Project work | Crumb sessions | Design artifacts, run-logs, compound patterns |
 | Research | researcher skill | Research-notes in `Sources/research/` |

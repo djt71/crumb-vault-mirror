@@ -4,7 +4,7 @@ domain: software
 status: active
 track: pattern
 created: 2026-03-08
-updated: 2026-04-04
+updated: 2026-07-04
 tags:
   - system-design
   - reliability
@@ -55,11 +55,11 @@ Full audit of CLAUDE.md and skill procedures. Tiered by silent-failure risk.
 
 | Obligation | Location | Enforcement | Status |
 |---|---|---|---|
-| Knowledge retrieval at skill activation | researcher, learning-plan, attention-manager, CLAUDE.md | PreToolUse hook on Skill | **Fixed** (phase 1) |
+| Knowledge retrieval at skill activation | researcher, systems-analyst (incl. learning-plan variant), attention-manager, CLAUDE.md | PreToolUse hook on Skill | **Fixed** (phase 1) |
 | Subagent provenance check | CLAUDE.md line 185 | vault-check §30 (warning) | **Partial** — commit-time warning; PostToolUse on Agent still open |
 | Input validation before skill execution | CLAUDE.md line 60 | PreToolUse hook (required_inputs, critical_inputs) | **Fixed** (phase 2) |
 | Context inventory to run-log | CLAUDE.md line 55 | vault-check §29 (warning) | **Partial** — commit-time warning; PostToolUse on Skill still open |
-| Feed-pipeline project cross-post | feed-pipeline Step 5.9 | None | **Open** — mid-procedure; needs PostToolUse or vault-check rule |
+| Feed-pipeline project cross-post | feed-pipeline Step 5.9 | None | **Closed** — skill retired (AS-028); no enforcement needed |
 
 ### Tier 2: Visible failure but skippable
 

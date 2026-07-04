@@ -1,13 +1,12 @@
 ---
 name: mermaid
 description: >
-  Create Mermaid diagrams embedded in markdown files or as standalone .mmd files.
-  Default skill for all diagram and chart requests. Also handles Excalidraw (.excalidraw JSON)
-  when user needs freeform spatial layout, wireframes, hand-drawn aesthetic, or says
-  "excalidraw", "draw this", or "sketch this". Use for flowcharts, sequence diagrams,
-  state diagrams, class diagrams, ERDs, Gantt charts, mind maps, pie charts, timelines,
-  kanban boards, architecture diagrams, bar/line charts, and more. Also use when "mermaid",
-  "inline diagram", "chart", "diagram this", or "visualize this" appears in a request.
+  Create Mermaid diagrams (inline markdown or .mmd; default for all
+  diagram/chart requests) and Excalidraw JSON when freeform spatial layout,
+  wireframes, or hand-drawn aesthetic is wanted. Use for any request to
+  diagram, chart, visualize, sketch, or draw; "mermaid", "excalidraw", or a
+  named diagram type (flowchart, sequence, ERD, Gantt, mind map, timeline,
+  kanban, architecture).
 context: main
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 model_tier: execution

@@ -33,7 +33,7 @@ summary: >
 
 # Fluent Forever — Gabriel Wyner
 
-**Purpose:** Language learning methodology reference — source material for the learning-plan skill's language skill type.
+**Purpose:** Language learning methodology reference — source material for the systems-analyst skill's learning-plan variant (language skill type).
 
 ![[wyner-fluent-forever.pdf]]
 

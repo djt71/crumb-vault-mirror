@@ -1,16 +1,14 @@
 ---
 name: researcher
 description: >
-  Execute a stage-separated research pipeline that produces evidence-grounded
-  deliverables with mechanical citation integrity. Orchestrates Scoping, Planning,
-  Research Loop, Citation Verification, Synthesis, and Writing stages as isolated
-  Agent tool subagents. State flows via structured handoffs and vault files.
-  Use when user says "research", "investigate", "find evidence for",
-  "deep research on", or "what does the evidence say about".
+  Execute the stage-separated research pipeline (Scoping, Planning, Research
+  Loop, Citation Verification, Synthesis, Writing) producing evidence-grounded
+  deliverables with mechanical citation integrity. Use when user says
+  "research", "investigate", "deep research on", "find evidence for",
+  "what does the evidence say about", or KB production needs cited deliverables.
 model_tier: reasoning
 capabilities:
   - id: research.external.standard
-    brief_schema: research-brief
     produced_artifacts:
       - "Sources/research/*.md"
       - "research/fact-ledger.yaml"
@@ -522,6 +520,10 @@ Before marking complete, verify:
 3. **Soft tool scoping:** Stage templates declare which tools are available (e.g., Citation Verification: `Read`, `Write`), but enforcement is via prompt instruction, not mechanical restriction. The Agent tool does not support `allowedTools` filtering. A sufficiently creative subagent could theoretically call undeclared tools.
 
 4. **Content hash deferred:** Source metadata includes a `content_hash` field with placeholder value `"RUNNER_COMPUTES"`. Hash computation is deferred to future MCP tooling (Phase 4). The field exists in the schema for forward compatibility but is not computed or consumed in V1.
+
+## Gotchas
+
+- **Writer stages fabricate internal `[[wikilinks]]` even while citing external sources correctly** (asymmetric grounding — the citation-verification stage grounds external claims but nothing grounds vault-internal references). Before emitting any deliverable, resolve every `[[...]]` target against the vault: strip it, replace it with a real anchor, or downgrade it to prose. *Record: `_system/docs/failure-log.md` 2026-04-21 (False Pattern — 4 fabricated vault paths in a research brief; external claims in the same brief all verified).*
 
 ## Compound Behavior
 

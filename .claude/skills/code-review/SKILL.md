@@ -1,11 +1,11 @@
 ---
 name: code-review
 description: >
-  Review code changes for correctness, readability, security, and professional quality.
-  Two-reviewer panel: Claude Opus (architectural reasoning via API) and Codex
-  (tool-grounded review via CLI). Runs at milestone phase transitions and on
-  manual request. Use when user says "review this code", "code review",
-  "check my implementation", or automatically at IMPLEMENT milestone boundaries.
+  Two-reviewer panel (Claude Opus via API + Codex via CLI) review of code
+  changes for correctness, security, readability, and quality. Use at
+  IMPLEMENT milestone boundaries and pre-merge in repo_path projects
+  (vault-check §23 enforces), or when user says "review this code",
+  "code review", "check my implementation".
 context: main
 allowed-tools: Read, Write, Edit, Bash, Grep, Glob
 model_tier: reasoning

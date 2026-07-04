@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: active
 created: 2026-03-14
-updated: 2026-04-11
+updated: 2026-07-04
 tags:
   - system/architecture
 topics:
@@ -77,7 +77,6 @@ Procedural expertise packages loaded on-demand based on description match.
 | action-architect | TASK/PLAN | Spec → milestones, tasks, dependencies |
 | writing-coach | Any output | Clarity, structure, tone improvement |
 | audit | Maintenance | Staleness scans, full audits, health checks |
-| checkpoint | Session mgmt | State saving, context management |
 | sync | Session mgmt | Git commit, backup operations |
 | startup | Session mgmt | Session startup hook procedures |
 | peer-review | Review | Cross-LLM artifact validation (multi-model panel) |
@@ -85,14 +84,11 @@ Procedural expertise packages loaded on-demand based on description match.
 | critic | Review | Adversarial review — unsupported claims, logical gaps, missing perspectives (single-stage structured critique) |
 | deliberation | Review | Multi-agent deliberation on vault artifacts — dispatches to external LLM evaluators with role-specific overlays |
 | inbox-processor | Intake | Process `_inbox/` files — classify, route |
-| feed-pipeline | Intake | 3-tier feed intel routing → signal-notes |
 | researcher | Research | 6-stage evidence pipeline with citation integrity |
 | mermaid | Diagrams | Default diagramming — Mermaid in markdown + Excalidraw for freeform/sketch layouts |
-| deck-intel | Extraction | Structured intel from PPTX/PDF |
-| diagram-capture | Extraction | Visual content interpretation from images |
+| deck-intel | Extraction | Structured intel from PPTX/PDF; visual content interpretation (absorbed diagram-capture, VO B5) |
 | vault-query | Cross-cutting | Structured vault queries for dispatch consumers |
 | attention-manager | Planning | Daily attention plans, monthly reviews |
-| learning-plan | Planning | Structured training plan design |
 
 **Location:** `.claude/skills/[name]/SKILL.md` — each skill is a single markdown file with YAML frontmatter (identity, procedure, context contract, quality checklist, compound behavior, convergence dimensions). Some skills have reference subdirectories (researcher has `stages/` and `schemas/`).
 
@@ -154,7 +150,7 @@ The shared filesystem. All state, all communication, all persistence.
 | `Projects/` | Active project scaffolds (state, specs, plans, tasks, logs, design, reviews, research, attachments) | Crumb |
 | `Archived/Projects/` | Archival target — recreated on next project archival (directory absent when empty; deleted 2026-07-03, vault-optimization B1) | Crumb (archive/reactivate) |
 | `Domains/` | Domain overview notes and MOC files organized by life domain (Career, Health, Learning, etc.) | Crumb |
-| `Sources/` | Knowledge notes from external sources — books, articles, podcasts, videos, courses, papers. Plus `signals/` for feed-pipeline output | Crumb |
+| `Sources/` | Knowledge notes from external sources — books, articles, podcasts, videos, courses, papers. Plus `signals/` for promoted signal-notes (formerly feed-pipeline output) | Crumb |
 | `_system/docs/` | System infrastructure: design spec, protocols, overlays, solutions, templates, personal context | Crumb |
 | `_system/logs/` | Operational logs: session-log, AKM feedback, backup/health status, service metrics | Crumb (session-log); Scripts (metrics) |
 | `_system/scripts/` | Mechanical enforcement and automation scripts | Crumb |

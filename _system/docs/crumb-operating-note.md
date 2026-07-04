@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: draft
 created: 2026-06-10
-updated: 2026-06-10
+updated: 2026-07-04
 skill_origin: none
 confidence: high
 tags:
@@ -75,14 +75,14 @@ members:
   (refs=81), personal-context
 
 **Skill surface (post-B5 consolidation)**
-- Workflow skills: systems-analyst, action-architect, audit (absorbing
-  checkpoint), peer-review (absorbing critic, writing-coach), deliberation,
-  researcher, code-review
-- Capture/hygiene: inbox-processor, feed-pipeline (operator-triggered;
-  AS-028-coordinated), vault-query, sync
-- Knowledge-work: attention-manager, deck-intel, mermaid, learning-plan
-  (merge into systems-analyst pending), diagram-capture (merge-or-keep
-  pending VO-019 composition check)
+- Workflow skills: systems-analyst (absorbed learning-plan, VO B5),
+  action-architect, audit (absorbed checkpoint, VO B5), peer-review, critic,
+  writing-coach (critic/writing-coach merges declined by operator 2026-06-10),
+  deliberation, researcher, code-review
+- Capture/hygiene: inbox-processor, vault-query, sync (feed-pipeline retired
+  outright at AS-028)
+- Knowledge-work: attention-manager, deck-intel (absorbed diagram-capture,
+  VO B5), mermaid
 
 **Vault-protecting machinery**
 - `vault-check.sh`, `session-startup.sh`, skill-preflight hook, the backup

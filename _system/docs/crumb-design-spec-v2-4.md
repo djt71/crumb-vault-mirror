@@ -228,7 +228,6 @@ crumb-vault/
     │   ├── writing-coach/SKILL.md
     │   ├── audit/SKILL.md
     │   ├── obsidian-cli/SKILL.md      # Vault query routing and safe CLI patterns (§3.1.5)
-    │   ├── checkpoint/SKILL.md        # Session state saving and context management (§3.1.6)
     │   ├── sync/SKILL.md              # Git commit and backup operations (§3.1.7)
     │   ├── inbox-processor/SKILL.md   # Phase 2: process manually added files from _inbox/
     │   ├── peer-review/SKILL.md      # Cross-LLM review automation (§3.3, v1.7.1)
@@ -238,7 +237,6 @@ crumb-vault/
     │   ├── lucidchart/SKILL.md       # Lucidchart diagrams via REST API for external sharing
     │   ├── meme-creator/SKILL.md     # Meme images from quotes with movie stills
     │   ├── startup/SKILL.md          # Session startup hook procedures
-    │   ├── feed-pipeline/SKILL.md   # Feed intel 3-tier routing to signal-notes (§3.3, v2.3)
     │   ├── researcher/              # Stage-separated evidence pipeline (§3.3, v2.4)
     │   │   ├── SKILL.md
     │   │   ├── stages/              # Stage procedures (01-scoping through 06-writing + validation rules)
@@ -1200,7 +1198,7 @@ Start with these 7 core skills. `systems-analyst` and `action-architect` are bui
 
 #### 3.1.6 Checkpoint
 
-**File:** `.claude/skills/checkpoint/SKILL.md`
+**File:** `.claude/skills/audit/SKILL.md` §State Checkpoint (absorbed into the audit skill at vault-optimization B5, 2026-07-04; originally a standalone skill)
 
 - **Phase:** Session management (cross-cutting)
 - **Inputs:** Current session state, context usage level

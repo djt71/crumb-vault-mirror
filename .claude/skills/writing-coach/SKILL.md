@@ -1,8 +1,8 @@
 ---
 name: writing-coach
 description: >
-  Improve clarity, structure, tone, argument, and brevity of written content.
-  Use when editing emails, docs, essays, proposals, or when user says "improve this",
+  Improve clarity, structure, tone, argument, and brevity of written content
+  (emails, docs, essays, proposals). Use when user says "improve this",
   "review my writing", "make this clearer", or "edit for tone".
 required_context:
   - path: _system/docs/solutions/ai-telltale-anti-patterns.md

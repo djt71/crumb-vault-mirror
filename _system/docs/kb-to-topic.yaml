@@ -3,7 +3,7 @@
 #
 # SCOPE: This file governs knowledge-note (type: knowledge-note) routing only.
 # Signal-notes (type: signal-note) route to moc-signals unconditionally via the
-# feed-pipeline skill, regardless of their kb/ tag. Do not use this mapping for
+# signal-note promotion (formerly the feed-pipeline skill, retired AS-028), regardless of their kb/ tag. Do not use this mapping for
 # signal-note topic derivation.
 #
 # Format: kb/<tag> → MOC filename slug (without .md, without path)

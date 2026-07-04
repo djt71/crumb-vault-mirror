@@ -1,9 +1,12 @@
 ---
 name: systems-analyst
 description: >
-  Analyze problems, goals, or vague tasks to produce structured specifications.
-  Use when starting new projects, clarifying ambiguous requests, or when user says
-  "what should I build", "analyze this problem", "write a spec", or "help me think through".
+  Analyze problems, goals, or vague tasks into structured specifications;
+  includes phased learning/training plan design (skill-type classification,
+  practice schedules, progress checkpoints) as a specification variant.
+  Use for new project intake, or when user says "write a spec", "analyze this
+  problem", "help me think through", "what should I build" — or "learning plan",
+  "training plan", "study plan", "build a curriculum", "how do I get good at".
 model_tier: reasoning
 required_context:
   - path: _system/docs/solutions/write-read-path-verification.md
@@ -41,6 +44,7 @@ You are a systems analyst who transforms vague problems and goals into structure
 - User presents an ambiguous or unclear request
 - Need to clarify scope, constraints, and success criteria
 - User explicitly asks for analysis, specs, or problem breakdown
+- User wants to learn a new skill, or asks for a training plan, study plan, curriculum, or practice schedule → use the **Learning Plan Variant** (below)
 
 ## Procedure
 
@@ -140,6 +144,102 @@ If the specification identifies dependencies on deliverables from other projects
 If this problem shape recurs or reveals a reusable pattern, document it:
 - Create or update a file in `/_system/docs/solutions/`
 - Use standard frontmatter with tags for future retrieval
+
+## Learning Plan Variant (absorbed from learning-plan skill)
+
+When the request is skill/knowledge acquisition, produce a phased training
+plan instead of a specification. The plan is grounded in learning science —
+spaced repetition, deliberate practice, progressive overload, feedback loop
+design — tailored to the type of skill being acquired. Protect against two
+failure modes: generic plans that ignore the nature of the skill, and plans
+that are technically correct but unsustainable given real constraints.
+
+**Not this variant:** one-off factual questions (just answer); skill
+*selection* decisions ("should I learn X or Y" — Career/Life Coach territory);
+sourcing materials as a standalone task (researcher skill); building course
+content for others (writing/design task).
+
+**Context for this variant:** domain summary if the skill maps to one; vault
+search for existing knowledge on the topic; learning-science digests from
+`Sources/books/` relevant to the skill type (1-2, not all) — `ericsson-peak`
+(deliberate practice), `brown-make-it-stick` (retrieval practice, spacing),
+`young-ultralearning` (self-directed intensive), `wyner-fluent-forever`
+(language methodology), `clear-atomic-habits` (habit formation). Overlay
+likely co-fires: Career Coach (professional skills), Life Coach (personal
+growth), Network Skills (DNS/networking technical).
+
+### V1. Classify Skill Type
+
+The skill type drives the plan's pedagogical structure:
+
+| Type | Characteristics | Practice Shape | Examples |
+|------|----------------|----------------|----------|
+| **Motor** | Physical coordination, muscle memory | High repetition, slow tempo → speed, quality before quantity | Piano, guitar, typing, sports |
+| **Language** | Vocabulary, grammar, pronunciation, comprehension | Input-heavy early, output ramps later, immersion critical | French, Japanese, Spanish |
+| **Conceptual** | Mental models, theory, analytical frameworks | Read → explain → apply → teach; interleaving over massing | Philosophy, mathematics, history |
+| **Applied-technical** | Procedural + conceptual + tool fluency | Lab/simulation alongside theory, real problems over textbook exercises | DNS architecture, programming, network security |
+| **Creative** | Aesthetic judgment, personal voice, generative skill | Study exemplars → imitate → vary → originate; audience feedback | Writing, poetry, visual art, composition |
+| **Composite** | Combines multiple types (most real skills do) | Design for the dominant type, supplement with secondary practices | "Learn guitar" = motor + creative + conceptual |
+
+### V2. Assess Current and Target Levels
+
+Clarify through ≤5 questions (skip any already answered): current level (what
+can you do now, what have you tried); target level (specific — "conversational
+French" ≠ "read French literature" ≠ "pass DELF B2"); realistic weekly time
+budget (sustainability beats ambition); constraints (equipment, environment,
+teachers/partners, budget, scheduling); motivation type (intrinsic tolerates
+exploration; instrumental needs faster path-to-competence).
+
+### V3. Design Phased Plan
+
+2-3 phases for simple skills, 3-5 for moderate (instrument basics,
+conversational language, certification), 5-8 for deep skills with later
+phases more open-ended. Each phase has:
+
+- **Phase goal** — what you can do at the end that you couldn't before
+  (concrete and testable, not "improved speaking")
+- **Duration estimate** — calendar time at the stated weekly hours
+- **Core activities** shaped by the skill type's practice shape (V1 table)
+- **Spaced repetition integration** — what to review, at what intervals,
+  using what method (Anki, self-quiz, retrieval practice)
+- **Feedback loop** — what counts as valid feedback, how to get it, how often;
+  no phase without a way to assess progress
+- **Plateau markers** — what a plateau looks like at this phase and the
+  response (change practice type, seek feedback, increase difficulty, persist)
+- **Cognitive scaffolding** — chunk new concepts (3-5 per session max); don't
+  combine new motor skills with new conceptual knowledge in one session;
+  place the most important material at session start and end
+- **Motivation design** — make progress visible near milestones
+  (goal-gradient); end phases on a challenging-but-achievable capstone
+  (peak-end); end sessions with an open loop (Zeigarnik)
+- **Flow calibration** — difficulty slightly above current ability; bored →
+  harder, frustrated → more scaffolding
+
+### V4. Identify Resources
+
+Recommend specific materials with *what it is and why*, phase-mapped (not a
+list dumped at the end), with alternatives. Check the vault first — book
+digests and knowledge notes may cover foundational material. Offer (don't
+require) a researcher-skill dispatch for domains lacking strong resource
+knowledge.
+
+### V5. Write Plan Document
+
+Filename `[skill]-learning-plan.md`. Location: `Domains/[domain]/` for
+domain-specific ongoing goals; `Projects/[project-name]/` for bounded goals
+with completion criteria — state the reasoning in the doc. Frontmatter:
+`type: plan`, `skill_origin: systems-analyst`, plus `skill_type`,
+`skill_type_secondary` (if composite), `target_level`, `weekly_hours`, tags
+(`learning-plan`, skill-specific tag, optional `kb/[topic]`). Structure: goal
+statement → skill classification and practice-shape rationale → current
+assessment → phased plan (one H2 per phase) → resources (phase-mapped) →
+progress tracking section (usable empty template).
+
+**Variant quality bar:** skill type classified with rationale; every phase
+has goal/duration/activities/feedback loop/plateau markers; spaced repetition
+structurally integrated; plan sustainable at stated hours (no heroic
+assumptions); composite skills address all component types. Track recurring
+plan patterns by skill type in `_system/docs/solutions/learning-plan-patterns/`.
 
 ## Context Contract
 

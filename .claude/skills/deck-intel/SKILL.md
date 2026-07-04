@@ -2,10 +2,13 @@
 name: deck-intel
 description: >
   Extract structured intelligence from PPTX and PDF files (sales enablement,
-  vendor materials, competitive intel, analyst reports). Produces knowledge-notes
-  with actionable content stripped of marketing noise. Use when user says
-  "process this deck", "extract intel from", "what's useful in this presentation",
-  "campaign intel", or drops PPTX/PDF files and asks for structured extraction.
+  vendor materials, competitive intel, analyst reports) and interpret visual
+  content in PPTX/PDF/images: classify (diagram/table/chart/screenshot),
+  recreate diagrams as Mermaid, tables as markdown, others as structured
+  descriptions. Use when user says "process this deck", "extract intel from",
+  "campaign intel", "capture this diagram", "what's in this image/diagram",
+  or drops a PPTX/PDF/image needing structured extraction. Composable from
+  inbox-processor for visual enrichment.
 model_tier: reasoning
 ---
 
@@ -29,6 +32,8 @@ nobody reads twice.
 - User references campaign preparation and has vendor/internal materials to process
 - User wants to update competitive knowledge from new analyst reports or vendor materials
 - Session context involves customer engagement prep with raw source materials
+- User says "capture this diagram", "interpret this image", "what's in this diagram", or points to an image file (JPEG, PNG, SVG) for interpretation → use **Standalone Visual Capture Mode** (below)
+- inbox-processor encounters an image file or image-heavy binary → composable visual capture
 
 ## Procedure
 
@@ -85,20 +90,80 @@ text synthesis).
 
 ### 4. Extract and Preserve Diagrams/Images
 
-Call the diagram-capture skill in **composable mode** to extract substantive
-images from the source file.
+Extract substantive images from the source file (procedure absorbed from the
+retired diagram-capture skill), then classify and filter.
 
-**PPTX files — two modes:**
-- **Embedded images** (zipfile): extracts photos, screenshots, inserted images
-- **Rendered slides** (LibreOffice headless → PyMuPDF): captures shape-based
-  diagrams, architecture layouts, network topologies as they appear on screen
+**PPTX files — two complementary extraction modes.** Use both when available;
+fall back to embedded-only when LibreOffice is not installed.
 
-**PDF files:**
-- **Embedded images** (PyMuPDF): extracts images with page context
+**Mode A: Embedded images** (zipfile — always available). Extracts photos,
+screenshots, and inserted images from `ppt/media/`. Does NOT capture diagrams
+built from PowerPoint shapes, SmartArt, or connectors — those live in slide
+XML, not as image files.
 
-diagram-capture classifies each image (diagram/table/chart/screenshot/decorative)
-and filters (skip decorative, icons < 50x50px). Present classification summary:
-"[N] images: [X] diagrams, [Y] tables, [Z] screenshots, [W] decorative (skip)."
+```python
+import zipfile, os, tempfile
+tmp = tempfile.mkdtemp(prefix="deck-intel-")
+with zipfile.ZipFile(filepath, 'r') as z:
+    media = [f for f in z.namelist()
+             if f.startswith('ppt/media/') and not f.endswith('/')]
+    for f in media:
+        z.extract(f, tmp)
+```
+
+**Mode B: Rendered slides** (LibreOffice headless — preferred for diagrams).
+Renders every slide to PNG, capturing shape-based diagrams, architecture
+layouts, and network topologies exactly as they appear on screen.
+
+- **Hidden slide check (required before rendering):** PPTX files may contain
+  hidden slides (`show="0"` in `ppt/slides/slideN.xml`) that LibreOffice
+  silently drops during export. Parse each slide XML first — if any have
+  `show="0"`, create a temp copy with those attributes removed.
+- **Rendering pipeline** (PNG export only renders slide 1; use PDF
+  intermediary): `libreoffice --headless --convert-to pdf --outdir "$tmp"
+  "$filepath"`, then render each PDF page to PNG via PyMuPDF.
+- When both modes run, deduplicate: prefer the rendered-slide version when a
+  diagram appears in both (it preserves slide context and surrounding labels).
+
+**PDF files** — extract embedded images with page context via PyMuPDF:
+
+```python
+import fitz, os, tempfile
+tmp = tempfile.mkdtemp(prefix="deck-intel-")
+doc = fitz.open(filepath)
+for page_num, page in enumerate(doc):
+    for img_idx, img in enumerate(page.get_images(full=True)):
+        xref = img[0]
+        base_image = doc.extract_image(xref)
+        out_path = os.path.join(tmp,
+            f"page{page_num+1}-img{img_idx+1}.{base_image['ext']}")
+        with open(out_path, "wb") as f:
+            f.write(base_image["image"])
+```
+
+**Filter and classify.** View each extracted image with the Read tool. Filter
+gate — auto-skip: images smaller than 50x50px (icons, bullets), solid fills
+and gradient backgrounds. For rendered slides also skip: title slides,
+agenda/TOC slides, text-heavy slides with no visual elements, "thank you" /
+legal disclaimer slides (expect higher decorative ratios from rendered slides).
+
+| Class | Criteria |
+|---|---|
+| **diagram** | Flowcharts, architecture diagrams, network topologies, process flows, sequence diagrams, state machines, org charts |
+| **table** | Tabular data, comparison matrices, feature grids, pricing tables |
+| **chart** | Bar/line/pie charts, scatter plots, gauges |
+| **screenshot** | UI screenshots, terminal output, application windows |
+| **decorative** | Stock photos, logos, gradient fills, section dividers — skip |
+
+Present classification summary: "[N] images: [X] diagrams, [Y] tables,
+[Z] screenshots, [W] decorative (skip)."
+
+**Sensitivity check:** flag screenshots containing customer names, internal
+metrics, proprietary dashboards, pricing, or PII with a `**Sensitivity:**`
+warning — these require scrubbing or internal-only marking before moving to
+a durable vault location.
+
+Clean up the temp extraction directory when done.
 
 **Preservation:** Save substantive images to `_attachments/` with filenames
 keyed to the knowledge note: `[source_id]-fig[N].[ext]`. The knowledge note
@@ -282,6 +347,53 @@ If this extraction reveals a pattern worth capturing:
 - Campaign-level insight spanning multiple sources → flag for user
 - Vendor-specific quirks (e.g., "always buries technical details in notes") →
   pattern note in `_system/docs/solutions/`
+- Diagram types where Mermaid recreation falls back frequently → track for skill tuning
+
+## Standalone Visual Capture Mode
+
+For direct invocations ("capture this diagram", "what's in this image") and
+composable calls from inbox-processor — visual interpretation without the
+deck-intel synthesis pipeline. Absorbed from the retired diagram-capture skill.
+
+**Input handling:** Image files (JPEG, PNG, GIF, WEBP, TIFF) process directly —
+no extraction. SVG: read the markup source as text; skip the vision step if
+the structure is self-explanatory. PPTX/PDF: extract per Step 4 above.
+Classify per the Step 4 table, then interpret. Present the classification
+summary before interpreting.
+
+**Interpretation by class** (unlike deck mode, standalone mode *recreates*
+content rather than preserving images):
+
+- **Diagrams → Mermaid:** identify diagram type (flowchart, sequence, state,
+  C4, etc.); map all nodes/entities, relationships/arrows, labels, groupings;
+  recreate in the closest matching Mermaid type; validate syntax before
+  outputting. Complexity gate: >30 nodes or heavily styled/3D layout → fall
+  back to structured text description and flag the fallback.
+- **Tables → Markdown:** all rows, columns, headers, cell values as a GFM
+  pipe table; preserve alignment and header rows; mark ambiguous cells `[unclear]`.
+- **Charts → Data + description:** extract data series as a markdown table
+  (approximate values from visual); describe the trend or comparison; note
+  chart type, axis labels, units.
+- **Screenshots → Description:** what's shown (application, feature area,
+  state), all visible text, product/version if identifiable. Apply the
+  sensitivity check from Step 4.
+- **Other → structured description** of content and apparent purpose.
+
+Every interpretation carries a confidence rating (high/medium/low) and uses
+`[unclear]` for ambiguous content — no hallucinated fills.
+
+**Standalone output:** create `[source-stem]-visual-capture.md` alongside the
+source — header with source filename, image counts, capture date; one section
+per image with classification label, the interpretation (Mermaid block /
+table / description), location (page/slide/direct file), confidence, and
+caveats. If the source is in a transient location (`_inbox/`, `/tmp/`), add a
+durability advisory: move to `_attachments/` or embed in a knowledge note for
+permanent reference. The skill flags but does not route.
+
+**Composable output** (called mid-procedure from another skill): return
+interpretations as structured content — do not create a separate file. From
+inbox-processor: content goes in a `## Visual Content` section of the
+companion note (after `## Extracted Content` or `## Notes`).
 
 ## Context Contract
 
@@ -314,7 +426,11 @@ multiple prior extractions for the same vendor/topic.
 - Actionable Items must be concrete and specific, not "follow up on this"
 - Confidence rating (high/medium/low) is mandatory and reflects extraction quality
 - No source-index notes — one deck = one knowledge note
-- Diagrams preserved as images in `_attachments/`, not recreated in Mermaid
+- Deck mode: diagrams preserved as images in `_attachments/`, not recreated in Mermaid
+- Standalone visual capture: Mermaid blocks syntactically valid; every
+  interpretation has a confidence rating; `[unclear]` for ambiguous content;
+  output file lives alongside the source; durability advisory for transient
+  locations; >30-node diagrams fall back to text with explicit flag
 
 ## Output Quality Checklist
 
@@ -351,3 +467,6 @@ marketing on the slides, capture that as a pattern note in
 4. **Cross-reference quality:** When multiple sources cover the same topic, are
    contradictions and overlaps surfaced?
 5. **Image preservation:** Are substantive diagrams captured and described?
+6. **Visual capture fidelity** (standalone mode): Do Mermaid recreations
+   preserve structural relationships and labels; do tables preserve all
+   visible data; are substantive images never mis-classified as decorative?

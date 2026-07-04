@@ -1,22 +1,13 @@
 ---
 type: state
 status: active
-created: 2026-07-03
-updated: 2026-07-03
+created: 2026-07-04
+updated: 2026-07-04
 ---
 
-# Vault Health Notes — 2026-07-03
+# Vault Health Notes — 2026-07-04
 
-## Warnings (85)
-  WARNING: Projects/tess-v2/scripts/.venv/lib/python3.14/site-packages/idna-3.11.dist-info/licenses/LICENSE.md — no YAML frontmatter found
-  WARNING: Projects/tess-v2/scripts/.venv/lib/python3.14/site-packages/httpcore-1.0.9.dist-info/licenses/LICENSE.md — no YAML frontmatter found
-  WARNING: Projects/tess-v2/scripts/.venv/lib/python3.14/site-packages/pip/_vendor/idna/LICENSE.md — no YAML frontmatter found
-  WARNING: Projects/tess-v2/scripts/.venv/lib/python3.14/site-packages/httpx-0.28.1.dist-info/licenses/LICENSE.md — no YAML frontmatter found
-  WARNING: Projects/tess-v2/scripts/.venv/lib/python3.14/site-packages/openai/resources/responses/api.md — no YAML frontmatter found
-  WARNING: Projects/tess-v2/scripts/.venv/lib/python3.14/site-packages/openai/resources/realtime/api.md — no YAML frontmatter found
-  WARNING: Projects/tess-v2/scripts/.venv/lib/python3.14/site-packages/openai/resources/conversations/api.md — no YAML frontmatter found
-  WARNING: Projects/tess-v2/scripts/.venv/lib/python3.14/site-packages/openai/resources/webhooks/api.md — no YAML frontmatter found
-  WARNING: Projects/tess-v2/scripts/.venv/lib/python3.14/site-packages/pip-26.0.dist-info/licenses/src/pip/_vendor/idna/LICENSE.md — no YAML frontmatter found
+## Warnings (87)
   WARNING: Projects/tess-v2/reviews/2026-03-28-external-action-plan-review-synthesis.md — no YAML frontmatter found
   WARNING: Projects/firekeeper-books/ai-art-learning-plan.md — kb-tagged note missing required 'topics' field
   WARNING: Domains/Career/moc-networking.md — orientation MOC has 15 Core entries but Synthesis has <30 words
@@ -27,6 +18,19 @@ updated: 2026-07-03
   WARNING: Domains/Learning/moc-philosophy.md — 2 Core one-liner(s) have <10 chars of description after the link (§5.6.6)
   WARNING: Domains/Learning/moc-psychology.md — orientation MOC has 12 Core entries but Synthesis has <30 words
   WARNING: Projects/mission-control/progress/run-log-2026-03a.md — 2161 lines (threshold: 1000) — consider rotation
+  WARNING: XD-001 — upstream project 'tess-operations' not found in Projects/ or Archived/Projects/
+  WARNING: XD-003 — upstream project 'multi-agent-deliberation' not found in Projects/ or Archived/Projects/
+  WARNING: XD-022 — upstream project 'tess-operations' not found in Projects/ or Archived/Projects/
+  WARNING: XD-023 — upstream project 'tess-operations' not found in Projects/ or Archived/Projects/
+  WARNING: XD-006 — upstream project 'agent-to-agent-communication' not found in Projects/ or Archived/Projects/
+  WARNING: XD-008 — upstream project 'tess-operations' not found in Projects/ or Archived/Projects/
+  WARNING: XD-010 — upstream project 'agent-to-agent-communication' not found in Projects/ or Archived/Projects/
+  WARNING: XD-012 — upstream project 'agent-to-agent-communication' not found in Projects/ or Archived/Projects/
+  WARNING: XD-017 — upstream project 'autonomous-operations' not found in Projects/ or Archived/Projects/
+  WARNING: XD-018 — upstream project 'autonomous-operations' not found in Projects/ or Archived/Projects/
+  WARNING: XD-019 — upstream project 'mcp-workspace-integration' not found in Projects/ or Archived/Projects/
+  WARNING: XD-020 — upstream project 'mcp-workspace-integration' not found in Projects/ or Archived/Projects/
+  WARNING: XD-021 — upstream project 'mcp-workspace-integration' not found in Projects/ or Archived/Projects/
   WARNING: Projects/feed-intel-framework/progress/run-log.md — session '## 2026-05-28 — Pipeline decommissioned (operator request)' mentions skill invocation but has no context inventory
   WARNING: Projects/agentic-sunset/progress/run-log.md — session '## 2026-06-10 — PLAN' mentions skill invocation but has no context inventory
   WARNING: Projects/agentic-sunset/progress/run-log.md — session '## 2026-06-10 — Session end' mentions skill invocation but has no context inventory
@@ -51,6 +55,7 @@ updated: 2026-07-03
   WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-06-10 — Pack approval batch resolved (question gate)' mentions skill invocation but has no context inventory
   WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-06-10 — Session end (M3 changeset session)' mentions skill invocation but has no context inventory
   WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-06-11 — Adjacent item closed: feed backlog operator decision (discard)' mentions skill invocation but has no context inventory
+  WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-07-03 — Session-end (compound evaluation)' mentions skill invocation but has no context inventory
   WARNING: Projects/obsidian-applenotes-import/progress/run-log.md — session '## 2026-04-25 — Project creation' mentions skill invocation but has no context inventory
   WARNING: Projects/obsidian-applenotes-import/progress/run-log.md — session '## 2026-04-25 — SPECIFY done; PLAN-ready' mentions skill invocation but has no context inventory
   WARNING: Projects/opportunity-scout/progress/run-log.md — session '## 2026-04-25 — Three-tier priority injection in synthesis + ranking prompts' mentions skill invocation but has no context inventory
@@ -79,22 +84,19 @@ updated: 2026-07-03
   WARNING: Projects/agentic-sunset/progress/run-log.md — broken link: [[project-agentic-sunset]]
   WARNING: Projects/agentic-sunset/progress/run-log.md — broken link: [[recurring-patterns]]
   WARNING: Projects/firekeeper-books/progress/run-log.md — broken link: [[recurring-patterns]]
-  WARNING: Archived/Projects/vault-restructure/design/migration-plan.md — broken link: [[openclaw-colocation-spec]]
-  WARNING: Archived/Projects/vault-restructure/design/migration-plan.md — broken link: [[openclaw-colocation-spec-summary]]
-  WARNING: Archived/Projects/vault-restructure/design/migration-plan.md — broken link: [[openclaw-crumb-reference]]
-  WARNING: Archived/Projects/openclaw-colocation/design/ref-openclaw-spec-overview.md — broken link: [[openclaw-colocation-spec-summary]]
-  WARNING: Archived/Projects/openclaw-colocation/design/ref-openclaw-crumb-reference.md — broken link: [[openclaw-crumb-reference]]
-  WARNING: Archived/Projects/openclaw-colocation/design/ref-openclaw-colocation-spec.md — broken link: [[openclaw-colocation-spec]]
-  WARNING: Archived/Projects/batch-book-pipeline/design/moc-scaffolding-proposal.md — broken link: [[source-id-index]]
-  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-31-competitive.md — broken link: [[Projects/tess-v2/design/scheduled-services]]
-  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-31-competitive.md — broken link: [[agent-to-agent-communication/design/orchestration-patterns]]
-  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-31-competitive.md — broken link: [[feed-intel-framework/insights/anthropic-roadmap]]
-  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-24-competitive.md — broken link: [[Projects/tess-v2/design/scheduled-services]]
-  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-24-competitive.md — broken link: [[agent-to-agent-communication/design/orchestration-patterns]]
-  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-24-competitive.md — broken link: [[feed-intel-framework/insights/anthropic-roadmap]]
-  WARNING: Archived/_openclaw/research/.processed/research-brief-2026-05-13-builder.md — broken link: [[Projects/tess-v2/design/scheduled-services]]
+  WARNING: Sources/insights/loop-scheduled-task-orchestration.md — broken link: [[tess-operations]]
+  WARNING: Sources/signals/claudecodecamp-agents-while-sleeping.md — broken link: [[tess-operations]]
+  WARNING: Sources/signals/fang-trajectory-informed-memory.md — broken link: [[attention-manager]]
+  WARNING: Sources/signals/jpschroeder-dmux-tmux-agents.md — broken link: [[tess-operations]]
+  WARNING: Sources/signals/sero-droid-structured-agent-coding.md — broken link: [[tess-operations]]
+  WARNING: Sources/signals/geohot-running-69-agents.md — broken link: [[tess-operations]]
+  WARNING: Sources/signals/sahoo-safeguarded-self-improvement.md — broken link: [[attention-manager]]
+  WARNING: Sources/signals/mitsuhiko-agents-like-coding-agents.md — broken link: [[tess-operations]]
+  WARNING: Sources/signals/danshipper-daily-codex-polish-agent.md — broken link: [[tess-operations]]
+  WARNING: Sources/signals/koylanai-claude-code-hooks-patterns.md — broken link: [[tess-operations]]
+  WARNING: Sources/signals/odysseus-minimal-agentic-system-linear.md — broken link: [[tess-operations]]
 
 ## Stale Projects (14+ days)
-feed-intel-framework, tess-v2, customer-intelligence, firekeeper-books, vault-optimization, obsidian-applenotes-import, think-different, opportunity-scout, mission-control, tess-danny-migration, semuta
+feed-intel-framework, tess-v2, customer-intelligence, firekeeper-books, obsidian-applenotes-import, think-different, opportunity-scout, mission-control, tess-danny-migration, semuta
 
 

@@ -1,9 +1,11 @@
 ---
 name: audit
 description: >
-  Audit vault and project state: check for drift, stale summaries, redundant patterns,
-  failure log trends, and general hygiene. Lightweight staleness scan runs at
-  session start; full audit runs on user request or when staleness scan warrants it.
+  Audit vault/project state (drift, stale summaries, redundant patterns,
+  failure-log trends, hygiene) and run state checkpoints (log progress,
+  compact context, verify vault files). Use when the startup staleness scan
+  warrants a full pass; when user says "audit", "vault health", "checkpoint";
+  or when a phase transition or session end needs a checkpoint.
 model_tier: reasoning
 required_context:
   - path: _system/docs/solutions/archive-conventions.md
@@ -15,13 +17,14 @@ required_context:
 
 ## Identity and Purpose
 
-You are a vault auditor who maintains system health by detecting drift, staleness, and systemic issues across all vault artifacts. You produce audit reports with findings and corrective actions, keeping the vault trustworthy and self-consistent. You protect against silent decay — stale summaries, orphaned notes, drifting conventions, and recurring failure modes that erode system reliability over time.
+You are a vault auditor who maintains system health by detecting drift, staleness, and systemic issues across all vault artifacts. You produce audit reports with findings and corrective actions, keeping the vault trustworthy and self-consistent. You protect against silent decay — stale summaries, orphaned notes, drifting conventions, and recurring failure modes that erode system reliability over time. You also run state checkpoints: capturing progress, managing context pressure, and verifying vault durability at phase transitions and session ends.
 
 ## When to Use This Skill
 
 - **Automatic:** Session-start staleness scan runs every session as part of CLAUDE.md session startup
 - **User request:** "Run an audit", "Check vault health", "Is anything stale?"
 - **Recommended:** When staleness scan finds 3+ issues, or 7+ days since last full audit
+- **Checkpoint:** After completing a workflow phase, before ending a session, when switching projects, after major milestones, or when context pressure is building (>70% usage)
 
 ## Procedure
 
@@ -52,24 +55,19 @@ User-initiated or recommended by staleness scan. Run when 7+ days since last ful
    - **3+ routing failures (Wrong Skill or Routing Failure) in 30 days:** Review CLAUDE.md routing heuristics and skill descriptions for ambiguity. Propose specific wording changes.
 8. Review context inventory entries in `run-log.md`: flag skills consistently operating in extended tier or above design ceiling — report to user with frequency and skill names
 9. Knowledge base health check: check for orphaned `#kb/*` notes (tagged but not linked from domain summary), flag recently completed project deliverables that may deserve `#kb/` tagging, and **verify all docs in `_system/docs/solutions/` have at least one `#kb/` tag** — untagged solution docs are invisible to knowledge base queries and risk creating duplicate patterns
-10. Report `Archived/KB/` file count. If count exceeds 20, recommend a purge review session (see `_system/docs/operator/how-to/vault-gardening.md`)
+10. Stale-KB scan: flag KB notes that look superseded or inert (no inbound wikilinks from active notes, content overtaken by newer notes). If candidates accumulate, recommend a delete review session — deletion with git provenance, per `_system/docs/operator/how-to/vault-gardening.md`
 11. **Orphaned solutions check:** For each doc in `_system/docs/solutions/`, verify it appears in at least one skill's `required_context` entries (check all `.claude/skills/*/SKILL.md` frontmatter). Solutions docs with no `required_context` linkage from any skill are orphaned — they were captured by compound engineering but have no mechanical read-back path. Skip docs that self-declare `linkage: discovery-only` in frontmatter — they have opted out of hard linkage deliberately. Flag the remaining orphans for the user with the recommendation to either add a `required_context` entry to the appropriate skill or mark the doc `linkage: discovery-only`.
 12. **Stale linkage check:** Scan all `required_context` entries across all skill YAML frontmatter. Flag entries where: (a) the `path` points to a file that doesn't exist, or (b) the skill file itself doesn't exist. These are broken links that silently fail at skill activation.
 13. If `_system/docs/solutions/` has reached 50+ documents, perform consolidation pass
 14. **Operator/architecture doc drift check:** Compare live system state against key reference docs for count mismatches:
     - Skill count in `_system/docs/operator/reference/skills-reference.md` vs. `ls .claude/skills/*/SKILL.md | wc -l`
     - Overlay count in `_system/docs/operator/reference/overlays-reference.md` vs. `ls _system/docs/overlays/*.md | wc -l` (minus index)
-    - Service count in `_system/docs/operator/reference/infrastructure-reference.md` vs. services in `_openclaw/staging/` plists
+    - Service count in `_system/docs/operator/reference/infrastructure-reference.md` vs. loaded `com.crumb.*` plists in `~/Library/LaunchAgents/`
     - Credential count in `_system/docs/operator/how-to/rotate-credentials.md` vs. `_system/docs/operator/reference/infrastructure-reference.md` credential table
     - Architecture docs `updated:` dates vs. design spec `updated:` date (spec change may mean arch docs are stale)
     Flag mismatches to the operator. Do not auto-update — the operator decides which docs need revision.
-15. **Tess harness audit** (checks Surface 1 of `Projects/tess-v2/design/tess-harness-plan.md`):
-    - **Skills audit:** Review `/Users/danny/.hermes/skills/` — for each skill, check accuracy (does the SKILL.md reflect current practice?), staleness (are examples still relevant?), consolidation opportunities (overlap with other skills), and risk of encoded confabulation (skills created in sessions where Tess also fabricated). Flag skills for patch/merge/delete actions.
-    - **MEMORY.md cross-layer check:** Read `/Users/danny/.hermes/memories/MEMORY.md` and compare each entry against `/Users/danny/.hermes/SOUL.md` and `/Users/danny/crumb-vault/AGENTS.md`. Flag entries that duplicate rules or facts already in higher-authority layers. Tess's MEMORY.md has a hard 2200-char cap — cross-layer duplicates waste a scarce budget. (2026-04-09 audit found ~50% duplication.)
-    - **SOUL.md / AGENTS.md cross-layer check:** Compare `/Users/danny/.hermes/SOUL.md` rules/sections against `/Users/danny/crumb-vault/AGENTS.md` content. Flag any content duplicated between the two layers. SOUL.md is higher authority and cwd-independent; AGENTS.md should be purely project-scoped context. (2026-04-09 audit found "Working With Danny" section of AGENTS.md duplicating SOUL.md Rules 1-6.)
-    - **Pending validations staleness check:** Read `Projects/tess-v2/design/tess-harness-plan-tracking.yaml`. Flag any `pending:` validation items open for >30 days without being tested — they're at risk of going stale. Suggest next-session triggers for each.
-16. Log audit completion date and findings to `run-log.md`
-17. **Write dashboard status file:** Write `_system/logs/vault-audit-status.json` with audit metrics for the Mission Control ops dashboard:
+15. Log audit completion date and findings to `run-log.md`
+16. **Write dashboard status file:** Write `_system/logs/vault-audit-status.json` with audit metrics for the Mission Control ops dashboard:
     ```json
     {
       "timestamp": "ISO 8601",
@@ -99,20 +97,32 @@ In addition to weekly checks, when 30+ days since last monthly audit:
 5. Check convergence rubrics against calibration data; suggest updates
 6. Check CLAUDE.md for routing or boundary drift; check CLAUDE.md line count (target < 200, hard ceiling 250 — refactor if exceeded)
 7. Knowledge base tag hygiene: check for duplicate or overly granular `#kb/` tags that should be consolidated (`obsidian tags all counts | grep "kb/"`)
-8. If `Archived/KB/` contains notes, offer a purge review session. For each archived note, check: (a) inbound wikilinks from active notes, (b) outbound attachment/companion references, (c) MOC entries in parent MOCs, (d) `#kb/` tag coverage gaps (sole carrier of a subtopic). Notes with no active references → offer permanent deletion (requires interactive user confirmation). Notes with active references → flag for decision. See `_system/docs/operator/how-to/vault-gardening.md` for full procedure.
+8. If the weekly stale-KB scan has flagged candidates, offer a delete review session. For each candidate note, check before deletion: (a) inbound wikilinks from active notes, (b) outbound attachment/companion references, (c) MOC entries in parent MOCs, (d) `#kb/` tag coverage gaps (sole carrier of a subtopic). Notes with no active references → offer permanent deletion with git provenance (requires interactive user confirmation). Notes with active references → flag for decision. See `_system/docs/operator/how-to/vault-gardening.md` for full procedure.
 9. Human-grounded hallucination spot-check: select one high-confidence pattern and one high-stakes summary for human validation
 10. Check `_system/docs/personal-context.md` currency: ask user whether strategic priorities are still current
 11. Review routing decision logs in `run-log.md`: compare routing decisions against outcomes — flag patterns where workflow selection or overlay matching led to rework
 12. Overlay activation precision review: review `run-log.md` entries where overlays were matched or skipped. For each active overlay, qualitatively assess: (a) were there sessions where the overlay fired but added no value (false positive)? (b) were there sessions where the overlay didn't fire but should have (false negative)? If either pattern recurs, propose tightening the overlay's signals/anti-signals and update canonical examples. This is the feedback loop that prevents overlay routing from drifting over time.
 
-### 4. Action Classification
+### 4. State Checkpoint (absorbed from checkpoint skill)
+
+On request, at phase transitions, or at session end — independent of audit tiers:
+
+1. **Log current state** to `run-log.md` (project sessions) or `_system/logs/session-log.md` (non-project sessions): what was accomplished since last checkpoint, current phase and status, open questions or blockers
+2. **Check context usage** via `/context`
+3. **Manage context pressure:** >70% → `/compact`; >85% → `/clear` + reconstruct from summaries; ≤70% → no action, report current level
+4. **Verify vault durability:** all documents mentioned in the run-log exist on disk, summary files are current, no critical work exists only in conversation context
+5. **Return summary:** what was checkpointed, context usage before/after, files verified or issues found
+
+Do not load additional context during a checkpoint — the goal is to reduce context, not add to it. Track context usage patterns at checkpoint time to calibrate future phase-scoping decisions; if checkpoints consistently trigger compaction, the upstream skill may be loading too much context.
+
+### 5. Action Classification
 
 **Actions the audit skill takes directly (low-risk):**
 - Regenerate drifted summaries
 - Prune completed/archived tasks
 - Merge clearly redundant solution docs
 - Update confidence tags based on new evidence
-- Report `Archived/KB/` count and recommend purge review
+- Flag stale-KB candidates and recommend delete review
 
 **Actions flagged for human review (medium/high-risk):**
 - Archive completed projects
@@ -121,8 +131,7 @@ In addition to weekly checks, when 30+ days since last monthly audit:
 - Modify CLAUDE.md or skill definitions
 - Promote patterns to skill rules
 - Modify overlay activation signals or anti-signals
-- Permanently delete KB notes from `Archived/KB/`
-- Move archived KB notes back to active locations
+- Permanently delete stale KB notes (delete review — git provenance, interactive confirmation)
 
 ## Context Contract
 
@@ -134,7 +143,7 @@ In addition to weekly checks, when 30+ days since last monthly audit:
 - `_system/docs/failure-log.md` (for recurring failure mode analysis)
 - `_system/docs/solutions/` directory listing (for consolidation)
 - `_system/docs/personal-context.md` (monthly review only — currency check)
-- `Archived/KB/` directory listing and note contents (for purge reference checks)
+- Stale-KB candidate note contents (for delete-review reference checks)
 
 **AVOID:**
 - Loading all vault files simultaneously — work incrementally by project/directory
@@ -147,10 +156,11 @@ Before marking complete, verify:
 - [ ] Actions taken vs. actions flagged for human review are clearly separated
 - [ ] Failure-log pattern analysis covers the full 30-day window
 - [ ] Knowledge base health check is complete (orphans, untagged solution docs)
-- [ ] Archived KB count reported (weekly) or purge review offered (monthly)
+- [ ] Stale-KB scan run (weekly) or delete review offered when candidates exist (monthly)
 - [ ] Orphaned solutions check complete (solutions docs without `required_context` linkage flagged)
 - [ ] Stale linkage check complete (broken `required_context` paths flagged)
 - [ ] Operator/architecture doc drift check complete (count mismatches flagged)
+- [ ] Checkpoint runs: progress logged, context managed, critical outputs confirmed on disk
 
 ## Compound Behavior
 
@@ -161,3 +171,4 @@ Track audit findings over time to identify systemic issues. If the same finding 
 1. **Coverage** — All audit checks for the relevant tier (staleness/weekly/monthly) are executed
 2. **Accuracy** — Findings correctly identify actual issues, not false positives
 3. **Actionability** — Each finding has a clear next step (auto-fix, flag for review, or escalate)
+4. **Durability** (checkpoint runs) — All critical work verified on disk before any context management action

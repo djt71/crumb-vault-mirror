@@ -1,12 +1,12 @@
 ---
 name: vault-query
 description: >
-  Query the Crumb vault for structured facts, recent activity, and relevant
-  notes on a given account, topic, or domain. Uses obsidian-cli for indexed
-  searches when available, falls back to native file tools. Produces structured
-  output for the operator or for downstream skills and workflows.
+  Query the vault for structured facts, recent activity, and relevant notes
+  on an account, topic, or domain; obsidian-cli indexed search when available,
+  native tools fallback; structured output consumable by other skills.
   Use when user says "query the vault", "what do we know about",
-  "vault lookup", or "find in vault".
+  "vault lookup", "find in vault", or another skill needs structured
+  vault retrieval.
 model_tier: execution
 ---
 

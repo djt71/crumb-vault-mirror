@@ -1,12 +1,11 @@
 ---
 name: deliberation
 description: >
-  Run a multi-agent deliberation on a vault artifact. Dispatches to external LLM
-  evaluators with role-specific overlays, collects structured assessments, generates
-  a deliberation outcome, and writes the complete record to the vault with rating
-  capture block for Danny's evaluation.
-  Use when user says "deliberate on", "run deliberation", "multi-agent review",
-  "panel review", or "evaluate this with the panel".
+  Run a multi-agent deliberation on a vault artifact: dispatch to external
+  LLM evaluators with role overlays, generate the outcome, write the record
+  with rating capture. Use when user says "deliberate on", "panel review",
+  "multi-agent review", "evaluate with the panel", or a quality gate requires
+  panel assessment.
 context: main
 allowed-tools: Read, Write, Edit, Bash, Grep, Glob, Agent
 model_tier: reasoning

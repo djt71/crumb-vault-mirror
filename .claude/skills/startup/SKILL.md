@@ -1,6 +1,6 @@
 ---
 name: startup
-description: Run session startup checks — vault health, Obsidian CLI, rotation, overlay index, audit status, stale summaries
+description: Display the formatted session-startup summary from the SessionStart hook output (vault health, Obsidian CLI, rotation, overlay index, audit status, stale summaries). Trigger — /startup invocation only; the hook runs automatically, this skill is the display contract.
 disable-model-invocation: true
 user-invocable: true
 allowed-tools: Bash, Read
