@@ -4,7 +4,7 @@ domain: null
 skill_origin: null
 status: active
 created: 2026-02-15
-updated: 2026-02-26
+updated: 2026-07-04
 tags:
   - context-management
   - protocol
@@ -19,7 +19,7 @@ Proactive context management prevents mid-task failures and maintains system res
 
 Check context BEFORE these events:
 - Phase transitions (SPECIFY→PLAN, PLAN→TASK, TASK→IMPLEMENT, PLAN→ACT)
-- Spawning subagents (Frontend Designer, Backend Designer)
+- Spawning subagents (dispatch agents, research pipelines)
 - Invoking context-heavy skills (Systems Analyst, Action Architect)
 - Ending session (ensure clean state for resume)
 
@@ -33,36 +33,42 @@ Check context WHEN these occur:
 
 ## Procedure
 
-### 1. Verify Phase Summaries
+### 1. Verify Phase Outputs & Summaries
 
-Generate or verify `*-summary.md` exists for all phase deliverables. Summaries are the primary context vehicle for downstream phases — if they're missing or stale, later phases operate on incomplete information.
+Confirm all phase deliverables are written to disk, and generate or verify
+`*-summary.md` for each. Summaries are the primary context vehicle for
+downstream phases — if they're missing or stale, later phases operate on
+incomplete information.
 
-### 2. Goal Progress Check (phase transitions only)
+### 2. Compound Reflection & Goal Progress (phase transitions only)
 
-Before reflecting on the phase, evaluate progress against the project's acceptance criteria or task completion gates:
-- Which acceptance criteria from the current phase are met, partially met, or unmet?
-- Are any unmet criteria blockers for the next phase, or can they carry forward?
-- If criteria were modified during the phase, note the change and rationale.
+Evaluate the completed phase in one reflection pass:
 
-Record the assessment in the phase transition log entry (step 6). This ensures goal tracking is continuous — not just "did we finish?" but "are we converging on the right outcome?"
+- **Goal progress:** which acceptance criteria are met, partially met, or
+  unmet? Are unmet criteria blockers for the next phase, or carry-forward?
+  Note any criteria modified during the phase, with rationale.
+- **Compound:** does the phase meet the compound step trigger criteria
+  (non-obvious decisions, rework, reusable artifacts, system gaps)? If yes,
+  execute the full compound step (reflect → route → execute) while the
+  phase's working context is still loaded. If no, note the skip.
 
-### 3. Compound Reflection (phase transitions only)
+Both results are recorded in the transition log entry (step 4). This step is
+the structural guarantee that compound engineering runs at every phase
+boundary.
 
-Before managing context, evaluate the phase that just completed against the compound step trigger criteria (see compound protocol): did this phase involve non-obvious decisions, rework, reusable artifacts, or system gaps? If yes, execute the full compound step procedure (reflect → route → execute) while the phase's working context is still loaded. If no, note the skip. Either way, the result is recorded in the phase transition log entry (step 6).
+### 3. Context Check & Act
 
-This step ensures compound engineering runs reliably — the evaluation is structurally guaranteed at every phase boundary.
+Run `/context` and act per band:
 
-### 4. Check Context Usage
+- **< 70%:** proceed
+- **70-85%:** run `/compact`
+- **> 85%:** run `/clear` and reconstruct from vault files
 
-Run `/context` command.
+(Mid-session, this step — plus the Minimum Safe Checkpoint at the 75-85%
+band — is the whole ceremony; the trigger lists and degradation guide below
+are reference, not steps.)
 
-### 5. Evaluate Capacity
-
-- **< 70%:** Proceed to next phase
-- **70-85%:** Run `/compact` to compress context
-- **> 85%:** Run `/clear` and reconstruct from vault files
-
-### 6. Log Phase Transition
+### 4. Log Phase Transition
 
 Write to `run-log.md`:
 
@@ -77,7 +83,7 @@ Write to `run-log.md`:
 - Key artifacts for [NEXT] phase: [list summary files to load]
 ```
 
-Also update `project-state.yaml`:
+Update `project-state.yaml`:
 
 ```yaml
 phase: [NEXT]
@@ -88,26 +94,22 @@ updated: YYYY-MM-DD HH:MM
 last_committed: YYYY-MM-DD HH:MM  # Updated at every git commit
 ```
 
-### 7. Commit to Git
+Add the transition line to `progress-log.md` (keeps the high-level timeline
+current for orientation and resume).
 
-`git add` all changed vault files and `git commit`. This moves the durability boundary from "end of session" to "end of meaningful work unit." If the session crashes after this point, all phase work and state are recoverable from git.
+### 5. Commit to Git
 
-### 8. Update Progress Log
+`git add` all changed vault files and `git commit`. This moves the durability
+boundary from "end of session" to "end of meaningful work unit." If the
+session crashes after this point, all phase work and state are recoverable
+from git.
 
-Update `progress-log.md` with the phase transition. This keeps the project's high-level timeline current for orientation and resume operations.
-
-### 9. Verify Phase Outputs
-
-Before compacting/clearing, confirm all phase deliverables are written to disk.
-
-### 10. Load Next Phase Context
+### 6. Load Next Phase Context
 
 Read relevant summary files for the upcoming phase:
-- For PLAN: Load `specification-summary.md`
-- For TASK: Load design summaries (`frontend-design-summary.md`, `backend-design-summary.md`)
-- For IMPLEMENT: Load `tasks.md` and relevant design specs
-
-### 11. Proceed to Next Phase
+- For PLAN: load `specification-summary.md`
+- For TASK: load design summaries (`*-design-summary.md` for each approved design doc)
+- For IMPLEMENT: load `tasks.md` and relevant design specs
 
 ## Context Positioning Guidance
 

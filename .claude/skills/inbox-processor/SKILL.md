@@ -526,22 +526,16 @@ Run when explicitly requested by user, or as an optional step during a full inbo
 - For project-scoped: omit `status`
 - For global: include `status: active`
 
-### 7. Verify and Report
+### 7. Verify, Report & Compound Check
 
 After processing all files:
 - Confirm `_inbox/` is empty (or contains only explicitly deferred files)
 - List what was processed: filename → destination, companion note created (if binary), renames applied
 - Note any files skipped, deferred, or flagged for user decision
 - Report orphan sweep results if run
-
-### 8. Compound Check
-
-If this batch reveals a pattern worth capturing:
-- Common file types or sources that recur (e.g., "customer exports always need the same processing")
-- Domain-specific intake conventions emerging
-- Tagging patterns that should become defaults
-
-Route per compound step protocol.
+- If this batch reveals a pattern worth capturing — recurring file types or
+  sources, emerging domain-specific intake conventions, tagging patterns that
+  should become defaults — route per compound step protocol
 
 ### Re-routing (utility operation)
 

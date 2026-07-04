@@ -103,7 +103,7 @@ At session end, note model routing decisions and their outcomes in the run-log e
 This creates a lightweight feedback loop — routing decisions are reviewed against actual results, not just assumed correct. Adjust `model_tier` assignments when patterns emerge (e.g., a skill consistently requires Opus rework after Sonnet delegation → promote to `reasoning`).
 
 Phased rollout — delegation is active for:
-- **Phase 1 (immediate):** Zero-context mechanical skills — sync, checkpoint, startup, obsidian-cli, meme-creator
+- **Phase 1 (immediate):** Zero-context mechanical skills — sync, startup
 - **Phase 2 (immediate):** Structured-input skills — mermaid, excalidraw, lucidchart
 - **Phase 3 (deferred):** Interactive skills with prompting phases (e.g., inbox-processor) — requires dispatch manifest design to preserve user decisions across the handoff
 
@@ -210,7 +210,7 @@ based on Context Checkpoint Protocol (_system/docs/context-checkpoint-protocol.m
 
 ### Session-End Sequence (REQUIRED — autonomous, do not wait for user prompts)
 Load and follow the full sequence in `_system/docs/protocols/session-end-protocol.md`.
-Steps: (1) log with compound evaluation, (2) failure-log if session went poorly (autonomous — no user prompt), (3) code review sweep — verify review entries for completed code tasks, (4) conditional commit, (5) git push.
+Steps: (1) log with compound evaluation, (2) failure-log if session went poorly (autonomous — no user prompt), (3) code review sweep — verify review entries for completed code tasks, (4) conditional commit & push.
 - Project sessions → run-log.md. Non-project sessions → `_system/logs/session-log.md` (skip trivial lookups).
 - Conditional commit: log-only delta → lightweight commit; substantial delta → flag to user; no changes → skip.
 References: spec §6, §4.8.

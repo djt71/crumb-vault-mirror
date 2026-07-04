@@ -3,7 +3,7 @@ type: reference
 domain: null
 status: active
 created: 2026-02-24
-updated: 2026-04-06
+updated: 2026-07-04
 tags:
   - protocol
   - session-management
@@ -21,31 +21,7 @@ Run the full sequence in one pass at session end. Do NOT prompt the user step-by
 - **Non-project sessions:** log to `_system/logs/session-log.md` using the format below
   (skip if session was only a greeting or single-question lookup)
 
-### 2. Session Report (Amendment Z)
-
-Write a structured session report to `~/.tess/state/session_reports.db`:
-
-1. Generate session ID if not already set: `tess session-report new-id`
-2. Compose the report YAML covering:
-   - **session:** id, date, sequence, duration_minutes, operator_present, incomplete
-   - **dispatch:** queue_items_executed (with outcome and notes), operator_overrides
-   - **decisions:** made (with context, decision, rationale), deferred
-   - **remaining_work:** list of tasks with status and next_action
-   - Optional: **execution** (projects_touched, files_created, files_modified)
-   - Optional: **model_routing** (opus_tasks, delegated, cost_estimate_usd)
-3. Write the report: save YAML to a temp file, then:
-   ```bash
-   tess session-report write /tmp/session-report.yaml
-   ```
-4. If claimed dispatch items, emit completion claims using the SAME session_id:
-   ```bash
-   tess dispatch claim IDQ-001 --session-id "<id>" --action complete
-   ```
-
-**Fast-exit mode:** If the session must end quickly, write a minimal report with
-`incomplete: true` and placeholder dispatch outcomes (`outcome: unknown`).
-
-### 3. Project State Refresh (project sessions only)
+### 2. Project State Refresh (project sessions only)
 
 Read `project-state.yaml` and verify `next_action` is consistent with the session's
 outcomes — tasks completed, code committed, gates passed/failed, blockers resolved
@@ -58,14 +34,14 @@ or introduced. If stale, update:
 This is the most common drift vector: code gets committed but `next_action` still says
 "pending commit." The next session inherits stale orientation and wastes time reconciling.
 
-### 4. Failure Log (autonomous, conditional)
+### 3. Failure Log (autonomous, conditional)
 
 If the session went clearly poorly — repeated errors, dead ends, significant
 rework, or user frustration — write a failure-log entry to
 `_system/docs/failure-log.md` with diagnosis. This is Crumb's autonomous
 assessment, not a user-prompted rating.
 
-### 5. Code Review Sweep (conditional)
+### 4. Code Review Sweep (conditional)
 
 If this is a project session with `repo_path` and code tasks were completed:
 
@@ -75,7 +51,7 @@ If this is a project session with `repo_path` and code tasks were completed:
    - Log explicit skip with reason: `Code Review — Skipped ({TASK_ID}): {reason}`
 3. vault-check §23 validates this at commit time as a WARNING — this step is the behavioral prompt to act before the structural check fires
 
-### 6. Build Verification (conditional)
+### 5. Build Verification (conditional)
 
 If this is a project session with `repo_path` and `build_command` in `project-state.yaml`,
 and source files were modified during the session (`.ts`, `.tsx`, `.js`, `.jsx`, or other
@@ -100,30 +76,13 @@ fields existed, or sessions where project creation step 3b/3c was missed.
 This step ensures compiled artifacts (`dist/`) match committed source. Tests run via
 `ts-node` hit source directly and will not catch a stale `dist/`.
 
-### 7. AKM Feedback & QMD Update (conditional)
+### 6. QMD Index Update (conditional)
 
-**6a. QMD index update:** If `qmd` is available (`command -v qmd`), run `qmd update`
-to re-index changed files. Failure is non-blocking — log a warning and continue.
+If `qmd` is available (`command -v qmd`), run `qmd update` to re-index changed
+files. Failure is non-blocking — log a warning and continue. (Consumer:
+`knowledge-retrieve.sh` via the skill-preflight hook.)
 
-**6b. AKM consumption tracking:** Removed. The Read-tool-based hit-rate measurement
-could not distinguish "brief was consumed in context" from "full file was opened" —
-18 days of 0% hit rates confirmed the metric was noise. Retrieval logging
-(session-start, skill-activation, new-content entries in `akm-feedback.jsonl`)
-continues and is sufficient for tuning QMD queries. If consumption measurement
-is needed later, it requires a different design (e.g., compound-connection tracing).
-
-### 8. Inbox Processed Sweep
-
-Purge `_openclaw/inbox/.processed/` — items here have already been promoted or
-discarded during a session and serve no further purpose. Remove all files:
-
-```bash
-rm -f _openclaw/inbox/.processed/*
-```
-
-Skip if the directory is empty or doesn't exist.
-
-### 9. Conditional Commit
+### 7. Commit & Push
 
 Check `git diff --stat HEAD` for uncommitted changes:
 
@@ -134,11 +93,9 @@ Check `git diff --stat HEAD` for uncommitted changes:
 - **Substantial delta** (any files outside the log/progress set):
   Flag to user: "Uncommitted work detected beyond session logs — [list files]."
   Commit with descriptive message covering all changes.
-- **No changes:** Skip commit. Log note: "No uncommitted changes — skipping commit."
+- **No changes:** Skip commit and push. Log note: "No uncommitted changes — skipping commit."
 
-### 10. Git Push
-
-`git push` (skip if no commit in step 9).
+Then `git push` (skip if no commit was made).
 
 ## Non-Project Session-Log Format
 

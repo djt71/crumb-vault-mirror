@@ -664,3 +664,37 @@ B5's adjacent finding #1 resolved same-session by operator decision ("we can cle
 **Model routing:** all main-session Fable 5; no Sonnet delegation — merges, D4 rewrites, and remediation phrasing are judgment-dense throughout; no skill invocations (direct task execution under IMPLEMENT). Token-heavy ops: full reads of 6 merge-pair SKILL.md files + 2 reference docs, vault-wide residual greps — appropriate for the precision required.
 
 **State for next session:** VO-033 (B6 ceremony) is the only unblocked VO task — apply frozen VO-026 pack; batch-open verifies AS-025 sign-off; every CLAUDE.md edit individually stop-and-ask (incl. :106 checkpoint cleanup); claude-ai-context refresh due (16-skill count) — fold in. AS-031 soak day 5 check due 2026-07-05.
+
+## 2026-07-04 — VO-033 complete: B6 ceremony batch EXECUTED
+
+**Session start:** operator: "let's work on VO-033 (B6 ceremony)". Context inventory: project-state + run-log tail + tasks.md VO-033 row + changeset-b6-ceremony.md (full — governing frozen pack) + full reads of both protocol docs + targeted reads of inbox-processor/startup SKILL.md + session-startup.sh + CLAUDE.md touch points; no overlays; no skill invocations (direct task execution under IMPLEMENT). Stop-and-ask satisfied via AskUserQuestion gate (4 decisions, below) before any execution.
+
+### Batch-open checks (logged before execution)
+
+**Preconditions:** B5 complete (VO-032) ✓ · **AS-025 sign-off verified in AS run-log** (line 280: DONE, high-risk diff-approved, applied 2026-06-12; M6 sign-off same date) ✓ · pack frozen+approved 2026-06-12 (B6-1..B6-4 as drafted, B6-5 at FULL six-counter scope) ✓.
+
+**Staleness re-validation (pack drafted 06-12; B3/B4/B5 landed since):**
+- **B6-1/B6-2:** both protocol docs matched pack before-state exactly (checkpoint 11 steps with stale Frontend/Backend Designer names; session-end 10 steps with Amendment Z, 6a/6b drift, dead `.processed` sweep). Zero drift.
+- **B6-3:** inbox-processor steps 7/8 content identical to pack basis; line refs drifted 531→529 (B5 description rewrite above) — content-anchored edit unaffected.
+- **B6-4:** CLAUDE.md:213 exact before-text present. Adjacent queued item CLAUDE.md:106 (Phase-1 list) found carrying THREE dead names: checkpoint (B5 merge) + obsidian-cli + meme-creator (long-retired, pre-existing).
+- **B6-5:** all six counter blocks live, emitting zeros every session. **Drift finding — pack's "no consumers" claim broke:** startup SKILL.md:20–28 (skill postdates pack consumer check) carried three bullets keyed to compound_insights_pending/stale + brainstorm_pending_review; sources archived AS-026 → dead branches → same-commit consumer remediation proposed.
+
+**Operator decisions (AskUserQuestion, 2026-07-04):** (1) **apply B6-1/2/3/5 as frozen** (single batch); (2) **B6-4 CLAUDE.md:213 apply** (individually approved); (3) **CLAUDE.md:106 full-line correction → "sync, startup"** (individually approved — fixes queued checkpoint staleness + both pre-existing dead names); (4) **startup SKILL.md strip all three dead-key bullets** (same-commit consumer remediation, D4 pattern).
+
+### Execution
+
+- **B6-1** context-checkpoint-protocol.md: §Procedure 11→6 per pack full text (verify-outputs+summaries merged; compound+goal-progress unified as step 2 with structural-guarantee language retained; context check+act with mid-session single-step note; log step carries full run-log/project-state templates + progress-log line; commit; load-next-context with neutralized `*-design-summary.md` examples). Stale-text fixes: Proactive Triggers subagent names → "dispatch agents, research pipelines". Checklist diff (11 rows) in pack proves no semantics lost. `updated:` → 2026-07-04.
+- **B6-2** session-end-protocol.md: 10→7 per pack (step 2 Amendment Z session report CUT — hard zombie, `session_reports.db` zero live readers, run-log is the surviving record; 6b AKM residue paragraph deleted; step 8 `.processed` sweep cut — target dir gone at AS-026; 9+10 merged as "Commit & Push" with skip-push-if-no-commit preserved; QMD step renumbered clean with consumer named inline). §Non-Project Format + §References unchanged. `updated:` → 2026-07-04.
+- **B6-3** inbox-processor SKILL.md: steps 7+8 folded → "7. Verify, Report & Compound Check" per pack diff; Re-routing section untouched; no renumbering needed.
+- **B6-4** CLAUDE.md ×2 (each individually operator-approved): :213 "(4) conditional commit, (5) git push" → "(4) conditional commit & push"; :106 Phase-1 list → "sync, startup".
+- **B6-5** session-startup.sh: all six zombie counter blocks removed (compound-insights scan `_openclaw/feeds/research` · dispatch queue+orphans `_tess/dispatch` · research_pending_review `_openclaw/research/output` · brainstorm `_openclaw/inbox/brainstorm-*` · feed_intel FIF pipeline.db read · z4 lock-deny `~/.tess/state/`) + COMPOUND_LINE builder + all six formatted-summary conditionals. `pipeline.db` itself untouched (stays frozen read-only for dashboard). **Verified:** `bash -n` clean + full run — startup context emits no dead keys, Startup Summary block intact.
+- **Consumer remediation (drift finding):** startup SKILL.md bullets for the three removed keys stripped (steps 4 now ends at stale_summaries recommendation).
+- **Folded in (queued):** claude-ai-context.md refresh — headline updated to B0–B6 complete + ceremony numbers, skill count 19→16 (verified 2026-07-04), VO section → M4 complete/M5 next, AS soak day 4/7, "stale skill body-text residuals" open item → RESOLVED at B5. `updated:` → 2026-07-04.
+
+**A10 after-state (per pack):** phase gates 11→6 · mid-session checkpoint 2→1 · session-end 10→7 · intake 8→7 · **total 31→21, zombies 0** · plus 6 zombie startup counters → 0.
+
+**Functional fast-pass:** zero live references to removed counter keys (md/sh sweep; remaining hits = historical run-logs/failure-log only) ✓ · zero old-step-number references to either protocol ✓ · Amendment Z mentions surviving = historical narrative only (live-soak-beats-benchmark history section, banner-framed arch/03, claude-ai-context decommission narrative) ✓ · startup script executes clean with intact display contract ✓ · CLAUDE.md step list consistent with rewritten protocol ✓. Session-end for THIS session executes against the new 7-step protocol = soak dry-run #5 first pass; dry-run #1 (phase transition) lands at M4→M5 gate.
+
+**VO-033 ACs:** AS-025 sign-off verified in AS run-log ✓ · batch-open checks logged ✓ · only the frozen VO-026 diff applied, plus operator-approved adjacents (CLAUDE.md:106 full-line, startup-skill strip — both gated individually) ✓ · each CLAUDE.md edit operator-approved individually ✓ · green + ceremony dry-run fast-pass at commit ✓ (vault-check at pre-commit, this commit). tasks.md → done.
+
+**Next: M5 soak** — VO-034 (instantiate soak: end = max(B6+14 calendar days, B6+8 working sessions) from B6 commit date 2026-07-04; log window, pass criteria, failure protocol, "working session" definition) → VO-035/036.
