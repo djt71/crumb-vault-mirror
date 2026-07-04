@@ -744,7 +744,7 @@ B5's adjacent finding #1 resolved same-session by operator decision ("we can cle
 | 2 | inbox-processor run (7-step post-fold) | pending | next `_inbox/` batch |
 | 3 | peer-review or deliberation dispatch | pending | next review-worthy artifact (also closes Grok watch 3/3) |
 | 4 | KB query + signal scan | pending | next #kb/ lookup or tagged-note creation |
-| 5 | Session-end sequence (rewritten 7-step) | **pass ×1** | 2026-07-04 B6 session close (run-log entry above) — first live pass, clean |
+| 5 | Session-end sequence (rewritten 7-step) | **pass ×2** | 2026-07-04 B6 session close (first live pass, clean) + 2026-07-04 VO-034 session close (second pass, clean; one transient push timeout, single retry succeeded per exception chain) |
 | 6 | Skill-routing spot-checks on rewritten descriptions | **pass ×1** | 2026-07-04 VO-032 fast-pass (5 spot-checks incl. merge-target routing); re-check during soak for a within-window pass |
 
 Note on #6: the B5 fast-pass predates the soak start by hours; counting it is defensible but a second within-window spot-check set will be run anyway to make the pass unambiguous. #1 will NOT be simulated — it must occur naturally on a real phase gate (soak measures reality, not rehearsal).
@@ -754,3 +754,17 @@ Note on #6: the B5 fast-pass predates the soak start by hours; counting it is de
 **VO-034 ACs:** window + end-condition + pass criteria + failure protocol (fix-forward vs revert per action plan) in run-log ✓ · "working session" definition logged ✓ · start date = B6 commit date ✓. tasks.md → done.
 
 **Next: VO-035** — execute + record the six Tier-1 workflows as they occur (opportunistic, not simulated where reality provides them); VO-036 close-out at soak end with pass criteria green + operator sign-off.
+
+## 2026-07-04 — Session-end (compound evaluation) — VO-034 segment
+
+**Session summary:** Continuation of the B6 session: VO-034 executed (commit `42239768`) — M5 soak instantiated and live (start 2026-07-04, end = max(2026-07-18, 8th WS), pass criteria + A3 failure protocol logged verbatim from action plan, Tier-1 tracker seeded). Push required one retry after a transient 2-minute hang (commit was already safe locally; no state damage; exception chain step 1 resolved it).
+
+**Compound evaluation:** No compoundable insights — mechanical instantiation of operator-approved parameters; the push hang was transient and the existing retry protocol handled it.
+
+**Protocol steps (7-step):** (1) log — this entry. (2) project-state refresh — current (next_action = VO-035 opportunistic recording) ✓. (3) failure-log — not warranted. (4) code review sweep — N/A (no repo_path). (5) build verification — N/A. (6) qmd update — run at close. (7) commit & push — log-only delta, lightweight commit.
+
+**Soak bookkeeping:** WS count unchanged (WS1 = 2026-07-04; same-day sessions count once). Tracker #5 advanced to pass ×2 (this close is the second clean run of the rewritten sequence).
+
+**Model routing:** all main-session Fable 5; no delegation; no skill invocations. No token-heavy operations.
+
+**State for next session:** VO-035 — record Tier-1 workflow outcomes as real work exercises them (#1–#4 pending natural occurrence; #6 re-check due within window); advance WS count at each session end. AS-031 soak day 5 check due 2026-07-05. Earliest possible VO soak end: 2026-07-18.
