@@ -836,3 +836,4 @@
 2026-07-04 11:39:09 SYNC vault-optimization: delete _system/archive/ parked copies (delete-over-park, operator-approved)
 2026-07-04 11:43:44 SYNC chore: session-end log — VO-032 B5 done + _system/archive cleared + AS soak day 4/7 green; B6 next
 2026-07-04 12:28:40 SYNC vault-optimization: VO-008 B6 — ceremony reduction (31→21 steps, zombies→0, startup-counter sweep)
+2026-07-04 12:30:02 SYNC chore: session-end log — VO-033 B6 done (M4 complete), session-end dry-run #5 first pass

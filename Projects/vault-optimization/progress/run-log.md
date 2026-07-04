@@ -713,3 +713,44 @@ B5's adjacent finding #1 resolved same-session by operator decision ("we can cle
 **Model routing:** all main-session Fable 5; no Sonnet delegation (batch execution judgment-dense: drift adjudication, protocol rewrite fidelity, remediation phrasing); no skill invocations (direct task execution under IMPLEMENT). No token-heavy anomalies — targeted reads throughout; largest single read was the startup script (426 lines, required for surgical block removal).
 
 **State for next session:** VO-034 — instantiate M5 soak (window = max(2026-07-18, B6+8 working sessions); log pass criteria + failure protocol + working-session definition; start date = B6 commit date 2026-07-04). Dry-run #5 first pass logged this session; #1 (phase transition) due at M4→M5 gate. AS-031 soak day 5 check due 2026-07-05. Known accepted residue: vault-check §31 warning on B5's historical run-log line mentioning the killed [[run-feed-pipeline]] wikilink (immutable log text).
+
+## 2026-07-04 — VO-034 complete: M5 soak INSTANTIATED
+
+**Context inventory:** project-state + tasks.md VO-034 row + action-plan.md M5 section (soak window, pass criteria, failure protocol) + design D6 (Tier-1 workflow list). Low risk — direct instantiation, no operator gate needed (all parameters operator-approved at TASK; this task binds them to dates).
+
+### Soak window (A10, instantiated)
+
+- **Start date:** 2026-07-04 (= B6 commit date, `89b748d3`). Today counts as working session 1.
+- **End condition:** soak ends at **max(2026-07-18, date of the 8th working session)** — i.e., no earlier than 2026-07-18, and not before 8 working sessions have occurred.
+- **Working session (definition, per action plan):** a calendar day with at least one logged vault work session — a session-log entry or any project run-log entry dated that day. Multiple sessions on one day = one working session.
+
+### Pass criteria (all three required)
+
+1. **Zero urgent git restores** of deleted/pruned artifacts.
+2. **No repeated workaround:** the same removed primitive *needed* twice = FAIL, where "needed" means restored, manually recreated, or worked around in a documented way that compensates for its removal.
+3. **All six Tier-1 representative workflows (design D6) pass at least once** during the window (tracker below; execution + recording = VO-035).
+
+### Failure protocol (A3, verbatim from action plan)
+
+- **Single primitive restore → fix-forward:** restore from git history, flip the manifest row to keep, run-log entry. Restarts the soak clock **for the affected surface only**.
+- **Repeated-workaround failure or Tier-1 blocker → revert** the offending batch commit(s) and re-enter M3 with the corrected changeset. Also restarts the clock for the affected surface.
+- **Second failure of any kind → restarts the FULL soak window.**
+
+### Tier-1 validation tracker (VO-035 records outcomes here)
+
+| # | Workflow (D6) | Status | Evidence |
+|---|---|---|---|
+| 1 | Full phase transition with checkpoint protocol (rewritten 6-step) | pending | natural occurrence expected: any project phase gate during window (VO's own M5→close at VO-036 qualifies) |
+| 2 | inbox-processor run (7-step post-fold) | pending | next `_inbox/` batch |
+| 3 | peer-review or deliberation dispatch | pending | next review-worthy artifact (also closes Grok watch 3/3) |
+| 4 | KB query + signal scan | pending | next #kb/ lookup or tagged-note creation |
+| 5 | Session-end sequence (rewritten 7-step) | **pass ×1** | 2026-07-04 B6 session close (run-log entry above) — first live pass, clean |
+| 6 | Skill-routing spot-checks on rewritten descriptions | **pass ×1** | 2026-07-04 VO-032 fast-pass (5 spot-checks incl. merge-target routing); re-check during soak for a within-window pass |
+
+Note on #6: the B5 fast-pass predates the soak start by hours; counting it is defensible but a second within-window spot-check set will be run anyway to make the pass unambiguous. #1 will NOT be simulated — it must occur naturally on a real phase gate (soak measures reality, not rehearsal).
+
+**Working-session tracker:** WS1 = 2026-07-04 ✓ (this entry). Count advances via the session-end log check; earliest possible end = 2026-07-18.
+
+**VO-034 ACs:** window + end-condition + pass criteria + failure protocol (fix-forward vs revert per action plan) in run-log ✓ · "working session" definition logged ✓ · start date = B6 commit date ✓. tasks.md → done.
+
+**Next: VO-035** — execute + record the six Tier-1 workflows as they occur (opportunistic, not simulated where reality provides them); VO-036 close-out at soak end with pass criteria green + operator sign-off.
