@@ -449,7 +449,7 @@ The bridge watcher (persistent daemon dispatching Tess requests from
 (agentic-sunset, 2026-06). `bridge-watcher.py` and its parked plist were
 deleted 2026-07-03 (vault-optimization B4) — full install/ops/kill-switch
 procedure in git history for this file and the scripts. Archived runtime
-plists: `_system/archive/launchagents-retired/`.
+plists: git history only (`git show 8f1cdbfd:_system/archive/launchagents-retired/`; on-disk archive deleted 2026-07-04).
 
 ### 8.5 Headless power management (if always-on)
 

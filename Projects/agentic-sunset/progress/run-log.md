@@ -489,3 +489,7 @@ Recorded from a vault-optimization session — **not AS work**. VO-028 B1 delete
 ## 2026-07-03 — Cross-project note (vault-optimization VO-029, not AS work)
 
 The tess-v2 vault-side venv (`Projects/tess-v2/scripts/.venv`, 23 MB untracked) — which VO's storage policy (VO-022) had flagged to ride with AS-030's tess-v2 closure — was still on disk after AS-030 (closeout touched phase fields, not disk). VO-029 (B2 sub-batch ii) deleted it 2026-07-03 with disposition-change rationale in the VO run-log. No AS action needed; soak tracker untouched. External repo `~/crumb-apps/tess-v2` unaffected (retained per disable+archive ethos).
+
+## 2026-07-04 — Cross-project note (vault-optimization, not AS work): `_system/archive/` parked copies deleted
+
+Operator-approved during a VO session: `_system/archive/` (the AS-012/022/028 parked archives — launchagents-retired ×~40 plists incl. redacted tess/openclaw copies, skills-retired/feed-pipeline, protocols-retired) deleted from disk, git history only now (`git show 8f1cdbfd:_system/archive/`). The AS standing decision "everything disable+archive, never delete" is superseded for these artifacts — rollback window closed 2026-06-14 (AS-021/022), delete-over-park per VO ethos. No live surface touched: plists were parked copies (override-registry ghosts cannot load, per AS-021); keep-set unaffected; AS-031 soak tracker unaffected (day 4 green stands).

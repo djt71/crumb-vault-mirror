@@ -36,7 +36,7 @@ produced zero revenue, and ~90% of its function is now native in Claude.AI / Cla
 - **Dark since 2026-06-10/11:** all agentic launchd labels + Ollama booted out
   (incl. the system-level `ai.openclaw.gateway` LaunchDaemon survivor found at
   the first quiet check). Plists archived (git-tracked) in
-  `_system/archive/launchagents-retired/`. Telegram silence is intentional.
+  git history (`_system/archive/` deleted 2026-07-04, delete-over-park). Telegram silence is intentional.
   healthchecks.io check `tess-mac-studio-health` paused.
 - **AS-016 quiet gate GREEN 2026-06-12**, then M3/M5/M6 executed same day:
   backup jobs relabeled to `com.crumb.*` (3 AM scheduled-fire confirmation
@@ -216,7 +216,7 @@ One clean `com.crumb.*` generation — 10 labels, zero `com.tess.*`/`ai.*`:
 - **Plumbing:** com.crumb.{vault-backup 3am, backup-status 15m, drive-sync 5am, vault-gc 4am, vault-health 2am, system-stats, qmd-index 5:30am}
 - **Publishing/dashboard stack:** com.crumb.{cloudflared, vault-web, vault-rebuild}; `com.crumb.dashboard` plist exists but the service was deliberately stopped 2026-06-01 — restart is an operator decision (kept for possible repurpose)
 
-Everything agentic is retired — plists in `_system/archive/launchagents-retired/`, runtimes archived-in-place on disk with README-ARCHIVED breadcrumbs. Do not expect Telegram traffic, hc-ping pings, or `_openclaw/` churn. Known TCC quirk: launchd can't list the iCloud backup dir — backup-status uses a marker-file fallback; retention prune runs from the session-startup hook.
+Everything agentic is retired — archived plists live in git history only (`_system/archive/` deleted 2026-07-04); runtime dirs were deleted with `Archived/` at VO B1. Do not expect Telegram traffic, hc-ping pings, or `_openclaw/` churn. Known TCC quirk: launchd can't list the iCloud backup dir — backup-status uses a marker-file fallback; retention prune runs from the session-startup hook.
 
 ## Recent Key Decisions
 

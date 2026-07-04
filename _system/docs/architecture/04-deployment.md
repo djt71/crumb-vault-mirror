@@ -146,7 +146,7 @@ Awareness-check runs on the legacy `ai.openclaw.awareness-check`, not the v2 nam
 
 **Project-registered services:** Projects with `repo_path` in `project-state.yaml` may list service labels in a `services` field. Session-end build verification restarts these services after code changes.
 
-**Plist locations (historical):** staging dirs and the parked bridge-watcher plist are gone (`_openclaw/` deleted; `_system/scripts/com.crumb.bridge-watcher.plist` deleted 2026-07-03, vault-optimization B4). Archived runtime plists: `_system/archive/launchagents-retired/`. Live keep-set plists deploy to `~/Library/LaunchAgents/`.
+**Plist locations (historical):** staging dirs and the parked bridge-watcher plist are gone (`_openclaw/` deleted; `_system/scripts/com.crumb.bridge-watcher.plist` deleted 2026-07-03, vault-optimization B4). Archived runtime plists: git history only (`git show 8f1cdbfd:_system/archive/launchagents-retired/` — on-disk archive deleted 2026-07-04, delete-over-park). Live keep-set plists deploy to `~/Library/LaunchAgents/`.
 
 **Project-registered services:** Projects with `repo_path` in `project-state.yaml` may list service labels in a `services` field. Session-end build verification restarts these services after code changes.
 
