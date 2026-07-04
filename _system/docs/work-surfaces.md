@@ -19,7 +19,7 @@ tags:
 # Work Surfaces
 
 The live roster of AI work surfaces and the policies that govern them. Successor to
-[[liberation-surfaces-snapshot]] (frozen April 2026). Grounded in
+the liberation-surfaces snapshot (frozen April 2026; retired 2026-07-03 — git history at `_system/docs/liberation-surfaces-snapshot.md`). Grounded in
 [[liberation-directive]] Principle 6 — *"Agents execute, Danny decides. Execution is
 rented from the platform, never rebuilt as self-hosted infrastructure"* — and the Crumb
 v3 identity ([[adr-crumb-v3-knowledge-store-identity]]: the vault is a knowledge store

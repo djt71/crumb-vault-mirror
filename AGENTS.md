@@ -32,10 +32,9 @@ All work is classified into domains that determine workflow depth:
 - `_system/docs/` — Global references (spec, rubrics, overlays, patterns, calibration data)
 - `Domains/` — Domain overviews and knowledge base notes (career, health, learning, etc.)
 - `Projects/` — Active project workspaces with specs, designs, tasks, logs
-- `Archived/` — Completed project archives
+- `Archived/` — Archival target (recreated on next project archival; absent when empty — deleted 2026-07-03)
 - `_attachments/` — Global binary storage with companion notes
 - `_inbox/` — Drop zone for unprocessed files (transient)
-- `_openclaw/` — OpenClaw gateway integration directory
 - `_system/reviews/` — Peer review artifacts (consolidated notes + raw API responses)
 - `.claude/` — AI-specific skills and agent definitions
 - `_system/scripts/` — External validation and bootstrap tools

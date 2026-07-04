@@ -127,10 +127,8 @@ crumb-vault/
 │   │   ├── routing-heuristics.md
 │   │   ├── convergence-rubrics.md     # Pre-built dimension sets for non-code convergence
 │   │   ├── failure-log.md             # Track all failure types for calibration (§4.8)
-│   │   ├── signals-archive-2026.jsonl  # Archived session signals (historical, no longer appended)
 │   │   ├── personal-context.md        # Strategic priorities, professional context, working style (§2.4)
 │   │   ├── peer-review-config.md      # Model config, retry policy, reviewer addenda
-│   │   ├── peer-review-skill-spec.md  # Design spec for peer-review utility skill
 │   │   ├── code-review-config.md      # Model config for code-review Tier 2 cloud panel
 │   │   ├── review-safety-denylist.md  # Shared secret-scanning denylist (peer-review + code-review)
 │   │   ├── kb-to-topic.yaml           # Canonical #kb/ tag → MOC slug mapping (§5.5, §5.6)
@@ -664,7 +662,7 @@ tags:
 | `_system/docs/solutions/*` | Reusable patterns extracted from completed work | Compound |
 | `_system/docs/convergence-rubrics.md` | Pre-built dimension sets for non-code quality assessment | Always |
 | `_system/docs/failure-log.md` | Track all failure types (hallucination, routing, scope, quality) for calibration. See §4.8. | Always |
-| `_system/docs/signals-archive-2026.jsonl` | Archived session signals (historical data, no longer appended). See §4.9. | N/A |
+| `_system/docs/signals-archive-2026.jsonl` | Archived session signals — retired 2026-07-03 (vault-optimization B3, dead-producer rule); git history. See §4.9. | N/A |
 | `_system/docs/personal-context.md` | Strategic priorities, professional context, and working style preferences. See §2.4. | Always |
 | `_system/docs/overlays/overlay-index.md` | Overlay routing table — maps activation criteria to overlay files. Loaded at session start. See §3.4.2. | Always |
 
@@ -2324,7 +2322,7 @@ Full procedure: `_system/docs/protocols/hallucination-detection-protocol.md`
 
 ### 4.9 Signal Capture Protocol (Deprecated v2.2)
 
-Retired. Interactive session rating removed (zero entropy). Session quality now assessed autonomously via failure-log. Archive: `_system/docs/signals-archive-2026.jsonl`.
+Retired. Interactive session rating removed (zero entropy). Session quality now assessed autonomously via failure-log. Signal archive retired 2026-07-03 (git history at `_system/docs/signals-archive-2026.jsonl`).
 
 **Retention policies for append-only stores:**
 
@@ -3642,7 +3640,7 @@ Add these as the first project reveals specific needs. By end of Week 1, all Pha
 25d. ~~**Configure git binary handling** — done (v1.6.3). `.gitignore` entries for binary extensions per §7.10 added. `.gitattributes` LFS stub added. Companion notes tracked while binaries excluded.~~
 25e. **Build MOC system.** Create initial MOC skeleton files per §5.6.12 (including `moc-crumb-operations`). Add `topics` field to frontmatter conventions. Add vault-check checks 17-19, 21. Implement MOC debt scoring in session-start staleness scan. Implement placement pass as part of compound step's kb promotion workflow. Defer synthesis skill to Phase 3 (build when debt score triggers indicate synthesis is needed).
 25f. **Add MOC lint to vault-check.sh.** Checks 17-19, 21 per §5.6.10. Run immediately after implementation to validate existing kb-tagged notes against new topics requirement — expect initial failures that need remediation (backfill topics on existing notes).
-25g. **Build `peer-review` utility skill.** Implement Option A (pure skill, no helper scripts) against `_system/docs/peer-review-skill-spec.md`. Create `_system/docs/peer-review-config.md` with model endpoints and API key env var references. Create `_system/reviews/` and `_system/reviews/raw/` directories. Start with OpenAI + Gemini; wire Perplexity once the core path is stable. Safety gate and diff-mode logic are the "must not drift" sections — if Claude mis-executes those in practice, extract to helper script (Option B transition per skill spec §10).
+25g. **Build `peer-review` utility skill.** Implement Option A (pure skill, no helper scripts) against `_system/docs/peer-review-skill-spec.md` (spec retired 2026-07-03 — git history). Create `_system/docs/peer-review-config.md` with model endpoints and API key env var references. Create `_system/reviews/` and `_system/reviews/raw/` directories. Start with OpenAI + Gemini; wire Perplexity once the core path is stable. Safety gate and diff-mode logic are the "must not drift" sections — if Claude mis-executes those in practice, extract to helper script (Option B transition per skill spec §10).
 
 ### Phase 3: Optimize (Month 2+)
 

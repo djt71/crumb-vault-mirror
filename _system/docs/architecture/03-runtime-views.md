@@ -14,7 +14,7 @@ topics:
 
 This section documents six key runtime flows through the system as sequence diagrams with prose summaries. Each flow covers the happy path and notes failure handling where relevant.
 
-**Source attribution:** Synthesized from the design spec ([[crumb-design-spec-v2-4]] §4.1, §6, §7.1), [[context-checkpoint-protocol]], [[session-end-protocol]], [[bridge-dispatch-protocol]], the feed-intel processing chain (formerly [[feed-intel-processing-chain]] and [[feed-intel-processing-chain-diagram]]), [[fif-triage-and-signals]], and the AKM design in spec §5 and `knowledge-retrieve.sh`.
+**Source attribution:** Synthesized from the design spec ([[crumb-design-spec-v2-4]] §4.1, §6, §7.1), [[context-checkpoint-protocol]], [[session-end-protocol]], the bridge-dispatch protocol (archived 2026-06-12), the feed-intel processing chain (formerly `feed-intel-processing-chain.md` and `-diagram.md`) and `fif-triage-and-signals.md` (all retired — git history), and the AKM design in spec §5 and `knowledge-retrieve.sh`.
 
 ---
 
@@ -93,7 +93,9 @@ sequenceDiagram
 
 ## 2. Tess Dispatch (Telegram Interaction)
 
-How a Telegram message from Danny reaches Tess and gets a response.
+> **Historical (decommissioned):** This flow describes the Tess/OpenClaw runtime, decommissioned by agentic-sunset (2026-06-01 → 2026-06-12) and reboot-verified absent 2026-06-14. Kept as architecture history; the components no longer run.
+
+How a Telegram message from Danny reached Tess and got a response.
 
 ```mermaid
 %%{init: {'theme': 'default'}}%%
@@ -140,6 +142,8 @@ Tess reads the full vault but writes only to `_openclaw/` directories. No govern
 ---
 
 ## 3. Feed Pipeline
+
+> **Historical (decommissioned):** This flow describes the Tess/OpenClaw runtime, decommissioned by agentic-sunset (2026-06-01 → 2026-06-12) and reboot-verified absent 2026-06-14. Kept as architecture history; the components no longer run.
 
 Content capture through triage to vault promotion. Three stages, two clocks, two agents.
 
@@ -207,6 +211,8 @@ sequenceDiagram
 
 ## 4. Mission Control Dashboard
 
+> **Partially historical:** the stripped dashboard survives as a knowledge-work surface (v3 ADR); the feed-triage panels described here are decommissioned. Server currently stopped (mission-control paused 2026-06-14).
+
 The web dashboard for feed triage and pipeline visibility.
 
 ```mermaid
@@ -255,7 +261,9 @@ The dashboard is served from `~/openclaw/crumb-dashboard` via Cloudflare Tunnel 
 
 ## 5. Bridge Handoff (Tess → Crumb → Tess)
 
-How a governed request flows from Telegram through the bridge to Crumb and back.
+> **Historical (decommissioned):** This flow describes the Tess/OpenClaw runtime, decommissioned by agentic-sunset (2026-06-01 → 2026-06-12) and reboot-verified absent 2026-06-14. Kept as architecture history; the components no longer run.
+
+How a governed request flowed from Telegram through the bridge to Crumb and back.
 
 ```mermaid
 %%{init: {'theme': 'default'}}%%

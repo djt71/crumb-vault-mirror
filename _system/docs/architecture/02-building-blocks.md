@@ -14,7 +14,7 @@ topics:
 
 This section decomposes the Crumb/Tess system into its constituent subsystems, maps ownership and write authority, and documents the dependency relationships between blocks.
 
-**Source attribution:** Synthesized from the design spec ([[crumb-design-spec-v2-4]] §1–§3, §5), ownership routing from [[tess-crumb-boundary-reference]], function tables from [[tess-crumb-comparison]], and live directory scans of the vault.
+**Source attribution:** Synthesized from the design spec ([[crumb-design-spec-v2-4]] §1–§3, §5), ownership routing from `tess-crumb-boundary-reference.md` and function tables from `tess-crumb-comparison.md` (both retired 2026-07-03, vault-optimization B3 — git history), and live directory scans of the vault.
 
 ---
 
@@ -140,10 +140,8 @@ Cross-cutting workflow patterns invoked by skills or the orchestrator. Not stand
 |----------|----------|---------|
 | Context Checkpoint | `_system/docs/context-checkpoint-protocol.md` | Phase transition procedure: compound eval → context check → log → state update |
 | Session-End | `_system/docs/protocols/session-end-protocol.md` | Autonomous session close: log → failure-log → code review sweep → commit → push |
-| Bridge Dispatch | `_system/docs/protocols/bridge-dispatch-protocol.md` | Tess bridge request processing under CLAUDE.md governance |
 | Hallucination Detection | `_system/docs/protocols/hallucination-detection-protocol.md` | Tiered detection: always-on, risk-proportional, audit-time, monthly |
 | Inline Attachment | `_system/docs/protocols/inline-attachment-protocol.md` | Binary artifact handling during project sessions |
-| Dispatch Triage | `_system/docs/protocols/dispatch-triage-protocol.md` | Bridge dispatch request classification and routing |
 
 **Additional protocols defined inline in CLAUDE.md:** Compound Step Protocol (spec §4.4), Convergence Protocol (spec §4.2), Risk-Tiered Approval Gates (spec §4.3), Project Archive/Reactivate (spec §4.6).
 
@@ -154,7 +152,7 @@ The shared filesystem. All state, all communication, all persistence.
 | Directory | Purpose | Owner |
 |-----------|---------|-------|
 | `Projects/` | Active project scaffolds (state, specs, plans, tasks, logs, design, reviews, research, attachments) | Crumb |
-| `Archived/Projects/` | Archived projects (full scaffold preserved) | Crumb (archive/reactivate) |
+| `Archived/Projects/` | Archival target — recreated on next project archival (directory absent when empty; deleted 2026-07-03, vault-optimization B1) | Crumb (archive/reactivate) |
 | `Domains/` | Domain overview notes and MOC files organized by life domain (Career, Health, Learning, etc.) | Crumb |
 | `Sources/` | Knowledge notes from external sources — books, articles, podcasts, videos, courses, papers. Plus `signals/` for feed-pipeline output | Crumb |
 | `_system/docs/` | System infrastructure: design spec, protocols, overlays, solutions, templates, personal context | Crumb |
@@ -191,14 +189,12 @@ Mechanical enforcement and automation. Bash and Python scripts that run outside 
 | `session-startup.sh` | SessionStart hook | Git pull, vault-check, CLI probe, rotation checks, feed-intel inbox scan |
 | `knowledge-retrieve.sh` | Session start; skill activation | AKM retrieval engine — QMD search + Knowledge Brief |
 | `skill-preflight.sh` | PreToolUse hook | KB-eligible skill activation → knowledge injection |
-| `bridge-watcher.py` | LaunchAgent (persistent) | kqueue file watcher for `_openclaw/inbox/` — triggers bridge dispatch |
-| `feed-inbox-ttl.sh` | Cron | Feed inbox TTL cleanup for aged items |
 | `mirror-sync.sh` | Cron | Vault mirror sync to secondary location |
 | `vault-backup.sh` | Cron | Cloud backup trigger |
 | `system-stats.sh` | Cron | System resource metrics |
 | `setup-crumb.sh` | Manual (new machine) | Full environment setup |
 
-Plus: `batch-moc-placement.py`, `batch-book-pipeline/`, `tess-health-check.sh`, `dns-recon.sh`, `vault-gc.sh`, and others.
+Plus: `batch-moc-placement.py`, `dns-recon.sh`, `vault-gc.sh`, and others. (Retired scripts awaiting B4 disposition: `bridge-watcher.py`, `tess-health-check.sh`.)
 
 ### 9. Bridge
 

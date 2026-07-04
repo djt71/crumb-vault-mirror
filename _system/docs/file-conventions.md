@@ -4,7 +4,7 @@ domain: null
 skill_origin: null
 status: active
 created: 2026-02-15
-updated: 2026-03-06
+updated: 2026-07-03
 tags:
   - file-conventions
   - system-config
@@ -38,7 +38,7 @@ tags:
 
 **No `status` field.** Project docs inherit lifecycle from directory location — `Projects/` = active, `Archived/Projects/` = archived. If `status` is present on project docs, it is ignored (not an error, just unnecessary).
 
-### Non-project docs (`Domains/`, `_system/docs/`, `_system/reviews/`, `_attachments/`, `Archived/KB/`, vault root)
+### Non-project docs (`Domains/`, `_system/docs/`, `_system/reviews/`, `_attachments/`, vault root)
 
 ```yaml
 ---
@@ -94,7 +94,7 @@ When routing a document to a new vault location (from `_inbox/`, between directo
 
 Examples:
 - Routing a beyond-roadmap research doc to `Projects/tess-operations/design/` → add a `[[beyond-current-roadmap-research]]` link from `frontier-ideas.md`
-- Routing an agent skills best-practices doc to `_system/docs/` → add a `[[agent-skills-best-practices]]` link from `skill-authoring-conventions.md`
+- Routing a NotebookLM workflow guide to `_system/docs/` → add a `[[notebooklm-workflow-guide]]` link from `learning-overview.md`
 
 This is a one-edit, high-leverage convention — it creates permanent discoverability at the point of routing.
 
@@ -430,7 +430,7 @@ Tags with the `#kb/` prefix mark documents with durable knowledge value beyond t
 - Use existing tags when they fit; prefer the closest Level 2 match over creating a new one
 - All `#kb/`-tagged notes MUST have a `topics` field listing their parent MOC(s)
 - Audit skill checks for orphaned `#kb/*` notes, premature Level 3 fragmentation, and untagged candidates weekly
-- Stale KB notes are archived to `Archived/KB/` — see `_system/docs/vault-gardening.md`
+- Stale KB notes are deleted with git provenance (reference checks + operator confirmation first) — see `_system/docs/operator/how-to/vault-gardening.md`
 - Full convention details in spec §5.5
 
 **Knowledge integration layers:** AKM handles runtime discovery via `#kb/` tags (automatic — notes enter the queryable pool when tagged); MOC placement via inbox-processor (semi-automatic — `topics` field drives routing); overlay/skill source catalog curation is manual (editorial judgment — Vault Source Material sections are curated references, not tag queries).

@@ -4,7 +4,7 @@ domain: software
 status: active
 track: pattern
 created: 2026-02-22
-updated: 2026-04-04
+updated: 2026-07-03
 skill_origin: compound
 confidence: high
 linkage: discovery-only
@@ -159,6 +159,31 @@ calibration. This pattern applies to schemas with 5+ required fields, nested
 objects, and type-specific conditional requirements — where the combinatorial
 surface exceeds what prompt engineering alone can nail on first attempt.
 
+## Pattern 5: CWD Sensitivity — Invoke Outside CLAUDE.md Trees
+
+**Problem:** `claude -p` returns conversational agent responses ("I need
+the...", tool descriptions, skill listings) instead of structured output
+(JSON arrays, scores) — because print mode loads project context (CLAUDE.md,
+skills, tools, memory) from the working directory at invocation time. Called
+from inside a CLAUDE.md project tree (e.g., the crumb-vault), the model
+receives the full agent system prompt, which overrides or drowns out any
+`--system-prompt` argument.
+
+**Solution:** Set `cwd` to a directory outside any CLAUDE.md project tree:
+
+```javascript
+execSync(`claude -p --model <model> --system-prompt "$(cat ${promptFile})"`, {
+  cwd: '/path/to/repo/without/claudemd',  // no CLAUDE.md here
+  // ...
+});
+```
+
+Or in bash, `cd` to the target repo before invoking `claude -p`.
+
+**Counterexample:** When the target repo intentionally has its own CLAUDE.md
+with structured output instructions, CWD sensitivity is a feature not a bug —
+the local CLAUDE.md governs the session correctly.
+
 ## Evidence
 
 All four patterns derived from crumb-tess-bridge Phase 2 live deployment,
@@ -169,6 +194,7 @@ both human and system analysis (consensus on top 3 patterns).
 - **Pattern 2:** User observation after attempt 5; CLAUDE.md section added, attempt 6 succeeded
 - **Pattern 3:** Attempt 5 (hash matched, canary off-by-one; hybrid approach preserved security tests)
 - **Pattern 4:** Meta-observation across all 6 attempts; each peeled back exactly one validation layer
+- **Pattern 5:** Merged 2026-07-03 from `claude-print-cwd-sensitivity.md` (git history). Discovered during opportunity-scout OSC-016 validation (2026-03-16): Haiku triage and Sonnet digest ranking both failed when `run-pipeline.sh` was invoked from `~/crumb-vault/` (which has CLAUDE.md); fixed by setting `cwd` in Node's `execSync` to the opportunity-scout repo root.
 
 Project reference: `Projects/crumb-tess-bridge/progress/run-log.md`, Session 31,
 "Phase 2 Live Deployment" section.

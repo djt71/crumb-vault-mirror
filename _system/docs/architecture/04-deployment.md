@@ -14,6 +14,8 @@ topics:
 
 This section describes the physical hosting, process model, network topology, storage layout, credential management, and DNS configuration of the Crumb/Tess system.
 
+> **Largely historical (agentic-sunset, 2026-06):** The Tess/OpenClaw runtime described below — gateway LaunchDaemon, bridge-watcher, `ai.openclaw.*`/`com.tess.v2.*` namespaces, `_openclaw/` staging — was decommissioned 2026-06-01 → 2026-06-12 and reboot-verified absent 2026-06-14. The surviving deployment is the 10-label `com.crumb.*` keep-set (see agentic-sunset keep-set manifest) plus interactive Claude Code sessions. Host/storage/credential fundamentals remain accurate.
+
 **Source attribution:** Synthesized from the design spec ([[crumb-design-spec-v2-4]] §7, §9), [[crumb-deployment-runbook]], [[crumb-studio-migration]], the openclaw-colocation-spec (retired 2026-06-12, full text in git history at `_system/docs/openclaw-colocation-spec.md`), LaunchAgent/LaunchDaemon plists in `_openclaw/staging/`, and live system state.
 
 ---
@@ -139,7 +141,7 @@ Awareness-check runs on the legacy `ai.openclaw.awareness-check`, not the v2 nam
 - **Opportunity Scout** (`scout-pipeline`/`feedback-health`/`weekly-heartbeat`/`feedback-poller`) — 2026-05-28 (same commit 2756dbc1); pipeline no longer useful per operator. Project kept (not archived); repo/plists retained for reversibility.
 - **`com.crumb.service-status`** (60s liveness sensor) — orphaned once the Mission Control dashboard stopped; plist + script + output removed 2026-06-01.
 - **`com.tess.v2.awareness-check`** (LLM heartbeat) — dropped 2026-05-28; awareness-check continues on the legacy namespace.
-- **`com.tess.health-check`** (TMA-004 Limited Mode auto-failover) — retired; broken for months via launchd↔Keychain isolation. Script `tess-health-check.sh` preserved for possible repair; plist removed.
+- **`com.tess.health-check`** (TMA-004 Limited Mode auto-failover) — retired; broken for months via launchd↔Keychain isolation. Plist removed; script `tess-health-check.sh` delete-listed (vault-optimization B4 — repair option lapsed with the Tess decommission).
 - **`overnight-research`** and **`connections-brainstorm`** (both namespaces) — 2026-06-01; both produced output nobody acted on, and overnight-research had been emitting a frozen duplicate brief for ~26 days.
 
 **Project-registered services:** Projects with `repo_path` in `project-state.yaml` may list service labels in a `services` field. Session-end build verification restarts these services after code changes.
@@ -227,7 +229,7 @@ The Mac Studio has no inbound ports open to the public internet. All remote acce
 /Users/danny/
 ├── crumb-vault/                    # THE VAULT — Obsidian + git-tracked
 │   ├── Projects/                   # Active project scaffolds
-│   ├── Archived/Projects/          # Archived projects
+│   ├── Archived/Projects/          # Archival target — recreated on archival (absent when empty)
 │   ├── Domains/                    # 8 life domain directories
 │   ├── Sources/                    # Knowledge notes (books, articles, signals)
 │   ├── _system/                    # Infrastructure (docs, scripts, logs, reviews)

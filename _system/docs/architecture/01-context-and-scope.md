@@ -14,7 +14,7 @@ topics:
 
 This section defines the system boundary, actors, external interfaces, and constraints of the Crumb/Tess system. It answers: what is this system, who uses it, what does it touch, and what limits apply?
 
-**Source attribution:** Synthesized from the design spec ([[crumb-design-spec-v2-4]] §0–§2, §7, §9), [[CLAUDE.md]], the existing architecture diagram (formerly [[system-architecture-diagram]]), actor definitions (formerly in [[tess-crumb-comparison]]), and the boundary reference ([[tess-crumb-boundary-reference]]).
+**Source attribution:** Synthesized from the design spec ([[crumb-design-spec-v2-4]] §0–§2, §7, §9), [[CLAUDE.md]], the existing architecture diagram (formerly `system-architecture-diagram.md`), actor definitions (formerly in `tess-crumb-comparison.md`), and the boundary reference (formerly `tess-crumb-boundary-reference.md`). The three formerly-named sources were retired 2026-07-03 (vault-optimization B3); full text in git history.
 
 ---
 

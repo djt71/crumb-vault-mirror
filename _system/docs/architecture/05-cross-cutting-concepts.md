@@ -22,7 +22,7 @@ This section documents the observable conventions and enforced patterns that app
 
 Every substantive document in the vault carries YAML frontmatter. Two schemas apply based on location:
 
-**Project docs** (under `Projects/` or `Archived/Projects/`):
+**Project docs** (under `Projects/` or `Archived/Projects/` — the latter exists only while archived projects are parked there; recreated on archival):
 - Required: `project`, `domain`, `type`, `created`, `updated`
 - No `status` field — lifecycle is directory-based (`Projects/` = active, `Archived/Projects/` = archived)
 

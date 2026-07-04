@@ -5,7 +5,7 @@ type: reference
 skill_origin: null
 status: draft
 created: 2026-02-17
-updated: 2026-02-19
+updated: 2026-07-03
 tags:
   - skill-authoring
   - crumb
@@ -365,9 +365,16 @@ The 2-4 dimensions against which this skill's output is evaluated during converg
 
 ---
 
-## See Also
+## External Best Practices (Gechev synthesis)
 
-- [[agent-skills-best-practices]] — External best practices synthesis (Gechev/Google) with Crumb applicability analysis. Covers: 200-line JiT extraction audit trigger, third-person imperative voice convention, four-phase skill validation methodology, script promotion rule.
+Distilled from [mgechev/skills-best-practices](https://github.com/mgechev/skills-best-practices) (Minko Gechev, Angular/Google; full applicability analysis in git history at `_system/docs/agent-skills-best-practices.md`, merged here 2026-07-03). The four adopted principles:
+
+1. **200-line JiT extraction audit trigger:** When any skill, workflow, or convention doc crosses ~200 lines, evaluate it for just-in-time extraction — keep the primary file lean as a navigation/dispatch layer; offload schemas, cheatsheets, and templates to reference files with explicit read-when instructions.
+2. **Third-person imperative voice:** Write procedural instructions as direct commands ("Extract the text...", not "You should..." or "I will..."). Removes actor ambiguity; produces more consistent agent behavior.
+3. **Four-phase skill validation loop** (integrate into peer review for new/modified skills): (a) discovery validation — test metadata trigger/false-trigger with generated positive/negative prompts; (b) logic validation — have an LLM simulate execution step-by-step and flag guess-or-hallucinate points; (c) edge-case attack — find failure states, missing fallbacks, implicit assumptions; (d) architecture refinement — apply fixes, re-verify progressive disclosure. Logic validation is the highest-value step: run it before shipping.
+4. **Script promotion rule:** If an inline operation appears in more than two skill/workflow executions, extract it to `_system/scripts/`. Scripts should be tiny CLIs with descriptive stdout/stderr so the agent can self-correct on failure. Track candidates during compound evaluations.
+
+Not adopted (already covered or platform-specific): YAML metadata trigger-routing optimization (Crumb dispatch is explicit), rigid `scripts/`/`references/`/`assets/` package layout (Crumb has its own conventions), "no README/CHANGELOG" advice (Crumb docs are dual-purpose human+agent context).
 
 ## Applying to Existing Skills
 

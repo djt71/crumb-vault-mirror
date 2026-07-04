@@ -38,9 +38,8 @@ crumb-vault/                           # Vault root (Obsidian vault + git repo)
 │       │   └── raw/                   # Raw reviewer JSON responses
 │       ├── research/                  # Project-specific research
 │       └── attachments/               # Project-scoped binaries
-├── Archived/
-│   ├── Projects/                      # Archived project scaffolds (same structure)
-│   └── KB/                            # Archived knowledge notes (flat, no subdirectories)
+├── Archived/                          # Archival target — recreated on archival, absent when empty
+│   └── Projects/                      # Archived project scaffolds (same structure; stale KB notes are deleted with git provenance, not parked)
 ├── Domains/                           # Domain overviews and MOCs (9 canonical domains)
 │   ├── Career/
 │   ├── Creative/
@@ -154,7 +153,7 @@ crumb-vault/                           # Vault root (Obsidian vault + git repo)
 
 ## Frontmatter Requirements
 
-### Project Documents (under `Projects/` or `Archived/Projects/`)
+### Project Documents (under `Projects/`, or `Archived/Projects/` when archived projects exist)
 
 ```yaml
 project: project-name          # required
