@@ -138,7 +138,6 @@ crumb-vault/
 │   │   │   └── [additional overlays added incrementally]
 │   │   ├── protocols/
 │   │   │   ├── session-end-protocol.md      # Session-end sequence (referenced in CLAUDE.md)
-│   │   │   ├── bridge-dispatch-protocol.md           # Tess bridge dispatch procedure (referenced in CLAUDE.md)
 │   │   │   ├── hallucination-detection-protocol.md   # Full §4.8 procedure (extracted from spec)
 │   │   │   └── inline-attachment-protocol.md
 │   │   ├── templates/
@@ -158,7 +157,6 @@ crumb-vault/
 │   │   ├── vault-check.sh             # External mechanical validation (§7.8)
 │   │   ├── session-startup.sh         # SessionStart hook (includes feed-intel inbox scan)
 │   │   ├── setup-crumb.sh             # New machine setup
-│   │   ├── batch-moc-placement.py     # Batch MOC Core placement for source-index notes
 │   │   ├── knowledge-retrieve.sh    # AKM retrieval engine — QMD semantic search + Knowledge Brief (v2.4)
 │   │   ├── feed-inbox-ttl.sh        # Feed inbox TTL cleanup for aged items
 │   │   └── batch-book-pipeline/       # Batch API pipeline for book digests

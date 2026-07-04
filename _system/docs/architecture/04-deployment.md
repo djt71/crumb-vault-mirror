@@ -141,12 +141,12 @@ Awareness-check runs on the legacy `ai.openclaw.awareness-check`, not the v2 nam
 - **Opportunity Scout** (`scout-pipeline`/`feedback-health`/`weekly-heartbeat`/`feedback-poller`) — 2026-05-28 (same commit 2756dbc1); pipeline no longer useful per operator. Project kept (not archived); repo/plists retained for reversibility.
 - **`com.crumb.service-status`** (60s liveness sensor) — orphaned once the Mission Control dashboard stopped; plist + script + output removed 2026-06-01.
 - **`com.tess.v2.awareness-check`** (LLM heartbeat) — dropped 2026-05-28; awareness-check continues on the legacy namespace.
-- **`com.tess.health-check`** (TMA-004 Limited Mode auto-failover) — retired; broken for months via launchd↔Keychain isolation. Plist removed; script `tess-health-check.sh` delete-listed (vault-optimization B4 — repair option lapsed with the Tess decommission).
+- **`com.tess.health-check`** (TMA-004 Limited Mode auto-failover) — retired; broken for months via launchd↔Keychain isolation. Plist removed; script `tess-health-check.sh` deleted 2026-07-03 (vault-optimization B4 — repair option lapsed with the Tess decommission; git history).
 - **`overnight-research`** and **`connections-brainstorm`** (both namespaces) — 2026-06-01; both produced output nobody acted on, and overnight-research had been emitting a frozen duplicate brief for ~26 days.
 
 **Project-registered services:** Projects with `repo_path` in `project-state.yaml` may list service labels in a `services` field. Session-end build verification restarts these services after code changes.
 
-**Plist locations:** `_openclaw/staging/m1/` (milestone 1 services), `_openclaw/staging/m2/` (milestone 2), `_system/scripts/com.crumb.bridge-watcher.plist`. Deployed to `~/Library/LaunchAgents/` or `/Library/LaunchDaemons/` as appropriate.
+**Plist locations (historical):** staging dirs and the parked bridge-watcher plist are gone (`_openclaw/` deleted; `_system/scripts/com.crumb.bridge-watcher.plist` deleted 2026-07-03, vault-optimization B4). Archived runtime plists: `_system/archive/launchagents-retired/`. Live keep-set plists deploy to `~/Library/LaunchAgents/`.
 
 **Project-registered services:** Projects with `repo_path` in `project-state.yaml` may list service labels in a `services` field. Session-end build verification restarts these services after code changes.
 

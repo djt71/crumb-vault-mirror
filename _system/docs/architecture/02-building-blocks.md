@@ -194,7 +194,7 @@ Mechanical enforcement and automation. Bash and Python scripts that run outside 
 | `system-stats.sh` | Cron | System resource metrics |
 | `setup-crumb.sh` | Manual (new machine) | Full environment setup |
 
-Plus: `batch-moc-placement.py`, `dns-recon.sh`, `vault-gc.sh`, and others. (Retired scripts awaiting B4 disposition: `bridge-watcher.py`, `tess-health-check.sh`.)
+Plus: `dns-recon.sh`, `vault-gc.sh`, `setup-crumb.sh`, and others. (Retired scripts — `bridge-watcher.py`, `tess-health-check.sh`, `batch-moc-placement.py`, `vault-search.sh` — deleted 2026-07-03, vault-optimization B4; git history.)
 
 ### 9. Bridge
 

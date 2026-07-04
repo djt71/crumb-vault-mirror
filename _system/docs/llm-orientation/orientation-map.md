@@ -92,7 +92,6 @@ Index of every LLM-consumed document in the Crumb/Tess system — location, toke
 |----------|----------|-------------|-------------|----------------|-------------------|
 | context-checkpoint-protocol.md | `_system/docs/context-checkpoint-protocol.md` | ~1,394 | Phase transitions | Phase gate workflow changes | [[05-cross-cutting-concepts]] §Compound |
 | session-end-protocol.md | `_system/docs/protocols/session-end-protocol.md` | ~1,073 | Session end (autonomous) | Session-end process changes | [[03-runtime-views]] §Session Lifecycle |
-| bridge-dispatch-protocol.md | `_system/docs/protocols/bridge-dispatch-protocol.md` | ~178 | Bridge dispatch stage | Dispatch format changes | [[03-runtime-views]] §Bridge Handoff |
 | convergence-rubrics.md | `_system/docs/convergence-rubrics.md` | ~438 | Quality evaluations | Convergence criteria updates | [[05-cross-cutting-concepts]] §Convergence |
 | file-conventions.md | `_system/docs/file-conventions.md` | ~4,505 | Before creating new files | Schema/tag/type changes | [[05-cross-cutting-concepts]] §Frontmatter |
 | personal-context.md | `_system/docs/personal-context.md` | ~416 | Session-wide (budget-exempt) | Personal preferences change | N/A (personal) |
@@ -148,7 +147,6 @@ Index of every LLM-consumed document in the Crumb/Tess system — location, toke
 | Skill system | Full | 22 SKILL.md files, skill-preflight-map.yaml |
 | Overlay system | Full | overlay-index.md, 8 overlay files |
 | Feed pipeline | Full | feed-pipeline SKILL.md, file-conventions.md |
-| Bridge protocol | Full | bridge-dispatch-protocol.md, CLAUDE.md §Bridge |
 | AKM/Knowledge | Full | file-conventions.md, kb-to-topic.yaml |
 | Code review | Full | code-review SKILL.md, code-review-config.md, code-review-dispatch agent |
 | Peer review | Full | peer-review SKILL.md, peer-review-dispatch agent |

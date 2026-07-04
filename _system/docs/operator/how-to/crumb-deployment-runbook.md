@@ -39,8 +39,7 @@ Client Machine (work laptop)              Remote Mac (Studio)
 └── Connection aliases                    ├── ~/crumb-vault/ (Obsidian vault)
                                           ├── ~/crumb-vault-mirror/ (GitHub mirror)
                                           ├── ~/.config/crumb/.env (API keys)
-                                          ├── Obsidian.app (GUI, optional but enables CLI)
-                                          └── bridge-watcher.py (launchd, watches _openclaw/inbox/)
+                                          └── Obsidian.app (GUI, optional but enables CLI)
 ```
 
 ---
@@ -443,101 +442,14 @@ bash ~/crumb-vault/_system/scripts/vault-backup.sh
 ls ~/Library/Mobile\ Documents/com~apple~CloudDocs/crumb-backups/
 ```
 
-### 8.4 Bridge Watcher (crumb-tess-bridge)
+### 8.4 Bridge Watcher (crumb-tess-bridge) — RETIRED
 
-The bridge watcher is a persistent daemon that processes incoming requests
-from Tess (OpenClaw/Telegram). It watches `_openclaw/inbox/` for new `.json`
-files and dispatches them through `bridge-processor.js`.
-
-**Prerequisites:** OpenClaw colocation must be complete (user `openclaw`,
-`_openclaw/` directory structure, group `crumbvault`).
-
-#### Directory setup
-
-```bash
-mkdir -p ~/crumb-vault/_openclaw/logs
-# Ensure group-write permissions
-chmod g+w ~/crumb-vault/_openclaw/logs
-chmod g+w ~/crumb-vault/_openclaw/inbox
-chmod g+w ~/crumb-vault/_openclaw/outbox
-chmod g+w ~/crumb-vault/_openclaw/inbox/.processed
-```
-
-#### Install the LaunchAgent
-
-```bash
-cp ~/crumb-vault/_system/scripts/com.crumb.bridge-watcher.plist \
-   ~/Library/LaunchAgents/
-launchctl bootstrap gui/$(id -u) \
-   ~/Library/LaunchAgents/com.crumb.bridge-watcher.plist
-```
-
-Verify:
-
-```bash
-launchctl print gui/$(id -u)/com.crumb.bridge-watcher
-# Should show: state = running
-tail -5 ~/crumb-vault/_openclaw/logs/watcher.log
-# Should show startup JSON log entries
-```
-
-#### Shell wrapper for interactive sessions
-
-Source the wrapper in `~/.zshrc` to prevent watcher/interactive session overlap:
-
-```bash
-echo 'source ~/crumb-vault/_system/scripts/claude-bridge-wrapper.sh' >> ~/.zshrc
-source ~/.zshrc
-```
-
-Use `claude-bridge` instead of `claude` when working in the vault. The wrapper
-acquires `LOCK_EX` on `_openclaw/.bridge.lock` for the full session, preventing
-the watcher from dispatching concurrently.
-
-#### Kill-switch
-
-To emergency-stop all bridge processing without stopping the watcher:
-
-```bash
-touch ~/crumb-vault/_openclaw/.bridge-disabled    # enable kill-switch
-rm ~/crumb-vault/_openclaw/.bridge-disabled        # disable kill-switch
-```
-
-Requests received while the kill-switch is active get a `BRIDGE_DISABLED`
-error response in the outbox (non-retryable).
-
-#### Stopping/restarting the watcher
-
-```bash
-# Stop
-launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/com.crumb.bridge-watcher.plist
-
-# Start
-launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.crumb.bridge-watcher.plist
-```
-
-#### Run manual validation
-
-```bash
-bash ~/crumb-vault/Projects/crumb-tess-bridge/src/watcher/validate-launchagent.sh
-```
-
-#### Configuration (environment variables)
-
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `CRUMB_BRIDGE_RATE_MAX` | 60 | Max requests per window |
-| `CRUMB_BRIDGE_RATE_WINDOW` | 3600 | Rate limit window (seconds) |
-| `CRUMB_BRIDGE_PROCESS_TIMEOUT` | 60 | Subprocess timeout (seconds). Increase to 300+ for Phase 2 `claude --print` ops. |
-| `CRUMB_BRIDGE_SKIP_PGREP` | (unset) | Set to `1` to skip interactive session detection |
-| `CRUMB_BRIDGE_USE_CLAUDE` | (unset) | Set to `1` to use `claude --print` instead of direct node invocation |
-
-#### Phase 2 note: API key for claude --print
-
-Phase 1 ops use direct `node bridge-processor.js` — no API key needed. When
-Phase 2 is enabled (`CRUMB_BRIDGE_USE_CLAUDE=1`), the watcher needs access to
-an Anthropic API key. Do NOT put it in the plist. Instead, the watcher inherits
-from the environment or sources from `~/.config/crumb/.env` at runtime.
+The bridge watcher (persistent daemon dispatching Tess requests from
+`_openclaw/inbox/`) was decommissioned with the Tess/OpenClaw runtime
+(agentic-sunset, 2026-06). `bridge-watcher.py` and its parked plist were
+deleted 2026-07-03 (vault-optimization B4) — full install/ops/kill-switch
+procedure in git history for this file and the scripts. Archived runtime
+plists: `_system/archive/launchagents-retired/`.
 
 ### 8.5 Headless power management (if always-on)
 
@@ -898,7 +810,7 @@ travel with `git clone` and must be created or copied manually on each machine.
 | File | Purpose | Copyable? |
 |------|---------|-----------|
 | `~/.claude/projects/-Users-tess-crumb-vault/memory/MEMORY.md` | Claude Code's per-project memory — learned patterns and preferences | Yes — copy to preserve continuity |
-| `~/.claude/projects/-Users-tess-crumb-vault/` (session history) | Accumulated session logs | Optional — can bloat; `clear-claude-cache.sh` cleans this |
+| `~/.claude/projects/-Users-tess-crumb-vault/` (session history) | Accumulated session logs | Optional — can bloat; prune manually if needed (`clear-claude-cache.sh` deleted 2026-07-03, vault-optimization B4 — git history) |
 
 ### Inside vault but excluded from mirror
 
