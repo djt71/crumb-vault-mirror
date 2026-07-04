@@ -149,7 +149,7 @@ Always-on. Runs via OpenClaw gateway connected to Telegram. Kimi K2.5 primary wi
 - Execute convergence protocols or compound engineering
 - Create skills, overlays, or other system primitives
 
-**Identity model:** Character-driven — [[IDENTITY.md]] + [[SOUL.md]] persona files. Direct, declarative, dry humor. Short sentences. Two steps ahead. Pushback is pattern-driven ("this broke last time you tried it"). A second register reaches for precedent and earned wisdom when reframing is needed.
+**Identity model:** Character-driven — `IDENTITY.md` + `SOUL.md` persona files (Tess runtime artifacts, decommissioned with the OpenClaw layer — git history). Direct, declarative, dry humor. Short sentences. Two steps ahead. Pushback is pattern-driven ("this broke last time you tried it"). A second register reaches for precedent and earned wisdom when reframing is needed.
 
 **Vault access:** Reads the full vault. Writes only to `_openclaw/` directories (inbox, outbox, scratch, transcripts).
 
