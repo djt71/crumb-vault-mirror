@@ -833,3 +833,4 @@
 2026-07-03 22:19:58 SYNC vault-optimization: VO-008 B4 — scripts/protocols/overlays batch (VO-023 B4 pack applied)
 2026-07-03 22:25:24 SYNC chore: session-end log — VO M4 triple batch (B2+B3+B4 done same session); B5 next with 3 operator addenda
 2026-07-04 10:38:31 SYNC vault-optimization: VO-008 B5 — skills/agents batch (VO-023 B5 pack applied)
+2026-07-04 11:39:09 SYNC vault-optimization: delete _system/archive/ parked copies (delete-over-park, operator-approved)
