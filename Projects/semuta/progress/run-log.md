@@ -84,3 +84,16 @@ updated: 2026-03-17
 **Model routing:** Peer-review-dispatch subagent on Opus (session default). Acceptable quality. No delegation candidates identified — all work this session was synthesis-heavy.
 
 **Next:** PLAN phase complete. All deliverables committed. Ready for PLAN → TASK transition (which in this project means proceeding to IMPLEMENT — tasks are already decomposed in the action plan).
+
+## 2026-07-05 — Gate 4 declaration: semuta is a hobby
+
+**Context:** Mission-layer session (non-project origin). The 2026-07-05 comprehensive audit flagged semuta as "stalled at PLAN since 03-18, bet-vs-hobby undeclared (Gate 4)." Operator declared: **hobby**.
+
+**What this means (per Liberation Directive v3, Gate 4):**
+- No revenue thesis, no campaign review — and it doesn't need either. Hobbies are legitimate pillar work.
+- The stall at PLAN→IMPLEMENT is reclassified: allowed silence, not drift. Semuta resumes when belief/energy pulls it, on no clock.
+- It does not enter the (future) campaign bets register.
+
+**Actions:** `mission_label: hobby` recorded in project-state.yaml. No change to phase, plan, or tasks — all PLAN deliverables remain valid and ready whenever work resumes.
+
+**Compound:** none — declaration only, no new pattern.

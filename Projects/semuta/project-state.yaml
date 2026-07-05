@@ -1,8 +1,9 @@
 name: semuta
 domain: software
 phase: PLAN
+mission_label: hobby  # Gate 4 declaration by operator, 2026-07-05 — no revenue thesis, no campaign review; pillar work (creative/spiritual). Dormancy is allowed silence, not drift.
 created: 2026-03-17
-updated: 2026-03-18
+updated: 2026-07-05
 repo_path: ~/openclaw/semuta
 last_committed: 2026-03-18
 last_gate: SPECIFY-to-PLAN

@@ -431,3 +431,13 @@ PLUS: spec updated to current state; M-1.1/M-1.2 confirmed complete (operator re
 1. Danny fills session-1 hours in time-log
 2. M-1B session 2: revised prompt × 3 models × 16, hit-rate + seed capture
 3. Findings accrue to [[spike-findings]]; gate after session 3
+
+## 2026-07-05 — Gate 4 declaration: not a bet (hobby)
+
+**Context:** Mission-layer session (non-project origin), campaign-stub review. Operator declared firekeeper-books **not a bet** in the Liberation Directive sense: not a long-term project; it may earn money over time, but incidental revenue does not create a revenue thesis or a campaign-review obligation.
+
+**What this means (Directive v3, Gate 4):** labeled **hobby** — legitimate pillar work (creative), no campaign review, no revenue obligation. If revenue arrives, it's information, not a verdict, and doesn't change the label; relabeling to bet would be a fresh operator declaration through the six gates. Time-log discipline (catalog thesis economics) remains useful data but is no longer a campaign commitment.
+
+**Actions:** `mission_label: hobby` recorded in project-state.yaml; declaration mirrored in `_system/directives/liberation-campaign.md` §Status (portfolio empty, deliberately so). No change to phase, spike plan, or next_action — M-1B session 2 proceeds whenever energy pulls it.
+
+**Compound:** none — declaration only.
