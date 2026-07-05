@@ -840,3 +840,4 @@
 2026-07-04 12:35:56 SYNC chore: session-end log — VO-034 M5 soak instantiated (window 2026-07-04→max(07-18, 8 WS), tracker live)
 2026-07-04 12:41:43 SYNC chore: session-end log — VO-034 segment close; soak tracker #5 → pass ×2
 2026-07-05 15:25:20 SYNC audit: comprehensive vault status pass + remediation — soak day 5 green
+2026-07-05 15:44:20 SYNC mission: Gate 4 declarations — semuta + firekeeper-books labeled hobby; campaign stub status recorded (portfolio empty by declaration)

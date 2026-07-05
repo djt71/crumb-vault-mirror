@@ -298,3 +298,16 @@ The legacy `com.scout.*` plists (daily-pipeline, feedback-poller, weekly-heartbe
 **Note:** Mission Control dashboard health panel will now flag these services as down — expected, not a fault.
 
 **Tests:** None — operational change, no code modified.
+
+## 2026-07-05 — Final entry: archived; concept moves to Claude Cowork
+
+**Context:** Mission-layer session. Operator declaration: opportunity-scout is "a good idea but poor execution so far — it needs to move into Claude Cowork and out of the vault." Project archived (first entry in Archived/Projects/); the discovery concept reboots on rented runtime per Directive v3 Principles 5–6.
+
+**Disposition:**
+- Durable extract written to `_system/docs/cowork-scout-handoff.md` — failure analysis (self-hosted machinery, hardcoded binary priorities, conversion pressure), surviving assets (calibration seed graveyard + high-scoring patterns, anti-firehose discipline, priority-tier memories), and reboot constraints (rented runtime, `_inbox/` write path, PIIA hard gate, no new primitives until pulled).
+- External teardown (same session, operator-approved): repo `~/openclaw/opportunity-scout` deleted; disabled scout plists removed from `~/Library/LaunchAgents/`. Telegram token revocation remains an operator to-do (already on the rotate-credentials revocation-candidates list).
+- Services were already stopped + disabled 2026-05-28; nothing was live at archival.
+
+**Compound:** The project's arc is the evidence base for two already-banked lessons — Directive v3 Principle 5 (browse freely / commit on belief; execution lesson, not concept failure) and Principle 6 (rented runtime — maintenance gravity killed the layer). Handoff-note-at-archival is a first instance of extracting a reboot brief when a concept survives its implementation; hold for a second occurrence before promoting.
+
+**Model routing:** Fable 5 main session; no delegation.

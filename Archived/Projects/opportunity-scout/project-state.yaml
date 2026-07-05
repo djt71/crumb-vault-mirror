@@ -1,13 +1,14 @@
 project: opportunity-scout
 domain: software
 project_class: system
-phase: TASK
+phase: ARCHIVED
+phase_before_archive: TASK
 workflow: four-phase
 last_gate: "PLAN → TASK 2026-03-14"
 active_task: null
-next_action: "Synthesis + ranking prompts upgraded to v2.0 with three-tier priority injection (2026-04-25). Observe tomorrow's digest for tier-matched framing — Tier 1 frames as current execution, Tier 2 surfaces under right conditions, Tier 3 gets filtered or honestly named as misfit. Replaces prior single-motivation FI framing. M2 gate (2026-04-15) status not updated in this session."
+next_action: "None — archived 2026-07-05. Concept moves to Claude Cowork (rented runtime); see _system/docs/cowork-scout-handoff.md."
 created: 2026-03-14
-updated: 2026-05-28
+updated: 2026-07-05
 last_committed: 2026-03-16
 decommissioned: 2026-05-28  # live com.tess.v2.scout-* jobs disabled + booted out; files/repo kept. See run-log 2026-05-28.
 services_status: disabled
@@ -15,7 +16,7 @@ services:
   - com.scout.daily-pipeline
   - com.scout.weekly-heartbeat
   - com.scout.feedback-poller
-repo_path: ~/openclaw/opportunity-scout
+# repo_path: ~/openclaw/opportunity-scout — repo deleted 2026-07-05 at archival (operator decision); history not preserved, calibration/design artifacts live in this project's design/.
 related_projects:
   - book-scout
   - feed-intel-framework
