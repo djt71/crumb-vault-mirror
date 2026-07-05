@@ -36,7 +36,6 @@ You orchestrate — you do not research directly. Each pipeline stage runs as an
 - User says "research", "investigate", "find evidence", "deep research", "what does the evidence say"
 - User needs an evidence-grounded deliverable (not just a quick answer)
 - A project task requires sourced research with citation integrity
-- Tess dispatches a research brief via the bridge
 
 **Not this skill:**
 - Quick factual lookups (just answer directly)
@@ -47,7 +46,7 @@ You orchestrate — you do not research directly. Each pipeline stage runs as an
 
 ### Step 1: Accept and Validate Brief
 
-The research brief comes from the operator (direct) or Tess (bridge dispatch). Extract:
+The research brief comes from the operator. Extract:
 
 - **question** (required): The research question
 - **deliverable_format** (required): `research-note` | `knowledge-note` — determines vault routing
@@ -97,7 +96,7 @@ Run the 6-stage pipeline. Each stage runs as an Agent tool subagent with its own
    - Include budget remaining and governance constraints
 2. **Invoke Agent tool** with the assembled prompt as the subagent description. Specify `allowedTools` scoped to the stage's tool list (see stage-specific sections below).
 3. **Parse subagent output**: extract `status`, `handoff`, `deliverables`, `escalation`, `error`
-4. **Handle escalation** if present: present structured questions to operator (or relay via Tess)
+4. **Handle escalation** if present: present structured questions to operator
 5. **Handoff overflow check** (orchestrator responsibility):
    - Serialize handoff to JSON, measure byte length
    - If > 7168 bytes (7KB soft threshold): write `coverage_assessment` to `research/coverage-[dispatch].yaml`, replace handoff value with `{"ref": "research/coverage-[dispatch].yaml"}`, add file to next stage's `context_files`
@@ -111,7 +110,6 @@ Run the 6-stage pipeline. Each stage runs as an Agent tool subagent with its own
 | Context | Method | Stage Isolation |
 |---------|--------|-----------------|
 | Operator session (Claude Code) | Agent tool subagents | Yes — separate context per stage |
-| Tess bridge dispatch | `claude --print` via external runner | Yes — subprocess per stage |
 | Testing / fallback | Inline execution (orchestrator runs stage logic directly) | No — shared context |
 
 **Stage-specific logic:**
@@ -339,7 +337,7 @@ Overwrite `research/research-status-[dispatch].md` with the final dispatch summa
 
 #### 5.4 Present Results
 
-Report to the operator (or relay via Tess bridge):
+Report to the operator:
 
 1. Link to the deliverable file
 2. Overall confidence score and one-line assessment
@@ -349,7 +347,7 @@ Report to the operator (or relay via Tess bridge):
 
 ### Step 6: Escalation Handling
 
-Four escalation gate types (mapped 1:1 to CTB-016 §6 enum):
+Four escalation gate types:
 
 | Gate | Trigger | Question Type |
 |------|---------|---------------|
@@ -400,7 +398,7 @@ When promoting candidates to escalation:
    by sub-question coverage impact (most-blocked sub-question first) and defer the rest
    to the next iteration.
 
-2. **Format per CTB-016 §6.2:**
+2. **Format:**
    ```json
    {
      "escalation_id": "generated UUIDv7",
@@ -420,7 +418,7 @@ When promoting candidates to escalation:
 
 3. **Validate:** All text fields must pass the ASCII regex constraint. Strip any
    non-ASCII characters from source titles or URLs before embedding in question text.
-   The `default` field is always `null` — the runner strips it before relay per CTB-016.
+   The `default` field is always `null`.
 
 4. **Mixed gate types:** If batching candidates of different gate types, use the
    highest-severity gate type for the escalation request: `risk` > `conflict` > `access` > `scope`.
@@ -442,9 +440,9 @@ When an escalation is triggered (stage output `status: "blocked"`):
 
 #### 6.5 Resume After Escalation
 
-When the operator (or Tess via bridge) responds to an escalation:
+When the operator responds to an escalation:
 
-1. Parse the response per CTB-016 §6.4 (runner resolves option indices to text).
+1. Parse the operator's response.
 2. Update handoff based on gate type:
    - **Scope:** Adjust sub-question list (add/remove/narrow per operator choice).
    - **Access:** Update source tier targets or mark sub-question for Tier B/C convergence.
@@ -459,21 +457,20 @@ When the operator (or Tess via bridge) responds to an escalation:
 
 - **Min-evidence before escalation:** See §6.2 above. Do not escalate on first failure.
 - **Critical-path exception:** Immediate escalation for uniquely authoritative sources (§6.2).
-- **Batch up to 3 questions** per escalation request (CTB-016 hard limit).
+- **Batch up to 3 questions** per escalation request (hard limit).
 - **Target ≤2 escalations per dispatch** (advisory — some topics legitimately need more).
-- **Escalation timeout:** 30 minutes per CTB-016 §6.6. If no response, dispatch fails
+- **Escalation timeout:** 30 minutes. If no response, dispatch fails
   with `ESCALATION_TIMEOUT`. Partial work preserved in vault.
 
 ## Context Contract
 
 **MUST have:**
-- Research brief (question + deliverable_format) — from operator or bridge dispatch
+- Research brief (question + deliverable_format) — from operator
 - This SKILL.md — pipeline architecture and orchestrator procedure
 
 **MAY request:**
 - Stage prompt templates in `stages/` — loaded per-stage, not all at once
 - Schemas in `schemas/` — fact-ledger-template.yaml, handoff-schema.json, telemetry-template.yaml
-- `Projects/crumb-tess-bridge/design/dispatch-protocol.md` — stage I/O schema, budget enforcement, escalation gates (targeted sections)
 - Project design docs — if research serves a specific project
 - `_system/docs/file-conventions.md` — for vault output routing
 

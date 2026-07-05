@@ -3,7 +3,7 @@ type: reference
 status: active
 domain: software
 created: 2026-03-14
-updated: 2026-07-04
+updated: 2026-07-05
 tags:
   - system/operator
 topics:
@@ -111,7 +111,7 @@ Skills with mandatory context documents (loaded before execution):
 |-------|--------------------|
 | attention-manager | goal-tracker, SE inventory, personal-context, 2 overlays, philosophy |
 | code-review | code-review-patterns.md, claude-print-automation-patterns.md |
-| peer-review | peer-review-config.md, peer-review-denylist.md |
+| peer-review | reasoning-token-budget.md; body-level: peer-review-config.md, review-safety-denylist.md |
 | writing-coach | ai-telltale-anti-patterns.md (external audience only) |
 | audit | archive-conventions.md |
 

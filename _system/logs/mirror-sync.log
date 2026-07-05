@@ -838,3 +838,4 @@
 2026-07-04 12:28:40 SYNC vault-optimization: VO-008 B6 — ceremony reduction (31→21 steps, zombies→0, startup-counter sweep)
 2026-07-04 12:30:02 SYNC chore: session-end log — VO-033 B6 done (M4 complete), session-end dry-run #5 first pass
 2026-07-04 12:35:56 SYNC chore: session-end log — VO-034 M5 soak instantiated (window 2026-07-04→max(07-18, 8 WS), tracker live)
+2026-07-04 12:41:43 SYNC chore: session-end log — VO-034 segment close; soak tracker #5 → pass ×2

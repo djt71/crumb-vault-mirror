@@ -2,8 +2,9 @@
 type: solution
 status: active
 track: bug
+linkage: discovery-only
 created: 2026-03-09
-updated: 2026-04-04
+updated: 2026-07-05
 domain: software
 topics:
   - moc-crumb-operations

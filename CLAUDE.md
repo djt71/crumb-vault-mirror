@@ -86,7 +86,7 @@ Default model: same as main session. Override per-subagent via agent YAML frontm
 ## Model Routing
 Skill `model_tier` maps to concrete models:
 - `reasoning` → session default (Opus)
-- `execution` → Sonnet (`claude-sonnet-4-6`)
+- `execution` → Sonnet (current release — pin tier, not version; see crumb-model-policy)
 
 When loading a skill with `model_tier: execution`, delegate the skill's procedure to a Sonnet subagent via the Task tool (`model: "sonnet"`). Pass the skill procedure, relevant file paths, and any required context as the subagent prompt. Review subagent output before finalizing.
 
@@ -104,7 +104,7 @@ This creates a lightweight feedback loop — routing decisions are reviewed agai
 
 Phased rollout — delegation is active for:
 - **Phase 1 (immediate):** Zero-context mechanical skills — sync, startup
-- **Phase 2 (immediate):** Structured-input skills — mermaid, excalidraw, lucidchart
+- **Phase 2 (immediate):** Structured-input skills — mermaid (incl. Excalidraw output)
 - **Phase 3 (deferred):** Interactive skills with prompting phases (e.g., inbox-processor) — requires dispatch manifest design to preserve user decisions across the handoff
 
 ## Plan Mode

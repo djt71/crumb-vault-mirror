@@ -3,7 +3,7 @@ type: reference
 status: active
 domain: software
 created: 2026-03-14
-updated: 2026-04-11
+updated: 2026-07-05
 tags:
   - system/operator
 topics:
@@ -12,9 +12,11 @@ topics:
 
 # Infrastructure Reference
 
-Hostnames, ports, services, credentials, and health checks for the Crumb/Tess system.
+Hostnames, ports, services, credentials, and health checks for the Crumb system.
 
 **Architecture source:** [[04-deployment]]
+
+**2026-07-05 rebuild note:** This doc was last updated 2026-04-11, before the agentic-sunset decommission (mid-June 2026) removed the Tess/OpenClaw runtime layer entirely. All `ai.openclaw.*` and `com.tess.v2.*` launchd services are gone from disk (verified: no plists in `~/Library/LaunchAgents/` or `/Library/LaunchDaemons/`, nothing in `launchctl list`, Ollama on :11434 unreachable). The live service set is now exclusively `com.crumb.*`. This rebuild is grounded directly in `ls ~/Library/LaunchAgents/com.crumb.*`, each plist's contents, and `launchctl list` — not inherited from the prior doc.
 
 ---
 
@@ -32,81 +34,64 @@ Hostnames, ports, services, credentials, and health checks for the Crumb/Tess sy
 
 | User | Role | Purpose |
 |------|------|---------|
-| `tess` | Operator primary | Owns vault. Runs Crumb sessions. Hosts most LaunchAgents. |
-| `openclaw` | Service account | Runs OpenClaw gateway (LaunchDaemon). Dedicated user for Tess isolation. |
-| `danny` | Apple data owner | Personal macOS account. Runs Apple snapshot LaunchAgent. Must be logged in for Apple integrations. |
+| `danny` | Sole active operator account | Owns vault, runs Crumb sessions, hosts all `com.crumb.*` LaunchAgents. |
+| `tess` | Historical service account | Account still exists on the system (`dscl . -list /Users`) but its LaunchAgents are fully decommissioned — no plists remain. Retained per disable+archive ethos, not deleted. |
+| `openclaw` | Historical service account | Same status as `tess` — account exists, `ai.openclaw.gateway` LaunchDaemon and all other `ai.openclaw.*` agents are gone from disk. |
+
+**Note:** The prior multi-user architecture (tess owns vault / openclaw runs gateway / danny handles Apple integrations) no longer reflects reality. All 11 live `com.crumb.*` services run under `danny`.
 
 ---
 
 ## Services
 
-**Infrastructure (always-on):**
+**Live service set — verified against `ls ~/Library/LaunchAgents/com.crumb.*` (11 plists) and `launchctl list` (10 loaded, 1 intentionally unloaded) on 2026-07-05:**
 
-| Label | Type | User | Schedule | Purpose | Health Check |
-|-------|------|------|----------|---------|-------------|
-| `ai.openclaw.gateway` | LaunchDaemon | openclaw | Always-on | OpenClaw gateway (Tess runtime) | `nc -z -w3 127.0.0.1 18789` |
-| `ai.openclaw.bridge.watcher` | LaunchAgent | tess | KeepAlive | kqueue watcher → bridge dispatch (Python) | `launchctl print gui/$(id -u)/ai.openclaw.bridge.watcher` |
-| `com.tess.llama-server` | LaunchAgent | tess | KeepAlive | Local Nemotron model host (Ollama) | `curl -s 127.0.0.1:11434/api/tags` |
-| `com.crumb.dashboard` | LaunchAgent | tess | KeepAlive | Mission Control HTTP server — **stopped 2026-05-28** (project still active) | Check dashboard HTTP /health |
-| `com.crumb.vault-web` | LaunchAgent | tess | KeepAlive | Quartz v4 static site for mobile vault access | Check served HTTP |
-| `com.crumb.cloudflared` | LaunchAgent | tess | KeepAlive | Cloudflare tunnel → dashboard (remote access) | `launchctl print gui/$(id -u)/com.crumb.cloudflared` |
+| Label | Schedule | Purpose | Program | Logs |
+|-------|----------|---------|---------|------|
+| `com.crumb.backup-status` | `StartInterval` 900s + `RunAtLoad` | Writes backup status JSON for dashboard consumption (checks iCloud vault backup + Time Machine) | `bash _system/scripts/backup-status.sh` | `/tmp/backup-status.log`, `/tmp/backup-status.err` (writes `_system/logs/backup-status.json`) |
+| `com.crumb.cloudflared` | `RunAtLoad` + `KeepAlive` | Cloudflare tunnel, outbound-only, exposes dashboard at `mc.crumbos.dev` → `localhost:3100` | `cloudflared tunnel run crumb-dashboard` | `/tmp/cloudflared-stdout.log`, `/tmp/cloudflared-stderr.log` |
+| `com.crumb.dashboard` | `RunAtLoad` + `KeepAlive` (when loaded) | Mission Control HTTP API server, port 3100 | `node .../crumb-dashboard/packages/api/dist/server.js` | `/tmp/crumb-dashboard-stdout.log`, `/tmp/crumb-dashboard-stderr.log`, `/tmp/crumb-dashboard.log` |
+| `com.crumb.drive-sync` | `StartCalendarInterval` 5:00 AM daily | Syncs operator/architecture docs to Google Drive (NotebookLM `.txt` + Perplexity Computer `.md`), one-way push via rclone | `bash _system/scripts/drive-sync.sh` | `/tmp/drive-sync-stdout.log`, `/tmp/drive-sync-stderr.log` (script's own log: `/tmp/drive-sync.log`) |
+| `com.crumb.qmd-index` | `StartCalendarInterval` 5:30 AM daily | Rebuilds qmd search index + embeddings | `bash -c "qmd update && qmd embed"` | `/tmp/qmd-index-stdout.log`, `/tmp/qmd-index-stderr.log` |
+| `com.crumb.system-stats` | `StartInterval` 60s + `RunAtLoad` | Resource metrics snapshot | `_system/scripts/system-stats.sh` | `_system/logs/system-stats.json`, stderr `/tmp/crumb-system-stats.err` |
+| `com.crumb.vault-backup` | `StartCalendarInterval` 3:00 AM daily | Vault backup tarball → iCloud (`~/Library/Mobile Documents/.../crumb-backups`) | `bash _system/scripts/vault-backup.sh` | `/tmp/vault-backup.log`, `/tmp/vault-backup.err` |
+| `com.crumb.vault-gc` | `StartCalendarInterval` 4:00 AM daily | Vault garbage collection — purges aged transient files, truncates growing logs (TTL policies in script) | `_system/scripts/vault-gc.sh` | `_system/logs/vault-gc.log` (stdout+stderr combined) |
+| `com.crumb.vault-health` | `StartCalendarInterval` 2:00 AM daily | Nightly vault content-health scan. Comment in plist: "agentic-sunset AS-019: log-only successor to `ai.openclaw.vault-health`" | `bash _system/scripts/vault-health.sh` | `/tmp/vault-health.log`, `/tmp/vault-health.err` (script also writes `_system/logs/vault-health.log` + `vault-health-notes.md`) |
+| `com.crumb.vault-rebuild` | `StartInterval` 900s (no RunAtLoad) | Rebuilds Quartz static site from vault content | `bash ~/quartz-vault/rebuild.sh` | `~/quartz-vault/logs/rebuild-launchd-stdout.log`, `-stderr.log` |
+| `com.crumb.vault-web` | `RunAtLoad` + `KeepAlive` | Serves Quartz v4 static site for mobile vault access, port 8843 | `node .../serve/build/main.js ~/quartz-vault/public -l 8843 --no-clipboard` | `~/quartz-vault/logs/serve-stdout.log`, `-stderr.log` |
 
-**Tess-v2 operational services (`com.tess.v2.*`, managed by `tess-v2/project-state.yaml`). Authoritative live set = `project-state.yaml` `services:` ∩ `launchctl list`:**
+**Parked service:** `com.crumb.dashboard` exists on disk (plist present, well-formed) but is **intentionally unloaded** — confirmed absent from `launchctl list` output on 2026-07-05. This follows the mission-control project pausing 2026-06-14 (dashboard stack kept for reversibility, deliberately stopped rather than torn down). `com.crumb.cloudflared` is still loaded and tunneling to `localhost:3100`, so the tunnel is currently live but has no backend to answer it — expect the public hostname to fail/502 until `com.crumb.dashboard` is reloaded.
 
-| Label | Schedule | Purpose |
-|-------|----------|---------|
-| `com.tess.v2.health-ping` | Every 900s | Dead man's switch heartbeat |
-| `com.tess.v2.vault-health` | 2:00 AM daily | Nightly vault integrity check |
-| `com.tess.v2.vault-gc` | Pre-dawn daily | Vault garbage collection |
-| `com.tess.v2.backup-status` | Interval | Backup state monitoring |
-| `com.tess.v2.daily-attention` | 6:30 AM daily | Daily attention planning |
+**Hygiene flag (dashboard plist):** `com.crumb.dashboard.plist` has `HEALTHCHECKS_API_KEY` hardcoded in cleartext in its `EnvironmentVariables` dict — this is stored in the plist file rather than Keychain, which is inconsistent with the Keychain-not-env convention used for other rotating credentials. Worth moving to Keychain (or at minimum an env file) the next time this service is touched.
 
-Awareness-check runs on the legacy `ai.openclaw.awareness-check` (the v2 LLM heartbeat was dropped 2026-05-28). The scout services were decommissioned 2026-05-28. For all services removed in the 2026-05/06 teardown, see **Decommissioned services** below.
+**Fully decommissioned namespaces (verified gone, not just moved):**
+- `ai.openclaw.gateway` (LaunchDaemon), `ai.openclaw.bridge.watcher`, `ai.openclaw.awareness-check`, `ai.openclaw.health-ping`, `ai.openclaw.daily-attention`, `ai.openclaw.vault-health` — no plists remain in `~/Library/LaunchAgents/` or `/Library/LaunchDaemons/`; `launchctl list` returns nothing for `openclaw`.
+- `com.tess.v2.*` (health-ping, vault-health, vault-gc, backup-status, daily-attention) — project `tess-v2` closed `phase: DONE` 2026-06-14 (agentic-sunset AS-030); all labels scrapped and reboot-verified absent (AS-021).
+- `com.tess.llama-server` (Ollama-hosted local model) — port 11434 unreachable, no `ollama` process running.
+- Everything under the 2026-05/06 teardown sweep (FIF capture/attention/feedback-health, Opportunity Scout services, `com.crumb.service-status`, `com.tess.health-check`, overnight-research, connections-brainstorm) — still gone, unchanged from prior doc.
 
-**Apple and cross-user services:**
+**Not carried forward / status unknown:** The prior doc listed `com.crumb.apple-snapshot` (danny, Apple data snapshots every 1800s). No plist by that name exists anywhere on disk as of 2026-07-05 (checked `~/Library/LaunchAgents/`, filesystem-wide for the pattern). Not verified whether this was intentionally retired during the decommission or is simply undocumented — see UNCERTAIN.
 
-| Label | Type | User | Schedule | Purpose |
-|-------|------|------|----------|---------|
-| `com.crumb.apple-snapshot` | LaunchAgent | danny | Every 1800s (waking) | Apple data snapshots to `_openclaw/state/` |
-| `com.crumb.drive-sync` | LaunchAgent | danny | 5:00 AM daily | Sync operator/architecture docs to Google Drive for NotebookLM |
-
-**Legacy `ai.openclaw.*`:** `health-ping`, `awareness-check`, `daily-attention`, `vault-health` (still loaded) plus `bridge.watcher`. `fif.capture/feedback/attention` and `overnight-research` were decommissioned (see below). Email triage (both namespaces) was shut down 2026-04-10 (TV2-036/037 cancelled). The authoritative service set is managed via `Projects/tess-v2/project-state.yaml` `services:` field.
-
-**Decommissioned services (2026-05/06):** Removed in the 2026-05-28 → 2026-06-01 teardown sweep (see `_system/docs/solutions/infrastructure-teardown-discipline.md`):
-- **FIF capture/attention/feedback-health** (both namespaces) — 2026-05-28 (commit 2756dbc1, operator-directed).
-- **Opportunity Scout** (`scout-pipeline`/`feedback-health`/`weekly-heartbeat`/`feedback-poller`) — 2026-05-28 (same commit); project kept, repo/plists retained.
-- **`com.crumb.service-status`** (liveness sensor) + its `service-status.json` output — 2026-06-01 (orphaned after dashboard stopped).
-- **`com.tess.v2.awareness-check`** (LLM heartbeat) — 2026-05-28 (awareness-check continues on legacy namespace).
-- **`com.tess.health-check`** (TMA-004 Limited Mode failover) — retired; script preserved, plist removed.
-- **`overnight-research`** + **`connections-brainstorm`** (both namespaces) — 2026-06-01.
+**`daily-attention`:** Both the `ai.openclaw.daily-attention` and `com.tess.v2.daily-attention` scheduled jobs are gone, and no `com.crumb.daily-attention` was created to replace them. Daily attention planning is currently session-driven only (via the `attention-manager` skill), not a standing scheduled service.
 
 ### Plist Locations
 
 | Location | Services |
 |----------|----------|
-| `/Library/LaunchDaemons/` | `ai.openclaw.gateway` |
-| `~/Library/LaunchAgents/` (tess) | All `ai.openclaw.*` agents, `com.crumb.*` agents |
-| `~/Library/LaunchAgents/` (danny) | `com.crumb.apple-snapshot` |
-| `_openclaw/staging/m1/` | Milestone 1 staging plists |
-| `_openclaw/staging/m2/` | Milestone 2 staging plists |
+| `~/Library/LaunchAgents/` (danny) | All 11 `com.crumb.*` agents |
+| `/Library/LaunchDaemons/` | None currently (ai.openclaw.gateway removed) |
 
 ### Service Management Commands
 
 ```bash
-# Gateway (LaunchDaemon — uses system/ domain, requires sudo)
-sudo launchctl bootout system/ai.openclaw.gateway          # stop
-sudo launchctl bootstrap system /Library/LaunchDaemons/ai.openclaw.gateway.plist  # start
-sudo launchctl print system/ai.openclaw.gateway             # status
-
 # LaunchAgents (gui/ domain — no sudo needed)
-launchctl bootout gui/$(id -u)/ai.openclaw.bridge.watcher     # stop
-launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/ai.openclaw.bridge.watcher.plist  # start
-launchctl print gui/$(id -u)/ai.openclaw.bridge.watcher       # status
+launchctl bootout gui/$(id -u)/com.crumb.<label>     # stop
+launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.crumb.<label>.plist  # start
+launchctl print gui/$(id -u)/com.crumb.<label>       # status
+launchctl list | grep com.crumb                      # quick loaded-set check
 ```
 
-**Warning:** `openclaw gateway restart` and `openclaw cron status/list` look in `gui/$UID` — they do NOT work for the LaunchDaemon in `system/`. Always use `launchctl` directly for gateway management.
-
-**Warning:** `launchctl list` does NOT show calendar-interval jobs that exited cleanly (exit code 0). Use `launchctl print` as the authoritative status check.
+**Warning:** `launchctl list` does NOT show calendar-interval jobs that exited cleanly (exit code 0) between polls. Use `launchctl print gui/$(id -u)/<label>` for authoritative status, especially for the five `StartCalendarInterval` jobs above (drive-sync, qmd-index, vault-backup, vault-gc, vault-health).
 
 ---
 
@@ -116,8 +101,8 @@ launchctl print gui/$(id -u)/ai.openclaw.bridge.watcher       # status
 
 | Port | Service | Binding | Protocol |
 |------|---------|---------|----------|
-| 18789 | OpenClaw gateway | `127.0.0.1` (loopback only) | WebSocket |
-| 11434 | Ollama | `127.0.0.1` (loopback only) | HTTP |
+| 3100 | `com.crumb.dashboard` (parked) | `127.0.0.1` | HTTP |
+| 8843 | `com.crumb.vault-web` | Local (serve) | HTTP |
 | 22 | SSH | Tailscale peers only | SSH |
 
 ### DNS
@@ -127,46 +112,28 @@ launchctl print gui/$(id -u)/ai.openclaw.bridge.watcher       # status
 | Tailscale MagicDNS | `<hostname>.tailXXXXXX.ts.net` |
 | Studio direct | Tailscale IP `100.x.y.z` |
 | External APIs | Public DNS (system resolver) |
-| OpenClaw gateway | `127.0.0.1:18789` (no DNS needed) |
+| Dashboard (public) | `mc.crumbos.dev` → Cloudflare tunnel → `localhost:3100` (currently backend-down, see Services above) |
 
 ### Outbound API Endpoints
 
 | Endpoint | Consumer | Purpose |
 |----------|----------|---------|
-| Anthropic API | Crumb (Claude Code) | Inference (Opus 4.6) |
-| OpenRouter API | Tess Voice | Inference (Kimi K2.5 primary, Qwen 3.6 failover) |
-| OpenAI API | peer-review, code-review skills | Review panels |
-| Google/Gemini API | peer-review skill, Gmail ops | Review panels, Gmail |
-| DeepSeek API | peer-review skill | Review panels |
-| xAI/Grok API | peer-review skill | Review panels |
-| Telegram API | OpenClaw gateway, LaunchAgent scripts | Tess messaging |
-| GitHub | Git push/pull | Vault and project repos |
+| Anthropic API | Crumb (Claude Code) | Inference |
+| OpenAI API | peer-review, code-review, deliberation dispatch agents | Review panels |
+| Google/Gemini API | peer-review, deliberation dispatch agents | Review panels |
+| DeepSeek API | peer-review, deliberation dispatch agents | Review panels |
+| xAI/Grok API | peer-review, deliberation dispatch agents (`.claude/agents/*-dispatch.md`, `.claude/skills/peer-review/SKILL.md`) | Review panels |
+| Google Workspace OAuth (workspace-mcp) | Gmail/Calendar/Drive/Contacts MCP tools | Live GWS integration — token store at `~/.google_workspace_mcp/credentials` and `~/.config/gws` (recently touched, actively used) |
+| GitHub | Git push/pull | Vault and project repos, via `gh auth git-credential` (see Credentials) |
 | Cloudflare | `com.crumb.cloudflared` | Outbound tunnel for dashboard remote access |
+
+**Removed:** OpenRouter (Tess Voice inference) and Telegram Bot API (Tess/OpenClaw messaging) — no live script or plist references either endpoint; both were consumers under the now-dead Tess/OpenClaw stack. See rotate-credentials doc, revocation-candidates section.
 
 ---
 
 ## Credentials
 
-| Credential | Storage | User | Consumer | Rotation |
-|-----------|---------|------|----------|----------|
-| Anthropic API key | macOS Keychain | tess | Claude Code (Crumb) | Manual |
-| OpenRouter API key | `~/.config/crumb/.env` | tess, openclaw | Tess Voice cloud inference | Manual |
-| OpenAI API key | `~/.config/crumb/.env` | tess | peer-review, code-review | Manual |
-| Google/Gemini API key | `~/.config/crumb/.env` | tess | peer-review | Manual |
-| DeepSeek API key | `~/.config/crumb/.env` | tess | peer-review | Manual |
-| xAI/Grok API key | `~/.config/crumb/.env` | tess | peer-review | Manual |
-| GitHub PAT | macOS Keychain (credential-osxkeychain) | tess | Git push/pull | Auto-cached |
-| OpenClaw token | `/Users/openclaw/.openclaw/openclaw.json` | openclaw | Gateway auth | Per config |
-| Telegram bot tokens | LaunchAgent plist env vars | tess | awareness-check, health-ping, vault-health, backup-status | Manual |
-| Cloudflare tunnel token | macOS Keychain | tess | `com.crumb.cloudflared` | Manual |
-| X (Twitter) OAuth | Dynamic (Keychain refresh) | tess | feed-intel framework | Auto-refresh |
-
-### Credential Files
-
-| Path | Mode | Contents |
-|------|------|----------|
-| `~/.config/crumb/.env` | 600 | OPENROUTER_API_KEY, OPENAI_API_KEY, GEMINI_API_KEY, DEEPSEEK_API_KEY, XAI_API_KEY |
-| `/Users/openclaw/.openclaw/openclaw.json` | 600 | OpenClaw gateway config + tokens |
+See [[rotate-credentials]] for the full credential table and rotation procedures. Summary of what changed: OpenRouter, Telegram bot tokens, and X/Twitter OAuth no longer have live consumers (moved to revocation-candidates); Google Workspace OAuth added as a live, previously-undocumented consumer; Mistral and Lucid API keys (present in `~/.config/crumb/.env` but not previously documented) also have no live script/skill consumer found.
 
 ---
 
@@ -175,33 +142,36 @@ launchctl print gui/$(id -u)/ai.openclaw.bridge.watcher       # status
 ### Quick Liveness Check
 
 ```bash
-# Gateway
-nc -z -w3 127.0.0.1 18789 && echo "OK" || echo "DOWN"
+# Dashboard (when loaded)
+curl -s -m 2 http://127.0.0.1:3100/health && echo "OK" || echo "DOWN"
 
-# Ollama
-curl -s http://127.0.0.1:11434/api/tags | jq '.models | length' 2>/dev/null && echo "OK" || echo "DOWN"
+# Vault-web
+curl -s -m 2 http://127.0.0.1:8843 -o /dev/null -w "%{http_code}\n"
 
-# Bridge watcher
-launchctl print gui/$(id -u)/ai.openclaw.bridge.watcher 2>/dev/null | grep -q "state = running" && echo "OK" || echo "DOWN"
+# Loaded com.crumb.* services
+launchctl list | grep com.crumb
 ```
 
 ### Do NOT use
 
-- `lsof -nP -iTCP:18789` without sudo — false negative for openclaw-owned sockets
-- `openclaw gateway restart` — wrong launchd domain for LaunchDaemon
-- `openclaw cron status` — wrong launchd domain for LaunchDaemon
+- `openclaw gateway restart` / `openclaw cron status` — these commands reference infrastructure that no longer exists (ai.openclaw.gateway is gone). Use `launchctl` directly.
+- Assuming `com.crumb.dashboard` is reachable because `com.crumb.cloudflared` is loaded — the tunnel loads independently of its backend.
 
 ### Log Locations
 
 | Log | Path | Contents |
 |-----|------|----------|
 | Vault-check output | `_system/logs/vault-check-output.log` | Latest vault-check run |
-| System stats | `_system/logs/system-stats.json` | Resource metrics |
-| Backup status | `_system/logs/backup-status.json` | Backup operation status |
-| Mirror sync | `_system/logs/mirror-sync.log` | Mirror sync status |
-| Ops metrics | `_system/logs/ops-metrics.jsonl` | Cron job metrics (cron-lib.sh) |
-| Vault health | `_system/logs/vault-health.log` + `vault-health-notes.md` | Nightly content-health scan |
-| AKM feedback | `_system/logs/akm-feedback.jsonl` | Active Knowledge Memory feedback |
+| System stats | `_system/logs/system-stats.json` | Resource metrics (`com.crumb.system-stats`) |
+| Backup status | `_system/logs/backup-status.json` | Backup operation status (`com.crumb.backup-status`) |
+| Vault GC | `_system/logs/vault-gc.log` | `com.crumb.vault-gc` stdout+stderr |
+| Vault health | `_system/logs/vault-health.log` + `vault-health-notes.md` | Nightly content-health scan (`com.crumb.vault-health`) |
+| Vault backup marker | `_system/logs/vault-backup-last.json` | Written by `vault-backup.sh`, read by `backup-status.sh` as an iCloud-listing fallback |
+| Drive sync | `/tmp/drive-sync.log` | rclone sync status |
+| Quartz rebuild | `~/quartz-vault/logs/rebuild-launchd-*.log` | `com.crumb.vault-rebuild` |
+| Quartz serve | `~/quartz-vault/logs/serve-*.log` | `com.crumb.vault-web` |
+
+**Note:** Most `com.crumb.*` LaunchAgents log to `/tmp/` rather than `_system/logs/`, which means logs do not survive reboot and are not vault-backed. Only `vault-gc`, `vault-health` (partial), `system-stats`, and `backup-status` write into `_system/logs/`.
 
 ---
 
@@ -210,21 +180,20 @@ launchctl print gui/$(id -u)/ai.openclaw.bridge.watcher 2>/dev/null | grep -q "s
 | Constraint | Impact | Mitigation |
 |-----------|--------|-----------|
 | `com.apple.provenance` xattr | `launchctl bootstrap` fails with "I/O error" | Strip xattr as absolute last step before bootstrap |
-| `sudo -u` doesn't reset HOME | Scripts see wrong home directory | Explicitly `export HOME="/Users/<user>"` |
-| `sudo -u` doesn't carry TCC | Apple data inaccessible cross-user | LaunchAgent in data-owning user's GUI domain |
 | `date +%H` zero-padded | Bash arithmetic treats `08`, `09` as octal | Use `date +%-H` for arithmetic |
 | openrsync ≠ GNU rsync | `--delete-excluded` destroys `.git/` | Use `--delete` + post-rsync cleanup |
 | `set -o pipefail` | Breaks `if cmd | grep -q` patterns | Use `set -eu` without pipefail |
-| Danny must be logged in | Apple integrations fail without GUI domain | Fast User Switching background login |
-| DM pairings in-memory only | Lost on gateway restart | Re-pair via Telegram after restart |
-| `npm install -g` under non-primary user | Writes to primary user's `~/.npm/` | Use `--prefix` and `npm_config_cache` |
+| `tmutil latestbackup` can return empty right after boot | Time Machine status false-negative | `backup-status.sh` falls back to `tmutil listbackups | tail -1` |
+| TCC blocks `~/Library/Mobile Documents` under launchd | Direct iCloud directory listing fails silently | `backup-status.sh` falls back to the `vault-backup-last.json` marker written by `vault-backup.sh` |
+
+**Removed (were multi-user-specific, no longer apply with single-user `danny` operation):** `sudo -u` HOME/TCC handling, Fast User Switching for Apple integrations, DM pairing loss on gateway restart, `npm install -g` cross-user cache writes. These were artifacts of the tess/openclaw/danny three-account architecture, which is retired.
 
 ---
 
 ## Reconciliation Notes
 
-- Service inventory reconciled against `_openclaw/staging/m1/*.plist`, `_openclaw/staging/m2/*.plist`, and `_system/scripts/ai.openclaw.bridge.watcher.plist`
-- Credential map reconciled against `_system/docs/architecture/04-deployment.md` §Credential Management
-- Health checks reconciled against MEMORY.md OpenClaw operational notes
-- Platform constraints reconciled against MEMORY.md macOS Multi-User Operations
-- **Uncertainty:** Exact Ollama model list and version not verified at write time
+- Service inventory reconciled directly against `ls ~/Library/LaunchAgents/com.crumb.*` (11 plists), each plist's raw contents, and `launchctl list | grep crumb` (10 loaded) — 2026-07-05.
+- Confirmed `ai.openclaw.*` and `com.tess.v2.*` fully absent from disk and `launchctl list` — not inherited from prior doc's claims.
+- Credential/consumer map reconciled against a grep sweep of `_system/scripts/` and `.claude/` for API key names, plus `Projects/agentic-sunset/project-state.yaml` and `Projects/tess-v2/project-state.yaml` for decommission status.
+- **Uncertainty:** `com.crumb.apple-snapshot` (in the 2026-04-11 doc) has no corresponding plist anywhere found on this pass — not confirmed whether retired intentionally or just undocumented. Do not assume it still runs.
+- **Uncertainty:** Exact `qmd` version/config and Ollama's full removal status (vs. simply not running) not independently verified beyond the port-11434 unreachable check.

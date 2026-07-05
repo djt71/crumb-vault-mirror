@@ -1,13 +1,13 @@
 ---
 type: state
 status: active
-created: 2026-07-04
-updated: 2026-07-04
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
-# Vault Health Notes — 2026-07-04
+# Vault Health Notes — 2026-07-05
 
-## Warnings (87)
+## Warnings (93)
   WARNING: Projects/tess-v2/reviews/2026-03-28-external-action-plan-review-synthesis.md — no YAML frontmatter found
   WARNING: Projects/firekeeper-books/ai-art-learning-plan.md — kb-tagged note missing required 'topics' field
   WARNING: Domains/Career/moc-networking.md — orientation MOC has 15 Core entries but Synthesis has <30 words
@@ -38,6 +38,7 @@ updated: 2026-07-04
   WARNING: Projects/agentic-sunset/progress/run-log.md — session '## 2026-06-12 — AS-026: vault surgery (_openclaw/_tess/_staging archived)' mentions skill invocation but has no context inventory
   WARNING: Projects/agentic-sunset/progress/run-log.md — session '## 2026-06-12 — AS-027/028/029: gitignore churn, skills cleanup, memory refresh' mentions skill invocation but has no context inventory
   WARNING: Projects/agentic-sunset/progress/run-log.md — session '## 2026-06-14 — Session-end (compound evaluation)' mentions skill invocation but has no context inventory
+  WARNING: Projects/agentic-sunset/progress/run-log.md — session '## 2026-07-04 — Cross-project note (vault-optimization, not AS work): `_system/archive/` parked copies deleted' mentions skill invocation but has no context inventory
   WARNING: Projects/tess-v2/progress/run-log-2026-03.md — session '## 2026-03-29 — Feed intel actions: security + browser tools' mentions skill invocation but has no context inventory
   WARNING: Projects/tess-v2/progress/run-log-2026-03.md — session '## 2026-03-30b — Soak Extension + Kimi Soak Setup + DeepSeek Audit' mentions skill invocation but has no context inventory
   WARNING: Projects/tess-v2/progress/run-log-2026-03.md — session '## 2026-04-01e — Phase Transition: TASK → IMPLEMENT' mentions skill invocation but has no context inventory
@@ -56,6 +57,9 @@ updated: 2026-07-04
   WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-06-10 — Session end (M3 changeset session)' mentions skill invocation but has no context inventory
   WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-06-11 — Adjacent item closed: feed backlog operator decision (discard)' mentions skill invocation but has no context inventory
   WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-07-03 — Session-end (compound evaluation)' mentions skill invocation but has no context inventory
+  WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-07-04 — Adjacent execution (same session as VO-032): `_system/archive/` deleted' mentions skill invocation but has no context inventory
+  WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-07-04 — Session-end (compound evaluation)' mentions skill invocation but has no context inventory
+  WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-07-04 — Session-end (compound evaluation) — first live pass of the B6 session-end protocol' mentions skill invocation but has no context inventory
   WARNING: Projects/obsidian-applenotes-import/progress/run-log.md — session '## 2026-04-25 — Project creation' mentions skill invocation but has no context inventory
   WARNING: Projects/obsidian-applenotes-import/progress/run-log.md — session '## 2026-04-25 — SPECIFY done; PLAN-ready' mentions skill invocation but has no context inventory
   WARNING: Projects/opportunity-scout/progress/run-log.md — session '## 2026-04-25 — Three-tier priority injection in synthesis + ranking prompts' mentions skill invocation but has no context inventory
@@ -77,6 +81,7 @@ updated: 2026-07-04
   WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-06-10 — Session end (M2 evidence session)' mentions subagent delegation but has no provenance assessment
   WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-06-10 — Session end (M3 changeset session)' mentions subagent delegation but has no provenance assessment
   WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-06-10 — VO-025 complete: ceremony step classification + A10 metrics' mentions subagent delegation but has no provenance assessment
+  WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-07-04 — VO-033 complete: B6 ceremony batch EXECUTED' mentions subagent delegation but has no provenance assessment
   WARNING: Projects/mission-control/progress/run-log.md — session '## 2026-03-30 (session 10) — M3.1: Intelligence Feed Density Redesign' mentions subagent delegation but has no provenance assessment
   WARNING: _system/docs/operator/how-to/tess-to-danny-migration-runbook.md — broken link: [[macos-tahoe-calendarinterval-bug]]
   WARNING: _system/docs/operator/how-to/tess-to-danny-migration-runbook.md — broken link: [[recurring-patterns]]
@@ -84,6 +89,7 @@ updated: 2026-07-04
   WARNING: Projects/agentic-sunset/progress/run-log.md — broken link: [[project-agentic-sunset]]
   WARNING: Projects/agentic-sunset/progress/run-log.md — broken link: [[recurring-patterns]]
   WARNING: Projects/firekeeper-books/progress/run-log.md — broken link: [[recurring-patterns]]
+  WARNING: Projects/vault-optimization/progress/run-log.md — broken link: [[run-feed-pipeline]]
   WARNING: Sources/insights/loop-scheduled-task-orchestration.md — broken link: [[tess-operations]]
   WARNING: Sources/signals/claudecodecamp-agents-while-sleeping.md — broken link: [[tess-operations]]
   WARNING: Sources/signals/fang-trajectory-informed-memory.md — broken link: [[attention-manager]]

@@ -3,7 +3,7 @@ type: config
 domain: software
 status: active
 created: 2026-03-22
-updated: 2026-03-22
+updated: 2026-07-05
 models:
   openai:
     model: gpt-5.4
@@ -26,12 +26,12 @@ models:
     token_param: max_tokens
     max_context_tokens: 64000
   grok:
-    model: grok-4-1-fast-reasoning
+    model: grok-4.3
     endpoint: https://api.x.ai/v1/chat/completions
     env_key: XAI_API_KEY
     max_tokens: 8192
     token_param: max_tokens
-    max_context_tokens: 128000
+    max_context_tokens: 1000000
 evaluator_registry:
   business-advisor:
     provider: openai
