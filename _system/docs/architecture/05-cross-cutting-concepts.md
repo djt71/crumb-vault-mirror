@@ -108,7 +108,7 @@ New types emerge through compound engineering, not speculative predefinition.
 
 | Category | Checks | What They Enforce |
 |----------|--------|-------------------|
-| Schema | §1, §3, §20, §25, §26, §27 | Frontmatter required fields, summary schema, source-index/signal-note/attention-item schemas |
+| Schema | §1, §3, §20, §25, §26 | Frontmatter required fields, summary schema, source-index/signal-note/attention-item schemas (§27 daily-attention removed 2026-07-05 — attention-manager retired) |
 | Staleness | §2, §11, §24 | Summary freshness, project-state last_committed, run-log size |
 | Structural integrity | §4, §5, §6, §7 | Run-log session blocks, compound step continuity, session-log compound completeness, project scaffold |
 | Task governance | §8, §10, §22, §23 | Task completion evidence, active_task consistency, DONE project guard, code review gate |

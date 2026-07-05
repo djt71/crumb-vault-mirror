@@ -529,8 +529,8 @@ required_context:
 | `personal-writing` | Operator-authored creative and reflective writing, stored in `Domains/Creative/writing/` |
 | `plan` | Forward-looking action documents with phases, checkpoints, and progress tracking (e.g., learning plans) |
 | `attention-item` | Operator attention items in `_inbox/attention/` — system alerts, tasks, follow-ups (§ Attention Items) |
-| `daily-attention` | Daily curated attention plan produced by attention-manager skill, stored in `_system/daily/` |
-| `attention-review` | Monthly attention review/synthesis produced by attention-manager skill, stored in `_system/daily/` |
+| `daily-attention` | RETIRED 2026-07-05 (attention-manager skill → Cowork, see `cowork-attention-handoff.md`) — historical daily plans in `_system/daily/` retain the type; vault-check §27 removed |
+| `attention-review` | RETIRED 2026-07-05 (same) — historical monthly reviews in `_system/daily/` retain the type |
 
 **MOC location:** MOC files live in `Domains/*/` directories (e.g., `Domains/career/moc-training-delivery.md`). Filenames must be globally unique across all domain directories — vault-check enforces this.
 

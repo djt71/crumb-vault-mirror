@@ -3,8 +3,9 @@ type: pattern
 domain: software
 status: active
 track: pattern
+linkage: discovery-only
 created: 2026-04-07
-updated: 2026-07-04
+updated: 2026-07-05
 tags:
   - system-design
   - attention-manager

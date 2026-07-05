@@ -72,7 +72,7 @@ Hostnames, ports, services, credentials, and health checks for the Crumb system.
 
 **Not carried forward / status unknown:** The prior doc listed `com.crumb.apple-snapshot` (danny, Apple data snapshots every 1800s). No plist by that name exists anywhere on disk as of 2026-07-05 (checked `~/Library/LaunchAgents/`, filesystem-wide for the pattern). Not verified whether this was intentionally retired during the decommission or is simply undocumented — see UNCERTAIN.
 
-**`daily-attention`:** Both the `ai.openclaw.daily-attention` and `com.tess.v2.daily-attention` scheduled jobs are gone, and no `com.crumb.daily-attention` was created to replace them. Daily attention planning is currently session-driven only (via the `attention-manager` skill), not a standing scheduled service.
+**`daily-attention`:** Both the `ai.openclaw.daily-attention` and `com.tess.v2.daily-attention` scheduled jobs are gone, and no `com.crumb.daily-attention` was created to replace them. The `attention-manager` skill was retired 2026-07-05 — the attention-planning concept moves to Claude Cowork (rented runtime, see `_system/docs/cowork-attention-handoff.md`); no vault-side service exists or is planned.
 
 ### Plist Locations
 

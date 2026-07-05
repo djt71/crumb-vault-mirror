@@ -71,7 +71,7 @@ Tell Crumb what you want to work on. Examples:
 - "Resume project documentation-overhaul" — Crumb reads `project-state.yaml` and run-log to reconstruct context
 - "Process inbox" — triggers inbox-processor skill
 - "Research X topic" — triggers researcher skill
-- "Plan my day" — triggers attention-manager skill
+- "Diagram this workflow" — triggers mermaid skill
 
 **Expected outcome:** Crumb activates the appropriate skill, loads context from the vault, and begins working. Skills auto-activate based on trigger phrase matching.
 

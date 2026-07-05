@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: active
 created: 2026-02-21
-updated: 2026-07-04
+updated: 2026-07-05
 tags:
   - system
 ---
@@ -14,7 +14,7 @@ Orientation artifact for a fresh session reading this repo (claude.ai chat, a
 new Claude Code session, or any agent cloning `github.com/djt71/crumb-vault`).
 Read this first — it is sufficient for most questions.
 
-Last updated: 2026-07-04. **Headline changes since 06-19:** (1) the
+Last updated: 2026-07-05 (point edits: attention-manager retired to Cowork, 15 skills, bet portfolio empty per Gate 4 declarations). Prior full refresh 2026-07-04. **Headline changes since 06-19:** (1) the
 agentic-sunset stability soak v1 **FAILED** — a headless reboot on 2026-06-18
 left the stack dark 13 days (keep-set resurrection is GUI-login-gated, now a
 documented operating assumption: GUI-login after every reboot, then verify
@@ -48,7 +48,8 @@ produced zero revenue, and ~90% of its function is now native in Claude.AI / Cla
   backup jobs relabeled to `com.crumb.*` (3 AM scheduled-fire confirmation
   2026-06-13); vault-health rebuilt log-only (no Telegram, no `_openclaw/`
   deps); README-ARCHIVED breadcrumbs in all 7 runtime dirs; daily-attention
-  replacement **declined** (on-demand attention-manager only — see
+  replacement **declined** (on-demand attention-manager only; that skill was
+  itself retired to Cowork 2026-07-05, `cowork-attention-handoff.md` — see
   `Projects/agentic-sunset/design/upstream-migration.md`); CLAUDE.md
   bridge-dispatch section removed; vault `_openclaw/`, `_tess/`,
   `_staging/TV2-*` archived to `Archived/` (pipeline.db external, spared) —
@@ -133,7 +134,7 @@ as external memory and single source of truth. Canonical spec:
 - **Claude Code sessions:** run on the Studio
 - **Tess (OpenClaw agent):** decommissioned 2026-06-10; the archived bridge dir was deleted with `Archived/` 2026-07-03 (git-history-only)
 - **Validation gate:** `_system/scripts/vault-check.sh` (pre-commit hook)
-- **Counts (verified 2026-07-04):** 16 skills · 8 overlays · 9 canonical domains
+- **Counts (verified 2026-07-05):** 15 skills · 8 overlays · 9 canonical domains
 - **Domains:** software, career, learning, health, financial, relationships, creative, spiritual, lifestyle
 
 ## Strategic Directive: Liberation
@@ -149,7 +150,9 @@ doc (7 surfaces incl. the Glean airlock, verified 2026-06-11). Tess/OpenClaw
 decommissioned 2026-06-10; Perplexity subscription cancelled 2026-06-11;
 `_inbox/` is the universal intake (`_openclaw/inbox/` defunct and archived).
 
-Primary revenue bet: **Firekeeper Books** (Prompt 1).
+Bet portfolio: **empty, deliberately** (2026-07-05 Gate 4 declarations —
+firekeeper-books and semuta both labeled hobby; incidental revenue ≠ revenue
+thesis). Track 1 (endure + bank) runs by default; campaign stub unanchored.
 
 ## Active Projects
 
@@ -178,10 +181,10 @@ Directory location is authoritative for archived-vs-active; project docs carry n
 - **Next:** consult `Sources/insights/staging-curation-pattern-transfer.md` (human-attention vs. agent-unsupervised) before scaling to remaining accounts (Steelcase, BorgWarner next).
 - **Key files:** `Projects/customer-intelligence/progress/run-log.md`, `Domains/career/accounts/`
 
-### firekeeper-books — creative / personal / two-phase  *(primary revenue bet)*
+### firekeeper-books — creative / personal / two-phase  *(hobby per Gate 4, declared 2026-07-05 — not a bet)*
 - **Phase:** ACT · **updated:** 2026-04-07 *(project-state stale — due a status refresh)*
 - **Status:** Fiction-first illustrated PD ebook publishing. Title #1: Frankenstein (1818). Title #2: The Odyssey (timed to Nolan film, 2026-07-17). $7.99, wide-first.
-- **Next (per last update):** AI-art learning plan — Phase 1 (Tool Fluency) → Phase 2 (Style Development). Trackables in `ai-art-inventory.md`, surfaced via attention-manager.
+- **Next (per last update):** AI-art learning plan — Phase 1 (Tool Fluency) → Phase 2 (Style Development). Trackables in `ai-art-inventory.md` (attention-manager retired 2026-07-05; inventory remains a direct-read input).
 - **Key files:** `Projects/firekeeper-books/ai-art-learning-plan.md`, `ai-art-inventory.md`, `progress/run-log.md`
 
 ### obsidian-applenotes-import — software / system / four-phase  *(new)*
@@ -240,7 +243,7 @@ Everything agentic is retired — archived plists live in git history only (`_sy
 - **agentic-sunset endgame:** all teardown tasks DONE + reboot-verified. **Only AS-031 soak v2 (day 4/7, target 2026-07-07) + AS-032 remain.** Operating rule: GUI-login after every reboot (headless reboot = stack stays dark).
 - **Residual cloud-side teardown state (found 2026-06-19):** tess-operations' server-side **Gmail filters** (TOP-017, on dturner71@gmail.com) survived the local teardown and silently force-archived ~3 months of personal mail (incl. the Beacon Zen sangha group) until operator-remediated 2026-06-19. **AS-032 to add an external-artifact sweep** — Google agent calendars, Drive `Agent/*` tree, and the "Tess Ops" Discord server may also persist. The AS inventory covered local host state only; externally-hosted config is invisible to `launchctl`/`crontab`/filesystem sweeps.
 - **opportunity-scout & feed-intel-framework:** pipelines decommissioned but projects not archived — archival proposals come at AS-032.
-- **firekeeper-books project-state stale** (2026-04-07) — primary revenue bet is due a status refresh.
+- **firekeeper-books project-state stale** (2026-04-07) — due a status refresh (hobby per Gate 4 since 2026-07-05).
 - **Stale skill body-text residuals: RESOLVED at VO B5 (2026-07-04)** — audit §15 removed, learning-plan §7 died in the systems-analyst merge, researcher gotcha noted in its description.
 
 ## Architecture Notes

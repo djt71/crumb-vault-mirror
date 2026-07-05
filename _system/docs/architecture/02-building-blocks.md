@@ -88,7 +88,6 @@ Procedural expertise packages loaded on-demand based on description match.
 | mermaid | Diagrams | Default diagramming — Mermaid in markdown + Excalidraw for freeform/sketch layouts |
 | deck-intel | Extraction | Structured intel from PPTX/PDF; visual content interpretation (absorbed diagram-capture, VO B5) |
 | vault-query | Cross-cutting | Structured vault queries for dispatch consumers |
-| attention-manager | Planning | Daily attention plans, monthly reviews |
 
 **Location:** `.claude/skills/[name]/SKILL.md` — each skill is a single markdown file with YAML frontmatter (identity, procedure, context contract, quality checklist, compound behavior, convergence dimensions). Some skills have reference subdirectories (researcher has `stages/` and `schemas/`).
 

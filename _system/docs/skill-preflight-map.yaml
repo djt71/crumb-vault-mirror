@@ -11,21 +11,6 @@
 # Skills not listed here: default to kb_eligible=true, no reminders, no validation.
 # Skills in the bash fast-path (sync, checkpoint, etc.) never reach this file.
 
-attention-manager:
-  kb_eligible: true
-  query_hints:
-    - attention
-    - focus
-    - priority
-    - cognitive
-    - time management
-  reminders:
-    - "Write context inventory to run-log after loading context"
-    - "Compound reflection at phase transitions (Context Checkpoint Protocol)"
-  required_inputs: []
-  critical_inputs:
-    - _system/docs/goal-tracker.yaml
-
 systems-analyst:
   kb_eligible: true
   query_hints: []

@@ -12,7 +12,7 @@ topics:
 
 # Skills Reference
 
-Complete index of Crumb's 16 skills. Each skill is defined in a `SKILL.md` file under `.claude/skills/<name>/` and is auto-activated when Claude's description matching detects the relevant trigger.
+Complete index of Crumb's 15 skills. Each skill is defined in a `SKILL.md` file under `.claude/skills/<name>/` and is auto-activated when Claude's description matching detects the relevant trigger.
 
 **Architecture source:** [[02-building-blocks]] §Skills Layer
 
@@ -23,7 +23,6 @@ Complete index of Crumb's 16 skills. Each skill is defined in a `SKILL.md` file 
 | Skill | Purpose | Trigger Pattern | Model Tier | Inputs | Outputs |
 |-------|---------|----------------|------------|--------|---------|
 | action-architect | Decompose specs into milestones and tasks | "break this down", "create tasks", "what's the plan" | reasoning | Approved spec, designs | action-plan.md, tasks.md |
-| attention-manager | Daily focus plan or monthly review | "plan my day", "daily attention", "monthly review" | reasoning | Goal-tracker, SE inventory, personal context | Daily artifact, monthly review |
 | audit | Vault health, staleness, drift checks; state checkpoints | "audit vault", "check for drift", "checkpoint", phase transitions | reasoning | Vault structure, summaries, logs | Audit report, corrective actions, checkpoint log entries |
 | code-review | Two-reviewer panel for code quality | "review this code", "code review" | reasoning | Code diff, project context | Review note with findings |
 | critic | Adversarial review of vault artifacts | "critique this", "find problems", "adversarial review" | reasoning | Artifact for review | Structured critique with severity ratings |
@@ -48,7 +47,7 @@ Skills declare a `model_tier` that determines execution context:
 | Tier | Model | Count | Skills |
 |------|-------|-------|--------|
 | **execution** | Sonnet | 4 | mermaid, startup, sync, vault-query |
-| **reasoning** | Opus (session default) | 12 | action-architect, attention-manager, audit, code-review, critic, deck-intel, deliberation, inbox-processor, peer-review, researcher, systems-analyst, writing-coach |
+| **reasoning** | Opus (session default) | 11 | action-architect, audit, code-review, critic, deck-intel, deliberation, inbox-processor, peer-review, researcher, systems-analyst, writing-coach |
 
 Execution-tier skills are delegated to Sonnet subagents. See CLAUDE.md §Model Routing for phased rollout status and override rules.
 
@@ -62,7 +61,7 @@ Execution-tier skills are delegated to Sonnet subagents. See CLAUDE.md §Model R
 | **PLAN** | action-architect, systems-analyst (learning-plan variant) | Produces action-plan.md, tasks.md |
 | **ACT / IMPLEMENT** | code-review, peer-review, writing-coach | Review gates at milestone boundaries |
 | **Cross-phase** | audit (incl. checkpoints), startup, sync | Ambient — available at any point |
-| **Standalone** | attention-manager, deck-intel, deliberation, inbox-processor, researcher | Not tied to project phases |
+| **Standalone** | deck-intel, deliberation, inbox-processor, researcher | Not tied to project phases |
 
 ---
 
@@ -75,7 +74,6 @@ These skills check `_system/docs/overlays/overlay-index.md` for matching overlay
 | systems-analyst | Step 2 — match task against index | Domain-specific (Career Coach, Security Advisor); learning-plan variant co-fires Career Coach, Life Coach |
 | action-architect | Step 2 — match task against index | Domain-specific |
 | writing-coach | Step 2 — match audience | Design Advisor (external audience) |
-| attention-manager | **Always** loads Life Coach + Career Coach | Non-optional |
 
 Overlays add lens questions — they don't replace the skill procedure.
 
@@ -98,8 +96,6 @@ Skills that declare structured dispatch capabilities in frontmatter (historical 
 | Skill | Capability ID | Token Budget | Cost Estimate |
 |-------|--------------|-------------|---------------|
 | researcher | research.external.standard | 150k | ~$2.25 |
-| attention-manager | attention.daily | 40k | ~$0.60 |
-| attention-manager | attention.monthly | 60k | ~$0.90 |
 
 ---
 
@@ -109,7 +105,6 @@ Skills with mandatory context documents (loaded before execution):
 
 | Skill | Required Documents |
 |-------|--------------------|
-| attention-manager | goal-tracker, SE inventory, personal-context, 2 overlays, philosophy |
 | code-review | code-review-patterns.md, claude-print-automation-patterns.md |
 | peer-review | reasoning-token-budget.md; body-level: peer-review-config.md, review-safety-denylist.md |
 | writing-coach | ai-telltale-anti-patterns.md (external audience only) |
@@ -124,7 +119,6 @@ All skills live under `.claude/skills/<name>/SKILL.md`:
 ```
 .claude/skills/
 ├── action-architect/SKILL.md
-├── attention-manager/SKILL.md
 ├── audit/SKILL.md
 ├── code-review/SKILL.md
 ├── critic/SKILL.md
@@ -141,4 +135,4 @@ All skills live under `.claude/skills/<name>/SKILL.md`:
 └── writing-coach/SKILL.md
 ```
 
-**Reconciliation:** 16 SKILL.md files verified under `.claude/skills/` (VO B5, 2026-07-04).
+**Reconciliation:** 15 SKILL.md files verified under `.claude/skills/` (attention-manager retired to Cowork 2026-07-05, see `cowork-attention-handoff.md`; prior: 16 per VO B5, 2026-07-04).

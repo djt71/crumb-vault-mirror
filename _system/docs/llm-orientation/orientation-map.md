@@ -36,7 +36,6 @@ Index of every LLM-consumed document in the Crumb/Tess system — location, toke
 | Skill | Location | Est. Tokens | Load Trigger | Update Trigger | Architecture Source |
 |-------|----------|-------------|-------------|----------------|-------------------|
 | action-architect | `.claude/skills/action-architect/SKILL.md` | ~1,500 | Skill trigger phrase | Workflow decomposition changes | [[02-building-blocks]] §Skills |
-| attention-manager | `.claude/skills/attention-manager/SKILL.md` | ~2,400 | "plan my day", "daily attention" | Goal-tracker schema, attention planning | [[03-runtime-views]] §AKM |
 | audit | `.claude/skills/audit/SKILL.md` | ~2,100 | "audit vault", "check for drift", "checkpoint", phase transitions | Vault-check rule changes | [[05-cross-cutting-concepts]] §vault-check |
 | code-review | `.claude/skills/code-review/SKILL.md` | ~3,000 | "review this code" | Review panel model changes | [[02-building-blocks]] §Code Review |
 | critic | `.claude/skills/critic/SKILL.md` | ~1,800 | "critique this", "find problems", "adversarial review" | Critic framework changes | [[02-building-blocks]] §Skills |

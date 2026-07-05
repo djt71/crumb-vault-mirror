@@ -71,8 +71,9 @@ members:
 - `_system/docs/overlays/` + overlay-index (8 overlays, all evidenced)
 
 **Knowledge base (Tier-1 data — never surface, never in deletion scope)**
-- `Sources/`, `Domains/`, the `#kb/` tag taxonomy, MOCs, goal-tracker
-  (refs=81), personal-context
+- `Sources/`, `Domains/`, the `#kb/` tag taxonomy, MOCs, personal-context
+  (goal-tracker retired 2026-07-05 with attention-manager — operator delta,
+  post-keep-set; priorities live in personal-context §Strategic Priorities)
 
 **Skill surface (post-B5 consolidation)**
 - Workflow skills: systems-analyst (absorbed learning-plan, VO B5),
@@ -81,8 +82,9 @@ members:
   deliberation, researcher, code-review
 - Capture/hygiene: inbox-processor, vault-query, sync (feed-pipeline retired
   outright at AS-028)
-- Knowledge-work: attention-manager, deck-intel (absorbed diagram-capture,
-  VO B5), mermaid
+- Knowledge-work: deck-intel (absorbed diagram-capture, VO B5), mermaid
+  (attention-manager retired to Cowork 2026-07-05 — operator delta,
+  post-keep-set; see `cowork-attention-handoff.md`)
 
 **Vault-protecting machinery**
 - `vault-check.sh`, `session-startup.sh`, skill-preflight hook, the backup
