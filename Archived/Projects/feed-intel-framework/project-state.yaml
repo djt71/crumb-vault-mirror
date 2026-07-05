@@ -2,19 +2,20 @@
 # Validated by vault-check.sh against run-log.md for consistency.
 project_class: system
 domain: software
-phase: DONE
+phase: ARCHIVED
+phase_before_archive: DONE
 workflow: four-phase
 last_gate: "TASK → DONE 2026-03-26"
 active_task: null
-next_action: "Phase 1 complete (M1–M5). M6/M7 deferred as Phase 2. Reddit adapter code done, API credentials pending Reddit approval."
+next_action: "None — archived 2026-07-05. Concept moves to Claude Cowork; see _system/docs/cowork-feed-handoff.md. M6/M7 (Phase 2) die unstarted by design."
 related_projects: [x-feed-intel]
-repo_path: /Users/danny/openclaw/feed-intel-framework
-build_command: "npm run build"
+# repo_path: /Users/danny/openclaw/feed-intel-framework — repo deleted 2026-07-05 at archival (operator decision; keep-for-Cowork considered and declined). pipeline.db corpus destroyed with it. Predecessor ~/openclaw/x-feed-intel deleted same pass.
+# build_command: "npm run build" — n/a, repo deleted
 services:
   - ai.openclaw.fif.capture
   - ai.openclaw.fif.attention
   - ai.openclaw.fif.feedback
-updated: 2026-05-28
+updated: 2026-07-05
 last_committed: 2026-03-10
 decommissioned: 2026-05-28  # all FIF launchd jobs (both generations) disabled + booted out; files/repo/creds kept. See run-log 2026-05-28.
 services_status: disabled

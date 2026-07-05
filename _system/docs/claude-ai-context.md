@@ -212,9 +212,9 @@ Directory location is authoritative for archived-vs-active; project docs carry n
 - **Key files:** `Projects/semuta/design/specification.md`; repo `~/openclaw/semuta`
 
 ### feed-intel-framework — software / system / four-phase
-- **Phase:** DONE · **updated:** 2026-05-28
-- **Status:** Phase 1 complete (M1–M5, 5 adapters: X/RSS/YouTube/HN/arXiv). **Capture decommissioned 2026-05-28** (services list now empty). Reddit adapter code done, API credentials pending. M6/M7 were deferred as Phase 2.
-- **Key files:** `Projects/feed-intel-framework/progress/run-log.md`; repo `/Users/danny/openclaw/feed-intel-framework`
+- **Phase:** ARCHIVED 2026-07-05 (was DONE — Phase 1 gate-passed 2026-03-26)
+- **Status:** Concept moved to Claude Cowork; repos + pipeline.db + creds deleted at archival. See `_system/docs/cowork-feed-handoff.md` (roster, triage rubric, reboot constraints).
+- **Key files:** `Archived/Projects/feed-intel-framework/`; handoff doc above
 
 ### think-different — learning / KB exception
 - **Phase:** ARCHIVED, but kept in `Projects/` (not `Archived/`) because it holds 45 biographical profiles in the active knowledge graph. `updated:` 2026-02-18.
@@ -242,7 +242,7 @@ Everything agentic is retired — archived plists live in git history only (`_sy
 
 - **agentic-sunset endgame:** all teardown tasks DONE + reboot-verified. **Only AS-031 soak v2 (day 4/7, target 2026-07-07) + AS-032 remain.** Operating rule: GUI-login after every reboot (headless reboot = stack stays dark).
 - **Residual cloud-side teardown state (found 2026-06-19):** tess-operations' server-side **Gmail filters** (TOP-017, on dturner71@gmail.com) survived the local teardown and silently force-archived ~3 months of personal mail (incl. the Beacon Zen sangha group) until operator-remediated 2026-06-19. **AS-032 to add an external-artifact sweep** — Google agent calendars, Drive `Agent/*` tree, and the "Tess Ops" Discord server may also persist. The AS inventory covered local host state only; externally-hosted config is invisible to `launchctl`/`crontab`/filesystem sweeps.
-- **opportunity-scout & feed-intel-framework:** pipelines decommissioned but projects not archived — archival proposals come at AS-032.
+- **opportunity-scout & feed-intel-framework:** both ARCHIVED 2026-07-05 (pre-empting the AS-032 proposals) — concepts moved to Claude Cowork via handoff notes (`cowork-scout-handoff.md`, `cowork-feed-handoff.md`); repos deleted.
 - **firekeeper-books project-state stale** (2026-04-07) — due a status refresh (hobby per Gate 4 since 2026-07-05).
 - **Stale skill body-text residuals: RESOLVED at VO B5 (2026-07-04)** — audit §15 removed, learning-plan §7 died in the systems-analyst merge, researcher gotcha noted in its description.
 

@@ -22,7 +22,7 @@ All SQLite databases used by the Feed Intel Framework (FIF) and Mission Control 
 
 | Database | Path | Size | Mode | Owner |
 |----------|------|------|------|-------|
-| **pipeline.db** | `~/openclaw/feed-intel-framework/state/pipeline.db` | ~13 MB | WAL | FIF pipeline |
+| **pipeline.db** | DELETED 2026-07-05 (was `~/openclaw/feed-intel-framework/state/pipeline.db`) | — | — | FIF pipeline (archived → Cowork; corpus destroyed with repo) |
 | **attention-replay.db** | `_openclaw/data/attention-replay.db` | ~4 KB | Standard | Vault (dev/test) |
 
 `pipeline.db` is the production database. `attention-replay.db` is a development artifact.

@@ -72,3 +72,6 @@ updated: 2026-03-26
 - §14.1–14.7 success criteria all met
 - Reddit adapter code done, API credentials pending — excluded from soak per AC
 - **Phase 1 complete (M1–M5, 43 tasks).** M6/M7 deferred as Phase 2 scope.
+
+## 2026-07-05 — ARCHIVED
+Operator decision: concept moves to Claude Cowork (rented runtime); vault project archived. Project was DONE (Phase 1 complete 2026-03-26); services disabled 2026-05-28; both repos + pipeline.db + ~/.config/fif/ deleted at archival. Durable extract: `_system/docs/cowork-feed-handoff.md`. Phase before archive: DONE.

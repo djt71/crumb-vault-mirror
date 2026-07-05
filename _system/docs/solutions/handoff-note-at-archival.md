@@ -55,6 +55,12 @@ tree before building; everybody reads a two-page brief named after the target su
   retired same day, same verdict; brief carries the soak-proven artifact format, the
   60%-work domain-balance threshold, both coaching lenses, and the no-grading rule.
   Second instance hit the promotion threshold; operator approved this doc.
+- **2026-07-05, feed-intel-framework** → `_system/docs/cowork-feed-handoff.md`. Third
+  instance, same day — first application of this doc as standard procedure. Notable:
+  the project had *completed* (DONE, gate-passed) before its delivery mechanism died,
+  and the extraction pass pulled the tuned triage rubric out of production source code
+  (`src/triage/index.ts`) minutes before the repo was destroyed — proving section 2's
+  point that concept-bearing content hides in implementations.
 
 ## When it applies
 
