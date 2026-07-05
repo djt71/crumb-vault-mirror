@@ -744,7 +744,7 @@ B5's adjacent finding #1 resolved same-session by operator decision ("we can cle
 | 2 | inbox-processor run (7-step post-fold) | pending | next `_inbox/` batch |
 | 3 | peer-review or deliberation dispatch | pending | next review-worthy artifact (also closes Grok watch 3/3) |
 | 4 | KB query + signal scan | pending | next #kb/ lookup or tagged-note creation |
-| 5 | Session-end sequence (rewritten 7-step) | **pass ×3** | 2026-07-04 B6 session close (first live pass, clean) + 2026-07-04 VO-034 session close (second pass, clean; one transient push timeout, single retry succeeded per exception chain) + 2026-07-05 mission-layer session close (third pass, clean; non-project route, incl. first-ever archival in step scope) |
+| 5 | Session-end sequence (rewritten 7-step) | **pass ×4** | 2026-07-04 B6 session close (first live pass, clean) + 2026-07-04 VO-034 session close (second pass, clean; one transient push timeout, single retry succeeded per exception chain) + 2026-07-05 mission-layer session close (third pass, clean; non-project route, incl. first-ever archival in step scope) + 2026-07-05 FIF-archival segment close (fourth pass, clean; second archival) |
 | 6 | Skill-routing spot-checks on rewritten descriptions | **pass ×1** | 2026-07-04 VO-032 fast-pass (5 spot-checks incl. merge-target routing); re-check during soak for a within-window pass |
 
 Note on #6: the B5 fast-pass predates the soak start by hours; counting it is defensible but a second within-window spot-check set will be run anyway to make the pass unambiguous. #1 will NOT be simulated — it must occur naturally on a real phase gate (soak measures reality, not rehearsal).
