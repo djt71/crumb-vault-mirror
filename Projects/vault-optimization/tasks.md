@@ -5,7 +5,7 @@ domain: software
 skill_origin: action-architect
 status: active
 created: 2026-06-10
-updated: 2026-06-10
+updated: 2026-07-05
 source: action-plan.md
 source_updated: 2026-06-10
 topics:
@@ -16,7 +16,7 @@ tags:
 
 # vault-optimization — Tasks
 
-Atomic tasks VO-010–036 (spec group in brackets). States: pending | in_progress
+Atomic tasks VO-010–037 (spec group in brackets; VO-037 is operator-added post-soak backlog, 2026-07-05). States: pending | in_progress
 | done | blocked. Bulk-deletion batches: ≤5 *edited* files per commit; deleted
 files enumerated in run-log.
 
@@ -49,3 +49,4 @@ files enumerated in run-log.
 | VO-034 | [VO-009] Instantiate + start soak: end = max(B6+14 calendar days, B6+8 working sessions); pass criteria + failure protocol logged | done | VO-033 | low | software | Window + end-condition + pass criteria + failure protocol (fix-forward vs revert rules per action plan) in run-log? "Working session" definition logged? Start date = B6 commit date? |
 | VO-035 | [VO-009] Execute 6 Tier-1 validation workflows (design D6) and record outcomes | pending | VO-034 | medium | software | All 6 runs recorded pass/fail? Failures triaged blocker vs fix-forward? Skill-routing spot-checks included? |
 | VO-036 | [VO-009] Soak close-out: validation record, operating note finalized, operator sign-off, project completion check | pending | VO-035, soak-end-condition | medium | software | Soak passed (zero urgent restores, no repeated workarounds)? Validation record written? Operating note `status: final`? All 6 spec end-state deliverables exist? Operator sign-off in run-log? |
+| VO-037 | [post-soak backlog] CLAUDE.md minimalism pass: section-by-section fire-rate review with keep-inline test (changes behavior in most sessions AND CLAUDE.md is sole source → keep; either no → one line + pointer); pointerize rare-fire sections (candidates: Project Archival, Project Creation detail, Model Routing rollout/cost-observation, canonical #kb tag list); single-source every fact duplicated in policy/protocol docs (drift class: sonnet-version + excalidraw/lucidchart repeats); choose pointer mechanism per moved section — textual load-on-demand (saves context, rare procedures) vs `@import` (inlines at load, saves nothing — always-needed content only) | pending | VO-036 | medium | software | Fire-rate table covers every CLAUDE.md section? Keep/pointerize decision per section with sole-source check recorded? Pointer mechanism chosen per moved section with context-cost rationale? Duplicated-fact list resolved to single sources? Before/after line count + always-loaded token estimate recorded? Behavior-loss check: every Always/Ask-First/Never rule still reachable? Each CLAUDE.md edit individually operator-approved (Ask-First class)? vault-check green at commit? |

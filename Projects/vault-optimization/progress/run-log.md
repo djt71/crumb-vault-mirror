@@ -744,12 +744,12 @@ B5's adjacent finding #1 resolved same-session by operator decision ("we can cle
 | 2 | inbox-processor run (7-step post-fold) | pending | next `_inbox/` batch |
 | 3 | peer-review or deliberation dispatch | pending | next review-worthy artifact (also closes Grok watch 3/3) |
 | 4 | KB query + signal scan | pending | next #kb/ lookup or tagged-note creation |
-| 5 | Session-end sequence (rewritten 7-step) | **pass ×2** | 2026-07-04 B6 session close (first live pass, clean) + 2026-07-04 VO-034 session close (second pass, clean; one transient push timeout, single retry succeeded per exception chain) |
+| 5 | Session-end sequence (rewritten 7-step) | **pass ×3** | 2026-07-04 B6 session close (first live pass, clean) + 2026-07-04 VO-034 session close (second pass, clean; one transient push timeout, single retry succeeded per exception chain) + 2026-07-05 mission-layer session close (third pass, clean; non-project route, incl. first-ever archival in step scope) |
 | 6 | Skill-routing spot-checks on rewritten descriptions | **pass ×1** | 2026-07-04 VO-032 fast-pass (5 spot-checks incl. merge-target routing); re-check during soak for a within-window pass |
 
 Note on #6: the B5 fast-pass predates the soak start by hours; counting it is defensible but a second within-window spot-check set will be run anyway to make the pass unambiguous. #1 will NOT be simulated — it must occur naturally on a real phase gate (soak measures reality, not rehearsal).
 
-**Working-session tracker:** WS1 = 2026-07-04 ✓ (this entry). Count advances via the session-end log check; earliest possible end = 2026-07-18.
+**Working-session tracker:** WS1 = 2026-07-04 ✓ (this entry) · WS2 = 2026-07-05 ✓ (audit + mission-layer sessions; counted once). Count advances via the session-end log check; earliest possible end = 2026-07-18.
 
 **VO-034 ACs:** window + end-condition + pass criteria + failure protocol (fix-forward vs revert per action plan) in run-log ✓ · "working session" definition logged ✓ · start date = B6 commit date ✓. tasks.md → done.
 
@@ -768,3 +768,11 @@ Note on #6: the B5 fast-pass predates the soak start by hours; counting it is de
 **Model routing:** all main-session Fable 5; no delegation; no skill invocations. No token-heavy operations.
 
 **State for next session:** VO-035 — record Tier-1 workflow outcomes as real work exercises them (#1–#4 pending natural occurrence; #6 re-check due within window); advance WS count at each session end. AS-031 soak day 5 check due 2026-07-05. Earliest possible VO soak end: 2026-07-18.
+
+## 2026-07-05 — VO-037 added (operator): CLAUDE.md minimalism pass, post-soak backlog
+
+**Context:** Non-project mission-layer session. Operator raised the "minimal CLAUDE.md" guidance circulating externally; assessment (logged in session-log) concluded the right metric for this vault is attention cost + sync liability, not line count — CLAUDE.md's audit history shows duplication-drift (sonnet version pin, excalidraw/lucidchart) as the real failure class, and rare-fire sections (Project Archival — fired for the first time ever today; Model Routing rollout detail) pay per-session rent for quarterly use.
+
+**Task:** VO-037 appended to tasks.md — section-by-section fire-rate review with keep-inline test; pointerize rare-fire sections; single-source duplicated facts; per-section pointer-mechanism choice (textual load-on-demand saves context; `@import` inlines at session start and saves nothing — reserve for always-needed content). Estimate ~220 → ~140–160 lines, zero behavior loss.
+
+**Sequencing:** depends_on VO-036 — deliberately deferred past M5 soak close (do not add a second variable to the running B6 validation). CLAUDE.md edits remain individually Ask-First at apply time.

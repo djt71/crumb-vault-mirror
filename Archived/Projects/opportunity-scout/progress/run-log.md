@@ -305,7 +305,7 @@ The legacy `com.scout.*` plists (daily-pipeline, feedback-poller, weekly-heartbe
 
 **Disposition:**
 - Durable extract written to `_system/docs/cowork-scout-handoff.md` — failure analysis (self-hosted machinery, hardcoded binary priorities, conversion pressure), surviving assets (calibration seed graveyard + high-scoring patterns, anti-firehose discipline, priority-tier memories), and reboot constraints (rented runtime, `_inbox/` write path, PIIA hard gate, no new primitives until pulled).
-- External teardown (same session, operator-approved): repo `~/openclaw/opportunity-scout` deleted; disabled scout plists removed from `~/Library/LaunchAgents/`. Telegram token revocation remains an operator to-do (already on the rotate-credentials revocation-candidates list).
+- External teardown (same session, operator-approved): repo `~/openclaw/opportunity-scout` deleted (28M, incl. `.env` local token copy). Scout plists: verified already absent from `~/Library/LaunchAgents/` (incl. subdirs) and no `launchctl print-disabled` overrides remain — removed by an earlier sweep, nothing to delete. Telegram token revocation remains an operator to-do (already on the rotate-credentials revocation-candidates list).
 - Services were already stopped + disabled 2026-05-28; nothing was live at archival.
 
 **Compound:** The project's arc is the evidence base for two already-banked lessons — Directive v3 Principle 5 (browse freely / commit on belief; execution lesson, not concept failure) and Principle 6 (rented runtime — maintenance gravity killed the layer). Handoff-note-at-archival is a first instance of extracting a reboot brief when a concept survives its implementation; hold for a second occurrence before promoting.
