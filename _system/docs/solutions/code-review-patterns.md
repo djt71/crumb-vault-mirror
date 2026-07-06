@@ -4,7 +4,7 @@ domain: software
 status: active
 track: convention
 created: 2026-02-24
-updated: 2026-04-04
+updated: 2026-07-05
 tags:
   - kb/software-dev
 topics:
@@ -31,6 +31,8 @@ reaches 3+ occurrences (per code-review SKILL Compound Behavior section).
 - Python stdlib behavior: `setdefault`, `dict.get()` semantics (multiple false positives in bridge review)
 
 ## Tier 1 Calibration Data (Sonnet)
+
+> **Note (2026-07-05 audit):** This table has been an empty header row since its creation in 2026-02, despite the population rule in code-review/SKILL.md (~lines 411-424) requiring calibration data to be logged here. Either the skill step isn't firing on actual code-review invocations, or this doc should be retired as unused. Decision pending operator.
 
 | # | Project | Diff (lines) | Language | Files | Findings | Actionable | S/N | Date |
 |---|---------|-------------|----------|-------|----------|------------|-----|------|

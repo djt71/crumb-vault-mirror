@@ -3,7 +3,7 @@ type: overlay
 domain: null
 status: active
 created: 2026-02-23
-updated: 2026-03-06
+updated: 2026-07-05
 tags:
   - overlay
   - design
@@ -34,9 +34,9 @@ application, site mode selection (Library/Observatory/Cartographer).
 - Functional-only UI where aesthetic judgment isn't needed (CLI tools, scripts)
 
 **Canonical examples:**
-- ✓ x-feed-intel digest HTML template — Library mode, needs taste alignment
+- ✓ x-feed-intel digest HTML template — Library mode (FIF archived 2026-07-05 — historical validation)
 - ✓ Personal blog or wiki design — Library mode, core use case
-- ✓ Crumb system dashboard — Observatory mode, analog readout aesthetic
+- ✓ Crumb system dashboard — Observatory mode, analog readout aesthetic (dashboard parked — com.crumb.dashboard intentionally unloaded)
 - ✗ Client deliverable following their brand guide — their taste, not Danny's
 - ✗ Internal CLI tool or shell script — no visual design surface
 

@@ -4,7 +4,7 @@ domain: null
 skill_origin: null
 status: active
 created: 2026-02-15
-updated: 2026-07-03
+updated: 2026-07-05
 tags:
   - file-conventions
   - system-config
@@ -93,7 +93,7 @@ Obsidian is configured with **shortest-path** wikilink resolution (default `newL
 When routing a document to a new vault location (from `_inbox/`, between directories, or from a project), **add a wikilink from the document that would naturally lead someone to the new content**. Without this, routed docs sit undiscovered.
 
 Examples:
-- Routing a beyond-roadmap research doc to `Projects/tess-operations/design/` → add a `[[beyond-current-roadmap-research]]` link from `frontier-ideas.md`
+- Routing a beyond-roadmap research doc to `Projects/mission-control/design/` → add a `[[beyond-current-roadmap-research]]` link from `frontier-ideas.md`
 - Routing a NotebookLM workflow guide to `_system/docs/` → add a `[[notebooklm-workflow-guide]]` link from `learning-overview.md`
 
 This is a one-edit, high-leverage convention — it creates permanent discoverability at the point of routing.
@@ -524,8 +524,8 @@ required_context:
 | `moc-operational` | Maps of Content — operational/procedural MOCs (§5.6) |
 | `source-index` | Per-source landing pages aggregating all knowledge notes for a source, stored in `Sources/[type]/` |
 | `signal-note` | Lightweight knowledge capture from feed intel pipeline, stored in `Sources/signals/` |
-| `x-feed-intel` | Feed intelligence items routed to vault by the x-feed-intel pipeline |
-| `quick-capture` | Lightweight captures from Tess via `_openclaw/inbox/`, pending Crumb processing |
+| `x-feed-intel` | RETIRED 2026-07-05 (FIF archived, see `cowork-feed-handoff.md`) — historical feed intelligence items routed to vault by the x-feed-intel pipeline retain the type |
+| `quick-capture` | RETIRED 2026-07-05 (retired with the OpenClaw layer, agentic-sunset) — historical lightweight captures from Tess via `_openclaw/inbox/` retain the type |
 | `personal-writing` | Operator-authored creative and reflective writing, stored in `Domains/Creative/writing/` |
 | `plan` | Forward-looking action documents with phases, checkpoints, and progress tracking (e.g., learning plans) |
 | `attention-item` | Operator attention items in `_inbox/attention/` — system alerts, tasks, follow-ups (§ Attention Items) |

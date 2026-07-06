@@ -3,7 +3,7 @@ type: explanation
 status: active
 domain: software
 created: 2026-03-14
-updated: 2026-07-04
+updated: 2026-07-05
 tags:
   - system/operator
 topics:
@@ -24,7 +24,7 @@ The vault is a directory of markdown files tracked by git. Obsidian provides the
 
 - **No vendor lock-in.** Markdown files are readable by any text editor, any LLM, any pipeline. If Obsidian disappeared tomorrow, the vault would still work.
 - **Git gives version history for free.** Every change is tracked. Decisions can be audited. State can be recovered. The commit log is a chronological record of everything that happened.
-- **Filesystem is the API.** Crumb reads and writes files. Tess reads and writes files. Scripts read and write files. No database layer, no API wrapper — just the filesystem. This makes the system inspectable, debuggable, and portable.
+- **Filesystem is the API.** Crumb reads and writes files. Scripts read and write files. (Historically, the Tess/OpenClaw agent also read and wrote files directly, before that layer was sunset 2026-06-11.) No database layer, no API wrapper — just the filesystem. This makes the system inspectable, debuggable, and portable.
 
 Wikilinks (`[[note-name]]`) create a web of connections between notes. Obsidian resolves these by filename regardless of directory, so moving files doesn't break links. This makes the vault's structure flexible — reorganization is cheap.
 

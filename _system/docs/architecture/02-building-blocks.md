@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: active
 created: 2026-03-14
-updated: 2026-07-04
+updated: 2026-07-05
 tags:
   - system/architecture
 topics:
@@ -29,26 +29,26 @@ block-beta
 
     block:agents["Agents"]:3
         orchestrator["Orchestrator\n(CLAUDE.md + Claude Code)"]
-        skills["Skill System\n(20 skills)"]
+        skills["Skill System\n(15 skills)"]
         subagents["Subagent System\n(4 agents)"]
     end
 
     block:lenses["Lenses & Patterns"]:3
         overlays["Overlay System\n(8 overlays)"]
-        protocols["Protocol Layer\n(6 protocols)"]
-        scripts["Script Layer\n(20 scripts)"]
+        protocols["Protocol Layer\n(4 protocols)"]
+        scripts["Script Layer\n(~20 scripts)"]
     end
 
     block:data["Data & Communication"]:3
         vault["Vault Store\n(Projects, Domains, Sources)"]
         kb["Knowledge Base\n(MOCs, AKM, #kb/ tags)"]
-        bridge["Bridge\n(_openclaw/)"]
+        bridge["Bridge (historical)\n(_openclaw/, deleted)"]
     end
 ```
 
 ### Prose Summary (for environments that cannot render Mermaid)
 
-Nine building blocks in three tiers. **Agents tier:** the Orchestrator (CLAUDE.md governance + Claude Code runtime), Skill System (20 procedural packages), and Subagent System (4 isolated workers). **Lenses & Patterns tier:** Overlay System (8 expert lenses), Protocol Layer (6 cross-cutting workflow patterns), and Script Layer (~20 mechanical enforcement and automation scripts). **Data & Communication tier:** Vault Store (the shared filesystem — Projects, Domains, Sources, system docs), Knowledge Base (MOCs, AKM/QMD retrieval, tag taxonomy), and Bridge (Tess-Crumb communication via `_openclaw/`).
+Nine building blocks in three tiers. **Agents tier:** the Orchestrator (CLAUDE.md governance + Claude Code runtime), Skill System (15 procedural packages), and Subagent System (4 isolated workers). **Lenses & Patterns tier:** Overlay System (8 expert lenses), Protocol Layer (4 cross-cutting workflow patterns), and Script Layer (~20 mechanical enforcement and automation scripts). **Data & Communication tier:** Vault Store (the shared filesystem — Projects, Domains, Sources, system docs), Knowledge Base (MOCs, AKM/QMD retrieval, tag taxonomy), and Bridge — **historical (decommissioned 2026-06):** formerly Tess-Crumb communication via `_openclaw/`, now deleted from disk (agentic-sunset).
 
 ---
 
@@ -156,7 +156,7 @@ The shared filesystem. All state, all communication, all persistence.
 | `_system/reviews/` | System-level peer and code review notes + raw JSON responses | Crumb (via peer-review/code-review skills) |
 | `_inbox/` | Drop zone for manually added files — processed by inbox-processor | Danny (drops); Crumb (processes) |
 | `_attachments/` | Permanent storage for unaffiliated binary files after processing | Crumb (via inbox-processor) |
-| `_openclaw/` | Bridge transport, Tess workspace, feed intel (see Bridge block below) | Tess |
+| `_openclaw/` | *(Historical — decommissioned 2026-06; directory deleted from disk, agentic-sunset)* Bridge transport, Tess workspace, feed intel (see Bridge block below) | Tess |
 | `.claude/` | Skills and agents (Claude Code convention) | Crumb |
 
 ### 7. Knowledge Base Layer
@@ -180,8 +180,8 @@ Mechanical enforcement and automation. Bash and Python scripts that run outside 
 
 | Script | Trigger | Purpose |
 |--------|---------|---------|
-| `vault-check.sh` | Pre-commit hook; audit skill | 30 structural validation checks. The system's only external enforcement. |
-| `session-startup.sh` | SessionStart hook | Git pull, vault-check, CLI probe, rotation checks, feed-intel inbox scan |
+| `vault-check.sh` | Pre-commit hook; audit skill | 26 structural validation checks. The system's only external enforcement. |
+| `session-startup.sh` | SessionStart hook | Git pull, backup-retention prune, vault-check deferred to pre-commit, Obsidian CLI probe, rotation-check data (stale summaries, session-log month, run-log rotation, last audit) |
 | `knowledge-retrieve.sh` | Session start; skill activation | AKM retrieval engine — QMD search + Knowledge Brief |
 | `skill-preflight.sh` | PreToolUse hook | KB-eligible skill activation → knowledge injection |
 | `mirror-sync.sh` | Cron | Vault mirror sync to secondary location |
@@ -192,6 +192,8 @@ Mechanical enforcement and automation. Bash and Python scripts that run outside 
 Plus: `dns-recon.sh`, `vault-gc.sh`, `setup-crumb.sh`, and others. (Retired scripts — `bridge-watcher.py`, `tess-health-check.sh`, `batch-moc-placement.py`, `vault-search.sh` — deleted 2026-07-03, vault-optimization B4; git history.)
 
 ### 9. Bridge
+
+> **Historical (decommissioned 2026-06):** The Tess-Crumb communication layer described below was decommissioned by agentic-sunset (2026-06-01 → 2026-06-12), reboot-verified absent 2026-06-14. `_openclaw/` (all 16 subdirectories listed below) is deleted from disk. Kept as architecture history — there is no bridge, and no second agent, today.
 
 The Tess-Crumb communication layer. All inter-agent communication flows through the filesystem.
 
@@ -210,11 +212,13 @@ The Tess-Crumb communication layer. All inter-agent communication flows through 
 | `_openclaw/dispatch/` | Bridge | Dispatch stage working files |
 | `_openclaw/staging/` | Ops | Deployment staging area |
 
-**Security boundary:** Filesystem permissions. The `openclaw` macOS user (running Tess) has group-read on the vault and write access to `_openclaw/`. The `tess` macOS user (running Crumb) owns the vault. Neither agent invokes the other directly.
+**Security boundary (historical):** Filesystem permissions. The `openclaw` macOS user (running Tess) had group-read on the vault and write access to `_openclaw/`. The `tess` macOS user (running Crumb) owned the vault. Neither agent invoked the other directly. Post-migration, `danny` is the current macOS account owning the vault and running Crumb; the `openclaw` account's runtime role ended with the decommission.
 
 ---
 
 ## Ownership Map
+
+> **Historical note:** The Tess Voice / Tess Mechanic columns below reflect the pre-decommission three-agent model (decommissioned by agentic-sunset, 2026-06-01 → 2026-06-12, reboot-verified absent 2026-06-14). Current reality: Crumb and Danny are the only rows/columns still live; `_openclaw/*` paths no longer exist.
 
 Who can read and write what. This is the authority model that governs all vault operations.
 
@@ -270,7 +274,7 @@ Which agent owns which system capability. "Owns" means sole authority to execute
 flowchart TD
     subgraph agents["Agents"]
         orch["Orchestrator\n(CLAUDE.md)"]
-        skills["Skill System\n(20 skills)"]
+        skills["Skill System\n(15 skills)"]
         subs["Subagent System\n(4 agents)"]
     end
 
@@ -283,7 +287,7 @@ flowchart TD
     subgraph data["Data & Communication"]
         vault["Vault Store"]
         kb["Knowledge Base"]
-        bridge["Bridge\n(_openclaw/)"]
+        bridge["Bridge (historical)\n(_openclaw/, deleted)"]
     end
 
     subgraph external["External"]
@@ -291,7 +295,7 @@ flowchart TD
         review_apis["Review LLM APIs"]
         obsidian["Obsidian CLI"]
         git["Git"]
-        openclaw["OpenClaw"]
+        openclaw["OpenClaw (historical,\ndecommissioned 2026-06)"]
     end
 
     %% Orchestrator is the root
@@ -337,9 +341,9 @@ Skills read and write the vault, query the Knowledge Base, and receive optional 
 
 The Script Layer validates the vault (vault-check), retrieves knowledge (AKM), and triggers git operations (pre-commit). The Knowledge Base is stored in the vault but provides a semantic retrieval layer on top of raw file access.
 
-The Bridge connects to the vault via filesystem exchange and to the external OpenClaw gateway for Tess transport. The Orchestrator depends on the Anthropic API for inference. Skills use the Obsidian CLI for indexed queries. The vault is version-controlled via Git.
+*(Historical — decommissioned 2026-06):* The Bridge connected to the vault via filesystem exchange and to the external OpenClaw gateway for Tess transport; both are gone. The Orchestrator depends on the Anthropic API for inference. Skills use the Obsidian CLI for indexed queries. The vault is version-controlled via Git.
 
-**Critical path:** Anthropic API → Orchestrator → Skills → Vault Store. If Anthropic is down, Crumb is fully non-functional. Tess Mechanic (local Ollama) continues independently.
+**Critical path:** Anthropic API → Orchestrator → Skills → Vault Store. If Anthropic is down, Crumb is fully non-functional. *(Historical: Tess Mechanic, local Ollama, used to continue independently — no longer applicable; there is no second agent.)*
 
 ---
 
@@ -350,11 +354,11 @@ Where each building block lives on disk, for navigation.
 | Block | Primary Path(s) | File Count |
 |-------|-----------------|------------|
 | Orchestrator | `/CLAUDE.md`, `/AGENTS.md` | 2 |
-| Skills | `.claude/skills/*/SKILL.md` | 20 directories |
+| Skills | `.claude/skills/*/SKILL.md` | 15 directories |
 | Subagents | `.claude/agents/*.md` | 4 files |
 | Overlays | `_system/docs/overlays/*.md` | 9 files (incl. index) |
-| Protocols | `_system/docs/protocols/*.md` + `_system/docs/context-checkpoint-protocol.md` | 6 files |
+| Protocols | `_system/docs/protocols/*.md` + `_system/docs/context-checkpoint-protocol.md` | 4 files |
 | Vault Store | `Projects/`, `Domains/`, `Sources/`, `_system/`, `_inbox/`, `_attachments/` | ~3650 files |
 | Knowledge Base | `Domains/*/moc-*.md`, `_system/docs/kb-to-topic.yaml`, `_system/scripts/knowledge-retrieve.sh` | 15 MOCs + scripts |
 | Scripts | `_system/scripts/` | ~20 files |
-| Bridge | `_openclaw/` | 16 subdirectories |
+| Bridge *(historical — decommissioned 2026-06, directory deleted)* | `_openclaw/` | 16 subdirectories (as it existed pre-deletion) |

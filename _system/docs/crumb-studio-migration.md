@@ -2,8 +2,8 @@
 type: runbook
 domain: software
 created: 2026-02-17
-updated: 2026-02-19
-status: active
+updated: 2026-07-05
+status: superseded
 tags:
   - migration
   - infrastructure

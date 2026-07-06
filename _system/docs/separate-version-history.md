@@ -5,7 +5,7 @@ type: log
 skill_origin: null
 status: active
 created: 2026-02-12
-updated: 2026-03-06
+updated: 2026-07-05
 tags:
   - design-spec
   - crumb
@@ -15,6 +15,8 @@ tags:
 ## 10. Version History
 
 > Pre-v2.0 versions (v0.1–v1.9.1): [[separate-version-history-archive]]
+
+> **Point-edit policy (adopted 2026-07-05, audit):** Dated inline point-edits to the spec (e.g., "retired 2026-07-03", "absorbed into audit skill 2026-07-04") do NOT bump the version number and are not individually logged here — the edit's inline date + git history are their provenance. The spec's frontmatter `updated:` field reflects the most recent point-edit. A version bump (v2.5+) is logged here only for structural revisions: new/removed sections, architecture changes, or a consolidation pass that rewrites accumulated point-edits into the body.
 
 **v2.4** (2026-03-06)
 - **Active Knowledge Memory, researcher skill, overlay expansion**

@@ -1,9 +1,9 @@
 ---
 type: reference
-status: hypothesis
+status: superseded
 domain: software
 created: 2026-04-21
-updated: 2026-04-21
+updated: 2026-07-05
 verification_pass: 2026-04-21
 tags:
   - strategy
@@ -13,6 +13,8 @@ tags:
   - cowork
   - liberation-directive
 ---
+
+> **RESOLVED (2026-07-05):** This hypothesis was overtaken by events — the Tess/OpenClaw layer was sunset via [[adr-crumb-v3-knowledge-store-identity]] (2026-06-10) and the agentic-sunset project. Preserved as a decision-history record.
 
 # Anthropic Stack Consolidation — Hypothesis
 

@@ -3,7 +3,7 @@ type: tutorial
 status: active
 domain: software
 created: 2026-03-14
-updated: 2026-03-14
+updated: 2026-07-05
 tags:
   - system/operator
 topics:
@@ -44,8 +44,7 @@ claude
 1. `git pull` — syncs latest vault state
 2. `vault-check` — deferred to pre-commit hook (lightweight scan)
 3. Obsidian CLI probe — confirms availability
-4. Feed-intel inbox scan — reports item count and tier breakdown
-5. Knowledge brief — displays 3-5 relevant AKM items based on recent vault activity
+4. Knowledge brief — displays 3-5 relevant AKM items based on recent vault activity
 
 You see the formatted startup summary.
 

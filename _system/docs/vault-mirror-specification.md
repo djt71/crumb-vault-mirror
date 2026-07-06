@@ -2,9 +2,9 @@
 type: specification
 project: vault-mirror
 domain: software
-status: draft
+status: implemented
 created: 2026-02-20
-updated: 2026-02-20
+updated: 2026-07-05
 skill_origin: systems-analyst
 tags:
   - infrastructure
@@ -74,7 +74,6 @@ Domains/                        # All personal content (career, health, financia
 Projects/customer-intelligence/ # Customer account data — confidentiality obligation
 _attachments/                   # Binary files, images
 _inbox/                         # Unprocessed intake
-_openclaw/                      # Agent communication channel (separate security boundary)
 _system/reviews/raw/            # Raw API responses (large, low value for context)
 .claude/settings.json           # May contain path-based permission rules
 .claude/settings.local.json     # Local overrides

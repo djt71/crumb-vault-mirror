@@ -3,7 +3,7 @@ type: reference
 status: active
 domain: software
 created: 2026-03-14
-updated: 2026-07-04
+updated: 2026-07-05
 tags:
   - system/llm-orientation
 topics:
@@ -51,7 +51,7 @@ Index of every LLM-consumed document in the Crumb/Tess system — location, toke
 | vault-query | `.claude/skills/vault-query/SKILL.md` | ~700 | "query the vault" | Query format changes | [[02-building-blocks]] §Skills |
 | writing-coach | `.claude/skills/writing-coach/SKILL.md` | ~1,000 | "improve this", "review my writing" | Writing evaluation changes | [[02-building-blocks]] §Skills |
 
-**Skill layer total:** ~40,500 tokens (all 16 skills; only 1-3 loaded per session). Removed since 2026-03-14: excalidraw, lucidchart, meme-creator, obsidian-cli, feed-pipeline (AS-028); merged at VO B5: checkpoint→audit, diagram-capture→deck-intel, learning-plan→systems-analyst. Added: critic, deliberation.
+**Skill layer total:** ~40,500 tokens (all 15 skills; only 1-3 loaded per session). Removed since 2026-03-14: excalidraw, lucidchart, meme-creator, obsidian-cli, feed-pipeline (AS-028), attention-manager (retired to Cowork, 2026-06-11); merged at VO B5: checkpoint→audit, diagram-capture→deck-intel, learning-plan→systems-analyst. Added: critic, deliberation.
 
 ---
 
@@ -69,15 +69,6 @@ Index of every LLM-consumed document in the Crumb/Tess system — location, toke
 | web-design-preference | `_system/docs/overlays/web-design-preference.md` | ~943 (+companion) | Web design for Danny | Taste profile changes | [[02-building-blocks]] §Overlays |
 
 **Overlay layer total:** ~6,503 tokens (overlays only; companions add ~2,000-5,000 each)
-
----
-
-## Tess Context (OpenClaw Agent)
-
-| Document | Location | Est. Tokens | Load Trigger | Update Trigger | Architecture Source |
-|----------|----------|-------------|-------------|----------------|-------------------|
-| SOUL.md | `_openclaw/staging/SOUL.md` | ~4,044 | OpenClaw session start | Personality/behavioral changes | [[01-context-and-scope]] §Actors |
-| IDENTITY.md | `_openclaw/staging/IDENTITY.md` | ~33 | OpenClaw session start | Agent role changes | [[01-context-and-scope]] §Actors |
 
 ---
 
@@ -120,13 +111,12 @@ Index of every LLM-consumed document in the Crumb/Tess system — location, toke
 | Category | Documents | Est. Tokens | Loading Pattern |
 |----------|-----------|-------------|-----------------|
 | Core context | 4 | ~6,900 | Every session |
-| Skills (all 20) | 20 | ~47,550 | 1-3 per session |
+| Skills (all 15) | 15 | ~47,550 | 1-3 per session |
 | Overlays (all 8) | 8 (+4 companions) | ~6,503 (+companions) | 0-2 per session |
-| Tess context | 2 | ~4,077 | OpenClaw only |
 | Protocols | 6 | ~8,004 | Per phase/event |
 | Subagents | 4 | ~8,650 | On dispatch |
 | System config | 4 | ~4,643 | Per hook/skill |
-| **Total inventory** | **48** | **~86,327** | — |
+| **Total inventory (approximate, recomputed 2026-07-05 after Tess-context removal)** | **41** | **~82,250** | — |
 
 **Typical session budget:** Core (~7k) + 1-2 skills (~4-10k) + 0-1 overlay (~1k) + protocol (~2k) = **~14-20k tokens** for orientation docs before project-specific context.
 
@@ -139,7 +129,7 @@ Index of every LLM-consumed document in the Crumb/Tess system — location, toke
 | Subsystem | Coverage | Documents |
 |-----------|----------|-----------|
 | Session lifecycle | Full | CLAUDE.md, startup SKILL.md, session-end-protocol, audit SKILL.md (checkpoint procedure) |
-| Skill system | Full | 16 SKILL.md files, skill-preflight-map.yaml |
+| Skill system | Full | 15 SKILL.md files, skill-preflight-map.yaml |
 | Overlay system | Full | overlay-index.md, 8 overlay files |
 | AKM/Knowledge | Full | file-conventions.md, kb-to-topic.yaml |
 | Code review | Full | code-review SKILL.md, code-review-config.md, code-review-dispatch agent |
@@ -151,7 +141,7 @@ Index of every LLM-consumed document in the Crumb/Tess system — location, toke
 | Subsystem | Gap | Recommendation |
 |-----------|-----|----------------|
 | Mission Control dashboard | No LLM orientation doc for dashboard API/structure | **Defer** — dashboard is consumed by humans via browser, not LLMs. No LLM needs to understand its internal structure. |
-| OpenClaw gateway config | No LLM-facing doc for openclaw.json structure | **Defer** — gateway config is managed manually. Tess operates through the gateway, not on it. |
+| OpenClaw gateway config | No LLM-facing doc for openclaw.json structure | **Moot** — the OpenClaw layer was sunset (agentic-sunset project, 2026-06-11); Tess operated through the gateway, not on it, prior to sunset. |
 | LaunchAgent/daemon management | No LLM-facing reference for service management | **Defer** — service management is human-operated (sudo required). Covered in operator how-to docs. |
 | Vault-check rule details | vault-check.sh is consumed directly, not via summary | **Not needed** — vault-check output is machine-readable. Crumb reads error messages, not the script. |
 | Design spec | No LLM-optimized summary of the 46k-token spec | **Fill candidate** — a spec-summary for LLM context loading would reduce unnecessary full-spec reads. Exists as `crumb-design-spec-v2-4-summary.md` but may be stale. Check staleness. |

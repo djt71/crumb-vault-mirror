@@ -5,7 +5,7 @@ status: active
 tags:
   - kb/software-dev
 created: 2026-02-19
-updated: 2026-02-20
+updated: 2026-07-05
 topics:
   - moc-crumb-operations
 ---
@@ -176,7 +176,7 @@ alias claude='TERM=xterm-256color command claude'
 
 ### 7. Headless power management (if always-on)
 
-If the remote Mac runs daemons (OpenClaw, etc.) and accepts SSH connections, prevent sleep:
+If the remote Mac runs daemons and accepts SSH connections, prevent sleep:
 
 ```bash
 sudo pmset -a sleep 0 disksleep 0 displaysleep 0 womp 1

@@ -5,7 +5,7 @@ type: runbook
 skill_origin: inbox-processor
 status: active
 created: 2026-02-20
-updated: 2026-04-11
+updated: 2026-07-05
 tags:
   - setup
   - deployment
@@ -18,7 +18,7 @@ tags:
 Complete guide for deploying Crumb on a fresh macOS machine. Covers both
 the remote Mac (where Crumb runs) and the client machine (where you SSH from).
 
-**Scope:** Crumb deployment and OpenClaw upgrade procedures. For full OpenClaw/Tess initial deployment, see [[crumb-studio-migration]].
+**Scope:** Crumb deployment procedures. The "OpenClaw Upgrade Procedure" section below is retained as a historical record only — the OpenClaw/Tess runtime it describes was decommissioned in the agentic-sunset teardown (2026-06-01→06-12, reboot-verified absent 2026-06-14). For the historical OpenClaw/Tess initial deployment (also from that decommissioned era), see [[crumb-studio-migration]].
 
 **Audience:** Danny, future-Danny, or anyone Danny trusts with the vault.
 
@@ -29,8 +29,16 @@ configs from an existing setup (see [Migration from Existing Machine](#migration
 
 ## Architecture Overview
 
-Crumb runs on a Mac (currently Mac Studio, user `tess`). You SSH in from a
-work laptop or other machine. The vault lives on the remote Mac's local disk.
+Crumb runs on a Mac (currently Mac Studio, user `danny` — sole active operator
+account as of the tess→danny migration, agentic-sunset 2026-06). You SSH in
+from a work laptop or other machine. The vault lives on the remote Mac's
+local disk.
+
+**Historical note:** Earlier revisions of this doc described a multi-user
+architecture (`tess` owned the vault, `openclaw` ran the gateway, `danny`
+handled Apple integrations). That architecture was decommissioned in the
+agentic-sunset teardown (2026-06-01→06-12, reboot-verified absent 2026-06-14)
+— see [[infrastructure-reference]] §Host for current single-user state.
 
 ```
 Client Machine (work laptop)              Remote Mac (Studio)
@@ -216,18 +224,25 @@ touch ~/.config/crumb/.env
 chmod 600 ~/.config/crumb/.env
 ```
 
-Add these keys (get values from your password manager or existing machine):
+Add these keys (get values from your password manager or existing machine).
+**[[rotate-credentials]] is the authoritative credential table** (live
+consumers vs. revocation candidates) — this section only lists what a fresh
+install actually needs; don't treat this as the full picture.
 
 ```bash
-# Tess Voice cloud inference (required)
-OPENROUTER_API_KEY=sk-or-...
-
 # Peer review (required for peer-review skill)
 OPENAI_API_KEY=sk-...
 GEMINI_API_KEY=AI...
 DEEPSEEK_API_KEY=sk-...
 XAI_API_KEY=xai-...
 ```
+
+**OPENROUTER_API_KEY — do NOT add this to a fresh install.** It's a
+revocation candidate, not a required key: its only consumer (Tess Voice
+cloud inference) was decommissioned in the agentic-sunset teardown
+(2026-06-01→06-12, reboot-verified absent 2026-06-14). See
+[[rotate-credentials]] §Candidates for Revocation. Only add it if you're
+standing up a new OpenRouter-dependent skill.
 
 **Note:** An `ANTHROPIC_API_KEY` is only needed if Claude Code can't authenticate
 via subscription (Keychain). Most setups don't need it — use subscription auth.
@@ -299,7 +314,7 @@ Edit `~/.ssh/config`:
 ```
 Host studio
     HostName 10.0.0.235        # replace with remote Mac's IP
-    User tess                   # replace with remote username
+    User danny                  # replace with remote username
     RequestTTY yes
     SetEnv TERM=xterm-256color
 ```
@@ -309,7 +324,7 @@ Host studio
 Add to `~/.zshrc` on the client:
 
 ```bash
-alias studio='TERM=xterm-256color ssh -t tess@10.0.0.235'
+alias studio='TERM=xterm-256color ssh -t danny@10.0.0.235'
 ```
 
 ---
@@ -405,13 +420,13 @@ Create the LaunchAgent plist:
 ```bash
 mkdir -p ~/Library/LaunchAgents
 
-cat > ~/Library/LaunchAgents/com.tess.vault-backup.plist << 'EOF'
+cat > ~/Library/LaunchAgents/com.crumb.vault-backup.plist << 'EOF'
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>com.tess.vault-backup</string>
+    <string>com.crumb.vault-backup</string>
     <key>ProgramArguments</key>
     <array>
         <string>/bin/bash</string>
@@ -432,8 +447,14 @@ cat > ~/Library/LaunchAgents/com.tess.vault-backup.plist << 'EOF'
 </plist>
 EOF
 
-launchctl load ~/Library/LaunchAgents/com.tess.vault-backup.plist
+launchctl load ~/Library/LaunchAgents/com.crumb.vault-backup.plist
 ```
+
+**Naming note (2026-07-05):** This plist was relabeled `com.tess.vault-backup`
+→ `com.crumb.vault-backup` during the agentic-sunset teardown (AS-018,
+2026-06). The name above is current — verify against
+`ls ~/Library/LaunchAgents/com.crumb.*` (11 plists on disk, 10 loaded; see
+[[infrastructure-reference]] §Services for the full live inventory).
 
 Test manually:
 
@@ -481,8 +502,19 @@ rclone config
 
 #### Install the LaunchAgent
 
+**Stale path note (2026-07-05):** The `cp` source below
+(`_openclaw/staging/m2/`) no longer exists — the entire `_openclaw/`
+directory was deleted (FIF archival, 2026-07-05). No plist template is
+checked into the vault for this service. On a fresh machine, either
+build `com.crumb.drive-sync.plist` from scratch (same structure as the
+`com.crumb.vault-backup` example in §8.3, pointed at
+`_system/scripts/drive-sync.sh`, `StartCalendarInterval` 5:00/5:30 AM) or
+copy the working plist directly from an existing machine's
+`~/Library/LaunchAgents/`. Command kept below as historical record of the
+original install step:
+
 ```bash
-# As danny:
+# As danny (historical — source path no longer exists, see note above):
 cp ~/crumb-vault/_openclaw/staging/m2/com.crumb.drive-sync.plist \
    ~/Library/LaunchAgents/
 launchctl bootstrap gui/$(id -u) \
@@ -515,9 +547,21 @@ System Settings → General → Sharing → Remote Login → On
 
 ---
 
-# OpenClaw Upgrade Procedure
+# OpenClaw Upgrade Procedure — RETIRED
 
-**Problem:** You need to upgrade the OpenClaw gateway to a new version (new features, bug fixes, or security patches). The gateway runs as a LaunchDaemon under the `openclaw` user, so upgrades require sudo and a service restart. Downtime affects Tess (Telegram bot, cron jobs, all OpenClaw-managed agents).
+The OpenClaw gateway and the entire Tess/OpenClaw runtime layer this
+procedure describes were decommissioned in the agentic-sunset teardown
+(2026-06-01→06-12, reboot-verified absent 2026-06-14). `ai.openclaw.gateway`
+and all other `ai.openclaw.*` LaunchDaemons/LaunchAgents are gone from disk
+— no plists remain in `/Library/LaunchDaemons/` or `~/Library/LaunchAgents/`,
+and `launchctl list` returns nothing for `openclaw` (verified 2026-07-05, see
+[[infrastructure-reference]] §Services). The `openclaw` user account still
+exists on the system but runs nothing. There is no live gateway to upgrade —
+this entire section is kept below as a historical record only, in the same
+spirit as §8.4 Bridge Watcher. Do not run any command in this section against
+the current system.
+
+**Problem (historical):** You need to upgrade the OpenClaw gateway to a new version (new features, bug fixes, or security patches). The gateway runs as a LaunchDaemon under the `openclaw` user, so upgrades require sudo and a service restart. Downtime affects Tess (Telegram bot, cron jobs, all OpenClaw-managed agents).
 
 **When to use:** When a new OpenClaw release is available and you want to apply it. Check release notes before upgrading — breaking changes may require config adjustments.
 
@@ -685,7 +729,10 @@ from the new machine (password manager, AirDrop — **never email or Slack**).
 
 ```bash
 cat ~/.config/crumb/.env
-# Copy the output: OPENROUTER_API_KEY, OPENAI_API_KEY, GEMINI_API_KEY, DEEPSEEK_API_KEY, XAI_API_KEY
+# Copy the output: OPENAI_API_KEY, GEMINI_API_KEY, DEEPSEEK_API_KEY, XAI_API_KEY
+# If OPENROUTER_API_KEY is still present, it's a revocation candidate (dead
+# consumer — see [[rotate-credentials]]), not a required key. Carry it over
+# only if you haven't yet decided to revoke it.
 ```
 
 **Shell configs:**
@@ -698,9 +745,15 @@ cat ~/.tmux.conf
 **Claude Code project memory:**
 
 ```bash
-cat ~/.claude/projects/-Users-tess-crumb-vault/memory/MEMORY.md
+cat ~/.claude/projects/-Users-danny-crumb-vault/memory/MEMORY.md
 # This preserves learned context, patterns, and preferences
 ```
+
+**Path note:** The project-memory path encodes the vault's filesystem path
+under the current operator account. It was `-Users-tess-crumb-vault` before
+the tess→danny migration (agentic-sunset, 2026-06) — use whichever path
+matches the account the vault actually lives under on the machine you're
+copying from.
 
 **SSH config (from client machine):**
 
@@ -762,7 +815,7 @@ for anything you saved. Restoration priority:
 4. **Run setup-crumb.sh** (Phase 4.2) — validates everything
 5. **Restore Claude Code memory** (after your first Crumb session creates the directory):
    ```bash
-   nano ~/.claude/projects/-Users-tess-crumb-vault/memory/MEMORY.md
+   nano ~/.claude/projects/-Users-danny-crumb-vault/memory/MEMORY.md
    # Paste saved contents
    ```
 6. **Set up client machine** (Phase 6) — paste saved SSH config and terminal config
@@ -783,7 +836,7 @@ After confirming the new machine works:
    ```
 3. **Unload the backup job:**
    ```bash
-   launchctl unload ~/Library/LaunchAgents/com.tess.vault-backup.plist
+   launchctl unload ~/Library/LaunchAgents/com.crumb.vault-backup.plist
    ```
 4. **Remove config files:**
    ```bash
@@ -801,7 +854,7 @@ travel with `git clone` and must be created or copied manually on each machine.
 
 | File | Purpose | Copyable? |
 |------|---------|-----------|
-| `~/.config/crumb/.env` | API keys (OpenRouter, OpenAI, Gemini, DeepSeek, xAI) | Yes — transfer securely |
+| `~/.config/crumb/.env` | API keys (OpenAI, Gemini, DeepSeek, xAI — peer-review panel; see [[rotate-credentials]] for the full table incl. revocation candidates) | Yes — transfer securely |
 | `~/.zshrc` | TERM export, bindkey fixes, Keychain unlock, claude alias | Yes |
 | `~/.tmux.conf` | tmux prefix, keybindings, status bar theme | Yes |
 
@@ -809,8 +862,13 @@ travel with `git clone` and must be created or copied manually on each machine.
 
 | File | Purpose | Copyable? |
 |------|---------|-----------|
-| `~/.claude/projects/-Users-tess-crumb-vault/memory/MEMORY.md` | Claude Code's per-project memory — learned patterns and preferences | Yes — copy to preserve continuity |
-| `~/.claude/projects/-Users-tess-crumb-vault/` (session history) | Accumulated session logs | Optional — can bloat; prune manually if needed (`clear-claude-cache.sh` deleted 2026-07-03, vault-optimization B4 — git history) |
+| `~/.claude/projects/-Users-danny-crumb-vault/memory/MEMORY.md` | Claude Code's per-project memory — learned patterns and preferences | Yes — copy to preserve continuity |
+| `~/.claude/projects/-Users-danny-crumb-vault/` (session history) | Accumulated session logs | Optional — can bloat; prune manually if needed (`clear-claude-cache.sh` deleted 2026-07-03, vault-optimization B4 — git history) |
+
+**Path note:** Both paths encode the operator account name (`-Users-danny-crumb-vault`).
+Pre-migration machines used `-Users-tess-crumb-vault` (retired with the
+tess→danny migration, agentic-sunset 2026-06) — adjust if restoring from a
+pre-migration backup.
 
 ### Inside vault but excluded from mirror
 
@@ -853,7 +911,7 @@ installation across these phases:
 4. Claude Code binary
 5. File permissions (script execute bits)
 6. Pre-commit hook (vault-check.sh)
-7. Config files (`~/.config/crumb/.env` with OpenRouter, peer-review panel keys)
+7. Config files (`~/.config/crumb/.env` presence + peer-review panel keys: OpenAI, Gemini, DeepSeek; also checks optional `LUCID_API_KEY`. Does not check for `OPENROUTER_API_KEY` — that's a revocation candidate, not a setup requirement, see [[rotate-credentials]])
 8. Vault validation (vault-check.sh)
 9. GitHub mirror (if configured)
 

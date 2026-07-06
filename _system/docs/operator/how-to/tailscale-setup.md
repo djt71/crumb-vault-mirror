@@ -1,9 +1,9 @@
 ---
 type: runbook
-status: active
+status: historical
 domain: software
 created: 2026-03-01
-updated: 2026-03-14
+updated: 2026-07-05
 tags:
   - ops/networking
   - ops/security
@@ -12,7 +12,9 @@ tags:
 
 # Tailscale Setup for Remote SSH Access
 
-**Priority:** High — needed before Danny's upcoming trip
+> **Historical (2026-07-05 audit):** Written for the retired `tess`/`openclaw` two-user architecture (decommissioned by agentic-sunset; tess→danny migration complete). The Tailscale concepts still apply, but every account-specific instruction below is stale. If remote SSH access is needed again, rewrite for the single `danny` user — see [[claude-code-ssh-setup]] for the current SSH reference.
+
+**Priority:** High — needed before Danny's upcoming trip (March 2026 — past)
 **Scope:** Mac Studio + personal laptop + phone (optional)
 **Project context:** OpenClaw colocation security (extends OC-009/OC-010 hardening)
 

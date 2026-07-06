@@ -18,6 +18,15 @@ tags:
 
 # Haiku SOUL.md Behavior Injection Ceiling
 
+> **Generalized lesson (2026-07-05):** Small models can't reliably override earlier
+> system-prompt instructions from within a persistent, multi-purpose session — later,
+> more specific instructions lose the attention competition against general behavioral
+> framing established earlier in context. Route procedure-critical work to a dedicated,
+> single-purpose invocation instead of injecting new procedures into an existing
+> persistent session. All evidence below is historical — the surfaces it was observed
+> on (Tess SOUL.md, OpenClaw exec, Telegram) have been decommissioned — but the lesson
+> generalizes to any small-model routing decision.
+
 ## Problem
 
 New behavioral sections added to Tess's SOUL.md (~15KB) fail to reliably trigger on Haiku. Three iterations of increasing directness all produced conversational responses instead of procedure execution:

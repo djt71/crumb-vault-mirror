@@ -71,7 +71,7 @@ These skills check `_system/docs/overlays/overlay-index.md` for matching overlay
 
 | Skill | Overlay Check | Common Overlays |
 |-------|--------------|-----------------|
-| systems-analyst | Step 2 — match task against index | Domain-specific (Career Coach, Security Advisor); learning-plan variant co-fires Career Coach, Life Coach |
+| systems-analyst | Step 2 — match task against index | Domain-specific (Career Coach, Network Skills); learning-plan variant co-fires Career Coach, Life Coach |
 | action-architect | Step 2 — match task against index | Domain-specific |
 | writing-coach | Step 2 — match audience | Design Advisor (external audience) |
 

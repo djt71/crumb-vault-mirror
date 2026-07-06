@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: active
 created: 2026-03-14
-updated: 2026-04-11
+updated: 2026-07-05
 tags:
   - system/architecture
 topics:
@@ -14,7 +14,7 @@ topics:
 
 This section describes the physical hosting, process model, network topology, storage layout, credential management, and DNS configuration of the Crumb/Tess system.
 
-> **Largely historical (agentic-sunset, 2026-06):** The Tess/OpenClaw runtime described below — gateway LaunchDaemon, bridge-watcher, `ai.openclaw.*`/`com.tess.v2.*` namespaces, `_openclaw/` staging — was decommissioned 2026-06-01 → 2026-06-12 and reboot-verified absent 2026-06-14. The surviving deployment is the 10-label `com.crumb.*` keep-set (see agentic-sunset keep-set manifest) plus interactive Claude Code sessions. Host/storage/credential fundamentals remain accurate.
+> **Largely historical (agentic-sunset, 2026-06):** The Tess/OpenClaw runtime described below — gateway LaunchDaemon, bridge-watcher, `ai.openclaw.*`/`com.tess.v2.*` namespaces, `_openclaw/` staging — was decommissioned 2026-06-01 → 2026-06-12 and reboot-verified absent 2026-06-14. The surviving deployment is the `com.crumb.*` keep-set (see agentic-sunset keep-set manifest) — 11 plists on disk, 10 loaded; `com.crumb.dashboard` is retained but intentionally unloaded (parked) — plus interactive Claude Code sessions. Host/storage/credential fundamentals remain accurate.
 
 **Source attribution:** Synthesized from the design spec ([[crumb-design-spec-v2-4]] §7, §9), [[crumb-deployment-runbook]], [[crumb-studio-migration]], the openclaw-colocation-spec (retired 2026-06-12, full text in git history at `_system/docs/openclaw-colocation-spec.md`), LaunchAgent/LaunchDaemon plists in `_openclaw/staging/`, and live system state.
 
@@ -24,13 +24,15 @@ This section describes the physical hosting, process model, network topology, st
 
 Single physical host: **Mac Studio M3 Ultra** (96 GB RAM, 1 TB SSD, macOS 15+).
 
-Three macOS user accounts:
+Three macOS user accounts (**historical** — see note below for current state):
 
 | User | Role | Purpose |
 |------|------|---------|
-| `tess` | Operator primary | Owns the vault. Runs Crumb (Claude Code sessions). Hosts all LaunchAgents except Apple snapshot. |
-| `openclaw` | Service account | Runs the OpenClaw gateway (LaunchDaemon). Dedicated user for Tess runtime isolation. |
-| `danny` | Apple data owner | Personal macOS account. Runs the Apple snapshot LaunchAgent (Reminders, Calendar, Notes). Must be logged in (GUI or Fast User Switching background) for Apple integrations. |
+| `tess` | Operator primary | Owned the vault. Ran Crumb (Claude Code sessions). Hosted all LaunchAgents except Apple snapshot. |
+| `openclaw` | Service account | Ran the OpenClaw gateway (LaunchDaemon). Dedicated user for Tess runtime isolation. |
+| `danny` | Apple data owner | Personal macOS account. Ran the Apple snapshot LaunchAgent (Reminders, Calendar, Notes). Must be logged in (GUI or Fast User Switching background) for Apple integrations. |
+
+> **Current state:** The Tess→Danny account migration is complete. `danny` is now the single operator account — it owns the vault (`/Users/danny/crumb-vault`), runs Crumb, and hosts the surviving `com.crumb.*` LaunchAgents. The separate `tess` account and the `openclaw` service account (and its OpenClaw gateway) no longer have a runtime role; they ended with the agentic-sunset decommission.
 
 **Remote access:** SSH via Tailscale mesh network. No public internet exposure. Client machines (work laptop, phone) connect through Tailscale's WireGuard tunnel using MagicDNS hostnames or direct Tailscale IPs (`100.x.y.z`).
 
@@ -138,7 +140,7 @@ Awareness-check runs on the legacy `ai.openclaw.awareness-check`, not the v2 nam
 
 **Decommissioned services (2026-05/06):** Removed in the 2026-05-28 → 2026-06-01 teardown sweep (see `_system/docs/solutions/infrastructure-teardown-discipline.md` and failure-log 2026-06-01):
 - **Feed-intel (FIF) capture/attention/feedback-health** (both namespaces) — 2026-05-28 (commit 2756dbc1, operator-directed); FIF capture pipeline retired.
-- **Opportunity Scout** (`scout-pipeline`/`feedback-health`/`weekly-heartbeat`/`feedback-poller`) — 2026-05-28 (same commit 2756dbc1); pipeline no longer useful per operator. Project kept (not archived); repo/plists retained for reversibility.
+- **Opportunity Scout** (`scout-pipeline`/`feedback-health`/`weekly-heartbeat`/`feedback-poller`) — 2026-05-28 (same commit 2756dbc1); pipeline no longer useful per operator. **Update (2026-07-05):** project subsequently archived (commit 2b8890b3); the concept moved to Claude Cowork (rented runtime) — see `_system/docs/cowork-scout-handoff.md`. No longer "kept for reversibility."
 - **`com.crumb.service-status`** (60s liveness sensor) — orphaned once the Mission Control dashboard stopped; plist + script + output removed 2026-06-01.
 - **`com.tess.v2.awareness-check`** (LLM heartbeat) — dropped 2026-05-28; awareness-check continues on the legacy namespace.
 - **`com.tess.health-check`** (TMA-004 Limited Mode auto-failover) — retired; broken for months via launchd↔Keychain isolation. Plist removed; script `tess-health-check.sh` deleted 2026-07-03 (vault-optimization B4 — repair option lapsed with the Tess decommission; git history).
@@ -284,28 +286,30 @@ Companion notes (markdown) ARE tracked — they carry the metadata, description,
 
 | Credential | Storage | User | Consumer | Rotation |
 |-----------|---------|------|----------|----------|
-| Anthropic API key | macOS Keychain | tess | Claude Code (Crumb) | Manual |
-| OpenAI API key | `~/.config/crumb/.env` | tess | peer-review, code-review skills | Manual |
-| Google/Gemini API key | `~/.config/crumb/.env` | tess | peer-review skill | Manual |
-| DeepSeek API key | `~/.config/crumb/.env` | tess | peer-review skill | Manual |
-| xAI/Grok API key | `~/.config/crumb/.env` | tess | peer-review skill | Manual |
-| OpenRouter API key | `~/.config/crumb/.env` | tess, openclaw | Tess Voice cloud inference | Manual |
-| GitHub PAT | macOS Keychain (credential-osxkeychain) | tess | Git push/pull | Auto-cached |
-| OpenClaw token | `/Users/openclaw/.openclaw/openclaw.json` | openclaw | Gateway auth | Per config |
-| Telegram bot tokens | LaunchAgent plist env vars | tess | awareness-check, health-ping, vault-health, backup-status | Manual |
-| Cloudflare tunnel token | macOS Keychain | tess | cloudflared tunnel (dashboard remote access) | Manual |
-| X (Twitter) OAuth | Dynamic (Keychain refresh) | tess | feed-intel framework | Auto-refresh |
+| Anthropic API key | macOS Keychain | danny (was `tess`, pre-migration) | Claude Code (Crumb) | Manual |
+| OpenAI API key | `~/.config/crumb/.env` | danny (was `tess`, pre-migration) | peer-review, code-review skills | Manual |
+| Google/Gemini API key | `~/.config/crumb/.env` | danny (was `tess`, pre-migration) | peer-review skill | Manual |
+| DeepSeek API key | `~/.config/crumb/.env` | danny (was `tess`, pre-migration) | peer-review skill | Manual |
+| xAI/Grok API key | `~/.config/crumb/.env` | danny (was `tess`, pre-migration) | peer-review skill | Manual |
+| OpenRouter API key | `~/.config/crumb/.env` | *(historical — decommissioned 2026-06)* was tess, openclaw | Tess Voice cloud inference — no longer in use | Manual |
+| GitHub PAT | macOS Keychain (credential-osxkeychain) | danny (was `tess`, pre-migration) | Git push/pull | Auto-cached |
+| OpenClaw token | `/Users/openclaw/.openclaw/openclaw.json` | *(historical — decommissioned 2026-06)* openclaw | Gateway auth — gateway no longer runs | Per config |
+| Telegram bot tokens | LaunchAgent plist env vars | danny (was `tess`, pre-migration) | *(historical consumers, decommissioned 2026-06)* awareness-check, health-ping; vault-health and backup-status survive as `com.crumb.*` but Telegram usage should be reconfirmed at next deployment review | Manual |
+| Cloudflare tunnel token | macOS Keychain | danny (was `tess`, pre-migration) | cloudflared tunnel (dashboard remote access) | Manual |
+| X (Twitter) OAuth | Dynamic (Keychain refresh) | danny (was `tess`, pre-migration) | *(historical — decommissioned 2026-07-05)* feed-intel framework (FIF), archived; concept moved to Claude Cowork. X OAuth revocation pending. | Auto-refresh |
 
 ### Security Model
 
-**Tier 1 (mandatory, OS-level):**
-- Dedicated `openclaw` macOS user — filesystem isolation. Crumb credentials are inaccessible to OpenClaw processes.
-- `~/.config/crumb/.env` owned by tess, mode 600 (no group/other read).
-- Vault ownership: `tess:crumbvault` group. `openclaw` is a group member with read access. Write restricted to `_openclaw/` via group permissions.
+> **Historical (decommissioned 2026-06):** This subsection describes the OpenClaw-era two-user security model. Current reality: `danny` is the sole macOS account; there is no `openclaw` account with a runtime role. Kept as architecture history.
+
+**Tier 1 (mandatory, OS-level) — historical:**
+- Dedicated `openclaw` macOS user — filesystem isolation. Crumb credentials were inaccessible to OpenClaw processes.
+- `~/.config/crumb/.env` owned by tess (now danny), mode 600 (no group/other read).
+- Vault ownership: `tess:crumbvault` group (now `danny`-owned). `openclaw` was a group member with read access. Write restricted to `_openclaw/` via group permissions.
 
 **Tier 1 (mandatory, application-level):**
-- `workspaceOnly` in `openclaw.json` restricts LLM file tool access to the OpenClaw workspace. Vault reads go through the app layer, not raw file tools.
-- Review safety denylist (`_system/docs/review-safety-denylist.md`) prevents sensitive content in peer/code review dispatches to external APIs.
+- *(Historical — decommissioned 2026-06):* `workspaceOnly` in `openclaw.json` restricted LLM file tool access to the OpenClaw workspace. Vault reads went through the app layer, not raw file tools.
+- Review safety denylist (`_system/docs/review-safety-denylist.md`) prevents sensitive content in peer/code review dispatches to external APIs. (Current — still enforced.)
 
 **Known constraints:**
 - `sudo -u <user>` does NOT carry TCC grants. Apple integration snapshots require a LaunchAgent in danny's GUI domain, not cross-user sudo.

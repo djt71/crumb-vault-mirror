@@ -3,7 +3,7 @@ type: reference
 status: active
 domain: software
 created: 2026-03-14
-updated: 2026-04-07
+updated: 2026-07-05
 tags:
   - system/operator
 topics:
@@ -105,4 +105,4 @@ When adding or retiring a tag, update all four.
 
 `_system/docs/kb-to-topic.yaml` maps each `#kb/` tag to its parent MOC slug. This is the single source of truth for the tag→MOC relationship.
 
-The inbox-processor and feed-pipeline skills consult this file when routing knowledge notes to MOCs.
+The inbox-processor skill consults this file when routing knowledge notes to MOCs.

@@ -3,10 +3,10 @@ type: config
 domain: software
 status: active
 created: 2026-02-24
-updated: 2026-02-26
+updated: 2026-07-05
 models:
   anthropic:
-    model: claude-opus-4-6
+    model: claude-opus-4-8
     endpoint: https://api.anthropic.com/v1/messages
     env_key: ANTHROPIC_API_KEY
     max_tokens: 8192
@@ -18,7 +18,7 @@ models:
       maintainability. Flag patterns that would cause problems at scale, but don't
       over-engineer suggestions for a personal project context.
   codex:
-    model: gpt-5.3-codex
+    model: gpt-5.4-codex
     execution: cli
     sandbox: read-only
     namespace: CDX
@@ -58,11 +58,11 @@ The skill reads these values at invocation time.
 
 ## Panel
 
-**Anthropic (Claude Opus 4.6):** Architectural reasoning, contract analysis,
+**Anthropic (Claude Opus 4.8):** Architectural reasoning, contract analysis,
 security design, intent comprehension. Dispatched via raw Anthropic Messages API.
 Zero false positives in calibration. Strongest unique findings.
 
-**Codex (GPT-5.3-Codex):** Tool-grounded review. Runs inside the repo with
+**Codex (GPT-5.4-Codex):** Tool-grounded review. Runs inside the repo with
 read-only sandbox — executes type-checker, test suite, and linter. Findings cite
 actual compiler/test output. Dispatched via `codex exec` CLI.
 
@@ -102,7 +102,13 @@ tokens exceeds this, the SKILL coordinator prompts for confirmation.
 
 ## Calibration Notes
 
-### Anthropic (Claude Opus 4.6)
+**Note (2026-07-05):** The calibration examples below reference `crumb-tess-bridge`
+and `x-feed-intel` — both repos have since been deleted (Tess/OpenClaw sunset and
+FIF archival respectively). The data is preserved as historical record; calibration
+should be re-run against a live repo when the panel composition or model pins next
+change materially.
+
+### Anthropic (Claude Opus 4.8)
 Based on crumb-tess-bridge review (107-line Python diff, 2026-02-24):
 - **Latency:** ~30s | **Tokens:** 3,203 in / 3,124 out
 - **Findings:** 9 | **False positives:** 0 | **S/N:** 100%
@@ -110,7 +116,7 @@ Based on crumb-tess-bridge review (107-line Python diff, 2026-02-24):
   mutation that other reviewers missed), security design concerns, zero noise.
 - **Profile:** Best for architectural and contract-level analysis.
 
-### Codex (GPT-5.3-Codex)
+### Codex (GPT-5.4-Codex)
 Smoke test data (2026-02-26, Codex v0.105.0):
 - **x-feed-intel:** `tsc --noEmit` clean, 16 test files found, 1,844 tokens, <1s tool execution
 - **feed-intel-framework:** `tsc --noEmit` clean, correctly diagnosed test runner issue

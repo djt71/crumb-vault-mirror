@@ -63,6 +63,8 @@ The tracker is small, mechanical, and read by automation. The reference is rich,
 
 ## Integration Points
 
+> **Note (2026-07-05):** attention-manager and goal-tracker were retired 2026-06-11 — the automation described below moved to Claude Cowork (see `_system/docs/cowork-attention-handoff.md`). The behavior/meaning layering insight itself stands independent of which surface mechanizes it.
+
 - **attention-manager** scans for `*-inventory.md` files in `Projects/` and `Domains/` and processes their cadence-annotated items alongside the SE inventory. Behavior-layer files are exempt from the source-doc budget (mechanical extraction only).
 - **Reference docs** are loaded only when re-grounding is needed — when motivation flags, when seasons change, when the practice needs re-tuning. The compound retrieval / library-grounding lens in attention-manager can surface them on demand.
 - **Phase transitions** in the reference doc trigger an inventory rewrite. The two stay loosely synchronized via a `Phase Transition Watch` section in the inventory.

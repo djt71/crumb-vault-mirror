@@ -3,9 +3,9 @@ project: null
 domain: software
 type: runbook
 skill_origin: systems-analyst
-status: active
+status: completed
 created: 2026-06-08
-updated: 2026-06-08
+updated: 2026-07-05
 tags:
   - migration
   - runbook
@@ -15,6 +15,8 @@ tags:
 ---
 
 # Tess → Danny Account Migration Runbook
+
+> **Completed (marked 2026-07-05 audit):** The migration this runbook describes is done — Crumb runs as `danny`, the `tess` account and its services are retired, and several checklist targets below (Telegram bots, feed pipeline, x-feed-intel keychain items) no longer exist (agentic-sunset / FIF archival). Retained as a historical runbook; unchecked `- [ ]` gates are artifacts of the forward-looking draft, not open work.
 
 Relocate the entire Crumb operation from the macOS user `tess` to the user `danny`,
 running as `danny` going forward, and retiring `tess`. Copy-and-verify strategy:

@@ -1,9 +1,9 @@
 ---
 type: reference
-status: active
+status: historical
 domain: software
 created: 2026-03-14
-updated: 2026-03-14
+updated: 2026-07-05
 tags:
   - system/operator
 topics:
@@ -12,7 +12,9 @@ topics:
 
 # SQLite Schema Reference
 
-All SQLite databases used by the Feed Intel Framework (FIF) and Mission Control dashboard.
+> **Historical (2026-07-05 audit):** The FIF databases documented here are gone — `pipeline.db` was deleted at FIF archival (2026-07-05) and `attention-replay.db` lived under `_openclaw/data/`, deleted at decommission. The schemas are preserved as a historical record (git-history-independent reference). The `dashboard.db` section may still matter if the paused mission-control dashboard is revived.
+
+All SQLite databases used by the Feed Intel Framework (FIF) and Mission Control dashboard (historical — see banner).
 
 **Architecture source:** [[04-deployment]] §Storage, [[03-runtime-views]] §Feed Pipeline
 

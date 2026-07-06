@@ -1,11 +1,11 @@
 ---
 type: reference
 domain: software
-status: deferred
+status: resolved
 track: convention
 linkage: discovery-only
 created: 2026-02-20
-updated: 2026-04-04
+updated: 2026-07-05
 tags:
   - diagramming
   - data-viz
@@ -16,7 +16,7 @@ topics:
 
 # HTML Rendering Skill — Bookmark
 
-## Status: Deferred (no active use case)
+## Status: Resolved 2026-07-05 (see Resolution section below) — originally deferred, no active use case
 
 ## Trigger
 
@@ -49,3 +49,11 @@ Not relevant (already covered by Crumb skills):
 ## Decision
 
 Evaluated 2026-02-20. Neither integrate wholesale nor ignore. Bookmark as reference material for a future Crumb-native HTML rendering skill if empirical trigger is met.
+
+## Resolution (2026-07-05)
+
+Resolved. The Claude Code harness now provides this capability natively via the
+Artifact tool (self-contained HTML pages, no external dependencies, browser-viewable,
+shareable via link) combined with the dataviz skill for chart/graph design guidance.
+No custom skill is needed — the gap this bookmark tracked has been closed by the
+platform itself.
