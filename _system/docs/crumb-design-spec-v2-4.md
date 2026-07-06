@@ -5,7 +5,7 @@ type: specification
 skill_origin: null
 status: active
 created: 2026-02-14
-updated: 2026-07-04
+updated: 2026-07-06
 tags:
   - design-spec
   - crumb
@@ -16,7 +16,7 @@ tags:
 
 *This document is self-contained. It describes the complete Crumb system architecture and is intended to allow full reconstruction with no prior knowledge. For version-by-version change history, see [[separate-version-history]] (pre-v2.0: [[separate-version-history-archive]]).*
 
-**Current version: v2.4 (2026-03-06; maintained via dated inline point-edits — latest 2026-07-06)** — Active Knowledge Memory (QMD semantic retrieval + Knowledge Brief), researcher skill (stage-separated evidence pipeline), 3 new overlays with companion document pattern, feed-pipeline hardening, 17 MOCs (count corrected 2026-07-06; was drifted at 15). Point-edits don't bump the version; see the policy note in [[separate-version-history]].
+**Current version: v2.4 (2026-03-06; maintained via dated inline point-edits — latest 2026-07-06)** — Active Knowledge Memory (QMD semantic retrieval + Knowledge Brief), researcher skill (stage-separated evidence pipeline), 3 new overlays with companion document pattern, feed-pipeline hardening, 17 MOCs (count corrected 2026-07-06; was drifted at 15; skill/subagent inventory re-aligned to as-built 15-skill registry 2026-07-06). Point-edits don't bump the version; see the policy note in [[separate-version-history]].
 
 ---
 
@@ -56,7 +56,7 @@ Design a **personal multi-agent operating system** that:
 5. **Go.** If FULL: invoke the relevant skill for the current phase. If ITERATION/MINIMAL: just do the work.
 
 **Minimum viable Crumb (what you need before you can trust this):**
-`AGENTS.md` · `CLAUDE.md` · `_system/logs/session-log.md` · one project scaffold · `systems-analyst` skill · `obsidian-cli` skill · `vault-check.sh`. Everything else is Phase 1b or later.
+`AGENTS.md` · `CLAUDE.md` · `_system/logs/session-log.md` · one project scaffold · `systems-analyst` skill · `vault-query` skill · `vault-check.sh`. Everything else is Phase 1b or later.
 
 **If things feel broken:**
 - **Stale or inconsistent state:** Run `_system/scripts/vault-check.sh` manually, then request a full audit. Fix errors before continuing work.
@@ -120,7 +120,7 @@ crumb-vault/
 │   ├── courses/                          # source_type: course
 │   ├── papers/                           # source_type: paper
 │   ├── other/                            # source_type: other
-│   └── signals/                          # Signal-notes from feed-pipeline (§2.2.5)
+│   └── signals/                          # Signal-notes (§2.2.5; original producer feed-pipeline retired 2026-07-05 → Claude Cowork)
 ├── _system/                               # System infrastructure — sorts to top in Obsidian
 │   ├── docs/
 │   │   ├── estimation-calibration.md
@@ -222,29 +222,34 @@ crumb-vault/
 ├── Archived/
 │   └── Projects/                      # Archived projects — see §4.1.6 lifecycle and §4.6 archive/reactivate protocol
 └── .claude/
-    ├── skills/
-    │   ├── systems-analyst/SKILL.md
+    ├── skills/                        # 15 skills, verified on disk 2026-07-06
+    │   ├── systems-analyst/SKILL.md   # Includes former learning-plan skill (merged 2026-07-04, VO M4 B5)
     │   ├── action-architect/SKILL.md
     │   ├── writing-coach/SKILL.md
-    │   ├── audit/SKILL.md
-    │   ├── obsidian-cli/SKILL.md      # Vault query routing and safe CLI patterns (§3.1.5)
+    │   ├── audit/SKILL.md             # Includes former checkpoint skill (merged 2026-07-04, VO M4 B5; §3.1.6)
+    │   ├── vault-query/SKILL.md       # Vault query routing and safe CLI patterns (§3.1.5); merged former obsidian-cli skill (~2026-03 consolidation)
     │   ├── sync/SKILL.md              # Git commit and backup operations (§3.1.7)
     │   ├── inbox-processor/SKILL.md   # Phase 2: process manually added files from _inbox/
-    │   ├── peer-review/SKILL.md      # Cross-LLM review automation (§3.3, v1.7.1)
-    │   ├── code-review/SKILL.md      # Two-tier code review: Sonnet inline (Tier 1) + cloud panel (Tier 2)
-    │   ├── excalidraw/SKILL.md       # Freeform diagrams as .excalidraw JSON
-    │   ├── mermaid/SKILL.md          # Mermaid diagrams in markdown or .mmd files
-    │   ├── lucidchart/SKILL.md       # Lucidchart diagrams via REST API for external sharing
-    │   ├── meme-creator/SKILL.md     # Meme images from quotes with movie stills
+    │   ├── peer-review/SKILL.md      # Cross-LLM review automation (§3.3)
+    │   ├── code-review/SKILL.md      # Two-reviewer panel: Claude Opus (API) + Codex (CLI) (§3.3)
+    │   ├── critic/SKILL.md           # Adversarial review of vault artifacts: unsupported claims, gaps, citation verification
+    │   ├── deck-intel/SKILL.md       # PPTX/PDF/image intelligence extraction; includes former diagram-capture skill (merged 2026-07-04, VO M4 B5)
+    │   ├── deliberation/SKILL.md     # Multi-agent panel deliberation with role overlays, rating capture
+    │   ├── mermaid/SKILL.md          # Mermaid diagrams in markdown or .mmd files; includes former excalidraw skill (merged ~2026-03 consolidation)
     │   ├── startup/SKILL.md          # Session startup hook procedures
-    │   ├── researcher/              # Stage-separated evidence pipeline (§3.3, v2.4)
+    │   ├── researcher/              # Stage-separated evidence pipeline (§3.3)
     │   │   ├── SKILL.md
     │   │   ├── stages/              # Stage procedures (01-scoping through 06-writing + validation rules)
     │   │   └── schemas/             # Handoff, fact-ledger, and telemetry templates
     │   └── [additional skills added incrementally]
-    └── agents/
-        ├── code-review-dispatch.md    # Tier 2 cloud panel dispatch (Opus, GPT-5.2, Devstral)
-        ├── peer-review-dispatch.md    # Cross-LLM prose review dispatch
+    │       # RETIRED/MERGED (historical, no longer on disk): obsidian-cli → vault-query (~2026-03);
+    │       # excalidraw → mermaid (~2026-03); lucidchart, meme-creator retired outright (~2026-03);
+    │       # checkpoint → audit, learning-plan → systems-analyst, diagram-capture → deck-intel (2026-07-04, VO M4 B5);
+    │       # feed-pipeline, attention-manager retired to Claude Cowork (2026-07-05)
+    └── agents/                        # 4 subagents, verified on disk 2026-07-06
+        ├── code-review-dispatch.md    # Two-reviewer panel dispatch: Claude Opus 4.8 (API) + GPT-5.4-Codex (`codex exec` CLI)
+        ├── peer-review-dispatch.md    # Cross-LLM prose review dispatch (gpt-5.4, gemini-3.1-pro-preview, deepseek-v4-pro, grok-4.3)
+        ├── deliberation-dispatch.md   # External LLM evaluator dispatch with role overlays/persona bias for panel deliberation
         ├── test-runner.md             # Test suite execution for code review
         └── [additional subagents added incrementally]
 ```
@@ -567,7 +572,9 @@ scope: whole                           # see scope enum below
 
 #### 2.2.5 Signal Notes
 
-Signal notes are lightweight, pointer-style knowledge captures from the feed intel pipeline (§3.3). They are not digests — they capture an excerpt, assessment, source link, and traceability back to the original triage item. Signal notes can later be promoted to full `knowledge-note` documents.
+Signal notes are lightweight, pointer-style knowledge captures. They are not digests — they capture an excerpt, assessment, source link, and traceability back to the original triage item. Signal notes can later be promoted to full `knowledge-note` documents.
+
+**Historical note (2026-07-06):** originally produced by the feed intel pipeline (`feed-pipeline` skill, formerly documented in §3.3). The feed pipeline was retired 2026-07-05 (FIF project archived; concept moved to Claude Cowork — see `_system/docs/cowork-feed-handoff.md`). The signal-note format itself remains valid and in use; §3.3 no longer documents a producing skill for it.
 
 **Directory:** `Sources/signals/` (flat — no subdirectory by source type).
 
@@ -578,7 +585,7 @@ Signal notes are lightweight, pointer-style knowledge captures from the feed int
 project: null
 domain: learning
 type: signal-note
-skill_origin: feed-pipeline
+skill_origin: feed-pipeline           # historical value: reflects the producing skill at note-creation time (feed-pipeline retired 2026-07-05); pre-existing values remain valid
 status: active
 created: 2026-03-01
 updated: 2026-03-01
@@ -1128,6 +1135,8 @@ Not everything is a skill. Use the right Claude Code primitive for the job:
 
 Start with these 7 core skills. `systems-analyst` and `action-architect` are built in Phase 1a (Day 1). `writing-coach` and `audit` are built in Phase 1b (Days 2-5) when their triggers fire. `obsidian-cli`, `checkpoint`, and `sync` are utility skills built as needed. All skills follow the section conventions in `_system/docs/skill-authoring-conventions.md`. The authoritative content for each skill lives in its SKILL.md file — the summaries below capture phase context, key inputs/outputs, and cross-references.
 
+**Historical note (2026-07-06):** this paragraph is preserved as a build-history record of the original Phase 1 roster. Two of the three utility skills named above have since been merged into successors and no longer exist as standalone skills: `obsidian-cli` → `vault-query` (pre-VO consolidation round, ~2026-03) and `checkpoint` → `audit` (VO M4 B5, 2026-07-04). `sync` remains standalone. See §3.1.5 and §3.1.6 below for the merge banners, and §3.3 for the current 15-skill registry. A full structural reorg of this section (renumbering/removing the retired subsections) is deferred to v2.5.
+
 #### 3.1.1 Systems Analyst
 
 **File:** `.claude/skills/systems-analyst/SKILL.md`
@@ -1184,7 +1193,9 @@ Start with these 7 core skills. `systems-analyst` and `action-architect` are bui
 
 #### 3.1.5 Obsidian CLI
 
-**File:** `.claude/skills/obsidian-cli/SKILL.md`
+**MERGED (~2026-03, pre-VO consolidation round).** The `obsidian-cli` skill was merged into `vault-query`, which now owns all vault query routing and safe CLI/native-tool fallback patterns described below. `obsidian-cli` no longer exists as a standalone skill; the section below is preserved as historical record.
+
+**File (historical):** `.claude/skills/obsidian-cli/SKILL.md`
 
 - **Phase:** Cross-cutting (used by all skills that query the vault)
 - **Purpose:** Provide reliable, token-efficient vault access using Obsidian's native index. Other skills call through this skill's patterns for vault queries rather than invoking CLI commands directly.
@@ -1198,7 +1209,9 @@ Start with these 7 core skills. `systems-analyst` and `action-architect` are bui
 
 #### 3.1.6 Checkpoint
 
-**File:** `.claude/skills/audit/SKILL.md` §State Checkpoint (absorbed into the audit skill at vault-optimization B5, 2026-07-04; originally a standalone skill)
+**MERGED (2026-07-04, VO M4 B5).** The `checkpoint` skill was merged into `audit`, which now owns state-checkpoint behavior (log progress, compact/reconstruct context, verify vault files). `checkpoint` no longer exists as a standalone skill; the section below is preserved as historical record.
+
+**File (historical):** `.claude/skills/audit/SKILL.md` §State Checkpoint (absorbed into the audit skill at vault-optimization B5, 2026-07-04; originally a standalone skill)
 
 - **Phase:** Session management (cross-cutting)
 - **Inputs:** Current session state, context usage level
@@ -1224,21 +1237,25 @@ Start with these 7 core skills. `systems-analyst` and `action-architect` are bui
 
 Subagents are defined in `.claude/agents/`. They provide isolated context workers for tasks that benefit from separation from the main session.
 
-**Current agents (as of v2.4):**
+**Current agents (as of v2.4; roster corrected 2026-07-06 — 4 agents verified on disk):**
 
 #### 3.2.1 Code Review Dispatch (`code-review-dispatch.md`)
 
-Dispatches Tier 2 cloud panel reviews. Sends diff content to 3 external models (Claude Opus, GPT-5.2, Devstral Medium) via API, collects structured findings, and writes synthesized review notes to `Projects/[project]/reviews/`. Used by the code-review skill for diffs exceeding the Tier 1 chunk threshold or when Tier 2 depth is warranted.
+**Corrected (2026-07-06).** Dispatches the code-review panel: **two reviewers**, Claude Opus 4.8 (API dispatch, findings namespace `ANT`) and GPT-5.4-Codex (dispatched via `codex exec` CLI, runs tool-grounded inside the repo, findings namespace `CDX`). Handles the safety gate, prompt wrapping with injection resistance and structured output layers, concurrent dispatch to both reviewers, and writes the review note skeleton plus raw responses to `Projects/[project]/reviews/`. Used by the code-review skill (per current `_system/docs/code-review-config.md` and the code-review SKILL.md — the panel is no longer 3 external models with a Tier 1/Tier 2 chunk-threshold split; Devstral was dropped).
 
 #### 3.2.2 Peer Review Dispatch (`peer-review-dispatch.md`)
 
-Dispatches prose artifact reviews to the 4-model peer review panel (GPT-5.2, Gemini 3 Pro Preview, DeepSeek V3.2-Thinking, Grok 4.1 Fast Reasoning) via API. Returns synthesized review notes to `_system/reviews/` or `Projects/[project]/reviews/`. Used by the peer-review skill.
+**Corrected (2026-07-06).** Dispatches prose artifact reviews to the current 4-model default peer review panel (gpt-5.4, gemini-3.1-pro-preview, deepseek-v4-pro, grok-4.3 — per `_system/docs/peer-review-config.md`) via API. Perplexity (`sonar-reasoning-pro`) remains an optional, manually-dispatched reviewer for spec/architecture/skill/writing artifact types only — not part of the automated default panel. Returns synthesized review notes to `_system/reviews/` or `Projects/[project]/reviews/`. Used by the peer-review skill.
 
 #### 3.2.3 Test Runner (`test-runner.md`)
 
 Executes test suites in external repos for code review scoping. Runs `npm test` (or equivalent) and returns pass/fail counts and failure summaries to the main session. Used by the code-review skill to establish test baseline before and after changes.
 
-#### 3.2.4 Subagent Revision Protocol
+#### 3.2.4 Deliberation Dispatch (`deliberation-dispatch.md`)
+
+**Added (2026-07-06 — agent already existed on disk; missing from this roster).** Dispatches deliberation artifacts to external LLM evaluators with role overlays: handles sensitivity classification and safety gate, assembles per-evaluator prompts (overlay + persona_bias + assessment schema), dispatches concurrently with random stagger, tracks versioning, and writes raw responses plus a deliberation record skeleton to the vault. Used by the deliberation skill.
+
+#### 3.2.5 Subagent Revision Protocol
 
 When the main session's validation finds **specific, actionable issues** with subagent output — not vague quality concerns — it can spawn a single revision pass before escalating to the human gate:
 
@@ -1260,22 +1277,32 @@ When the main session's validation finds **specific, actionable issues** with su
 
 **Do not build these until you have empirical evidence they're needed.** New skill candidates discovered through compound engineering (§4.4) are added here via the Primitive Proposal Flow.
 
+**(Inventory re-aligned 2026-07-06 to the as-built 15-skill registry; see point-edit policy in [[separate-version-history]].)** Per-skill `version:` frontmatter has been retired — skills no longer carry a version field, so the column below is dropped. The 15-skill registry is split across this document: 5 core skills are documented in §3.1 (systems-analyst, action-architect, writing-coach, audit, sync); the remaining 10 are documented below. Together §3.1 + this table enumerate all 15 current skills with no overlap.
+
 **Built skills** (details in each skill's `SKILL.md`):
 
-| Skill | Version | Summary |
-|---|---|---|
-| Peer Review | v1.7.1 | Cross-LLM artifact review. 4-model panel. Config: `peer-review-config.md` |
-| Inbox Processor | v1.6.3 | Process `_inbox/` files — classify, frontmatter, route. MarkItDown extraction |
-| Researcher | v2.4 | 6-stage evidence pipeline via Agent tool dispatch. Write-only-from-ledger citation integrity. `stages/` + `schemas/` subdirs |
-| Code Review | v2.1 | Two-tier: Sonnet inline (Tier 1) + cloud panel (Tier 2). Config: `code-review-config.md` |
-| Feed Pipeline | v2.3 | 3-tier feed intel routing → signal-notes. `model_tier: reasoning` |
-| Excalidraw | v1.9.1 | Freeform `.excalidraw` JSON diagrams |
-| Mermaid | v1.9.1 | Default diagramming. Markdown-embedded or `.mmd` files |
-| Lucidchart | v1.9.1 | Lucidchart via REST API for external sharing |
-| Meme Creator | v1.9.1 | Meme images from quotes with movie stills |
-| Startup | v1.9.1 | Session startup hook — git pull, vault-check, CLI, rotation, overlay index |
-| Checkpoint | v1.5.4 | Session state saving + context management (§3.1.6) |
-| Sync | v1.5.4 | Git commit + backup operations (§3.1.7) |
+| Skill | Summary |
+|---|---|
+| Peer Review | Cross-LLM artifact review. 4-model default panel (gpt-5.4, gemini-3.1-pro-preview, deepseek-v4-pro, grok-4.3) + optional manual-dispatch Perplexity reviewer. Config: `peer-review-config.md` |
+| Inbox Processor | Process `_inbox/` files — classify, frontmatter, route. MarkItDown extraction |
+| Researcher | 6-stage evidence pipeline via Agent tool dispatch. Write-only-from-ledger citation integrity. `stages/` + `schemas/` subdirs |
+| Code Review | Two-reviewer panel: Claude Opus 4.8 (API) + GPT-5.4-Codex (`codex exec` CLI). Config: `code-review-config.md` |
+| Critic | Adversarial review of a vault artifact: unsupported claims, logical gaps, missing perspectives, independent citation verification, severity-rated findings |
+| Deck Intel | Extract structured intelligence from PPTX/PDF files and interpret visual content (diagrams, tables, charts, screenshots); recreates diagrams as Mermaid. Includes former diagram-capture skill (merged 2026-07-04, VO M4 B5) |
+| Deliberation | Multi-agent deliberation on a vault artifact: dispatch to external LLM evaluators with role overlays, generate outcome, write record with rating capture |
+| Mermaid | Default diagramming. Markdown-embedded or `.mmd` files; owns Excalidraw JSON output (includes former excalidraw skill, merged ~2026-03 consolidation) |
+| Startup | Session startup hook — git pull, vault-check, CLI, rotation, overlay index |
+| Vault Query | Query the vault for structured facts, recent activity, and relevant notes; Obsidian CLI indexed search with native-tools fallback. Includes former obsidian-cli skill (merged ~2026-03 consolidation) |
+
+**Retired / merged (historical):**
+
+| Skill | Disposition |
+|---|---|
+| Feed Pipeline | RETIRED 2026-07-05 — FIF project archived; concept moved to Claude Cowork (see `_system/docs/cowork-feed-handoff.md`) |
+| Excalidraw | MERGED ~2026-03 (pre-VO consolidation round) → mermaid (owns Excalidraw JSON output) |
+| Lucidchart | RETIRED ~2026-03 (pre-VO consolidation round) |
+| Meme Creator | RETIRED ~2026-03 (pre-VO consolidation round) |
+| Checkpoint | MERGED 2026-07-04 (VO M4 B5) → audit (§3.1.6) |
 
 **Backlog** (unbuilt):
 
@@ -1494,9 +1521,9 @@ Skills declare their compute tier via the `model_tier` frontmatter field. CLAUDE
 
 **Delegation mechanism:** When Opus loads a skill with `model_tier: execution`, it delegates the skill's procedure to a Sonnet subagent via the Task tool (`model: "sonnet"`). Opus handles dispatch prompt assembly and result review; Sonnet handles execution. Concrete and works today — no future capability required.
 
-**Phased rollout:**
-- **Phase 1 (deployed):** Zero-context mechanical skills — sync, checkpoint, startup, obsidian-cli, meme-creator
-- **Phase 2 (deployed):** Structured-input skills — mermaid, excalidraw, lucidchart
+**Phased rollout (corrected 2026-07-06 to match CLAUDE.md, the authoritative source for this mapping — the prior list named several skills since merged or retired: checkpoint → audit, obsidian-cli → vault-query, meme-creator/lucidchart retired, excalidraw merged into mermaid):**
+- **Phase 1 (immediate):** Zero-context mechanical skills — sync, startup
+- **Phase 2 (immediate):** Structured-input skills — mermaid (incl. Excalidraw output)
 - **Phase 3 (deferred):** Interactive skills with prompting phases — inbox-processor (requires dispatch manifest design to preserve user decisions across handoff)
 
 **Precedence:** subagent explicit `model` field > skill `model_tier` > session default.
@@ -2998,7 +3025,7 @@ Built MOCs (on disk):
 | `moc-psychology` | orientation | Learning | Behavioral science, cognitive science, mental models |
 | `moc-religion` | orientation | Learning | Faith, theology, spiritual practice, religious history |
 | `moc-lifestyle` | orientation | Learning | Home management, domestic arts, personal systems |
-| `moc-signals` | orientation | Learning | Feed-pipeline signal-notes — tech trends, tools, research signals |
+| `moc-signals` | orientation | Learning | Signal-notes (formerly produced by feed-pipeline, retired 2026-07-05 → Claude Cowork) — tech trends, tools, research signals |
 
 Planned starters (not yet created):
 
@@ -3584,10 +3611,10 @@ Get to a real project as fast as possible. Build only what's structurally requir
 1. **Create Obsidian vault** with the directory structure from §2.1
 2. **Write CLAUDE.md** (< 200 lines) following §6
 3. **Write AGENTS.md** — tool-agnostic project overview
-4. **Build 3 core skills:** `systems-analyst`, `action-architect`, `obsidian-cli`
+4. **Build 3 core skills:** `systems-analyst`, `action-architect`, `vault-query` (point-edit 2026-07-06: was `obsidian-cli`, since merged into `vault-query` — see §3.1.5)
     - Create complete SKILL.md files following the conventions in `_system/docs/skill-authoring-conventions.md`
     - Each skill includes all required sections: identity/purpose, procedure, context contract, quality checklist, compound behavior, convergence dimensions
-    - The CLI skill (§3.1.5) provides vault query routing, safe command patterns, and fallback behavior
+    - The vault-query skill (historical patterns documented at §3.1.5) provides vault query routing, safe command patterns, and fallback behavior
 5. **Initialize `_system/logs/session-log.md`** — format from §2.3.4. This captures non-project interactions from the start, ensuring ad-hoc work feeds the compounding system.
 6. **Initialize first project** using the Project Creation Protocol (§4.1.5):
     - User provides or confirms project name and domain
@@ -3673,8 +3700,8 @@ These are things the original v6 design included that this revision deliberately
 | Hallucination detection web grounding | Currently, code convergence has binary grounding (tests pass/fail) but non-code convergence relies on self-referential rubric scoring. Web search could enable fact-checking summaries against live sources, validating vault knowledge currency during audits, and grounding compound step insights against community consensus. Significant capability upgrade, but depends on stable research tooling. | Researcher skill is stable and you want to extend grounding to audit-time checks. Evaluate whether the improvement in hallucination detection justifies the added complexity and token cost of web queries during audits. |
 | OpenClaw integration | **DECOMMISSIONED (agentic-sunset, 2026-06-01→06-12; reboot-verified absent 2026-06-14).** The remainder of this row is a historical record of the v2.0 state. ~~Phases 1+3 operational (v2.0).~~ OpenClaw ran as dedicated `openclaw` macOS user on Mac Studio (LaunchDaemon, Tier 1 hardening). Crumb-Tess bridge provides bidirectional Telegram communication via atomic file exchange in `_openclaw/inbox/` and `_openclaw/outbox/`. 5 Phase 1 operations live. kqueue file watcher (sub-ms detection) + bridge processor + post-processing governance verification. 325 tests, 15-payload injection test suite, 6 peer review rounds. Phase 2 dispatch protocol designed for multi-stage task execution. Colocation security spec peer-reviewed (3 rounds), bridge spec peer-reviewed (6 rounds). Full project: `Projects/crumb-tess-bridge/`. Integration reference: openclaw-crumb-reference (retired 2026-06-12; git history at `_system/docs/openclaw-crumb-reference.md`). | **None — closed at decommission.** Phases 2+4 (vault skill curation layer, cron sync, CLI escalation, browser automation) and Bridge Phase 2 were never built and are mooted; the always-on-agent concept moved to Claude Cowork (see `_system/docs/cowork-*-handoff.md`). |
 | ~~Semantic search via qmd~~ | ~~**Built (v2.4)** — AKM integrates QMD with decay scoring, 3 trigger modes, daily dedup. Script: `knowledge-retrieve.sh`. Project: `active-knowledge-memory` (DONE).~~ | ~~N/A~~ |
-| ClawVault structured memory | ClawVault (by Versatly, MIT licensed, 20 GitHub stars) adds typed categories, observational memory (auto-extracting decisions/lessons/preferences from transcripts), wiki-link knowledge graph, and session lifecycle management (`wake`/`sleep`/`handoff`) on top of qmd. Would automate the OpenClaw→Crumb intake funnel and provide formal cross-system session continuity. Category structure (`decisions/`, `projects/`, `lessons/`) overlaps with Crumb's vault structure — risk of parallel state. Immature project from unproven org. Detailed assessment exists as standalone document. | Running OpenClaw integration Phase 1+2 generates empirical friction data showing: (a) unstructured captures require excessive triage time in Crumb sessions, or (b) cross-system session handoffs fail without formal lifecycle protocol. If neither friction materializes, ClawVault solves a problem you don't have. |
-| Vision enrichment for image attachments | Claude Code cannot natively see image content. Current image processing is limited to EXIF metadata extraction via MarkItDown + exiftool (ImageSize, dates, GPS, etc.). No OCR or content description is available through the CLI. MarkItDown supports LLM-based image descriptions via its Python API `llm_client` parameter (tested with GPT-4o, LLaVA via Ollama) — this is the planned implementation vehicle, not a custom build. The companion note schema (§2.2.1) is already designed for this: `description_source` tracks provenance (`null` → `vision-api`), `needs-description` tag identifies candidates for batch enrichment, and the `description` field accepts upgraded content without schema changes. | Two paths: (1) via OpenClaw — delegate image description to OpenClaw's vision-capable models and write results back to companion notes during intake processing, or (2) directly in Crumb — configure MarkItDown with a vision-capable LLM client (requires API key for OpenAI/Anthropic, or a local vision model like LLaVA via Ollama). Evaluate path (1) first if OpenClaw integration is active. Pursue path (2) when the `needs-description` backlog grows large enough that manual descriptions become impractical — compound engineering will surface this friction. |
+| ClawVault structured memory | **Note (2026-07-06):** OpenClaw decommissioned 2026-06 — path/trigger referencing it is mooted; evaluate the non-OpenClaw path only. ClawVault (by Versatly, MIT licensed, 20 GitHub stars) adds typed categories, observational memory (auto-extracting decisions/lessons/preferences from transcripts), wiki-link knowledge graph, and session lifecycle management (`wake`/`sleep`/`handoff`) on top of qmd. Would automate the OpenClaw→Crumb intake funnel and provide formal cross-system session continuity. Category structure (`decisions/`, `projects/`, `lessons/`) overlaps with Crumb's vault structure — risk of parallel state. Immature project from unproven org. Detailed assessment exists as standalone document. | Running OpenClaw integration Phase 1+2 generates empirical friction data showing: (a) unstructured captures require excessive triage time in Crumb sessions, or (b) cross-system session handoffs fail without formal lifecycle protocol. If neither friction materializes, ClawVault solves a problem you don't have. |
+| Vision enrichment for image attachments | **Note (2026-07-06):** OpenClaw decommissioned 2026-06 — path/trigger referencing it is mooted; evaluate the non-OpenClaw path only. Claude Code cannot natively see image content. Current image processing is limited to EXIF metadata extraction via MarkItDown + exiftool (ImageSize, dates, GPS, etc.). No OCR or content description is available through the CLI. MarkItDown supports LLM-based image descriptions via its Python API `llm_client` parameter (tested with GPT-4o, LLaVA via Ollama) — this is the planned implementation vehicle, not a custom build. The companion note schema (§2.2.1) is already designed for this: `description_source` tracks provenance (`null` → `vision-api`), `needs-description` tag identifies candidates for batch enrichment, and the `description` field accepts upgraded content without schema changes. | Two paths: (1) via OpenClaw — delegate image description to OpenClaw's vision-capable models and write results back to companion notes during intake processing, or (2) directly in Crumb — configure MarkItDown with a vision-capable LLM client (requires API key for OpenAI/Anthropic, or a local vision model like LLaVA via Ollama). Evaluate path (1) first if OpenClaw integration is active. Pursue path (2) when the `needs-description` backlog grows large enough that manual descriptions become impractical — compound engineering will surface this friction. |
 | Docling as PDF extraction backend | MarkItDown's PDF conversion is adequate for narrative text but loses table structure (validated 2026-02-17): table cells render as flat text, not markdown tables. Headings and bullet lists are preserved. Docling (IBM, MIT licensed, Linux Foundation hosted) uses computer vision models for layout detection, reading order, table structure, and equation recognition — significantly higher fidelity for complex PDFs. Available as both Python API and MCP server. Heavier dependency: downloads AI models from HuggingFace, requires more disk space and processing time. | Compound engineering surfaces recurring PDF quality issues — the inbox processor's MarkItDown-generated summaries are consistently inadequate for a specific document type (e.g., dense technical proposals, contracts with complex tables, academic papers). Then: swap the PDF backend to Docling while keeping MarkItDown for office documents and images. The companion note schema is tool-agnostic — the extraction engine is an implementation detail of the inbox processor skill, not a spec-level architectural choice. |
 | MOC synthesis skill | Synthesis pass (§5.6.7) requires LLM judgment for rewriting prose, restructuring sections, and proposing splits/merges. A dedicated skill ensures consistent synthesis quality with proper context contracts and convergence dimensions. | MOC debt scores regularly exceed threshold (>30 points on 3+ MOCs). Until then, synthesis can be done conversationally during sessions where the operator notices a MOC needs attention. |
 | Automated delta refresh | Delta computation (§5.6.11) is deterministic and could run as a pre-commit hook or session-start script. Currently described as a session-start operation within the staleness scan. | Delta computation takes >5 seconds or the operator wants deltas to be always-fresh without manual triggering. |
