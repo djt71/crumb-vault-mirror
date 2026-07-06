@@ -28,12 +28,10 @@ Mode: pre-commit (3 staged files)
   Checked 0 kb tags, 0 invalid
 
 === 10. Project-State Active Task Consistency ===
-  Skipped (no staged project-state or tasks files)
-  Checked 0 project states, 0 inconsistent
+  Checked 10 project states, 0 inconsistent
 
 === 11. Project-State last_committed Field ===
-  Skipped (no staged project-state files)
-  Checked 0 project states, 0 missing last_committed
+  Checked 10 project states, 0 missing last_committed
 
 === 12. DONE Project Design File Warning ===
   Skipped (no staged design files)
@@ -55,8 +53,7 @@ Mode: pre-commit (3 staged files)
   Checked 0 orientation MOCs, 0 with low synthesis density, 0 with thin one-liners
 
 === 22. Repo Path Validation ===
-  Skipped (no staged project-state files)
-  Checked 0 repo paths, 0 issues
+  Checked 3 repo paths, 0 issues
 
 === 23. Code Review Gate ===
   Skipped (no staged task or run-log files)

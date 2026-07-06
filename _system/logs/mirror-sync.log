@@ -851,3 +851,4 @@
 2026-07-05 23:38:03 SYNC chore: session-end log — system-docs audit session close; tracker #5 pass ×5; project-state refresh
 2026-07-06 11:15:59 SYNC audit: open-items closeout — 8 operator decisions executed (apple-snapshot retired, Mistral/Lucid keys pulled, healthchecks scrubbed, tailscale doc reactivated, MOC count 17, cr-patterns table dropped, skill-conventions active, Telegram dormant); AS-031 soak day 6 GREEN
 2026-07-06 11:21:58 SYNC chore: credential revocations complete — Mistral/Lucid/healthchecks revoked at providers, .env backup deleted, docs updated pending → revoked
+2026-07-06 11:25:15 SYNC soak: VO-035 Tier-1 #6 within-window routing spot-checks PASS 8/8 — tracker COMPLETE; fix 2 retirement residues (vault-check REGISTERED_SKILLS attention-manager, preflight-map dead excalidraw/lucidchart keys)
