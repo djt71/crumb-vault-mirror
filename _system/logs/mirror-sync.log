@@ -853,3 +853,4 @@
 2026-07-06 11:21:58 SYNC chore: credential revocations complete — Mistral/Lucid/healthchecks revoked at providers, .env backup deleted, docs updated pending → revoked
 2026-07-06 11:25:15 SYNC soak: VO-035 Tier-1 #6 within-window routing spot-checks PASS 8/8 — tracker COMPLETE; fix 2 retirement residues (vault-check REGISTERED_SKILLS attention-manager, preflight-map dead excalidraw/lucidchart keys)
 2026-07-06 11:27:59 SYNC chore: session-end log — audit open-items closeout + Tier-1 #6 complete + AS soak day 6; WS3 counted, tracker #5 ×6; project-states refreshed
+2026-07-06 11:33:03 SYNC compound: promote registry-enumeration-at-retirement to solutions/ (operator-approved) — permit surfaces are invisible to reference-greps; MOC placement + signal link

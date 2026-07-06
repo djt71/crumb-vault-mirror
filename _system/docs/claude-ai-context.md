@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: active
 created: 2026-02-21
-updated: 2026-07-05
+updated: 2026-07-06
 tags:
   - system
 ---
@@ -14,7 +14,7 @@ Orientation artifact for a fresh session reading this repo (claude.ai chat, a
 new Claude Code session, or any agent cloning `github.com/djt71/crumb-vault`).
 Read this first — it is sufficient for most questions.
 
-Last updated: 2026-07-05 (point edits: attention-manager retired to Cowork, 15 skills, bet portfolio empty per Gate 4 declarations). Prior full refresh 2026-07-04. **Headline changes since 06-19:** (1) the
+Last updated: 2026-07-06 (point edit: mission statement re-aligned to directive v3 — three-pillar framing, liberation as priority sub-goal; the prose had retained the superseded v2.1 revenue-framed mission). Prior point edits 2026-07-05: attention-manager retired to Cowork, 15 skills, bet portfolio empty per Gate 4 declarations. Prior full refresh 2026-07-04. **Headline changes since 06-19:** (1) the
 agentic-sunset stability soak v1 **FAILED** — a headless reboot on 2026-06-18
 left the stack dark 13 days (keep-set resurrection is GUI-login-gated, now a
 documented operating assumption: GUI-login after every reboot, then verify
@@ -141,9 +141,12 @@ as external memory and single source of truth. Canonical spec:
 
 **Governing document:** `_system/directives/liberation-directive.md` (v3, 2026-06-11 — constitution: three-pillar mission, six gates, two tracks; philosophy wins on conflict)
 
-Mission: build enough independent revenue that corporate work becomes a choice,
-not a dependency. Revenue-generating work gets priority claim on sessions; all
-other work continues in parallel (three tiers: active / standing-latent / noise).
+Mission: continuous growth across three pillars — spiritual, mental, physical —
+lived in the present tense. Money is a condition of life, not a pillar; liberation
+(restructuring provision so it stops taxing growth — a gradient, no clock) is the
+priority sub-goal, not the mission itself. Revenue-generating work gets priority
+claim on sessions; all other work continues in parallel (three tiers: active /
+standing-latent / noise).
 
 **Work surfaces:** live roster + write-boundary classes are in the work-surfaces
 doc (7 surfaces incl. the Glean airlock, verified 2026-06-11). Tess/OpenClaw

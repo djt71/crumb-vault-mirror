@@ -1,16 +1,16 @@
 {
-  "timestamp": "2026-07-06T15:32:58Z",
+  "timestamp": "2026-07-06T15:42:59Z",
   "cpu": {
-    "load_1m": 1.75,
-    "load_5m": 2.04,
-    "load_15m": 2.26,
+    "load_1m": 3.13,
+    "load_5m": 3.53,
+    "load_15m": 3.00,
     "cores": 28
   },
   "memory": {
     "total_gb": 96.0,
-    "used_gb": 26.4,
-    "available_gb": 68.6,
-    "percent_used": 27.5
+    "used_gb": 26.2,
+    "available_gb": 68.9,
+    "percent_used": 27.2
   },
   "disk": {
     "total_gb": 926.3,
