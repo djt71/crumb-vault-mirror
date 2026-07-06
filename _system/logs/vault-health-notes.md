@@ -1,13 +1,13 @@
 ---
 type: state
 status: active
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-07-06
+updated: 2026-07-06
 ---
 
-# Vault Health Notes — 2026-07-05
+# Vault Health Notes — 2026-07-06
 
-## Warnings (93)
+## Warnings (78)
   WARNING: Projects/tess-v2/reviews/2026-03-28-external-action-plan-review-synthesis.md — no YAML frontmatter found
   WARNING: Projects/firekeeper-books/ai-art-learning-plan.md — kb-tagged note missing required 'topics' field
   WARNING: Domains/Career/moc-networking.md — orientation MOC has 15 Core entries but Synthesis has <30 words
@@ -18,20 +18,6 @@ updated: 2026-07-05
   WARNING: Domains/Learning/moc-philosophy.md — 2 Core one-liner(s) have <10 chars of description after the link (§5.6.6)
   WARNING: Domains/Learning/moc-psychology.md — orientation MOC has 12 Core entries but Synthesis has <30 words
   WARNING: Projects/mission-control/progress/run-log-2026-03a.md — 2161 lines (threshold: 1000) — consider rotation
-  WARNING: XD-001 — upstream project 'tess-operations' not found in Projects/ or Archived/Projects/
-  WARNING: XD-003 — upstream project 'multi-agent-deliberation' not found in Projects/ or Archived/Projects/
-  WARNING: XD-022 — upstream project 'tess-operations' not found in Projects/ or Archived/Projects/
-  WARNING: XD-023 — upstream project 'tess-operations' not found in Projects/ or Archived/Projects/
-  WARNING: XD-006 — upstream project 'agent-to-agent-communication' not found in Projects/ or Archived/Projects/
-  WARNING: XD-008 — upstream project 'tess-operations' not found in Projects/ or Archived/Projects/
-  WARNING: XD-010 — upstream project 'agent-to-agent-communication' not found in Projects/ or Archived/Projects/
-  WARNING: XD-012 — upstream project 'agent-to-agent-communication' not found in Projects/ or Archived/Projects/
-  WARNING: XD-017 — upstream project 'autonomous-operations' not found in Projects/ or Archived/Projects/
-  WARNING: XD-018 — upstream project 'autonomous-operations' not found in Projects/ or Archived/Projects/
-  WARNING: XD-019 — upstream project 'mcp-workspace-integration' not found in Projects/ or Archived/Projects/
-  WARNING: XD-020 — upstream project 'mcp-workspace-integration' not found in Projects/ or Archived/Projects/
-  WARNING: XD-021 — upstream project 'mcp-workspace-integration' not found in Projects/ or Archived/Projects/
-  WARNING: Projects/feed-intel-framework/progress/run-log.md — session '## 2026-05-28 — Pipeline decommissioned (operator request)' mentions skill invocation but has no context inventory
   WARNING: Projects/agentic-sunset/progress/run-log.md — session '## 2026-06-10 — PLAN' mentions skill invocation but has no context inventory
   WARNING: Projects/agentic-sunset/progress/run-log.md — session '## 2026-06-10 — Session end' mentions skill invocation but has no context inventory
   WARNING: Projects/agentic-sunset/progress/run-log.md — session '## 2026-06-11 — Operator decision (cross-project, work-surfaces session): inbox consolidation' mentions skill invocation but has no context inventory
@@ -60,9 +46,11 @@ updated: 2026-07-05
   WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-07-04 — Adjacent execution (same session as VO-032): `_system/archive/` deleted' mentions skill invocation but has no context inventory
   WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-07-04 — Session-end (compound evaluation)' mentions skill invocation but has no context inventory
   WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-07-04 — Session-end (compound evaluation) — first live pass of the B6 session-end protocol' mentions skill invocation but has no context inventory
+  WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-07-05 — Scoped audit: _system/docs/ staleness + reduction (operator-initiated)' mentions skill invocation but has no context inventory
+  WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-07-05 — Audit fix pass executed (all four tranches + spec provenance, operator-approved)' mentions skill invocation but has no context inventory
+  WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-07-05 — Session-end (compound evaluation) — system-docs audit session' mentions skill invocation but has no context inventory
   WARNING: Projects/obsidian-applenotes-import/progress/run-log.md — session '## 2026-04-25 — Project creation' mentions skill invocation but has no context inventory
   WARNING: Projects/obsidian-applenotes-import/progress/run-log.md — session '## 2026-04-25 — SPECIFY done; PLAN-ready' mentions skill invocation but has no context inventory
-  WARNING: Projects/opportunity-scout/progress/run-log.md — session '## 2026-04-25 — Three-tier priority injection in synthesis + ranking prompts' mentions skill invocation but has no context inventory
   WARNING: Projects/agentic-sunset/progress/run-log.md — session '## 2026-06-10 — Session end' mentions subagent delegation but has no provenance assessment
   WARNING: Projects/agentic-sunset/progress/run-log.md — session '## 2026-06-11 — Session end' mentions subagent delegation but has no provenance assessment
   WARNING: Projects/tess-v2/progress/run-log-2026-03.md — session '## 2026-03-28m — Phase 1: TV2-006 Complete' mentions subagent delegation but has no provenance assessment
@@ -83,13 +71,10 @@ updated: 2026-07-05
   WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-06-10 — VO-025 complete: ceremony step classification + A10 metrics' mentions subagent delegation but has no provenance assessment
   WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-07-04 — VO-033 complete: B6 ceremony batch EXECUTED' mentions subagent delegation but has no provenance assessment
   WARNING: Projects/mission-control/progress/run-log.md — session '## 2026-03-30 (session 10) — M3.1: Intelligence Feed Density Redesign' mentions subagent delegation but has no provenance assessment
-  WARNING: _system/docs/operator/how-to/tess-to-danny-migration-runbook.md — broken link: [[macos-tahoe-calendarinterval-bug]]
-  WARNING: _system/docs/operator/how-to/tess-to-danny-migration-runbook.md — broken link: [[recurring-patterns]]
   WARNING: Projects/agentic-sunset/design/upstream-migration.md — broken link: [[feedback-feed-intel-stays-open]]
   WARNING: Projects/agentic-sunset/progress/run-log.md — broken link: [[project-agentic-sunset]]
   WARNING: Projects/agentic-sunset/progress/run-log.md — broken link: [[recurring-patterns]]
   WARNING: Projects/firekeeper-books/progress/run-log.md — broken link: [[recurring-patterns]]
-  WARNING: Projects/vault-optimization/progress/run-log.md — broken link: [[run-feed-pipeline]]
   WARNING: Sources/insights/loop-scheduled-task-orchestration.md — broken link: [[tess-operations]]
   WARNING: Sources/signals/claudecodecamp-agents-while-sleeping.md — broken link: [[tess-operations]]
   WARNING: Sources/signals/fang-trajectory-informed-memory.md — broken link: [[attention-manager]]
@@ -103,6 +88,6 @@ updated: 2026-07-05
   WARNING: Sources/signals/odysseus-minimal-agentic-system-linear.md — broken link: [[tess-operations]]
 
 ## Stale Projects (14+ days)
-feed-intel-framework, tess-v2, customer-intelligence, firekeeper-books, obsidian-applenotes-import, think-different, opportunity-scout, mission-control, tess-danny-migration, semuta
+tess-v2, customer-intelligence, obsidian-applenotes-import, think-different, mission-control, tess-danny-migration
 
 

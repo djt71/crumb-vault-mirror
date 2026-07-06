@@ -16,23 +16,9 @@ topics:
 Recurring patterns observed across code reviews. Entries are added when a pattern
 reaches 3+ occurrences (per code-review SKILL Compound Behavior section).
 
-## Tier 1 Calibration Data (Devstral Small 2) — Retired 2026-02-25
-
-**Retired:** Replaced by Sonnet inline review. Signal-to-noise ratio ranged from 14% to 71% (median ~58%) across 3 reviews. The subagent dispatch overhead (preflight check, temp files, response parsing, hallucination filtering) existed solely to compensate for model unreliability. Sonnet inline eliminates both the noise problem and the dispatch complexity.
-
-| # | Project | Diff (lines) | Language | Files | Findings | Actionable | S/N | Latency | Date |
-|---|---------|-------------|----------|-------|----------|------------|-----|---------|------|
-| 1 | feed-intel-framework | 1,338 | TypeScript | 14 | 12 | 7 | 58% | — | 2026-02-24 |
-| 2 | crumb-tess-bridge | 107 | Python | 2 | 20 | 3 | 15% | 84s | 2026-02-24 |
-| 3 | x-feed-intel | 175 | TypeScript | 5 | 7 | 5 | 71% | 35s | 2026-02-24 |
-
-**Notable model blind spots (historical):**
-- TOCTOU race conditions (missed in x-feed-intel pipeline-lock.ts)
-- Python stdlib behavior: `setdefault`, `dict.get()` semantics (multiple false positives in bridge review)
-
 ## Tier 1 Calibration Data (Sonnet)
 
-> **Note (2026-07-05 audit):** This table has been an empty header row since its creation in 2026-02, despite the population rule in code-review/SKILL.md (~lines 411-424) requiring calibration data to be logged here. Either the skill step isn't firing on actual code-review invocations, or this doc should be retired as unused. Decision pending operator.
+> **Note:** Retired Devstral Small 2 calibration data (3 reviews, 2026-02-24, S/N 14–71%) removed 2026-07-06 per operator decision — git history if needed. Operator decision 2026-07-06: doc **kept** as the live calibration target; the table below has been empty since 2026-02 — verify the code-review SKILL population step actually fires at the next invocation (same check as the gpt-5.4-codex model-pin verification).
 
 | # | Project | Diff (lines) | Language | Files | Findings | Actionable | S/N | Date |
 |---|---------|-------------|----------|-------|----------|------------|-----|------|

@@ -16,7 +16,7 @@ tags:
 
 *This document is self-contained. It describes the complete Crumb system architecture and is intended to allow full reconstruction with no prior knowledge. For version-by-version change history, see [[separate-version-history]] (pre-v2.0: [[separate-version-history-archive]]).*
 
-**Current version: v2.4 (2026-03-06; maintained via dated inline point-edits — latest 2026-07-04)** — Active Knowledge Memory (QMD semantic retrieval + Knowledge Brief), researcher skill (stage-separated evidence pipeline), 3 new overlays with companion document pattern, feed-pipeline hardening, 15 MOCs. Point-edits don't bump the version; see the policy note in [[separate-version-history]].
+**Current version: v2.4 (2026-03-06; maintained via dated inline point-edits — latest 2026-07-06)** — Active Knowledge Memory (QMD semantic retrieval + Knowledge Brief), researcher skill (stage-separated evidence pipeline), 3 new overlays with companion document pattern, feed-pipeline hardening, 17 MOCs (count corrected 2026-07-06; was drifted at 15). Point-edits don't bump the version; see the policy note in [[separate-version-history]].
 
 ---
 

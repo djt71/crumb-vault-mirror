@@ -62,7 +62,7 @@ Hostnames, ports, services, credentials, and health checks for the Crumb system.
 
 **Parked service:** `com.crumb.dashboard` exists on disk (plist present, well-formed) but is **intentionally unloaded** — confirmed absent from `launchctl list` output on 2026-07-05. This follows the mission-control project pausing 2026-06-14 (dashboard stack kept for reversibility, deliberately stopped rather than torn down). `com.crumb.cloudflared` is still loaded and tunneling to `localhost:3100`, so the tunnel is currently live but has no backend to answer it — expect the public hostname to fail/502 until `com.crumb.dashboard` is reloaded.
 
-**Hygiene flag (dashboard plist):** `com.crumb.dashboard.plist` has `HEALTHCHECKS_API_KEY` hardcoded in cleartext in its `EnvironmentVariables` dict — this is stored in the plist file rather than Keychain, which is inconsistent with the Keychain-not-env convention used for other rotating credentials. Worth moving to Keychain (or at minimum an env file) the next time this service is touched.
+**Hygiene flag (dashboard plist) — RESOLVED 2026-07-06:** `HEALTHCHECKS_API_KEY` was hardcoded in cleartext in `com.crumb.dashboard.plist`'s `EnvironmentVariables`. Stripped from the plist 2026-07-06 (operator decision; healthchecks has no live consumer — the service was removed from the monitoring stack). Key revocation at healthchecks.io pending operator. If the dashboard is revived and needs healthchecks again, issue a fresh key and store per the Keychain-not-env convention.
 
 **Fully decommissioned namespaces (verified gone, not just moved):**
 - `ai.openclaw.gateway` (LaunchDaemon), `ai.openclaw.bridge.watcher`, `ai.openclaw.awareness-check`, `ai.openclaw.health-ping`, `ai.openclaw.daily-attention`, `ai.openclaw.vault-health` — no plists remain in `~/Library/LaunchAgents/` or `/Library/LaunchDaemons/`; `launchctl list` returns nothing for `openclaw`.
@@ -70,7 +70,7 @@ Hostnames, ports, services, credentials, and health checks for the Crumb system.
 - `com.tess.llama-server` (Ollama-hosted local model) — port 11434 unreachable, no `ollama` process running.
 - Everything under the 2026-05/06 teardown sweep (FIF capture/attention/feedback-health, Opportunity Scout services, `com.crumb.service-status`, `com.tess.health-check`, overnight-research, connections-brainstorm) — still gone, unchanged from prior doc.
 
-**Not carried forward / status unknown:** The prior doc listed `com.crumb.apple-snapshot` (danny, Apple data snapshots every 1800s). No plist by that name exists anywhere on disk as of 2026-07-05 (checked `~/Library/LaunchAgents/`, filesystem-wide for the pattern). Not verified whether this was intentionally retired during the decommission or is simply undocumented — see UNCERTAIN.
+**Not carried forward — retired:** The prior doc listed `com.crumb.apple-snapshot` (danny, Apple data snapshots every 1800s). No plist by that name exists anywhere on disk as of 2026-07-05 (checked `~/Library/LaunchAgents/`, filesystem-wide for the pattern). **Operator decision 2026-07-06: retired** — its output target (`_openclaw/state/`) was deleted with the agentic-sunset decommission; not rebuilt.
 
 **`daily-attention`:** Both the `ai.openclaw.daily-attention` and `com.tess.v2.daily-attention` scheduled jobs are gone, and no `com.crumb.daily-attention` was created to replace them. The `attention-manager` skill was retired 2026-07-05 — the attention-planning concept moves to Claude Cowork (rented runtime, see `_system/docs/cowork-attention-handoff.md`); no vault-side service exists or is planned.
 
@@ -133,7 +133,7 @@ launchctl list | grep com.crumb                      # quick loaded-set check
 
 ## Credentials
 
-See [[rotate-credentials]] for the full credential table and rotation procedures. Summary of what changed: OpenRouter, Telegram bot tokens, and X/Twitter OAuth no longer have live consumers (moved to revocation-candidates); Google Workspace OAuth added as a live, previously-undocumented consumer; Mistral and Lucid API keys (present in `~/.config/crumb/.env` but not previously documented) also have no live script/skill consumer found.
+See [[rotate-credentials]] for the full credential table and rotation procedures. Summary of what changed: OpenRouter, Telegram bot tokens, and X/Twitter OAuth no longer have live consumers (moved to revocation-candidates); Google Workspace OAuth added as a live, previously-undocumented consumer; Mistral and Lucid API keys (present in `~/.config/crumb/.env` but not previously documented) also had no live script/skill consumer found — operator decided revoke 2026-07-06; lines removed from `.env`, provider-side revocation pending.
 
 ---
 
@@ -195,5 +195,5 @@ launchctl list | grep com.crumb
 - Service inventory reconciled directly against `ls ~/Library/LaunchAgents/com.crumb.*` (11 plists), each plist's raw contents, and `launchctl list | grep crumb` (10 loaded) — 2026-07-05.
 - Confirmed `ai.openclaw.*` and `com.tess.v2.*` fully absent from disk and `launchctl list` — not inherited from prior doc's claims.
 - Credential/consumer map reconciled against a grep sweep of `_system/scripts/` and `.claude/` for API key names, plus `Projects/agentic-sunset/project-state.yaml` and `Projects/tess-v2/project-state.yaml` for decommission status.
-- **Uncertainty:** `com.crumb.apple-snapshot` (in the 2026-04-11 doc) has no corresponding plist anywhere found on this pass — not confirmed whether retired intentionally or just undocumented. Do not assume it still runs.
+- ~~**Uncertainty:** `com.crumb.apple-snapshot`~~ — resolved 2026-07-06: operator confirmed retired (see Service Inventory note above).
 - **Uncertainty:** Exact `qmd` version/config and Ollama's full removal status (vs. simply not running) not independently verified beyond the port-11434 unreachable check.

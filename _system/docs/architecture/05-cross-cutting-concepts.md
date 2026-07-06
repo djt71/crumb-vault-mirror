@@ -162,7 +162,7 @@ Maps of Content are navigational indexes for knowledge domains. Two types:
 | `moc-orientation` | Synthesis + navigation for a topic area | `moc-philosophy`, `moc-business` |
 | `moc-operational` | Procedural steps + checklists | `moc-crumb-operations` |
 
-**15 built MOCs** across Learning and Career domains.
+**17 built MOCs** across Learning, Career, and Lifestyle domains.
 
 **Placement pass (deterministic):** When a note gets `#kb/` tags, the `topics` field maps it to parent MOCs via `kb-to-topic.yaml`. A one-liner is added to the MOC's Core section between `<!-- CORE:START -->` and `<!-- CORE:END -->` anchors.
 

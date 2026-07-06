@@ -830,3 +830,22 @@ Note on #6: the B5 fast-pass predates the soak start by hours; counting it is de
 **Model routing:** scan/edit delegation to Sonnet ×6 + Haiku ×1, all pass on first review (one self-caught table-column slip, agent-fixed); synthesis/judgment on Fable 5. Verdict: correct tiering for mechanical scan+edit work — no promotion needed.
 
 **State for next session:** VO-035 opportunistic recording continues (#1–#4 pending; #6 deliberate re-check owed). AS-031 soak day 5/7 check was due today — verify AS soak status if not already done in a parallel session. Audit open-items list available in the 2026-07-05 fix-pass entry when operator wants the one-line decisions.
+
+## 2026-07-06 — Audit open-items resolved (all 8, operator one-line decisions)
+
+The 2026-07-05 fix-pass open-items list closed out. Facts gathered first (Tailscale live status, Telegram consumer verification, MOC enumeration, key locations), then operator decided each; all executions same session.
+
+| Item | Decision | Execution |
+|---|---|---|
+| `com.crumb.apple-snapshot` | **Retired** (not rebuilt — `_openclaw/state/` target gone) | infra-reference §Service-Inventory note + UNCERTAIN row resolved; arch/04 parenthetical |
+| Mistral + Lucid API keys | **Revoke** | Lines removed from `~/.config/crumb/.env` (dated backup `.env.bak-20260706`, chmod 600); rotate-credentials rows updated. **Provider-side revocation pending operator** (Mistral + Lucid consoles); delete the .env backup after |
+| `HEALTHCHECKS_API_KEY` cleartext | **Revoke + scrub now** | Stripped from parked `com.crumb.dashboard.plist` via `plutil -remove` (lint OK; plist unloaded, no restart needed); infra-reference hygiene flag → RESOLVED; rotate-credentials checklist ticked. **Key revocation at healthchecks.io pending operator** |
+| Tailscale | **Restore doc to active** (service confirmed LIVE: 3-device tailnet, dt-macbook-pro actively connected 2026-07-06) | tailscale-setup.md status → active, banner rewritten (live status + stale-setup-steps caveat retained) |
+| MOC count drift | **Correct to 17** | spec v2.4 banner (dated point-edit), arch/00, arch/02 ×2, arch/05 (+ domains list now Learning/Career/Lifestyle). separate-version-history untouched (historical) |
+| code-review-patterns table | **Keep doc, drop dead table** | Retired Devstral section deleted (git history); audit note → resolved wording; verify SKILL population step fires at next code-review invocation (paired with gpt-5.4-codex pin check) |
+| skill-authoring-conventions | **Promote to active** | frontmatter status draft → active |
+| Telegram bot tokens | **Keep dormant** | Consumer check completed: vault-health.sh + backup-status.sh scripts (not just plists) verified zero Telegram references; rotate-credentials row updated with decision |
+
+**Operator follow-ups outstanding (external, cannot be done from here):** revoke Mistral key (console), revoke Lucid key (console), revoke healthchecks.io key — then delete `~/.config/crumb/.env.bak-20260706`. These fit the AS-032 external-artifact sweep per rotate-credentials §Candidates-for-Revocation step 3.
+
+**Cross-project note:** AS-031 soak Day 6 (2026-07-06) checked GREEN earlier this session (logged in AS run-log) — 6/7 consecutive; Day 7 due 2026-07-07.

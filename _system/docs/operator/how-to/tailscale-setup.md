@@ -1,9 +1,9 @@
 ---
 type: runbook
-status: historical
+status: active
 domain: software
 created: 2026-03-01
-updated: 2026-07-05
+updated: 2026-07-06
 tags:
   - ops/networking
   - ops/security
@@ -12,7 +12,7 @@ tags:
 
 # Tailscale Setup for Remote SSH Access
 
-> **Historical (2026-07-05 audit):** Written for the retired `tess`/`openclaw` two-user architecture (decommissioned by agentic-sunset; tess→danny migration complete). The Tailscale concepts still apply, but every account-specific instruction below is stale. If remote SSH access is needed again, rewrite for the single `danny` user — see [[claude-code-ssh-setup]] for the current SSH reference.
+> **Status (2026-07-06):** Tailscale is **live and in service** — verified 2026-07-06: 3-device tailnet (tesss-mac-studio, dt-macbook-pro, iphone173), MacBook actively connected direct. Restored to `active` by operator decision as the tailnet reference (the 2026-07-05 audit had flipped it historical). Caveat stands: the setup walkthrough below was written for the retired `tess`/`openclaw` two-user architecture — account-specific setup steps are stale; for current SSH usage see [[claude-code-ssh-setup]].
 
 **Priority:** High — needed before Danny's upcoming trip (March 2026 — past)
 **Scope:** Mac Studio + personal laptop + phone (optional)

@@ -3,9 +3,9 @@ project: null
 domain: software
 type: reference
 skill_origin: null
-status: draft
+status: active
 created: 2026-02-17
-updated: 2026-07-03
+updated: 2026-07-06
 tags:
   - skill-authoring
   - crumb

@@ -166,7 +166,7 @@ The semantic layer built on top of the Vault Store. Provides discovery, retrieva
 | Component | Location | Purpose |
 |-----------|----------|---------|
 | `#kb/` tag taxonomy | Tags on vault files | 18 canonical Level 2 tags. Level 3 subtags are open. Marks durable knowledge. |
-| MOC system | `Domains/*/moc-*.md` | Maps of Content — navigational indexes per knowledge domain. 15 built MOCs. |
+| MOC system | `Domains/*/moc-*.md` | Maps of Content — navigational indexes per knowledge domain. 17 built MOCs. |
 | AKM (Active Knowledge Memory) | `_system/scripts/knowledge-retrieve.sh` | QMD-backed semantic retrieval. Knowledge Brief at session start (5 items). Skill-activation retrieval (3 items). Decay-based relevance scoring. |
 | Source indexes | `Sources/*/[source-id]-index.md` | Per-source landing pages aggregating child knowledge notes |
 | `kb-to-topic.yaml` | `_system/docs/kb-to-topic.yaml` | Canonical `#kb/` tag → MOC slug mapping. Single source of truth for automated routing. |
@@ -359,6 +359,6 @@ Where each building block lives on disk, for navigation.
 | Overlays | `_system/docs/overlays/*.md` | 9 files (incl. index) |
 | Protocols | `_system/docs/protocols/*.md` + `_system/docs/context-checkpoint-protocol.md` | 4 files |
 | Vault Store | `Projects/`, `Domains/`, `Sources/`, `_system/`, `_inbox/`, `_attachments/` | ~3650 files |
-| Knowledge Base | `Domains/*/moc-*.md`, `_system/docs/kb-to-topic.yaml`, `_system/scripts/knowledge-retrieve.sh` | 15 MOCs + scripts |
+| Knowledge Base | `Domains/*/moc-*.md`, `_system/docs/kb-to-topic.yaml`, `_system/scripts/knowledge-retrieve.sh` | 17 MOCs + scripts |
 | Scripts | `_system/scripts/` | ~20 files |
 | Bridge *(historical — decommissioned 2026-06, directory deleted)* | `_openclaw/` | 16 subdirectories (as it existed pre-deletion) |
