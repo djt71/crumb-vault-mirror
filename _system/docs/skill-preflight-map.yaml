@@ -88,18 +88,3 @@ mermaid:
   reminders:
     - "Validate syntax before delivering: check unclosed brackets, missing end keywords, duplicate IDs"
   required_inputs: []
-
-excalidraw:
-  kb_eligible: false
-  query_hints: []
-  reminders:
-    - "Run validation: python3 .claude/skills/excalidraw/validate-excalidraw.py <output-file>"
-  required_inputs: []
-
-lucidchart:
-  kb_eligible: false
-  query_hints: []
-  reminders:
-    - "Write vault reference note after API response"
-    - "New docs don't appear in My Documents until viewUrl is visited first — tell the user"
-  required_inputs: []

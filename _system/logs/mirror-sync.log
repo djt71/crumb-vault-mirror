@@ -850,3 +850,4 @@
 2026-07-05 23:34:42 SYNC chore: clear vault-check warnings — XD-019/020/021 upstream never scaffolded (native Workspace MCP), de-link memory-note and dead-skill wikilinks
 2026-07-05 23:38:03 SYNC chore: session-end log — system-docs audit session close; tracker #5 pass ×5; project-state refresh
 2026-07-06 11:15:59 SYNC audit: open-items closeout — 8 operator decisions executed (apple-snapshot retired, Mistral/Lucid keys pulled, healthchecks scrubbed, tailscale doc reactivated, MOC count 17, cr-patterns table dropped, skill-conventions active, Telegram dormant); AS-031 soak day 6 GREEN
+2026-07-06 11:21:58 SYNC chore: credential revocations complete — Mistral/Lucid/healthchecks revoked at providers, .env backup deleted, docs updated pending → revoked

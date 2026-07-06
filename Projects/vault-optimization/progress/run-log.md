@@ -745,9 +745,9 @@ B5's adjacent finding #1 resolved same-session by operator decision ("we can cle
 | 3 | peer-review or deliberation dispatch | pending | next review-worthy artifact (also closes Grok watch 3/3) |
 | 4 | KB query + signal scan | pending | next #kb/ lookup or tagged-note creation |
 | 5 | Session-end sequence (rewritten 7-step) | **pass ×5** | 2026-07-04 B6 session close (first live pass, clean) + 2026-07-04 VO-034 session close (second pass, clean; one transient push timeout, single retry succeeded per exception chain) + 2026-07-05 mission-layer session close (third pass, clean; non-project route, incl. first-ever archival in step scope) + 2026-07-05 FIF-archival segment close (fourth pass, clean; second archival) + 2026-07-05 system-docs audit session close (fifth pass, clean; project route) |
-| 6 | Skill-routing spot-checks on rewritten descriptions | **pass ×1** | 2026-07-04 VO-032 fast-pass (5 spot-checks incl. merge-target routing); re-check during soak for a within-window pass |
+| 6 | Skill-routing spot-checks on rewritten descriptions | **pass ×2 — COMPLETE** | 2026-07-04 VO-032 fast-pass (5 spot-checks incl. merge-target routing) + 2026-07-06 deliberate within-window set (8 fresh prompts, 8/8 pass, incl. attention-manager negative check; see 2026-07-06 entry) |
 
-Note on #6: the B5 fast-pass predates the soak start by hours; counting it is defensible but a second within-window spot-check set will be run anyway to make the pass unambiguous. #1 will NOT be simulated — it must occur naturally on a real phase gate (soak measures reality, not rehearsal).
+Note on #6: ~~the B5 fast-pass predates the soak start by hours; counting it is defensible but a second within-window spot-check set will be run anyway to make the pass unambiguous~~ — within-window pass run 2026-07-06, #6 unambiguously complete. #1 will NOT be simulated — it must occur naturally on a real phase gate (soak measures reality, not rehearsal).
 
 **Working-session tracker:** WS1 = 2026-07-04 ✓ (this entry) · WS2 = 2026-07-05 ✓ (audit + mission-layer sessions; counted once). Count advances via the session-end log check; earliest possible end = 2026-07-18.
 
@@ -851,3 +851,24 @@ The 2026-07-05 fix-pass open-items list closed out. Facts gathered first (Tailsc
 **Cross-project note:** AS-031 soak Day 6 (2026-07-06) checked GREEN earlier this session (logged in AS run-log) — 6/7 consecutive; Day 7 due 2026-07-07.
 
 **2026-07-06 follow-up closed (same day):** Operator revoked all three keys at the providers (Mistral console, Lucid console, healthchecks.io); `~/.config/crumb/.env.bak-20260706` deleted after revocation. rotate-credentials + infra-reference "pending" notes updated to revoked. Zero external credential follow-ups remain from the audit; the only revocation candidates still open in rotate-credentials are OpenRouter, OpenClaw gateway token, and X OAuth (tracked by AS-032).
+
+## 2026-07-06 — VO-035 Tier-1 #6: within-window skill-routing spot-checks — PASS (8/8)
+
+**Method:** live registry read (all 15 `.claude/skills/*/SKILL.md` descriptions extracted fresh from disk), 8 natural-language prompts evaluated against the rewritten trigger-condition descriptions — zero overlap with the 07-04 fast-pass set; includes the new negative-routing edge created by the 07-05 attention-manager retirement.
+
+| # | Prompt | Expected | Result |
+|---|---|---|---|
+| 1 | "what do we know about [account]?" | vault-query (verbatim trigger; disjoint from researcher's "what does the evidence say about") | ✅ |
+| 2 | "how do I get good at chess?" | systems-analyst (learning-plan merge target — different phrase than 07-04's "training plan") | ✅ |
+| 3 | "sketch a wireframe in excalidraw" | mermaid (Excalidraw absorption; only mermaid names it) | ✅ |
+| 4 | "what's in this image?" | deck-intel (interpret-vs-create disambiguation with mermaid holds) | ✅ |
+| 5 | "what needs my attention today?" | **no match** (attention-manager retired 2026-07-05; no surviving description claims attention/priorities; audit's "vault health" correctly doesn't catch it) | ✅ |
+| 6 | "push the vault" | sync (verbatim) | ✅ |
+| 7 | "panel review this spec" | deliberation (trigger sets disjoint from peer-review's "peer review"/"cross-model review") | ✅ |
+| 8 | "check citations in this note" | critic (declined-merge standalone, fresh phrasing vs 07-04) | ✅ |
+
+**Registry-consistency sweep (bonus, found 2 residues — both fixed same commit, neither a routing failure):**
+1. `vault-check.sh` REGISTERED_SKILLS still listed **attention-manager** — the 07-05 retirement sweep removed §27 but missed this allowlist. Benign direction (stale allowed name; can't cause false warnings) but exactly the drift class under watch. Removed; list now 15 = disk. `bash -n` clean.
+2. `skill-preflight-map.yaml` dead `excalidraw:`/`lucidchart:` keys (07-04 VO-032 adjacent finding #2, routed to audit/M5 — executed now, in-window). Keys never fired (no matching skills); removed.
+
+**Soak assessment:** routing surface itself (SKILL.md descriptions) was 8/8 clean — the two residues were in enforcement/hook config, not routing, and are remediation-lag from the operator's mid-soak keep-set delta, not B5 regressions. Not a workaround, not an urgent restore — soak criteria unaffected. **Tier-1 tracker: #5 ✓, #6 ✓ COMPLETE; #1–#4 pending natural occurrence.**

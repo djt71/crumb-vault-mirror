@@ -2283,7 +2283,7 @@ echo ""
 echo "=== Primitive Registry ==="
 
 # Registered skills (directory names under .claude/skills/)
-REGISTERED_SKILLS="action-architect attention-manager audit code-review critic deck-intel deliberation inbox-processor mermaid peer-review researcher startup sync systems-analyst vault-query writing-coach"
+REGISTERED_SKILLS="action-architect audit code-review critic deck-intel deliberation inbox-processor mermaid peer-review researcher startup sync systems-analyst vault-query writing-coach"
 
 # Registered overlays (filenames under _system/docs/overlays/, excluding overlay-index.md)
 REGISTERED_OVERLAYS="business-advisor.md career-coach.md design-advisor.md financial-advisor.md glean-prompt-engineer.md life-coach.md network-skills.md web-design-preference.md"
