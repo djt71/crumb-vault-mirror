@@ -846,3 +846,4 @@
 2026-07-05 17:03:02 SYNC mission: retire attention-manager skill + goal-tracker — attention practice moves to Claude Cowork
 2026-07-05 17:19:41 SYNC mission: archive feed-intel-framework — concept moves to Claude Cowork (rented runtime)
 2026-07-05 17:21:19 SYNC chore: session-end log — FIF→Cowork segment close; soak tracker #5 → pass ×4
+2026-07-05 22:18:22 SYNC audit: _system/docs staleness sweep — arch docs reconciled to post-sunset reality, runbook rebuilt, 4 docs historicized, spec point-edit policy adopted

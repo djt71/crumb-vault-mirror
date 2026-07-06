@@ -46,7 +46,7 @@ nothing on `tess` is deleted until `danny` is verified green over a soak window.
    from danny's GUI login (`launchctl bootstrap gui/$(id -u danny)`). danny being
    admin lets danny self-recover; bootstrap still happens from danny's session.
 4. **Four plists use `StartCalendarInterval`** which never fires on macOS 26.x
-   (see [[macos-tahoe-calendarinterval-bug]]). Fix to `StartInterval` during the
+   (see memory note `macos-tahoe-calendarinterval-bug`). Fix to `StartInterval` during the
    rewrite pass: `ai.openclaw.vault-health`, `com.crumb.qmd-index`,
    `com.crumb.vault-gc`, `com.tess.vault-backup`.
 5. **Re-auth required (not file-copyable):** `.cloudflared` tunnel, MCP OAuth
@@ -244,7 +244,7 @@ Obsidian back to `/Users/danny/crumb-vault`. tess copies are untouched through P
 ## Open items to resolve during execution
 
 - **Duplicate-agent pruning:** decide the canonical generation per function
-  (com.tess.* legacy vs com.tess.v2.* vs ai.openclaw.*) — see [[recurring-patterns]].
+  (com.tess.* legacy vs com.tess.v2.* vs ai.openclaw.*) — see memory note `recurring-patterns`.
 - **`homebrew.mxcl.ollama`** is brew-managed; migrate via `brew services`, not a copied plist.
 - **`.cloudflared` tunnel UUID:** reuse (copy cert) vs fresh tunnel — affects DNS/ingress.
 - **Personal Library data** (Mail, Messages, Photos) is account-personal and out of scope.
