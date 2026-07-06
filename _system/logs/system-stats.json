@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-07-06T15:15:56Z",
+  "timestamp": "2026-07-06T15:20:56Z",
   "cpu": {
-    "load_1m": 2.50,
-    "load_5m": 2.63,
-    "load_15m": 2.55,
+    "load_1m": 1.46,
+    "load_5m": 1.91,
+    "load_15m": 2.24,
     "cores": 28
   },
   "memory": {

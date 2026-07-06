@@ -62,7 +62,7 @@ Hostnames, ports, services, credentials, and health checks for the Crumb system.
 
 **Parked service:** `com.crumb.dashboard` exists on disk (plist present, well-formed) but is **intentionally unloaded** — confirmed absent from `launchctl list` output on 2026-07-05. This follows the mission-control project pausing 2026-06-14 (dashboard stack kept for reversibility, deliberately stopped rather than torn down). `com.crumb.cloudflared` is still loaded and tunneling to `localhost:3100`, so the tunnel is currently live but has no backend to answer it — expect the public hostname to fail/502 until `com.crumb.dashboard` is reloaded.
 
-**Hygiene flag (dashboard plist) — RESOLVED 2026-07-06:** `HEALTHCHECKS_API_KEY` was hardcoded in cleartext in `com.crumb.dashboard.plist`'s `EnvironmentVariables`. Stripped from the plist 2026-07-06 (operator decision; healthchecks has no live consumer — the service was removed from the monitoring stack). Key revocation at healthchecks.io pending operator. If the dashboard is revived and needs healthchecks again, issue a fresh key and store per the Keychain-not-env convention.
+**Hygiene flag (dashboard plist) — RESOLVED 2026-07-06:** `HEALTHCHECKS_API_KEY` was hardcoded in cleartext in `com.crumb.dashboard.plist`'s `EnvironmentVariables`. Stripped from the plist 2026-07-06 (operator decision; healthchecks has no live consumer — the service was removed from the monitoring stack); key revoked at healthchecks.io by operator same day. If the dashboard is revived and needs healthchecks again, issue a fresh key and store per the Keychain-not-env convention.
 
 **Fully decommissioned namespaces (verified gone, not just moved):**
 - `ai.openclaw.gateway` (LaunchDaemon), `ai.openclaw.bridge.watcher`, `ai.openclaw.awareness-check`, `ai.openclaw.health-ping`, `ai.openclaw.daily-attention`, `ai.openclaw.vault-health` — no plists remain in `~/Library/LaunchAgents/` or `/Library/LaunchDaemons/`; `launchctl list` returns nothing for `openclaw`.
@@ -133,7 +133,7 @@ launchctl list | grep com.crumb                      # quick loaded-set check
 
 ## Credentials
 
-See [[rotate-credentials]] for the full credential table and rotation procedures. Summary of what changed: OpenRouter, Telegram bot tokens, and X/Twitter OAuth no longer have live consumers (moved to revocation-candidates); Google Workspace OAuth added as a live, previously-undocumented consumer; Mistral and Lucid API keys (present in `~/.config/crumb/.env` but not previously documented) also had no live script/skill consumer found — operator decided revoke 2026-07-06; lines removed from `.env`, provider-side revocation pending.
+See [[rotate-credentials]] for the full credential table and rotation procedures. Summary of what changed: OpenRouter, Telegram bot tokens, and X/Twitter OAuth no longer have live consumers (moved to revocation-candidates); Google Workspace OAuth added as a live, previously-undocumented consumer; Mistral and Lucid API keys (present in `~/.config/crumb/.env` but not previously documented) also had no live script/skill consumer found — revoked at both providers 2026-07-06; lines removed from `.env`.
 
 ---
 

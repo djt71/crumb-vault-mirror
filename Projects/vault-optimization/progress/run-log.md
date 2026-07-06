@@ -849,3 +849,5 @@ The 2026-07-05 fix-pass open-items list closed out. Facts gathered first (Tailsc
 **Operator follow-ups outstanding (external, cannot be done from here):** revoke Mistral key (console), revoke Lucid key (console), revoke healthchecks.io key — then delete `~/.config/crumb/.env.bak-20260706`. These fit the AS-032 external-artifact sweep per rotate-credentials §Candidates-for-Revocation step 3.
 
 **Cross-project note:** AS-031 soak Day 6 (2026-07-06) checked GREEN earlier this session (logged in AS run-log) — 6/7 consecutive; Day 7 due 2026-07-07.
+
+**2026-07-06 follow-up closed (same day):** Operator revoked all three keys at the providers (Mistral console, Lucid console, healthchecks.io); `~/.config/crumb/.env.bak-20260706` deleted after revocation. rotate-credentials + infra-reference "pending" notes updated to revoked. Zero external credential follow-ups remain from the audit; the only revocation candidates still open in rotate-credentials are OpenRouter, OpenClaw gateway token, and X OAuth (tracked by AS-032).
