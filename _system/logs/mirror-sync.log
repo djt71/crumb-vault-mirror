@@ -855,3 +855,4 @@
 2026-07-06 11:27:59 SYNC chore: session-end log — audit open-items closeout + Tier-1 #6 complete + AS soak day 6; WS3 counted, tracker #5 ×6; project-states refreshed
 2026-07-06 11:33:03 SYNC compound: promote registry-enumeration-at-retirement to solutions/ (operator-approved) — permit surfaces are invisible to reference-greps; MOC placement + signal link
 2026-07-06 11:43:50 SYNC fix: claude-ai-context mission statement re-aligned to directive v3 — stale v2.1 revenue-framed mission replaced with three-pillar framing (liberation = priority sub-goal); vault-wide sweep found no other live copies
+2026-07-06 11:58:34 SYNC spec: inventory point-edit tranche — skill/subagent sections re-aligned to as-built reality (operator-approved)

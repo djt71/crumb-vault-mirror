@@ -1,0 +1,15 @@
+name: skills-library
+domain: software
+type: system
+phase: SPECIFY
+last_gate: null
+created: 2026-07-06
+updated: 2026-07-06
+related_projects:
+  - vault-optimization
+# No repo_path: vault-only project — skills, packaging script, and doc updates
+# all live in the vault. External repo gate explicitly skipped (CLAUDE.md §3b).
+active_task: null
+next_action: "Enter SPECIFY (systems-analyst): tiered cross-surface skills library — Crumb-only / portable core / claude.ai-only tiers, vault as single originator, projection-based packaging for claude.ai/Cowork upload. Grounding facts verified 2026-07-06: SKILL.md format identical across surfaces; NO cross-surface sync (claude.ai = per-user zip upload, Cowork = Skills tab or /v1/skills API, Claude Code = .claude/skills/); claude.ai skills run in sandboxed code-exec VM (no local fs/bash)."
+last_committed: null
+services: []
