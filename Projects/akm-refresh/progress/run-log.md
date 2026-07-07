@@ -107,3 +107,33 @@ Operator: "apply the fixes, no round 2 or three." All nine action items applied 
 - Context usage before checkpoint: estimated ~60% (moderate band)
 - Action taken: none (below 70% threshold)
 - Key artifacts for PLAN phase: `specification-summary.md` (current in context), M1–M6 matrix + task table in `specification.md`, `akm-evaluation-2026-07.md` for design-level numbers as needed
+
+## 2026-07-07 — PLAN: action plan + tasks authored
+
+**Context inventory (action-architect invocation):**
+1. `specification-summary.md` — current in context (authored/revised this session)
+2. `specification.md` — task table + M1–M6 matrix (current in context; no re-read)
+3. `_system/docs/solutions/staged-spike-with-bail.md` — full read; applied to AKM-001 (Stage-0 bail on daemon availability)
+4. `_system/docs/estimation-calibration.md` — full read; expansion pattern (2.6–3.0x spec→TASK on infra projects) + checkpoint-pivot lesson applied to plan risk notes
+
+Budget: 4 docs (standard tier). Budget-exempt: preflight knowledge brief (hook-injected), signal scan reused from same-day SPECIFY invocation (no new scan — same tag space), overlay index (no match, unchanged).
+
+**Delivered:**
+- `action-plan.md` — 4 milestones: M1 transport/mode decision (AKM-001 spike staged with Stage-0 bail on daemon availability per staged-spike-with-bail + AKM-002 design w/ operator gate), M2 precision-trigger rebuild (AKM-003/004, code review at boundary), M3 hook primitives (AKM-005/007 designs parallel w/ shared A4/U3 validation + two Primitive Creation gates; AKM-006/008 after AKM-003; code review at boundary), M4 vocabulary + soak closure (AKM-009/010). Soak window doubles as M3/M4 working time.
+- `tasks.md` — 10 tasks, binary acceptance criteria, dependency graph per spec; milestone-boundary enforcement notes (code review, M6/A4 amendment rule).
+- `action-plan-summary.md`
+- `estimation-calibration.md` — akm-refresh row registered at PLAN: 10 tasks, predicted ~1.5x mild expansion (finer cutting test vs the 2.6–3.0x infra band), gates may compress instead.
+
+**Cross-project deps:** no new rows — XD-028 already covers the VO-037 handoff. **Compound:** calibration registration is the compound act this phase; decomposition itself followed existing patterns (no new solutions candidates).
+
+**Plan impact assessment:** MODERATE (modifies existing production script behavior + adds two hooks; task structure transcribes an already-peer-reviewed spec). Peer review available on request, not prompted.
+
+## 2026-07-07 — Session end (SPECIFY → PLAN in one session)
+
+**Session arc:** vault-state resume → systems-analyst spec → peer review round 1 (3/4 reviewers; DeepSeek timeout) → A1–A9 applied, cycle closed at one round per operator → spec approved → SPECIFY→PLAN gate (committed `b9418418`) → action-architect plan (4 milestones, 10 tasks). Session ends with PLAN outputs authored, **awaiting operator plan approval** — next session: approve (or peer-review) the plan → PLAN→TASK gate → AKM-001 Stage-0 daemon check.
+
+**Compound evaluation:** phase-transition candidates already logged (behavioral-vs-automated 4th instance → route at AKM-008; two medium-confidence pattern candidates flagged for operator approval). New this segment: **vault-check detection quirk** — pre-commit run reported "no staged run-log files" and skipped §4/5/29/30 even though `progress/run-log.md` was staged and committed; the run-log-scoped checks silently didn't run. System gap observation for vault-optimization's backlog (vault-check is VO's surface); not fixed here, not a solutions/ candidate.
+
+**Model routing (cost observation):** all three skills this session (systems-analyst, peer-review, action-architect) are reasoning-tier — kept on session model, no Sonnet delegations; no `model_tier: execution` skills invoked. Heaviest ops: peer-review-dispatch subagent (~79k tokens, 20 tool uses — panel dispatch + note authoring, quality pass), review-note full read (~416 lines), protocol/skill doc loads. Outcomes: all pass, no rework.
+
+**Open operator items at session end:** (1) plan approval, (2) A10 DeepSeek curl_timeout bump, (3) two compound pattern candidates (write to solutions/ y/n), (4) vault-check run-log detection quirk → VO backlog.

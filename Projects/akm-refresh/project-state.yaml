@@ -11,6 +11,6 @@ related_projects:
 # hooks, and config all live in the vault. External repo gate skipped (CLAUDE.md §3b).
 # R4 (new-content hook) has a coordination point with VO-037 CLAUDE.md slim-down.
 active_task: null
-next_action: "PLAN entered 2026-07-07 (spec approved post peer review). First: action-architect — milestones + action plan from specification-summary (10 tasks AKM-001..010, M1–M6 matrix governs R2). Open operator item: A10 DeepSeek curl_timeout bump in peer-review-config."
+next_action: "PLAN outputs authored 2026-07-07 (action-plan.md, tasks.md, summary — 4 milestones, 10 tasks, 4 operator gates). Awaiting operator plan approval → PLAN→TASK Phase Transition Gate → first task AKM-001 (daemon spike, Stage-0 bail on daemon availability). Open operator item: A10 DeepSeek curl_timeout bump."
 last_committed: 2026-07-07 14:10
 services: []
