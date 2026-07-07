@@ -4,12 +4,12 @@ type: system
 phase: SPECIFY
 last_gate: null
 created: 2026-07-06
-updated: 2026-07-06
+updated: 2026-07-07
 related_projects:
   - vault-optimization
 # No repo_path: vault-only project — skills, packaging script, and doc updates
 # all live in the vault. External repo gate explicitly skipped (CLAUDE.md §3b).
 active_task: null
-next_action: "Spec COMPLETE 2026-07-06 (specification.md + summary). 4 operator decisions locked: top-3 sources only; first delivery = portable tier + packaging (claude.ai-only tier deferred to SKL-007); manual upload only (no /v1/skills API); doc revisions in scope. Peer review offered (STANDARD scope, not required). Next: SPECIFY→PLAN gate (context-checkpoint-protocol) then PLAN — key design question: A4 single-source mechanism (one SKILL.md serves both surfaces vs packaging-time transform) + tier marker frontmatter key."
+next_action: "Skills review COMPLETE 2026-07-07 (design/skills-review.md — pre-PLAN input to SKL-001): usage bimodal (follows gate wiring); portable core confirmed = writing-coach, critic, mermaid/Excalidraw, deck-intel method; 7 operator decisions pending (review §C: researcher repositioning, sync retire, near-zero-usage skill fates, deliberation strip-or-archive, code-review silence check, systems-analyst Step 4 demotion, built-in overlap policy incl. code-review name collision). Tier A quick wins APPLIED 2026-07-07 (uncommitted). Then: SPECIFY→PLAN gate (context-checkpoint-protocol) then PLAN — key design question: A4 single-source mechanism + tier marker frontmatter key. Peer review of spec still offered (STANDARD, not required)."
 last_committed: null
 services: []

@@ -13,7 +13,7 @@ capabilities:
       - "Sources/research/*.md"
       - "research/fact-ledger.yaml"
     cost_profile:
-      model: claude-opus-4-6
+      model: opus  # tier, not version — current top-tier release (crumb-model-policy)
       estimated_tokens: 150000
       estimated_cost_usd: 2.25
       typical_wall_time_seconds: 1200
@@ -94,7 +94,7 @@ Run the 6-stage pipeline. Each stage runs as an Agent tool subagent with its own
    - Read the stage prompt template (e.g., `stages/01-scoping.md`)
    - Inject runtime values: brief JSON, previous stage handoff, dispatch ID, ledger path, context file paths
    - Include budget remaining and governance constraints
-2. **Invoke Agent tool** with the assembled prompt as the subagent description. Specify `allowedTools` scoped to the stage's tool list (see stage-specific sections below).
+2. **Invoke Agent tool** with the assembled prompt as the subagent description. State the stage's tool list inside the prompt (soft scoping — the Agent tool has no mechanical tool filtering; see Known Limitations §3).
 3. **Parse subagent output**: extract `status`, `handoff`, `deliverables`, `escalation`, `error`
 4. **Handle escalation** if present: present structured questions to operator
 5. **Handoff overflow check** (orchestrator responsibility):
@@ -208,13 +208,9 @@ Based on `brief.deliverable_format`:
 
 **`knowledge-note` (durable knowledge):**
 1. Read the deliverable from `research/deliverable-[dispatch].md`.
-2. Determine the source type for vault routing based on the **majority tier** among
-   scored sources (count of sources per tier — most sources wins):
-   - Majority Tier A → `Sources/papers/`
-   - Majority Tier B, or tie between tiers → `Sources/articles/`
-   - Majority Tier C → `Sources/articles/`
-   - Fallback if no sources: `Sources/articles/`
-3. Write the deliverable to `Sources/[type]/[slug].md` with frontmatter:
+2. Route to `Sources/research/` — matches `produced_artifacts` in this skill's frontmatter
+   and established vault practice (all prior researcher deliverables live there).
+3. Write the deliverable to `Sources/research/[slug].md` with frontmatter:
    ```yaml
    ---
    type: knowledge-note
@@ -516,7 +512,7 @@ Before marking complete, verify:
 
 3. **Soft tool scoping:** Stage templates declare which tools are available (e.g., Citation Verification: `Read`, `Write`), but enforcement is via prompt instruction, not mechanical restriction. The Agent tool does not support `allowedTools` filtering. A sufficiently creative subagent could theoretically call undeclared tools.
 
-4. **Content hash deferred:** Source metadata includes a `content_hash` field with placeholder value `"RUNNER_COMPUTES"`. Hash computation is deferred to future MCP tooling (Phase 4). The field exists in the schema for forward compatibility but is not computed or consumed in V1.
+4. **Content hash deferred:** Source metadata includes a `content_hash` field with placeholder value `"DEFERRED"` (matching the ledger template and stage 03). Hash computation is deferred to future MCP tooling (Phase 4). The field exists in the schema for forward compatibility but is not computed or consumed in V1.
 
 ## Gotchas
 

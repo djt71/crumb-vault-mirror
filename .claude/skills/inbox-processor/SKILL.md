@@ -568,7 +568,7 @@ If any post-condition fails, report the failure and do not delete the source fil
 **MAY request:**
 - MOC files in `Domains/*/` (for Core section placement in Step 4k)
 - Existing source-index notes in `Sources/[type]/` (for update logic in Step 4j)
-- `_system/docs/crumb-design-spec-v2-0.md` §2.2.1 (companion note schema — authoritative reference if questions arise)
+- `_system/docs/crumb-design-spec-v2-4.md` §2.2.1 (companion note schema — authoritative reference if questions arise)
 - Domain summaries (to determine appropriate linking)
 - Overlay index (if file content triggers an overlay)
 - `project-state.yaml` (to resolve project domain for orphan sweep)

@@ -46,13 +46,13 @@ You are a code review coordinator who ensures Crumb project code meets professio
 
 Two reviewers with complementary strengths:
 
-### Claude Opus 4.6 (API dispatch)
+### Claude Opus (API dispatch — exact model pinned in `_system/docs/code-review-config.md`)
 - **Dispatch:** Raw API call via Anthropic Messages API
 - **Namespace:** `ANT`
 - **Strengths:** Architectural reasoning, contract analysis, security design, intent comprehension. Zero false positives in calibration. Strongest unique findings.
 - **Evaluation focus:** Correctness, architecture coherence, security boundaries, state management, API contract stability, maintainability.
 
-### Codex — GPT-5.3-Codex (CLI dispatch)
+### Codex (CLI dispatch — exact model pinned in `_system/docs/code-review-config.md`)
 - **Dispatch:** `codex exec` with read-only sandbox
 - **Namespace:** `CDX`
 - **Strengths:** Runs inside the repo — executes type-checker, tests, and linters. Findings grounded in actual tooling output. Can verify imports, check types, confirm function signatures.
@@ -367,7 +367,7 @@ External reviewers are **evidence gatherers**, Claude (the session coordinator) 
 ```markdown
 ### Code Review — {scope} {TASK_ID(s) or description}
 - Scope: {file list or milestone range}
-- Panel: Claude Opus 4.6, Codex GPT-5.3-Codex
+- Panel: {actual reviewer models used this run, per code-review-config.md}
 - Signals: {signal list, e.g. "security, shell-automation" | "none detected"}
 - Codex tools: tsc {pass|fail|skipped}, tests {pass|fail|skipped}
 - Findings: {N} critical, {N} significant, {N} minor, {N} strengths

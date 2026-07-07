@@ -45,7 +45,7 @@ Use these search strategies in order, scoped by the request:
 1. **Project state** — if query matches a project name, read its `project-state.yaml` and recent run-log entries
 2. **Domain MOCs** — check `Domains/*/moc-*.md` for topic orientation
 3. **Knowledge base** — search by `#kb/` tags matching the query topic
-4. **Account dossiers** — if query is an account name, check `Projects/customer-intelligence/dossiers/`
+4. **Account materials** — if query is an account name, check `Projects/customer-intelligence/` (`staging/`, `comms/`)
 5. **Recent activity** — `git log --since="30 days" --oneline -- <relevant paths>` for recency
 6. **Full-text search** — grep for the query term across relevant vault areas
 
@@ -76,6 +76,8 @@ Return results inline in the session (default). If a calling workflow asks for a
 If the query found nothing relevant, say so explicitly — don't pad with tangential results.
 
 ## Obsidian CLI Reference
+
+This section is the **vault-wide obsidian-cli safety reference** (CLAUDE.md points here; it absorbed the retired obsidian-cli skill). The write/destructive command rows in the risk table exist for other callers — vault-query itself never executes them (see Constraints: read-only).
 
 When Obsidian is running and CLI is available (checked at session start), use these indexed query patterns:
 

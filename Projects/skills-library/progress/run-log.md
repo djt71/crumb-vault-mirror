@@ -63,3 +63,49 @@ tags:
 **Model routing:** all main-session Fable 5 + one claude-code-guide subagent (docs verification, ~35k tokens — justified: platform facts needed live verification, not memory). No execution-tier delegation (no mechanical skills invoked).
 
 **State for next session:** SPECIFY→PLAN gate (context-checkpoint-protocol) then PLAN. Key design questions carried: A4 single-source mechanism (one SKILL.md both surfaces vs packaging-time transform); tier-marker frontmatter key; dist/ location + .gitignore entry. Optional first: peer review of spec (STANDARD offer stands, one session only).
+
+## 2026-07-07 — Skills system review (operator-requested, pre-PLAN design input)
+
+**Trigger:** Operator requested a full review of all 15 skills before PLAN — practicality vs. original goal, procedure optimization, missing functionality/improvements. Run as a design artifact feeding SKL-001 tier classification.
+
+**Context inventory:** project-state.yaml, specification-summary.md, run-log (state reconstruction); CLAUDE.md ambient. Skill files + logs delegated to subagents (below) — main-session source-doc load stayed within standard tier.
+
+**Method:** 5 parallel subagents (all Fable 5 except usage sweep on Sonnet — mechanical grep/classify work per model-routing policy): 4 cluster reviewers (workflow/ops, quality-panel, intake/content, research/retrieval — full SKILL.md + bundled-file reads, stale-ref spot-checks) + 1 usage-evidence sweep (24 log files, ~14k lines, false-positive filtering). Exception handled per protocol: quality-panel agent died on API server error mid-response → single retry via SendMessage resume of same agent (context preserved) → complete result. Usage agent ~159k tokens (justified: full-corpus sweep); reviewers 63–102k each.
+
+**Deliverable:** `design/skills-review.md` — headline findings, usage table, per-skill findings (15 + defunct obsidian-cli), 15-item drift register, ranked recommendations (A quick wins / B refactors / C operator decisions), SKL-001 portability classification.
+
+**Key findings:** (1) usage is bimodal and follows gate wiring, not skill quality — audit/action-architect/systems-analyst/peer-review carry the load; critic/deliberation/vault-query/writing-coach have zero-to-one real uses ever; sync is bypassed as a norm (inline git). (2) Review cluster's cost is duplication: 3 near-identical dispatch agents (1,211 ln) + duplicated conventions between code-review/peer-review. (3) Systemic drift: session-start triple-claim + silently broken staleness chain (hook emits stale_summaries: 0 unconditionally); superseded knowledge-retrieve.sh steps in both planning skills; CLAUDE.md → deleted obsidian-cli skill; deliberation path bug. (4) Strategic tension for SKL-001: the unused skills are the top portable candidates — portable core confirmed as writing-coach, critic, mermaid/Excalidraw, deck-intel method (researcher deferred: heavy transform, claude.ai has native research).
+
+**Operator decisions pending (review §C):** researcher-vs-deep-research repositioning; sync fold-and-retire; fate of near-zero-usage skills (critic → cheap first gate recommended); deliberation strip-or-archive; code-review silence check (no reviewed merge since 2026-04-18); systems-analyst Step 4 demotion.
+
+**Compound evaluation:** Candidate pattern — **"usage follows wiring"**: skills invoked by workflow gates get used; skills relying on spontaneous trigger-matching starve, regardless of quality (empirical across 15 skills / 5 months of logs). This generalizes the Ceremony Budget Principle: the invocation path is part of the ceremony. Medium confidence → per CLAUDE.md, flagging for operator approval before writing to `_system/docs/solutions/`. Also validates VO's ceremony-reduction thesis with the strongest evidence yet.
+
+**Model routing outcome:** Sonnet usage-sweep delegation = pass (no rework; false-positive filtering held up against spot checks). Fable 5 reviewers = pass. One API-error retry (infra, not model quality).
+
+## 2026-07-07 — Tier A quick wins applied (operator-approved)
+
+**Scope:** all Tier A items from `design/skills-review.md` — 24 edits across 11 skill files + CLAUDE.md + 1 file move. No design decisions taken; Tier B/C untouched.
+
+**Applied:**
+- systems-analyst + action-architect: manual `knowledge-retrieve.sh` step replaced with hook-handled note (drift item 1)
+- CLAUDE.md: obsidian-cli skill ref → vault-query skill, Obsidian CLI Reference section (item 2; operator-approved CLAUDE.md edit)
+- mermaid: dead `html-rendering-bookmark.md` always-load removed from required_context (item 3)
+- inbox-processor: spec ref v2-0 → v2-4 (item 6, spec-ref part)
+- researcher (item 9, cosmetic parts): model pin → tier reference; allowedTools contradiction resolved (soft scoping per Known Limitation 3); knowledge-note routing → `Sources/research/` (matches produced_artifacts + practice, replaces majority-tier papers/articles logic); RUNNER_COMPUTES → DEFERRED
+- vault-query: dossiers path → existing `staging/`/`comms/`; CLI section retitled as vault-wide safety reference with read-only clarification (item 10)
+- deliberation: 2× `data/deliberations/` → `_system/data/deliberations/` (item 11)
+- code-review: hardcoded reviewer model versions removed from panel headings + run-log template, deferred to code-review-config.md (item 13)
+- peer-review: `agentic-extraction-spec.md` → `_system/docs/peer-review-agentic-extraction-spec.md` via git mv; zero inbound refs verified pre-move (item 14)
+- critic: intake now captures `review_focus` + `citation_check` (item 15)
+- writing-coach: duplicate Convergence Dimensions section removed (pointer to Step 4 retained)
+- audit: weekly checks 6+7 merged (escalation block kept), checks renumbered 1–15; `tessHarnessIssues` dropped from dashboard JSON template (verified consumer-free in crumb-dashboard repo)
+
+**Verification:** post-edit grep sweep across `.claude/skills/` clean — zero remaining hits for knowledge-retrieve.sh, html-rendering-bookmark, bare `data/deliberations`, Opus 4.6 / GPT-5.3 / opus-4-6 pins, spec-v2-0, RUNNER_COMPUTES, dossiers. vault-check deferred to pre-commit hook.
+
+**Not committed yet** — substantial delta flagged to operator per conditional-commit policy.
+
+## 2026-07-07 — Addendum: built-in skill overlap (operator question → review doc)
+
+**Trigger:** Operator asked whether Claude Code's built-in code-review skill is real. Confirmed from the live session's own skill roster (first-party, not docs recall): built-ins `/code-review` (+ `ultra` multi-agent cloud mode, billed, operator-invoked; `/ultrareview` deprecated alias), `/review` (PR), `/security-review`.
+
+**Finding:** exact name collision with Crumb's code-review skill — the third built-in-overlap instance after researcher↔deep-research (§C-1) and mermaid↔dataviz. Full 15-skill collision sweep run; no other collisions. Added to skills-review.md as an Addendum section + new §C decision 7 (built-in overlap policy: built-in for the everyday case, Crumb skill as differentiated/escalation tier; consider renaming code-review → review-panel). Candidate guard registered (not applied): built-in-collision row in audit weekly check 13. project-state next_action updated (7 decisions pending).

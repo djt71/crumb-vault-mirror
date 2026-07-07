@@ -49,6 +49,7 @@ Determine the artifact interactively:
 - Ask what to review if not specified
 - Infer `artifact_type` from frontmatter or content
 - Default rigor to `standard`
+- Capture optional parameters if the operator specifies them: `review_focus` (dimensions to prioritize in Step 3) and `citation_check` (default `true`; `false` skips Step 3b)
 
 ### Step 2: Read and Understand
 

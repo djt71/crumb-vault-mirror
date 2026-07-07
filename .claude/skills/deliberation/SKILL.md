@@ -255,7 +255,7 @@ If this is part of a batch, note progress: "Deliberation {N} of {total} in batch
 When the user wants to evaluate multiple artifacts:
 
 1. Assign a shared `batch_id` (e.g., `h4-cold-batch`)
-2. Create a **batch manifest** at `data/deliberations/batch-{batch_id}.md` listing:
+2. Create a **batch manifest** at `_system/data/deliberations/batch-{batch_id}.md` listing:
    - Planned artifact list (paths, types)
    - Expected deliberation count
    - Completion tracking (updated as each deliberation finishes)
@@ -365,7 +365,7 @@ Prompt Opus (in the main session — not a subagent) with the extracted dataset 
 
 ### Synth Step 5: Write Synthesis Output
 
-Write the synthesis to `data/deliberations/synthesis-{batch_id}.md` with frontmatter:
+Write the synthesis to `_system/data/deliberations/synthesis-{batch_id}.md` with frontmatter:
 
 ```yaml
 ---

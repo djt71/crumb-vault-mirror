@@ -46,7 +46,7 @@ Load approved artifacts before planning:
 - If design docs don't have these as distinct headings, load the first and last sections of each design doc as a proxy
 - Check estimation calibration history if it exists: `_system/docs/estimation-calibration.md`
 - **Search for implementation patterns:** Glob `_system/docs/solutions/*.md` and scan filenames + frontmatter tags for relevance to the tech stack and architecture being planned. Read any matches — prior implementation patterns surface known pitfalls, proven approaches, and iteration budgets that inform task scoping and risk levels.
-- **Knowledge retrieval (ambient):** If the project has `kb/` tags or the problem domain maps to KB topics, run `_system/scripts/knowledge-retrieve.sh --trigger skill-activation --project [project] --task "[task description]"`. Include the brief output in the context inventory as 1 document against the budget. The brief is ambient — loaded for reference, not displayed to the operator. If the script is not executable or returns empty, continue without it.
+- **Knowledge retrieval (ambient):** handled automatically by the skill-preflight PreToolUse hook — the knowledge brief arrives as additionalContext; count it as 1 document against the budget if present. No manual invocation.
 
 ### 1b. Signal Scan
 

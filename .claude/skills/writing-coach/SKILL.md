@@ -108,8 +108,4 @@ Before marking complete, verify:
 
 Build personal style guide in `_system/docs/solutions/writing-patterns/`. Track recurring editing patterns and audience-specific conventions with standard frontmatter and confidence tagging.
 
-## Convergence Dimensions
-
-1. **Audience fit** — Appropriate tone, terminology, and depth for intended reader
-2. **Structure** — Logical flow, clear sections, good signposting
-3. **Brevity** — No unnecessary words, sentences, or paragraphs; gets to the point
+Convergence dimensions are defined in Step 4 (Audience fit, Structure, Brevity).

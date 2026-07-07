@@ -68,7 +68,7 @@ When work crosses the workflow entry threshold OR user requests a project:
 
 ## File Access
 - Use **Obsidian CLI** for indexed queries (search, tags, backlinks, properties) when Obsidian is running
-  — see obsidian-cli skill for safe command patterns
+  — see vault-query skill (Obsidian CLI Reference section) for safe command patterns
 - Use **native file tools** (Read, Write, Edit, Grep, Glob) for direct read/write and as fallback
   when Obsidian is not running
 - CLI availability is checked automatically by the SessionStart hook

@@ -47,27 +47,26 @@ User-initiated or recommended by staleness scan. Run when 7+ days since last ful
 3. Prune completed tasks from `tasks.md` (move to archive)
 4. Review `_system/logs/session-log.md` for patterns worth promoting to solution docs or interactions worth escalating to projects
 5. Review `tentative-pattern` tags in `_system/docs/solutions/`: validate or discard based on new evidence
-6. Review `_system/docs/failure-log.md`: identify recurring failure modes, suggest rubric/validation updates
-7. Review `_system/docs/failure-log.md` for recurring failure patterns: identify skills, domains, or workflows that appear in multiple failure entries within the last 30 days
+6. Review `_system/docs/failure-log.md` for recurring failure modes (last 30 days): identify skills, domains, or workflows appearing in multiple failure entries; suggest rubric/validation updates
    **Escalation responses (when patterns emerge):**
    - **Same skill in 2+ failure entries:** Require an extra convergence check (score + ground) on that skill's next invocation. Review the skill's convergence dimensions — they may need tightening.
    - **Extended-tier context usage on 3+ consecutive invocations of a skill:** Flag for summary tightening or doc refactoring. The skill's context contract may need restructuring to fit within standard tier.
    - **3+ routing failures (Wrong Skill or Routing Failure) in 30 days:** Review CLAUDE.md routing heuristics and skill descriptions for ambiguity. Propose specific wording changes.
-8. Review context inventory entries in `run-log.md`: flag skills consistently operating in extended tier or above design ceiling — report to user with frequency and skill names
-9. Knowledge base health check: check for orphaned `#kb/*` notes (tagged but not linked from domain summary), flag recently completed project deliverables that may deserve `#kb/` tagging, and **verify all docs in `_system/docs/solutions/` have at least one `#kb/` tag** — untagged solution docs are invisible to knowledge base queries and risk creating duplicate patterns
-10. Stale-KB scan: flag KB notes that look superseded or inert (no inbound wikilinks from active notes, content overtaken by newer notes). If candidates accumulate, recommend a delete review session — deletion with git provenance, per `_system/docs/operator/how-to/vault-gardening.md`
-11. **Orphaned solutions check:** For each doc in `_system/docs/solutions/`, verify it appears in at least one skill's `required_context` entries (check all `.claude/skills/*/SKILL.md` frontmatter). Solutions docs with no `required_context` linkage from any skill are orphaned — they were captured by compound engineering but have no mechanical read-back path. Skip docs that self-declare `linkage: discovery-only` in frontmatter — they have opted out of hard linkage deliberately. Flag the remaining orphans for the user with the recommendation to either add a `required_context` entry to the appropriate skill or mark the doc `linkage: discovery-only`.
-12. **Stale linkage check:** Scan all `required_context` entries across all skill YAML frontmatter. Flag entries where: (a) the `path` points to a file that doesn't exist, or (b) the skill file itself doesn't exist. These are broken links that silently fail at skill activation.
-13. If `_system/docs/solutions/` has reached 50+ documents, perform consolidation pass
-14. **Operator/architecture doc drift check:** Compare live system state against key reference docs for count mismatches:
+7. Review context inventory entries in `run-log.md`: flag skills consistently operating in extended tier or above design ceiling — report to user with frequency and skill names
+8. Knowledge base health check: check for orphaned `#kb/*` notes (tagged but not linked from domain summary), flag recently completed project deliverables that may deserve `#kb/` tagging, and **verify all docs in `_system/docs/solutions/` have at least one `#kb/` tag** — untagged solution docs are invisible to knowledge base queries and risk creating duplicate patterns
+9. Stale-KB scan: flag KB notes that look superseded or inert (no inbound wikilinks from active notes, content overtaken by newer notes). If candidates accumulate, recommend a delete review session — deletion with git provenance, per `_system/docs/operator/how-to/vault-gardening.md`
+10. **Orphaned solutions check:** For each doc in `_system/docs/solutions/`, verify it appears in at least one skill's `required_context` entries (check all `.claude/skills/*/SKILL.md` frontmatter). Solutions docs with no `required_context` linkage from any skill are orphaned — they were captured by compound engineering but have no mechanical read-back path. Skip docs that self-declare `linkage: discovery-only` in frontmatter — they have opted out of hard linkage deliberately. Flag the remaining orphans for the user with the recommendation to either add a `required_context` entry to the appropriate skill or mark the doc `linkage: discovery-only`.
+11. **Stale linkage check:** Scan all `required_context` entries across all skill YAML frontmatter. Flag entries where: (a) the `path` points to a file that doesn't exist, or (b) the skill file itself doesn't exist. These are broken links that silently fail at skill activation.
+12. If `_system/docs/solutions/` has reached 50+ documents, perform consolidation pass
+13. **Operator/architecture doc drift check:** Compare live system state against key reference docs for count mismatches:
     - Skill count in `_system/docs/operator/reference/skills-reference.md` vs. `ls .claude/skills/*/SKILL.md | wc -l`
     - Overlay count in `_system/docs/operator/reference/overlays-reference.md` vs. `ls _system/docs/overlays/*.md | wc -l` (minus index)
     - Service count in `_system/docs/operator/reference/infrastructure-reference.md` vs. loaded `com.crumb.*` plists in `~/Library/LaunchAgents/`
     - Credential count in `_system/docs/operator/how-to/rotate-credentials.md` vs. `_system/docs/operator/reference/infrastructure-reference.md` credential table
     - Architecture docs `updated:` dates vs. design spec `updated:` date (spec change may mean arch docs are stale)
     Flag mismatches to the operator. Do not auto-update — the operator decides which docs need revision.
-15. Log audit completion date and findings to `run-log.md`
-16. **Write dashboard status file:** Write `_system/logs/vault-audit-status.json` with audit metrics for the Mission Control ops dashboard:
+14. Log audit completion date and findings to `run-log.md`
+15. **Write dashboard status file:** Write `_system/logs/vault-audit-status.json` with audit metrics for the Mission Control ops dashboard:
     ```json
     {
       "timestamp": "ISO 8601",
@@ -77,7 +76,6 @@ User-initiated or recommended by staleness scan. Run when 7+ days since last ful
       "orphanedSolutions": 0,
       "brokenLinks": 0,
       "docDriftIssues": 0,
-      "tessHarnessIssues": 0,
       "failureLogEntries30d": 0,
       "archivedKbCount": 0,
       "findings": { "high": 0, "medium": 0, "low": 0 },

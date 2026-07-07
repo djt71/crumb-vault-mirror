@@ -10,10 +10,6 @@ description: >
 context: main
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 model_tier: execution
-required_context:
-  - path: _system/docs/solutions/html-rendering-bookmark.md
-    condition: always
-    reason: "HTML rendering considerations for diagram output"
 ---
 
 # Mermaid Diagram Creation

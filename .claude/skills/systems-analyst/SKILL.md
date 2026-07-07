@@ -55,7 +55,7 @@ Read relevant context before beginning analysis (use Obsidian CLI skill for inde
 - If domain-specific: read `Domains/[domain]/[domain]-summary.md`
 - Search for related patterns: `obsidian search query="tag:problem-pattern [keyword]" format=json matches`
 - Search for related knowledge: `obsidian tag name=kb/[topic]` to find relevant knowledge base notes
-- **Knowledge retrieval (ambient):** If the project has `kb/` tags or the problem domain maps to KB topics, run `_system/scripts/knowledge-retrieve.sh --trigger skill-activation --project [project] --task "[task description]"`. Include the brief output in the context inventory as 1 document against the budget. The brief is ambient — loaded for reference, not displayed to the operator. If the script is not executable or returns empty, continue without it.
+- **Knowledge retrieval (ambient):** handled automatically by the skill-preflight PreToolUse hook — the knowledge brief arrives as additionalContext; count it as 1 document against the budget if present. No manual invocation.
 - **Search for prior art:** Glob `_system/docs/solutions/*.md` and scan filenames + frontmatter tags for relevance to the problem domain and tech stack. Read any matches — prior implementation patterns inform constraints and known pitfalls before analysis begins. This prevents re-discovering lessons already captured from previous projects.
 
 ### 1b. Signal Scan
