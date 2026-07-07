@@ -1,16 +1,16 @@
 name: akm-refresh
 domain: software
 type: system
-phase: SPECIFY
-last_gate: null
+phase: PLAN
+last_gate: SPECIFY-to-PLAN
 created: 2026-07-07
-updated: 2026-07-07
+updated: 2026-07-07 14:10
 related_projects:
   - vault-optimization
 # No repo_path: vault-only project — knowledge-retrieve.sh, skill-preflight
 # hooks, and config all live in the vault. External repo gate skipped (CLAUDE.md §3b).
 # R4 (new-content hook) has a coordination point with VO-037 CLAUDE.md slim-down.
 active_task: null
-next_action: "Project created 2026-07-07 from AKM evaluation (R1 measurement DONE — see _system/docs/akm-evaluation-2026-07.md). Scope: R2 precision-trigger fix (mode flip off collapsed BM25, accept-empty, kill groups-of-3 splitting, score-0 drop, daemon-mode latency evaluation), R3 consumption-tracking hook (new primitive), R4 new-content hook (new primitive), R5 query_hints population. R6 serendipity explicitly out of scope. Next: SPECIFY — author specification.md via systems-analyst; key inputs = akm-evaluation-2026-07, information-surfacing-provenance, bench fixture baseline."
-last_committed: null
+next_action: "PLAN entered 2026-07-07 (spec approved post peer review). First: action-architect — milestones + action plan from specification-summary (10 tasks AKM-001..010, M1–M6 matrix governs R2). Open operator item: A10 DeepSeek curl_timeout bump in peer-review-config."
+last_committed: 2026-07-07 14:10
 services: []
