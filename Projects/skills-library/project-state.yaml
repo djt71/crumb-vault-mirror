@@ -11,5 +11,5 @@ related_projects:
 # all live in the vault. External repo gate explicitly skipped (CLAUDE.md §3b).
 active_task: null
 next_action: "Skills review COMPLETE 2026-07-07 (design/skills-review.md — pre-PLAN input to SKL-001): usage bimodal (follows gate wiring); portable core confirmed = writing-coach, critic, mermaid/Excalidraw, deck-intel method; 7 operator decisions pending (review §C: researcher repositioning, sync retire, near-zero-usage skill fates, deliberation strip-or-archive, code-review silence check, systems-analyst Step 4 demotion, built-in overlap policy incl. code-review name collision). Tier A quick wins APPLIED 2026-07-07 (uncommitted). Then: SPECIFY→PLAN gate (context-checkpoint-protocol) then PLAN — key design question: A4 single-source mechanism + tier marker frontmatter key. Peer review of spec still offered (STANDARD, not required)."
-last_committed: null
+last_committed: 2026-07-07
 services: []
