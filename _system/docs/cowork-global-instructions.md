@@ -5,7 +5,7 @@ type: reference
 skill_origin: null
 status: active
 created: 2026-06-12
-updated: 2026-06-12
+updated: 2026-07-06  # observation item 3 added; paste block unchanged — no re-paste needed
 related:
   - "_system/docs/work-surfaces.md"
   - "_system/docs/adr-vault-write-boundary.md"
@@ -106,5 +106,9 @@ Carried from the scheduler verification
 2. **Does Cowork share the Claude Code project memory directory**
    (`~/.claude/projects/.../memory/`)? Still the one unresolved item from the
    2026-06-11 verification pass.
+3. **Do connectors (Gmail) reach Cowork's *scheduled* runs?** Load-bearing for
+   the feed-intel Gmail digest ([[cowork-feed-instructions]] — its setup
+   checklist step 1 is the test: one-off scheduled task → one-line self-email).
+   Added 2026-07-06.
 
 Log answers here and in [[work-surfaces]] when observed.

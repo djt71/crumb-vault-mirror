@@ -21,6 +21,13 @@ archival (their independent git history destroyed, accepted per scout precedent)
 note plus the vault design docs are the durable extract. Pattern:
 [[handoff-note-at-archival]].
 
+> **Reboot built 2026-07-06:** [[cowork-feed-instructions]] is the canonical source for
+> the Cowork "Feed Intel" project — interactive on-demand block plus a twice-weekly
+> (Mon/Thu) Gmail-digest scheduled prompt (Class 0 outside-in delivery; the push survives,
+> the room changes). Gated on verifying that connectors reach Cowork scheduled runs.
+> X bookmarks source **dropped** (operator, 2026-07-06) — OAuth revocation proceeds with
+> nothing depending on it.
+
 **Governing frame:** feed intelligence is a discovery surface under Directive v3
 Principle 5 — browse freely, no conversion obligation — on rented runtime (Principle 6).
 Intake stays deliberately open; filtering belongs downstream (`feedback-feed-intel-stays-open`
