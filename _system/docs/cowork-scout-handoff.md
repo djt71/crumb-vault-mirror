@@ -4,7 +4,7 @@ domain: null
 status: active
 skill_origin: null
 created: 2026-07-05
-updated: 2026-07-05
+updated: 2026-07-06
 tags:
   - cowork
   - discovery
@@ -16,6 +16,10 @@ tags:
 **Origin:** `Archived/Projects/opportunity-scout/` (archived 2026-07-05, operator decision:
 "good idea, poor execution — move into Claude Cowork, out of the vault"). This note is the
 durable extract; read it before building any Cowork-based discovery surface.
+
+> **Reboot built 2026-07-06:** [[cowork-scout-instructions]] is the canonical paste block
+> for the Cowork "Opportunity Scout" project. Cadence: on-demand only (operator decision;
+> AS-023 closed as a decline, so the scheduling-ownership deferral below is resolved).
 
 **Governing frame:** Liberation Directive v3, Principle 5 (*browse freely; commit on
 belief*) — the scout failure was execution, not concept. A cadence of interesting ideas to
@@ -50,6 +54,17 @@ a lead to be worked) and **rented runtime** (Principle 6 — no self-hosted infr
   ignore" is medium-independent and applies to any Cowork digest too.
 - **Memories:** `feedback-priority-tiers-not-binary`, `feedback-feed-intel-stays-open`
   (filter downstream, keep intake open).
+- **Wildcatter skills (recovered 2026-07-06)** —
+  `Archived/Projects/opportunity-scout/design/wildcatter-*-skill.md`: the Perplexity
+  Computer three-stage pipeline (opportunity-hunter → deal-critic → plan-architect).
+  Already salvaged: the hunter's five scan categories → browse lenses in
+  [[cowork-scout-instructions]]. Worth pulling **at commitment time** (six-gate review
+  of a discovery-originated bet): the critic's memo format (why it could work / what
+  most likely kills it / which assumptions invalidate it), the plan-architect's
+  grounded/estimated/speculative assumption labels, and the asymmetry taxonomy
+  (information/distribution/technology/regulation). Everything else is v2-era doctrine
+  — conversion funnel, hardcoded founder profile, 30–90-day revenue urgency — do not
+  revive as machinery.
 
 ## Reboot constraints (from the current architecture)
 

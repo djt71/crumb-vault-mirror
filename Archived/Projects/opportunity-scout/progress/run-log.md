@@ -311,3 +311,26 @@ The legacy `com.scout.*` plists (daily-pipeline, feedback-poller, weekly-heartbe
 **Compound:** The project's arc is the evidence base for two already-banked lessons — Directive v3 Principle 5 (browse freely / commit on belief; execution lesson, not concept failure) and Principle 6 (rented runtime — maintenance gravity killed the layer). Handoff-note-at-archival is a first instance of extracting a reboot brief when a concept survives its implementation; hold for a second occurrence before promoting.
 
 **Model routing:** Fable 5 main session; no delegation.
+
+## 2026-07-06 — Archival addendum: wildcatter skill files recovered
+
+**Context:** Operator surfaced three Perplexity-Computer-era skill files via `_inbox/`
+(`wildcatter-opportunity-hunter`, `wildcatter-deal-critic`, `wildcatter-plan-architect` —
+a three-stage hunt → stress-test → plan pipeline used for opportunity-scout during the
+Perplexity experiment, spring 2026). Analyzed on request, then filed here as recovered
+historical artifacts (operator-approved routing). Completed Project Guard note: these are
+recovered v1-era documents of this project, not new work — preservation, not reactivation.
+
+**Disposition:**
+- Filed to `design/wildcatter-*-skill.md` with vault frontmatter merged over the original
+  skill frontmatter (bodies untouched).
+- Salvage into the Cowork reboot: the hunter's five scan categories added to the
+  `cowork-scout-instructions.md` paste block as browse lenses (operator-directed).
+  Remaining salvageable instruments noted in `cowork-scout-handoff.md` §What survives.
+- Analysis finding worth keeping: the hunter's default profile listed DDI/DNS security as
+  a core strength (tuning scans toward it) while carrying no PIIA exclusion — the
+  downstream critic gate then killed everything DDI-adjacent, which is consistent with the
+  calibration seed's graveyard being "notably all DDI/Infoblox-adjacent patterns."
+  The pipeline generated candidates its own veto gate was guaranteed to kill.
+
+**Model routing:** Fable 5 main session; no delegation.
