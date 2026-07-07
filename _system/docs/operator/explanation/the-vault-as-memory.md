@@ -40,7 +40,7 @@ Knowledge enters the vault through several pipelines:
 | Feed-intel items (historical) | feed-pipeline skill (retired AS-028; intake now via `_inbox/`) | Signal-notes in `Sources/signals/` |
 | Manual drops | `_inbox/` → inbox-processor | Routed to appropriate location |
 | Project work | Crumb sessions | Design artifacts, run-logs, compound patterns |
-| Research | researcher skill | Research-notes in `Sources/research/` |
+| Research | built-in deep-research skill (researcher retired 2026-07-07) | Research-notes in `Sources/research/` |
 
 Every knowledge artifact gets `#kb/` tags (18 canonical Level 2 topics, open Level 3 subtopics) and a `topics` field that links it to Maps of Content (MOCs) in `Domains/`. This creates a three-layer structure:
 

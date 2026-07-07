@@ -133,6 +133,8 @@ Drift register items 1, 2, 3, 6 (spec ref), 9 (cosmetic parts), 10, 11, 13, 14, 
 - Dispatch-step rewrites (item 12)
 
 ### C — Operator decisions (change what exists, not just how it's written)
+
+**STATUS: ALL DECIDED AND EXECUTED 2026-07-07** (operator, interactive session). Outcomes: **C1** researcher RETIRED (operator went beyond the wrapper recommendation; built-in deep-research + inline vault routing). **C2** sync RETIRED, safety rules folded into session-end-protocol §7. **C3a** critic RETIRED. **C3b** vault-query KEPT with inline execution permitted for trivial lookups. **C3c** writing-coach portable tier, local source kept. **C4** deliberation RETIRED, design preserved in `_system/docs/solutions/deliberation-panel-pattern.md`. **C5** resolved clean — zero commits in semuta/crumb-dashboard since 2026-04-18; tess-v2's two commits were decommission sweeps; no unreviewed merges. **C6** systems-analyst Step 4 demoted to coarse work-areas sketch (+ `lifestyle` added to its domain list). **C7** policy adopted + code-review RENAMED review-panel (policy codified in skills-reference.md; audit weekly check 13 gained a built-in collision row). Roster: 15 → 11 skills. Consequence for Tier B: dispatch-agent unification shrinks from three agents to two (review-panel + peer-review); researcher envelope dedupe is moot.
 1. **researcher vs. deep-research:** reposition researcher as the vault-integration wrapper around the built-in harness (recommended — retires ~450 lines and 4-month-idle machinery while keeping the ledger/validation/routing value), or keep both with disambiguated triggers.
 2. **sync:** fold into session-end protocol and retire the skill (recommended — protocol already re-implemented it; one fewer primitive), or demote to referenced executor.
 3. **Fate of the near-zero-usage skills (critic, deliberation, vault-query, writing-coach):** for each — wire into a gate (usage follows wiring, per finding 1), reposition as portable-tier value (writing-coach and critic are top candidates), or retire. The cluster review recommends repositioning **critic as the default cheap first gate ahead of peer-review** (zero API cost; escalate to the external panel only for HIGH-impact artifacts). Note: critic and writing-coach merges were already REJECTED 2026-06-10 — this review adds the usage evidence that wasn't on the table then.
@@ -150,18 +152,18 @@ Drift register items 1, 2, 3, 6 (spec ref), 9 (cosmetic parts), 10, 11, 13, 14, 
 | deck-intel (method) | **portable** | strip vault routing + deletion gate; loses LibreOffice mode |
 | systems-analyst (method) | portable-with-transform | strip vault plumbing; learning-plan variant is pure method |
 | action-architect (method) | portable-with-transform | strip vault context loading |
-| researcher (ledger discipline) | portable-with-transform | heavy — persistence/telemetry don't transfer; claude.ai has native research |
-| critic | **portable** | minimal — only vault colocation/frontmatter strip away; strongest cluster candidate |
+| researcher (ledger discipline) | ~~portable-with-transform~~ **RETIRED 2026-07-07** (§C-1) | — |
+| critic | ~~portable~~ **RETIRED 2026-07-07** (§C-3a) | — |
 | peer-review | Crumb-only | multi-external-model dispatch is the product |
-| code-review | Crumb-only | Codex CLI + git tooling + API dispatch don't survive a sandbox |
-| deliberation | Crumb-only | API keys, evaluator registry, vault record schemas |
+| review-panel (was code-review) | Crumb-only | Codex CLI + git tooling + API dispatch don't survive a sandbox |
+| deliberation | ~~Crumb-only~~ **RETIRED 2026-07-07** (§C-4; pattern doc preserved) | — |
 | audit | Crumb-only | — |
 | inbox-processor | Crumb-only | — |
 | startup | Crumb-only | — |
-| sync | Crumb-only | — |
+| sync | ~~Crumb-only~~ **RETIRED 2026-07-07** (§C-2; folded into session-end protocol) | — |
 | vault-query | Crumb-only | — |
 
-Spec's working guess (3–5 portable: writing-coach, mermaid, deck-intel method, researcher stages, critic rubric) is largely confirmed — the portable core is **writing-coach, critic, mermaid/Excalidraw, deck-intel method** (researcher's transform is heavy and claude.ai has native research; defer it). writing-coach is the cheapest first upload for SKL-005 live verification.
+Spec's working guess (3–5 portable: writing-coach, mermaid, deck-intel method, researcher stages, critic rubric) is largely confirmed — ~~the portable core is writing-coach, critic, mermaid/Excalidraw, deck-intel method~~ **updated post-§C (2026-07-07): with critic and researcher retired, the portable core is writing-coach, mermaid/Excalidraw, deck-intel method (3 skills — within the spec's 3–5 range)**. writing-coach is the cheapest first upload for SKL-005 live verification.
 
 ## Addendum (2026-07-07) — Built-In Skill Overlap
 

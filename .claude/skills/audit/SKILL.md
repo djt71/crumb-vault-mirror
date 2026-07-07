@@ -64,6 +64,7 @@ User-initiated or recommended by staleness scan. Run when 7+ days since last ful
     - Service count in `_system/docs/operator/reference/infrastructure-reference.md` vs. loaded `com.crumb.*` plists in `~/Library/LaunchAgents/`
     - Credential count in `_system/docs/operator/how-to/rotate-credentials.md` vs. `_system/docs/operator/reference/infrastructure-reference.md` credential table
     - Architecture docs `updated:` dates vs. design spec `updated:` date (spec change may mean arch docs are stale)
+    - **Built-in skill collision check:** compare `.claude/skills/` directory names and trigger territory against the harness's built-in/user-invocable skill list for new collisions (exact name or functional overlap). Flag per the built-in overlap policy in `_system/docs/operator/reference/skills-reference.md` — built-in handles the everyday case; Crumb skill holds only differentiated value
     Flag mismatches to the operator. Do not auto-update — the operator decides which docs need revision.
 14. Log audit completion date and findings to `run-log.md`
 15. **Write dashboard status file:** Write `_system/logs/vault-audit-status.json` with audit metrics for the Mission Control ops dashboard:

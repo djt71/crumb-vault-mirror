@@ -4,7 +4,7 @@ description: >
   Dispatch code diffs to the review panel: Claude Opus via API and Codex via CLI.
   Handles safety gate, prompt wrapping, concurrent dispatch, and raw response
   storage. Follows the peer-review-dispatch mechanical pattern.
-  Spawned by the code-review skill — not invoked directly.
+  Spawned by the review-panel skill — not invoked directly.
 ---
 
 # Code Review Dispatch Agent
@@ -35,7 +35,7 @@ Execute the mechanical dispatch phase of a code review: load API keys, run the s
 
 **MUST NOT load:**
 - Project specs, run logs, CLAUDE.md, skill files
-- The code-review SKILL.md itself
+- The review-panel SKILL.md itself
 
 ## Procedure
 
@@ -256,7 +256,7 @@ diff_stats:
   files_changed: {N}
   insertions: {N}
   deletions: {N}
-skill_origin: code-review
+skill_origin: review-panel
 created: {YYYY-MM-DD}
 updated: {YYYY-MM-DD}
 reviewers:
@@ -291,7 +291,7 @@ reviewer_meta:
     raw_text: {path to last-message-file output}
 tags:
   - review
-  - code-review
+  - review-panel
 ---
 ```
 

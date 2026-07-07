@@ -95,6 +95,10 @@ Check `git diff --stat HEAD` for uncommitted changes:
   Commit with descriptive message covering all changes.
 - **No changes:** Skip commit and push. Log note: "No uncommitted changes — skipping commit."
 
+Commit safety rules (absorbed from the retired sync skill, 2026-07-07):
+- Review the staged diff for sensitive content (credentials, API keys, tokens) before committing
+- Stage specific files — never `git add -A` (avoids accidentally committing sensitive or unintended files)
+
 Then `git push` (skip if no commit was made).
 
 ## Non-Project Session-Log Format

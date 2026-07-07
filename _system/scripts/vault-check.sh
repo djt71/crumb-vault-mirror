@@ -1932,7 +1932,7 @@ check_context_inventory() {
     local has_context_inventory=0
 
     # Known skill names that indicate a skill was invoked
-    local skill_pattern="attention-manager\|systems-analyst\|action-architect\|researcher\|learning-plan\|feed-pipeline\|inbox-processor\|peer-review\|code-review\|deck-intel\|writing-coach\|audit\|vault-query"
+    local skill_pattern="attention-manager\|systems-analyst\|action-architect\|researcher\|learning-plan\|feed-pipeline\|inbox-processor\|peer-review\|code-review\|review-panel\|deck-intel\|writing-coach\|audit\|vault-query"
 
     _check_ctx_inv() {
         if [ $in_session -eq 1 ] && [ $has_skill_mention -eq 1 ]; then
@@ -2283,7 +2283,7 @@ echo ""
 echo "=== Primitive Registry ==="
 
 # Registered skills (directory names under .claude/skills/)
-REGISTERED_SKILLS="action-architect audit code-review critic deck-intel deliberation inbox-processor mermaid peer-review researcher startup sync systems-analyst vault-query writing-coach"
+REGISTERED_SKILLS="action-architect audit deck-intel inbox-processor mermaid peer-review review-panel startup systems-analyst vault-query writing-coach"
 
 # Registered overlays (filenames under _system/docs/overlays/, excluding overlay-index.md)
 REGISTERED_OVERLAYS="business-advisor.md career-coach.md design-advisor.md financial-advisor.md glean-prompt-engineer.md life-coach.md network-skills.md web-design-preference.md"

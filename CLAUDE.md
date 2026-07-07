@@ -103,7 +103,7 @@ At session end, note model routing decisions and their outcomes in the run-log e
 This creates a lightweight feedback loop — routing decisions are reviewed against actual results, not just assumed correct. Adjust `model_tier` assignments when patterns emerge (e.g., a skill consistently requires Opus rework after Sonnet delegation → promote to `reasoning`).
 
 Phased rollout — delegation is active for:
-- **Phase 1 (immediate):** Zero-context mechanical skills — sync, startup
+- **Phase 1 (immediate):** Zero-context mechanical skills — startup
 - **Phase 2 (immediate):** Structured-input skills — mermaid (incl. Excalidraw output)
 - **Phase 3 (deferred):** Interactive skills with prompting phases (e.g., inbox-processor) — requires dispatch manifest design to preserve user decisions across the handoff
 

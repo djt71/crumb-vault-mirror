@@ -866,3 +866,4 @@
 2026-07-07 14:11:45 SYNC feat: akm-refresh SPECIFY complete → PLAN — spec authored + peer-reviewed (round 1, unanimous proceed; A1-A9 applied: M1-M6 acceptance matrix, recall@3 gate, SLO viability rule, AKM-010 soak task, R3/R4 descope contingencies); XD-028 registered (VO-037 overlap window); Grok calibration watch closed (keep)
 2026-07-07 14:19:35 SYNC feat: akm-refresh PLAN authored — action-plan (4 milestones, Stage-0 daemon bail on AKM-001, 4 operator gates) + tasks.md (10 tasks, binary AC) + summary; estimation-calibration row registered (~1.5x prediction, finer-cutting test); session-end log — awaiting operator plan approval before PLAN→TASK gate
 2026-07-07 15:25:52 SYNC feat: skills-library skills-system review + Tier A quick wins applied
+2026-07-07 15:26:28 SYNC chore: skills-library last_committed stamp

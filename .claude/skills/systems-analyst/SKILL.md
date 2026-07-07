@@ -109,15 +109,14 @@ In `specification.md`, document:
 - Second-order effects: Consequences beyond immediate scope
 
 **Domain Classification & Workflow Depth**
-- Classify into: software | career | learning | health | financial | relationships | creative | spiritual
+- Classify into: software | career | learning | health | financial | relationships | creative | spiritual | lifestyle
 - Recommend workflow: full four-phase | three-phase | two-phase
 - Rationale: Why this depth is appropriate
 
-**Task Decomposition**
-- Break work into tasks scoped by context window budget (≤5 file changes per task)
-- Tag each task: `#code`, `#research`, `#decision`, `#writing`, `#behavior-change`
-- Identify dependencies between tasks
-- Assign initial risk levels (low | medium | high)
+**Work Areas Sketch (coarse — not task decomposition)**
+- Identify the major work areas and their dependencies (a handful of named areas, not atomic tasks)
+- Assign initial risk levels per area (low | medium | high)
+- Do NOT produce task IDs, per-task acceptance criteria, or atomic task lists — that is action-architect's mandate in PLAN→TASK. Duplicating it here creates parallel task artifacts that go stale (known project pitfall).
 
 ### 5. Create Summary
 
@@ -156,7 +155,7 @@ that are technically correct but unsustainable given real constraints.
 
 **Not this variant:** one-off factual questions (just answer); skill
 *selection* decisions ("should I learn X or Y" — Career/Life Coach territory);
-sourcing materials as a standalone task (researcher skill); building course
+sourcing materials as a standalone task (built-in deep-research skill); building course
 content for others (writing/design task).
 
 **Context for this variant:** domain summary if the skill maps to one; vault
@@ -220,7 +219,7 @@ phases more open-ended. Each phase has:
 Recommend specific materials with *what it is and why*, phase-mapped (not a
 list dumped at the end), with alternatives. Check the vault first — book
 digests and knowledge notes may cover foundational material. Offer (don't
-require) a researcher-skill dispatch for domains lacking strong resource
+require) a built-in deep-research dispatch for domains lacking strong resource
 knowledge.
 
 ### V5. Write Plan Document
@@ -267,8 +266,7 @@ plan patterns by skill type in `_system/docs/solutions/learning-plan-patterns/`.
 - `specification.md` uses YAML frontmatter with `type: specification` and `skill_origin: systems-analyst`
 - Problem Statement is 2-3 sentences, not a paragraph
 - Facts, Assumptions, and Unknowns are separated into distinct lists
-- Task IDs follow the pattern `[PROJECT]-[NNN]` (zero-padded three digits)
-- Each task has a risk level (low | medium | high) and acceptance criteria
+- Work areas carry risk levels only — no task IDs or acceptance criteria in the spec (action-architect owns those)
 - `specification-summary.md` is generated alongside the full spec
 
 ## Output Quality Checklist

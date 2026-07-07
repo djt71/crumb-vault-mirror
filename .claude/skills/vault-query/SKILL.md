@@ -25,7 +25,7 @@ Your output goes to the operator (for quick lookups) or to a calling skill/workf
 - Pre-call brief needs account history and recent activity
 
 **Not this skill:**
-- Web research (use researcher skill)
+- Web research (use the built-in deep-research skill)
 - Vault modifications (use appropriate domain skill)
 
 ## Procedure
@@ -106,5 +106,6 @@ When Obsidian is not running, fall back to Glob + Grep for the same queries.
 
 - Read-only — never modify vault files during a query
 - Maximum 15 files read per query (prevent runaway searches)
+- **Inline execution permitted for trivial lookups** (single-fact, known-location queries): skip the execution-tier subagent round-trip and run the query directly in-session — mirrors MINIMAL prompt triage. Reserve subagent delegation for multi-file retrievals where isolating reads from main-session context pays off (operator decision 2026-07-07)
 - If Obsidian is not running and the query is broad, narrow scope and note the limitation
 - Wikilinks in output must resolve to actual vault files

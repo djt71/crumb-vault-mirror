@@ -41,7 +41,7 @@ except:
 
 # --- Fast path: skip-entirely skills (no map read, no Python, no subprocesses) ---
 case "$SKILL_NAME" in
-    sync|startup|\
+    startup|\
 loop|simplify|keybindings-help|claude-api|statusline-setup)
         exit 0 ;;
 esac

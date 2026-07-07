@@ -1,11 +1,12 @@
 ---
-name: code-review
+name: review-panel
 description: >
-  Two-reviewer panel (Claude Opus via API + Codex via CLI) review of code
-  changes for correctness, security, readability, and quality. Use at
+  Cross-model review panel (Claude Opus via API + Codex via CLI running
+  repo tooling) for high-stakes code changes — the escalation tier above
+  the built-in /code-review, which handles routine passes. Use at
   IMPLEMENT milestone boundaries and pre-merge in repo_path projects
-  (vault-check §23 enforces), or when user says "review this code",
-  "code review", "check my implementation".
+  (vault-check §23 enforces), or when user says "review panel",
+  "panel review of this code", "full cross-model review".
 context: main
 allowed-tools: Read, Write, Edit, Bash, Grep, Glob
 model_tier: reasoning
