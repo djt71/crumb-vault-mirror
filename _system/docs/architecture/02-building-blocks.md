@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: active
 created: 2026-03-14
-updated: 2026-07-05
+updated: 2026-07-07
 tags:
   - system/architecture
 topics:
@@ -29,8 +29,8 @@ block-beta
 
     block:agents["Agents"]:3
         orchestrator["Orchestrator\n(CLAUDE.md + Claude Code)"]
-        skills["Skill System\n(15 skills)"]
-        subagents["Subagent System\n(4 agents)"]
+        skills["Skill System\n(11 skills)"]
+        subagents["Subagent System\n(3 agents)"]
     end
 
     block:lenses["Lenses & Patterns"]:3
@@ -48,7 +48,7 @@ block-beta
 
 ### Prose Summary (for environments that cannot render Mermaid)
 
-Nine building blocks in three tiers. **Agents tier:** the Orchestrator (CLAUDE.md governance + Claude Code runtime), Skill System (15 procedural packages), and Subagent System (4 isolated workers). **Lenses & Patterns tier:** Overlay System (8 expert lenses), Protocol Layer (4 cross-cutting workflow patterns), and Script Layer (~20 mechanical enforcement and automation scripts). **Data & Communication tier:** Vault Store (the shared filesystem — Projects, Domains, Sources, system docs), Knowledge Base (MOCs, AKM/QMD retrieval, tag taxonomy), and Bridge — **historical (decommissioned 2026-06):** formerly Tess-Crumb communication via `_openclaw/`, now deleted from disk (agentic-sunset).
+Nine building blocks in three tiers. **Agents tier:** the Orchestrator (CLAUDE.md governance + Claude Code runtime), Skill System (11 procedural packages), and Subagent System (3 isolated workers). **Lenses & Patterns tier:** Overlay System (8 expert lenses), Protocol Layer (4 cross-cutting workflow patterns), and Script Layer (~20 mechanical enforcement and automation scripts). **Data & Communication tier:** Vault Store (the shared filesystem — Projects, Domains, Sources, system docs), Knowledge Base (MOCs, AKM/QMD retrieval, tag taxonomy), and Bridge — **historical (decommissioned 2026-06):** formerly Tess-Crumb communication via `_openclaw/`, now deleted from disk (agentic-sunset).
 
 ---
 
@@ -77,19 +77,17 @@ Procedural expertise packages loaded on-demand based on description match.
 | action-architect | TASK/PLAN | Spec → milestones, tasks, dependencies |
 | writing-coach | Any output | Clarity, structure, tone improvement |
 | audit | Maintenance | Staleness scans, full audits, health checks |
-| sync | Session mgmt | Git commit, backup operations |
 | startup | Session mgmt | Session startup hook procedures |
 | peer-review | Review | Cross-LLM artifact validation (multi-model panel) |
-| code-review | Review | Two-tier: Claude Opus (API) + Codex (CLI) |
-| critic | Review | Adversarial review — unsupported claims, logical gaps, missing perspectives (single-stage structured critique) |
-| deliberation | Review | Multi-agent deliberation on vault artifacts — dispatches to external LLM evaluators with role-specific overlays |
+| review-panel | Review | Escalation-tier code review: Claude Opus (API) + Codex (CLI). Routine passes use the built-in `/code-review`. |
 | inbox-processor | Intake | Process `_inbox/` files — classify, route |
-| researcher | Research | 6-stage evidence pipeline with citation integrity |
 | mermaid | Diagrams | Default diagramming — Mermaid in markdown + Excalidraw for freeform/sketch layouts |
 | deck-intel | Extraction | Structured intel from PPTX/PDF; visual content interpretation (absorbed diagram-capture, VO B5) |
 | vault-query | Cross-cutting | Structured vault queries for dispatch consumers |
 
-**Location:** `.claude/skills/[name]/SKILL.md` — each skill is a single markdown file with YAML frontmatter (identity, procedure, context contract, quality checklist, compound behavior, convergence dimensions). Some skills have reference subdirectories (researcher has `stages/` and `schemas/`).
+> **Roster change (2026-07-07, skills-library §C):** 15 → 11. `researcher`, `critic`, `sync`, and `deliberation` retired in favor of built-in harness capabilities (deep-research, /code-review, session-end commit flow); `code-review` renamed `review-panel` and repositioned as the escalation tier above the built-in `/code-review`.
+
+**Location:** `.claude/skills/[name]/SKILL.md` — each skill is a single markdown file with YAML frontmatter (identity, procedure, context contract, quality checklist, compound behavior, convergence dimensions). Some skills have reference subdirectories (mermaid has `excalidraw-reference/`).
 
 **Loading:** Claude Code auto-matches skill descriptions to user requests. Skills with `model_tier: execution` delegate to Sonnet subagents. Skills without `model_tier` run on the session model (Opus).
 
@@ -99,10 +97,11 @@ Isolated context workers for tasks that benefit from separation from the main se
 
 | Agent | Purpose | Consumers |
 |-------|---------|-----------|
-| code-review-dispatch | Review panel dispatch: Claude Opus (API) + Codex (CLI) | code-review skill |
+| code-review-dispatch | Review panel dispatch: Claude Opus (API) + Codex (CLI) | review-panel skill |
 | peer-review-dispatch | Multi-model prose review panel dispatch | peer-review skill |
-| deliberation-dispatch | Role-specific overlay + persona-biased evaluator dispatch with concurrent API calls | deliberation skill |
-| test-runner | Test suite execution in external repos (TypeScript, Node native, pytest) | code-review skill |
+| test-runner | Test suite execution in external repos (TypeScript, Node native, pytest) | review-panel skill |
+
+*(deliberation-dispatch retired with the deliberation skill, 2026-07-07 — skills-library §C.)*
 
 **Location:** `.claude/agents/[name].md`
 
@@ -189,7 +188,7 @@ Mechanical enforcement and automation. Bash and Python scripts that run outside 
 | `system-stats.sh` | Cron | System resource metrics |
 | `setup-crumb.sh` | Manual (new machine) | Full environment setup |
 
-Plus: `dns-recon.sh`, `vault-gc.sh`, `setup-crumb.sh`, and others. (Retired scripts — `bridge-watcher.py`, `tess-health-check.sh`, `batch-moc-placement.py`, `vault-search.sh` — deleted 2026-07-03, vault-optimization B4; git history.)
+Plus: `dns-recon.sh`, `vault-gc.sh`, and others. (Retired scripts — `bridge-watcher.py`, `tess-health-check.sh`, `batch-moc-placement.py`, `vault-search.sh` — deleted 2026-07-03, vault-optimization B4; git history.)
 
 ### 9. Bridge
 
@@ -274,8 +273,8 @@ Which agent owns which system capability. "Owns" means sole authority to execute
 flowchart TD
     subgraph agents["Agents"]
         orch["Orchestrator\n(CLAUDE.md)"]
-        skills["Skill System\n(15 skills)"]
-        subs["Subagent System\n(4 agents)"]
+        skills["Skill System\n(11 skills)"]
+        subs["Subagent System\n(3 agents)"]
     end
 
     subgraph lenses["Lenses & Patterns"]
@@ -354,11 +353,11 @@ Where each building block lives on disk, for navigation.
 | Block | Primary Path(s) | File Count |
 |-------|-----------------|------------|
 | Orchestrator | `/CLAUDE.md`, `/AGENTS.md` | 2 |
-| Skills | `.claude/skills/*/SKILL.md` | 15 directories |
-| Subagents | `.claude/agents/*.md` | 4 files |
+| Skills | `.claude/skills/*/SKILL.md` | 11 directories |
+| Subagents | `.claude/agents/*.md` | 3 files |
 | Overlays | `_system/docs/overlays/*.md` | 9 files (incl. index) |
 | Protocols | `_system/docs/protocols/*.md` + `_system/docs/context-checkpoint-protocol.md` | 4 files |
-| Vault Store | `Projects/`, `Domains/`, `Sources/`, `_system/`, `_inbox/`, `_attachments/` | ~3650 files |
+| Vault Store | `Projects/`, `Domains/`, `Sources/`, `_system/`, `_inbox/`, `_attachments/` | ~2–3k files (counts drift — order of magnitude only) |
 | Knowledge Base | `Domains/*/moc-*.md`, `_system/docs/kb-to-topic.yaml`, `_system/scripts/knowledge-retrieve.sh` | 17 MOCs + scripts |
 | Scripts | `_system/scripts/` | ~20 files |
 | Bridge *(historical — decommissioned 2026-06, directory deleted)* | `_openclaw/` | 16 subdirectories (as it existed pre-deletion) |

@@ -867,3 +867,4 @@
 2026-07-07 14:19:35 SYNC feat: akm-refresh PLAN authored — action-plan (4 milestones, Stage-0 daemon bail on AKM-001, 4 operator gates) + tasks.md (10 tasks, binary AC) + summary; estimation-calibration row registered (~1.5x prediction, finer-cutting test); session-end log — awaiting operator plan approval before PLAN→TASK gate
 2026-07-07 15:25:52 SYNC feat: skills-library skills-system review + Tier A quick wins applied
 2026-07-07 15:26:28 SYNC chore: skills-library last_committed stamp
+2026-07-07 16:53:49 SYNC feat: skills-library §C decisions executed — skill roster 15→11

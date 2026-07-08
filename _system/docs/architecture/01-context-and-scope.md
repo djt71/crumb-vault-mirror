@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: active
 created: 2026-03-14
-updated: 2026-07-05
+updated: 2026-07-07
 tags:
   - system/architecture
 topics:
@@ -18,9 +18,9 @@ This section defines the system boundary, actors, external interfaces, and const
 
 > **Historical (decommissioned):** The three-agent context described in this section (Crumb + Tess Voice + Tess Mechanic via the OpenClaw gateway) was decommissioned by project agentic-sunset (2026-06-01 → 2026-06-12), reboot-verified absent 2026-06-14. `_openclaw/` is deleted from disk. **Current reality:** Crumb (Claude Code sessions) is the only agent; danny is the sole operator, running Crumb directly at the keyboard. The Telegram/Tess interaction channel, the bridge handoff, and the OpenClaw-gateway external system no longer exist. The full three-agent model is preserved below as historical record — see the "Current State" summary immediately below, and [[03-runtime-views]] / [[04-deployment]] for the fullest decommission framing.
 
-## Current State (2026-07-05)
+## Current State (2026-07-07)
 
-Single operator (danny), single agent (Crumb, Claude Code sessions, Claude Opus). No Telegram channel, no always-on background agent, no bridge. The vault remains the single source of truth and the only communication/persistence layer. Crumb reads and writes it under full governance; danny interacts only at the keyboard (interactive sessions or scheduled/cron-invoked `claude --print` for narrow automation, e.g. session-end scripts) — there is no mobile/asynchronous agent surface today. Everything from "## System Purpose" through "## Handoff Model" below describes the historical three-agent design and is kept for architecture history.
+Single operator (danny), single agent (Crumb, Claude Code sessions on top-tier frontier models — currently Opus 4.8 and Fable 5; see crumb-model-policy). No Telegram channel, no always-on background agent, no bridge. The vault remains the single source of truth and the only communication/persistence layer. Crumb reads and writes it under full governance; danny interacts only at the keyboard (interactive sessions or scheduled/cron-invoked `claude --print` for narrow automation, e.g. session-end scripts) — there is no mobile/asynchronous agent surface today. Everything from "## System Purpose" through "## Handoff Model" below describes the historical three-agent design and is kept for architecture history.
 
 ---
 
@@ -121,7 +121,7 @@ The single human user. All system authority derives from Danny. Crumb and Tess a
 
 ### Crumb (System Architect)
 
-Session-bound. Runs only when Danny starts a Claude Code session. Claude Opus 4.6, always.
+Session-bound. Runs only when Danny starts a Claude Code session. Top-tier frontier model, always — pin tier, not version (crumb-model-policy); currently Opus 4.8 / Fable 5.
 
 **What Crumb owns:**
 - Architecture and design decisions (sole authority)
@@ -189,9 +189,9 @@ Always-on. Runs via OpenClaw. Nemotron on local Ollama (`com.tess.llama-server` 
 
 | Component | Description |
 |-----------|-------------|
-| **Obsidian vault** | All state, all communication, all persistence. Projects, specs, plans, logs, skills, protocols, knowledge base. ~2800 files, ~45MB. |
+| **Obsidian vault** | All state, all communication, all persistence. Projects, specs, plans, logs, skills, protocols, knowledge base. ~2–3k files, ~40MB (counts drift — order of magnitude only). |
 | **CLAUDE.md** | Crumb's governance surface — routing rules, protocols, behavioral boundaries, risk tiers. Loaded every session. |
-| **Skills** (`.claude/skills/`) | Procedural expertise packages. 15 skills covering analysis, review, diagrams, research, inbox processing, etc. |
+| **Skills** (`.claude/skills/`) | Procedural expertise packages. 11 skills covering analysis, planning, review, diagrams, intake, and writing (roster 15→11, 2026-07-07 — skills-library §C). |
 | **Subagents** (`.claude/agents/`) | Isolated workers for code review dispatch, peer review dispatch, test running. |
 | **Overlays** (`_system/docs/overlays/`) | Expert lenses (Business Advisor, Career Coach, Life Coach, etc.) injected into active skills. 8 active overlays. |
 | **Protocols** | Cross-cutting workflow patterns: context checkpoint, session-end, hallucination detection, inline attachment (4 files total). |
@@ -202,7 +202,7 @@ Always-on. Runs via OpenClaw. Nemotron on local Ollama (`com.tess.llama-server` 
 
 | External System | Integration | Notes |
 |----------------|-------------|-------|
-| **Anthropic API** | Model inference for Crumb (Opus 4.6) | Crumb-only dependency. Crumb sessions non-functional without it. |
+| **Anthropic API** | Model inference for Crumb (top-tier frontier — currently Opus 4.8 / Fable 5) | Crumb-only dependency. Crumb sessions non-functional without it. |
 | **OpenRouter** | *(Historical — decommissioned 2026-06)* Cloud LLM gateway for Tess Voice | Kimi K2.5 primary, Qwen 3.6 failover. Replaced direct Anthropic access for Tess Voice (migrated 2026-03-30 cloud eval). No longer in use — Tess Voice decommissioned. |
 | **OpenClaw** | *(Historical — decommissioned 2026-06)* Agent gateway platform | Ran Tess. LaunchDaemon on Mac Studio. Managed Telegram bindings, cron scheduling, plugin routing. Decommissioned by agentic-sunset, reboot-verified absent 2026-06-14. |
 | **Telegram** | *(Historical — decommissioned 2026-06)* Mobile messaging | Danny ↔ Tess Voice communication channel. No mobile channel currently exists. |
@@ -212,7 +212,7 @@ Always-on. Runs via OpenClaw. Nemotron on local Ollama (`com.tess.llama-server` 
 | **Git / GitHub** | Version control | Vault is git-tracked. Software projects use external repos. |
 | **NotebookLM** (Google) | Documentation consumption | Danny's primary interface for reading architecture and operator docs. Docs synced to Google Drive → notebook ingestion. |
 | **MarkItDown** (Microsoft) | Binary extraction | CLI tool converting PDF, DOCX, PPTX, XLSX to markdown for inbox processing. |
-| **Web** | Research | Claude Code's built-in WebSearch/WebFetch for the researcher skill and ad-hoc lookups. |
+| **Web** | Research | Claude Code's built-in WebSearch/WebFetch for research (built-in deep-research harness; researcher skill retired 2026-07-07) and ad-hoc lookups. |
 
 ---
 
@@ -272,9 +272,9 @@ Crumb writes project state to the vault. Tess reads it on next interaction.
 
 ### Technical
 
-- **Claude Opus 4.6 for Crumb.** Non-negotiable. Model routing (`model_tier` → Sonnet delegation) applies to subagents and Sonnet-tier skills only. *(Historical: previously also applied to Tess Voice/Mechanic — decommissioned 2026-06.)*
+- **Top-tier frontier model for Crumb.** Non-negotiable — pin tier, not version (crumb-model-policy); currently Opus 4.8 / Fable 5. Model routing (`model_tier` → Sonnet delegation) applies to subagents and Sonnet-tier skills only. *(Historical: previously also applied to Tess Voice/Mechanic — decommissioned 2026-06.)*
 - **macOS host.** Mac Studio, macOS 15+. TCC grants, bootstrap domains, and launchd behaviors are platform-specific constraints. Danny must be logged in (GUI or background) for Apple integrations.
-- **Token limits.** Opus 4.6 has a 1M context window. Practical working range is lower — context management is autonomous per the Context Checkpoint Protocol.
+- **Token limits.** Frontier context windows are 1M-class; practical working range is lower — context management is autonomous per the Context Checkpoint Protocol.
 - **NotebookLM consumption.** Architecture and operator docs must be self-contained enough for notebook ingestion. Clear section boundaries, explicit cross-references, no reliance on Obsidian-specific rendering.
 
 ### Security

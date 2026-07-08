@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: active
 created: 2026-03-14
-updated: 2026-04-11
+updated: 2026-07-07
 tags:
   - system/architecture
 topics:
@@ -70,7 +70,6 @@ sequenceDiagram
     CC->>CC: Code review sweep (if code tasks)
     CC->>CC: Build verification (if repo_path + build_command)
     CC->>AKM: QMD index update
-    CC->>CC: AKM feedback measurement
     CC->>CC: git add + commit (conditional)
     CC->>CC: git push
 ```
@@ -85,7 +84,7 @@ sequenceDiagram
 
 **Phase transition:** Context Checkpoint Protocol runs: verify summaries → goal progress check → compound reflection → context check → log transition. Compound reflection is structurally enforced at every phase boundary.
 
-**Session end (autonomous, 9 steps):** Log with compound eval → project state refresh → failure log (conditional) → code review sweep (conditional) → build verification (conditional) → AKM feedback + QMD update → inbox sweep → conditional commit → git push.
+**Session end (autonomous, 7 steps):** Log with compound eval → project state refresh (project sessions) → failure log (conditional) → code review sweep (conditional) → build verification (conditional) → QMD index update (conditional) → conditional commit + push. Authoritative step list: [[session-end-protocol]]. (The former AKM feedback measurement step was removed — see §6.)
 
 **Failure handling:** If context exhausts mid-work: `/compact` or `/clear` + vault reconstruction. If a skill fails to load: retry once, degrade, then escalate. If the session crashes: Session Interruption Recovery (spec §7.4) reconciles filesystem state against run-log on next resume.
 
@@ -326,7 +325,7 @@ How the Active Knowledge Memory retrieves and surfaces relevant vault knowledge.
 ```mermaid
 %%{init: {'theme': 'default'}}%%
 sequenceDiagram
-    participant Hook as SessionStart Hook
+    participant Hook as PreToolUse Hook<br/>(skill-preflight.sh)
     participant AKM as knowledge-retrieve.sh
     participant QMD as QMD Index
     participant Vault

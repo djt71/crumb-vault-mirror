@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: active
 created: 2026-03-14
-updated: 2026-04-11
+updated: 2026-07-07
 tags:
   - system/architecture
 topics:
@@ -97,7 +97,7 @@ New types emerge through compound engineering, not speculative predefinition.
 
 ## Vault-Check (Mechanical Enforcement)
 
-`_system/scripts/vault-check.sh` — ~27 deterministic validations (rule numbers are not dense — some checks were removed, others added; consult the script header for the authoritative list). The system's only enforcement mechanism that cannot hallucinate, forget, or skip steps.
+`_system/scripts/vault-check.sh` — 24 deterministic validations (rule numbers are not dense — some checks were removed, others added; consult the script header for the authoritative count). The system's only enforcement mechanism that cannot hallucinate, forget, or skip steps.
 
 **Enforcement tiers:**
 - **Error (exit 2):** Blocks git commit. Required field violations, schema breaks, invariant violations.
@@ -227,8 +227,10 @@ Two-tier model for code projects (projects with `repo_path`):
 
 | Tier | Tool | When | Scope |
 |------|------|------|-------|
-| **Tier 1** | Sonnet inline | Every code task completion | Chunked diff review within main session |
-| **Tier 2** | Review panel — Claude Opus (API) + Codex (CLI) | Milestone boundaries, large diffs | Full-context external review via code-review-dispatch agent |
+| **Tier 1** | Built-in `/code-review` | Routine passes at code task completion | Diff review within the main session |
+| **Tier 2** | `review-panel` skill — Claude Opus (API) + Codex (CLI) | Milestone boundaries, pre-merge, high-stakes changes | Full cross-model review via code-review-dispatch agent |
+
+*(The former standalone `code-review` skill was renamed `review-panel` and repositioned as the escalation tier above the built-in `/code-review`, 2026-07-07 — skills-library §C.)*
 
 vault-check §23 enforces that completed code tasks have a code review entry (or explicit skip) in the run-log. Warning level — advisory, not blocking.
 
