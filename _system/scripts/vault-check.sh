@@ -2,7 +2,7 @@
 # vault-check.sh — External Mechanical Vault Validation
 # Crumb Design Spec §7.8
 #
-# Twenty-four mechanical validations that cannot hallucinate, forget, or skip steps.
+# Twenty-five mechanical validations that cannot hallucinate, forget, or skip steps.
 # Exit codes: 0 = clean, 1 = warnings (non-blocking), 2 = errors (blocking)
 #
 # Usage:
@@ -2226,6 +2226,75 @@ fi
 echo "  Checked $FILES_SCANNED_LINKS files, $BROKEN_LINK_COUNT broken links in $BROKEN_LINK_FILES files"
 
 fi  # end scope guard for check 31
+
+# ============================================================================
+# 32. UPDATED FIELD BUMP CHECK (pre-commit only)
+# When a staged modification changes a doc's content but leaves its
+# `updated:` frontmatter value identical to HEAD, warn. The staleness
+# machinery (§2 summary freshness, session-start scans) keys off `updated` —
+# drift here silently defeats it (provenance: architecture docs 03/05 carried
+# April dates over July content, session-log 2026-07-07).
+#
+# Scope: staged MODIFIED .md files carrying an `updated:` field in both HEAD
+# and index versions. Compares index vs HEAD, not the worktree.
+# Grace rule: if the index value already equals today's date, pass — a
+# date-granular field can't be bumped twice in one day.
+# Skips: new files (no HEAD baseline), renames, operational logs
+# (run-log*.md, progress-log.md, _system/logs/), .claude/ definitions.
+# Full-scan mode: skipped (no staged/HEAD pair to compare).
+# Warning level: advisory, non-blocking.
+# ============================================================================
+echo ""
+echo "=== 32. Updated Field Bump Check ==="
+
+UPDATED_BUMP_CHECKED=0
+UPDATED_BUMP_STALE=0
+
+# Extract the `updated:` frontmatter value from document content on stdin-style
+# string input (git show output — no file on disk to reuse extract_field_from_file).
+extract_updated_from_content() {
+    local content="$1"
+    local result
+    result=$(printf '%s' "$content" | tr -d '\r' | awk '
+        /^---[[:space:]]*$/ {
+            count++
+            if (count == 2) exit
+            next
+        }
+        count == 1 { print }
+    ' | grep '^updated:' | head -1 | sed 's/^updated:[[:space:]]*//' | sed "s/^[\"']//;s/[\"']$//") || true
+    printf '%s' "$result"
+}
+
+if [ "$SCOPE" = "staged" ]; then
+    TODAY_DATE=$(date +%Y-%m-%d)
+    MODIFIED_STAGED=$(git -C "$VAULT_ROOT" diff --cached --name-only --diff-filter=M 2>/dev/null | grep '\.md$' || true)
+    while IFS= read -r relpath; do
+        [ -z "$relpath" ] && continue
+        case "$relpath" in
+            .claude/*|_system/logs/*) continue ;;
+        esac
+        case "$(basename "$relpath")" in
+            run-log*.md|progress-log.md) continue ;;
+        esac
+        head_content=$(git -C "$VAULT_ROOT" show "HEAD:$relpath" 2>/dev/null) || continue
+        index_content=$(git -C "$VAULT_ROOT" show ":$relpath" 2>/dev/null) || continue
+        head_updated=$(extract_updated_from_content "$head_content")
+        index_updated=$(extract_updated_from_content "$index_content")
+        # Only police files that carry the field in both versions
+        if [ -z "$head_updated" ] || [ -z "$index_updated" ]; then
+            continue
+        fi
+        UPDATED_BUMP_CHECKED=$((UPDATED_BUMP_CHECKED + 1))
+        if [ "$head_updated" = "$index_updated" ] && [ "$index_updated" != "$TODAY_DATE" ]; then
+            warn "$relpath: content changed but updated: still $index_updated — bump updated (staleness scans key off this field)"
+            UPDATED_BUMP_STALE=$((UPDATED_BUMP_STALE + 1))
+        fi
+    done < <(echo "$MODIFIED_STAGED")
+    echo "  Checked $UPDATED_BUMP_CHECKED modified docs with updated: field, $UPDATED_BUMP_STALE unbumped"
+else
+    echo "  Skipped (full scan — pre-commit only; needs staged/HEAD pair)"
+fi
 
 # ============================================================================
 echo ""

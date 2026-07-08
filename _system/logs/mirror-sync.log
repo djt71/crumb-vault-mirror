@@ -868,3 +868,4 @@
 2026-07-07 15:25:52 SYNC feat: skills-library skills-system review + Tier A quick wins applied
 2026-07-07 15:26:28 SYNC chore: skills-library last_committed stamp
 2026-07-07 16:53:49 SYNC feat: skills-library §C decisions executed — skill roster 15→11
+2026-07-07 22:11:43 SYNC docs: architecture set refresh — roster 11/agents 3, 04-deployment restructured (Part I current / Part II historical), frontmatter dates + model-policy phrasing fixed

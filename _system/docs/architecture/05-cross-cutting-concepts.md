@@ -97,7 +97,7 @@ New types emerge through compound engineering, not speculative predefinition.
 
 ## Vault-Check (Mechanical Enforcement)
 
-`_system/scripts/vault-check.sh` — 24 deterministic validations (rule numbers are not dense — some checks were removed, others added; consult the script header for the authoritative count). The system's only enforcement mechanism that cannot hallucinate, forget, or skip steps.
+`_system/scripts/vault-check.sh` — 25 deterministic validations (rule numbers are not dense — some checks were removed, others added; consult the script header for the authoritative count). The system's only enforcement mechanism that cannot hallucinate, forget, or skip steps.
 
 **Enforcement tiers:**
 - **Error (exit 2):** Blocks git commit. Required field violations, schema breaks, invariant violations.
@@ -109,7 +109,7 @@ New types emerge through compound engineering, not speculative predefinition.
 | Category | Checks | What They Enforce |
 |----------|--------|-------------------|
 | Schema | §1, §3, §20, §25, §26 | Frontmatter required fields, summary schema, source-index/signal-note/attention-item schemas (§27 daily-attention removed 2026-07-05 — attention-manager retired) |
-| Staleness | §2, §11, §24 | Summary freshness, project-state last_committed, run-log size |
+| Staleness | §2, §11, §24, §32 | Summary freshness, project-state last_committed, run-log size, updated-field bump on staged edits (pre-commit only) |
 | Structural integrity | §4, §5, §6, §7 | Run-log session blocks, compound step continuity, session-log compound completeness, project scaffold |
 | Task governance | §8, §10, §22, §23 | Task completion evidence, active_task consistency, DONE project guard, code review gate |
 | Knowledge base | §9, §17, §18, §19, §21 | kb/ tag validation, MOC schema, topics resolution, topics requirement, synthesis density |

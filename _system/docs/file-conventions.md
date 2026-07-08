@@ -4,7 +4,7 @@ domain: null
 skill_origin: null
 status: active
 created: 2026-02-15
-updated: 2026-07-05
+updated: 2026-07-07
 tags:
   - file-conventions
   - system-config
@@ -62,6 +62,8 @@ tags:
 **Required fields (project):** project, domain, type, created, updated. vault-check validates these.
 
 **Summary-specific field:** `source_updated: YYYY-MM-DD` — records the parent document's `updated` value when the summary was generated. Used by staleness detection.
+
+**Bump `updated` on every content edit.** Staleness detection (summary freshness, session-start scans) keys off this field — an edit that leaves `updated` stale silently defeats it. vault-check §32 warns at commit time when a staged modification changes a doc's content without bumping `updated` (same-day re-edits pass; the field is date-granular).
 
 **Optional fields:** skill_origin, tags, topics, and any domain-specific fields (e.g., `customer`, `dossier` for customer-intelligence docs).
 

@@ -22,7 +22,7 @@ This document is the entry point for the Arc42-derived architecture documentatio
 2. [[02-building-blocks]] — 9 subsystems in 3 tiers: agents (11 skills, 3 subagents, orchestrator), lenses & patterns (8 overlays, 4 protocols, scripts), data & communication. Ownership map, dependency diagram, code mapping.
 3. [[03-runtime-views]] — 6 sequence diagrams: session lifecycle, Tess dispatch (historical), feed pipeline (historical), Mission Control (partially historical), bridge handoff (historical), AKM surfacing
 4. [[04-deployment]] — Mac Studio host; single `com.crumb.*` LaunchAgent namespace (11 plists, 10 loaded — dashboard parked); the historical two-namespace `ai.openclaw.*`/`com.tess.v2.*` architecture was decommissioned by agentic-sunset (2026-06); Tailscale mesh, storage layout, credential management, DNS.
-5. [[05-cross-cutting-concepts]] — Frontmatter schema, tag taxonomy (18 Level 2 kb/ tags), vault-check (24 validations), context budgets, MOC system, compound engineering (with 2026-04-04 track/review-routing/cluster enhancements), code review tiers (built-in /code-review for routine passes + review-panel escalation: Claude Opus + Codex).
+5. [[05-cross-cutting-concepts]] — Frontmatter schema, tag taxonomy (18 Level 2 kb/ tags), vault-check (25 validations), context budgets, MOC system, compound engineering (with 2026-04-04 track/review-routing/cluster enhancements), code review tiers (built-in /code-review for routine passes + review-panel escalation: Claude Opus + Codex).
 
 ## Document Hierarchy
 
@@ -55,6 +55,6 @@ Architecture docs must be consistent with the design spec. Divergence means eith
 | Bridge | Filesystem-based handoff between Tess and Crumb via `_openclaw/inbox/` and `_openclaw/outbox/`. kqueue detection, 4-layer security. **Historical (decommissioned):** `_openclaw/` deleted from disk at decommission (2026-06). `_inbox/` is the current universal intake. | [[01-context-and-scope]], [[03-runtime-views]] §5 |
 | Skill | Procedural expertise package in `.claude/skills/`. Loaded on-demand by description match. 11 active. | [[02-building-blocks]] §2 |
 | Overlay | Expert lens injected into active skills. No procedures of their own. 8 active. Routed via overlay index. | [[02-building-blocks]] §4 |
-| vault-check | Deterministic bash script with 24 mechanical validations. The system's only enforcement that can't hallucinate. Pre-commit hook. | [[05-cross-cutting-concepts]] |
+| vault-check | Deterministic bash script with 25 mechanical validations. The system's only enforcement that can't hallucinate. Pre-commit hook. | [[05-cross-cutting-concepts]] |
 | Compound | Reflection at every phase transition that routes insights to conventions, solution docs, or primitive proposals. | [[05-cross-cutting-concepts]] |
 | Signal-note | Lightweight knowledge capture from the historical feed pipeline (FIF, decommissioned 2026-07-05). Lives in `Sources/signals/`. Promotion path to full knowledge-note. | [[05-cross-cutting-concepts]] |
