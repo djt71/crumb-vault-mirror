@@ -63,3 +63,33 @@
 2026-07-07T06:05:34Z stale-projects: count=6 tess-v2, customer-intelligence, obsidian-applenotes-import, think-different, mission-control, tess-danny-migration
 2026-07-07T06:05:34Z OK: wrote health notes to /Users/danny/crumb-vault/_system/logs/vault-health-notes.md
 2026-07-07T06:05:34Z OK: warnings only — written to health notes
+2026-07-08T06:06:02Z vault-check: exit=1 errors=0 warnings=95
+2026-07-08T06:06:02Z git-status: clean=true 
+2026-07-08T06:06:02Z stale-projects: count=6 tess-v2, customer-intelligence, obsidian-applenotes-import, think-different, mission-control, tess-danny-migration
+2026-07-08T06:06:02Z OK: wrote health notes to /Users/danny/crumb-vault/_system/logs/vault-health-notes.md
+2026-07-08T06:06:02Z OK: warnings only — written to health notes
+2026-07-09T06:05:52Z vault-check: exit=1 errors=0 warnings=95
+2026-07-09T06:05:52Z git-status: clean=true 
+2026-07-09T06:05:52Z stale-projects: count=6 tess-v2, customer-intelligence, obsidian-applenotes-import, think-different, mission-control, tess-danny-migration
+2026-07-09T06:05:52Z OK: wrote health notes to /Users/danny/crumb-vault/_system/logs/vault-health-notes.md
+2026-07-09T06:05:52Z OK: warnings only — written to health notes
+2026-07-10T06:05:55Z vault-check: exit=1 errors=0 warnings=95
+2026-07-10T06:05:55Z git-status: clean=true 
+2026-07-10T06:05:55Z stale-projects: count=6 tess-v2, customer-intelligence, obsidian-applenotes-import, think-different, mission-control, tess-danny-migration
+2026-07-10T06:05:55Z OK: wrote health notes to /Users/danny/crumb-vault/_system/logs/vault-health-notes.md
+2026-07-10T06:05:55Z OK: warnings only — written to health notes
+2026-07-11T06:05:57Z vault-check: exit=1 errors=0 warnings=95
+2026-07-11T06:05:57Z git-status: clean=true 
+2026-07-11T06:05:57Z stale-projects: count=6 tess-v2, customer-intelligence, obsidian-applenotes-import, think-different, mission-control, tess-danny-migration
+2026-07-11T06:05:57Z OK: wrote health notes to /Users/danny/crumb-vault/_system/logs/vault-health-notes.md
+2026-07-11T06:05:57Z OK: warnings only — written to health notes
+2026-07-12T06:05:36Z vault-check: exit=1 errors=0 warnings=95
+2026-07-12T06:05:36Z git-status: clean=true 
+2026-07-12T06:05:36Z stale-projects: count=6 tess-v2, customer-intelligence, obsidian-applenotes-import, think-different, mission-control, tess-danny-migration
+2026-07-12T06:05:36Z OK: wrote health notes to /Users/danny/crumb-vault/_system/logs/vault-health-notes.md
+2026-07-12T06:05:36Z OK: warnings only — written to health notes
+2026-07-13T06:05:42Z vault-check: exit=1 errors=0 warnings=95
+2026-07-13T06:05:42Z git-status: clean=false 8 uncommitted file(s)
+2026-07-13T06:05:42Z stale-projects: count=6 tess-v2, customer-intelligence, obsidian-applenotes-import, think-different, mission-control, tess-danny-migration
+2026-07-13T06:05:42Z OK: wrote health notes to /Users/danny/crumb-vault/_system/logs/vault-health-notes.md
+2026-07-13T06:05:42Z OK: warnings only — written to health notes

@@ -624,3 +624,10 @@
 [vault-gc] done: nothing to clean
 [vault-gc] done: nothing to clean
 [vault-gc] done: nothing to clean
+[vault-gc] done: nothing to clean
+[vault-gc] done: nothing to clean
+[vault-gc] done: nothing to clean
+[vault-gc] done: nothing to clean
+[vault-gc] reviews/raw (vault-optimization): purged 8 files older than 30d
+[vault-gc] done: 8 files purged, 0 logs truncated
+[vault-gc] done: nothing to clean

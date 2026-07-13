@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: active
 created: 2026-02-21
-updated: 2026-07-06
+updated: 2026-07-13
 tags:
   - system
 ---
@@ -14,11 +14,11 @@ Orientation artifact for a fresh session reading this repo (claude.ai chat, a
 new Claude Code session, or any agent cloning `github.com/djt71/crumb-vault`).
 Read this first — it is sufficient for most questions.
 
-Last updated: 2026-07-06 (point edit: mission statement re-aligned to directive v3 — three-pillar framing, liberation as priority sub-goal; the prose had retained the superseded v2.1 revenue-framed mission). Prior point edits 2026-07-05: attention-manager retired to Cowork, 15 skills, bet portfolio empty per Gate 4 declarations. Prior full refresh 2026-07-04. **Headline changes since 06-19:** (1) the
+Last updated: 2026-07-13 (point edit: **AS-031 soak v2 COMPLETE — 7/7 green** 2026-07-01→07-07, Day 7 backfilled 07-13; AS-032 is agentic-sunset's sole remaining task. VO M5 soak now WS-bound: WS5 = 2026-07-13, end = max(07-18, 8th working session). The 07-13 reboot was recovered per the GUI-login operating rule — first field exercise, held). Prior point edits 2026-07-06 (mission statement re-aligned to directive v3) and 2026-07-05 (attention-manager retired to Cowork, 15 skills, bet portfolio empty per Gate 4 declarations). Prior full refresh 2026-07-04. **Headline changes since 06-19:** (1) the
 agentic-sunset stability soak v1 **FAILED** — a headless reboot on 2026-06-18
 left the stack dark 13 days (keep-set resurrection is GUI-login-gated, now a
 documented operating assumption: GUI-login after every reboot, then verify
-:8843 + backup-status); soak **v2 restarted 2026-07-01, day 4/7 green**.
+:8843 + backup-status); soak **v2 restarted 2026-07-01 → COMPLETE 7/7 green 2026-07-13**.
 (2) vault-optimization **ran M4 end-to-end** (destructive batches B0–B6 all
 executed 2026-07-03/04): B0 restore-drill gate passed, **B1 deleted `Archived/`
 entirely** (857 tracked files + 133M untracked venvs, ~149M disk recovered;
@@ -64,10 +64,12 @@ produced zero revenue, and ~90% of its function is now native in Claude.AI / Cla
 - **Closeouts done (AS-030, 2026-06-14):** tess-v2 → DONE, tess-danny-migration →
   DONE (P7 superseded), mission-control → paused; `cross-project-deps.md` swept
   (XD-026 resolved, 17 rows mooted).
-- **Remaining:** AS-031 7-day soak **v2** (v1 failed — headless-reboot outage;
-  v2 day 1 = 2026-07-01, day 3/7 green, 7/7 target 2026-07-07) → AS-032
-  compound routing + **external-artifact sweep** (Google Calendar/Drive/Discord
-  residue; inputs preserved in `design/external-artifacts/`) + archival proposals.
+- **Remaining:** AS-032 only — AS-031 soak v2 **COMPLETE 2026-07-13** (7/7
+  consecutive green 2026-07-01→07-07; Day 7 backfilled from backup markers +
+  Drive-side sync mtimes). AS-032 = compound routing + **external-artifact
+  sweep** (Google Calendar/Drive/Discord residue + OpenRouter/OpenClaw-token/
+  X-OAuth revocation decisions; inputs preserved in `design/external-artifacts/`)
+  + archival proposals.
 - **Model policy:** Crumb runs both Opus 4.8 and Fable 5 (top-tier frontier
   models only — tier is the non-negotiable, not the model line).
 
@@ -163,15 +165,15 @@ State below is pulled from each project's `project-state.yaml` (authoritative).
 Directory location is authoritative for archived-vs-active; project docs carry no status field.
 
 ### vault-optimization — software / system / four-phase  *(most active)*
-- **Phase:** IMPLEMENT (M4 complete — all destructive batches executed) · **updated:** 2026-07-04
-- **Status:** M1–M3 complete; M4 executed 2026-07-03/04: B0 restore-drill PASSED, B1 `Archived/` deleted (~149M recovered), B2–B4 attachments/logs/docs/scripts/protocols/overlays swept, B5 skills 19→16, B6 ceremony 31→21 steps + startup-counter sweep (see header).
-- **Next:** M5 soak — VO-034 (instantiate soak window) → VO-035/036 (dry-runs + close).
+- **Phase:** IMPLEMENT (M5 soak live) · **updated:** 2026-07-13
+- **Status:** M1–M4 complete (M4 executed 2026-07-03/04: B0 restore-drill PASSED, B1 `Archived/` deleted (~149M recovered), B2–B4 attachments/logs/docs/scripts/protocols/overlays swept, B5 skills 19→16, B6 ceremony 31→21 steps + startup-counter sweep). M5 soak live since 2026-07-04, criteria green; Tier-1 workflows #4/#5/#6 passed, #1–#3 await natural occurrence.
+- **Next:** soak end = max(2026-07-18, 8th working session) — WS-bound as of 07-13 (WS5) → VO-036 close-out → VO-037 CLAUDE.md slim-down.
 - **Key files:** `Projects/vault-optimization/tasks.md`, `progress/run-log.md`, `design/changeset-b*.md`, `keep-set-manifest.md`
 
 ### agentic-sunset — software / system / four-phase
-- **Phase:** IMPLEMENT (soak) · **updated:** 2026-07-04
-- **Status:** Decommission functionally complete + reboot-verified (GUI-login caveat above). Soak v2 day 4/7 green (tracker in run-log).
-- **Next:** 7/7 green (target 2026-07-07) → AS-032 (external-artifact sweep + compound + archival proposals) → project close.
+- **Phase:** IMPLEMENT (AS-032 only) · **updated:** 2026-07-13
+- **Status:** Decommission functionally complete + reboot-verified (GUI-login caveat above). Soak v2 COMPLETE 7/7 green (2026-07-01→07-07, closed 07-13; tracker in run-log). GUI-login operating rule field-proven at the 07-13 reboot.
+- **Next:** AS-032 (external-artifact sweep + compound + archival proposals) → project close.
 
 ### tess-v2 — software / system / four-phase  *(DONE — closed at agentic-sunset AS-030, 2026-06-14)*
 - **Phase:** DONE · **active_task:** — · **updated:** 2026-06-14

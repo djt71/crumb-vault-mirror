@@ -906,3 +906,15 @@ The 2026-07-05 fix-pass open-items list closed out. Facts gathered first (Tailsc
 **State for next session:** AS-031 Day 7 check due 2026-07-07 — on green, AS-031 done → AS-032 opens. VO: #1–#4 opportunistic; WS advances at each close; earliest soak end 2026-07-18. Pending operator asks: code-review SKILL.md pin alignment (above).
 
 **2026-07-06 addendum (skills-library creation session) — VO-035 Tier-1 #4 PASS, natural occurrence:** New-project SPECIFY (skills-library) exercised **KB query + signal scan** end-to-end against the pruned vault: skill-preflight hook fired on systems-analyst invocation and injected a 3-item knowledge brief (incl. the directly-relevant skillsbench insight); signal scan across Sources/signals|insights|research returned >15 kb/software-dev hits → noise gate applied correctly (keyword intersection → 7 candidates → operator selected 3); selected sources materially shaped the spec (3–5 portable-skill cap from SkillsBench). Zero friction, zero workarounds, no retired primitive missed. **Tier-1 tracker: #4 ✓ COMPLETE, #5 pass ×8 (this close), #6 COMPLETE; #1–#3 pending natural occurrence.** WS count unchanged (WS3 = 2026-07-06 already counted; same-date sessions count once). Soak criteria green.
+
+## 2026-07-13 — M5 soak status check + WS4 backfill
+
+**Trigger:** operator soak-status opener (both soaks checked; AS-031 closed 7/7 same session — see AS run-log).
+
+**WS backfill:** Working sessions ran 2026-07-07 (skills-library §C execution + architecture refresh + vault-check §32 — commits `566b1f70`, `42c34e7f`; akm-refresh SPECIFY same day) but none logged VO soak bookkeeping → **WS4 = 2026-07-07 backfilled** (same-date sessions count once). No sessions 07-08→07-12 (no commits, no run-log entries anywhere). Today's session counts at close → **WS5 = 2026-07-13**. Soak end = max(2026-07-18, 8th WS) — now **WS-bound**: 3 more working sessions needed after today, so the soak will close later than the 07-18 floor unless session pace picks up.
+
+**Criteria check:** zero urgent restores and zero repeated workarounds in window (07-07→13 had no sessions to stress the surface; the 07-13 reboot recovery was AS-domain, keep-set only, no VO primitive touched). Tier-1: #4/#5(×8)/#6 COMPLETE; **#1–#3 still pending natural occurrence** — these are now the long pole alongside the WS count. Soak criteria green.
+
+**Hygiene note:** `vault-gc` 30-day TTL pruned `reviews/raw/` 2026-06-10 peer-review JSONs (8 files, deleted on disk ~07-10, uncommitted since — no sessions ran). Routine retention churn per `vault-gc.sh` design (session-log 5e80c8fd precedent); commit with this session's close. Not a workaround, not a restore — soak-neutral.
+
+**Session close (2026-07-13):** **WS5 = 2026-07-13** confirmed at close. Tracker #5 (session-end sequence) → **pass ×9** (this close; full 7-step run, cross-project dual-soak session). #1–#3 still pending natural occurrence. No urgent restores, no workarounds — soak criteria green. Session-end compound evaluation logged in the AS run-log (primary project this session); nothing VO-specific to route beyond the WS backfill mechanism note above.
