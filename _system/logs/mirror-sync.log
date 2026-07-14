@@ -870,3 +870,4 @@
 2026-07-07 16:53:49 SYNC feat: skills-library §C decisions executed — skill roster 15→11
 2026-07-07 22:11:43 SYNC docs: architecture set refresh — roster 11/agents 3, 04-deployment restructured (Part I current / Part II historical), frontmatter dates + model-policy phrasing fixed
 2026-07-07 23:07:07 SYNC feat: vault-check §32 updated-bump rule — warn on staged content edits without updated: bump (same-day grace); sync points 24→25, convention added to file-conventions
+2026-07-13 19:56:53 SYNC chore: session-end — AS-031 soak v2 COMPLETE (7/7, Day 7 backfilled), VO M5 WS4/WS5 backfill (WS-bound); vault-gc reviews/raw TTL prunes committed; claude-ai-context refreshed

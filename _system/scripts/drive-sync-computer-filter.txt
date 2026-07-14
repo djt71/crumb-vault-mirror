@@ -1,4 +1,6 @@
-# rclone filter rules for Perplexity Computer vault sync
+# rclone filter rules for the filtered Drive backup (gdrive:crumb-vault)
+# Historical name: this was the Perplexity Computer feed; re-purposed as a
+# secondary backup 2026-07-13 (subscription cancelled 2026-06-11).
 # Order matters — first match wins
 # See: https://rclone.org/filtering/#filter-from-read-filtering-patterns-from-a-file
 

@@ -1,12 +1,13 @@
 #!/bin/bash
 # drive-sync.sh — Sync vault content to Google Drive
 # Runs as danny (Google account owner).
-# Schedule: hourly cron (baseline) + post-commit hook (event-triggered)
-# Perplexity Computer depends on fresh vault data for daily operational awareness.
+# Schedule: daily launchd (05:00) + post-commit hook (event-triggered)
 #
 # Two sync targets:
 #   1. NotebookLM: operator/architecture docs → .txt (NLM can't read .md)
-#   2. Perplexity Computer: knowledge-level vault artifacts → .md
+#   2. Drive backup: knowledge-level vault artifacts → .md (filtered mirror,
+#      secondary backup — operator decision 2026-07-13; originally the
+#      Perplexity Computer feed, re-purposed after subscription cancelled 2026-06-11)
 #
 # Uses rclone sync --checksum for content-based sync.
 # One-way push only — never pulls from Drive. No git conflict risk.
@@ -33,7 +34,7 @@ NLM_DRIVE_DIR="crumb-docs"
 NLM_STAGING="/tmp/drive-sync-staging-nlm"
 NLM_DIRS="architecture operator llm-orientation"
 
-# Perplexity Computer config
+# Drive backup config (filtered vault mirror; filter file keeps its historical name)
 COMPUTER_DRIVE_DIR="crumb-vault"
 COMPUTER_FILTER="${SCRIPT_DIR}/drive-sync-computer-filter.txt"
 
@@ -88,13 +89,13 @@ rm -rf "$NLM_STAGING"
 log "  NotebookLM sync: done"
 
 # ============================================================
-# Target 2: Perplexity Computer (.md preserved, filter-based)
+# Target 2: Drive backup (.md preserved, filter-based)
 # ============================================================
 
 if [ ! -f "$COMPUTER_FILTER" ]; then
-    log "  ERROR: Computer filter file not found at ${COMPUTER_FILTER}"
+    log "  ERROR: backup filter file not found at ${COMPUTER_FILTER}"
 else
-    log "  Computer sync: vault → Drive (filtered, .md preserved)"
+    log "  Drive backup sync: vault → Drive (filtered, .md preserved)"
 
     rclone sync "$VAULT_ROOT/" "${REMOTE}:${COMPUTER_DRIVE_DIR}/" \
         --filter-from "$COMPUTER_FILTER" \
@@ -102,7 +103,7 @@ else
         --log-file "$LOG" \
         --log-level NOTICE
 
-    log "  Computer sync: done"
+    log "  Drive backup sync: done"
 fi
 
 log "DONE drive-sync"

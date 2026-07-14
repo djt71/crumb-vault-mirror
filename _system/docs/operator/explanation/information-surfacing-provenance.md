@@ -3,7 +3,7 @@ type: explanation
 status: active
 domain: software
 created: 2026-07-07
-updated: 2026-07-07
+updated: 2026-07-13
 tags:
   - system/operator
 topics:
@@ -25,7 +25,7 @@ Investigation date: 2026-07-07 (session sweep across active projects, archived p
 | Delivery | `skill-preflight.sh` PreToolUse hook → `additionalContext` | attention-manager session (2026-03-08) | Live |
 | Compound connections | Signal scan over `Sources/signals\|insights\|research` + skill Step-1b scans | AKM knowledge-utilization-gap investigation (2026-03-07) | Live (behavioral) |
 | Structure | `#kb/` taxonomy, `topics:` → Domain MOCs, `*-summary.md` + `source_updated` staleness | Design spec §5.3/§5.6 (pre-AKM) | Live |
-| Outbound projections | drive-sync → NotebookLM (`.txt`) + Perplexity Computer; Quartz site for mobile | documentation-overhaul; liberation-directive v1.1; vault-mobile-access (git-only) | Live |
+| Outbound projections | drive-sync → NotebookLM (`.txt`); Quartz site for mobile. (drive-sync's second target is a filtered Drive backup, not a surfacing projection — formerly the Perplexity Computer feed, re-purposed 2026-07-13) | documentation-overhaul; liberation-directive v1.1; vault-mobile-access (git-only) | Live |
 
 ## Layer notes
 

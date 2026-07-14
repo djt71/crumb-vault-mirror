@@ -3,7 +3,7 @@ type: reference
 status: active
 domain: software
 created: 2026-03-14
-updated: 2026-07-05
+updated: 2026-07-13
 tags:
   - system/operator
 topics:
@@ -51,7 +51,7 @@ Hostnames, ports, services, credentials, and health checks for the Crumb system.
 | `com.crumb.backup-status` | `StartInterval` 900s + `RunAtLoad` | Writes backup status JSON for dashboard consumption (checks iCloud vault backup + Time Machine) | `bash _system/scripts/backup-status.sh` | `/tmp/backup-status.log`, `/tmp/backup-status.err` (writes `_system/logs/backup-status.json`) |
 | `com.crumb.cloudflared` | `RunAtLoad` + `KeepAlive` | Cloudflare tunnel, outbound-only, exposes dashboard at `mc.crumbos.dev` → `localhost:3100` | `cloudflared tunnel run crumb-dashboard` | `/tmp/cloudflared-stdout.log`, `/tmp/cloudflared-stderr.log` |
 | `com.crumb.dashboard` | `RunAtLoad` + `KeepAlive` (when loaded) | Mission Control HTTP API server, port 3100 | `node .../crumb-dashboard/packages/api/dist/server.js` | `/tmp/crumb-dashboard-stdout.log`, `/tmp/crumb-dashboard-stderr.log`, `/tmp/crumb-dashboard.log` |
-| `com.crumb.drive-sync` | `StartCalendarInterval` 5:00 AM daily | Syncs operator/architecture docs to Google Drive (NotebookLM `.txt` + Perplexity Computer `.md`), one-way push via rclone | `bash _system/scripts/drive-sync.sh` | `/tmp/drive-sync-stdout.log`, `/tmp/drive-sync-stderr.log` (script's own log: `/tmp/drive-sync.log`) |
+| `com.crumb.drive-sync` | `StartCalendarInterval` 5:00 AM daily | Syncs to Google Drive: NotebookLM docs (`.txt`) + filtered vault mirror (`.md`, secondary backup — formerly the Perplexity Computer feed, re-purposed 2026-07-13), one-way push via rclone | `bash _system/scripts/drive-sync.sh` | `/tmp/drive-sync-stdout.log`, `/tmp/drive-sync-stderr.log` (script's own log: `/tmp/drive-sync.log`) |
 | `com.crumb.qmd-index` | `StartCalendarInterval` 5:30 AM daily | Rebuilds qmd search index + embeddings | `bash -c "qmd update && qmd embed"` | `/tmp/qmd-index-stdout.log`, `/tmp/qmd-index-stderr.log` |
 | `com.crumb.system-stats` | `StartInterval` 60s + `RunAtLoad` | Resource metrics snapshot | `_system/scripts/system-stats.sh` | `_system/logs/system-stats.json`, stderr `/tmp/crumb-system-stats.err` |
 | `com.crumb.vault-backup` | `StartCalendarInterval` 3:00 AM daily | Vault backup tarball → iCloud (`~/Library/Mobile Documents/.../crumb-backups`) | `bash _system/scripts/vault-backup.sh` | `/tmp/vault-backup.log`, `/tmp/vault-backup.err` |
