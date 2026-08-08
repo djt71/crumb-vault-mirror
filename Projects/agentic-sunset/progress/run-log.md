@@ -519,3 +519,37 @@ Operator-approved during a VO session: `_system/archive/` (the AS-012/022/028 pa
 **Model routing:** all main-session Fable 5; no delegation — judgment-dense evidence reconstruction (backfill verdict) + small precision edits. No token-heavy operations.
 
 **State for next session:** AS-032 is the only open AS work. VO soak continues — WS6–WS8 needed; Tier-1 #1–#3 pending natural occurrence.
+
+## 2026-07-14 — AS-032 kickoff: external-artifact sweep (verification pass)
+
+**Trigger:** operator kickoff ("let's kick off AS-032").
+
+**Context inventory:** project-state.yaml (AS-032 scope), design/external-artifacts/ (google-calendars.json, gmail-label-ids.json, email-domain-denylist.txt, operator_priorities.md), google-drive-folders.json recovered via `git show 44248ac4^:_openclaw/config/google-drive-folders.json`, rotate-credentials.md §Candidates for Revocation. 5 docs — within standard budget.
+
+**Verification results (read-only, google-workspace MCP as dturner71@gmail.com):**
+- **Calendars:** 'Agent — Staging' and 'Agent — Followups' both still exist (IDs match google-calendars.json). Zero events on both (checked 2026-01-01 → now; calendars created ~2026-03, so full-lifetime coverage). Empty shells.
+- **Drive:** `00_System/Agent/` tree intact — all 4 subfolders (Inbox/Work/Outbox/Audit, IDs match config) present, **all empty**. Created 2026-03-11, never modified since. Empty scaffolding only.
+- **Gmail:** filters already remediated 2026-06-19 (prior session) — not re-swept.
+- **Discord 'Tess Ops' (TOP-018/023/024):** no tooling — operator-manual item.
+- **Revocation candidates (rotate-credentials §Candidates):** OpenRouter key (env line present, no consumer), OpenClaw gateway token (`/Users/openclaw/.openclaw/openclaw.json`), X OAuth (Keychain, provider-side revocation pending). Telegram tokens = keep dormant (operator decision 2026-07-06). Mistral + Lucid already revoked 2026-07-06.
+
+**Verdict:** nothing cloud-side holds content — all deletions are shell-cleanup, no data loss possible. Decisions presented to operator: calendar deletion ×2, Drive Agent-tree deletion, Discord server, three credential revocations.
+
+## 2026-07-14 — AS-032 sweep execution (operator decisions + local scrub)
+
+**Operator decisions (all via in-session prompt):** delete both agent calendars (operator-manual); trash Drive `00_System/Agent/` tree (executed); revoke OpenRouter + OpenClaw credential + X OAuth; delete `openclaw.json` + all backup copies; revoke 4 newly-found candidates (Perplexity, Discord bot tokens ×2, twitterapi.io, YouTube); scrub full `x-feed-intel.*` Keychain namespace; operator deletes 'Tess Ops' Discord server + bot apps.
+
+**Executed by Claude:**
+- Drive `00_System/Agent/` (ID 1UvEbKgaNNSMAOJPslHuS8mfuF15JnU3a) → trashed via Drive API. 30-day recovery window.
+- Keychain: all 9 `x-feed-intel.*` entries deleted from login keychain, residual scan clean. `google-oauth-client-id/secret` entries deliberately untouched (possible live workspace-mcp credential — verify before any future removal).
+- rotate-credentials.md updated: OpenRouter storage-location correction (was documented as `.env`; actually lived in `openclaw.json` — no `.env` line exists), 4 new candidate rows, X OAuth local-scrub note, Telegram dormant-decision reconciliation, OpenClaw row expanded (secrets-cache finding).
+
+**Sweep discoveries (beyond spec inputs):** `openclaw.json` was a residual secrets cache — OpenRouter key, Perplexity key, Discord bot tokens ×2, Telegram token, gateway password, stale live-key copies (OpenAI/Anthropic) — plus 11 `.bak*`/`.pre-*` sibling copies. Keychain held 4 FIF credentials absent from rotate-credentials §Candidates (twitterapi.io, YouTube, telegram ×2). Gateway credential is a password (mode `password`), not a token as documented; its value echoed in session output — flagged do-not-reuse.
+
+**Pending operator-manual (AS-032 remains open until confirmed):**
+1. `sudo rm -f /Users/openclaw/.openclaw/openclaw.json*` (12 files — sudo blocked for Claude)
+2. Delete 'Agent — Staging' + 'Agent — Followups' calendars (Calendar settings)
+3. Revoke at providers: OpenRouter dashboard, X developer portal, Perplexity dashboard, twitterapi.io, Google Cloud console (YouTube key)
+4. Discord: delete 'Tess Ops' server + `tess-discord`/`mechanic-discord` bot applications (developer portal)
+
+**Still open on AS-032 after sweep:** final compound routing (platform-absorption + dual-scheduler-drift, ask-first), archival proposals (tess-v2 KB exception, agentic-sunset itself), XD-row keep-or-moot confirmation ×6.

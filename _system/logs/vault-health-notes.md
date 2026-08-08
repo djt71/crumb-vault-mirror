@@ -1,13 +1,13 @@
 ---
 type: state
 status: active
-created: 2026-07-13
-updated: 2026-07-13
+created: 2026-08-08
+updated: 2026-08-08
 ---
 
-# Vault Health Notes — 2026-07-13
+# Vault Health Notes — 2026-08-08
 
-## Warnings (95)
+## Warnings (97)
   WARNING: Projects/tess-v2/reviews/2026-03-28-external-action-plan-review-synthesis.md — no YAML frontmatter found
   WARNING: Projects/firekeeper-books/ai-art-learning-plan.md — kb-tagged note missing required 'topics' field
   WARNING: Domains/Career/moc-networking.md — orientation MOC has 15 Core entries but Synthesis has <30 words
@@ -25,6 +25,7 @@ updated: 2026-07-13
   WARNING: Projects/agentic-sunset/progress/run-log.md — session '## 2026-06-12 — AS-027/028/029: gitignore churn, skills cleanup, memory refresh' mentions skill invocation but has no context inventory
   WARNING: Projects/agentic-sunset/progress/run-log.md — session '## 2026-06-14 — Session-end (compound evaluation)' mentions skill invocation but has no context inventory
   WARNING: Projects/agentic-sunset/progress/run-log.md — session '## 2026-07-04 — Cross-project note (vault-optimization, not AS work): `_system/archive/` parked copies deleted' mentions skill invocation but has no context inventory
+  WARNING: Projects/agentic-sunset/progress/run-log.md — session '## 2026-07-13 — AS-031 soak v2 COMPLETE (Day 7 backfilled GREEN, 7/7) → AS-032 opens' mentions skill invocation but has no context inventory
   WARNING: Projects/tess-v2/progress/run-log-2026-03.md — session '## 2026-03-29 — Feed intel actions: security + browser tools' mentions skill invocation but has no context inventory
   WARNING: Projects/tess-v2/progress/run-log-2026-03.md — session '## 2026-03-30b — Soak Extension + Kimi Soak Setup + DeepSeek Audit' mentions skill invocation but has no context inventory
   WARNING: Projects/tess-v2/progress/run-log-2026-03.md — session '## 2026-04-01e — Phase Transition: TASK → IMPLEMENT' mentions skill invocation but has no context inventory
@@ -58,6 +59,7 @@ updated: 2026-07-13
   WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-07-06 — VO-035 Tier-1 #6: within-window skill-routing spot-checks — PASS (8/8)' mentions skill invocation but has no context inventory
   WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-07-06 — Session-end (compound evaluation)' mentions skill invocation but has no context inventory
   WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-07-06 — Session-end (compound evaluation) — mission-statement fix + spec inventory tranche' mentions skill invocation but has no context inventory
+  WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-07-13 — M5 soak status check + WS4 backfill' mentions skill invocation but has no context inventory
   WARNING: Projects/obsidian-applenotes-import/progress/run-log.md — session '## 2026-04-25 — Project creation' mentions skill invocation but has no context inventory
   WARNING: Projects/obsidian-applenotes-import/progress/run-log.md — session '## 2026-04-25 — SPECIFY done; PLAN-ready' mentions skill invocation but has no context inventory
   WARNING: Projects/akm-refresh/progress/run-log.md — session '## 2026-07-07 — SPECIFY: peer review round 1' mentions skill invocation but has no context inventory
@@ -105,9 +107,9 @@ updated: 2026-07-13
   WARNING: Sources/signals/odysseus-minimal-agentic-system-linear.md — broken link: [[tess-operations]]
 
 ## Git Status
-8 uncommitted file(s)
+2 uncommitted file(s)
 
 ## Stale Projects (14+ days)
-tess-v2, customer-intelligence, obsidian-applenotes-import, think-different, mission-control, tess-danny-migration
+agentic-sunset, tess-v2, customer-intelligence, skills-library, firekeeper-books, vault-optimization, obsidian-applenotes-import, think-different, akm-refresh, mission-control, tess-danny-migration, semuta
 
 
