@@ -874,3 +874,4 @@
 2026-07-13 20:07:15 SYNC docs: drive-sync Target 2 re-purposed — Perplexity Computer feed → secondary Drive backup (operator decision; mechanism unchanged)
 2026-08-08 11:23:24 SYNC docs: AS-032 sweep session backfill — run-log (verification + execution 2026-07-14) + rotate-credentials revocation updates
 2026-08-08 11:33:40 SYNC chore: close + delete obsidian-applenotes-import (operator decision 2026-08-08, no archival)
+2026-08-08 11:39:50 SYNC chore: full vault audit 2026-08-08 (weekly + monthly) — session-log entry + dashboard status

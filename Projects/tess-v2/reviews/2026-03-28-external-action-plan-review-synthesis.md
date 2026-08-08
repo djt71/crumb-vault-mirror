@@ -1,3 +1,16 @@
+---
+project: tess-v2
+domain: software
+type: review
+status: active
+created: 2026-03-28
+updated: 2026-08-08
+skill_origin: peer-review
+tags:
+  - review
+  - peer-review
+---
+
 # Tess v2 Action Plan — Consolidated Peer Review Synthesis
 
 **Date:** 2026-03-28  

@@ -4,7 +4,7 @@ project: agentic-sunset
 domain: software
 status: active
 created: 2026-06-12
-updated: 2026-06-12
+updated: 2026-08-08
 topics:
   - moc-crumb-operations
 tags:
@@ -22,7 +22,7 @@ What the decommissioned agentic layer (OpenClaw / Hermes / Tess) did, what repla
 |---|---|---|---|
 | 1 | daily-attention (30m cron + direct Claude API → `_system/daily/{date}.md`) | **On demand only — scheduled replacement DECLINED** (operator, 2026-06-12). The attention-manager skill produces the same artifact when invoked ("plan my day"). Dashboard attention panel reads whatever is current; staleness is acceptable by choice. | Decline documented |
 | 2 | awareness-check / health-ping (30m/15m monitors + dead-man's switch → Telegram / healthchecks.io) | **Dropped.** Nothing autonomous remains to watch. Backup health → `backup-status.json` (dashboard ops panel); vault integrity → `com.crumb.vault-health` nightly log + session-start hook; healthchecks check `tess-mac-studio-health` paused (delete after 30-day window per reversibility contract). | Dropped with rationale |
-| 3 | Feed intel / digests (FIF pipeline, x-feed-intel, scout digests) | **Claude.AI on demand** — web search + connectors; deep-research skill for heavy runs. Deliberately NOT rebuilt as automation: intake stays open and pull-based ([[feedback-feed-intel-stays-open]]). `pipeline.db` stays on disk for the dashboard intel page. | Replaced (pull model) |
+| 3 | Feed intel / digests (FIF pipeline, x-feed-intel, scout digests) | **Claude.AI on demand** — web search + connectors; deep-research skill for heavy runs. Deliberately NOT rebuilt as automation: intake stays open and pull-based (`feedback-feed-intel-stays-open` memory). `pipeline.db` stays on disk for the dashboard intel page. | Replaced (pull model) |
 | 4 | Telegram notifications (briefings, alerts via gateway bot) | **Harness push notifications + Gmail MCP** when something must reach Danny; otherwise pull (dashboard, session start). No bot, no always-on channel. | Replaced |
 | 5 | Research pipelines (overnight briefs — already dead pre-sunset) | **deep-research / researcher skills, interactive.** Archived briefs remain under `_openclaw/research/` until AS-026. | Replaced |
 

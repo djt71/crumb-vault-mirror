@@ -91,20 +91,20 @@ updated: 2026-08-08
   WARNING: Projects/akm-refresh/progress/run-log.md — session '## 2026-07-07 — Session end (SPECIFY → PLAN in one session)' mentions subagent delegation but has no provenance assessment
   WARNING: Projects/mission-control/progress/run-log.md — session '## 2026-03-30 (session 10) — M3.1: Intelligence Feed Density Redesign' mentions subagent delegation but has no provenance assessment
   WARNING: Projects/agentic-sunset/design/upstream-migration.md — broken link: [[feedback-feed-intel-stays-open]]
-  WARNING: Projects/agentic-sunset/progress/run-log.md — broken link: [[project-agentic-sunset]]
-  WARNING: Projects/agentic-sunset/progress/run-log.md — broken link: [[recurring-patterns]]
-  WARNING: Projects/firekeeper-books/progress/run-log.md — broken link: [[recurring-patterns]]
-  WARNING: Sources/insights/loop-scheduled-task-orchestration.md — broken link: [[tess-operations]]
-  WARNING: Sources/signals/claudecodecamp-agents-while-sleeping.md — broken link: [[tess-operations]]
-  WARNING: Sources/signals/fang-trajectory-informed-memory.md — broken link: [[attention-manager]]
-  WARNING: Sources/signals/jpschroeder-dmux-tmux-agents.md — broken link: [[tess-operations]]
-  WARNING: Sources/signals/sero-droid-structured-agent-coding.md — broken link: [[tess-operations]]
-  WARNING: Sources/signals/geohot-running-69-agents.md — broken link: [[tess-operations]]
-  WARNING: Sources/signals/sahoo-safeguarded-self-improvement.md — broken link: [[attention-manager]]
-  WARNING: Sources/signals/mitsuhiko-agents-like-coding-agents.md — broken link: [[tess-operations]]
-  WARNING: Sources/signals/danshipper-daily-codex-polish-agent.md — broken link: [[tess-operations]]
-  WARNING: Sources/signals/koylanai-claude-code-hooks-patterns.md — broken link: [[tess-operations]]
-  WARNING: Sources/signals/odysseus-minimal-agentic-system-linear.md — broken link: [[tess-operations]]
+  WARNING: Projects/agentic-sunset/progress/run-log.md — broken link: `[[project-agentic-sunset]]`
+  WARNING: Projects/agentic-sunset/progress/run-log.md — broken link: `[[recurring-patterns]]`
+  WARNING: Projects/firekeeper-books/progress/run-log.md — broken link: `[[recurring-patterns]]`
+  WARNING: Sources/insights/loop-scheduled-task-orchestration.md — broken link: `[[tess-operations]]`
+  WARNING: Sources/signals/claudecodecamp-agents-while-sleeping.md — broken link: `[[tess-operations]]`
+  WARNING: Sources/signals/fang-trajectory-informed-memory.md — broken link: `[[attention-manager]]`
+  WARNING: Sources/signals/jpschroeder-dmux-tmux-agents.md — broken link: `[[tess-operations]]`
+  WARNING: Sources/signals/sero-droid-structured-agent-coding.md — broken link: `[[tess-operations]]`
+  WARNING: Sources/signals/geohot-running-69-agents.md — broken link: `[[tess-operations]]`
+  WARNING: Sources/signals/sahoo-safeguarded-self-improvement.md — broken link: `[[attention-manager]]`
+  WARNING: Sources/signals/mitsuhiko-agents-like-coding-agents.md — broken link: `[[tess-operations]]`
+  WARNING: Sources/signals/danshipper-daily-codex-polish-agent.md — broken link: `[[tess-operations]]`
+  WARNING: Sources/signals/koylanai-claude-code-hooks-patterns.md — broken link: `[[tess-operations]]`
+  WARNING: Sources/signals/odysseus-minimal-agentic-system-linear.md — broken link: `[[tess-operations]]`
 
 ## Git Status
 2 uncommitted file(s)

@@ -918,3 +918,20 @@ The 2026-07-05 fix-pass open-items list closed out. Facts gathered first (Tailsc
 **Hygiene note:** `vault-gc` 30-day TTL pruned `reviews/raw/` 2026-06-10 peer-review JSONs (8 files, deleted on disk ~07-10, uncommitted since — no sessions ran). Routine retention churn per `vault-gc.sh` design (session-log 5e80c8fd precedent); commit with this session's close. Not a workaround, not a restore — soak-neutral.
 
 **Session close (2026-07-13):** **WS5 = 2026-07-13** confirmed at close. Tracker #5 (session-end sequence) → **pass ×9** (this close; full 7-step run, cross-project dual-soak session). #1–#3 still pending natural occurrence. No urgent restores, no workarounds — soak criteria green. Session-end compound evaluation logged in the AS run-log (primary project this session); nothing VO-specific to route beyond the WS backfill mechanism note above.
+
+## 2026-08-08 — M5 soak CLOSED (operator decision)
+
+**Trigger:** operator decision during full-vault-audit session ("close the soak") — audit flagged the soak 21 days past its 07-18 floor with WS stuck at 5/8 and no vault activity since 07-13.
+
+**Closure state:** window ran 2026-07-04 → 2026-08-08 (35 days elapsed vs. 14-day floor; WS count ended at 5 of 8 — the 8th-WS bound was never reached because the vault went dormant 07-14 → 08-08, not because sessions stressed the surface and stalled).
+
+**Criteria verdict:**
+- **Zero urgent restores** ✓ — none in window, and the 25-day unattended stretch is itself strong evidence: the pruned surface ran with no operator present and nothing needed restoring (independently confirmed by today's automated vault-health run and the 08-08 full audit — 0 errors, all counts consistent).
+- **No repeated workaround** ✓ — none recorded in window.
+- **Tier-1 workflows:** #4, #5 (×9), #6 COMPLETE. **#1–#3 never occurred naturally** — unexercised, not failed. Disposition: carry as post-soak watch items; log opportunistically if/when a session exercises them, no gate.
+
+**Verdict: PASS on all exercised criteria; closed at operator discretion with #1–#3 unexercised.** The B0–B6 pruned configuration is accepted as the operating baseline.
+
+**Unblocked:** VO-036 close-out (validation record, operating note final, operator sign-off) → VO-037 CLAUDE.md minimalism pass (+ deferred §3.1/§3.3 spec structural reorg, v2.5). Both are next-session work — not executed in this audit session.
+
+**Carried pending operator ask (unchanged):** code-review SKILL.md model-pin alignment (opus-4-8 / gpt-5.4-codex, two tokens).
