@@ -875,3 +875,4 @@
 2026-08-08 11:23:24 SYNC docs: AS-032 sweep session backfill — run-log (verification + execution 2026-07-14) + rotate-credentials revocation updates
 2026-08-08 11:33:40 SYNC chore: close + delete obsidian-applenotes-import (operator decision 2026-08-08, no archival)
 2026-08-08 11:39:50 SYNC chore: full vault audit 2026-08-08 (weekly + monthly) — session-log entry + dashboard status
+2026-08-08 11:59:09 SYNC fix: audit follow-up — broken-wikilink sweep (16 links, 15 files) + tess-v2 review frontmatter backfill
