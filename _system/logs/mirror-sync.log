@@ -873,3 +873,4 @@
 2026-07-13 19:56:53 SYNC chore: session-end — AS-031 soak v2 COMPLETE (7/7, Day 7 backfilled), VO M5 WS4/WS5 backfill (WS-bound); vault-gc reviews/raw TTL prunes committed; claude-ai-context refreshed
 2026-07-13 20:07:15 SYNC docs: drive-sync Target 2 re-purposed — Perplexity Computer feed → secondary Drive backup (operator decision; mechanism unchanged)
 2026-08-08 11:23:24 SYNC docs: AS-032 sweep session backfill — run-log (verification + execution 2026-07-14) + rotate-credentials revocation updates
+2026-08-08 11:33:40 SYNC chore: close + delete obsidian-applenotes-import (operator decision 2026-08-08, no archival)
