@@ -3,7 +3,7 @@ type: reference
 status: active
 domain: software
 created: 2026-03-14
-updated: 2026-04-11
+updated: 2026-08-10
 tags:
   - system/operator
 topics:
@@ -63,7 +63,7 @@ crumb-vault/                           # Vault root (Obsidian vault + git repo)
 │   └── insights/                      # Curated synthesis
 ├── _system/                           # System infrastructure
 │   ├── docs/
-│   │   ├── crumb-design-spec-v2-4.md  # Master design spec (261KB)
+│   │   ├── crumb-design-spec.md  # Master design spec (261KB)
 │   │   ├── file-conventions.md        # File naming, frontmatter, type taxonomy
 │   │   ├── architecture/              # Arc42-derived system docs (00–05)
 │   │   ├── operator/                  # Diátaxis operator docs

@@ -4,7 +4,7 @@ domain: null
 skill_origin: null
 status: active
 created: 2026-02-15
-updated: 2026-07-07
+updated: 2026-08-10
 tags:
   - file-conventions
   - system-config
@@ -12,7 +12,7 @@ tags:
 
 # File Conventions
 
-Conventions for all files in the Crumb vault. These enable Obsidian CLI queries (property filtering, tag-based search), knowledge base discovery via `#kb/*` tags, and consistent vault maintenance. Full specification: _system/docs/crumb-design-spec-v2-0.md §2.2.
+Conventions for all files in the Crumb vault. These enable Obsidian CLI queries (property filtering, tag-based search), knowledge base discovery via `#kb/*` tags, and consistent vault maintenance. Full specification: _system/docs/crumb-design-spec.md §2.2.
 
 ## YAML Frontmatter
 

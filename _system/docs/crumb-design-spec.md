@@ -5,18 +5,18 @@ type: specification
 skill_origin: null
 status: active
 created: 2026-02-14
-updated: 2026-07-06
+updated: 2026-08-10
 tags:
   - design-spec
   - crumb
 ---
 
 # crumb — Personal Multi-Agent Operating System
-## Revised Design Specification (v2.4)
+## Revised Design Specification (v2.5)
 
 *This document is self-contained. It describes the complete Crumb system architecture and is intended to allow full reconstruction with no prior knowledge. For version-by-version change history, see [[separate-version-history]] (pre-v2.0: [[separate-version-history-archive]]).*
 
-**Current version: v2.4 (2026-03-06; maintained via dated inline point-edits — latest 2026-07-06)** — Active Knowledge Memory (QMD semantic retrieval + Knowledge Brief), researcher skill (stage-separated evidence pipeline), 3 new overlays with companion document pattern, feed-pipeline hardening, 17 MOCs (count corrected 2026-07-06; was drifted at 15; skill/subagent inventory re-aligned to as-built 15-skill registry 2026-07-06). Point-edits don't bump the version; see the policy note in [[separate-version-history]].
+**Current version: v2.5 (2026-08-10; maintained via dated inline point-edits)** — structural reorg of §3.1/§3.3 from build-plan framing to the as-built 11-skill registry (VO-037); retired-skill subsections removed (git is the archive); §4.1.5 absorbed the external-repo gate + service registration; §3.5 absorbed cost observation; file renamed version-neutral (`crumb-design-spec.md`) — version lives in this header and [[separate-version-history]] only. Point-edits don't bump the version; see the policy note in [[separate-version-history]].
 
 ---
 
@@ -1131,11 +1131,11 @@ Not everything is a skill. Use the right Claude Code primitive for the job:
 | **Protocol** (in CLAUDE.md or referenced file) | Cross-cutting workflow pattern used across skills. | Not a standalone entity. Invoked by skills or orchestrator. |
 | **Overlay** (`_system/docs/overlays/`) | Domain expertise or contextual lens applied to another skill's work. | Loaded automatically via overlay index when activation signals match (§3.4.2), or explicitly by user request. Adds lens questions to active skill's procedure. |
 
-### 3.1 Phase 1 Skills (Build First)
+### 3.1 Core Workflow Skills (as built)
 
-Start with these 7 core skills. `systems-analyst` and `action-architect` are built in Phase 1a (Day 1). `writing-coach` and `audit` are built in Phase 1b (Days 2-5) when their triggers fire. `obsidian-cli`, `checkpoint`, and `sync` are utility skills built as needed. All skills follow the section conventions in `_system/docs/skill-authoring-conventions.md`. The authoritative content for each skill lives in its SKILL.md file — the summaries below capture phase context, key inputs/outputs, and cross-references.
+The four core workflow skills below anchor the phased workflows. All skills follow the section conventions in `_system/docs/skill-authoring-conventions.md`. The authoritative content for each skill lives in its SKILL.md file — the summaries below capture phase context, key inputs/outputs, and cross-references.
 
-**Historical note (2026-07-06):** this paragraph is preserved as a build-history record of the original Phase 1 roster. Two of the three utility skills named above have since been merged into successors and no longer exist as standalone skills: `obsidian-cli` → `vault-query` (pre-VO consolidation round, ~2026-03) and `checkpoint` → `audit` (VO M4 B5, 2026-07-04). `sync` remains standalone. See §3.1.5 and §3.1.6 below for the merge banners, and §3.3 for the current 15-skill registry. A full structural reorg of this section (renumbering/removing the retired subsections) is deferred to v2.5.
+*(Reorganized at v2.5, 2026-08-10: build-plan framing and retired-skill subsections removed — build history lives in git and [[separate-version-history]]. Former subsections: obsidian-cli §3.1.5 merged → vault-query ~2026-03; checkpoint §3.1.6 merged → audit 2026-07-04; sync §3.1.7 retired 2026-07-07 — all now in the §3.3 retired/merged table.)*
 
 #### 3.1.1 Systems Analyst
 
@@ -1191,57 +1191,15 @@ Start with these 7 core skills. `systems-analyst` and `action-architect` are bui
 - **Convergence dimensions:** Coverage, Accuracy, Actionability
 - **Context contract:** MUST have vault structure access; MAY request specific project files, failure log, signals, solutions listing; AVOID loading all vault files simultaneously
 
-#### 3.1.5 Obsidian CLI
-
-**MERGED (~2026-03, pre-VO consolidation round).** The `obsidian-cli` skill was merged into `vault-query`, which now owns all vault query routing and safe CLI/native-tool fallback patterns described below. `obsidian-cli` no longer exists as a standalone skill; the section below is preserved as historical record.
-
-**File (historical):** `.claude/skills/obsidian-cli/SKILL.md`
-
-- **Phase:** Cross-cutting (used by all skills that query the vault)
-- **Purpose:** Provide reliable, token-efficient vault access using Obsidian's native index. Other skills call through this skill's patterns for vault queries rather than invoking CLI commands directly.
-- **Key behavior:**
-  - **Routing:** Use CLI for index-powered operations (search, backlinks, tags, properties, orphans); use file tools for direct read/write or when Obsidian is not running
-  - **Safe patterns:** `silent` flag on create, `all` scope for vault-wide queries, `format=json matches` for search, `format=tsv` for properties, defensive output parsing
-  - **Risk alignment:** Low risk (read operations), Medium risk (create/append/move), High risk (delete/eval)
-- **Compound behavior:** Track CLI usage patterns; flag recurring failures for documentation updates
-- **Convergence dimensions:** Correctness, Efficiency, Robustness
-- **Context contract:** MUST have the query/operation; MAY request scope parameters; AVOID unbounded vault-wide queries
-
-#### 3.1.6 Checkpoint
-
-**MERGED (2026-07-04, VO M4 B5).** The `checkpoint` skill was merged into `audit`, which now owns state-checkpoint behavior (log progress, compact/reconstruct context, verify vault files). `checkpoint` no longer exists as a standalone skill; the section below is preserved as historical record.
-
-**File (historical):** `.claude/skills/audit/SKILL.md` §State Checkpoint (absorbed into the audit skill at vault-optimization B5, 2026-07-04; originally a standalone skill)
-
-- **Phase:** Session management (cross-cutting)
-- **Inputs:** Current session state, context usage level
-- **Outputs:** Progress snapshot in run-log/session-log, context health report
-- **Key behavior:** Logs current state, checks context usage (`/context`), manages context pressure (compact at >70%, clear+reconstruct at >85%), verifies all critical outputs are persisted to vault
-- **Compound behavior:** Track context usage patterns at checkpoint time to calibrate future phase-scoping decisions
-- **Convergence dimensions:** Completeness, Durability
-- **Context contract:** Minimal — reads small state files only; avoids loading additional context
-
-#### 3.1.7 Sync
-
-**File:** `.claude/skills/sync/SKILL.md`
-
-- **Phase:** Session management (cross-cutting)
-- **Inputs:** Git repository state
-- **Outputs:** Git commit, optionally push to remote and/or trigger backup
-- **Key behavior:** Verifies vault state, checks git status, creates commit with conventional message (staging specific files, not `git add -A`), optionally pushes and triggers cloud backup
-- **Compound behavior:** Track sync patterns to identify lost uncommitted work across sessions
-- **Convergence dimensions:** Completeness, Safety
-- **Context contract:** Minimal — operates on filesystem, not vault content
-
 ### 3.2 Subagents — Actual Roster
 
 Subagents are defined in `.claude/agents/`. They provide isolated context workers for tasks that benefit from separation from the main session.
 
-**Current agents (as of v2.4; roster corrected 2026-07-06 — 4 agents verified on disk):**
+**Current agents (as of v2.5; roster re-verified 2026-08-10 — 3 agents on disk; deliberation-dispatch removed with the deliberation skill retirement 2026-07-07):**
 
 #### 3.2.1 Code Review Dispatch (`code-review-dispatch.md`)
 
-**Corrected (2026-07-06).** Dispatches the code-review panel: **two reviewers**, Claude Opus 4.8 (API dispatch, findings namespace `ANT`) and GPT-5.4-Codex (dispatched via `codex exec` CLI, runs tool-grounded inside the repo, findings namespace `CDX`). Handles the safety gate, prompt wrapping with injection resistance and structured output layers, concurrent dispatch to both reviewers, and writes the review note skeleton plus raw responses to `Projects/[project]/reviews/`. Used by the code-review skill (per current `_system/docs/code-review-config.md` and the code-review SKILL.md — the panel is no longer 3 external models with a Tier 1/Tier 2 chunk-threshold split; Devstral was dropped).
+**Corrected (2026-07-06; skill renamed 2026-08-10 note).** Dispatches the review panel: **two reviewers**, Claude Opus (API dispatch, findings namespace `ANT`) and Codex (dispatched via `codex exec` CLI, runs tool-grounded inside the repo, findings namespace `CDX`) — exact models pinned in `_system/docs/code-review-config.md`. Handles the safety gate, prompt wrapping with injection resistance and structured output layers, concurrent dispatch to both reviewers, and writes the review note skeleton plus raw responses to `Projects/[project]/reviews/`. Used by the **review-panel** skill (renamed from code-review 2026-07-07, skills-library review; the panel is no longer 3 external models with a Tier 1/Tier 2 chunk-threshold split; Devstral was dropped).
 
 #### 3.2.2 Peer Review Dispatch (`peer-review-dispatch.md`)
 
@@ -1251,11 +1209,7 @@ Subagents are defined in `.claude/agents/`. They provide isolated context worker
 
 Executes test suites in external repos for code review scoping. Runs `npm test` (or equivalent) and returns pass/fail counts and failure summaries to the main session. Used by the code-review skill to establish test baseline before and after changes.
 
-#### 3.2.4 Deliberation Dispatch (`deliberation-dispatch.md`)
-
-**Added (2026-07-06 — agent already existed on disk; missing from this roster).** Dispatches deliberation artifacts to external LLM evaluators with role overlays: handles sensitivity classification and safety gate, assembles per-evaluator prompts (overlay + persona_bias + assessment schema), dispatches concurrently with random stagger, tracks versioning, and writes raw responses plus a deliberation record skeleton to the vault. Used by the deliberation skill.
-
-#### 3.2.5 Subagent Revision Protocol
+#### 3.2.4 Subagent Revision Protocol
 
 When the main session's validation finds **specific, actionable issues** with subagent output — not vague quality concerns — it can spawn a single revision pass before escalating to the human gate:
 
@@ -1273,23 +1227,20 @@ When the main session's validation finds **specific, actionable issues** with su
 | Frontend Designer | Software project requires UI/UX design, component architecture, or design systems work |
 | Backend Designer | Software project requires API design, database modeling, or service architecture work |
 
-### 3.3 Phase 2+ Skills (Add Incrementally Based on Need)
+### 3.3 Skill Registry (as built) & Backlog
 
-**Do not build these until you have empirical evidence they're needed.** New skill candidates discovered through compound engineering (§4.4) are added here via the Primitive Proposal Flow.
+**Current registry: 11 skills** (structural reorg at v2.5, 2026-08-10; roster per the skills-library review decisions of 2026-07-07 — built-in overlap policy: where a Claude Code built-in covers the need, the custom skill retires). Four core workflow skills are documented in §3.1 (systems-analyst, action-architect, writing-coach, audit); the remaining 7 are summarized below. Together §3.1 + this table enumerate all 11 current skills with no overlap. Per-skill `version:` frontmatter is retired.
 
-**(Inventory re-aligned 2026-07-06 to the as-built 15-skill registry; see point-edit policy in [[separate-version-history]].)** Per-skill `version:` frontmatter has been retired — skills no longer carry a version field, so the column below is dropped. The 15-skill registry is split across this document: 5 core skills are documented in §3.1 (systems-analyst, action-architect, writing-coach, audit, sync); the remaining 10 are documented below. Together §3.1 + this table enumerate all 15 current skills with no overlap.
+**Do not build backlog entries until you have empirical evidence they're needed.** New skill candidates discovered through compound engineering (§4.4) are added here via the Primitive Proposal Flow.
 
 **Built skills** (details in each skill's `SKILL.md`):
 
 | Skill | Summary |
 |---|---|
-| Peer Review | Cross-LLM artifact review. 4-model default panel (gpt-5.4, gemini-3.1-pro-preview, deepseek-v4-pro, grok-4.3) + optional manual-dispatch Perplexity reviewer. Config: `peer-review-config.md` |
+| Peer Review | Cross-LLM artifact review. Panel composition + models pinned in `peer-review-config.md`; optional manual-dispatch Perplexity reviewer |
 | Inbox Processor | Process `_inbox/` files — classify, frontmatter, route. MarkItDown extraction |
-| Researcher | 6-stage evidence pipeline via Agent tool dispatch. Write-only-from-ledger citation integrity. `stages/` + `schemas/` subdirs |
-| Code Review | Two-reviewer panel: Claude Opus 4.8 (API) + GPT-5.4-Codex (`codex exec` CLI). Config: `code-review-config.md` |
-| Critic | Adversarial review of a vault artifact: unsupported claims, logical gaps, missing perspectives, independent citation verification, severity-rated findings |
+| Review Panel | Cross-model code review panel: Claude Opus (API) + Codex (CLI, tool-grounded in repo) — escalation tier above the built-in /code-review. Renamed from code-review 2026-07-07. Config: `code-review-config.md` |
 | Deck Intel | Extract structured intelligence from PPTX/PDF files and interpret visual content (diagrams, tables, charts, screenshots); recreates diagrams as Mermaid. Includes former diagram-capture skill (merged 2026-07-04, VO M4 B5) |
-| Deliberation | Multi-agent deliberation on a vault artifact: dispatch to external LLM evaluators with role overlays, generate outcome, write record with rating capture |
 | Mermaid | Default diagramming. Markdown-embedded or `.mmd` files; owns Excalidraw JSON output (includes former excalidraw skill, merged ~2026-03 consolidation) |
 | Startup | Session startup hook — git pull, vault-check, CLI, rotation, overlay index |
 | Vault Query | Query the vault for structured facts, recent activity, and relevant notes; Obsidian CLI indexed search with native-tools fallback. Includes former obsidian-cli skill (merged ~2026-03 consolidation) |
@@ -1302,7 +1253,13 @@ When the main session's validation finds **specific, actionable issues** with su
 | Excalidraw | MERGED ~2026-03 (pre-VO consolidation round) → mermaid (owns Excalidraw JSON output) |
 | Lucidchart | RETIRED ~2026-03 (pre-VO consolidation round) |
 | Meme Creator | RETIRED ~2026-03 (pre-VO consolidation round) |
-| Checkpoint | MERGED 2026-07-04 (VO M4 B5) → audit (§3.1.6) |
+| Obsidian CLI | MERGED ~2026-03 (pre-VO consolidation round) → vault-query |
+| Checkpoint | MERGED 2026-07-04 (VO M4 B5) → audit |
+| Sync | RETIRED 2026-07-07 (skills-library review, built-in overlap policy — git flow covered by session-end protocol + harness) |
+| Researcher | RETIRED 2026-07-07 (skills-library review, built-in overlap policy — built-in deep-research covers the need) |
+| Critic | RETIRED 2026-07-07 (skills-library review, built-in overlap policy; supersedes the 2026-06-10 critic/writing-coach merge-decline) |
+| Deliberation | RETIRED 2026-07-07 (skills-library review, built-in overlap policy); deliberation-dispatch agent removed with it |
+| Code Review | RENAMED 2026-07-07 → review-panel (escalation tier above built-in /code-review) |
 
 **Backlog** (unbuilt):
 

@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: active
 created: 2026-02-21
-updated: 2026-08-08
+updated: 2026-08-10
 tags:
   - system
 ---
@@ -121,7 +121,7 @@ would consume most of your context window and degrade response quality.
 5. Budget: aim for ≤5 source files read per session beyond this one
 
 The heaviest files (avoid unless specifically needed):
-- `_system/docs/crumb-design-spec-v2-4.md` — full system spec, 260k+ chars; read specific sections only
+- `_system/docs/crumb-design-spec.md` — full system spec, 260k+ chars; read specific sections only
 - `_system/docs/separate-version-history.md` — changelog
 - `_system/reviews/` — peer-review transcripts, 25–65k chars each
 
@@ -129,7 +129,7 @@ The heaviest files (avoid unless specifically needed):
 
 Crumb is a personal multi-agent OS built on Claude Code, using an Obsidian vault
 as external memory and single source of truth. Canonical spec:
-`_system/docs/crumb-design-spec-v2-4.md`.
+`_system/docs/crumb-design-spec.md`.
 
 - **Vault location:** Mac Studio (`tess@`), accessed via SSH from work Mac
 - **Obsidian:** runs on the Studio. Both instances can run simultaneously — `workspace.json` is gitignored
@@ -271,7 +271,7 @@ Start with run-logs (small, recent state) before specs (large, full design). Rea
 
 **System (large — read sparingly):**
 - `CLAUDE.md` — project instructions, workflow rules
-- `_system/docs/crumb-design-spec-v2-4.md` — full spec (read specific sections only)
+- `_system/docs/crumb-design-spec.md` — full spec (read specific sections only)
 - `.claude/skills/<name>/SKILL.md` — read only the skill relevant to the task
 
 **Per-project:** `Projects/<name>/progress/run-log.md` (recent state) → `Projects/<name>/design/` (plans/specs).

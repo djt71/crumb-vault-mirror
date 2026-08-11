@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: active
 created: 2026-03-14
-updated: 2026-07-07
+updated: 2026-08-10
 tags:
   - system/architecture
 topics:
@@ -17,7 +17,7 @@ This section describes the physical hosting, process model, network topology, st
 - **Part I — Current Deployment:** what actually runs today — single operator account, interactive Claude Code sessions, and the `com.crumb.*` LaunchAgent keep-set.
 - **Part II — Historical: OpenClaw-Era Deployment:** the two-namespace Tess/OpenClaw runtime — gateway LaunchDaemon, bridge-watcher, `ai.openclaw.*`/`com.tess.v2.*` namespaces, `_openclaw/` staging — decommissioned by project agentic-sunset (2026-06-01 → 2026-06-12), reboot-verified absent 2026-06-14. Kept as architecture history.
 
-**Source attribution:** Synthesized from the design spec ([[crumb-design-spec-v2-4]] §7, §9), [[crumb-deployment-runbook]], [[crumb-studio-migration]], the openclaw-colocation-spec (retired 2026-06-12, full text in git history at `_system/docs/openclaw-colocation-spec.md`), and live system state (`~/Library/LaunchAgents/` + `launchctl list`, verified 2026-07-07).
+**Source attribution:** Synthesized from the design spec ([[crumb-design-spec]] §7, §9), [[crumb-deployment-runbook]], [[crumb-studio-migration]], the openclaw-colocation-spec (retired 2026-06-12, full text in git history at `_system/docs/openclaw-colocation-spec.md`), and live system state (`~/Library/LaunchAgents/` + `launchctl list`, verified 2026-07-07).
 
 ---
 

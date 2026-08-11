@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: active
 created: 2026-03-14
-updated: 2026-07-07
+updated: 2026-08-10
 tags:
   - system/architecture
 topics:
@@ -14,7 +14,7 @@ topics:
 
 This section documents the observable conventions and enforced patterns that apply across the entire system. These are not design principles (those live in the design spec §0.2) — they are the concrete rules, formats, and enforcement mechanisms that govern how vault artifacts are created, validated, and maintained.
 
-**Source attribution:** Synthesized from [[file-conventions]], [[crumb-design-spec-v2-4]] §2.2, §4.2–§4.5, §5.5–§5.6, §7.2–§7.8, and `vault-check.sh`.
+**Source attribution:** Synthesized from [[file-conventions]], [[crumb-design-spec]] §2.2, §4.2–§4.5, §5.5–§5.6, §7.2–§7.8, and `vault-check.sh`.
 
 ---
 

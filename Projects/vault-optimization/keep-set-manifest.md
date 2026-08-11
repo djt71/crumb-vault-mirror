@@ -4,7 +4,7 @@ project: vault-optimization
 domain: software
 status: active
 created: 2026-06-10
-updated: 2026-06-10
+updated: 2026-08-10
 source: design/optimization-design.md
 source_updated: 2026-06-10
 topics:
@@ -242,7 +242,7 @@ referenced solutions qualify as compound-provenance under the narrowed Tier 2
 | context-checkpoint-protocol | doc | structural-necessity | refs=15; CLAUDE.md Phase Transition Gate loads it (REQUIRED); executed twice 2026-06-10 | keep — B6 ceremony-diff target | VO (B3/B6) | — |
 | convergence-rubrics | doc | structural-necessity | refs=9; CLAUDE.md Convergence § + Subagent Validation § consume it | keep | VO (B3) | — |
 | cross-project-deps | doc | structural-necessity | refs=19, last=2026-06-10; XD gate registry (XD-027 governs this project) | keep | VO (B3) | — |
-| crumb-design-spec-v2-4 | doc | structural-necessity | refs=16; CLAUDE.md cites §§ throughout (2.1, 3.5, 4.4, 4.6, 4.8, 6, 7.9) | keep | VO (B3) | — |
+| crumb-design-spec | doc | structural-necessity | refs=16; CLAUDE.md cites §§ throughout (2.1, 3.5, 4.4, 4.6, 4.8, 6, 7.9) | keep | VO (B3) | — |
 | crumb-studio-migration | doc | proven-active | refs=12, last=2026-06-09 | keep | VO (B3) | — |
 | crumb-v2-system-health-assessment | doc | structural-necessity | refs=10; CLAUDE.md Ceremony Budget Principle cites it as provenance | keep | VO (B3) | — |
 | cybersecurity-kb-capture | doc | proven-active (light) | refs=3, last=2026-03-06; upstream capture-value filter, generalizes to any KB domain, no staleness | **keep** (VO-024 R4 — merge declined: counterpart plan deletes) | VO (B3) | — |

@@ -33,7 +33,7 @@ Load and follow the full procedure in `_system/docs/context-checkpoint-protocol.
 ### Project Creation (REQUIRED before starting any formal workflow)
 When work crosses the workflow entry threshold OR user requests a project: propose
 name (kebab-case) + domain, user confirms, create scaffold, enter first phase.
-**Load and follow the full flow in spec §4.1.5** (`_system/docs/crumb-design-spec-v2-4.md`) —
+**Load and follow the full flow in spec §4.1.5** (`_system/docs/crumb-design-spec.md`) —
 includes the external-repo gate (3b) and service registration (3c) for software `system`
 projects. Spec artifact is `specification.md` (not `spec.md`), `type: specification`, `skill_origin: systems-analyst`.
 

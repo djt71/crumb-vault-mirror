@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: accepted
 created: 2026-05-15
-updated: 2026-06-10
+updated: 2026-08-10
 skill_origin: compound
 confidence: high
 tags:
@@ -284,7 +284,7 @@ This ADR was drafted by Crumb (Claude Opus 4.7) in a 2026-05-15 audit follow-up 
 
 ## Related
 
-- `_system/docs/crumb-design-spec-v2-4.md` — Crumb v2 design spec (will be superseded in part by Crumb v3 work)
+- `_system/docs/crumb-design-spec.md` — Crumb v2 design spec (will be superseded in part by Crumb v3 work)
 - `_system/docs/crumb-v2-system-health-assessment.md` — health assessment that informed ceremony budget principle
 - `_system/docs/solutions/live-soak-beats-benchmark.md` — captured pattern on live-soak primacy
 - `Archived/Projects/tess-v2/design/spec-amendment-AC-execution-surfaces.md` — orchestrator role retraction

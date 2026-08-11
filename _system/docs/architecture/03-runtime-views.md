@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: active
 created: 2026-03-14
-updated: 2026-07-07
+updated: 2026-08-10
 tags:
   - system/architecture
 topics:
@@ -14,7 +14,7 @@ topics:
 
 This section documents six key runtime flows through the system as sequence diagrams with prose summaries. Each flow covers the happy path and notes failure handling where relevant.
 
-**Source attribution:** Synthesized from the design spec ([[crumb-design-spec-v2-4]] §4.1, §6, §7.1), [[context-checkpoint-protocol]], [[session-end-protocol]], the bridge-dispatch protocol (archived 2026-06-12), the feed-intel processing chain (formerly `feed-intel-processing-chain.md` and `-diagram.md`) and `fif-triage-and-signals.md` (all retired — git history), and the AKM design in spec §5 and `knowledge-retrieve.sh`.
+**Source attribution:** Synthesized from the design spec ([[crumb-design-spec]] §4.1, §6, §7.1), [[context-checkpoint-protocol]], [[session-end-protocol]], the bridge-dispatch protocol (archived 2026-06-12), the feed-intel processing chain (formerly `feed-intel-processing-chain.md` and `-diagram.md`) and `fif-triage-and-signals.md` (all retired — git history), and the AKM design in spec §5 and `knowledge-retrieve.sh`.
 
 ---
 

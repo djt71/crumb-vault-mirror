@@ -4,7 +4,7 @@ project: vault-optimization
 domain: software
 status: active
 created: 2026-06-10
-updated: 2026-06-10
+updated: 2026-08-10
 source: keep-set-manifest.md
 tags:
   - changeset
@@ -42,7 +42,7 @@ Clusters per design D5: **constitutional** (CLAUDE.md-cited or structural) ·
 Project records and protocols/scripts/overlays are B4/B5 scope, not here.
 
 - **Constitutional:** CLAUDE.md (B6-owned), liberation-directive,
-  overlay-index (B4-owned), crumb-design-spec-v2-4, file-conventions,
+  overlay-index (B4-owned), crumb-design-spec, file-conventions,
   context-checkpoint-protocol, convergence-rubrics, cross-project-deps,
   crumb-v2-system-health-assessment, failure-log, estimation-calibration,
   personal-context, skill-authoring-conventions, separate-version-history
@@ -115,10 +115,10 @@ edits execute in the same B3 commit (D4 batch discipline).
 | feed-intel-processing-chain + -diagram | architecture/03:17 — drop links, keep attribution prose |
 | openclaw-colocation-spec | architecture/04:17,340 + crumb-studio-migration.md:355,672,676 — re-point kill-switch/threat-model pointers to git provenance or inline needed content |
 | openclaw-colocation-spec-summary | none |
-| openclaw-crumb-reference | crumb-design-spec-v2-4.md integration-reference pointer → git citation. **Order gate: confirm AS-029 memory rewrite has consumed it first (standing handoff flag)** |
+| openclaw-crumb-reference | crumb-design-spec.md integration-reference pointer → git citation. **Order gate: confirm AS-029 memory rewrite has consumed it first (standing handoff flag)** |
 | openclaw-memory-research | none |
 | openclaw-skill-integration | none |
-| peer-review-skill-spec | peer-review-config.md:89 initial-design-values pointer → git citation; crumb-design-spec-v2-4.md:133,3645 → git citation |
+| peer-review-skill-spec | peer-review-config.md:89 initial-design-values pointer → git citation; crumb-design-spec.md:133,3645 → git citation |
 | proposal-pattern-enforcement-schema | none |
 | tess-crumb-boundary-reference | moc-crumb-architecture.md:39 + architecture/01:17 + 02:17 — drop rows/links |
 | tess-crumb-comparison | moc-crumb-architecture.md:40 + architecture/01:17 + 02:17 — drop rows/links |

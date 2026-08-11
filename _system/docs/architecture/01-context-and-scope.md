@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: active
 created: 2026-03-14
-updated: 2026-07-07
+updated: 2026-08-10
 tags:
   - system/architecture
 topics:
@@ -14,7 +14,7 @@ topics:
 
 This section defines the system boundary, actors, external interfaces, and constraints of the Crumb/Tess system. It answers: what is this system, who uses it, what does it touch, and what limits apply?
 
-**Source attribution:** Synthesized from the design spec ([[crumb-design-spec-v2-4]] §0–§2, §7, §9), [[CLAUDE.md]], the existing architecture diagram (formerly `system-architecture-diagram.md`), actor definitions (formerly in `tess-crumb-comparison.md`), and the boundary reference (formerly `tess-crumb-boundary-reference.md`). The three formerly-named sources were retired 2026-07-03 (vault-optimization B3); full text in git history.
+**Source attribution:** Synthesized from the design spec ([[crumb-design-spec]] §0–§2, §7, §9), [[CLAUDE.md]], the existing architecture diagram (formerly `system-architecture-diagram.md`), actor definitions (formerly in `tess-crumb-comparison.md`), and the boundary reference (formerly `tess-crumb-boundary-reference.md`). The three formerly-named sources were retired 2026-07-03 (vault-optimization B3); full text in git history.
 
 > **Historical (decommissioned):** The three-agent context described in this section (Crumb + Tess Voice + Tess Mechanic via the OpenClaw gateway) was decommissioned by project agentic-sunset (2026-06-01 → 2026-06-12), reboot-verified absent 2026-06-14. `_openclaw/` is deleted from disk. **Current reality:** Crumb (Claude Code sessions) is the only agent; danny is the sole operator, running Crumb directly at the keyboard. The Telegram/Tess interaction channel, the bridge handoff, and the OpenClaw-gateway external system no longer exist. The full three-agent model is preserved below as historical record — see the "Current State" summary immediately below, and [[03-runtime-views]] / [[04-deployment]] for the fullest decommission framing.
 

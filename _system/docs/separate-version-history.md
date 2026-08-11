@@ -5,7 +5,7 @@ type: log
 skill_origin: null
 status: active
 created: 2026-02-12
-updated: 2026-07-05
+updated: 2026-08-10
 tags:
   - design-spec
   - crumb
@@ -17,6 +17,14 @@ tags:
 > Pre-v2.0 versions (v0.1–v1.9.1): [[separate-version-history-archive]]
 
 > **Point-edit policy (adopted 2026-07-05, audit):** Dated inline point-edits to the spec (e.g., "retired 2026-07-03", "absorbed into audit skill 2026-07-04") do NOT bump the version number and are not individually logged here — the edit's inline date + git history are their provenance. The spec's frontmatter `updated:` field reflects the most recent point-edit. A version bump (v2.5+) is logged here only for structural revisions: new/removed sections, architecture changes, or a consolidation pass that rewrites accumulated point-edits into the body.
+
+**v2.5** (2026-08-10 — vault-optimization VO-037)
+- **Structural reorg: build-plan framing → as-built registry; version-neutral filename**
+  - §3.1 retitled "Core Workflow Skills (as built)" — four core skills (systems-analyst, action-architect, writing-coach, audit); retired-skill subsections (obsidian-cli §3.1.5, checkpoint §3.1.6, sync §3.1.7) removed from the body — dispositions live in the §3.3 retired/merged table, full text in git.
+  - §3.3 retitled "Skill Registry (as built) & Backlog" — re-aligned to the current 11-skill registry (skills-library review 2026-07-07: researcher/critic/sync/deliberation retired under built-in overlap policy; code-review renamed review-panel). Retired/merged table extended accordingly.
+  - §3.2 roster corrected to 3 agents on disk (deliberation-dispatch removed with the deliberation retirement); Subagent Revision Protocol renumbered §3.2.5 → §3.2.4.
+  - Accumulated point-edits consolidated into the body: §4.1.5 absorbed CLAUDE.md's external-repo gate (3b) + service registration (3c); §3.5 absorbed cost observation and dropped the stale `claude-sonnet-4-6` pin (tier, not version); companion to the CLAUDE.md minimalism pass (220 → 167 lines), which now pointerizes rare-fire procedure to this spec.
+  - **File renamed** `crumb-design-spec-v2-4.md` → `crumb-design-spec.md` (version-neutral; operator decision 2026-08-10). The version lives in the spec header and this log only — ends the rename-churn drift class (a stale `v2-0` reference survived the last rename). All live references updated at rename time.
 
 **v2.4** (2026-03-06)
 - **Active Knowledge Memory, researcher skill, overlay expansion**

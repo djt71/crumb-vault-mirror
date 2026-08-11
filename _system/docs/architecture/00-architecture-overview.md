@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: active
 created: 2026-03-14
-updated: 2026-07-07
+updated: 2026-08-10
 tags:
   - system/architecture
 topics:
@@ -28,7 +28,7 @@ This document is the entry point for the Arc42-derived architecture documentatio
 
 | Document | Authority | Changes When |
 |----------|-----------|-------------|
-| [[crumb-design-spec-v2-4]] | Intent and principles (the "why") | Fundamental model changes |
+| [[crumb-design-spec]] | Intent and principles (the "why") | Fundamental model changes |
 | **Architecture docs** (this set) | Current implementation state (the "how") | System changes structurally |
 | [[separate-version-history]] | Chronology (the "when") | Any notable change |
 
@@ -36,7 +36,7 @@ Architecture docs must be consistent with the design spec. Divergence means eith
 
 ## Related Documents
 
-- [[crumb-design-spec-v2-4]] — Design intent authority
+- [[crumb-design-spec]] — Design intent authority
 - [[separate-version-history]] — Chronological change record
 - [[overlay-index]] — Overlay routing table
 - [[file-conventions]] — File naming, frontmatter, and tag conventions

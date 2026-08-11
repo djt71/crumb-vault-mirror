@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: active
 created: 2026-03-14
-updated: 2026-07-07
+updated: 2026-08-10
 tags:
   - system/architecture
 topics:
@@ -14,7 +14,7 @@ topics:
 
 This section decomposes the Crumb/Tess system into its constituent subsystems, maps ownership and write authority, and documents the dependency relationships between blocks.
 
-**Source attribution:** Synthesized from the design spec ([[crumb-design-spec-v2-4]] §1–§3, §5), ownership routing from `tess-crumb-boundary-reference.md` and function tables from `tess-crumb-comparison.md` (both retired 2026-07-03, vault-optimization B3 — git history), and live directory scans of the vault.
+**Source attribution:** Synthesized from the design spec ([[crumb-design-spec]] §1–§3, §5), ownership routing from `tess-crumb-boundary-reference.md` and function tables from `tess-crumb-comparison.md` (both retired 2026-07-03, vault-optimization B3 — git history), and live directory scans of the vault.
 
 ---
 

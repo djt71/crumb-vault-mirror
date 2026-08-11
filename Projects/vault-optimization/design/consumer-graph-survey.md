@@ -4,7 +4,7 @@ project: vault-optimization
 domain: software
 status: active
 created: 2026-06-10
-updated: 2026-06-10
+updated: 2026-08-10
 source: design/optimization-design.md
 tags:
   - design
@@ -149,9 +149,9 @@ the agent transcripts; counts and classifications reviewed this session.
 | feed-pipeline-calibration.jsonl | **A2 #2 — rides with AS-028**: feed-pipeline/SKILL.md:450 · run-feed-pipeline.md:78,91 |
 | openclaw-colocation-spec | architecture/04:17,340 · crumb-studio-migration.md:355,672,676 (kill-switch/threat-model pointers — re-point to git provenance or inline the needed content) |
 | openclaw-colocation-spec-summary | none |
-| openclaw-crumb-reference | crumb-design-spec-v2-4.md (integration-reference pointer) · standing AS-029 handoff flag (memory rewrite may consume first) |
+| openclaw-crumb-reference | crumb-design-spec.md (integration-reference pointer) · standing AS-029 handoff flag (memory rewrite may consume first) |
 | openclaw-memory-research / openclaw-skill-integration | none |
-| peer-review-skill-spec | peer-review-config.md:89 (initial-design-values pointer → git citation) · crumb-design-spec-v2-4.md:133,3645 |
+| peer-review-skill-spec | peer-review-config.md:89 (initial-design-values pointer → git citation) · crumb-design-spec.md:133,3645 |
 | proposal-pattern-enforcement-schema | none |
 | tess-crumb-boundary-reference | moc-crumb-architecture.md:39 · architecture/01:17 · architecture/02:17 |
 | tess-crumb-comparison | moc-crumb-architecture.md:40 · architecture/01:17 · architecture/02:17 |
@@ -217,7 +217,7 @@ session-log/archived provenance mentions only).
 | `_system/docs/architecture/01..04` (cluster — one edit pass) | bridge-watcher(+plist), tess-health-check, batch-moc/dns-recon list line, both protocols, feed-intel-chain links, openclaw-colocation-spec, tess-crumb-boundary/comparison | B3/B4 |
 | `_system/docs/operator/how-to/crumb-deployment-runbook.md` | bridge-watcher(+plist), clear-claude-cache | B4 |
 | `Domains/Learning/moc-crumb-architecture.md` | tess-crumb-boundary/comparison, docs/attachments cluster (+ E2 vault-mirror extraction link fix at B1) | B3/B1 |
-| `_system/docs/crumb-design-spec-v2-4.md` | openclaw-crumb-reference, peer-review-skill-spec | B3 |
+| `_system/docs/crumb-design-spec.md` | openclaw-crumb-reference, peer-review-skill-spec | B3 |
 | `_system/docs/peer-review-config.md` | peer-review-skill-spec | B3 |
 | `_system/docs/skill-authoring-conventions.md`, `file-conventions.md` | agent-skills-best-practices merge | B3 |
 | `_system/docs/crumb-studio-migration.md` | openclaw-colocation-spec | B3 |

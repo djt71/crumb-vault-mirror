@@ -3,7 +3,7 @@ type: reference
 status: active
 domain: software
 created: 2026-03-14
-updated: 2026-07-05
+updated: 2026-08-10
 tags:
   - system/llm-orientation
 topics:
@@ -144,11 +144,11 @@ Index of every LLM-consumed document in the Crumb/Tess system — location, toke
 | OpenClaw gateway config | No LLM-facing doc for openclaw.json structure | **Moot** — the OpenClaw layer was sunset (agentic-sunset project, 2026-06-11); Tess operated through the gateway, not on it, prior to sunset. |
 | LaunchAgent/daemon management | No LLM-facing reference for service management | **Defer** — service management is human-operated (sudo required). Covered in operator how-to docs. |
 | Vault-check rule details | vault-check.sh is consumed directly, not via summary | **Not needed** — vault-check output is machine-readable. Crumb reads error messages, not the script. |
-| Design spec | No LLM-optimized summary of the 46k-token spec | **Fill candidate** — a spec-summary for LLM context loading would reduce unnecessary full-spec reads. Exists as `crumb-design-spec-v2-4-summary.md` but may be stale. Check staleness. |
+| Design spec | No LLM-optimized summary of the 46k-token spec | **Fill candidate** — a spec-summary for LLM context loading would reduce unnecessary full-spec reads. Exists as `crumb-design-spec-summary.md` but may be stale. Check staleness. |
 | Automation hooks | No doc explaining the hook chain (PreToolUse, PostToolUse, SessionStart) | **Fill candidate** — hooks are invisible infrastructure that affect every session. A brief orientation doc would help debugging. |
 
 ### Recommendations
 
-1. **Check staleness** of `crumb-design-spec-v2-4-summary.md` — if current, the spec gap is already filled
+1. **Check staleness** of `crumb-design-spec-summary.md` — if current, the spec gap is already filled
 2. **Consider** a lightweight hooks orientation doc (~50 lines) for the automation chain
 3. **No action needed** on Mission Control, OpenClaw config, LaunchAgent, or vault-check gaps — these are human-operated subsystems

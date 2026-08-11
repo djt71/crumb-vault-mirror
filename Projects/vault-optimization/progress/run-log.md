@@ -970,3 +970,17 @@ The 2026-07-05 fix-pass open-items list closed out. Facts gathered first (Tailsc
 **Metrics:** 220 → 167 lines (−24%); 2,247 → 1,757 words ≈ ~3.0k → ~2.35k tokens always-loaded (−22%). **Behavior-loss check PASS:** all five Behavioral Boundaries blocks intact (System/Always/Exception/Ask-First/Never); never-autonomous archival retained inline (E6); primitive user-approval retained inline (E7 + Ask-First); repo-gate/service-registration reachable via §4.1.5 pointer; every pointer target verified on disk this session.
 
 **Remaining in VO-037:** S3 — spec §3.1/§3.3 structural reorg (build-plan framing → as-built registry) + version bump v2.4 → v2.5.
+
+## 2026-08-10 — VO-037 tranche 2 (S3): spec §3.1/§3.3 structural reorg, v2.5, version-neutral rename
+
+**Operator decision:** filename question presented three ways (version-neutral / v2-5 / keep v2-4) — **version-neutral rename approved**: `crumb-design-spec-v2-4.md` → `crumb-design-spec.md`; version lives in the header + [[separate-version-history]] only, ending the rename-churn drift class (a stale `v2-0` ref from the last rename was found live in file-conventions and fixed in this sweep).
+
+**Structural reorg (v2.5, logged in version history):**
+- §3.1 "Phase 1 Skills (Build First)" → "Core Workflow Skills (as built)": build-plan framing dropped; retired subsections §3.1.5 obsidian-cli / §3.1.6 checkpoint / §3.1.7 sync deleted from body (git is the archive; dispositions in §3.3 table).
+- §3.3 "Phase 2+ Skills" → "Skill Registry (as built) & Backlog": re-aligned 15 → **11-skill registry** (4 core in §3.1 + 7 in table); researcher/critic/deliberation rows moved to retired table with 2026-07-07 built-in-overlap rationale; code-review → review-panel rename recorded; sync/obsidian-cli rows added.
+- §3.2 point-edits (adjacent, proceed+flag): roster 4 → 3 agents (deliberation-dispatch removed with its skill; §3.2.5 renumbered §3.2.4); §3.2.1 model pins deferred to code-review-config.md, review-panel rename noted.
+- Header: v2.5, current-version paragraph rewritten; v2.5 entry added to separate-version-history.
+
+**Rename sweep (registry-enumeration discipline — full grep across md/sh/yaml/json, 23 hits enumerated):** 20 live files updated (git mv + path/wikilink replace incl. stale v2-0 refs in file-conventions, Domains brief, cloud-agent-infra research frontmatter); 4 files deliberately unchanged (separate-version-history v2.5 entry names the old file as historical fact; session-log ×2 + this run-log's own dated entries are provenance). `updated:` bumped on all swept docs (§32).
+
+**VO-037 acceptance check:** fire-rate table all sections ✓ (design/vo-037-fire-rate-review.md) · keep/pointerize per section with sole-source check ✓ · pointer mechanism per moved section with context-cost rationale ✓ (all textual load-on-demand) · duplicated-fact list resolved ✓ · metrics 220→167 lines, ~3.0k→~2.35k tokens ✓ · behavior-loss check PASS ✓ · every CLAUDE.md edit individually operator-approved ✓ (E1–E9 + filename decision) · vault-check green at commit ✓ (pre-commit).
