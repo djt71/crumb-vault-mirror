@@ -1516,19 +1516,21 @@ Skills declare their compute tier via the `model_tier` frontmatter field. CLAUDE
 | `model_tier` | Work type | Maps to |
 |---|---|---|
 | `reasoning` | High-judgment: analysis, specification, design, evaluation | Opus (session default) |
-| `execution` | Procedural: file processing, templating, mechanical utilities | Sonnet (`claude-sonnet-4-6`) |
+| `execution` | Procedural: file processing, templating, mechanical utilities | Sonnet (current release — pin tier, not version) |
 | *(omitted)* | Inherit session model (backward compatible) | Session default |
 
 **Delegation mechanism:** When Opus loads a skill with `model_tier: execution`, it delegates the skill's procedure to a Sonnet subagent via the Task tool (`model: "sonnet"`). Opus handles dispatch prompt assembly and result review; Sonnet handles execution. Concrete and works today — no future capability required.
 
 **Phased rollout (corrected 2026-07-06 to match CLAUDE.md, the authoritative source for this mapping — the prior list named several skills since merged or retired: checkpoint → audit, obsidian-cli → vault-query, meme-creator/lucidchart retired, excalidraw merged into mermaid):**
-- **Phase 1 (immediate):** Zero-context mechanical skills — sync, startup
+- **Phase 1 (immediate):** Zero-context mechanical skills — startup (sync retired 2026-07-07, skills-library review)
 - **Phase 2 (immediate):** Structured-input skills — mermaid (incl. Excalidraw output)
 - **Phase 3 (deferred):** Interactive skills with prompting phases — inbox-processor (requires dispatch manifest design to preserve user decisions across handoff)
 
 **Precedence:** subagent explicit `model` field > skill `model_tier` > session default.
 
 **Config location:** Concrete model strings live in CLAUDE.md Model Routing section only. Updating the mapping is a single-line change there; skill definitions need no updates.
+
+**Cost observation** (absorbed from CLAUDE.md at VO-037, 2026-08-10): At session end, note model routing decisions and their outcomes in the run-log entry — which skills were delegated to Sonnet vs. kept on Opus, whether delegation produced acceptable quality (pass/rework/fail), and any notable token-heavy operations (large file reads, multi-round subagents). This creates a lightweight feedback loop — routing decisions are reviewed against actual results, not just assumed correct. Adjust `model_tier` assignments when patterns emerge (e.g., a skill consistently requires Opus rework after Sonnet delegation → promote to `reasoning`).
 
 ### 3.6 Primitive Creation Protocol
 
@@ -1788,6 +1790,11 @@ Full procedure: `_system/docs/context-checkpoint-protocol.md`
       ```
     - For software-domain projects only: `Projects/[project-name]/design/` directory
     - All other files (`specification.md`, `tasks.md`, `action-plan.md`, `decisions/`, etc.) are created on-demand by the skills that produce them
+
+3b. **External repo gate** (software `system` projects only — absorbed from CLAUDE.md at VO-037, 2026-08-10): Confirm code directory with user (convention: `~/openclaw/[project-name]/`), `mkdir -p`, `git init` + `.gitignore`, initial commit, record `repo_path` in `project-state.yaml`. If the repo has a build step (`tsconfig.json` or `build` script in `package.json`), record `build_command` in `project-state.yaml`. Skip for: knowledge-work, vault-only software, and non-`system` projects.
+
+3c. **Service registration** (ongoing, not just creation): When creating a launchd plist for a project with `repo_path`, add the plist label to the `services` list in `project-state.yaml`. This enables the session-end build verification step to restart services after rebuilds.
+
 4. **Enter SPECIFY phase.** Systems Analyst skill takes over. The conversation context that triggered project creation is already in Claude's working memory — it carries directly into the SPECIFY phase without needing to be re-gathered or re-read from the vault.
 
 **If created from an ongoing conversation (mid-session escalation):** Write the session-log entry *before* creating the project scaffold. This ensures crash resilience: if the session dies between "user agrees to create project" and "scaffold is written," the worst case is a session-log entry with `Promote: project proposed: [name]` but no project directory yet — recoverable on the next session. The session-log entry serves as the durable record; the in-memory context serves the active SPECIFY phase.

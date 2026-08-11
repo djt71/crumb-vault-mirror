@@ -1,6 +1,6 @@
-Mode: pre-commit (1 staged files)
+Mode: pre-commit (4 staged files)
 === 1. Frontmatter Schema Validation ===
-  Checked 1 files, 0 with issues
+  Checked 2 files, 0 with issues
 
 === 2. Summary Freshness Check ===
   Checked 0 summaries, 0 stale
@@ -21,13 +21,15 @@ Mode: pre-commit (1 staged files)
   Checked 8 projects, 0 missing scaffold files
 
 === 8. Task Completion Evidence ===
+  Skipped (no staged task or run-log files)
   Checked 0 completed tasks, 0 missing run-log evidence
 
 === 9. Knowledge Base Tag Validation ===
   Checked 0 kb tags, 0 invalid
 
 === 10. Project-State Active Task Consistency ===
-  Checked 8 project states, 0 inconsistent
+  Skipped (no staged project-state or tasks files)
+  Checked 0 project states, 0 inconsistent
 
 === 11. Project-State last_committed Field ===
   Skipped (no staged project-state files)
@@ -57,7 +59,8 @@ Mode: pre-commit (1 staged files)
   Checked 0 repo paths, 0 issues
 
 === 23. Code Review Gate ===
-  Checked 0 post-enforcement tasks, 0 missing reviews, 63 grandfathered (before 2026-03-20)
+  Skipped (no staged task or run-log files)
+  Checked 0 post-enforcement tasks, 0 missing reviews, 0 grandfathered (before 2026-03-20)
 
 === 24. Run-Log Size Check ===
   Skipped (no staged run-log files)
@@ -79,10 +82,13 @@ Mode: pre-commit (1 staged files)
   Skipped (no staged run-log files)
 
 === 31. Broken Wikilink Detection ===
-  Checked 1 files, 0 broken links in 0 files
+  Checked 4 files, 0 broken links in 0 files
 
 === 32. Updated Field Bump Check ===
-  Checked 1 modified docs with updated: field, 0 unbumped
+./_system/scripts/vault-check.sh: line 2265: printf: write error: Broken pipe
+./_system/scripts/vault-check.sh: line 2265: printf: write error: Broken pipe
+  WARNING: _system/docs/crumb-design-spec-v2-4.md: content changed but updated: still 2026-07-06 — bump updated (staleness scans key off this field)
+  Checked 1 modified docs with updated: field, 1 unbumped
 
 === Solution Doc Track Schema ===
   Checked 0 solution docs, 0 track issues
@@ -94,6 +100,7 @@ Mode: pre-commit (1 staged files)
 Vault Check Summary
 ==========================================
   Errors:   0
-  Warnings: 0
+  Warnings: 1
 
-RESULT: CLEAN (exit code 0)
+RESULT: WARNINGS (exit code 1)
+Non-blocking — review when convenient.

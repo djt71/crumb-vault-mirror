@@ -10,7 +10,7 @@ software · career · learning · health · financial · relationships · creati
 ## Workflow Routing
 
 ### Ceremony Budget Principle
-Before proposing new capabilities, skills, or pipelines, evaluate whether existing friction can be reduced first. Reducing ceremony is higher leverage than adding capability. New primitives increase operational surface — justify against maintenance gravity. If a feature exists but isn't being used, the bottleneck is more likely ceremony than missing functionality. Conversely, if a new capability seems necessary, ask whether the real need is to unblock an existing one — heavy intake ceremony that suppresses adoption creates the illusion of missing features when the feature exists and the pipeline is just too costly to use. See `_system/docs/crumb-v2-system-health-assessment.md` for provenance.
+Before proposing new capability, reduce existing friction first — new primitives must justify against maintenance gravity, and unused features usually signal ceremony cost, not missing functionality. Full principle + future-addition rubric: `_system/docs/crumb-operating-note.md` §4 (provenance: `_system/docs/crumb-v2-system-health-assessment.md`).
 
 - **Strategic directive:** When multiple projects compete for session priority, consult `_system/directives/liberation-directive.md` for the active governing directive. Revenue-generating prompts get priority claim; all other work continues in parallel.
 - **Software projects:** SPECIFY → PLAN → TASK → IMPLEMENT (full four-phase)
@@ -31,25 +31,11 @@ Before proposing new capabilities, skills, or pipelines, evaluate whether existi
 Load and follow the full procedure in `_system/docs/context-checkpoint-protocol.md`. Do NOT proceed to the next phase until all steps are complete.
 
 ### Project Creation (REQUIRED before starting any formal workflow)
-When work crosses the workflow entry threshold OR user requests a project:
-1. Propose project name (kebab-case) and domain classification
-2. User confirms or overrides name and domain
-3. Create scaffold: `Projects/[name]/`, `Projects/[name]/project-state.yaml`,
-   `Projects/[name]/progress/run-log.md`,
-   `Projects/[name]/progress/progress-log.md`, `design/` subdirectory (software only)
-3b. External repo gate (software `system` projects only):
-    Confirm code directory with user (convention: `~/openclaw/[project-name]/`), `mkdir -p`,
-    `git init` + `.gitignore`, initial commit, record `repo_path` in `project-state.yaml`.
-    If the repo has a build step (`tsconfig.json` or `build` script in `package.json`),
-    record `build_command` in `project-state.yaml`.
-    Skip for: knowledge-work, vault-only software, and non-`system` projects.
-3c. Service registration (ongoing, not just creation):
-    When creating a launchd plist for a project with `repo_path`, add the plist label
-    to `services` list in `project-state.yaml`. This enables the session-end build
-    verification step to restart services after rebuilds.
-4. Use `specification.md` (not `spec.md`), frontmatter `type: specification`,
-   `skill_origin: systems-analyst`. See _system/docs/crumb-design-spec-v2-4.md §2.1, §2.2.
-5. Enter first workflow phase
+When work crosses the workflow entry threshold OR user requests a project: propose
+name (kebab-case) + domain, user confirms, create scaffold, enter first phase.
+**Load and follow the full flow in spec §4.1.5** (`_system/docs/crumb-design-spec-v2-4.md`) —
+includes the external-repo gate (3b) and service registration (3c) for software `system`
+projects. Spec artifact is `specification.md` (not `spec.md`), `type: specification`, `skill_origin: systems-analyst`.
 
 ## Risk-Tiered Approval
 - **Low risk:** Auto-approve — reading, drafting, testing, logging, searching vault
@@ -74,38 +60,19 @@ When work crosses the workflow entry threshold OR user requests a project:
 - CLI availability is checked automatically by the SessionStart hook
 - Knowledge base queries: `obsidian tag name=kb/<topic>` and
   `obsidian backlinks path=Domains/<domain>/<domain>-overview.md`
-- **Canonical #kb/ Level 2 tags** (use these — do not invent new Level 2 tags without user approval):
-  `religion` · `philosophy` · `gardening` · `history` · `inspiration` · `poetry` · `writing` · `business` · `networking` · `security` · `software-dev` · `customer-engagement` · `training-delivery` · `fiction` · `biography` · `politics` · `psychology` · `lifestyle`
-- Level 3 subtopics (e.g., `#kb/networking/dns`, `#kb/business/pricing`) are open — create through compound engineering when needed
-- Three levels is the hard cap: `#kb/topic/subtopic` maximum. vault-check.sh enforces this.
-- When a subtopic is subordinate to an existing Level 2 tag (e.g., DNS is a subtopic of networking), use Level 3 (`kb/networking/dns`), not a separate Level 2. Cross-domain topics use dual tagging (e.g., `kb/networking/dns` + `kb/security` for DNS security).
-
-## Subagent Configuration
-Default model: same as main session. Override per-subagent via agent YAML frontmatter `model` field. Only override when session cost data justifies it.
+- **#kb/ taxonomy:** canonical Level 2 tag list + level rules live in `_system/docs/file-conventions.md` (§Knowledge Base Tags) — never invent new Level 2 tags without user approval; three levels is the hard cap (vault-check enforces)
 
 ## Model Routing
 Skill `model_tier` maps to concrete models:
 - `reasoning` → session default (Opus)
 - `execution` → Sonnet (current release — pin tier, not version; see crumb-model-policy)
 
-When loading a skill with `model_tier: execution`, delegate the skill's procedure to a Sonnet subagent via the Task tool (`model: "sonnet"`). Pass the skill procedure, relevant file paths, and any required context as the subagent prompt. Review subagent output before finalizing.
-
-Skills without `model_tier` inherit the session model (backward compatible).
+When loading a skill with `model_tier: execution`, delegate the skill's procedure to a Sonnet subagent via the Task tool (`model: "sonnet"`), passing procedure + file paths + required context; review output before finalizing. Skills without `model_tier` inherit the session model. Subagent default model = session model; per-subagent YAML `model` override only when session cost data justifies it.
 
 Precedence: subagent explicit `model` field > skill `model_tier` > session default.
 
 ### Cost Observation
-At session end, note model routing decisions and their outcomes in the run-log entry:
-- Which skills were delegated to Sonnet vs. kept on Opus
-- Whether delegation produced acceptable quality (pass/rework/fail)
-- Any notable token-heavy operations (large file reads, multi-round subagents)
-
-This creates a lightweight feedback loop — routing decisions are reviewed against actual results, not just assumed correct. Adjust `model_tier` assignments when patterns emerge (e.g., a skill consistently requires Opus rework after Sonnet delegation → promote to `reasoning`).
-
-Phased rollout — delegation is active for:
-- **Phase 1 (immediate):** Zero-context mechanical skills — startup
-- **Phase 2 (immediate):** Structured-input skills — mermaid (incl. Excalidraw output)
-- **Phase 3 (deferred):** Interactive skills with prompting phases (e.g., inbox-processor) — requires dispatch manifest design to preserve user decisions across the handoff
+At session end, note routing decisions and outcomes (delegation quality, token-heavy ops) in the run-log entry — full procedure and the phased delegation rollout (currently: startup, mermaid; inbox-processor deferred): spec §3.5.
 
 ## Plan Mode
 - Use Plan Mode (Shift+Tab twice) during SPECIFY and PLAN validation phases for mechanical read-only enforcement
@@ -139,7 +106,7 @@ When a tool call, skill invocation, or subagent fails, follow this chain — do 
 - Modifying schemas or migrations
 - Sending external communications
 - Creating files outside the vault structure
-- Creating new primitives (skills, subagents, overlays) — see Primitive Creation Protocol in spec §3.5
+- Creating new primitives (skills, subagents, overlays) — see Primitive Creation Protocol in spec §3.6
 - Writing medium-confidence compound patterns to `_system/docs/solutions/` — see spec §4.4
 - Modifying CLAUDE.md, skill definitions, or overlay index
 
@@ -150,19 +117,9 @@ When a tool call, skill invocation, or subagent fails, follow this chain — do 
 - Load more than 10 source documents into a single skill invocation
 
 ## Project Archival
-- Archive: user-initiated only. Precondition: clean working tree. Confirm → final
-  run-log + compound → progress-log → update project-state (phase: archived,
-  phase_before_archive: [previous phase]) → move to Archived/Projects/ → update
-  companion note paths → vault-check → git commit
-- Knowledge-base exception: projects with standalone KB artifacts (profiles, reference
-  material, #kb/ tagged content) stay in Projects/ with phase: ARCHIVED — don't bury
-  active knowledge graph content in Archived/. Flag KB candidates during confirmation.
-- Reactivate: user-initiated only. Move back → update companion note paths → update
-  project-state (restore phase from phase_before_archive) → run-log entry →
-  progress-log → vault-check → git commit
-- Claude never archives or reactivates autonomously — only suggests on explicit user approval
-- Project docs do NOT carry a status field — directory location is authoritative
-- See spec §4.6 for full procedure
+- Archive/reactivate: user-initiated only — Claude suggests, never executes autonomously. Precondition: clean working tree. **Load and follow the full procedure in spec §4.6.**
+- Knowledge-base exception: projects with standalone KB artifacts stay in Projects/ with `phase: ARCHIVED` — flag KB candidates during confirmation.
+- Project docs do NOT carry a status field — directory location is authoritative.
 
 ## Completed Project Guard
 - Do not add new design artifacts or tasks to a project with `phase: DONE` or `phase: ARCHIVED`
@@ -176,18 +133,12 @@ Structurally enforced at every phase transition via Context Checkpoint Protocol.
 ## Skills & Agents
 Skills in .claude/skills/ are loaded automatically when description matches.
 Subagents in .claude/agents/ are spawned for heavy isolated work.
-Overlays in _system/docs/overlays/ are loaded when activation signals match the overlay index.
-New primitives: user can request creation at any time; compound step proposes
-via Primitive Proposal Flow. All creation follows Primitive Creation Protocol —
-Claude proposes definition, user approves before files are written.
+New primitive creation follows the Primitive Creation Protocol (spec §3.6) — user approves before files are written.
 
 ## Overlay Routing
-Overlay index loaded at session start: _system/docs/overlays/overlay-index.md
-Skills with overlay check steps (systems-analyst, action-architect) match tasks against
-the index's activation signals and load relevant overlays automatically.
-User can also request any overlay explicitly.
-Overlays add lens questions to the active skill — they don't replace it.
-Overlays and _system/docs/personal-context.md don't count against the source document budget tiers.
+Overlay index loaded at session start: _system/docs/overlays/overlay-index.md.
+Skills with overlay check steps (systems-analyst, action-architect) match tasks against the index's activation signals and load overlays automatically; user can request any overlay explicitly.
+Overlays add lens questions to the active skill — they don't replace it. Overlays and _system/docs/personal-context.md don't count against source-doc budgets.
 
 ## Subagent Validation
 When subagent returns, apply provenance check: verify key constraints match full output, no interpretive claims introduced. If quality unclear, read full doc from vault and apply lightweight convergence check (2-3 dimensions from _system/docs/convergence-rubrics.md) before approval gate.
@@ -214,7 +165,3 @@ Steps: (1) log with compound evaluation, (2) failure-log if session went poorly 
 - Project sessions → run-log.md. Non-project sessions → `_system/logs/session-log.md` (skip trivial lookups).
 - Conditional commit: log-only delta → lightweight commit; substantial delta → flag to user; no changes → skip.
 References: spec §6, §4.8.
-
-## External Tools
-- **MarkItDown:** CLI for binary-to-markdown conversion. Used by inbox-processor skill
-  and inline attachment protocol. Invocation: `markitdown <filepath>`. See spec §7.9.

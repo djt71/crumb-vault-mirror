@@ -954,3 +954,19 @@ The 2026-07-05 fix-pass open-items list closed out. Facts gathered first (Tailsc
 **Compound evaluation (M5 milestone close):** No new pattern promoted. The pin-ask resolution is confirmatory evidence for the already-accumulating VO-037 rationale (facts duplicated in prose drift; facts single-sourced with pointers don't) — recorded as data point, mechanism already understood. Watch-item disposition (unexercised ≠ failed, log opportunistically, no gate) worked cleanly as a soak-close pattern; not promoted (single occurrence).
 
 **Model routing:** all main-session Fable 5 — session was state reconstruction + judgment-heavy doc finalization + operator decision capture; delegation unjustified at this batch size (7 files touched).
+
+## 2026-08-10 — VO-037 tranche 1: CLAUDE.md minimalism pass APPLIED (E1–E9, operator-approved individually)
+
+**Fire-rate review:** `design/vo-037-fire-rate-review.md` — all 24 sections tabled with fire-rate + sole-source verdicts; 15 KEEP, 9 edits. Pointer mechanism: textual load-on-demand for every moved section (all rare-fire; @import would inline at session load and save nothing).
+
+**Operator approvals:** E1–E9 approved individually (multi-select, this session): E1 Ceremony Budget 18→3 (→ operating note §4), E2 Project Creation 21→6 (→ spec §4.1.5), E3 kb tag list → file-conventions §Knowledge-Base-Tags pointer, E4 Subagent Config merged into Model Routing, E5 Cost Observation 13→4 (→ spec §3.5), E6 Project Archival 15→4 (→ spec §4.6), E7 Skills&Agents creation sentences → spec §3.6 pointer, E8 Overlay Routing 8→4, E9 External Tools deleted (spec §7.9 + inbox-processor carry it).
+
+**Companion spec point-edits (S1/S2, medium-risk proceed+flag; applied BEFORE CLAUDE.md so no pointer dangled):** §4.1.5 absorbed 3b external-repo-gate + 3c service-registration (dated absorption notes); §3.5 stale `claude-sonnet-4-6` pin → tier-not-version wording; §3.5 rollout Phase 1 sync → startup (sync retired 2026-07-07); §3.5 absorbed Cost Observation prose (dated).
+
+**Beyond-approval flag:** one-token correction in kept Ask-First list — Primitive Creation Protocol cross-ref said spec §3.5, actual location is §3.6 (verified). Pre-existing wrong pointer, fixed in-pass; flagged to operator at tranche close (revert on request).
+
+**Duplicated-fact list resolved:** kb tag list → file-conventions; creation flow → spec §4.1.5; archival → spec §4.6; rollout + cost-observation → spec §3.5; sonnet stale pin corrected; primitive-creation → spec §3.6. Accepted duplication (recorded, kept): 1-line Domains list (routing-critical, stable).
+
+**Metrics:** 220 → 167 lines (−24%); 2,247 → 1,757 words ≈ ~3.0k → ~2.35k tokens always-loaded (−22%). **Behavior-loss check PASS:** all five Behavioral Boundaries blocks intact (System/Always/Exception/Ask-First/Never); never-autonomous archival retained inline (E6); primitive user-approval retained inline (E7 + Ask-First); repo-gate/service-registration reachable via §4.1.5 pointer; every pointer target verified on disk this session.
+
+**Remaining in VO-037:** S3 — spec §3.1/§3.3 structural reorg (build-plan framing → as-built registry) + version bump v2.4 → v2.5.
