@@ -175,7 +175,7 @@ an inbox category. All operator-triggered, all within the existing skill.
 ## Verification List — COMPLETE (2026-06-11)
 
 All four items verified against current primary docs. Results:
-`Projects/agentic-sunset/design/scheduler-verification-2026-06.md`. Headlines: Cowork
+`Archived/Projects/agentic-sunset/design/scheduler-verification-2026-06.md`. Headlines: Cowork
 scheduled tasks confirmed (local, live filesystem, catch-up on wake) but Cowork does
 **not** read CLAUDE.md or fire lifecycle hooks — scheduled-task prompts must be
 self-contained; git pre-commit vault-check **does** fire on Cowork commits (the Class 3

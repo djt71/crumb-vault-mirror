@@ -79,3 +79,8 @@ updated: 2026-04-01
 - 5 production contracts, 4/5 live-tested STAGED on iteration 1
 - 326 tests passing
 - Next: LaunchAgent scheduling + 48h parallel run (TV2-032/033)
+
+## 2026-08-10 — ARCHIVED
+- Moved to Archived/Projects/ per agentic-sunset AS-032 archival proposal (operator-approved)
+- KB exception: does not apply (no #kb/ content in project dir; durable patterns live at _system/docs/tess-v2-durable-patterns.md + solutions/, outside the project)
+- phase_before_archive: DONE (closed 2026-06-14 via AS-030)

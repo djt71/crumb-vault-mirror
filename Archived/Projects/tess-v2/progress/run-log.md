@@ -859,3 +859,7 @@ This inverted Z's writer-reader direction: Z had Tess writing the queue, Crumb r
 **Reversibility:** phase is reversible; repo + design docs intact. Restore = phase → IMPLEMENT + re-bootstrap archived plists (agentic-sunset `design/restore-snapshot.md`).
 
 **Cross-refs:** agentic-sunset run-log 2026-06-14 (AS-021/AS-030); XD-024 + XD-025 mooted in cross-project-deps.md; tess-danny-migration also closed DONE this task.
+
+## 2026-08-10 — ARCHIVED (agentic-sunset AS-032 proposal, operator-approved)
+
+Final entry. Project closed DONE 2026-06-14 (AS-030); archival proposed at AS-032 close and approved by operator 2026-08-10. **KB-exception question answered NO:** the project directory holds no `#kb/` tagged content or profiles (sole grep hit is literal file sizes in a run-log line); durable knowledge was extracted independently and lives outside the project — `_system/docs/tess-v2-durable-patterns.md` (23 Category A patterns) + 3 `_system/docs/solutions/` extractions — so standard archival applies, not the stay-in-Projects exception. External repo `/Users/danny/crumb-apps/tess-v2` untouched (disable+archive ethos). Harness ledger (VAL-001/002/003 closed superseded 2026-08-08) travels with the project. Compound: none new — this is a mechanical move; all insights were routed at closure (AS-030) and at AS-032 compound routing.

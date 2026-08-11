@@ -384,3 +384,7 @@ Rollback until P7: `launchctl enable gui/501/<label>` then bootstrap (baseline b
 **Disposition:** phase TASK → DONE, status → done. Stays in `Projects/` (archival is operator-initiated; vault/ops project, no repo).
 
 **Cross-refs:** XD-026 resolved in cross-project-deps.md; agentic-sunset run-log 2026-06-14; tess-v2 also closed DONE this task.
+
+## 2026-08-10 — ARCHIVED (agentic-sunset AS-032 proposal, operator-approved)
+
+Final entry. Project closed DONE 2026-06-14 (AS-030, P7 superseded via XD-026 — tess-plist retirement executed by agentic-sunset AS-013/014/021/022). Archival proposed at AS-032 close, approved by operator 2026-08-10 after 57 days at DONE. tess-side data reclaim (former TDM-062) was folded into AS-032 and is complete (openclaw.json ×12 deleted + verified 2026-08-10; Keychain x-feed-intel.* scrubbed 2026-07-14). Runbook stays live outside the project at _system/docs/operator/how-to/tess-to-danny-migration-runbook.md. No KB-exception content. Compound: none new — mechanical move.

@@ -877,3 +877,4 @@
 2026-08-08 11:39:50 SYNC chore: full vault audit 2026-08-08 (weekly + monthly) — session-log entry + dashboard status
 2026-08-08 11:59:09 SYNC fix: audit follow-up — broken-wikilink sweep (16 links, 15 files) + tess-v2 review frontmatter backfill
 2026-08-08 11:59:19 SYNC docs: audit decisions executed — VAL-001/002/003 superseded, VO M5 soak CLOSED, AS project-state refreshed
+2026-08-08 12:22:48 SYNC chore: session-end — dormancy-return maintenance (audit + follow-ups, soak closed, project deletion); claude-ai-context refreshed (11 skills, roster + soak states)

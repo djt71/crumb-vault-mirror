@@ -16,8 +16,8 @@ topics:
 source_projects:
   - tess-v2
 source_artifacts:
-  - Projects/tess-v2/design/paperclip-spike-decision-2026-04-12.md
-  - Projects/tess-v2/progress/run-log.md
+  - Archived/Projects/tess-v2/design/paperclip-spike-decision-2026-04-12.md
+  - Archived/Projects/tess-v2/progress/run-log.md
 ---
 
 # Staged Spike With Bail Checkpoints

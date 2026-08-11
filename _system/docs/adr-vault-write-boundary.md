@@ -115,5 +115,5 @@ No scheduled writer touches Class 3 paths, ever.
 - [[adr-crumb-v3-knowledge-store-identity]] — amended reactivation policy; all else stands
 - `_system/docs/solutions/live-soak-beats-benchmark.md` — provenance of the
   machinery-not-writes lesson
-- Projects/agentic-sunset — AS-023 (first Class 1 writer), AS-026/028 (inbox
+- Archived/Projects/agentic-sunset — AS-023 (first Class 1 writer), AS-026/028 (inbox
   consolidation execution)

@@ -286,7 +286,7 @@ flowchart TD
     style gw fill:#fff3e0
 ```
 
-**Service namespace note (as the system stood 2026-04-11):** The system was in a migration state between two LaunchAgent namespaces. The legacy `ai.openclaw.*` namespace hosted bridge-watcher and remaining Tess operations; the new `com.tess.v2.*` namespace (tess-v2 project) hosted the then-authoritative set plus support daemons. Both namespaces coexisted during migration. The authoritative live set was `Projects/tess-v2/project-state.yaml` `services:` cross-referenced with `launchctl list`. Email triage services (both namespaces) were shut down on 2026-04-10 (TV2-036/037 cancelled).
+**Service namespace note (as the system stood 2026-04-11):** The system was in a migration state between two LaunchAgent namespaces. The legacy `ai.openclaw.*` namespace hosted bridge-watcher and remaining Tess operations; the new `com.tess.v2.*` namespace (tess-v2 project) hosted the then-authoritative set plus support daemons. Both namespaces coexisted during migration. The authoritative live set was `Archived/Projects/tess-v2/project-state.yaml` `services:` cross-referenced with `launchctl list`. Email triage services (both namespaces) were shut down on 2026-04-10 (TV2-036/037 cancelled).
 
 ### Prose Summary (for environments that cannot render Mermaid)
 

@@ -66,7 +66,7 @@ find . -not -path "./.git/*" -not -path "./Archived/*" -not -path "./.obsidian/*
 | File | Size | Tracked | Disposition |
 |---|---|---|---|
 | `Projects/think-different/attachments/james-watson.jpg` | 9.1 MB | yes | keep — active project embed (companion pair pattern, 45 tracked pairs in that dir) |
-| `Projects/tess-v2/scripts/.venv/.../_pydantic_core...so` | 4.0 MB | no | disk-only venv; delete rides with AS-030 tess-v2 closure (flagged to AS run-log) — not VO scope |
+| `Archived/Projects/tess-v2/scripts/.venv/.../_pydantic_core...so` | 4.0 MB | no | disk-only venv; delete rides with AS-030 tess-v2 closure (flagged to AS run-log) — not VO scope |
 | `_attachments/learning/wyner-fluent-forever.pdf` | 3.9 MB | no | keep on disk — live companion (learning-plan source material); gitignored by design |
 
 No tracked heavyweight is unowned → sub-batch (ii) expected yield: the

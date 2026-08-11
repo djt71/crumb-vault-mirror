@@ -25,7 +25,7 @@ Post-agentic-sunset, the vault still carries the primitive surface, documentatio
 1. `_system/docs/adr-crumb-v3-knowledge-store-identity.md` (2026-05-15, status: proposed) — **baseline by operator decision**
 2. `_system/docs/crumb-v2-system-health-assessment.md` — ceremony budget provenance ("Reducing ceremony is higher leverage than adding capability", §Observations Worth Sitting With)
 3. `_system/docs/solutions/infrastructure-teardown-discipline.md` — consumer-graph + end-condition disciplines
-4. `Projects/agentic-sunset/action-plan-summary.md` — scope boundary
+4. `Archived/Projects/agentic-sunset/action-plan-summary.md` — scope boundary
 5. Signals (operator-selected): `Sources/signals/trq212-anthropic-skill-design-lessons.md` (trigger-condition descriptions = Anthropic-flagged HIGH value / LOW effort per its Gap 3; gotchas sections; anti-railroading), `Sources/insights/skillsbench-agent-skills-mixed-results.md` (arXiv 2602.12670: 2–3 focused skills +18.6pp vs 4+ skills +5.9pp vs exhaustive −2.9pp; skills net-negative in well-covered domains; self-generated skills fail)
 6. `Projects/vault-optimization/reviews/2026-06-10-specification.md` — round-1 peer review (4-model panel); amendments A1–A9 applied 2026-06-10
 

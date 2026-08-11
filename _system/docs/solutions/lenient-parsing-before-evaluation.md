@@ -17,8 +17,8 @@ topics:
 source_projects:
   - tess-v2
 source_artifacts:
-  - Projects/tess-v2/design/response-harness-analysis.md
-  - Projects/tess-v2/design/spec-amendments-harness.md
+  - Archived/Projects/tess-v2/design/response-harness-analysis.md
+  - Archived/Projects/tess-v2/design/spec-amendments-harness.md
 ---
 
 # Lenient Parsing Layer Before Contract Evaluation
@@ -108,7 +108,7 @@ failure modes that actually require the model to reason differently next time.
 
 - `_system/docs/solutions/behavioral-vs-automated-triggers.md` — adjacent
   pattern on mechanical enforcement over behavioral compliance
-- `Projects/tess-v2/design/spec-amendments-harness.md` (Amendment U) —
+- `Archived/Projects/tess-v2/design/spec-amendments-harness.md` (Amendment U) —
   original formulation for the tess-v2 contract runner
-- `Projects/tess-v2/design/response-harness-analysis.md` — AutoBE analysis
+- `Archived/Projects/tess-v2/design/response-harness-analysis.md` — AutoBE analysis
   and the 7 recurring quirks

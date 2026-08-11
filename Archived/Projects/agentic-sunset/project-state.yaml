@@ -1,0 +1,20 @@
+name: agentic-sunset
+domain: software
+type: system
+phase: ARCHIVED
+phase_before_archive: DONE
+last_gate: TASK-to-IMPLEMENT
+created: 2026-06-10
+updated: 2026-08-10
+related_projects:
+  - tess-v2
+  - tess-danny-migration
+  - mission-control
+  - feed-intel-framework
+  - opportunity-scout
+# No repo_path: decommission project — produces no code, only teardown + vault artifacts.
+# External repo gate explicitly skipped (spec §Domain Classification).
+active_task: null
+next_action: "ARCHIVED 2026-08-10 — project complete, all 23 tasks done (AS-010–AS-032). Decommission of the entire agentic layer finished: local teardown reboot-verified (AS-021) + soak-verified 7/7 (AS-031 v2), external-artifact sweep fully closed 2026-08-10 (Gmail filters, Drive Agent-tree — recovery window lapses ~2026-08-13 → permanent, tree was empty; Keychain namespace, openclaw.json ×12, agent calendars ×2, provider revocations ×5, Discord server + bot apps). Compound insights routed (infrastructure-teardown-discipline.md disciplines 2-corollary + 4). XD ×6 dispositioned. tess-v2 + tess-danny-migration archived in the same pass (operator-approved). STANDING OPERATING RULE (survives the project): GUI login after every reboot; verify :8843 + backup-status; kickstart to close gaps. See design/service-inventory.md."
+last_committed: 2026-07-06
+services: []

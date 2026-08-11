@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: active
 created: 2026-03-07
-updated: 2026-07-05
+updated: 2026-08-10
 tags:
   - system
   - cross-project
@@ -27,12 +27,9 @@ Tracks specific, directional blocking relationships between projects with resolu
 
 | ID | Blocked Item | Waiting On | Upstream Project | Upstream Task/Milestone | Status | Notes |
 |----|-------------|------------|-----------------|------------------------|--------|-------|
-| XD-005 | MC Customer: Relationship Heat Map | Google/Apple integration | — | not yet scoped | blocked | No upstream project exists. (AS-030 2026-06-14: reviewed — kept as dormant MC backlog, not teardown-mooted; dormant while MC paused.) |
-| XD-007 | MC Customer: Comms Cadence | Google/Apple integration | — | not yet scoped | blocked | No upstream project exists. (AS-030 2026-06-14: reviewed — kept as dormant MC backlog, not teardown-mooted; dormant while MC paused.) |
-| XD-009 | MC Knowledge: Decision Journal | Decision journal impl | — | not yet scoped | blocked | No upstream project exists. (AS-030 2026-06-14: reviewed — kept as dormant MC backlog, not teardown-mooted; dormant while MC paused.) |
-| XD-019 | MC Customer: Relationship Heat Map (XD-005) | Google Workspace MCP access | — | — | blocked | No upstream project — planned as mcp-workspace-integration (task MWI-005) but never scaffolded; Google Workspace MCP arrived natively and is live. Apple side still unscoped. Dormant while MC paused. |
-| XD-020 | MC Customer: Comms Cadence (XD-007) | Google Workspace MCP access | — | — | blocked | No upstream project — same as XD-019 (planned mcp-workspace-integration never scaffolded; native Workspace MCP live). Dormant while MC paused. |
-| XD-021 | pydantic-ai-adoption ADR §2.2 resolution | MCP feasibility findings | — | — | blocked | No upstream project — planned as mcp-workspace-integration (task MWI-002 spike) but never scaffolded. Spike results would resolve the feasibility brief that ADR §2.2 deferred. |
+| XD-005 | MC Customer: Relationship Heat Map | Google/Apple integration | — | not yet scoped | blocked | No upstream project exists. (AS-030 2026-06-14: reviewed — kept as dormant MC backlog, not teardown-mooted; dormant while MC paused. AS-032 2026-08-10: keep-dormant confirmed at AS close.) |
+| XD-007 | MC Customer: Comms Cadence | Google/Apple integration | — | not yet scoped | blocked | No upstream project exists. (AS-030 2026-06-14: reviewed — kept as dormant MC backlog, not teardown-mooted; dormant while MC paused. AS-032 2026-08-10: keep-dormant confirmed at AS close.) |
+| XD-009 | MC Knowledge: Decision Journal | Decision journal impl | — | not yet scoped | blocked | No upstream project exists. (AS-030 2026-06-14: reviewed — kept as dormant MC backlog, not teardown-mooted; dormant while MC paused. AS-032 2026-08-10: keep-dormant confirmed at AS close.) |
 | XD-027 | vault-optimization VO-031/032 (B4/B5 primitive batches) + VO-026/033 (ceremony changeset/batch) | CLAUDE.md diff, skills+memory cleanup, directory archival complete | agentic-sunset | AS-025–029 (M6) | pending | Boundary settled at VO TASK (2026-06-10): VO-010–030 proceed during AS M3–M5; VO-031/032 blocked on Appendix A ownership matrix frozen (VO-016) + AS M6 sign-off in AS run-log; VO-026/033 additionally on AS-025. AS-side now satisfied: AS M6 (AS-025–029) complete 2026-06-12 + AS-021 reboot passed 2026-06-14 — VO-031/032 now gated only on VO-016. See Projects/vault-optimization/tasks.md. |
 | XD-028 | vault-optimization VO-037 (CLAUDE.md slim-down): deletion of the behavioral signal-scan paragraph | new-content hook live (mechanical replacement for the behavioral obligation) | akm-refresh | AKM-007/AKM-008 (R4) | pending | Added at akm-refresh SPECIFY (2026-07-07). VO-037 must not delete the CLAUDE.md signal-scan paragraph until the R4 hook is implemented and observed firing — otherwise cross-pollination loses its only (behavioral) trigger with no replacement. Overlap window (peer review GRK-F6): between R4 hook go-live and VO-037's deletion, both the hook and the behavioral instruction are live — double-surfacing possible; accepted, bounded by VO-037 execution. |
 
@@ -57,6 +54,7 @@ Tracks specific, directional blocking relationships between projects with resolu
 | XD-016 | TOP-046 reactive stream (§8.1) | `research` triage action in dashboard | mission-control | MC-068 | mooted | TOP-046 scheduled streams (§8.2/§8.3) can proceed without MC-068. MOOTED AS-030 2026-06-14: TOP-046 (tess-operations) decommissioned — the blocked item itself is dead. |
 | XD-017 | MC-067 action_class display | Daily artifact action_class field | autonomous-operations | AO-002 | mooted | MC-067 reads daily artifact; action_class was an additive field. MOOTED AS-030 2026-06-14: autonomous-operations decommissioned. |
 | XD-018 | AO Phase 2 task registry | Replay log schema stability | autonomous-operations | AO-001 complete + Phase 1 exit | mooted | MOOTED AS-030 2026-06-14: autonomous-operations decommissioned. |
+| XD-021 | pydantic-ai-adoption ADR §2.2 resolution | MCP feasibility findings | — | — | mooted | MOOTED AS-032 2026-08-10 (operator-confirmed): the blocked item belongs to pydantic-ai-adoption — archived, then deleted with `Archived/` (VO-028 B1; git history only). The MWI-002 spike upstream (mcp-workspace-integration) was never scaffolded and never will be. Same class as XD-016: blocked item itself is dead. |
 
 ## Resolved Dependencies
 
@@ -65,6 +63,8 @@ Tracks specific, directional blocking relationships between projects with resolu
 | XD-014 | MC Daily Attention panel (MC-067) | AM-003 done, schema live. MC-067 registered as consumer. | 2026-03-09 |
 | XD-015 | Tess morning briefing — daily attention (TOP-055) | AM-003 done. TOP-055 registered. | 2026-03-09 |
 | XD-026 | tess-danny-migration P7 closeout (DONE-superseded) | agentic-sunset executed tess-plist retirement: daemon teardown (AS-013/014) + tess/openclaw user-domain LaunchAgent archival (AS-022) + reboot resurrection verification (AS-021). tess-danny-migration closed DONE under AS-030; the mooted-row sweep this row called for was completed in the same task (XD-001/002/003/004/006/008/010/011/012/013/016/017/018/022/023/024/025 → mooted). | 2026-06-14 |
+| XD-019 | MC Customer: Relationship Heat Map — Google Workspace MCP access | RESOLVED by platform absorption (AS-032, operator-confirmed): the planned upstream (mcp-workspace-integration MWI-005) was never scaffolded and is dead; native Google Workspace MCP provides the capability. Caveat: its OAuth is currently expired and deliberately not renewed (agent-access surface closed per AS ethos) — re-auth is an operator decision if MC resumes. Feature remains tracked by XD-005 (dormant). | 2026-08-10 |
+| XD-020 | MC Customer: Comms Cadence — Google Workspace MCP access | RESOLVED by platform absorption (AS-032, operator-confirmed): same resolution as XD-019. Feature remains tracked by XD-007 (dormant). | 2026-08-10 |
 
 ## Future Integration (deferred)
 

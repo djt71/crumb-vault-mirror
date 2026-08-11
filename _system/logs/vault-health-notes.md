@@ -1,14 +1,13 @@
 ---
 type: state
 status: active
-created: 2026-08-08
-updated: 2026-08-08
+created: 2026-08-10
+updated: 2026-08-10
 ---
 
-# Vault Health Notes — 2026-08-08
+# Vault Health Notes — 2026-08-10
 
-## Warnings (97)
-  WARNING: Projects/tess-v2/reviews/2026-03-28-external-action-plan-review-synthesis.md — no YAML frontmatter found
+## Warnings (80)
   WARNING: Projects/firekeeper-books/ai-art-learning-plan.md — kb-tagged note missing required 'topics' field
   WARNING: Domains/Career/moc-networking.md — orientation MOC has 15 Core entries but Synthesis has <30 words
   WARNING: Domains/Learning/moc-history.md — 4 Core one-liner(s) have <10 chars of description after the link (§5.6.6)
@@ -60,8 +59,7 @@ updated: 2026-08-08
   WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-07-06 — Session-end (compound evaluation)' mentions skill invocation but has no context inventory
   WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-07-06 — Session-end (compound evaluation) — mission-statement fix + spec inventory tranche' mentions skill invocation but has no context inventory
   WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-07-13 — M5 soak status check + WS4 backfill' mentions skill invocation but has no context inventory
-  WARNING: Projects/obsidian-applenotes-import/progress/run-log.md — session '## 2026-04-25 — Project creation' mentions skill invocation but has no context inventory
-  WARNING: Projects/obsidian-applenotes-import/progress/run-log.md — session '## 2026-04-25 — SPECIFY done; PLAN-ready' mentions skill invocation but has no context inventory
+  WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-08-08 — M5 soak CLOSED (operator decision)' mentions skill invocation but has no context inventory
   WARNING: Projects/akm-refresh/progress/run-log.md — session '## 2026-07-07 — SPECIFY: peer review round 1' mentions skill invocation but has no context inventory
   WARNING: Projects/akm-refresh/progress/run-log.md — session '## 2026-07-07 — SPECIFY: review fixes applied (A1–A9), cycle closed' mentions skill invocation but has no context inventory
   WARNING: Projects/akm-refresh/progress/run-log.md — session '## 2026-07-07 — Session end (SPECIFY → PLAN in one session)' mentions skill invocation but has no context inventory
@@ -90,26 +88,8 @@ updated: 2026-08-08
   WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-07-06 — Session-end (compound evaluation) — mission-statement fix + spec inventory tranche' mentions subagent delegation but has no provenance assessment
   WARNING: Projects/akm-refresh/progress/run-log.md — session '## 2026-07-07 — Session end (SPECIFY → PLAN in one session)' mentions subagent delegation but has no provenance assessment
   WARNING: Projects/mission-control/progress/run-log.md — session '## 2026-03-30 (session 10) — M3.1: Intelligence Feed Density Redesign' mentions subagent delegation but has no provenance assessment
-  WARNING: Projects/agentic-sunset/design/upstream-migration.md — broken link: [[feedback-feed-intel-stays-open]]
-  WARNING: Projects/agentic-sunset/progress/run-log.md — broken link: `[[project-agentic-sunset]]`
-  WARNING: Projects/agentic-sunset/progress/run-log.md — broken link: `[[recurring-patterns]]`
-  WARNING: Projects/firekeeper-books/progress/run-log.md — broken link: `[[recurring-patterns]]`
-  WARNING: Sources/insights/loop-scheduled-task-orchestration.md — broken link: `[[tess-operations]]`
-  WARNING: Sources/signals/claudecodecamp-agents-while-sleeping.md — broken link: `[[tess-operations]]`
-  WARNING: Sources/signals/fang-trajectory-informed-memory.md — broken link: `[[attention-manager]]`
-  WARNING: Sources/signals/jpschroeder-dmux-tmux-agents.md — broken link: `[[tess-operations]]`
-  WARNING: Sources/signals/sero-droid-structured-agent-coding.md — broken link: `[[tess-operations]]`
-  WARNING: Sources/signals/geohot-running-69-agents.md — broken link: `[[tess-operations]]`
-  WARNING: Sources/signals/sahoo-safeguarded-self-improvement.md — broken link: `[[attention-manager]]`
-  WARNING: Sources/signals/mitsuhiko-agents-like-coding-agents.md — broken link: `[[tess-operations]]`
-  WARNING: Sources/signals/danshipper-daily-codex-polish-agent.md — broken link: `[[tess-operations]]`
-  WARNING: Sources/signals/koylanai-claude-code-hooks-patterns.md — broken link: `[[tess-operations]]`
-  WARNING: Sources/signals/odysseus-minimal-agentic-system-linear.md — broken link: `[[tess-operations]]`
-
-## Git Status
-2 uncommitted file(s)
 
 ## Stale Projects (14+ days)
-agentic-sunset, tess-v2, customer-intelligence, skills-library, firekeeper-books, vault-optimization, obsidian-applenotes-import, think-different, akm-refresh, mission-control, tess-danny-migration, semuta
+tess-v2, customer-intelligence, skills-library, firekeeper-books, think-different, akm-refresh, mission-control, tess-danny-migration, semuta
 
 

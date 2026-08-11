@@ -20,7 +20,7 @@ related_projects:
 supersedes:
   - "Implicit framing of Crumb as 'personal multi-agent OS'"
 informed_by:
-  - "Projects/tess-v2/design/spec-amendment-AC-execution-surfaces.md (2026-04-21)"
+  - "Archived/Projects/tess-v2/design/spec-amendment-AC-execution-surfaces.md (2026-04-21)"
   - "_system/docs/solutions/live-soak-beats-benchmark.md"
   - "_system/docs/crumb-v2-system-health-assessment.md"
 topics:
@@ -287,5 +287,5 @@ This ADR was drafted by Crumb (Claude Opus 4.7) in a 2026-05-15 audit follow-up 
 - `_system/docs/crumb-design-spec-v2-4.md` — Crumb v2 design spec (will be superseded in part by Crumb v3 work)
 - `_system/docs/crumb-v2-system-health-assessment.md` — health assessment that informed ceremony budget principle
 - `_system/docs/solutions/live-soak-beats-benchmark.md` — captured pattern on live-soak primacy
-- `Projects/tess-v2/design/spec-amendment-AC-execution-surfaces.md` — orchestrator role retraction
-- `Projects/tess-v2/design/tess-harness-plan-tracking.yaml` — VAL items to be closed as superseded
+- `Archived/Projects/tess-v2/design/spec-amendment-AC-execution-surfaces.md` — orchestrator role retraction
+- `Archived/Projects/tess-v2/design/tess-harness-plan-tracking.yaml` — VAL items to be closed as superseded

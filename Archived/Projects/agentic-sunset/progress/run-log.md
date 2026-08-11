@@ -553,3 +553,51 @@ Operator-approved during a VO session: `_system/archive/` (the AS-012/022/028 pa
 4. Discord: delete 'Tess Ops' server + `tess-discord`/`mechanic-discord` bot applications (developer portal)
 
 **Still open on AS-032 after sweep:** final compound routing (platform-absorption + dual-scheduler-drift, ask-first), archival proposals (tess-v2 KB exception, agentic-sunset itself), XD-row keep-or-moot confirmation ×6.
+
+## 2026-08-10 — AS-032 operator-manual checklist COMPLETE (external-artifact sweep closed)
+
+**Trigger:** operator resumed the checklist session (opened 2026-08-08, executed 08-08→08-10, confirmed 2026-08-10: "these are done, verify what you can").
+
+**Verification (Claude, this session):**
+1. **openclaw.json ×12 — VERIFIED DELETED.** `ls /Users/openclaw/.openclaw/openclaw.json*` → zero matches (was 12 files confirmed present at session open 2026-08-08). Residual secrets cache gone.
+2. **Agent calendars ×2 — VERIFIED DELETED.** claude.ai Calendar connector (read-only) lists only Holidays / Turner Family / personal — 'Agent — Staging' and 'Agent — Followups' gone (both confirmed still present 2026-08-08, same connector).
+3. **Provider revocations ×5 — operator-attested** (no Crumb tooling to inspect provider dashboards): OpenRouter key, X OAuth (developer portal), Perplexity key, twitterapi.io key, YouTube key (Google Cloud console).
+4. **Discord — operator-attested:** 'Tess Ops' server deleted; `tess-discord` + `mechanic-discord` bot applications deleted at developer portal.
+
+**Docs updated:** rotate-credentials.md — all 7 candidate rows marked revoked/executed 2026-08-10 (OpenRouter, gateway/openclaw.json, X OAuth, Perplexity, Discord ×2, twitterapi.io, YouTube). Telegram row unchanged (keep-dormant stands, 2026-07-06 decision).
+
+**Auth-surface note:** google-workspace MCP OAuth found expired at 2026-08-08 session open (re-auth page dismissed, not completed — operator keeps the broad-scope write surface closed; consistent with AS intent). Read-only verification done via claude.ai Calendar connector instead.
+
+**Drive recovery window:** closes ~2026-08-13 → Agent-tree deletion becomes permanent. No action — tree verified empty 2026-07-14; permanent deletion is the goal state.
+
+**With this, the external-artifact sweep (Gmail 06-19, Drive 07-14, Keychain 07-14, openclaw.json / calendars / providers / Discord 08-10) is fully closed. STILL OPEN on AS-032:** (1) final compound routing — platform-absorption + dual-scheduler-drift insights, ask-first; (2) archival proposals — tess-v2 KB-exception question, tess-danny-migration (DONE 55d+), agentic-sunset itself; (3) XD keep-or-moot confirmation ×6 (XD-005/007/009 no-upstream MC wishlist; XD-019/020/021 MCP upstream survives).
+
+## 2026-08-10 — AS-032 final compound routing EXECUTED (operator-approved)
+
+Both queued insights routed per proposal (operator: "yes, proceed"). Route = extend existing solutions doc, zero new primitives (ceremony budget respected):
+
+1. **Platform absorption as standing teardown trigger** → `_system/docs/solutions/infrastructure-teardown-discipline.md`: promoted to **Discipline 4** ("watch the platform: upstream capability absorption is a teardown trigger"), evidence entry added (agentic-sunset as origin — ~90% of self-built agentic layer absorbed by platform, teardown triggered only by operator intuition), When-to-Apply bullet (audit-time re-justification), Corollary extended with the level-down diagnostic question. Doc now claims four disciplines (was three); frontmatter updated (agentic-sunset in source_projects, updated: 2026-08-10).
+2. **Dual-scheduler drift** → same doc: Discipline 2 gains an explicit **migration corollary** (sweep every scheduler class — cron, launchd, git hooks, shell profiles, session hooks) + evidence entry (drive-sync in 3 scheduler classes with 2 source paths, frozen vault to Drive/NotebookLM ~2 days). Also added as a section in the `macos-system-notes` auto-memory (where scheduler gotchas surface ambiently).
+
+Compound routing for AS-032 is CLOSED. Remaining: XD keep-or-moot ×6, archival proposals.
+
+## 2026-08-10 — AS-032 XD keep-or-moot ×6 CONFIRMED (operator decisions)
+
+All six rows dispositioned in `_system/docs/cross-project-deps.md` (operator confirmed each recommendation):
+- **XD-005/007/009 → KEEP dormant** — MC roadmap markers, not teardown residue; AS-030 keep-decision re-confirmed at AS close; notes annotated.
+- **XD-019/020 → RESOLVED (platform absorption)** — planned upstream (mcp-workspace-integration MWI-005) dead; native Google Workspace MCP provides the capability. Caveat recorded: MCP OAuth currently expired + deliberately unrenewed (surface closed); re-auth = operator decision if MC resumes. Features remain tracked by XD-005/007. Moved to Resolved table. (Discipline 4 — platform absorption — applied to the ledger itself.)
+- **XD-021 → MOOTED** — blocked item belongs to pydantic-ai-adoption (archived → deleted with `Archived/`, VO-028 B1, git-history-only); MWI-002 spike will never run. XD-016 class. Moved to Mooted table.
+
+Remaining on AS-032: archival proposals only.
+
+## 2026-08-10 — AS-032 COMPLETE → project DONE → ARCHIVED (final entry)
+
+**AS-032 closed** — all four sub-items done this session: (1) operator-manual checklist verified/attested (entry above); (2) compound routing executed (entry above); (3) XD ×6 dispositioned (entry above); (4) archival proposals presented and operator-approved: tess-v2 (KB exception answered NO — no #kb/ content in project dir, durable patterns live outside it), tess-danny-migration (57d at DONE, former TDM-062 completed under AS-032), and agentic-sunset itself. tasks.md AS-031/032 rows backfilled to done (AS-031 was stale-todo — known tasks.md-staleness pitfall).
+
+**Project summary (2026-06-10 → 2026-08-10):** the entire self-built agentic layer (OpenClaw gateway, Hermes, Tess runtime — 14 launchd labels, Ollama, Telegram messaging, Discord ops, Gmail automation, agent calendars, Drive scaffolding, ~20 credentials) decommissioned with zero data loss and zero premature deletion. Keep-set end state: 10 `com.crumb.*` labels, reboot-verified (AS-021), soak-verified 7/7 (AS-031 v2 after a v1 failure that produced the GUI-login-gated operating rule). External-artifact sweep extended the teardown off-machine: Gmail filters, Drive tree, Keychain namespace, secrets cache, calendars, five provider revocations, Discord. Cloud-side content verified empty before every deletion.
+
+**Final compound evaluation:** the project's insights were all routed at their gates or at AS-032 routing (infrastructure-teardown-discipline disciplines 2-corollary + 4; scheduler-execution-locus, prompt-env-mismatch, teardown-blast-radius → recurring-patterns; GUI-login-gated resurrection → service-inventory + memory). Nothing new at close — this entry is mechanical. One meta-observation, not promoted (single occurrence): a teardown project that archives *itself* exercises the archival protocol as its own final acceptance test.
+
+**Archival (operator-approved, this session):** phase DONE → ARCHIVED (phase_before_archive: DONE), moved to Archived/Projects/ with tess-v2 + tess-danny-migration in the same pass. Standing operating rule survives the project in `design/service-inventory.md` + project memory: **GUI login after every reboot; verify :8843 + backup-status; kickstart to close gaps.**
+
+*The work persists.*

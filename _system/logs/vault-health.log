@@ -223,3 +223,13 @@
 2026-08-08T06:05:35Z stale-projects: count=12 agentic-sunset, tess-v2, customer-intelligence, skills-library, firekeeper-books, vault-optimization, obsidian-applenotes-import, think-different, akm-refresh, mission-control, tess-danny-migration, semuta
 2026-08-08T06:05:35Z OK: wrote health notes to /Users/danny/crumb-vault/_system/logs/vault-health-notes.md
 2026-08-08T06:05:35Z OK: warnings only — written to health notes
+2026-08-09T06:05:35Z vault-check: exit=1 errors=0 warnings=80
+2026-08-09T06:05:35Z git-status: clean=true 
+2026-08-09T06:05:35Z stale-projects: count=9 tess-v2, customer-intelligence, skills-library, firekeeper-books, think-different, akm-refresh, mission-control, tess-danny-migration, semuta
+2026-08-09T06:05:35Z OK: wrote health notes to /Users/danny/crumb-vault/_system/logs/vault-health-notes.md
+2026-08-09T06:05:35Z OK: warnings only — written to health notes
+2026-08-10T06:06:05Z vault-check: exit=1 errors=0 warnings=80
+2026-08-10T06:06:05Z git-status: clean=true 
+2026-08-10T06:06:05Z stale-projects: count=9 tess-v2, customer-intelligence, skills-library, firekeeper-books, think-different, akm-refresh, mission-control, tess-danny-migration, semuta
+2026-08-10T06:06:05Z OK: wrote health notes to /Users/danny/crumb-vault/_system/logs/vault-health-notes.md
+2026-08-10T06:06:05Z OK: warnings only — written to health notes

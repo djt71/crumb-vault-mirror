@@ -34,3 +34,7 @@ High-level milestone tracker. Detailed session notes live in [[run-log]].
 ## Flags carried into execution
 - Dormant monitoring stack (dashboard + cloudflared + telemetry) — carry vs drop (operator's call).
 - nemotron-load DROP recommended (1040× fail) — override available.
+
+## 2026-08-10 — ARCHIVED
+- Moved to Archived/Projects/ per agentic-sunset AS-032 archival proposal (operator-approved)
+- phase_before_archive: DONE (closed 2026-06-14 via AS-030; P7 superseded by agentic-sunset, XD-026)

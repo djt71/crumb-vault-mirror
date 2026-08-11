@@ -4,7 +4,7 @@ track: pattern
 domain: software
 status: active
 created: 2026-06-01
-updated: 2026-06-01
+updated: 2026-08-10
 confidence: high
 linkage: discovery-only
 topics:
@@ -20,9 +20,11 @@ source_projects:
   - opportunity-scout
   - mission-control
   - tess-v2
+  - agentic-sunset
 source_artifacts:
   - _system/logs/session-log.md
   - Projects/mission-control/progress/run-log.md
+  - Archived/Projects/agentic-sunset/progress/run-log.md
 ---
 
 # Infrastructure Teardown Discipline
@@ -34,10 +36,10 @@ accumulates faster than it is removed, because **building has a trigger
 (a need) and teardown has none**. The cost is not the idle process; it is the
 *false signal*: an orphaned monitor turns silence into noise, a stale freshness
 check turns a deliberate shutdown into a recurring alert, and a tracked
-churn-file turns a clean working tree into permanent drift. Three disciplines,
-applied at teardown time, prevent the recurring class: declare an end-condition,
-sweep consumers when removing a producer, and never version-control what your
-own toolchain rewrites.
+churn-file turns a clean working tree into permanent drift. Four disciplines
+prevent the recurring class: declare an end-condition, sweep consumers when
+removing a producer, never version-control what your own toolchain rewrites,
+and treat upstream platform absorption as a standing teardown trigger.
 
 ## Evidence
 
@@ -81,6 +83,22 @@ recurrence (the 2026-04-25 session-log entry set the trigger explicitly:
   different dir, so no false-alarm was created. Confirms discipline 1 (no
   end-condition on a generative pipeline → frozen output goes unnoticed) and the
   migration-zombie corollary of discipline 2.
+- **Dual-scheduler drift (2026-06-10, agentic-sunset AS-012/017):** a path
+  migration left the same job (drive-sync) scheduled in **three scheduler
+  classes** — crontab (hourly), launchd plist (05:00 daily), and a git
+  post-commit hook — with two *different* source paths; Google Drive/NotebookLM
+  silently received a frozen vault copy for ~2 days. Each scheduler had been
+  added in a different era, and no single inventory listed them all. Sharpens
+  discipline 2's migration corollary: sweep every scheduler *class*, not just
+  the one you remember using.
+- **Platform absorption unwatched (2026-06-10 → 2026-08, agentic-sunset):**
+  ~90% of the self-built agentic layer (OpenClaw gateway, Hermes, Tess runtime —
+  14 launchd labels, Ollama, a Telegram messaging layer) had been absorbed as
+  native Claude Code / claude.ai capability, yet all of it kept running on pure
+  inertia. The teardown trigger was operator intuition after an extended break —
+  no system watch existed. Result: the largest teardown in vault history
+  (23 tasks, ~2 months including soaks and an external-artifact sweep). Origin
+  of discipline 4.
 
 ## Pattern
 
@@ -101,12 +119,27 @@ re-check them at the moment anything is *decommissioned* (highest-leverage):
    becomes a false signal the instant the producer stops — a stale-data alert
    that can never clear, or a "service down" that was intentional. Disable the
    watchers *with* the producer, not when their alerts annoy someone weeks later.
+   **Migration corollary:** a path or namespace migration must sweep every
+   *scheduler class* — crontab, launchd, git hooks, shell profiles, session
+   hooks — because the same job accretes schedulers across eras and no single
+   listing shows them all (see the dual-scheduler drift evidence).
 
 3. **Never version-control artifacts your own toolchain rewrites.** A file
    written by a commit hook, a cron job, or a build step churns the working tree
    on its own schedule. Tracked, it guarantees the tree is never clean and
    provides perfect camouflage for real uncommitted work. Gitignore it (keep on
    disk) the moment you notice it dirtying the tree without a manual edit.
+
+4. **Watch the platform: upstream capability absorption is a teardown
+   trigger.** Self-built infrastructure exists to fill a gap in the platform
+   beneath it. When the platform absorbs that capability, the gap closes — but
+   nothing turns your version off; it keeps running purely because it already
+   exists, accreting maintenance gravity while duplicating what the platform
+   now provides. Re-justify standing self-built infrastructure against current
+   platform capability at audit time, and treat confirmed absorption as a
+   teardown evaluation, not just good news. The disciplines 1–3 ask "did the
+   thing this *serves* disappear?"; discipline 4 asks "did the *reason to have
+   built it* disappear?"
 
 ## When to Apply
 
@@ -116,6 +149,8 @@ re-check them at the moment anything is *decommissioned* (highest-leverage):
   trace the consumer graph as a required step.
 - Investigating recurring alert noise or a working tree that won't reach clean —
   these are the symptoms this discipline prevents.
+- At audit / periodic review: re-justify standing self-built infrastructure
+  against current platform capability (discipline 4).
 
 ## When Not to Apply
 
@@ -129,14 +164,15 @@ re-check them at the moment anything is *decommissioned* (highest-leverage):
 
 ## Corollary
 
-The three disciplines share a root cause: **asymmetry between creation and
+The four disciplines share a root cause: **asymmetry between creation and
 removal**. Creation is pulled by a need; removal must be *pushed* by discipline
 because nothing pulls it. The fix in every case is to attach the teardown
 obligation to the thing at creation time — an end-date, a consumer-graph note, a
 gitignore line — so removal is mechanical rather than remembered. When in doubt,
 the diagnostic question is: *"If the thing this serves disappeared tomorrow,
 what would notice and turn this off?"* If the answer is "nothing," it is a future
-zombie.
+zombie. Discipline 4 extends the question one level down the stack: *"If the
+platform shipped this capability tomorrow, what would notice and retire ours?"*
 
 ## Related
 

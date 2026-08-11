@@ -98,7 +98,7 @@ _system/docs/file-conventions.md or ask Danny.
 ## Open observation items
 
 Carried from the scheduler verification
-(`Projects/agentic-sunset/design/scheduler-verification-2026-06.md`):
+(`Archived/Projects/agentic-sunset/design/scheduler-verification-2026-06.md`):
 
 1. **Do global instructions reach Cowork's *scheduled* task runs**, or only
    interactive sessions? If they reach scheduled runs, the "scheduled prompts must

@@ -194,6 +194,6 @@ launchctl list | grep com.crumb
 
 - Service inventory reconciled directly against `ls ~/Library/LaunchAgents/com.crumb.*` (11 plists), each plist's raw contents, and `launchctl list | grep crumb` (10 loaded) — 2026-07-05.
 - Confirmed `ai.openclaw.*` and `com.tess.v2.*` fully absent from disk and `launchctl list` — not inherited from prior doc's claims.
-- Credential/consumer map reconciled against a grep sweep of `_system/scripts/` and `.claude/` for API key names, plus `Projects/agentic-sunset/project-state.yaml` and `Projects/tess-v2/project-state.yaml` for decommission status.
+- Credential/consumer map reconciled against a grep sweep of `_system/scripts/` and `.claude/` for API key names, plus `Archived/Projects/agentic-sunset/project-state.yaml` and `Archived/Projects/tess-v2/project-state.yaml` for decommission status.
 - ~~**Uncertainty:** `com.crumb.apple-snapshot`~~ — resolved 2026-07-06: operator confirmed retired (see Service Inventory note above).
 - **Uncertainty:** Exact `qmd` version/config and Ollama's full removal status (vs. simply not running) not independently verified beyond the port-11434 unreachable check.

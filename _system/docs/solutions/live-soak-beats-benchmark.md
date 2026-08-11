@@ -18,10 +18,10 @@ topics:
 source_projects:
   - tess-v2
 source_artifacts:
-  - Projects/tess-v2/design/model-hermes-crumb-evaluation-frame-2026-04-20.md
-  - Projects/tess-v2/design/spec-amendment-AC-execution-surfaces.md
-  - Projects/tess-v2/design/live-vs-documented-hierarchy-reconciliation-2026-04-20.md
-  - Projects/tess-v2/eval-results/cloud-eval-results-kimi-2026-03-30.md
+  - Archived/Projects/tess-v2/design/model-hermes-crumb-evaluation-frame-2026-04-20.md
+  - Archived/Projects/tess-v2/design/spec-amendment-AC-execution-surfaces.md
+  - Archived/Projects/tess-v2/design/live-vs-documented-hierarchy-reconciliation-2026-04-20.md
+  - Archived/Projects/tess-v2/eval-results/cloud-eval-results-kimi-2026-03-30.md
 ---
 
 # Live Soak Beats Benchmark for Role-Fit Judgment

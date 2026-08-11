@@ -14,7 +14,7 @@ Orientation artifact for a fresh session reading this repo (claude.ai chat, a
 new Claude Code session, or any agent cloning `github.com/djt71/crumb-vault`).
 Read this first — it is sufficient for most questions.
 
-Last updated: 2026-08-08 (point edit after a 25-day vault dormancy gap 2026-07-14→08-08 — no sessions, stack ran clean unattended: **AS-032 external-artifact sweep EXECUTED 2026-07-14** (Drive Agent-tree trashed — recovery window closes ~08-13; Keychain x-feed-intel.* scrubbed; 7 revocations approved — operator-manual checklist at providers still open, see AS project-state); **VO M5 soak CLOSED 2026-08-08** by operator decision — PASS on all exercised criteria at WS5/8, Tier-1 #1–#3 unexercised → watch items; pruned config accepted as baseline; VO-036 close-out → VO-037 next; **full vault audit 2026-08-08** (weekly + monthly, follow-ups executed: 16 broken wikilinks fixed, tess-v2 VAL-001/002/003 closed superseded); **skill roster is 11** since 2026-07-07 (skills-library §C); **obsidian-applenotes-import closed + deleted 2026-08-08** (operator decision, no archival — pre-M0, no repo ever created, git-history-only)). Prior point edits 2026-07-13 (AS-031 soak v2 COMPLETE 7/7 green; GUI-login recovery rule field-proven at the 07-13 reboot), 2026-07-06 (mission statement re-aligned to directive v3) and 2026-07-05 (attention-manager retired to Cowork, 15 skills, bet portfolio empty per Gate 4 declarations). Prior full refresh 2026-07-04. **Headline changes since 06-19:** (1) the
+Last updated: 2026-08-10 (point edit: **agentic-sunset COMPLETE → ARCHIVED** — AS-032 closed: operator-manual checklist executed 08-08→08-10 and verified (openclaw.json ×12 gone, agent calendars ×2 gone, provider revocations ×5 + Discord operator-attested); compound insights routed (`infrastructure-teardown-discipline.md` now four disciplines — new discipline 4 "platform absorption is a teardown trigger" + discipline 2 migration corollary "sweep every scheduler class"); XD ×6 dispositioned (005/007/009 keep-dormant, 019/020 resolved platform-absorption, 021 mooted); **three projects archived to `Archived/Projects/` in one pass: agentic-sunset, tess-v2 (KB exception answered NO — durable patterns live outside the project), tess-danny-migration**; `Projects/index.md` rebuilt from live phases (was stale since 04-21). Active roster is now 7: vault-optimization, akm-refresh, skills-library, customer-intelligence, firekeeper-books, semuta, mission-control (paused)). Prior point edit 2026-08-08 (after a 25-day vault dormancy gap 2026-07-14→08-08 — no sessions, stack ran clean unattended: **AS-032 external-artifact sweep EXECUTED 2026-07-14** (Drive Agent-tree trashed — recovery window closes ~08-13; Keychain x-feed-intel.* scrubbed; 7 revocations approved — operator-manual checklist at providers still open, see AS project-state); **VO M5 soak CLOSED 2026-08-08** by operator decision — PASS on all exercised criteria at WS5/8, Tier-1 #1–#3 unexercised → watch items; pruned config accepted as baseline; VO-036 close-out → VO-037 next; **full vault audit 2026-08-08** (weekly + monthly, follow-ups executed: 16 broken wikilinks fixed, tess-v2 VAL-001/002/003 closed superseded); **skill roster is 11** since 2026-07-07 (skills-library §C); **obsidian-applenotes-import closed + deleted 2026-08-08** (operator decision, no archival — pre-M0, no repo ever created, git-history-only)). Prior point edits 2026-07-13 (AS-031 soak v2 COMPLETE 7/7 green; GUI-login recovery rule field-proven at the 07-13 reboot), 2026-07-06 (mission statement re-aligned to directive v3) and 2026-07-05 (attention-manager retired to Cowork, 15 skills, bet portfolio empty per Gate 4 declarations). Prior full refresh 2026-07-04. **Headline changes since 06-19:** (1) the
 agentic-sunset stability soak v1 **FAILED** — a headless reboot on 2026-06-18
 left the stack dark 13 days (keep-set resurrection is GUI-login-gated, now a
 documented operating assumption: GUI-login after every reboot, then verify
@@ -30,7 +30,7 @@ diagram-capture→deck-intel, learning-plan→systems-analyst) + deleted
 six zombie startup counters removed). Canonical exceptions extracted first:
 NLM workflow guide + vault-mirror spec → `_system/docs/`, deliberation record
 store → `_system/data/deliberations/`, `_openclaw/config` 4-pack →
-`Projects/agentic-sunset/design/external-artifacts/` (AS-032 sweep inputs).
+`Archived/Projects/agentic-sunset/design/external-artifacts/` (AS-032 sweep inputs).
 **Anything formerly under `Archived/` is git-history-only now**
 (`git show 49143a99:Archived/<path>`).
 
@@ -50,7 +50,7 @@ produced zero revenue, and ~90% of its function is now native in Claude.AI / Cla
   deps); README-ARCHIVED breadcrumbs in all 7 runtime dirs; daily-attention
   replacement **declined** (on-demand attention-manager only; that skill was
   itself retired to Cowork 2026-07-05, `cowork-attention-handoff.md` — see
-  `Projects/agentic-sunset/design/upstream-migration.md`); CLAUDE.md
+  `Archived/Projects/agentic-sunset/design/upstream-migration.md`); CLAUDE.md
   bridge-dispatch section removed; vault `_openclaw/`, `_tess/`,
   `_staging/TV2-*` archived to `Archived/` (pipeline.db external, spared) —
   **and `Archived/` itself deleted 2026-07-03 (VO-028 B1; git history is the archive)**;
@@ -170,15 +170,15 @@ Directory location is authoritative for archived-vs-active; project docs carry n
 - **Next:** VO-036 close-out (validation record, operating note, operator sign-off) → VO-037 CLAUDE.md slim-down + spec §3.1/§3.3 reorg (v2.5).
 - **Key files:** `Projects/vault-optimization/tasks.md`, `progress/run-log.md`, `design/changeset-b*.md`, `keep-set-manifest.md`
 
-### agentic-sunset — software / system / four-phase
+### agentic-sunset — software / system / four-phase  *(COMPLETE — ARCHIVED 2026-08-10)*
 - **Phase:** IMPLEMENT (AS-032 only) · **updated:** 2026-08-08
-- **Status:** Decommission functionally complete + reboot-verified (GUI-login caveat above). Soak v2 COMPLETE 7/7 green (closed 07-13). **AS-032 sweep EXECUTED 2026-07-14:** Drive `00_System/Agent` tree trashed (recovery window closes ~2026-08-13), Keychain `x-feed-intel.*` scrubbed (9 entries), 7 revocations approved in rotate-credentials.md (4 discovered by the sweep itself — openclaw.json was a residual secrets cache). tess-v2 VAL-001/002/003 closed superseded 2026-08-08.
-- **Next:** operator-manual checklist (sudo-delete openclaw.json ×12, delete 2 agent calendars, provider-side revocations ×5, Discord server + bot apps) → final compound routing → archival proposals (incl. tess-v2 KB question, tess-danny-migration) → project close.
+- **Status:** Project complete, all 23 tasks done (AS-010–AS-032); archived 2026-08-10 as its own final act. Local teardown reboot-verified + soak-verified; external-artifact sweep fully closed 2026-08-10 (checklist executed by operator, verified where tooling allowed). Drive trash recovery window lapses ~2026-08-13 → deletion becomes permanent (goal state — tree was verified empty).
+- **Surviving operating rule:** GUI login after every reboot; verify :8843 + backup-status; kickstart to close gaps (`Archived/Projects/agentic-sunset/design/service-inventory.md`).
 
-### tess-v2 — software / system / four-phase  *(DONE — closed at agentic-sunset AS-030, 2026-06-14)*
+### tess-v2 — software / system / four-phase  *(ARCHIVED 2026-08-10; closed DONE at agentic-sunset AS-030, 2026-06-14)*
 - **Phase:** DONE · **active_task:** — · **updated:** 2026-06-14
-- **Status:** Closed. The Tess execution layer it built was fully decommissioned by agentic-sunset (all `com.tess.v2.*` labels scrapped + reboot-verified absent at AS-021); the draft Amendment AC (which scoped Tess to scheduled-services-only) is overtaken by events — those services no longer exist. **Durable knowledge preserved independently:** 23 Category-A engineering patterns in `_system/docs/tess-v2-durable-patterns.md` + 3 `solutions/` extractions; repo retained (disable+archive, not deleted). Stays in `Projects/` (KB-bearing); move-to-`Archived/` deferred to AS-032 operator proposal.
-- **Key files:** `Projects/tess-v2/progress/run-log.md` (closeout 2026-06-14); `_system/docs/tess-v2-durable-patterns.md`; repo `/Users/danny/crumb-apps/tess-v2/`
+- **Status:** Closed. The Tess execution layer it built was fully decommissioned by agentic-sunset (all `com.tess.v2.*` labels scrapped + reboot-verified absent at AS-021); the draft Amendment AC (which scoped Tess to scheduled-services-only) is overtaken by events — those services no longer exist. **Durable knowledge preserved independently:** 23 Category-A engineering patterns in `_system/docs/tess-v2-durable-patterns.md` + 3 `solutions/` extractions; repo retained (disable+archive, not deleted). KB-exception question answered NO at AS-032 (no `#kb/` content in the project dir — durable patterns all live outside it) → moved to `Archived/Projects/` 2026-08-10, alongside tess-danny-migration.
+- **Key files:** `Archived/Projects/tess-v2/progress/run-log.md` (closeout 2026-06-14); `_system/docs/tess-v2-durable-patterns.md`; repo `/Users/danny/crumb-apps/tess-v2/`
 
 ### customer-intelligence — career / knowledge / three-phase
 - **Phase:** ACT · **updated:** 2026-04-27
@@ -251,7 +251,7 @@ Everything agentic is retired — archived plists live in git history only (`_sy
 
 ## Open Items
 
-- **agentic-sunset endgame:** all teardown tasks DONE + reboot-verified; soaks complete; sweep executed 2026-07-14. **Only the AS-032 operator-manual checklist + compound + archival proposals remain** (see project section above). Operating rule: GUI-login after every reboot (headless reboot = stack stays dark). Time-sensitive: Drive trash recovery window closes ~2026-08-13.
+- **agentic-sunset: CLOSED 2026-08-10** — nothing remains; project archived. Standing operating rule survives: GUI-login after every reboot (headless reboot = stack stays dark); verify :8843 + backup-status post-login.
 - **Residual cloud-side teardown state (found 2026-06-19):** tess-operations' server-side **Gmail filters** (TOP-017, on dturner71@gmail.com) survived the local teardown and silently force-archived ~3 months of personal mail (incl. the Beacon Zen sangha group) until operator-remediated 2026-06-19. **AS-032 to add an external-artifact sweep** — Google agent calendars, Drive `Agent/*` tree, and the "Tess Ops" Discord server may also persist. The AS inventory covered local host state only; externally-hosted config is invisible to `launchctl`/`crontab`/filesystem sweeps.
 - **opportunity-scout & feed-intel-framework:** both ARCHIVED 2026-07-05 (pre-empting the AS-032 proposals) — concepts moved to Claude Cowork via handoff notes (`cowork-scout-handoff.md`, `cowork-feed-handoff.md`); repos deleted.
 - **firekeeper-books project-state stale** (2026-04-07) — due a status refresh (hobby per Gate 4 since 2026-07-05).
