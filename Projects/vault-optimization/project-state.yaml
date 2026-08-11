@@ -1,15 +1,15 @@
 name: vault-optimization
 domain: software
 type: system
-phase: IMPLEMENT
-last_gate: TASK-to-IMPLEMENT
+phase: DONE
+last_gate: IMPLEMENT-to-DONE
 created: 2026-06-10
 updated: 2026-08-10
 related_projects:
   - agentic-sunset
 # No repo_path: vault-only project — produces no code, only vault restructuring artifacts.
-# External repo gate explicitly skipped (vault-only software per CLAUDE.md §3b).
-active_task: VO-037
-next_action: "VO-036 CLOSED 2026-08-10 (operator sign-off in run-log): validation-record.md written, operating note FINAL (status: active), all 6 spec deliverables verified, M5 complete. Carried pin ask resolved MOOT (review-panel rewrite already defers to code-review-config.md, verified correct). NOW EXECUTING VO-037: CLAUDE.md minimalism pass (fire-rate review, keep-inline test, pointerize rare-fire sections, single-source duplicated facts; each CLAUDE.md edit individually ask-first) + deferred §3.1/§3.3 spec structural reorg (v2.5 bump). VO-037 is the last open task — project completion check follows. Post-soak watch items #1–#3: log opportunistically, no gate. Adjacent parked: moc-crumb-architecture Synthesis rewrite only."
+# External repo gate explicitly skipped (vault-only software per spec §4.1.5 step 3b).
+active_task: null
+next_action: "PROJECT DONE 2026-08-10 (operator decision): all 28 tasks complete (VO-010–037), 6-deliverable completion contract verified at VO-036, M5 soak PASS. VO-037 executed same day: CLAUDE.md 220→167 lines (E1–E9), spec v2.5 structural reorg + version-neutral rename to crumb-design-spec.md. No open work. Archival: operator-initiated when desired — KB-exception candidates: keep-set-manifest, validation-record (canonical references). Post-soak watch items #1–#3: log opportunistically in any project, no gate. Adjacent parked (unowned after close): moc-crumb-architecture Synthesis rewrite."
 last_committed: 2026-08-10
 services: []
