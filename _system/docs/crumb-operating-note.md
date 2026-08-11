@@ -1,9 +1,9 @@
 ---
 type: reference
 domain: software
-status: draft
+status: active
 created: 2026-06-10
-updated: 2026-07-04
+updated: 2026-08-10
 skill_origin: none
 confidence: high
 tags:
@@ -23,12 +23,12 @@ topics:
 
 # Crumb — Core-Functionality Operating Note
 
-> **DRAFT — pending VO-036.** Drafted at vault-optimization VO-018 (M2, before
-> any deletion batch executed). The must-exist set below reflects manifest
-> *dispositions*, some still proposals frozen at M3 changesets. Finalized at
-> VO-036 (M5 close-out) after batches B1–B6 and the soak period, when the
-> keep-set is the actual tree. This note is the canonical entrypoint for
-> future maintenance once finalized.
+> **FINAL — validated at VO-036** (M5 close-out, 2026-08-10). Drafted at
+> VO-018; finalized after batches B1–B6 and the soak window
+> (2026-07-04 → 2026-08-08, PASS on all exercised criteria — see
+> `Projects/vault-optimization/validation-record.md`). The must-exist set
+> below is the actual tree. This note is the canonical entrypoint for
+> future maintenance.
 
 ## 1. What Crumb Is (Identity)
 
@@ -58,9 +58,9 @@ compound-provenance.
 ## 2. What Must Exist for Crumb to Remain Itself
 
 The item-level source of truth is the keep-set manifest
-(`Projects/vault-optimization/keep-set-manifest.md`, 199 rows; after VO close,
-the final manifest state in git). The categories, with their load-bearing
-members:
+(`Projects/vault-optimization/keep-set-manifest.md`, 199 rows, frozen at VO
+close — the tree in git is authoritative for deltas thereafter). The
+categories, with their load-bearing members:
 
 **Constitution & conventions**
 - `CLAUDE.md` (post-AS-025 rewrite) — workflow routing, risk tiers, behavioral
@@ -75,16 +75,20 @@ members:
   (goal-tracker retired 2026-07-05 with attention-manager — operator delta,
   post-keep-set; priorities live in personal-context §Strategic Priorities)
 
-**Skill surface (post-B5 consolidation)**
+**Skill surface (post-B5 consolidation + skills-library review 2026-07-07 —
+11 skills)**
 - Workflow skills: systems-analyst (absorbed learning-plan, VO B5),
-  action-architect, audit (absorbed checkpoint, VO B5), peer-review, critic,
-  writing-coach (critic/writing-coach merges declined by operator 2026-06-10),
-  deliberation, researcher, code-review
-- Capture/hygiene: inbox-processor, vault-query, sync (feed-pipeline retired
-  outright at AS-028)
+  action-architect, audit (absorbed checkpoint, VO B5), peer-review,
+  writing-coach, review-panel (cross-model escalation tier above the built-in
+  /code-review; renamed from code-review 2026-07-07)
+- Capture/hygiene: inbox-processor, vault-query, startup
 - Knowledge-work: deck-intel (absorbed diagram-capture, VO B5), mermaid
-  (attention-manager retired to Cowork 2026-07-05 — operator delta,
-  post-keep-set; see `cowork-attention-handoff.md`)
+- Retired post-keep-set (operator deltas, recorded in skills-library run-log):
+  attention-manager → Cowork 2026-07-05 (`cowork-attention-handoff.md`);
+  researcher, critic, sync, deliberation retired 2026-07-07 under the
+  built-in-overlap policy (harness built-ins cover the need; supersedes the
+  2026-06-10 critic/writing-coach merge-decline). feed-pipeline retired
+  outright at AS-028.
 
 **Vault-protecting machinery**
 - `vault-check.sh`, `session-startup.sh`, skill-preflight hook, the backup

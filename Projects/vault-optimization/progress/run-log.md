@@ -935,3 +935,22 @@ The 2026-07-05 fix-pass open-items list closed out. Facts gathered first (Tailsc
 **Unblocked:** VO-036 close-out (validation record, operating note final, operator sign-off) → VO-037 CLAUDE.md minimalism pass (+ deferred §3.1/§3.3 spec structural reorg, v2.5). Both are next-session work — not executed in this audit session.
 
 **Carried pending operator ask (unchanged):** code-review SKILL.md model-pin alignment (opus-4-8 / gpt-5.4-codex, two tokens).
+
+## 2026-08-10 — VO-036 CLOSED: soak close-out executed, operator sign-off recorded
+
+**Trigger:** operator resumed VO ("pick up vault-optimization"); next_action = VO-036.
+
+**Execution (all in-session):**
+- **Validation record written** — `Projects/vault-optimization/validation-record.md` (spec deliverable #6): soak parameters (window 2026-07-04 → 2026-08-08, closed at operator discretion, WS 5/8), criteria verdicts (zero urgent restores ✓ incl. 25-day unattended stretch; zero workarounds ✓), Tier-1 outcomes table (#4 PASS, #5 PASS ×9, #6 PASS ×2; #1–#3 UNEXERCISED → post-soak watch items), in-window deltas (skills-library roster 15→11, vault-gc TTL churn — both soak-neutral). B0–B6 pruned config = operating baseline.
+- **Operating note finalized** — `_system/docs/crumb-operating-note.md`: DRAFT banner → FINAL (validation pointer added), `status: draft` → `active`, §2 skill roster refreshed from stale 15-skill list to current 11 (researcher/critic/sync/deliberation retirements + code-review→review-panel rename recorded as post-keep-set operator deltas; manifest line marked frozen-at-close). **Enum note:** task acceptance said `status: final`; conventions enum is active|archived|draft — used `active`, "final" read as no-longer-draft. Flagged to operator at sign-off, accepted.
+- **Six spec end-state deliverables verified on disk:** v3 ADR (`status: accepted`) · operating note (final) · keep-set manifest · storage policy · reduced primitive surface (11 skills + 3 agents, trigger-condition descriptions verified via #6 routing passes) · validation record. Completion contract satisfied.
+- **tasks.md:** VO-035 → done (backfill; disposition decided at 08-08 soak close), VO-036 → done.
+- **vault-check:** 0 errors, 56 pre-existing non-blocking warnings, none from files touched this session.
+
+**Operator sign-off: RECORDED 2026-08-10** (in-session approval; status-enum interpretation accepted). M5 complete. Project completion check: VO-037 (post-soak backlog) remains → phase stays IMPLEMENT; VO-037 authorized to start same session.
+
+**Carried pin ask RESOLVED as moot:** the 2026-07-07 review-panel rewrite removed hardcoded model pins from the skill body — it defers to `_system/docs/code-review-config.md`, verified correct (claude-opus-4-8 / gpt-5.4-codex). Cleared from project-state; no edit needed. Third data point for the duplication-drift class resolving via single-sourcing — the fix that eliminated the drift was pointerization, exactly VO-037's mechanism.
+
+**Compound evaluation (M5 milestone close):** No new pattern promoted. The pin-ask resolution is confirmatory evidence for the already-accumulating VO-037 rationale (facts duplicated in prose drift; facts single-sourced with pointers don't) — recorded as data point, mechanism already understood. Watch-item disposition (unexercised ≠ failed, log opportunistically, no gate) worked cleanly as a soak-close pattern; not promoted (single occurrence).
+
+**Model routing:** all main-session Fable 5 — session was state reconstruction + judgment-heavy doc finalization + operator decision capture; delegation unjustified at this batch size (7 files touched).

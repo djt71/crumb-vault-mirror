@@ -4,12 +4,12 @@ type: system
 phase: IMPLEMENT
 last_gate: TASK-to-IMPLEMENT
 created: 2026-06-10
-updated: 2026-08-08
+updated: 2026-08-10
 related_projects:
   - agentic-sunset
 # No repo_path: vault-only project — produces no code, only vault restructuring artifacts.
 # External repo gate explicitly skipped (vault-only software per CLAUDE.md §3b).
-active_task: null
-next_action: "M5 SOAK CLOSED 2026-08-08 (operator decision, audit session — see run-log entry): PASS on all exercised criteria (zero urgent restores incl. 25-day unattended stretch, zero workarounds; Tier-1 #4/#5×9/#6 COMPLETE), closed at WS5/8 with #1–#3 unexercised → post-soak watch items, log opportunistically, no gate. B0–B6 pruned config accepted as operating baseline. NEXT = VO-036 close-out: validation record, operating note final, operator sign-off. Then VO-037: CLAUDE.md minimalism pass + deferred §3.1/§3.3 spec structural reorg (v2.5 bump). Adjacent parked (audit/M5): moc-crumb-architecture Synthesis rewrite only. PENDING OPERATOR ASK (carried): code-review SKILL.md pins Opus 4.6/GPT-5.3-Codex vs corrected config opus-4-8/gpt-5.4-codex — align skill body (ask-first, two tokens)."
-last_committed: 2026-07-06
+active_task: VO-037
+next_action: "VO-036 CLOSED 2026-08-10 (operator sign-off in run-log): validation-record.md written, operating note FINAL (status: active), all 6 spec deliverables verified, M5 complete. Carried pin ask resolved MOOT (review-panel rewrite already defers to code-review-config.md, verified correct). NOW EXECUTING VO-037: CLAUDE.md minimalism pass (fire-rate review, keep-inline test, pointerize rare-fire sections, single-source duplicated facts; each CLAUDE.md edit individually ask-first) + deferred §3.1/§3.3 spec structural reorg (v2.5 bump). VO-037 is the last open task — project completion check follows. Post-soak watch items #1–#3: log opportunistically, no gate. Adjacent parked: moc-crumb-architecture Synthesis rewrite only."
+last_committed: 2026-08-10
 services: []
