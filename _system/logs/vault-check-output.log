@@ -1,6 +1,6 @@
-Mode: pre-commit (5 staged files)
+Mode: pre-commit (1 staged files)
 === 1. Frontmatter Schema Validation ===
-  Checked 3 files, 0 with issues
+  Checked 1 files, 0 with issues
 
 === 2. Summary Freshness Check ===
   Checked 0 summaries, 0 stale
@@ -24,13 +24,14 @@ Mode: pre-commit (5 staged files)
   Checked 0 completed tasks, 0 missing run-log evidence
 
 === 9. Knowledge Base Tag Validation ===
-  Checked 1 kb tags, 0 invalid
+  Checked 0 kb tags, 0 invalid
 
 === 10. Project-State Active Task Consistency ===
   Checked 8 project states, 0 inconsistent
 
 === 11. Project-State last_committed Field ===
-  Checked 8 project states, 0 missing last_committed
+  Skipped (no staged project-state files)
+  Checked 0 project states, 0 missing last_committed
 
 === 12. DONE Project Design File Warning ===
   Skipped (no staged design files)
@@ -40,10 +41,10 @@ Mode: pre-commit (5 staged files)
   Checked 0 MOC files, 0 issues
 
 === 18. Topics Resolution ===
-  Checked 3 topic entries, 0 issues
+  Checked 1 topic entries, 0 issues
 
 === 19. Topics Requirement (kb-tagged notes) ===
-  Checked 1 kb-tagged notes, 0 missing topics
+  Checked 0 kb-tagged notes, 0 missing topics
 
 === 20. Source-Index Schema Validation ===
   Checked 0 source-index files, 0 issues
@@ -52,7 +53,8 @@ Mode: pre-commit (5 staged files)
   Checked 0 orientation MOCs, 0 with low synthesis density, 0 with thin one-liners
 
 === 22. Repo Path Validation ===
-  Checked 2 repo paths, 0 issues
+  Skipped (no staged project-state files)
+  Checked 0 repo paths, 0 issues
 
 === 23. Code Review Gate ===
   Checked 0 post-enforcement tasks, 0 missing reviews, 63 grandfathered (before 2026-03-20)
@@ -77,11 +79,10 @@ Mode: pre-commit (5 staged files)
   Skipped (no staged run-log files)
 
 === 31. Broken Wikilink Detection ===
-  Checked 4 files, 0 broken links in 0 files
+  Checked 1 files, 0 broken links in 0 files
 
 === 32. Updated Field Bump Check ===
-  WARNING: Projects/vault-optimization/tasks.md: content changed but updated: still 2026-07-05 — bump updated (staleness scans key off this field)
-  Checked 2 modified docs with updated: field, 1 unbumped
+  Checked 1 modified docs with updated: field, 0 unbumped
 
 === Solution Doc Track Schema ===
   Checked 0 solution docs, 0 track issues
@@ -93,7 +94,6 @@ Mode: pre-commit (5 staged files)
 Vault Check Summary
 ==========================================
   Errors:   0
-  Warnings: 1
+  Warnings: 0
 
-RESULT: WARNINGS (exit code 1)
-Non-blocking — review when convenient.
+RESULT: CLEAN (exit code 0)

@@ -5,7 +5,7 @@ domain: software
 skill_origin: action-architect
 status: active
 created: 2026-06-10
-updated: 2026-07-05
+updated: 2026-08-10
 source: action-plan.md
 source_updated: 2026-06-10
 topics:
