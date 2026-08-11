@@ -884,3 +884,4 @@
 2026-08-10 21:35:04 SYNC chore: bump tasks.md updated field (vault-check §32)
 2026-08-10 21:43:10 SYNC docs: VO-037 tranche 1 — CLAUDE.md minimalism pass (220→167 lines, E1-E9 operator-approved) + spec absorptions S1/S2
 2026-08-10 21:49:24 SYNC docs: VO-037 tranche 2 — spec v2.5 structural reorg (§3.1/§3.3 as-built 11-skill registry) + version-neutral rename to crumb-design-spec.md
+2026-08-10 21:59:08 SYNC chore: vault-optimization DONE — phase set, session-end close-out (run-log, progress-log, claude-ai-context refresh)

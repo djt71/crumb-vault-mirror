@@ -996,3 +996,7 @@ The 2026-07-05 fix-pass open-items list closed out. Facts gathered first (Tailsc
 **Post-soak watch items (standing, unowned):** Tier-1 #1 phase-transition-with-checkpoint, #2 inbox-processor, #3 peer-review dispatch — log opportunistically in whichever project first exercises them. **Adjacent parked (unowned after close):** moc-crumb-architecture Synthesis rewrite.
 
 **Model routing:** all main-session Fable 5 — judgment-heavy throughout (fire-rate analysis, constitutional edits, operator decision capture); no delegation-eligible mechanical batches arose. No token-heavy operations beyond one full spec-section read.
+
+## 2026-08-10 — Maintenance note (post-DONE, per Completed Project Guard)
+
+**Scope:** operator-requested closure of the last parked adjacent item — moc-crumb-architecture Synthesis rewrite (flagged VO-030/B3 2026-06, judgment edit deferred out of mechanical batch scope, carried through M5). Synthesis paragraph rewritten to v3 post-sunset architecture (`Domains/Learning/moc-crumb-architecture.md`; delta line + updated bump). No design artifacts or tasks added; VO parked-item list now empty.
