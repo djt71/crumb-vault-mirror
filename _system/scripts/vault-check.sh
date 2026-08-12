@@ -49,16 +49,20 @@ else
     echo "Mode: full scan"
 fi
 
-# Helper: check if any staged file matches a pattern (glob-style prefix + suffix)
-# Usage: has_staged_match "Projects/" ".md" — true if any staged file starts with
-#        prefix and ends with suffix. With empty prefix, matches suffix anywhere.
+# Helper: check if any staged file matches a pattern (prefix + substring)
+# Usage: has_staged_match "Projects/" "run-log" — true if any staged file starts
+#        with prefix and contains the substring anywhere after it. With empty
+#        prefix, matches the substring anywhere. NOT end-anchored: callers pass
+#        partial names ("run-log" must match "run-log.md" and "run-log-2026-02.md",
+#        "design/" must match "design/foo.md") — a $ anchor here silently disabled
+#        every such check in staged mode (fixed 2026-08-11).
 has_staged_match() {
     local prefix="${1:-}"
     local suffix="${2:-}"
     if [ "$SCOPE" = "full" ]; then
         return 0  # always "has match" in full mode
     fi
-    echo "$STAGED_FILES" | grep -q "^${prefix}.*${suffix}$"
+    echo "$STAGED_FILES" | grep -q "^${prefix}.*${suffix}"
 }
 
 # Helper: iterate staged .md files matching a directory prefix.

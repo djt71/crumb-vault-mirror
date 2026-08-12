@@ -157,3 +157,13 @@ Budget: 4 docs (standard tier). Budget-exempt: preflight knowledge brief (hook-i
 - Context usage before checkpoint: ~35% (low band)
 - Action taken: none (below 70% threshold)
 - Key artifacts for TASK phase: `action-plan-summary.md` + `tasks.md` (current in context), `specification.md` M1–M6 matrix + AKM-001 task row, `_system/docs/solutions/staged-spike-with-bail.md` (governs AKM-001 staging)
+
+## 2026-08-11 — Maintenance (ride-along): vault-check staged-detection bug fixed
+
+**Scope note:** vault system maintenance, not akm-refresh project work — fixed here because the quirk recurred during this session's gate commit and its original home (VO backlog) closed with the project.
+
+**Root cause:** `has_staged_match()` in `vault-check.sh` end-anchored its suffix pattern (`^prefix.*suffix$`). Callers pass partial names — `run-log` (must match `run-log.md`, `run-log-2026-02.md`), `session-log`, `design/` — which can never match with a `$` anchor. Result: sections 4, 5, 24, 29, 30 (run-log checks), 6 (session-log), and 12 (design files) silently skipped in staged/pre-commit mode since the helper was introduced; the run-log-conditional halves of 8 and 23 likewise never triggered via the run-log arm. Exact-filename callers (`tasks.md`, `project-state.yaml`, `.md`) were unaffected, which masked the bug — the summary always showed *some* checks running.
+
+**Fix:** dropped the end anchor (substring-after-prefix semantics), comment updated with the failure mode. Unit-tested all five caller shapes against a fixture list; integration test = this commit itself (stages this run-log → sections 4/5/29/30 must report "Checked" instead of "Skipped"). shellcheck unavailable locally (not installed) — noted, not run.
+
+**Follow-on exposure:** the newly-live checks will now run on run-log/session-log/design files for the first time at every commit — first-commit warnings on historical entries are expected noise, not regressions.
