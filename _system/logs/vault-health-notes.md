@@ -1,11 +1,11 @@
 ---
 type: state
 status: active
-created: 2026-08-11
-updated: 2026-08-11
+created: 2026-08-12
+updated: 2026-08-12
 ---
 
-# Vault Health Notes — 2026-08-11
+# Vault Health Notes — 2026-08-12
 
 ## Warnings (61)
   WARNING: Projects/firekeeper-books/ai-art-learning-plan.md — kb-tagged note missing required 'topics' field
@@ -71,6 +71,6 @@ updated: 2026-08-11
   WARNING: Projects/mission-control/progress/run-log.md — session '## 2026-03-30 (session 10) — M3.1: Intelligence Feed Density Redesign' mentions subagent delegation but has no provenance assessment
 
 ## Stale Projects (14+ days)
-customer-intelligence, skills-library, firekeeper-books, think-different, akm-refresh, mission-control, semuta
+customer-intelligence, skills-library, firekeeper-books, think-different, mission-control, semuta
 
 

@@ -1921,7 +1921,9 @@ echo "=== 29. Context Inventory Completeness ==="
 CTX_INV_SESSIONS=0
 CTX_INV_MISSING=0
 CTX_INV_GRANDFATHERED=0
-CTX_INV_ENFORCEMENT_DATE="2026-03-20"
+# 2026-08-11: check was silently dead in staged mode until the has_staged_match fix;
+# entries written before that date were never validated live, so they're grandfathered.
+CTX_INV_ENFORCEMENT_DATE="2026-08-11"
 
 if [ "$SCOPE" = "staged" ] && ! has_staged_match "Projects/" "run-log"; then
     echo "  Skipped (no staged run-log files)"
@@ -2000,7 +2002,9 @@ echo "=== 30. Subagent Provenance Check ==="
 PROVENANCE_SESSIONS=0
 PROVENANCE_MISSING=0
 PROVENANCE_GRANDFATHERED=0
-PROVENANCE_ENFORCEMENT_DATE="2026-03-20"
+# 2026-08-11: check was silently dead in staged mode until the has_staged_match fix;
+# entries written before that date were never validated live, so they're grandfathered.
+PROVENANCE_ENFORCEMENT_DATE="2026-08-11"
 
 if [ "$SCOPE" = "staged" ] && ! has_staged_match "Projects/" "run-log"; then
     echo "  Skipped (no staged run-log files)"

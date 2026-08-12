@@ -238,3 +238,8 @@
 2026-08-11T06:04:38Z stale-projects: count=7 customer-intelligence, skills-library, firekeeper-books, think-different, akm-refresh, mission-control, semuta
 2026-08-11T06:04:38Z OK: wrote health notes to /Users/danny/crumb-vault/_system/logs/vault-health-notes.md
 2026-08-11T06:04:38Z OK: warnings only — written to health notes
+2026-08-12T06:04:33Z vault-check: exit=1 errors=0 warnings=61
+2026-08-12T06:04:33Z git-status: clean=true 
+2026-08-12T06:04:33Z stale-projects: count=6 customer-intelligence, skills-library, firekeeper-books, think-different, mission-control, semuta
+2026-08-12T06:04:33Z OK: wrote health notes to /Users/danny/crumb-vault/_system/logs/vault-health-notes.md
+2026-08-12T06:04:33Z OK: warnings only — written to health notes
