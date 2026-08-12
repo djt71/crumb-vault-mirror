@@ -5,7 +5,7 @@ domain: software
 status: active
 skill_origin: action-architect
 created: 2026-07-07
-updated: 2026-07-07
+updated: 2026-08-11
 topics:
   - moc-crumb-architecture
 tags:
@@ -16,6 +16,8 @@ tags:
 # akm-refresh — Action Plan
 
 Decomposition of the approved specification (peer-reviewed round 1, revised 2026-07-07). Ten tasks across four milestones. The M1–M6 acceptance matrix in the spec governs all R2 work; M6 (viability rule) is a halt-for-operator gate, not a soft warning.
+
+**Amended 2026-08-11 at plan approval:** (1) XD-028 ownership transferred to akm-refresh — vault-optimization closed DONE 2026-08-10 with the CLAUDE.md signal-scan paragraph intact, orphaning the deletion; AKM-008 now sets the deletion trigger (≥3 confirmed organic fires), AKM-010 closes the window. (2) Soak metrics scoped to the three pre-existing triggers so AKM-008's mid-soak go-live cannot contaminate the criterion-7 verdict.
 
 **Calibration note (estimation-calibration.md):** spec-stage task counts ran 2.6–3.0x under at execution on the last two infra projects. These ten tasks are cut finer than those specs' lines (each already carries acceptance criteria), so expansion should be milder — expect splits in AKM-003 (wrapper vs preflight changes) and AKM-006/008 (hook script vs registration vs verification) rather than new workstreams. Checkpoint-triggered pivots compress: if M6 fires at M1, M2 reshapes and M4 shrinks; if the A4 contingency fires, M3 partially or fully descopes by amendment. Neither is failure — both are the gates working.
 
@@ -45,7 +47,7 @@ Mode flip, structured-query assembly, splitting-hack deletion, score-0 drop, acc
 
 ### Phase 2.2 — Re-baseline + soak start (AKM-004)
 
-Fixture v2 baseline; soak checklist (empty-brief rate, surfaced counts, noise-flag convention per success criterion 7) written to run-log with a start date. The 2-week clock starts here.
+Fixture v2 baseline; soak checklist (empty-brief rate, surfaced counts, noise-flag convention per success criterion 7) written to run-log with a start date. The 2-week clock starts here. **Soak scope (amendment 2026-08-11):** metrics cover the three pre-existing triggers only — the soak judges the R2 rebuild, not the whole surfacing system. New-content-hook events (if AKM-008 goes live mid-soak) are logged with per-trigger attribution but excluded from criterion-7 evaluation.
 
 **Milestone boundary:** run code-review skill on the wrapper/preflight diff before declaring M2 complete (production scripts on the live path; vault-only project still gets review).
 
@@ -61,7 +63,7 @@ The A4/U3 hook-payload validation executes **once**, at the start of whichever d
 
 ### Phase 3.2 — Hook implementations (AKM-006, AKM-008)
 
-Hook scripts + `.claude/settings.json` registration + fault-injection verification (hook errors must never block the wrapped tool). R4 go-live updates XD-028 (overlap window with the CLAUDE.md behavioral paragraph until VO-037 deletes it).
+Hook scripts + `.claude/settings.json` registration + fault-injection verification (hook errors must never block the wrapped tool). R4 go-live updates XD-028: akm-refresh owns the CLAUDE.md signal-scan paragraph deletion (transferred from VO-037 at VO close — amendment 2026-08-11); AKM-008 records the deletion trigger (≥3 confirmed organic fires, operator decision if fewer by soak close), AKM-010 closes the overlap window.
 
 **Milestone boundary:** code-review skill on both hook scripts before declaring M3 complete.
 
@@ -77,7 +79,7 @@ After AKM-003 (mode decision changes hint semantics: hints become `lex:` terms i
 
 ### Phase 4.2 — Soak execution & closure (AKM-010)
 
-≥14 days from AKM-004's start date. Close with a run-log verdict and an explicit evaluation of success criteria 1–7. This is the project's DONE gate input.
+≥14 days from AKM-004's start date. Close with a run-log verdict and an explicit evaluation of success criteria 1–7. Also closes the XD-028 overlap window (paragraph deleted per the AKM-008 trigger, or operator disposition recorded). This is the project's DONE gate input.
 
 **M4 success criteria:** hints populated and verified; soak verdict logged; all seven success criteria explicitly evaluated.
 

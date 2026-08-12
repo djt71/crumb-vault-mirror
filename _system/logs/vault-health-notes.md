@@ -1,13 +1,13 @@
 ---
 type: state
 status: active
-created: 2026-08-10
-updated: 2026-08-10
+created: 2026-08-11
+updated: 2026-08-11
 ---
 
-# Vault Health Notes — 2026-08-10
+# Vault Health Notes — 2026-08-11
 
-## Warnings (80)
+## Warnings (61)
   WARNING: Projects/firekeeper-books/ai-art-learning-plan.md — kb-tagged note missing required 'topics' field
   WARNING: Domains/Career/moc-networking.md — orientation MOC has 15 Core entries but Synthesis has <30 words
   WARNING: Domains/Learning/moc-history.md — 4 Core one-liner(s) have <10 chars of description after the link (§5.6.6)
@@ -17,17 +17,6 @@ updated: 2026-08-10
   WARNING: Domains/Learning/moc-philosophy.md — 2 Core one-liner(s) have <10 chars of description after the link (§5.6.6)
   WARNING: Domains/Learning/moc-psychology.md — orientation MOC has 12 Core entries but Synthesis has <30 words
   WARNING: Projects/mission-control/progress/run-log-2026-03a.md — 2161 lines (threshold: 1000) — consider rotation
-  WARNING: Projects/agentic-sunset/progress/run-log.md — session '## 2026-06-10 — PLAN' mentions skill invocation but has no context inventory
-  WARNING: Projects/agentic-sunset/progress/run-log.md — session '## 2026-06-10 — Session end' mentions skill invocation but has no context inventory
-  WARNING: Projects/agentic-sunset/progress/run-log.md — session '## 2026-06-11 — Operator decision (cross-project, work-surfaces session): inbox consolidation' mentions skill invocation but has no context inventory
-  WARNING: Projects/agentic-sunset/progress/run-log.md — session '## 2026-06-12 — AS-026: vault surgery (_openclaw/_tess/_staging archived)' mentions skill invocation but has no context inventory
-  WARNING: Projects/agentic-sunset/progress/run-log.md — session '## 2026-06-12 — AS-027/028/029: gitignore churn, skills cleanup, memory refresh' mentions skill invocation but has no context inventory
-  WARNING: Projects/agentic-sunset/progress/run-log.md — session '## 2026-06-14 — Session-end (compound evaluation)' mentions skill invocation but has no context inventory
-  WARNING: Projects/agentic-sunset/progress/run-log.md — session '## 2026-07-04 — Cross-project note (vault-optimization, not AS work): `_system/archive/` parked copies deleted' mentions skill invocation but has no context inventory
-  WARNING: Projects/agentic-sunset/progress/run-log.md — session '## 2026-07-13 — AS-031 soak v2 COMPLETE (Day 7 backfilled GREEN, 7/7) → AS-032 opens' mentions skill invocation but has no context inventory
-  WARNING: Projects/tess-v2/progress/run-log-2026-03.md — session '## 2026-03-29 — Feed intel actions: security + browser tools' mentions skill invocation but has no context inventory
-  WARNING: Projects/tess-v2/progress/run-log-2026-03.md — session '## 2026-03-30b — Soak Extension + Kimi Soak Setup + DeepSeek Audit' mentions skill invocation but has no context inventory
-  WARNING: Projects/tess-v2/progress/run-log-2026-03.md — session '## 2026-04-01e — Phase Transition: TASK → IMPLEMENT' mentions skill invocation but has no context inventory
   WARNING: Projects/skills-library/progress/run-log.md — session '## 2026-07-06 — Project creation' mentions skill invocation but has no context inventory
   WARNING: Projects/skills-library/progress/run-log.md — session '## 2026-07-07 — Tier A quick wins applied (operator-approved)' mentions skill invocation but has no context inventory
   WARNING: Projects/skills-library/progress/run-log.md — session '## 2026-07-07 — Addendum: built-in skill overlap (operator question → review doc)' mentions skill invocation but has no context inventory
@@ -60,22 +49,13 @@ updated: 2026-08-10
   WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-07-06 — Session-end (compound evaluation) — mission-statement fix + spec inventory tranche' mentions skill invocation but has no context inventory
   WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-07-13 — M5 soak status check + WS4 backfill' mentions skill invocation but has no context inventory
   WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-08-08 — M5 soak CLOSED (operator decision)' mentions skill invocation but has no context inventory
+  WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-08-10 — VO-036 CLOSED: soak close-out executed, operator sign-off recorded' mentions skill invocation but has no context inventory
+  WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-08-10 — VO-037 tranche 1: CLAUDE.md minimalism pass APPLIED (E1–E9, operator-approved individually)' mentions skill invocation but has no context inventory
+  WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-08-10 — VO-037 tranche 2 (S3): spec §3.1/§3.3 structural reorg, v2.5, version-neutral rename' mentions skill invocation but has no context inventory
+  WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-08-10 — Session-end (compound evaluation) — PROJECT DONE' mentions skill invocation but has no context inventory
   WARNING: Projects/akm-refresh/progress/run-log.md — session '## 2026-07-07 — SPECIFY: peer review round 1' mentions skill invocation but has no context inventory
   WARNING: Projects/akm-refresh/progress/run-log.md — session '## 2026-07-07 — SPECIFY: review fixes applied (A1–A9), cycle closed' mentions skill invocation but has no context inventory
   WARNING: Projects/akm-refresh/progress/run-log.md — session '## 2026-07-07 — Session end (SPECIFY → PLAN in one session)' mentions skill invocation but has no context inventory
-  WARNING: Projects/agentic-sunset/progress/run-log.md — session '## 2026-06-10 — Session end' mentions subagent delegation but has no provenance assessment
-  WARNING: Projects/agentic-sunset/progress/run-log.md — session '## 2026-06-11 — Session end' mentions subagent delegation but has no provenance assessment
-  WARNING: Projects/tess-v2/progress/run-log-2026-03.md — session '## 2026-03-28m — Phase 1: TV2-006 Complete' mentions subagent delegation but has no provenance assessment
-  WARNING: Projects/tess-v2/progress/run-log-2026-03.md — session '## 2026-03-30 — Cloud Model Evaluation Battery (TV2-Cloud)' mentions subagent delegation but has no provenance assessment
-  WARNING: Projects/tess-v2/progress/run-log-2026-03.md — session '## 2026-04-01b — Phase 3 Architecture Sprint (6 Tasks + 2 Review Rounds)' mentions subagent delegation but has no provenance assessment
-  WARNING: Projects/tess-v2/progress/run-log-2026-03.md — session '## 2026-04-01d — Phase 3 Complete: Architecture Sprint + Peer Review' mentions subagent delegation but has no provenance assessment
-  WARNING: Projects/tess-v2/progress/run-log-2026-03.md — session '## 2026-04-01e — Phase 4 Implementation: Scaffold Complete (TV2-031a-d)' mentions subagent delegation but has no provenance assessment
-  WARNING: Projects/tess-v2/progress/run-log-2026-03.md — session '## 2026-04-08 — TV2-Cloud Frontier Re-Evaluation + Gemini Diagnostic' mentions subagent delegation but has no provenance assessment
-  WARNING: Projects/tess-v2/progress/run-log-2026-03.md — session '## 2026-04-10b — Email Triage Shutdown + Scout Soak Review' mentions subagent delegation but has no provenance assessment
-  WARNING: Projects/tess-v2/progress/run-log.md — session '## 2026-04-20 — Kimi K2.6 TV2-Cloud eval battery' mentions subagent delegation but has no provenance assessment
-  WARNING: Projects/tess-v2/progress/run-log.md — session '## 2026-04-19 — Post-deploy status check (TV2-057c) + snapshot cleanup' mentions subagent delegation but has no provenance assessment
-  WARNING: Projects/tess-v2/progress/run-log.md — session '## 2026-04-15 (session 3) — TV2-057 design note + decomposition' mentions subagent delegation but has no provenance assessment
-  WARNING: Projects/tess-v2/progress/run-log.md — session '## 2026-04-15 (session 2) — TV2-038 kickoff + TV2-056 discovery and fix' mentions subagent delegation but has no provenance assessment
   WARNING: Projects/skills-library/progress/run-log.md — session '## 2026-07-06 — Session-end (compound evaluation)' mentions subagent delegation but has no provenance assessment
   WARNING: Projects/skills-library/progress/run-log.md — session '## 2026-07-07 — Skills system review (operator-requested, pre-PLAN design input)' mentions subagent delegation but has no provenance assessment
   WARNING: Projects/skills-library/progress/run-log.md — session '## 2026-07-07 — Session-end (compound evaluation)' mentions subagent delegation but has no provenance assessment
@@ -86,10 +66,11 @@ updated: 2026-08-10
   WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-06-10 — VO-025 complete: ceremony step classification + A10 metrics' mentions subagent delegation but has no provenance assessment
   WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-07-04 — VO-033 complete: B6 ceremony batch EXECUTED' mentions subagent delegation but has no provenance assessment
   WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-07-06 — Session-end (compound evaluation) — mission-statement fix + spec inventory tranche' mentions subagent delegation but has no provenance assessment
+  WARNING: Projects/vault-optimization/progress/run-log.md — session '## 2026-08-10 — VO-037 tranche 1: CLAUDE.md minimalism pass APPLIED (E1–E9, operator-approved individually)' mentions subagent delegation but has no provenance assessment
   WARNING: Projects/akm-refresh/progress/run-log.md — session '## 2026-07-07 — Session end (SPECIFY → PLAN in one session)' mentions subagent delegation but has no provenance assessment
   WARNING: Projects/mission-control/progress/run-log.md — session '## 2026-03-30 (session 10) — M3.1: Intelligence Feed Density Redesign' mentions subagent delegation but has no provenance assessment
 
 ## Stale Projects (14+ days)
-tess-v2, customer-intelligence, skills-library, firekeeper-books, think-different, akm-refresh, mission-control, tess-danny-migration, semuta
+customer-intelligence, skills-library, firekeeper-books, think-different, akm-refresh, mission-control, semuta
 
 

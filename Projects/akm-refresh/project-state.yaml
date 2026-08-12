@@ -1,16 +1,18 @@
 name: akm-refresh
 domain: software
 type: system
-phase: PLAN
-last_gate: SPECIFY-to-PLAN
+phase: TASK
+last_gate: PLAN-to-TASK
 created: 2026-07-07
-updated: 2026-07-07 14:10
+updated: 2026-08-11 09:45
 related_projects:
   - vault-optimization
 # No repo_path: vault-only project — knowledge-retrieve.sh, skill-preflight
 # hooks, and config all live in the vault. External repo gate skipped (CLAUDE.md §3b).
-# R4 (new-content hook) has a coordination point with VO-037 CLAUDE.md slim-down.
+# R4 (new-content hook) coordination: XD-028 ownership transferred to akm-refresh
+# 2026-08-11 (VO closed DONE with CLAUDE.md signal-scan paragraph intact) —
+# AKM-008 sets deletion trigger, AKM-010 closes overlap window.
 active_task: null
-next_action: "PLAN outputs authored 2026-07-07 (action-plan.md, tasks.md, summary — 4 milestones, 10 tasks, 4 operator gates). Awaiting operator plan approval → PLAN→TASK Phase Transition Gate → first task AKM-001 (daemon spike, Stage-0 bail on daemon availability). Open operator item: A10 DeepSeek curl_timeout bump."
-last_committed: 2026-07-07 14:10
+next_action: "Plan approved 2026-08-11 with two amendments (XD-028 ownership transfer; per-trigger soak scoping). Start AKM-001 daemon latency spike — Stage-0 bail check first: confirm `qmd mcp --http --daemon` flags from local `--help` on installed qmd before spending spike budget."
+last_committed: 2026-08-11 09:45
 services: []

@@ -5,9 +5,9 @@ domain: software
 status: active
 skill_origin: action-architect
 created: 2026-07-07
-updated: 2026-07-07
+updated: 2026-08-11
 summary_of: action-plan.md
-source_updated: 2026-07-07
+source_updated: 2026-08-11
 topics:
   - moc-crumb-architecture
 tags:
@@ -31,3 +31,5 @@ tags:
 **Calibration expectation:** infra projects ran 2.6–3.0x spec→TASK expansion; these tasks are cut finer, so expect intra-task splits (AKM-003, 006, 008) rather than new workstreams. M6/A4 gates firing = compression, not failure.
 
 **Out of plan:** R6, chronic-miss re-enable, decay retuning, chapter digests (await R3 data); A10 DeepSeek timeout (operator item).
+
+**Amendments (2026-08-11, at plan approval):** (1) XD-028 ownership transferred to akm-refresh (VO closed DONE with the CLAUDE.md signal-scan paragraph intact) — AKM-008 records the deletion trigger (≥3 confirmed organic fires), AKM-010 closes the overlap window. (2) Soak metrics scoped to the three pre-existing triggers; new-content-hook events excluded from the criterion-7 verdict.

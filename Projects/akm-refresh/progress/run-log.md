@@ -4,7 +4,7 @@ project: akm-refresh
 domain: software
 status: active
 created: 2026-07-07
-updated: 2026-07-07
+updated: 2026-08-11
 topics:
   - moc-crumb-architecture
 tags:
@@ -137,3 +137,23 @@ Budget: 4 docs (standard tier). Budget-exempt: preflight knowledge brief (hook-i
 **Model routing (cost observation):** all three skills this session (systems-analyst, peer-review, action-architect) are reasoning-tier — kept on session model, no Sonnet delegations; no `model_tier: execution` skills invoked. Heaviest ops: peer-review-dispatch subagent (~79k tokens, 20 tool uses — panel dispatch + note authoring, quality pass), review-note full read (~416 lines), protocol/skill doc loads. Outcomes: all pass, no rework.
 
 **Open operator items at session end:** (1) plan approval, (2) A10 DeepSeek curl_timeout bump, (3) two compound pattern candidates (write to solutions/ y/n), (4) vault-check run-log detection quirk → VO backlog.
+
+## 2026-08-11 — PLAN: joint review, two amendments, plan approved
+
+**Resume:** vault-state reconstruction after ~5-week park (run-log + project-state + plan docs). Operator requested joint plan review before approval.
+
+**Review findings (operator concurred, both amendments applied):**
+1. **XD-028 orphaned** — the plan assumed VO-037 would delete the CLAUDE.md signal-scan paragraph once R4 went live, but vault-optimization closed DONE 2026-08-10 with the paragraph intact (correctly honoring the dependency). Deletion had no owner; overlap window unbounded. **Amendment 1:** ownership transferred to akm-refresh — AKM-008 acceptance now records the deletion trigger (≥3 confirmed organic fires; operator decision if fewer by soak close), AKM-010 acceptance closes the window. XD-028 rewritten; action-plan §3.2/§4.2 updated.
+2. **Mid-soak contamination risk** — AKM-008's go-live during the AKM-004 soak would add a new trigger to the surfacing-event population the soak measures. **Amendment 2:** soak metrics scoped to the three pre-existing triggers; new-content-hook events logged with per-trigger attribution but excluded from criterion-7 evaluation. AKM-004 acceptance + action-plan §2.2 updated. (Option 2 — delaying AKM-008 past soak close — rejected: pushes R4 ~2 weeks and extends the XD-028 overlap window.)
+3. Noted non-issues: AKM-006 mid-soak is safe (no surfacing events generated); July staleness self-heals (AKM-001 re-measures baselines and re-verifies installed qmd; A4/U3 payload validation re-runs at design time).
+
+**Plan approved by operator** with both amendments. Files touched: `tasks.md` (AKM-004/008/010 rows), `action-plan.md` (amendment note + §2.2/§3.2/§4.2), `action-plan-summary.md` (synced), `_system/docs/cross-project-deps.md` (XD-028 rewrite).
+
+### Phase Transition: PLAN → TASK
+- Date: 2026-08-11 09:45
+- PLAN phase outputs: `action-plan.md` (amended 2026-08-11), `tasks.md` (10 tasks, 3 rows amended), `action-plan-summary.md` (synced), XD-028 rewrite in `cross-project-deps.md`, calibration row in `estimation-calibration.md` (registered at PLAN authoring)
+- Goal progress: all PLAN quality criteria met — milestones with success criteria, 10 tasks with binary acceptance + dependency graph, 4 operator gates placed, calibration registered. Criteria modified at approval: AKM-004/008/010 acceptance rows amended (XD-028 ownership + soak scoping) — approval-stage review findings, not scope changes. Nothing unmet; nothing blocks TASK.
+- Compound: one candidate — **"cross-project dependency rows orphan silently when the counterparty project closes"** (VO's DONE close-out had no step to sweep `cross-project-deps.md` for rows naming it; XD-028 sat ownerless for a day and would have stayed so until this review). Proposed route: add a cross-project-deps sweep step to the project close-out/archival procedure (spec §4.6) — process change, flagged for operator approval, not written autonomously. Prior open candidates (b)/(c) from SPECIFY remain flagged.
+- Context usage before checkpoint: ~35% (low band)
+- Action taken: none (below 70% threshold)
+- Key artifacts for TASK phase: `action-plan-summary.md` + `tasks.md` (current in context), `specification.md` M1–M6 matrix + AKM-001 task row, `_system/docs/solutions/staged-spike-with-bail.md` (governs AKM-001 staging)
