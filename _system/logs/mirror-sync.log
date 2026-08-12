@@ -888,3 +888,4 @@
 2026-08-10 22:04:09 SYNC docs: moc-crumb-architecture Synthesis rewritten to v3 post-sunset architecture — last parked VO item closed
 2026-08-11 21:19:37 SYNC docs: akm-refresh plan approved w/ 2 amendments (XD-028 ownership transfer, per-trigger soak scoping) — PLAN→TASK gate
 2026-08-11 21:19:59 SYNC chore: bump cross-project-deps.md updated field (vault-check §32)
+2026-08-11 21:34:17 SYNC fix: vault-check has_staged_match end-anchor bug — run-log/session-log/design staged checks were silently dead
