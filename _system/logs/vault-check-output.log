@@ -1,6 +1,6 @@
 Mode: pre-commit (1 staged files)
 === 1. Frontmatter Schema Validation ===
-  Checked 1 files, 0 with issues
+  Checked 0 files, 0 with issues
 
 === 2. Summary Freshness Check ===
   Checked 0 summaries, 0 stale
@@ -15,7 +15,7 @@ Mode: pre-commit (1 staged files)
   Skipped (no staged run-log files)
 
 === 6. Session-Log Compound Completeness ===
-  Skipped (no staged session-log files)
+  Checked 156 session entries, 0 missing Compound field
 
 === 7. Project Scaffold Completeness ===
   Skipped (no staged project files)
@@ -86,7 +86,7 @@ Mode: pre-commit (1 staged files)
   Checked 1 files, 0 broken links in 0 files
 
 === 32. Updated Field Bump Check ===
-  Checked 1 modified docs with updated: field, 0 unbumped
+  Checked 0 modified docs with updated: field, 0 unbumped
 
 === Solution Doc Track Schema ===
   Checked 0 solution docs, 0 track issues
