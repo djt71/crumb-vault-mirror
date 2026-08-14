@@ -1937,8 +1937,17 @@ check_context_inventory() {
     local has_skill_mention=0
     local has_context_inventory=0
 
-    # Known skill names that indicate a skill was invoked
-    local skill_pattern="attention-manager\|systems-analyst\|action-architect\|researcher\|learning-plan\|feed-pipeline\|inbox-processor\|peer-review\|code-review\|review-panel\|deck-intel\|writing-coach\|audit\|vault-query"
+    # Known skill names that indicate a skill was invoked.
+    # NOTE: bare "audit" is deliberately NOT in this list — it collides with ordinary
+    # prose ("pre-existing audit finding", "audited all connectors", "audit ALL
+    # customer-facing language", "the June 10 audit flagged...", "/models audit").
+    # Confirmed false positive: 2026-08-12, akm-refresh run-log ("pre-existing audit
+    # finding" phrase). Real audit-skill invocations in this vault's run-logs are
+    # consistently phrased with one of these more specific alternates (surveyed across
+    # Projects/*/progress/run-log*.md and _system/logs/session-log.md) — e.g. "Full
+    # audit run (both tiers...)", "Full vault audit (weekly + monthly)", "Ran full
+    # vault audit...", "per audit skill", "audit skill's own escalation threshold".
+    local skill_pattern="attention-manager\|systems-analyst\|action-architect\|researcher\|learning-plan\|feed-pipeline\|inbox-processor\|peer-review\|code-review\|review-panel\|deck-intel\|writing-coach\|audit skill\|full audit\|weekly audit\|monthly audit\|vault audit\|audit run\|/audit\|vault-query"
 
     _check_ctx_inv() {
         if [ $in_session -eq 1 ] && [ $has_skill_mention -eq 1 ]; then

@@ -3,7 +3,7 @@ type: reference
 domain: software
 status: active
 created: 2026-02-21
-updated: 2026-08-10
+updated: 2026-08-14
 tags:
   - system
 ---
@@ -14,7 +14,23 @@ Orientation artifact for a fresh session reading this repo (claude.ai chat, a
 new Claude Code session, or any agent cloning `github.com/djt71/crumb-vault`).
 Read this first — it is sufficient for most questions.
 
-Last updated: 2026-08-10 second point edit — **vault-optimization DONE** (VO-036 sign-off + VO-037 executed: CLAUDE.md 220→167, spec v2.5 as-built reorg, spec file renamed version-neutral `crumb-design-spec.md` — update any saved path references). Active roster now 6 working: akm-refresh, skills-library, customer-intelligence, firekeeper-books, semuta, mission-control (paused) + vault-optimization DONE-in-place. Earlier same-day point edit: (point edit: **agentic-sunset COMPLETE → ARCHIVED** — AS-032 closed: operator-manual checklist executed 08-08→08-10 and verified (openclaw.json ×12 gone, agent calendars ×2 gone, provider revocations ×5 + Discord operator-attested); compound insights routed (`infrastructure-teardown-discipline.md` now four disciplines — new discipline 4 "platform absorption is a teardown trigger" + discipline 2 migration corollary "sweep every scheduler class"); XD ×6 dispositioned (005/007/009 keep-dormant, 019/020 resolved platform-absorption, 021 mooted); **three projects archived to `Archived/Projects/` in one pass: agentic-sunset, tess-v2 (KB exception answered NO — durable patterns live outside the project), tess-danny-migration**; `Projects/index.md` rebuilt from live phases (was stale since 04-21). Active roster is now 7: vault-optimization, akm-refresh, skills-library, customer-intelligence, firekeeper-books, semuta, mission-control (paused)). Prior point edit 2026-08-08 (after a 25-day vault dormancy gap 2026-07-14→08-08 — no sessions, stack ran clean unattended: **AS-032 external-artifact sweep EXECUTED 2026-07-14** (Drive Agent-tree trashed — recovery window closes ~08-13; Keychain x-feed-intel.* scrubbed; 7 revocations approved — operator-manual checklist at providers still open, see AS project-state); **VO M5 soak CLOSED 2026-08-08** by operator decision — PASS on all exercised criteria at WS5/8, Tier-1 #1–#3 unexercised → watch items; pruned config accepted as baseline; VO-036 close-out → VO-037 next; **full vault audit 2026-08-08** (weekly + monthly, follow-ups executed: 16 broken wikilinks fixed, tess-v2 VAL-001/002/003 closed superseded); **skill roster is 11** since 2026-07-07 (skills-library §C); **obsidian-applenotes-import closed + deleted 2026-08-08** (operator decision, no archival — pre-M0, no repo ever created, git-history-only)). Prior point edits 2026-07-13 (AS-031 soak v2 COMPLETE 7/7 green; GUI-login recovery rule field-proven at the 07-13 reboot), 2026-07-06 (mission statement re-aligned to directive v3) and 2026-07-05 (attention-manager retired to Cowork, 15 skills, bet portfolio empty per Gate 4 declarations). Prior full refresh 2026-07-04. **Headline changes since 06-19:** (1) the
+Last updated: 2026-08-14 point edit — **akm-refresh PLAN→TASK** (plan approved by
+operator 2026-08-11 after a joint review, with two amendments: (1) **XD-028 ownership
+transferred** to akm-refresh — vault-optimization closed DONE with the CLAUDE.md
+signal-scan paragraph intact, leaving the deletion ownerless, so AKM-008 now records
+the deletion trigger (≥3 confirmed organic fires) and AKM-010 closes the overlap
+window; (2) **AKM-004 soak metrics scoped to the three pre-existing triggers** —
+new-content-hook events are logged with per-trigger attribution but excluded from the
+criterion-7 verdict, so AKM-008 going live mid-soak can't contaminate it. Gate
+committed `c7290d88`; next action is **AKM-001 Stage-0 daemon availability check**
+(confirm `qmd mcp --http --daemon` flags from local `--help` before spending spike
+budget)). Vault infrastructure same window: **vault-check `has_staged_match` bug fixed
+2026-08-11** (`da943b4e`) — the helper end-anchored its suffix pattern, so every
+partial-name caller (`run-log`, `session-log`, `design/`) could never match and
+sections 4/5/6/12/24/29/30 had been silently skipped in staged/pre-commit mode since
+the helper was introduced; now live, and the §29/§30 grandfather dates were advanced to
+2026-08-11 (`619afccc`, operator-approved) to absorb the 53-warning historical backlog
+those dead checks had accumulated. Prior point edit 2026-08-10 (second same-day) — **vault-optimization DONE** (VO-036 sign-off + VO-037 executed: CLAUDE.md 220→167, spec v2.5 as-built reorg, spec file renamed version-neutral `crumb-design-spec.md` — update any saved path references). Active roster now 6 working: akm-refresh, skills-library, customer-intelligence, firekeeper-books, semuta, mission-control (paused) + vault-optimization DONE-in-place. Earlier same-day point edit: (point edit: **agentic-sunset COMPLETE → ARCHIVED** — AS-032 closed: operator-manual checklist executed 08-08→08-10 and verified (openclaw.json ×12 gone, agent calendars ×2 gone, provider revocations ×5 + Discord operator-attested); compound insights routed (`infrastructure-teardown-discipline.md` now four disciplines — new discipline 4 "platform absorption is a teardown trigger" + discipline 2 migration corollary "sweep every scheduler class"); XD ×6 dispositioned (005/007/009 keep-dormant, 019/020 resolved platform-absorption, 021 mooted); **three projects archived to `Archived/Projects/` in one pass: agentic-sunset, tess-v2 (KB exception answered NO — durable patterns live outside the project), tess-danny-migration**; `Projects/index.md` rebuilt from live phases (was stale since 04-21). Active roster is now 7: vault-optimization, akm-refresh, skills-library, customer-intelligence, firekeeper-books, semuta, mission-control (paused)). Prior point edit 2026-08-08 (after a 25-day vault dormancy gap 2026-07-14→08-08 — no sessions, stack ran clean unattended: **AS-032 external-artifact sweep EXECUTED 2026-07-14** (Drive Agent-tree trashed — recovery window closes ~08-13; Keychain x-feed-intel.* scrubbed; 7 revocations approved — operator-manual checklist at providers still open, see AS project-state); **VO M5 soak CLOSED 2026-08-08** by operator decision — PASS on all exercised criteria at WS5/8, Tier-1 #1–#3 unexercised → watch items; pruned config accepted as baseline; VO-036 close-out → VO-037 next; **full vault audit 2026-08-08** (weekly + monthly, follow-ups executed: 16 broken wikilinks fixed, tess-v2 VAL-001/002/003 closed superseded); **skill roster is 11** since 2026-07-07 (skills-library §C); **obsidian-applenotes-import closed + deleted 2026-08-08** (operator decision, no archival — pre-M0, no repo ever created, git-history-only)). Prior point edits 2026-07-13 (AS-031 soak v2 COMPLETE 7/7 green; GUI-login recovery rule field-proven at the 07-13 reboot), 2026-07-06 (mission statement re-aligned to directive v3) and 2026-07-05 (attention-manager retired to Cowork, 15 skills, bet portfolio empty per Gate 4 declarations). Prior full refresh 2026-07-04. **Headline changes since 06-19:** (1) the
 agentic-sunset stability soak v1 **FAILED** — a headless reboot on 2026-06-18
 left the stack dark 13 days (keep-set resurrection is GUI-login-gated, now a
 documented operating assumption: GUI-login after every reboot, then verify
@@ -193,14 +209,15 @@ Directory location is authoritative for archived-vs-active; project docs carry n
 - **Key files:** `Projects/firekeeper-books/ai-art-learning-plan.md`, `ai-art-inventory.md`, `progress/run-log.md`
 
 ### akm-refresh — software / system / four-phase
-- **Phase:** PLAN · entered SPECIFY 2026-07-07, since advanced
-- **Status:** Fix AKM retrieval per the 2026-07 evaluation — mode inversion at scale (BM25 collapsed), R2–R5 scope; two new-primitive hooks pending design approval. Bench fixture at `_system/data/akm/`.
-- **Key files:** `Projects/akm-refresh/design/specification.md`, `progress/run-log.md`
+- **Phase:** TASK (PLAN→TASK gate 2026-08-11) · **updated:** 2026-08-11
+- **Status:** Fix AKM retrieval per the 2026-07 evaluation — mode inversion at scale (BM25 collapsed), R2–R5 scope; two new-primitive hooks pending design approval. Bench fixture at `_system/data/akm/`. **Plan approved 2026-08-11** with two amendments (XD-028 deletion-trigger ownership transferred to AKM-008/010; AKM-004 soak metrics scoped to the three pre-existing triggers). Shape: 10 tasks (AKM-001…010) across 4 milestones — M1 transport/mode decision, M2 precision-trigger rebuild, M3 hook primitives, M4 vocabulary + soak closure; 4 operator gates (AKM-002 design, AKM-005/007 primitive approvals, AKM-010 soak verdict).
+- **Next:** AKM-001 — staged spike, **Stage-0 bail check first**: confirm `qmd mcp --http --daemon` flags from local `--help` on the installed qmd before spending spike budget.
+- **Key files:** `Projects/akm-refresh/specification.md`, `action-plan-summary.md`, `tasks.md`, `progress/run-log.md`
 
 ### skills-library — software / system / four-phase
 - **Phase:** SPECIFY (§C roster decisions executed 2026-07-07: skills 15→11 — researcher/critic/sync/deliberation retired, code-review → review-panel, built-in overlap policy adopted)
 - **Next:** PLAN gate. Portable core = writing-coach, mermaid/Excalidraw, deck-intel method; A4 single-source question open.
-- **Key files:** `Projects/skills-library/design/specification.md`, `progress/run-log.md`
+- **Key files:** `Projects/skills-library/specification.md`, `design/skills-review.md`, `progress/run-log.md`
 
 *(obsidian-applenotes-import — closed + **deleted** 2026-08-08, operator decision, no archival: died at PLAN pre-M0, no repo ever created; git-history-only at commit `b29301d7^`.)*
 
@@ -248,6 +265,7 @@ Everything agentic is retired — archived plists live in git history only (`_sy
 - **Peer-review skill:** parallel dispatch to external LLMs (GPT / Gemini / DeepSeek / Grok families).
 - **Session-log domains:** exactly the 8 work domains, no "cross-cutting"/"other".
 - **Historical log entries are immutable** (grep exclusions in vault-check).
+- **vault-check staged-mode checks are live again (2026-08-11):** `has_staged_match` no longer end-anchors its suffix pattern, so run-log/session-log/design-scoped sections (4/5/6/12/24/29/30 + the run-log arms of 8/23) actually fire at pre-commit; §29/§30 enforcement dates advanced to 2026-08-11 so pre-fix entries are grandfathered rather than re-warned on every commit.
 
 ## Open Items
 
@@ -255,6 +273,7 @@ Everything agentic is retired — archived plists live in git history only (`_sy
 - **Residual cloud-side teardown state (found 2026-06-19):** tess-operations' server-side **Gmail filters** (TOP-017, on dturner71@gmail.com) survived the local teardown and silently force-archived ~3 months of personal mail (incl. the Beacon Zen sangha group) until operator-remediated 2026-06-19. **AS-032 to add an external-artifact sweep** — Google agent calendars, Drive `Agent/*` tree, and the "Tess Ops" Discord server may also persist. The AS inventory covered local host state only; externally-hosted config is invisible to `launchctl`/`crontab`/filesystem sweeps.
 - **opportunity-scout & feed-intel-framework:** both ARCHIVED 2026-07-05 (pre-empting the AS-032 proposals) — concepts moved to Claude Cowork via handoff notes (`cowork-scout-handoff.md`, `cowork-feed-handoff.md`); repos deleted.
 - **firekeeper-books project-state stale** (2026-04-07) — due a status refresh (hobby per Gate 4 since 2026-07-05).
+- **Cross-project-deps close-out sweep (open operator decision, raised 2026-08-11):** XD-028 orphaned when vault-optimization closed DONE — no close-out/archival step sweeps `cross-project-deps.md` for rows naming the closing project. Proposed as a process change to spec §4.6; flagged, not written autonomously.
 - **Stale skill body-text residuals: RESOLVED at VO B5 (2026-07-04)** — audit §15 removed, learning-plan §7 died in the systems-analyst merge, researcher gotcha noted in its description.
 
 ## Architecture Notes

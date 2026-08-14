@@ -9,7 +9,7 @@ last_committed: 2026-03-13
 
 # Mission Control — Run Log
 
-> **Archive:** [[run-log-2026-03a]] — Project creation, SPECIFY, PLAN, Phase 0 design (M0a/M0b), Phase 1 implementation (M1-M3), Phase 2 (M4-M6 partial) — sessions 1-7 (2026-03-07 through 2026-03-13)
+> **Archives:** [[run-log-2026-03a]] — 2026-03-09 to 2026-03-13: session 7 (MC-072 + Ops polish) back through MC-065 feed-pipeline dashboard entry path. · [[run-log-2026-03b]] — 2026-03-09 (MC-028 adapter tests + parity gate start) back through 2026-03-07: project creation, SPECIFY, PLAN phase decomposition, TASK phase M0a/M0b design system, MC-006 through MC-055. · [[run-log-2026-03c]] — 2026-03-07 (chronological): MC-010 Design gate review onward — cross-project dependency tracking, Phase 1 implementation (M1-M3), Cloudflare Tunnel, FIF adapters, Attention page frontend, cross-project tasks through Session 11 (cont). Together these three files cover sessions 1-7 (2026-03-07 through 2026-03-13) — the full span previously in run-log-2026-03a.md before it was split for size (2026-08-14).
 
 ---
 

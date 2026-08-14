@@ -1,6 +1,6 @@
-Mode: pre-commit (1 staged files)
+Mode: pre-commit (6 staged files)
 === 1. Frontmatter Schema Validation ===
-  Checked 0 files, 0 with issues
+  Checked 1 files, 0 with issues
 
 === 2. Summary Freshness Check ===
   Checked 0 summaries, 0 stale
@@ -9,7 +9,7 @@ Mode: pre-commit (1 staged files)
   Checked 0 summary files, 0 missing source_updated
 
 === 4. Run-Log Structural Integrity ===
-  Checked 11 run-logs, 0 incomplete session blocks
+  Checked 13 run-logs, 0 incomplete session blocks
 
 === 5. Compound Step Continuity ===
   Checked 13 phase transitions, 0 missing Compound field
@@ -42,7 +42,7 @@ Mode: pre-commit (1 staged files)
   Checked 0 MOC files, 0 issues
 
 === 18. Topics Resolution ===
-  Checked 1 topic entries, 0 issues
+  Checked 0 topic entries, 0 issues
 
 === 19. Topics Requirement (kb-tagged notes) ===
   Checked 0 kb-tagged notes, 0 missing topics
@@ -61,8 +61,7 @@ Mode: pre-commit (1 staged files)
   Checked 0 post-enforcement tasks, 0 missing reviews, 63 grandfathered (before 2026-03-20)
 
 === 24. Run-Log Size Check ===
-  WARNING: Projects/mission-control/progress/run-log-2026-03a.md — 2161 lines (threshold: 1000) — consider rotation
-  Checked 7 active run-logs, 1 over threshold (1000 lines)
+  Checked 6 active run-logs, 0 over threshold (1000 lines)
 
 === 25. Signal-Note Schema Validation ===
   Checked 0 signal-note files, 0 issues
@@ -74,16 +73,16 @@ Mode: pre-commit (1 staged files)
   Cross-project deps: 0 issues
 
 === 29. Context Inventory Completeness ===
-  Skill sessions: 0, missing inventory: 0, 83 grandfathered (before 2026-08-11)
+  Skill sessions: 0, missing inventory: 0, 78 grandfathered (before 2026-08-11)
 
 === 30. Subagent Provenance Check ===
   Subagent sessions: 0, missing provenance: 0, 30 grandfathered (before 2026-08-11)
 
 === 31. Broken Wikilink Detection ===
-  Checked 1 files, 0 broken links in 0 files
+  Checked 5 files, 0 broken links in 0 files
 
 === 32. Updated Field Bump Check ===
-  Checked 0 modified docs with updated: field, 0 unbumped
+  Checked 1 modified docs with updated: field, 0 unbumped
 
 === Solution Doc Track Schema ===
   Checked 0 solution docs, 0 track issues
@@ -95,7 +94,6 @@ Mode: pre-commit (1 staged files)
 Vault Check Summary
 ==========================================
   Errors:   0
-  Warnings: 1
+  Warnings: 0
 
-RESULT: WARNINGS (exit code 1)
-Non-blocking — review when convenient.
+RESULT: CLEAN (exit code 0)
