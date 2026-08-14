@@ -3,7 +3,7 @@ type: config
 domain: software
 status: active
 created: 2026-02-18
-updated: 2026-06-10
+updated: 2026-08-14
 models:
   openai:
     model: gpt-5.4
