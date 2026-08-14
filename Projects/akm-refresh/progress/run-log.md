@@ -180,4 +180,15 @@ Budget: 4 docs (standard tier). Budget-exempt: preflight knowledge brief (hook-i
 
 **Model routing (cost observation):** full session on Fable 5, no delegation — plan review and bug root-causing were judgment-dense; no `model_tier: execution` skill invoked. No token-heavy anomalies.
 
-**Open operator items carried out of session:** (1) §29/30 backlog disposition — **resolved 2026-08-12:** operator approved advancing `CTX_INV_ENFORCEMENT_DATE` and `PROVENANCE_ENFORCEMENT_DATE` to 2026-08-11 (entries written while the checks were dead were never validated live; re-scoping the scan would have lost future vault-wide coverage). Verified: full run now reports 0 §29/30 warnings, 83 + 30 sessions grandfathered. The 1 oversized-run-log warning (mission-control, pre-existing finding from the 2026-08-08 full-vault pass) stands. (2) Cross-project-deps close-out sweep (spec §4.6 process change) — still awaiting operator decision. (3) Prior SPECIFY-phase compound candidates (b)/(c) — still flagged.
+**Open operator items carried out of session (2026-08-11):** (1) §29/30 backlog disposition — **resolved 2026-08-12:** operator approved advancing `CTX_INV_ENFORCEMENT_DATE` and `PROVENANCE_ENFORCEMENT_DATE` to 2026-08-11 (entries written while the checks were dead were never validated live; re-scoping the scan would have lost future vault-wide coverage). Verified: full run now reports 0 §29/30 warnings, 83 + 30 sessions grandfathered. The 1 oversized-run-log warning (mission-control, pre-existing finding from the 2026-08-08 full-vault pass) stands. (2) Cross-project-deps close-out sweep (spec §4.6 process change) — still awaiting operator decision. (3) Prior SPECIFY-phase compound candidates (b)/(c) — still flagged.
+
+## 2026-08-14 — Maintenance (ride-along): SPECIFY/PLAN open items dispositioned
+
+**Scope note:** operator dispositions of items this project's ledger was carrying — recorded here to close the loop; no akm-refresh phase work done.
+
+**Context inventory:** n/a — no skill invoked this entry (the `peer-review-config.md` mention below is a filename, not an invocation; second §29 false-positive shape: skill names embedded in filenames).
+
+- **Candidate (b)** ("evaluation metric must match the delivery cutoff", GEM-F2) — **approved and written** to [[evaluation-metric-matches-delivery-cutoff]] (`confidence: medium`, single instance, promoted with operator approval per spec §4.4).
+- **Candidate (c)** ("accept-empty removes the pressure that makes overlapping score distributions dangerous as a noise gate") — **held by operator decision**: R2 builds accept-empty and the AKM-004/010 soak directly tests the dynamic; write after soak with two data points instead of one. Re-evaluate at AKM-010 close.
+- **Cross-project-deps close-out sweep** (raised at the 08-11 PLAN gate) — **approved and executed**: spec §4.6 Archive Procedure gained step 6 (XD-row sweep, applies to DONE close-outs too); steps renumbered 6-9 → 7-10.
+- **A10** (DeepSeek curl_timeout, open since 07-07) — **applied**: per-provider `curl_timeout: 240` in the deepseek block of `peer-review-config.md` (global stays 120).

@@ -5,7 +5,7 @@ type: specification
 skill_origin: null
 status: active
 created: 2026-02-14
-updated: 2026-08-10
+updated: 2026-08-14
 tags:
   - design-spec
   - crumb
@@ -2176,15 +2176,17 @@ When the user requests archival ("archive the think-different project", "move X 
    ```
    The `phase_before_archive` field preserves the pre-archival phase for use during reactivation. This is set once during archival and read once during reactivation. The `archived_reason` field distinguishes completed projects (knowledge-base mining candidates) from paused projects (likely to return) and abandoned projects (may signal patterns worth examining in audit). Claude asks the user for the reason during the confirmation step.
 
-6. **Move the project directory.** `mv Projects/[project-name] Archived/Projects/[project-name]`
+6. **Sweep cross-project dependencies** *(added 2026-08-14)*. Grep `_system/docs/cross-project-deps.md` for XD rows naming the project. Disposition each with the user: transfer ownership to the counterparty project, close the row, or mark it moot. **This step also applies when setting a project to DONE without archival** — XD rows orphan silently when their owning project leaves active rotation (provenance: XD-028, orphaned at vault-optimization's DONE close-out 2026-08-10, caught only by an unrelated review 2026-08-11).
+
+7. **Move the project directory.** `mv Projects/[project-name] Archived/Projects/[project-name]`
 
    **Knowledge-base exception:** If a project contains artifacts with standalone knowledge-base value (biographical profiles, reference material, curated research tagged with `#kb/` topics), it stays in `Projects/` with `phase: ARCHIVED` rather than moving to `Archived/Projects/`. The rationale: `Archived/` buries content that belongs in the active knowledge graph. Projects whose artifacts are purely project mechanics (specs, migration plans, task lists) move to `Archived/` as normal. Claude should flag knowledge-base candidates during the confirmation step and let the user decide.
 
-7. **Update companion note paths.** Any `type: attachment-companion` notes with `attachment.source_file` paths referencing `Projects/[project-name]/...` need their paths updated to `Archived/Projects/[project-name]/...`. This maintains the vault-check bidirectional reference invariant (§7.8 checks 12-13). If the project has no attachments, skip this step.
+8. **Update companion note paths.** Any `type: attachment-companion` notes with `attachment.source_file` paths referencing `Projects/[project-name]/...` need their paths updated to `Archived/Projects/[project-name]/...`. This maintains the vault-check bidirectional reference invariant (§7.8 checks 12-13). If the project has no attachments, skip this step.
 
-8. **Run vault-check.** Verify structural integrity after the move — especially companion note source_file paths (checks 12-13). Archive and reactivate are exactly the operations that stress these checks. If vault-check reports errors after the move, re-run the companion path update to catch any missed files, then re-run vault-check. If errors persist, flag to user before committing.
+9. **Run vault-check.** Verify structural integrity after the move — especially companion note source_file paths (checks 12-13). Archive and reactivate are exactly the operations that stress these checks. If vault-check reports errors after the move, re-run the companion path update to catch any missed files, then re-run vault-check. If errors persist, flag to user before committing.
 
-9. **Git commit.**
+10. **Git commit.**
    ```
    git add -A
    git commit -m "archive: [project-name] — [one-line reason]"

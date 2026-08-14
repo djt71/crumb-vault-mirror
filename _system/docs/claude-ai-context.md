@@ -273,7 +273,7 @@ Everything agentic is retired — archived plists live in git history only (`_sy
 - **Residual cloud-side teardown state (found 2026-06-19):** tess-operations' server-side **Gmail filters** (TOP-017, on dturner71@gmail.com) survived the local teardown and silently force-archived ~3 months of personal mail (incl. the Beacon Zen sangha group) until operator-remediated 2026-06-19. **AS-032 to add an external-artifact sweep** — Google agent calendars, Drive `Agent/*` tree, and the "Tess Ops" Discord server may also persist. The AS inventory covered local host state only; externally-hosted config is invisible to `launchctl`/`crontab`/filesystem sweeps.
 - **opportunity-scout & feed-intel-framework:** both ARCHIVED 2026-07-05 (pre-empting the AS-032 proposals) — concepts moved to Claude Cowork via handoff notes (`cowork-scout-handoff.md`, `cowork-feed-handoff.md`); repos deleted.
 - **firekeeper-books project-state stale** (2026-04-07) — due a status refresh (hobby per Gate 4 since 2026-07-05).
-- **Cross-project-deps close-out sweep (open operator decision, raised 2026-08-11):** XD-028 orphaned when vault-optimization closed DONE — no close-out/archival step sweeps `cross-project-deps.md` for rows naming the closing project. Proposed as a process change to spec §4.6; flagged, not written autonomously.
+- **Cross-project-deps close-out sweep: RESOLVED 2026-08-14** — operator approved the spec §4.6 process change; Archive Procedure gained step 6 (XD-row sweep at close-out, applies to DONE as well as ARCHIVED).
 - **Stale skill body-text residuals: RESOLVED at VO B5 (2026-07-04)** — audit §15 removed, learning-plan §7 died in the systems-analyst merge, researcher gotcha noted in its description.
 
 ## Architecture Notes
