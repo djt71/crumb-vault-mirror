@@ -5,7 +5,9 @@ domain: creative
 skill_origin: learning-plan
 status: active
 created: 2026-04-02
-updated: 2026-04-02
+updated: 2026-08-14
+topics:
+  - moc-writing
 skill_type: composite
 skill_type_secondary:
   - applied-technical

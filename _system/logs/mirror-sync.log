@@ -892,3 +892,4 @@
 2026-08-11 21:36:35 SYNC fix: vault-check has_staged_match end-anchor bug — run-log/session-log/design staged checks were silently dead
 2026-08-12 12:54:37 SYNC chore: vault-check §29/30 grandfather date → 2026-08-11 (operator-approved) + akm-refresh 08-11 session-end backfill
 2026-08-12 12:57:09 SYNC chore: vault-check §29/30 grandfather date → 2026-08-11 (operator-approved) + akm-refresh 08-11 session-end backfill
+2026-08-14 09:38:17 SYNC chore: three maintenance items — mission-control archive 3-way split (§24 clear), §29 audit-pattern tightened, claude-ai-context refresh
