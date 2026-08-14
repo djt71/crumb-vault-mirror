@@ -4,7 +4,7 @@ type: system
 phase: TASK
 last_gate: PLAN-to-TASK
 created: 2026-07-07
-updated: 2026-08-11 09:45
+updated: 2026-08-14
 related_projects:
   - vault-optimization
 # No repo_path: vault-only project — knowledge-retrieve.sh, skill-preflight
@@ -12,7 +12,7 @@ related_projects:
 # R4 (new-content hook) coordination: XD-028 ownership transferred to akm-refresh
 # 2026-08-11 (VO closed DONE with CLAUDE.md signal-scan paragraph intact) —
 # AKM-008 sets deletion trigger, AKM-010 closes overlap window.
-active_task: null
-next_action: "Plan approved 2026-08-11 with two amendments (XD-028 ownership transfer; per-trigger soak scoping). Start AKM-001 daemon latency spike — Stage-0 bail check first: confirm `qmd mcp --http --daemon` flags from local `--help` on installed qmd before spending spike budget."
+active_task: AKM-003
+next_action: "AKM-002 APPROVED 2026-08-14 (design/akm-002-retrieval-design.md; lifecycle Option A session-startup lazy-start). Start AKM-003 wrapper implementation: daemon MCP client + health-probe + vec-only CLI fallback (D1/D6), mode flip + structured queries + splitting deletion (D2), noise stack + collections scoping (D4), empty_reason/transport feedback fields (D5), PyYAML-free preflight-map parser fix (D5 defect), session-startup daemon block (Option A), AKM_LEGACY_MODE rollback toggle (D7). Acceptance: M1–M5 pass live, all three triggers exercised, shellcheck clean, rollback tested. Code review at M2 boundary (after AKM-004)."
 last_committed: 2026-08-11 09:45
 services: []

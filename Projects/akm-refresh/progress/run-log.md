@@ -192,3 +192,45 @@ Budget: 4 docs (standard tier). Budget-exempt: preflight knowledge brief (hook-i
 - **Candidate (c)** ("accept-empty removes the pressure that makes overlapping score distributions dangerous as a noise gate") — **held by operator decision**: R2 builds accept-empty and the AKM-004/010 soak directly tests the dynamic; write after soak with two data points instead of one. Re-evaluate at AKM-010 close.
 - **Cross-project-deps close-out sweep** (raised at the 08-11 PLAN gate) — **approved and executed**: spec §4.6 Archive Procedure gained step 6 (XD-row sweep, applies to DONE close-outs too); steps renumbered 6-9 → 7-10.
 - **A10** (DeepSeek curl_timeout, open since 07-07) — **applied**: per-provider `curl_timeout: 240` in the deepseek block of `peer-review-config.md` (global stays 120).
+
+## 2026-08-14 — TASK: AKM-001 daemon latency spike executed — DONE, verdict GO
+
+**Context inventory:** run-log.md + tasks.md (vault-state resume, full read), `action-plan-summary.md` (full read), `_system/docs/solutions/staged-spike-with-bail.md` (full read — governs staging), `specification.md` (targeted grep: M1–M6 matrix + AKM-001/002 rows only), `knowledge-retrieve.sh` (targeted: mode routing/splitting region + QMD_BIN resolution). 4 docs + 2 targeted reads — standard budget. No skill invoked (spike = direct measurement work; MINIMAL-triage execution under TASK phase).
+
+**Stage-0 (bail check): PASS in minutes** — `qmd mcp --http` / `--http --daemon` confirmed on installed qmd 2.5.3 from local `--help` (primary source, per staged-spike-with-bail). No bail; full spike budget spent on measurement.
+
+**Executed:** daemon interface probe (MCP streamable HTTP, session handshake, `query` tool schema — typed lex/vec/hyde lines, rerank toggle, minScore, collections); latency matrix warm/distinct-query on both transports (daemon: lex 13ms → hybrid+rerank p95 1.29s; CLI: structured no-rerank ~650ms stable, with-rerank 3.3–4.5s confirming July); `qmd bench` recall@3 baselines (bm25 .284 / vector .475 / hybrid .476 / full .570); wrapper overhead isolated via PATH-shim (~150ms warm — 5× below A1's assumed 0.8s); daemon RSS (48MB idle → 3.5GB after model-serving); down-daemon behavior (instant connection-refused).
+
+**Operational hazards found (all recorded in memo for AKM-002):** (1) daemon start reports success on stdout/exit-0 even when bind fails — health-probe mandatory; (2) killing foreground parent orphans the listening child; (3) daemon result-cache on identical queries — invalidated first timing pass, distinct queries required for measurement.
+
+**Verdict: GO — M6 does not fire.** Daemon + structured lex+vec + rerank projected to pass M1–M5 (M5: ~1.45s p95 e2e; M1: 0.476 ≥ 0.475, near-zero margin). CLI structured no-rerank viable as degrade fallback (~0.8s e2e) pending no-rerank recall verification (bench can't measure it — flagged as AKM-002 input). `full` mode rejected: best recall but ~3.7s compute on any transport. Memo: `design/akm-001-daemon-spike-memo.md`. AKM-001 acceptance criteria all met (Stage-0 verdict, ≥3 modes × both transports p50/p95, recall@3 baselines, RSS + failure behavior, explicit M1–M5 projection). tasks.md AKM-001 → done; project-state → AKM-002.
+
+**Environment left as found:** all probe daemons/orphans killed, port 8181 free; probe artifacts in session scratchpad only.
+
+**Compound candidates (discretionary, mid-phase):** (a) "daemonized tools that report startup success from the launcher, not the listener, need health-probe verification" — single instance, hold; adjacent to existing launchd/false-success lore in memory. (b) Result-cache invalidating repeated-query latency measurement — measurement-methodology note, folded into memo; not promoted.
+
+## 2026-08-14 — TASK: AKM-002 retrieval design authored — awaiting operator gate
+
+**Context inventory:** `specification.md` (full read of Facts/Assumptions/Unknowns/System Map/Success Criteria — first full spec read this session), `skill-preflight.sh` (full read — U5 consumer), `knowledge-retrieve.sh` (targeted: dispatch block, brief-emit section), `skill-preflight-map.yaml` (full read), `akm-001-daemon-spike-memo.md` (authored this session, in context). ~4 docs + targeted reads — standard budget. No skill invoked (design task executed directly under TASK phase; systems-analyst not re-invoked — design consumes an already-peer-reviewed spec).
+
+**New evidence gathered for the design (beyond AKM-001):**
+1. **Recall by query shape** (daemon MCP, fixture, one scorer): lex+vec+rerank R@3 0.408 > vec-rerank 0.336 > vec-norerank 0.329 > lexvec-norerank 0.256. Rerank is load-bearing (+59%); without rerank the lex line *hurts* (RRF admits BM25 junk) → CLI fallback shape = vec-only no-rerank.
+2. **Score semantics:** no-rerank daemon scores are exactly rank-reciprocal (floors meaningless there); rerank scores overlap fully (noise 0.88 vs relevant 0.91 — F3 confirmed at daemon layer). N3's raw hits are all projects/ docs → KB-scope filter alone empties it (A3/C5 re-confirmed). Floors demoted to weak-tail trim (provisional 0.35, rerank path only).
+3. **U5 tests (precondition): PASS** — empty brief through skill-preflight = silent no-injection (existing `^\[` strip works); all 3 triggers emit well-formed header-only empties; non-empty sanity valid. Sole hooked consumer today = skill-preflight.sh.
+4. **Live defect found (U5-3):** PyYAML missing from every python3 on the machine → skill-preflight map parsing silently dead (reminders never inject — verified; `kb_eligible: false` ignored; `required_inputs` dead; AKM-009 query_hints would be a no-op). Fix assigned to AKM-003 (owns the file): dependency-free parser + parse self-check. Likely broken since a python toolchain upgrade; masked by the hook's blanket fail-open.
+5. `--json` flag verified working on qmd 2.5.3 (undocumented alias of `--format json`) — no CLI-flag-drift issue in wrapper.
+6. Daemon `collections` param can enforce KB scope server-side (`sources`+`domains`) — adopted in design (D4), improves fetch-budget efficiency.
+
+**Delivered:** `design/akm-002-retrieval-design.md` — D1 transport (daemon primary + health-probe + vec-only CLI fallback; lifecycle Option A session-startup lazy-start recommended vs Option B launchd KeepAlive — operator pick), D2 modes per trigger (C7 respected), D3 recall evidence, D4 noise stack (scope filter > splitting deletion > accept-empty > score-0 drop > floor-as-trim), D5 U5 results + PyYAML defect, D6 stateless MCP client, D7 rollback toggle (`AKM_LEGACY_MODE`), D8 M1–M5 projection (all pass; M6 not fired). tasks.md AKM-002 → in-progress. Probe daemon killed, port clear.
+
+**Gate: APPROVED by operator 2026-08-14** — design approved as written; daemon lifecycle = **Option A (session-startup lazy-start)**. AKM-002 done. AKM-003 (wrapper implementation) unblocked; D1's session-startup daemon-start block is now in AKM-003's implementation scope alongside the wrapper changes and the PyYAML preflight-map fix.
+
+## 2026-08-14 — Session end (AKM-001 + AKM-002 in one session)
+
+**Session arc:** vault-state resume → AKM-001 staged spike (Stage-0 pass in minutes → full measurement matrix → GO memo) → AKM-002 design (new recall/score-semantics/U5 evidence → design doc → operator approval + lifecycle Option A). Two tasks done, one operator gate passed. Next session: AKM-003 wrapper implementation (predicted split candidate per calibration row).
+
+**Compound evaluation:** in-flow candidates already logged (health-probe pattern — now with a second supporting observation: the PyYAML silent-fallback defect is the same class, "fail-open masks dead config"; result-cache measurement note — folded into memo). New at session end: **"blanket fail-open try/except turns missing dependencies into silent config death"** — the preflight map was dead for an unknown period because `import yaml` failure was absorbed by design; the hook kept working, so nothing surfaced. Candidate pairs with the AKM-001 false-success finding as two instances of *silent-degradation-needs-a-self-check*. Medium confidence, 2 instances — solutions/ write requires operator approval; flagged as open item. Prior candidate (c) (accept-empty pressure-removal) unchanged — re-evaluate at AKM-010.
+
+**Model routing (cost observation):** full session on Fable 5, no delegation — spike measurement and design judgment are reasoning-tier; no `model_tier: execution` skill invoked. Token-heavy ops: fixture recall runs (5 shapes × 12 queries over MCP, ~60s wall each), qmd bench (~59s). All measurement done via Bash directly, no subagents. Outcomes: no rework, one measurement pass invalidated by daemon result-cache and redone with distinct queries (methodology, not model, cost).
+
+**Open operator items at session end:** (1) compound candidate "silent-degradation-needs-a-self-check" (2 instances) — solutions/ write y/n; (2) candidate (c) accept-empty pattern — parked to AKM-010 close (unchanged).
